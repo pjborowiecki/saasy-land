@@ -3,22 +3,44 @@
 # dependencies
 /node_modules
 /.pnp
-.pnp.js
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# bun
+.bun-cache
+
+# biome
+.biome-cache
 
 # testing
 /coverage
+/playwright-report
+/test-results
+/blob-report
 
 # next.js
 /.next/
 /out/
-next-env.d.ts
 
 # production
 /build
+/dist
 
-# misc
-.DS_Store
-*.pem
+# drizzle
+/drizzle/meta
+
+# next-intl
+messages/*.d.json.ts
+
+# bun
+.bun-cache
+
+# biome
+.biome-cache
 
 # debug
 npm-debug.log*
@@ -26,9 +48,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
-.env
+# env files (can opt-in for committing if needed)
+.env*
 
 # vercel
 .vercel
@@ -37,11 +58,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# certificates
-certificates
+# AI tools
+opensrc/
 
-# content
-.contentlayer
-
-# notes
-TODO.md
+# misc
+.DS_Store
+*.pem
+._*

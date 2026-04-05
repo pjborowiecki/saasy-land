@@ -1,0 +1,7 @@
+echo "🔍 RUNNING PROJECT CHECKS"
+
+echo "  ↳ TSC (Type check)..."
+bun run check
+
+echo "  ↳ Biome (Lint, Format, Sort Staged Files)..."
+bunx biome check --staged --write --files-ignore-unknown=true --no-errors-on-unmatched

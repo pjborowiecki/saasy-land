@@ -1,20 +1,21 @@
-import * as React from "react"
+import type { Metadata } from "next"
+import type { JSX } from "react"
 
-import { Footer } from "@/components/nav/footer"
-import { Header } from "@/components/nav/header"
+import { CONSTANTS } from "~/src/constants"
+import { geistMono, geistSans } from "~/src/lib/fonts"
+import { cn } from "~/src/lib/ui"
 
-interface LandingLayoutProps {
-  children: React.ReactNode
+import "~/src/styles/globals.css"
+
+export const metadata: Metadata = {
+  title: CONSTANTS.APP_NAME,
+  description: CONSTANTS.APP_DESCRIPTION,
 }
 
-export default function LandingLayout({
-  children,
-}: LandingLayoutProps): JSX.Element {
+export default function RootLayout({ children }: Readonly<LayoutProps<"/">>): JSX.Element {
   return (
-    <div className="flex flex-col overflow-hidden">
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer />
-    </div>
+    <html lang="en" className={cn(geistSans.variable, geistMono.variable, "h-full antialiased")}>
+      <body className="flex min-h-full flex-col">{children}</body>
+    </html>
   )
 }
