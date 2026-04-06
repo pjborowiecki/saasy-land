@@ -1,0 +1,14 @@
+{
+  "landingPage": {
+    "metadata": {
+      "description": "Profesjonalny starter dla aplikacji typu SaaS."
+    },
+    "welcome": "Witaj na stronie {name}!"
+  },
+  "appPage": {
+    "metadata": {
+      "description": "Strefa aplikacji po zalogowaniu."
+    },
+    "welcome": "Aplikacja — {name}"
+  }
+}
