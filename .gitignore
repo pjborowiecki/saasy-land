@@ -30,17 +30,8 @@
 /build
 /dist
 
-# drizzle
-/drizzle/meta
-
 # next-intl
 messages/*.d.json.ts
-
-# bun
-.bun-cache
-
-# biome
-.biome-cache
 
 # debug
 npm-debug.log*
@@ -48,8 +39,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
