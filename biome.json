@@ -15,6 +15,7 @@
       "!build",
       "!.agents",
       "!src/types/env.d.ts",
+      "!src/integrations/next-intl/messages/*.d.json.ts",
       "!src/integrations/drizzle-orm/migrations"
     ]
   },

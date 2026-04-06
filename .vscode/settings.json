@@ -1,5 +1,5 @@
 {
-  "i18n-ally.localesPaths": ["./messages"],
+  "i18n-ally.localesPaths": ["./src/integrations/next-intl/messages"],
   "i18n-ally.displayLanguage": "en-US",
   "i18n-ally.keystyle": "nested",
   "editor.formatOnSave": true,

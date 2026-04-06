@@ -1,0 +1,14 @@
+{
+  "landingPage": {
+    "metadata": {
+      "description": "Professional full-stack starter for building SaaS applications."
+    },
+    "welcome": "Welcome to the {name} page!"
+  },
+  "appPage": {
+    "metadata": {
+      "description": "Signed-in app area."
+    },
+    "welcome": "App — {name}"
+  }
+}
