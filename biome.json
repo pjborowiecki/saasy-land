@@ -7,7 +7,16 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!.agents", "!src/types/env.d.ts", "!src/types/cloudflare-env.d.ts"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!.agents",
+      "!src/types/env.d.ts",
+      "!src/integrations/drizzle-orm/migrations"
+    ]
   },
   "formatter": {
     "enabled": true,
