@@ -1,4 +1,39 @@
 {
+  "shadcnComponents": {
+    "breadcrumb": {
+      "navLabel": "Nawigacja",
+      "more": "Więcej"
+    },
+    "carousel": {
+      "nextSlide": "Następny slajd",
+      "previousSlide": "Poprzedni slajd",
+      "carouselLabel": "Karuzela"
+    },
+    "dialog": {
+      "close": "Zamknij"
+    },
+    "command": {
+      "title": "Paleta poleceń",
+      "description": "Wyszukaj polecenie do eykonania..."
+    },
+    "pagination": {
+      "navLabel": "Paginacja",
+      "previousPage": "Wstecz",
+      "nextPage": "Dalej",
+      "goToPreviousPage": "Przejdź do poprzedniej strony",
+      "goToNextPage": "Przejdź do następnej strony",
+      "morePages": "Kolejne strony"
+    },
+    "sheet": {
+      "close": "Zamknij"
+    }
+  },
+  "customComponents": {
+    "dateTimePicker": {
+      "date": "Data",
+      "time": "Czas"
+    }
+  },
   "landingPage": {
     "metadata": {
       "description": "Profesjonalny starter dla aplikacji typu SaaS."

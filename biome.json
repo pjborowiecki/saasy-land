@@ -114,7 +114,7 @@
   },
   "overrides": [
     {
-      "includes": ["**/components/shadcn/form.tsx"],
+      "includes": ["**/components/shadcn/form.tsx", "**/components/shadcn/label.tsx"],
       "linter": {
         "rules": {
           "a11y": {

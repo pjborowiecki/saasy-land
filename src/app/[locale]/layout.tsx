@@ -4,12 +4,14 @@ import type { JSX } from "react"
 
 import { hasLocale } from "next-intl"
 
+import { Toaster } from "~/src/components/shadcn/sonner"
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 import { env } from "~/src/environment"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 import { geistMono, geistSans } from "~/src/lib/fonts"
-import { cn } from "~/src/lib/ui"
+import { cn } from "~/src/lib/utils"
+import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
 
 import "~/src/styles/globals.css"
@@ -38,7 +40,12 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
   return (
     <html lang={locale} className={cn(geistSans.variable, geistMono.variable)}>
       <body className="flex h-full min-h-full flex-col antialiased">
-        <TranslationsProvider>{children}</TranslationsProvider>
+        <TranslationsProvider>
+          <TooltipProvider>
+            {children}
+            <Toaster />
+          </TooltipProvider>
+        </TranslationsProvider>
       </body>
     </html>
   )
