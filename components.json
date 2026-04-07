@@ -10,11 +10,11 @@
     "cssVariables": true,
     "prefix": ""
   },
-  "iconLibrary": "lucide-react",
+  "iconLibrary": "lucide",
   "rtl": false,
   "aliases": {
     "components": "~/src/components",
-    "utils": "~/src/lib/ui",
+    "utils": "~/src/lib/utils",
     "ui": "~/src/components/shadcn",
     "lib": "~/src/lib",
     "hooks": "~/src/hooks"
