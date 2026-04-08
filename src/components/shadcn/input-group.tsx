@@ -4,10 +4,11 @@ import type { ComponentProps, JSX } from "react"
 
 import { cva, type VariantProps } from "class-variance-authority"
 
+import { cn } from "~/src/lib/utils"
+
 import { Button } from "~/src/components/shadcn/button"
 import { Input } from "~/src/components/shadcn/input"
 import { Textarea } from "~/src/components/shadcn/textarea"
-import { cn } from "~/src/lib/utils"
 
 function InputGroup({ className, ...props }: ComponentProps<"div">): JSX.Element {
   return (

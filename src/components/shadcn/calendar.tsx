@@ -5,8 +5,9 @@ import { type ComponentProps, createContext, type JSX, useContext, useEffect, us
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import { type DayButton, DayPicker, getDefaultClassNames, type Locale } from "react-day-picker"
 
-import { Button, buttonVariants } from "~/src/components/shadcn/button"
 import { cn } from "~/src/lib/utils"
+
+import { Button, buttonVariants } from "~/src/components/shadcn/button"
 
 type DayPickerComponents = NonNullable<ComponentProps<typeof DayPicker>["components"]>
 type RootProps = Parameters<NonNullable<DayPickerComponents["Root"]>>[0]

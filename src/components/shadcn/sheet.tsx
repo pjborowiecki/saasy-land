@@ -6,8 +6,9 @@ import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
 import { XIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { Button } from "~/src/components/shadcn/button"
 import { cn } from "~/src/lib/utils"
+
+import { Button } from "~/src/components/shadcn/button"
 
 function Sheet({ ...props }: Readonly<SheetPrimitive.Root.Props>): JSX.Element {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />

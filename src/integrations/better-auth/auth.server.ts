@@ -5,6 +5,7 @@ import { nextCookies } from "better-auth/next-js"
 import { randomUUIDv7 } from "bun"
 
 import { env } from "~/src/environment"
+
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 import * as schema from "~/src/integrations/drizzle-orm/drizzle.schemas"
 
