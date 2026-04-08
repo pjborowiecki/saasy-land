@@ -1,5 +1,6 @@
 import type { NextConfig } from "next"
 
+import { createMDX } from "fumadocs-mdx/next"
 import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
@@ -15,4 +16,8 @@ const withNextIntl = createNextIntlPlugin({
   experimental: { createMessagesDeclaration: "./src/integrations/next-intl/messages/en-US.json" },
 })
 
-export default withNextIntl(nextConfig)
+const withMDX = createMDX({
+  configPath: "./src/integrations/fumadocs/fumadocs.config.ts",
+})
+
+export default withNextIntl(withMDX(nextConfig))

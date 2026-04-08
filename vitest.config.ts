@@ -9,7 +9,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "~": projectRoot,
-      "~/app": path.join(projectRoot, "src/app"),
     },
   },
   test: {

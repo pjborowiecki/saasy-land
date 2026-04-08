@@ -1,8 +1,10 @@
 import { Elysia } from "elysia"
 
-const app = new Elysia({ prefix: "/api" })
+import { fumadocsSearch } from "~/src/integrations/fumadocs/fumadocs.search"
 
-app.get("/", "Hello from Saasy Land 2.0!")
+const app = new Elysia({ prefix: "/api" })
+  .get("/", "Hello from Saasy Land 2.0!")
+  .get("/search", ({ request }) => fumadocsSearch.GET(request))
 
 export type App = typeof app
 

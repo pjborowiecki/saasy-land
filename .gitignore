@@ -26,6 +26,9 @@
 /.next/
 /out/
 
+# content
+/.source/
+
 # production
 /build
 /dist

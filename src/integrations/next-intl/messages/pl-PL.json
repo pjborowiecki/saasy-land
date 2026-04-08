@@ -29,9 +29,12 @@
     }
   },
   "customComponents": {
-    "dateTimePicker": {
-      "date": "Data",
-      "time": "Czas"
+    "themeSwitch": {
+      "label": "Wybierz motyw",
+      "placeholder": "Motyw",
+      "light": "Jasny",
+      "dark": "Ciemny",
+      "system": "System"
     }
   },
   "landingPage": {
