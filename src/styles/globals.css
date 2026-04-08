@@ -2,7 +2,12 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@plugin "@tailwindcss/typography";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+@plugin "@tailwindcss/typography" {
+  className: wysiwyg;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -39,6 +44,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --fd-layout-width: 2000px;
 }
 
 .dark {
@@ -123,8 +130,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-mono;
   }
 }

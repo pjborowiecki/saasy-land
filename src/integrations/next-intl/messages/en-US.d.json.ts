@@ -32,9 +32,12 @@ declare const messages: {
     }
   },
   "customComponents": {
-    "dateTimePicker": {
-      "date": "Date",
-      "time": "Time"
+    "themeSwitch": {
+      "label": "Choose a theme",
+      "placeholder": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
     }
   },
   "landingPage": {
