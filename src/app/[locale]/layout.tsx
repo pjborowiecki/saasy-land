@@ -9,6 +9,7 @@ import { env } from "~/src/environment"
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
+import { ThemeProvider, themeProviderConfig } from "~/src/providers/theme-provider"
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
 
@@ -45,12 +46,14 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
   return (
     <html lang={locale} className={cn(geistSans.variable, geistMono.variable)}>
       <body className="flex h-full min-h-full flex-col antialiased">
-        <TranslationsProvider>
-          <TooltipProvider>
-            {children}
-            <Toaster />
-          </TooltipProvider>
-        </TranslationsProvider>
+        <ThemeProvider {...themeProviderConfig}>
+          <TranslationsProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster />
+            </TooltipProvider>
+          </TranslationsProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
