@@ -6,9 +6,10 @@ import { Command as CommandPrimitive } from "cmdk"
 import { CheckIcon, SearchIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
+import { cn } from "~/src/lib/utils"
+
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~/src/components/shadcn/dialog"
 import { InputGroup, InputGroupAddon } from "~/src/components/shadcn/input-group"
-import { cn } from "~/src/lib/utils"
 
 function Command({ className, ...props }: ComponentProps<typeof CommandPrimitive>): JSX.Element {
   return (

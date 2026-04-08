@@ -4,15 +4,20 @@ import type { JSX } from "react"
 
 import { hasLocale } from "next-intl"
 
-import { Toaster } from "~/src/components/shadcn/sonner"
+import { env } from "~/src/environment"
+
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
-import { env } from "~/src/environment"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
-import { geistMono, geistSans } from "~/src/lib/fonts"
-import { cn } from "~/src/lib/utils"
+
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
+
+import { routing } from "~/src/integrations/next-intl/i18n.routing"
+
+import { geistMono, geistSans } from "~/src/lib/fonts"
+import { cn } from "~/src/lib/utils"
+
+import { Toaster } from "~/src/components/shadcn/sonner"
 
 import "~/src/styles/globals.css"
 

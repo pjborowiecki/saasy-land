@@ -3,8 +3,9 @@ import type { ComponentProps, JSX } from "react"
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
 import { cn } from "~/src/lib/utils"
+
+import { Button } from "~/src/components/shadcn/button"
 
 async function Pagination({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }): Promise<JSX.Element> {
   const t = await getTranslations("shadcnComponents.pagination")
