@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      # CI-only dummy values to satisfy runtime env validation during `next build`.
+      AUTH_SECRET: "ci_dummy_secret_000000000000000000000000000000000000000000000000000000000000"
+      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
+      NEXT_PUBLIC_APP_URL: "http://127.0.0.1:3000"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.x"
+
+      - name: Install dependencies (no lifecycle scripts)
+        run: bun install --ignore-scripts
+
+      - name: Generate Next types
+        run: bun run typegen
+
+      - name: Typecheck
+        run: bun run check
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Unit & component tests
+        run: bun run test
+
+      - name: Build (for E2E)
+        run: bun run build
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('bun.lock') }}
+
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps
+
+      - name: E2E smoke tests (Chromium only)
+        run: bun run test:e2e:smoke
+
