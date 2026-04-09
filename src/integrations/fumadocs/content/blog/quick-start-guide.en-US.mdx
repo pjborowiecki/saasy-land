@@ -1,0 +1,84 @@
+---
+title: Quick start — run SaaSy Land locally
+description: Clone the repo, configure your environment, migrate the database, and start the dev server in a few minutes.
+authorName: Piotr J. Borowiecki
+date: 2025-05-11
+---
+
+This guide gets **SaaSy Land** running on your machine. It assumes a Unix-like shell (macOS, Linux, or WSL) and **[Bun](https://bun.sh)** as the package manager — the same toolchain used in this project’s `package.json` scripts.
+
+## Prerequisites
+
+- **Git**
+- **[Bun](https://bun.sh)** installed (`bun --version`)
+- A **[Neon](https://neon.tech)** (or compatible) Postgres database — you need a connection string for `DATABASE_URL`
+
+## 1. Get the code
+
+Clone the repository and enter the project directory:
+
+```bash
+git clone https://github.com/pjborowiecki/saasyland.com.git
+cd saasyland.com
+```
+
+## 2. Install dependencies
+
+```bash
+bun install
+```
+
+## 3. Environment variables
+
+Copy the example env file and edit it:
+
+```bash
+cp .env.example .env.local
+```
+
+At minimum, set:
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_APP_URL` | App URL — use `http://localhost:3000` locally |
+| `DATABASE_URL` | Pooled Postgres URL (e.g. from Neon “Connect” with the pooler) |
+| `AUTH_SECRET` | Secret for Better Auth — generate a strong value (e.g. `openssl rand -base64 96`) |
+
+See comments inside `.env.example` for optional `DATABASE_URL_UNPOOLED` and deployment notes.
+
+> **Tip:** On Vercel you can sync envs with `vercel env pull .env.local` if the project is linked.
+
+## 4. Database migrations
+
+Apply the schema to your database (loads `.env.local` via the script):
+
+```bash
+bun run db:migrate
+```
+
+For prototyping only, you can use `bun run db:push` instead — prefer migrations for anything that should be reproducible.
+
+## 5. Start the dev server
+
+```bash
+bun run dev
+```
+
+Open **[http://localhost:3000](http://localhost:3000)** — with the default locale prefix, try **[http://localhost:3000/en](http://localhost:3000/en)**.
+
+## 6. Useful commands
+
+| Command | What it does |
+| --- | --- |
+| `bun run check` | TypeScript (`tsc --noEmit`) |
+| `bun run build` | Production build |
+| `bun run test` | Vitest unit tests |
+| `bun run test:e2e` | Playwright E2E |
+| `bun run typegen` | Next.js route types + MDX codegen hooks |
+
+## Next steps
+
+- Read the **[documentation](/en/docs)** for architecture, auth, and features.
+- Explore the **[blog](/en/blog)** for release notes and deeper posts.
+
+If something fails, double-check `DATABASE_URL` (SSL, pooler host) and that `AUTH_SECRET` is set — those are the most common blockers for a first local run.

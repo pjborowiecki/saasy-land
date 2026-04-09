@@ -51,6 +51,32 @@ declare const messages: {
       "description": "Signed-in app area."
     },
     "welcome": "App — {name}"
+  },
+  "premiumPage": {
+    "metadata": {
+      "description": "Premium content for SaaSy Land."
+    },
+    "title": "Premium",
+    "description": "Premium content for SaaSy Land."
+  },
+  "blog": {
+    "metadata": {
+      "title": "Blog",
+      "description": "Notes and updates from SaaSy Land."
+    },
+    "nav": {
+      "docs": "Docs",
+      "blog": "Blog"
+    },
+    "index": {
+      "title": "Blog",
+      "description": "Markdown posts compiled with Fumadocs MDX."
+    },
+    "post": {
+      "backToBlog": "Back to blog",
+      "writtenBy": "Written by",
+      "dateLabel": "Published"
+    }
   }
 };
 export default messages;
