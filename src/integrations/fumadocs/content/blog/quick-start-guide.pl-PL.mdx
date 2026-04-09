@@ -1,0 +1,84 @@
+---
+title: Szybki start — uruchom SaaSy Land lokalnie
+description: Sklonuj repozytorium, skonfiguruj środowisko, wykonaj migracje bazy i uruchom serwer deweloperski w kilka minut.
+authorName: Piotr J. Borowiecki
+date: 2025-05-11
+---
+
+Ten przewodnik pomaga uruchomić **SaaSy Land** na Twoim komputerze. Zakłada powłokę w stylu Unix (macOS, Linux lub WSL) oraz **[Bun](https://bun.sh)** jako menedżer pakietów — tak jak w skryptach w `package.json`.
+
+## Wymagania wstępne
+
+- **Git**
+- Zainstalowany **[Bun](https://bun.sh)** (`bun --version`)
+- Baza **Postgres** (np. **[Neon](https://neon.tech)**) — potrzebujesz connection stringa do `DATABASE_URL`
+
+## 1. Pobierz kod
+
+Sklonuj repozytorium i przejdź do katalogu projektu:
+
+```bash
+git clone https://github.com/pjborowiecki/saasyland.com.git
+cd saasyland.com
+```
+
+## 2. Zainstaluj zależności
+
+```bash
+bun install
+```
+
+## 3. Zmienne środowiskowe
+
+Skopiuj przykładowy plik i uzupełnij wartości:
+
+```bash
+cp .env.example .env.local
+```
+
+Minimalnie ustaw:
+
+| Zmienna | Znaczenie |
+| --- | --- |
+| `NEXT_PUBLIC_APP_URL` | Adres aplikacji — lokalnie `http://localhost:3000` |
+| `DATABASE_URL` | Pooled Postgres (np. z Neon „Connect” z poolerem) |
+| `AUTH_SECRET` | Sekret Better Auth — wygeneruj silny ciąg (np. `openssl rand -base64 96`) |
+
+Szczegóły i opcjonalne `DATABASE_URL_UNPOOLED` są w komentarzach w `.env.example`.
+
+> **Wskazówka:** Na Vercel możesz zsynchronizować zmienne przez `vercel env pull .env.local`, jeśli projekt jest podpięty.
+
+## 4. Migracje bazy
+
+Zastosuj schemat w bazie (skrypt wczytuje `.env.local`):
+
+```bash
+bun run db:migrate
+```
+
+Tylko do prototypów możesz użyć `bun run db:push` — do powtarzalnych środowisk lepsze są migracje.
+
+## 5. Serwer deweloperski
+
+```bash
+bun run dev
+```
+
+Otwórz **[http://localhost:3000](http://localhost:3000)** — z domyślnym prefiksem locale spróbuj **[http://localhost:3000/pl](http://localhost:3000/pl)**.
+
+## 6. Przydatne polecenia
+
+| Polecenie | Działanie |
+| --- | --- |
+| `bun run check` | TypeScript (`tsc --noEmit`) |
+| `bun run build` | Build produkcyjny |
+| `bun run test` | Testy Vitest |
+| `bun run test:e2e` | Playwright E2E |
+| `bun run typegen` | Typy tras Next + codegen MDX |
+
+## Co dalej
+
+- Zobacz **[dokumentację](/pl/docs)** — architektura, auth, funkcje.
+- **[Blog](/pl/blog)** — notatki o wydaniach i dłuższe artykuły.
+
+Jeśli coś nie działa, sprawdź `DATABASE_URL` (SSL, host poolera) oraz czy `AUTH_SECRET` jest ustawiony — to najczęstsze przyczyny przy pierwszym uruchomieniu lokalnym.

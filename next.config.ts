@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   typedRoutes: true,
   experimental: { rootParams: true },
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "avatars.githubusercontent.com", pathname: "/**" }],
+  },
 }
 
 const withNextIntl = createNextIntlPlugin({

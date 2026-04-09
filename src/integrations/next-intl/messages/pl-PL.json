@@ -48,5 +48,31 @@
       "description": "Strefa aplikacji po zalogowaniu."
     },
     "welcome": "Aplikacja — {name}"
+  },
+  "premiumPage": {
+    "metadata": {
+      "description": "Premium content for SaaSy Land."
+    },
+    "title": "Premium",
+    "description": "Premium content for SaaSy Land."
+  },
+  "blog": {
+    "metadata": {
+      "title": "Blog",
+      "description": "Notatki i aktualizacje z SaaSy Land."
+    },
+    "nav": {
+      "docs": "Dokumentacja",
+      "blog": "Blog"
+    },
+    "index": {
+      "title": "Blog",
+      "description": "Wpisy Markdown kompilowane przez Fumadocs MDX."
+    },
+    "post": {
+      "backToBlog": "Wróć do bloga",
+      "writtenBy": "Autor",
+      "dateLabel": "Data"
+    }
   }
 }
