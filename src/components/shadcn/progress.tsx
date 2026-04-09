@@ -20,7 +20,7 @@ function Progress({ className, children, value, ...props }: Readonly<ProgressPri
 function ProgressTrack({ className, ...props }: Readonly<ProgressPrimitive.Track.Props>): JSX.Element {
   return (
     <ProgressPrimitive.Track
-      className={cn("relative flex h-1 w-full items-center overflow-x-hidden rounded-none bg-muted", className)}
+      className={cn("relative flex h-1 w-full items-center overflow-x-hidden rounded-lg bg-muted", className)}
       data-slot="progress-track"
       {...props}
     />
