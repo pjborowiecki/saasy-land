@@ -77,6 +77,11 @@ declare const messages: {
       "writtenBy": "Written by",
       "dateLabel": "Published"
     }
+  },
+  "emails": {
+    "testEmail": {
+      "test": "Test"
+    }
   }
 };
 export default messages;
