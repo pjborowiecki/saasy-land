@@ -7,6 +7,8 @@ const env = createEnv({
   server: {
     AUTH_SECRET: z.string().min(64),
     DATABASE_URL: z.url(),
+    CLOUDFLARE_EMAIL_SERVICE_URL: z.url().optional(),
+    CLOUDFLARE_API_TOKEN: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url().default(CONSTANTS.DEFAULT_APP_URL),
@@ -14,6 +16,8 @@ const env = createEnv({
   runtimeEnv: {
     AUTH_SECRET: process.env.AUTH_SECRET,
     DATABASE_URL: process.env.DATABASE_URL,
+    CLOUDFLARE_EMAIL_SERVICE_URL: process.env.CLOUDFLARE_EMAIL_SEND_URL,
+    CLOUDFLARE_API_TOKEN: process.env.CLOUDFLARE_API_TOKEN,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
 })

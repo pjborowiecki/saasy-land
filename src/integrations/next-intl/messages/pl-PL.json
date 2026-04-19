@@ -74,5 +74,10 @@
       "writtenBy": "Autor",
       "dateLabel": "Data"
     }
+  },
+  "emails": {
+    "testEmail": {
+      "test": "Test"
+    }
   }
 }

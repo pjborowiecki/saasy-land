@@ -59,3 +59,4 @@ opensrc/
 .DS_Store
 *.pem
 ._*
+.env*.local
