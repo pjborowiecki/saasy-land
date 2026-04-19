@@ -15,6 +15,8 @@ jobs:
       AUTH_SECRET: "ci_dummy_secret_000000000000000000000000000000000000000000000000000000000000"
       DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
       NEXT_PUBLIC_APP_URL: "http://127.0.0.1:3000"
+      CLOUDFLARE_EMAIL_SERVICE_URL: "https://api.cloudflare.com/client/v4/accounts/account_id/email/sending/send"
+      CLOUDFLARE_API_TOKEN: "cfat_your_top_secret_cloudflare_api_token"
     steps:
       - name: Checkout
         uses: actions/checkout@v4

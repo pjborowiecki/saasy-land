@@ -79,8 +79,8 @@ declare const messages: {
     }
   },
   "emails": {
-    "testEmail": {
-      "test": "Test"
+    "test": {
+      "title": "Test"
     }
   }
 };
