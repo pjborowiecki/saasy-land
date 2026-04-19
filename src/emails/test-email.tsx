@@ -10,21 +10,18 @@ interface TestEmailProps {
 }
 
 export default async function TestEmail({ locale }: Readonly<TestEmailProps>): Promise<JSX.Element> {
-  const t = createTranslator({
-    locale,
-    namespace: "emails.testEmail",
-    messages: await import(`~/src/integrations/next-intl/messages/${locale}.json`),
-  })
+  const { default: messages } = await import(`~/src/integrations/next-intl/messages/${locale}.json`)
+  const t = createTranslator({ locale, messages, namespace: "emails.test" })
 
   return (
     <Html>
       <Head />
-      <Preview>{t("test")}</Preview>
+      <Preview>{t("title")}</Preview>
       <Tailwind>
         <Body className="font-sans">
           <Container className="mx-auto px-5 py-10">
             <Section>
-              <Heading className="m-0 mb-4 font-bold text-2xl">{t("test")}</Heading>
+              <Heading className="m-0 mb-4 font-bold text-2xl">{t("title")}</Heading>
             </Section>
           </Container>
         </Body>
