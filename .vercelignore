@@ -1,0 +1,24 @@
+node_modules/
+.next/
+.git/
+.cursor/
+.agents/
+opensrc/
+graphify-out/
+.source/
+.husky/
+e2e/
+test-results/
+playwright-report/
+blob-report/
+coverage/
+.DS_Store
+*.tsbuildinfo
+.bun-cache/
+.biome-cache/
+playwright.config.ts
+vitest.config.ts
+# Markdown & Docs
+*.md
+AGENTS.md
+LICENSE.md

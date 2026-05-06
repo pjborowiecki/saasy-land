@@ -1,0 +1,11 @@
+---
+description: Read .agents/skills for tool-specific guidance before deep work
+alwaysApply: true
+---
+
+This project maintains agent skills under `.agents/skills/` (each topic in its own folder with `SKILL.md`).
+
+- **Always** consult `.agents/skills` when a task touches a library, platform, or workflow that has a skill there (Medusa, TanStack, Cloudflare, Stripe, GSAP, storefront patterns, etc.).
+- Before implementing or advising on those areas, **read the relevant `SKILL.md`** (and any sibling files in that skill folder) so recommendations match established patterns, constraints, and checklists in this repo.
+- Prefer loading the skill that matches the **narrowest** fit (e.g. `tanstack-start` vs `tanstack-router`), and combine skills when a task spans multiple systems.
+- Do not rely on generic training data alone when a local skill exists for the same tool or task—the skills encode project-specific and maintainer-curated guidance.
