@@ -17,6 +17,10 @@ jobs:
       NEXT_PUBLIC_APP_URL: "http://127.0.0.1:3000"
       CLOUDFLARE_EMAIL_SERVICE_URL: "https://api.cloudflare.com/client/v4/accounts/account_id/email/sending/send"
       CLOUDFLARE_API_TOKEN: "cfat_your_top_secret_cloudflare_api_token"
+      GITHUB_CLIENT_ID: "ci_dummy_github_id"
+      GITHUB_CLIENT_SECRET: "ci_dummy_github_secret"
+      GOOGLE_CLIENT_ID: "ci_dummy_google_id"
+      GOOGLE_CLIENT_SECRET: "ci_dummy_google_secret"
     steps:
       - name: Checkout
         uses: actions/checkout@v4

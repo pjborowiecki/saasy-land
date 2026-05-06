@@ -8,7 +8,7 @@ import { cn } from "~/src/lib/utils"
 import { Button } from "~/src/components/shadcn/button"
 
 async function Pagination({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("shadcnComponents.pagination")
+  const t = await getTranslations("components.shadcn.pagination")
 
   return (
     <nav
@@ -51,7 +51,7 @@ async function PaginationPrevious({
   ariaLabel,
   ...props
 }: ComponentProps<typeof PaginationLink> & { text?: string; ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("shadcnComponents.pagination")
+  const t = await getTranslations("components.shadcn.pagination")
 
   return (
     <PaginationLink aria-label={ariaLabel ?? t("goToPreviousPage")} size="default" className={cn("pl-1.5!", className)} {...props}>
@@ -67,7 +67,7 @@ async function PaginationNext({
   ariaLabel,
   ...props
 }: ComponentProps<typeof PaginationLink> & { text?: string; ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("shadcnComponents.pagination")
+  const t = await getTranslations("components.shadcn.pagination")
 
   return (
     <PaginationLink aria-label={ariaLabel ?? t("goToNextPage")} size="default" className={cn("pr-1.5!", className)} {...props}>
@@ -78,7 +78,7 @@ async function PaginationNext({
 }
 
 async function PaginationEllipsis({ className, srLabel, ...props }: ComponentProps<"span"> & { srLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("shadcnComponents.pagination")
+  const t = await getTranslations("components.shadcn.pagination")
 
   return (
     <span

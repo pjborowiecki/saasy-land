@@ -62,7 +62,7 @@ function Carousel({
   children,
   ...props
 }: ComponentProps<"div"> & CarouselProps): JSX.Element {
-  const t = useTranslations("shadcnComponents.carousel")
+  const t = useTranslations("components.shadcn.carousel")
 
   const [carouselRef, api] = useEmblaCarousel(
     {
@@ -182,7 +182,7 @@ function CarouselItem({ className, ...props }: ComponentProps<"div">): JSX.Eleme
 
 function CarouselPrevious({ className, variant = "outline", size = "icon-sm", ...props }: ComponentProps<typeof Button>): JSX.Element {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel()
-  const t = useTranslations("shadcnComponents.carousel")
+  const t = useTranslations("components.shadcn.carousel")
 
   return (
     <Button
@@ -206,7 +206,7 @@ function CarouselPrevious({ className, variant = "outline", size = "icon-sm", ..
 
 function CarouselNext({ className, variant = "outline", size = "icon-sm", ...props }: ComponentProps<typeof Button>): JSX.Element {
   const { orientation, scrollNext, canScrollNext } = useCarousel()
-  const t = useTranslations("shadcnComponents.carousel")
+  const t = useTranslations("components.shadcn.carousel")
 
   return (
     <Button

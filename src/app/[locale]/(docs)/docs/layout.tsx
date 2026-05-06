@@ -10,7 +10,7 @@ import { DocsProvider } from "~/src/providers/docs-provider"
 
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
 
-import { CustomGithubInfo } from "~/src/components/custom/github-info"
+import { GithubInfo } from "~/src/components/custom/github-info"
 import { LocaleSwitch } from "~/src/components/custom/locale-switch"
 import { ThemeSwitch } from "~/src/components/custom/theme-switch"
 
@@ -29,7 +29,7 @@ export default async function DocumentationLayout({ children, params }: Readonly
         links={[
           {
             type: "custom",
-            children: <CustomGithubInfo owner={CONSTANTS.APP_GITHUB_OWNER} repo={CONSTANTS.APP_GITHUB_REPO} />,
+            children: <GithubInfo owner={CONSTANTS.APP_GITHUB_OWNER} repo={CONSTANTS.APP_GITHUB_REPO} />,
           },
         ]}
         sidebar={{

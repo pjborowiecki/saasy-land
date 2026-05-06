@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
   typedRoutes: true,
+  serverExternalPackages: ["better-auth"],
   experimental: { rootParams: true },
   images: {
     remotePatterns: [{ protocol: "https", hostname: "avatars.githubusercontent.com", pathname: "/**" }],

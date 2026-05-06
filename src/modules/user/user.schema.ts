@@ -6,8 +6,8 @@ import { session } from "~/src/modules/session/session.schema"
 
 export const user = pgTable("user", {
   id: uuid("id").primaryKey(),
-  name: varchar("name", { length: 256 }).notNull(),
-  email: varchar("email", { length: 320 }).notNull().unique(),
+  name: varchar("name", { length: 32 }).notNull(),
+  email: varchar("email", { length: 64 }).notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: varchar("image", { length: 2048 }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),

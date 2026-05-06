@@ -1,39 +1,32 @@
 "use client"
 
-import type { JSX } from "react"
-import { Suspense } from "react"
+import type { ComponentProps, JSX } from "react"
 
-import { GithubInfo } from "fumadocs-ui/components/github-info"
+import { cn } from "~/src/lib/utils"
 
-import { Skeleton } from "~/src/components/shadcn/skeleton"
+import { Icons } from "~/src/components/custom/icons"
 
-type CustomGithubInfoProps = Readonly<{
+interface GithubInfoProps extends ComponentProps<"a"> {
   owner: string
   repo: string
-}>
-
-function GithubInfoSkeleton({ owner, repo }: CustomGithubInfoProps): JSX.Element {
-  return (
-    <div className="flex flex-col gap-1.5 rounded-lg p-2">
-      <div className="flex items-center gap-2 truncate">
-        <Skeleton aria-hidden className="size-3.5 rounded" />
-        <Skeleton aria-hidden className="h-4 w-40 rounded" />
-      </div>
-      <div className="flex items-center gap-2 text-fd-muted-foreground text-xs">
-        <Skeleton aria-hidden className="h-3 w-10 rounded" />
-        <Skeleton aria-hidden className="h-3 w-10 rounded" />
-      </div>
-      <span className="sr-only">
-        {owner}/{repo}
-      </span>
-    </div>
-  )
 }
 
-export function CustomGithubInfo({ owner, repo }: CustomGithubInfoProps): JSX.Element {
+export function GithubInfo({ owner, repo, className, ...rest }: Readonly<GithubInfoProps>): JSX.Element {
   return (
-    <Suspense fallback={<GithubInfoSkeleton owner={owner} repo={repo} />}>
-      <GithubInfo owner={owner} repo={repo} />
-    </Suspense>
+    <a
+      target="_blank"
+      rel="noreferrer noopener"
+      href={`https://github.com/${owner}/${repo}`}
+      className={cn(
+        "flex flex-col gap-1.5 rounded-lg p-2 text-fd-foreground/80 text-sm transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground",
+        className,
+      )}
+      {...rest}
+    >
+      <p className="flex items-center gap-2 truncate">
+        <Icons.Github className="size-3.5" />
+        {owner}/{repo}
+      </p>
+    </a>
   )
 }

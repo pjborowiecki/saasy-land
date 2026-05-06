@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server"
 import { cn } from "~/src/lib/utils"
 
 async function Breadcrumb({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("shadcnComponents.breadcrumb")
+  const t = await getTranslations("components.shadcn.breadcrumb")
 
   return <nav aria-label={ariaLabel ?? t("navLabel")} data-slot="breadcrumb" className={cn(className)} {...props} />
 }
@@ -56,7 +56,7 @@ function BreadcrumbSeparator({ children, className, ...props }: ComponentProps<"
 }
 
 async function BreadcrumbEllipsis({ className, ...props }: ComponentProps<"span">): Promise<JSX.Element> {
-  const t = await getTranslations("shadcnComponents.breadcrumb")
+  const t = await getTranslations("components.shadcn.breadcrumb")
 
   return (
     <span data-slot="breadcrumb-ellipsis" className={cn("flex size-5 items-center justify-center [&>svg]:size-4", className)} {...props}>

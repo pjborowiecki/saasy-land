@@ -47,7 +47,7 @@ function DialogContent({
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
 }): JSX.Element {
-  const t = useTranslations("shadcnComponents.dialog")
+  const t = useTranslations("components.shadcn.dialog")
 
   return (
     <DialogPortal>
@@ -87,7 +87,7 @@ function DialogFooter({
 }: ComponentProps<"div"> & {
   showCloseButton?: boolean
 }): JSX.Element {
-  const t = useTranslations("shadcnComponents.dialog")
+  const t = useTranslations("components.shadcn.dialog")
 
   return (
     <div data-slot="dialog-footer" className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)} {...props}>

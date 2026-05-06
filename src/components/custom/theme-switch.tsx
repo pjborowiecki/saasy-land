@@ -11,7 +11,7 @@ import { Skeleton } from "~/src/components/shadcn/skeleton"
 const THEMES = ["light", "dark", "system"] as const
 
 export function ThemeSwitch(): JSX.Element {
-  const t = useTranslations("customComponents.themeSwitch")
+  const t = useTranslations("components.custom.themeSwitch")
 
   const { theme, setTheme } = useTheme()
 

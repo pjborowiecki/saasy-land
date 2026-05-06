@@ -15,6 +15,13 @@
       "when": 1775493941675,
       "tag": "20260406164541_panoramic_tomorrow_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1778101505396,
+      "tag": "20260506210505_square_weapon_omega",
+      "breakpoints": true
     }
   ]
 }

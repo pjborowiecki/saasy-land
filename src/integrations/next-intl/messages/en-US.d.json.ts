@@ -2,42 +2,44 @@
 // See: https://next-intl.dev/docs/workflows/typescript#messages-arguments
 
 declare const messages: {
-  "shadcnComponents": {
-    "breadcrumb": {
-      "navLabel": "Breadcrumb",
-      "more": "More"
+  "components": {
+    "shadcn": {
+      "breadcrumb": {
+        "navLabel": "Breadcrumb",
+        "more": "More"
+      },
+      "carousel": {
+        "nextSlide": "Next slide",
+        "previousSlide": "Previous slide",
+        "carouselLabel": "Carousel"
+      },
+      "dialog": {
+        "close": "Close"
+      },
+      "command": {
+        "title": "Command palette",
+        "description": "Search for a command to run..."
+      },
+      "pagination": {
+        "navLabel": "Pagination",
+        "previousPage": "Previous",
+        "nextPage": "Next",
+        "goToPreviousPage": "Go to previous page",
+        "goToNextPage": "Go to next page",
+        "morePages": "More pages"
+      },
+      "sheet": {
+        "close": "Close"
+      }
     },
-    "carousel": {
-      "nextSlide": "Next slide",
-      "previousSlide": "Previous slide",
-      "carouselLabel": "Carousel"
-    },
-    "dialog": {
-      "close": "Close"
-    },
-    "command": {
-      "title": "Command palette",
-      "description": "Search for a command to run..."
-    },
-    "pagination": {
-      "navLabel": "Pagination",
-      "previousPage": "Previous",
-      "nextPage": "Next",
-      "goToPreviousPage": "Go to previous page",
-      "goToNextPage": "Go to next page",
-      "morePages": "More pages"
-    },
-    "sheet": {
-      "close": "Close"
-    }
-  },
-  "customComponents": {
-    "themeSwitch": {
-      "label": "Choose a theme",
-      "placeholder": "Theme",
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+    "custom": {
+      "themeSwitch": {
+        "label": "Choose a theme",
+        "placeholder": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
     }
   },
   "landingPage": {
@@ -46,12 +48,6 @@ declare const messages: {
     },
     "welcome": "Welcome to the {name} page!"
   },
-  "appPage": {
-    "metadata": {
-      "description": "Signed-in app area."
-    },
-    "welcome": "App — {name}"
-  },
   "premiumPage": {
     "metadata": {
       "description": "Premium content for SaaSy Land."
@@ -59,7 +55,129 @@ declare const messages: {
     "title": "Premium",
     "description": "Premium content for SaaSy Land."
   },
-  "blog": {
+  "emails": {
+    "test": {
+      "title": "Test"
+    }
+  },
+  "auth": {
+    "oAuth": {
+      "google": "Sign in with Google",
+      "github": "Sign in with GitHub",
+      "success": "Signed in successfully!"
+    },
+    "errors": {
+      "accessDenied": "Access denied.",
+      "accountNotFound": "Account not found.",
+      "credentialAccountNotFound": "Credential account not found.",
+      "emailCanNotBeUpdated": "Email cannot be updated.",
+      "emailNotVerified": "Email not verified.",
+      "failedToCreateSession": "Failed to create session.",
+      "failedToCreateUser": "Failed to create user.",
+      "failedToGetSession": "Failed to get session.",
+      "failedToGetUserInfo": "Failed to get user info.",
+      "failedToUnlinkLastAccount": "Failed to unlink last account.",
+      "failedToUpdateUser": "Failed to update user.",
+      "idTokenNotSupported": "ID token not supported.",
+      "invalidEmail": "Invalid email.",
+      "invalidEmailOrPassword": "Invalid email or password.",
+      "invitationNotFound": "Invitation not found.",
+      "invalidPassword": "Invalid password.",
+      "invalidToken": "Invalid token.",
+      "passwordTooLong": "Password is too long.",
+      "passwordTooShort": "Password is too short.",
+      "providerNotFound": "Provider not found.",
+      "sessionExpired": "Session expired.",
+      "socialAccountAlreadyLinked": "Social account already linked.",
+      "unknownError": "An unknown error occurred.",
+      "userAlreadyExists": "User already exists.",
+      "userAlreadyExistsUseAnotherEmail": "User already exists. Use another email.",
+      "userAlreadyHasPassword": "User already has a password. Provide that to delete the account.",
+      "userEmailNotFound": "User email not found.",
+      "userNotFound": "User not found."
+    },
+    "validations": {
+      "emailRequired": "Email is required.",
+      "emailInvalid": "Please enter a valid email address.",
+      "emailMaxLength": "Email cannot be longer than {max} characters.",
+      "nameRequired": "Name is required.",
+      "nameMaxLength": "Name cannot be longer than {max} characters.",
+      "passwordRequired": "Password is required.",
+      "passwordMinLength": "Password must be at least {min} characters long.",
+      "passwordMaxLength": "Password cannot be longer than {max} characters.",
+      "passwordUppercase": "Password must contain at least one uppercase letter.",
+      "passwordSpecialCharacter": "Password must contain at least one special character.",
+      "confirmPasswordRequired": "Please confirm your password.",
+      "passwordsMustMatch": "Passwords must match.",
+      "atLeastMinCharactersLong": "At least {min} characters long",
+      "atLeastOneSpecialCharacter": "At least one special character",
+      "atLeastOneUppercase": "At least one uppercase letter"
+    },
+    "layout": {
+      "backToHome": "Back to Home"
+    },
+    "signInPage": {
+      "metadata": {
+        "title": "Sign In",
+        "description": "Sign in to your account at {name}."
+      },
+      "form": {
+        "title": "Welcome back",
+        "description": "Enter your details to sign in to your account.",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Continue",
+        "submitting": "Signing In...",
+        "success": "Signed in successfully!",
+        "error": "Invalid email or password. Please try again.",
+        "noAccount": "Don't have an account? <signup>Sign up</signup>",
+        "forgotPassword": "Forgot password?",
+        "continueWithGithub": "Continue with GitHub",
+        "continueWithGoogle": "Continue with Google",
+        "or": "or"
+      }
+    },
+    "signUpPage": {
+      "metadata": {
+        "title": "Sign Up",
+        "description": "Sign up for an account at {name}."
+      },
+      "form": {
+        "title": "Sign Up",
+        "description": "Sign up for an account at {name}.",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Continue",
+        "submitting": "Signing Up...",
+        "success": "Account created successfully!",
+        "error": "An error occurred during sign up. Please try again.",
+        "hasAccount": "Already have an account? <signin>Sign in</signin>",
+        "or": "or",
+        "confirmPassword": "Confirm password",
+        "termsAndPrivacy": "By signing up, you agree to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>."
+      }
+    }
+  },
+  "app": {
+    "page": {
+      "metadata": {
+        "description": "Signed-in app area."
+      },
+      "welcome": "App — {name}"
+    },
+    "components": {
+      "userWidget": {
+        "signedInAs": "Signed in as <user>{name}</user>"
+      },
+      "signOutButton": {
+        "signOut": "Sign Out",
+        "signingOut": "Signing out...",
+        "success": "See you later!"
+      }
+    }
+  },
+  "blogPage": {
     "metadata": {
       "title": "Blog",
       "description": "Notes and updates from SaaSy Land."
@@ -76,11 +194,6 @@ declare const messages: {
       "backToBlog": "Back to blog",
       "writtenBy": "Written by",
       "dateLabel": "Published"
-    }
-  },
-  "emails": {
-    "test": {
-      "title": "Test"
     }
   }
 };
