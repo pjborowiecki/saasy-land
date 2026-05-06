@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import type { JSX } from "react"
 
+import { Analytics } from "@vercel/analytics/next"
 import { hasLocale } from "next-intl"
 
 import { env } from "~/src/environment"
@@ -55,6 +56,7 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
             <TooltipProvider>
               {children}
               <Toaster />
+              <Analytics />
             </TooltipProvider>
           </ThemeProvider>
         </TranslationsProvider>
