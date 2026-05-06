@@ -5,9 +5,10 @@ import { CONSTANTS } from "~/src/constants"
 export const routing = defineRouting({
   locales: CONSTANTS.LOCALES,
   defaultLocale: CONSTANTS.DEFAULT_LOCALE,
-  alternateLinks: false,
+  alternateLinks: true,
+  localeDetection: false,
   localePrefix: {
-    mode: "always",
+    mode: "as-needed",
     prefixes: {
       "en-US": "/en",
       "pl-PL": "/pl",
