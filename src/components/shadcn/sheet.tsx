@@ -49,7 +49,7 @@ function SheetContent({
   side?: "top" | "right" | "bottom" | "left"
   showCloseButton?: boolean
 }): JSX.Element {
-  const t = useTranslations("shadcnComponents.sheet")
+  const t = useTranslations("components.shadcn.sheet")
 
   return (
     <SheetPortal>

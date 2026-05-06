@@ -1,40 +1,42 @@
 {
-  "shadcnComponents": {
-    "breadcrumb": {
-      "navLabel": "Nawigacja",
-      "more": "Więcej"
+  "components": {
+    "shadcn": {
+      "breadcrumb": {
+        "navLabel": "Nawigacja",
+        "more": "Więcej"
+      },
+      "carousel": {
+        "nextSlide": "Następny slajd",
+        "previousSlide": "Poprzedni slajd",
+        "carouselLabel": "Karuzela"
+      },
+      "dialog": {
+        "close": "Zamknij"
+      },
+      "command": {
+        "title": "Paleta poleceń",
+        "description": "Wyszukaj polecenie do eykonania..."
+      },
+      "pagination": {
+        "navLabel": "Paginacja",
+        "previousPage": "Wstecz",
+        "nextPage": "Dalej",
+        "goToPreviousPage": "Przejdź do poprzedniej strony",
+        "goToNextPage": "Przejdź do następnej strony",
+        "morePages": "Kolejne strony"
+      },
+      "sheet": {
+        "close": "Zamknij"
+      }
     },
-    "carousel": {
-      "nextSlide": "Następny slajd",
-      "previousSlide": "Poprzedni slajd",
-      "carouselLabel": "Karuzela"
-    },
-    "dialog": {
-      "close": "Zamknij"
-    },
-    "command": {
-      "title": "Paleta poleceń",
-      "description": "Wyszukaj polecenie do eykonania..."
-    },
-    "pagination": {
-      "navLabel": "Paginacja",
-      "previousPage": "Wstecz",
-      "nextPage": "Dalej",
-      "goToPreviousPage": "Przejdź do poprzedniej strony",
-      "goToNextPage": "Przejdź do następnej strony",
-      "morePages": "Kolejne strony"
-    },
-    "sheet": {
-      "close": "Zamknij"
-    }
-  },
-  "customComponents": {
-    "themeSwitch": {
-      "label": "Wybierz motyw",
-      "placeholder": "Motyw",
-      "light": "Jasny",
-      "dark": "Ciemny",
-      "system": "System"
+    "custom": {
+      "themeSwitch": {
+        "label": "Wybierz motyw",
+        "placeholder": "Motyw",
+        "light": "Jasny",
+        "dark": "Ciemny",
+        "system": "System"
+      }
     }
   },
   "landingPage": {
@@ -43,12 +45,6 @@
     },
     "welcome": "Witaj na stronie {name}!"
   },
-  "appPage": {
-    "metadata": {
-      "description": "Strefa aplikacji po zalogowaniu."
-    },
-    "welcome": "Aplikacja — {name}"
-  },
   "premiumPage": {
     "metadata": {
       "description": "Premium content for SaaSy Land."
@@ -56,7 +52,129 @@
     "title": "Premium",
     "description": "Premium content for SaaSy Land."
   },
-  "blog": {
+  "emails": {
+    "test": {
+      "title": "Test"
+    }
+  },
+  "auth": {
+    "oAuth": {
+      "google": "Zaloguj się przez Google",
+      "github": "Zaloguj się przez GitHub",
+      "success": "Zalogowano pomyślnie!"
+    },
+    "errors": {
+      "accessDenied": "Odmowa dostępu.",
+      "accountNotFound": "Nie znaleziono konta.",
+      "credentialAccountNotFound": "Nie znaleziono konta z tymi danymi.",
+      "emailCanNotBeUpdated": "Nie można zaktualizować adresu e-mail.",
+      "emailNotVerified": "Adres e-mail nie został zweryfikowany.",
+      "failedToCreateSession": "Nie udało się utworzyć sesji.",
+      "failedToCreateUser": "Nie udało się utworzyć użytkownika.",
+      "failedToGetSession": "Nie udało się pobrać sesji.",
+      "failedToGetUserInfo": "Nie udało się pobrać informacji o użytkowniku.",
+      "failedToUnlinkLastAccount": "Nie udało się odłączyć ostatniego konta.",
+      "failedToUpdateUser": "Nie udało się zaktualizować użytkownika.",
+      "idTokenNotSupported": "Token ID nie jest obsługiwany.",
+      "invalidEmail": "Nieprawidłowy adres e-mail.",
+      "invalidEmailOrPassword": "Nieprawidłowy e-mail lub hasło.",
+      "invitationNotFound": "Nie znaleziono zaproszenia.",
+      "invalidPassword": "Nieprawidłowe hasło.",
+      "invalidToken": "Nieprawidłowy token.",
+      "passwordTooLong": "Hasło jest za długie.",
+      "passwordTooShort": "Hasło jest za krótkie.",
+      "providerNotFound": "Nie znaleziono dostawcy.",
+      "sessionExpired": "Sesja wygasła.",
+      "socialAccountAlreadyLinked": "Konto społecznościowe jest już połączone.",
+      "unknownError": "Wystąpił nieznany błąd.",
+      "userAlreadyExists": "Użytkownik już istnieje.",
+      "userAlreadyExistsUseAnotherEmail": "Użytkownik już istnieje. Użyj innego adresu e-mail.",
+      "userAlreadyHasPassword": "Użytkownik ma już hasło. Podaj je, aby usunąć konto.",
+      "userEmailNotFound": "Nie znaleziono adresu e-mail użytkownika.",
+      "userNotFound": "Nie znaleziono użytkownika."
+    },
+    "validations": {
+      "emailRequired": "E-mail jest wymagany.",
+      "emailInvalid": "Wprowadź poprawny adres e-mail.",
+      "emailMaxLength": "E-mail nie może być dłuższy niż {max} znaków.",
+      "nameRequired": "Imię jest wymagane.",
+      "nameMaxLength": "Imię nie może być dłuższe niż {max} znaków.",
+      "passwordRequired": "Hasło jest wymagane.",
+      "passwordMinLength": "Hasło musi mieć co najmniej {min} znaków.",
+      "passwordMaxLength": "Hasło nie może być dłuższe niż {max} znaków.",
+      "passwordUppercase": "Hasło musi zawierać co najmniej jedną wielką literę.",
+      "passwordSpecialCharacter": "Hasło musi zawierać co najmniej jeden znak specjalny.",
+      "confirmPasswordRequired": "Potwierdź swoje hasło.",
+      "passwordsMustMatch": "Hasła muszą się zgadzać.",
+      "atLeastMinCharactersLong": "Co najmniej {min} znaków",
+      "atLeastOneSpecialCharacter": "Co najmniej jeden znak specjalny",
+      "atLeastOneUppercase": "Co najmniej jedna wielka litera"
+    },
+    "layout": {
+      "backToHome": "Wróć na stronę główną"
+    },
+    "signInPage": {
+      "metadata": {
+        "title": "Logowanie",
+        "description": "Zaloguj się do aplikacji {name}."
+      },
+      "form": {
+        "title": "Witaj ponownie",
+        "description": "Wprowadź swoje dane, aby się zalogować.",
+        "email": "E-mail",
+        "password": "Hasło",
+        "submit": "Kontynuuj",
+        "submitting": "Logowanie...",
+        "success": "Zalogowano pomyślnie!",
+        "error": "Nieprawidłowy adres e-mail lub hasło. Spróbuj ponownie.",
+        "noAccount": "Nie masz konta? <signup>Zarejestruj się</signup>",
+        "forgotPassword": "Zapomniałeś hasła?",
+        "continueWithGithub": "Kontynuuj z GitHub",
+        "continueWithGoogle": "Kontynuuj z Google",
+        "or": "lub"
+      }
+    },
+    "signUpPage": {
+      "metadata": {
+        "title": "Rejestracja",
+        "description": "Zarejestruj się w aplikacji {name}."
+      },
+      "form": {
+        "title": "Rejestracja",
+        "description": "Zarejestruj się w aplikacji {name}.",
+        "name": "Imię",
+        "email": "E-mail",
+        "password": "Hasło",
+        "submit": "Kontynuuj",
+        "submitting": "Rejestracja...",
+        "success": "Konto zostało pomyślnie utworzone!",
+        "error": "Wystąpił błąd podczas rejestracji. Spróbuj ponownie.",
+        "hasAccount": "Masz już konto? <signin>Zaloguj się</signin>",
+        "or": "lub",
+        "confirmPassword": "Potwierdź hasło",
+        "termsAndPrivacy": "Rejestrując się, akceptujesz nasz <terms>Regulamin</terms> oraz <privacy>Politykę Prywatności</privacy>."
+      }
+    }
+  },
+  "app": {
+    "page": {
+      "metadata": {
+        "description": "Strefa aplikacji po zalogowaniu."
+      },
+      "welcome": "Aplikacja — {name}"
+    },
+    "components": {
+      "userWidget": {
+        "signedInAs": "Zalogowano jako <user>{name}</user>"
+      },
+      "signOutButton": {
+        "signOut": "Wyloguj",
+        "signingOut": "Wylogowywanie...",
+        "success": "Do zobaczenia!"
+      }
+    }
+  },
+  "blogPage": {
     "metadata": {
       "title": "Blog",
       "description": "Notatki i aktualizacje z SaaSy Land."
@@ -73,11 +191,6 @@
       "backToBlog": "Wróć do bloga",
       "writtenBy": "Autor",
       "dateLabel": "Data"
-    }
-  },
-  "emails": {
-    "test": {
-      "title": "Test"
     }
   }
 }

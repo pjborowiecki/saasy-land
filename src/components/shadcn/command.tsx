@@ -35,7 +35,7 @@ function CommandDialog({
   showCloseButton?: boolean
   children: ReactNode
 }): JSX.Element {
-  const t = useTranslations("shadcnComponents.command")
+  const t = useTranslations("components.shadcn.command")
 
   return (
     <Dialog {...props}>

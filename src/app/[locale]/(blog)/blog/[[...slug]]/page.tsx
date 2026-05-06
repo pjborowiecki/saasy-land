@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: BlogSlugPageProps): Promise<M
   const { locale, slug } = await params
 
   if (isBlogIndex(slug)) {
-    const t = await getTranslations({ locale, namespace: "blog" })
+    const t = await getTranslations({ locale, namespace: "blogPage" })
     return {
       title: t("metadata.title"),
       description: t("metadata.description"),
@@ -56,7 +56,7 @@ export default async function BlogPage({ params }: BlogSlugPageProps): Promise<J
   const { locale, slug } = await params
 
   if (isBlogIndex(slug)) {
-    const t = await getTranslations({ locale, namespace: "blog" })
+    const t = await getTranslations({ locale, namespace: "blogPage" })
     const posts = sortPostsByDateDesc(blogSource.getPages(locale).filter((page) => isPublished(page.data)))
 
     return (
@@ -97,7 +97,7 @@ export default async function BlogPage({ params }: BlogSlugPageProps): Promise<J
   const data = page.data
   const Mdx = data.body
 
-  const t = await getTranslations({ locale, namespace: "blog" })
+  const t = await getTranslations({ locale, namespace: "blogPage" })
 
   const summary = summaryFromFrontmatter(data)
 
