@@ -1,0 +1,22 @@
+---
+description: graphify knowledge graph context
+alwaysApply: true
+---
+
+Graphify outputs live under **`graphify-out/`** (gitignored). A **fresh clone has no graph** until it is generated.
+
+## Agent vs terminal
+
+- **`/graphify .` and full Graphify builds** (detect, semantic/docs/images, merged graph): run in **this Cursor Agent chat**, not in the Terminal. The leading `/` in the shell would look for a file named `graphify` at disk root and fail; there is no shell entry for `/graphify .` here. Ask in Agent with **`/graphify .`** (if your slash menu exposes it) or plain language such as *“Run Graphify’s full pipeline on `.` per the official skill.”*
+- **`graphify` CLI only in Terminal:** subcommands such as **`graphify update .`** (AST/code refresh, no LLM), **`graphify query "..."`**, **`graphify cursor install`**, etc.
+
+## If `graphify-out/GRAPH_REPORT.md` is missing
+
+- Prefer **Agent**: full pipeline or, for **AST-only** bootstrap after clone, Agent can run the skill or invoke the same steps; **`graphify update .`** in Terminal from repo root also **creates** `graphify-out/` from scratch when missing.
+- Do **not** loop on reading missing `GRAPH_REPORT.md` / `graph.json`. If generation fails or `graphify` is not installed, say so once.
+
+## If `graphify-out/GRAPH_REPORT.md` exists
+
+- For broad **architecture / codebase structure** questions, read **`graphify-out/GRAPH_REPORT.md`** first (god nodes, communities).
+- If **`graphify-out/wiki/index.md`** exists, prefer that wiki over huge raw trees.
+- After **changing application code**, refresh with **`graphify update .`** (Terminal) or ask Agent to update the graph.

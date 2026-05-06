@@ -1,0 +1,11 @@
+---
+description: Prefer opensrc/ mirrors when working from node_modules and external packages
+alwaysApply: true
+---
+
+This repo keeps local source mirrors under `opensrc/` (vendored or cloned upstream trees).
+
+- When using **external packages**, **node_modules**, or third-party tooling, prefer reading the **real implementation** for the relevant library under `opensrc/` when it exists there—not only type definitions or docs sites.
+- Use that source to confirm **available APIs**, **internal behavior**, **correct usage patterns**, and edge cases that typings or summaries often omit.
+- If something is unclear from application code alone, locate the matching tree in `opensrc/` (same package name / org path as on npm or GitHub) and trace the code paths you depend on.
+- Respect `.graphifyignore` and project layout: `opensrc/` is intentionally excluded from Graphify scans but is first-class reference material for humans and agents.

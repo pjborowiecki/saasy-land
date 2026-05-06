@@ -43,6 +43,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 .env*
+.env*.local
 !.env.example
 
 # vercel
@@ -52,11 +53,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# AI tools
+# AI
+.cursor/
+.claude/
 opensrc/
+graphify-out/
 
 # misc
 .DS_Store
 *.pem
 ._*
-.env*.local
