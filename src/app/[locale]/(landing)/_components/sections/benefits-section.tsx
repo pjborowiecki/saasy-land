@@ -33,7 +33,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <div className="relative h-[220px] w-full overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
+              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
                 <Image
                   src="/images/benefits/time-saver.webp"
                   alt="Time Saver Growth"
@@ -58,7 +58,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
             </CardHeader>
             <div className="absolute -inset-x-10 -bottom-20 h-[400px] bg-linear-to-tr from-indigo-500/20 via-primary/20 to-pink-500/20 opacity-60 blur-[80px] transition-opacity duration-700 group-hover:opacity-100" />
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <div className="relative h-[220px] w-full overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
+              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
                 <Image
                   src="/images/benefits/modern-tech.webp"
                   alt="Modern Tech"
@@ -86,7 +86,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <div className="relative h-[220px] w-full overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
+              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
                 <Image
                   src="/images/benefits/quality.webp"
                   alt="Quality Code"
@@ -109,7 +109,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <div className="relative h-[220px] w-full overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
+              <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
                 <Image
                   src="/images/benefits/flexibility.webp"
                   alt="Flexibility Shapes"

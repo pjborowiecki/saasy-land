@@ -50,7 +50,7 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
       className={cn(geistSans.variable, geistMono.variable, "h-full bg-background text-foreground antialiased")}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">
+      <body suppressHydrationWarning className="flex min-h-full flex-col">
         <TranslationsProvider>
           <ThemeProvider>
             <TooltipProvider>
