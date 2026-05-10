@@ -43,7 +43,219 @@
     "metadata": {
       "description": "Profesjonalny starter dla aplikacji typu SaaS."
     },
-    "welcome": "Witaj na stronie {name}!"
+    "welcome": "Witaj na stronie {name}!",
+    "hero": {
+      "badge": "Najlepszy Boilerplate Next.js 14",
+      "titlePart1": "Przyspiesz Start Swojego Biznesu z ",
+      "titlePart2": "SaaSy Land",
+      "description": "Twój skrót do sukcesu startupu. Najlepszy, nowoczesny, open-source'owy szablon Next.js, ze wszystkim czego potrzebujesz, skonfigurowanym i gotowym do użycia.",
+      "startBuilding": "Zacznij Budować (Za Darmo)",
+      "viewRecipes": "Poznaj Pro Recepty"
+    },
+    "tech": {
+      "title": "Zbudowany z użyciem technologii, które znasz i kochasz",
+      "nextjs": "Next.js",
+      "neon": "Neon",
+      "stripe": "Stripe",
+      "resend": "Resend",
+      "drizzle": "Drizzle ORM",
+      "tailwind": "Tailwind CSS",
+      "shadcn": "ShadCN/UI",
+      "elysia": "Elysia",
+      "zod": "Zod"
+    },
+    "benefits": {
+      "titlePart1": "Dlaczego ",
+      "titlePart2": "Warto?",
+      "description": "Twoja konkurencja już używa SaaSy Land i podobnych produktów, zyskując czas i przewagę. Nie zostań w tyle!",
+      "cards": {
+        "timeSaver": {
+          "badge": "Niesamowita Oszczędność Czasu",
+          "title": "Zdobądź Przewagę Nad Konkurencją",
+          "description": "Ponieważ wszystko jest profesjonalnie skonfigurowane i zgodne ze standardami, oszczędzasz ogromną ilość czasu i wysiłku, które możesz teraz przeznaczyć na to, co naprawdę ważne: rozwój Twojego biznesu."
+        },
+        "modernTech": {
+          "badge": "Najnowsze i Najlepsze",
+          "title": "Wykorzystaj Nowoczesne Technologie",
+          "description": "Stale aktualizujemy nasze szablony, aby korzystać z najnowszych i najlepszych technologii, dzięki czemu masz pewność, że Twoja strona jest zawsze szybka."
+        },
+        "quality": {
+          "badge": "Wysoka Jakość Wdrożenia",
+          "title": "Miej Pewność, że Wszystko Działa",
+          "description": "Spędziliśmy niezliczone godziny na badaniach, czytaniu dokumentacji i testowaniu najlepszych sposobów implementacji funkcji. Wykonaliśmy ciężką pracę, abyś Ty nie musiał."
+        },
+        "flexibility": {
+          "badge": "Elastyczność i Wsparcie",
+          "title": "Łatwo Dostosuj Każdy Detal",
+          "description": "Dzięki naszej szczegółowej dokumentacji możesz teraz łatwo dostosować każdy pojedynczy detal szablonu. Jeśli będziesz potrzebować pomocy, jesteśmy na wyciągnięcie ręki."
+        }
+      },
+      "stats": {
+        "visits": "162.9k",
+        "visitsLabel": "Wizyt na Stronie (Ostatnie 7 Dni)",
+        "increase": "Wzrost o 22% względem zeszłego tygodnia"
+      }
+    },
+    "features": {
+      "titlePart1": "Odkryj Nasze ",
+      "titlePart2": "Znakomite Funkcje",
+      "description": "Wszystko czego potrzebujesz wprost z pudełka. Bez zbędnych dodatków, tylko najważniejsze elementy zbudowane jak należy.",
+      "list": {
+        "auth": {
+          "title": "Uwierzytelnianie",
+          "description": "Bezpieczne logowanie, rejestracja i dostawcy OAuth już skonfigurowani."
+        },
+        "db": {
+          "title": "Baza Danych ORM",
+          "description": "W pełni typowane operacje na bazie danych z Drizzle. Płynna integracja z PostgreSQL."
+        },
+        "stripe": {
+          "title": "Płatności Stripe",
+          "description": "Obsługa subskrypcji, jednorazowych płatności i solidnych webhooków wprost z pudełka."
+        },
+        "email": {
+          "title": "Szablony E-mail",
+          "description": "Pięknie zaprojektowane szablony React Email wysyłane bezbłędnie przez nowoczesne API."
+        },
+        "seo": {
+          "title": "Optymalizacja SEO",
+          "description": "Dynamiczne metatagi, grafiki Open Graph i poprawnie ustrukturyzowana mapa strony."
+        },
+        "ui": {
+          "title": "Komponenty UI",
+          "description": "Ogromna biblioteka dostępnych, pięknie zaprojektowanych komponentów Base UI i Tailwind."
+        },
+        "i18n": {
+          "title": "Internacjonalizacja",
+          "description": "Profesjonalna konfiguracja i18n z obsługą wielu języków i zlokalizowanym routingiem od zaraz."
+        },
+        "typeSafety": {
+          "title": "Pełne Typowanie",
+          "description": "Restrykcyjna konfiguracja TypeScript end-to-end, wychwytująca błędy wcześnie i poprawiająca DX."
+        },
+        "quality": {
+          "title": "Najwyższa Jakość",
+          "description": "Czysta architektura i modułowy kod zaprojektowany do łatwego skalowania i utrzymania."
+        },
+        "performance": {
+          "title": "Maksymalna Wydajność",
+          "description": "Wykorzystanie Partial Prerendering (PPR) oraz pamięci podręcznej edge dla błyskawicznego ładowania."
+        },
+        "vercel": {
+          "title": "Gotowe na Vercel i Bun",
+          "description": "Zoptymalizowane pod kątem bezserwerowego wdrażania na Vercel oraz błyskawicznego środowiska Bun."
+        },
+        "blog": {
+          "title": "Blog i Dokumentacja MDX",
+          "description": "Wbudowany silnik markdown do pisania pięknie sformatowanych blogów i obszernej dokumentacji."
+        }
+      }
+    },
+    "testimonials": {
+      "titlePart1": "Uwielbiany przez ",
+      "titlePart2": "Twórców"
+    },
+    "pricing": {
+      "titlePart1": "Prosty, przejrzysty ",
+      "titlePart2": "cennik",
+      "description": "Wszystko, czego potrzebujesz, aby szybciej wejść na rynek, za ułamek kosztów tworzenia od podstaw.",
+      "monthly": "Miesięcznie",
+      "yearly": "Rocznie",
+      "save20": "Oszczędź 20%",
+      "starter": {
+        "title": "Starter",
+        "description": "Idealny dla projektów pobocznych i wczesnych startupów badających rynek.",
+        "priceMonthly": "$0",
+        "priceYearly": "$0",
+        "period": "/miesiąc",
+        "button": "Rozpocznij za darmo!",
+        "features": {
+          "f1": "Pełny kod źródłowy Next.js 14",
+          "f2": "Baza danych i Autoryzacja",
+          "f3": "Podstawowe komponenty UI",
+          "f4": "Zaawansowana integracja Stripe",
+          "f5": "Priorytetowe wsparcie"
+        }
+      },
+      "pro": {
+        "badge": "Najpopularniejszy",
+        "title": "Pro Builder",
+        "description": "Wszystko, czego potrzebujesz, aby zbudować i skalować swój SaaS do milionów.",
+        "priceMonthly": "$9.99",
+        "priceYearly": "$7.99",
+        "period": "/miesiąc",
+        "button": "Odblokuj funkcje PRO",
+        "features": {
+          "f1": "Wszystko z planu Starter",
+          "f2": "Zaawansowana integracja Stripe (Webhooki)",
+          "f3": "Szablony E-mail przez Resend",
+          "f4": "Komponenty Panelu Administratora",
+          "f5": "6 Miesięcy Priorytetowego Wsparcia"
+        }
+      },
+      "lifetime": {
+        "title": "Dożywotni Dostęp",
+        "description": "Zapłać raz i uzyskaj dożywotni dostęp do wszystkich przyszłych aktualizacji.",
+        "priceMonthly": "$67",
+        "priceYearly": "$67",
+        "period": "/jednorazowo",
+        "button": "Zdobądź Dożywotni Dostęp!",
+        "features": {
+          "f1": "Wszystko w Pakiecie Pro",
+          "f2": "Dożywotnie Aktualizacje",
+          "f3": "Ekskluzywna Społeczność Discord",
+          "f4": "Wczesny Dostęp do Nowości",
+          "f5": "Dożywotnie Wsparcie Priorytetowe"
+        }
+      }
+    },
+    "faq": {
+      "titlePart1": "Często Zadawane ",
+      "titlePart2": "Pytania",
+      "q1": "Czym jest SaaSy Land?",
+      "a1": "SaaSy Land to nowoczesna kolekcja szablonów startowych open source dla pełnostosowych projektów w Next.js 14. Zbudowana przy użyciu Tailwind CSS, ShadCn, Next-Auth oraz wielu różnych baz danych. Poszczególne gałęzie (branches) zawierają kompletne środowiska, w tym bazy bezserwerowe takie jak PostgreSQL z Neon czy MySQL z PlanetScale, Drizzle ORM, Prisma ORM v.5, ale także MongoDB i Supabase.",
+      "q2": "Co wchodzi w skład pakietu?",
+      "a2": "Dostępnych jest wiele opcji konfiguracyjnych. W zależności od tego, którą gałąź sklonujesz i wybierzesz, otrzymasz projekt full-stack z zaawansowaną autoryzacją (np. weryfikacja e-mail, resetowanie hasła, logowanie linkiem (magic link), logowanie przez Google i Github), zsynchronizowany z wybraną przez Ciebie bazą danych. Dodatkowo otrzymasz w pełni funkcjonalny, łatwy do dostosowania landing page, blog oparty o Markdown i MDX, strony z dokumentacją, integrację płatności Stripe i wiele więcej.",
+      "q3": "Dlaczego warto używać SaaSy Land?",
+      "a3": "Ponieważ wszystko jest profesjonalnie skonfigurowane zgodnie z najnowszymi standardami, oszczędzasz mnóstwo czasu i wysiłku, który możesz teraz przeznaczyć na to, co naprawdę ważne - budowanie własnego, unikalnego produktu. I to wszystko całkowicie za darmo!",
+      "q4": "Czy to łatwe w użyciu? Jak zacząć?",
+      "a4": "SaaSy Land jest bardzo prosty w obsłudze. Możesz zacząć, klonując repozytorium z GitHuba i podążając za instrukcjami w dokumentacji.",
+      "q5": "Czy mogę liczyć na pomoc i wsparcie?",
+      "a5": "Śmiało napisz do nas e-mail z jakimikolwiek pytaniami lub rozpocznij dyskusję na GitHubie. Chociaż zawsze chętnie pomagamy, pamiętaj, że jest to darmowy produkt, który rozwijamy z pasji w wolnym czasie, więc nie możemy zagwarantować czasu odpowiedzi.",
+      "q6": "Czy projekt jest wciąż rozwijany?",
+      "a6": "SaaSy Land jest obecnie aktywnie rozwijany. Pracujemy nad dodawaniem nowych funkcji i ulepszaniem istniejących. Poprawiamy również dokumentację i dodajemy kolejne przykłady. Bądź z nami! Rozważ też zapisanie się do newslettera, aby otrzymywać powiadomienia o nowych, dużych wydaniach. Obiecujemy, że nie będziemy wysyłać spamu!"
+    },
+    "newsletter": {
+      "title": "Zapisz się do Newslettera",
+      "description": "Bądź na bieżąco z aktualizacjami, nowymi funkcjami i wskazówkami dotyczącymi rozwoju startupów, prosto na Twoją skrzynkę.",
+      "placeholder": "Wpisz swój adres e-mail",
+      "button": "Subskrybuj"
+    },
+    "contact": {
+      "title": "Bądźmy w kontakcie",
+      "description": "Śmiało napisz do nas z jakimikolwiek pytaniami. Chociaż zawsze chętnie pomagamy, pamiętaj, że jest to darmowy produkt i nie możemy zagwarantować czasu odpowiedzi. Będzie nam również miło poznać Twoją opinię!",
+      "location": "Kraków, Polska",
+      "form": {
+        "firstName": "Imię",
+        "email": "Adres E-mail",
+        "message": "W czym możemy pomóc?",
+        "button": "Wyślij Wiadomość"
+      }
+    },
+    "footer": {
+      "copyright": "© {year}"
+    }
+  },
+  "navigation": {
+    "items": {
+      "about": "O nas",
+      "features": "Funkcje",
+      "pricing": "Cennik",
+      "faq": "FAQ",
+      "docs": "Dokumentacja",
+      "blog": "Blog"
+    },
+    "getStarted": "Rozpocznij"
   },
   "premiumPage": {
     "metadata": {
