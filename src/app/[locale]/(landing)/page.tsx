@@ -3,7 +3,15 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
+import { BenefitsSection } from "~/src/app/[locale]/(landing)/_components/sections/benefits-section"
+import { ContactSection } from "~/src/app/[locale]/(landing)/_components/sections/contact-section"
+import { FaqSection } from "~/src/app/[locale]/(landing)/_components/sections/faq-section"
+import { FeaturesSection } from "~/src/app/[locale]/(landing)/_components/sections/features-section"
+import { HeroSection } from "~/src/app/[locale]/(landing)/_components/sections/hero-section"
+import { NewsletterSection } from "~/src/app/[locale]/(landing)/_components/sections/newsletter-section"
+import { PricingSection } from "~/src/app/[locale]/(landing)/_components/sections/pricing-section"
+import { TechSection } from "~/src/app/[locale]/(landing)/_components/sections/tech-section"
+import { TestimonialsSection } from "~/src/app/[locale]/(landing)/_components/sections/testimonials-section"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]">>): Promise<Metadata> {
   const { locale } = await params
@@ -14,14 +22,18 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function LandingPage({ params }: Readonly<PageProps<"/[locale]">>): Promise<JSX.Element> {
-  const { locale } = await params
-
-  const t = await getTranslations({ locale, namespace: "landingPage" })
-
+export default async function LandingPage(): Promise<JSX.Element> {
   return (
-    <div>
-      <p>{t("welcome", { name: CONSTANTS.APP_NAME })}</p>
-    </div>
+    <>
+      <HeroSection />
+      <TechSection />
+      <BenefitsSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <PricingSection />
+      <FaqSection />
+      <NewsletterSection />
+      <ContactSection />
+    </>
   )
 }

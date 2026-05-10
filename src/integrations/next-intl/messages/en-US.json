@@ -43,7 +43,218 @@
     "metadata": {
       "description": "Professional full-stack starter for building SaaS applications."
     },
-    "welcome": "Welcome to the {name} page!"
+    "welcome": "Welcome to the {name} page!",
+    "hero": {
+      "badge": "424 Stars on GitHub",
+      "titlePart1": "Fast-Track Your Business Launch with ",
+      "titlePart2": "SaaSy Land",
+      "description": "Your shortcut to startup success. The ultimate, modern, open-source Next.js template, with everything you need set up and ready to use.",
+      "startBuilding": "Start Building",
+      "viewRecipes": "Explore Pro Recipes"
+    },
+    "techMarquee": {
+      "nextjs": "Next.js",
+      "neon": "Neon",
+      "stripe": "Stripe",
+      "resend": "Resend",
+      "drizzle": "Drizzle ORM",
+      "tailwind": "Tailwind",
+      "shadcn": "ShadCN/UI",
+      "elysia": "Elysia",
+      "zod": "Zod"
+    },
+    "benefits": {
+      "titlePart1": "Why Should ",
+      "titlePart2": "You Care?",
+      "description": "Your competitors are already using SaaSy Land and similar products, gaining time and competitive advantage. Don't get left behind!",
+      "cards": {
+        "timeSaver": {
+          "badge": "Incredible Time Saver",
+          "title": "Get a Head Start on Your Competitors",
+          "description": "Since everything is professionally configured and up to standards, you save a tremendous amount of time and effort, which you can now spend focusing on what really matters: your core business offering."
+        },
+        "modernTech": {
+          "badge": "Latest and Greatest",
+          "title": "Take Advantage of Modern Technologies",
+          "description": "We are constantly updating our templates to take advantage of the latest and greatest technologies, so you can be sure your website is always fast."
+        },
+        "quality": {
+          "badge": "High Quality Implementation",
+          "title": "Know Everything Works As Expected",
+          "description": "We spent countless hours researching, exploring docs and testing the best way to implement features. We have done the hard work so you don't have to."
+        },
+        "flexibility": {
+          "badge": "Flexibility and Support",
+          "title": "Easily Customize Every Single Detail",
+          "description": "With the help of our detailed documentation, you can now easily customize every single detail of the template. Should you need any help, we are a message away."
+        }
+      },
+      "stats": {
+        "visits": "162.9k",
+        "visitsLabel": "Last 7 Days Website Visits",
+        "increase": "22% increase from Last Week"
+      }
+    },
+    "features": {
+      "titlePart1": "Discover Our ",
+      "titlePart2": "Wholesome Features",
+      "description": "Everything you need out of the box. No fluff, just the essentials built right.",
+      "list": {
+        "auth": {
+          "title": "Authentication",
+          "description": "Secure login, registration, and social OAuth providers already configured via Better Auth."
+        },
+        "db": {
+          "title": "Database ORM",
+          "description": "Fully typed database operations with Drizzle. Seamless integrations with PostgreSQL."
+        },
+        "stripe": {
+          "title": "Stripe Payments",
+          "description": "Handle subscriptions, one-time payments, and robust webhook listeners right out of the box."
+        },
+        "email": {
+          "title": "Email Templates",
+          "description": "Beautifully crafted React Email templates sent flawlessly via modern APIs."
+        },
+        "seo": {
+          "title": "SEO Optimized",
+          "description": "Dynamic meta tags, Open Graph imagery, and sitemap generation correctly structured."
+        },
+        "ui": {
+          "title": "UI Components",
+          "description": "A massive library of accessible, beautifully designed Base UI and Tailwind components."
+        },
+        "i18n": {
+          "title": "Internationalization",
+          "description": "Professional i18n setup supporting multiple languages and localized routing out of the box."
+        },
+        "typeSafety": {
+          "title": "Full Type-Safety",
+          "description": "End-to-end strict TypeScript configuration to catch bugs early and improve developer experience."
+        },
+        "quality": {
+          "title": "Quality Implementation",
+          "description": "Clean architecture and modular code designed to be scaled, maintained, and extended easily."
+        },
+        "performance": {
+          "title": "Maximum Performance",
+          "description": "Utilizing Partial Prerendering (PPR) and edge caching for blazingly fast load times."
+        },
+        "vercel": {
+          "title": "Vercel & Bun Ready",
+          "description": "Optimized for serverless edge deployment using Vercel and the blazingly fast Bun runtime."
+        },
+        "blog": {
+          "title": "MDX Blog & Docs",
+          "description": "A built-in markdown engine to write beautifully formatted blogs and comprehensive documentation."
+        }
+      }
+    },
+    "testimonials": {
+      "titlePart1": "Loved by ",
+      "titlePart2": "Builders"
+    },
+    "pricing": {
+      "titlePart1": "Simple, transparent ",
+      "titlePart2": "pricing",
+      "description": "Everything you need to launch faster, at a fraction of the cost of developing it from scratch.",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "save20": "Save 20%",
+      "starter": {
+        "title": "Starter",
+        "description": "Perfect for side projects and early startups testing the waters.",
+        "priceMonthly": "$0",
+        "priceYearly": "$0",
+        "period": "/mo",
+        "button": "Get started for free!",
+        "features": {
+          "f1": "Complete Next.js 14 Source Code",
+          "f2": "Database & Auth Setup",
+          "f3": "Basic UI Components",
+          "f4": "Advanced Stripe Integration",
+          "f5": "Priority Support"
+        }
+      },
+      "pro": {
+        "badge": "Most Popular",
+        "title": "Pro Builder",
+        "description": "Everything you need to build and scale your SaaS to millions.",
+        "priceMonthly": "$9.99",
+        "priceYearly": "$7.99",
+        "period": "/mo",
+        "button": "Unlock PRO Features",
+        "features": {
+          "f1": "Everything in Starter",
+          "f2": "Advanced Stripe Integration (Webhooks)",
+          "f3": "Email Templates via Resend",
+          "f4": "Admin Dashboard Components",
+          "f5": "6 Months Priority Support"
+        }
+      },
+      "lifetime": {
+        "title": "Lifetime Access",
+        "description": "Pay once and get lifetime access to all future updates and releases.",
+        "priceMonthly": "$67",
+        "priceYearly": "$67",
+        "period": "/one-time",
+        "button": "Gain Lifetime Access!",
+        "features": {
+          "f1": "Everything in Pro Builder",
+          "f2": "Lifetime Core Updates",
+          "f3": "Exclusive Discord Community",
+          "f4": "Early Access to New Features",
+          "f5": "Lifetime Priority Support"
+        }
+      }
+    },
+    "faq": {
+      "titlePart1": "Frequently Asked ",
+      "titlePart2": "Questions",
+      "q1": "What is SaaSy Land?",
+      "a1": "SaaSy Land is a modern, open sourced collection starter templates for Next.js 14 full-stack projects. Built with Tailwind CSS, ShadCn, Next-Auth and several databases. Branches contain stand-alone set ups, including for serverless databases like PostgreSQL with Neon and MySQL with PlanetScale, Drizzle ORM, Prisma ORM v.5, but also MongoDB and Supabase.",
+      "q2": "What is included?",
+      "a2": "Several configuration options are available. Depending on which repo branch you clone and decide to use, you will have a full-stack project with advanced authentication (e.g., email verification, password reset, magic link sign in, OAuth social sign in with Google and Github), synchronized with a database of your choosing. On top of that, you will have a fully functional landing page, which is extremely easy to customize, Markdown and MDX-powered blog, documentation pages, Stripe payments integration, and more.",
+      "q3": "Why would I want to use SaaSy Land?",
+      "a3": "Since everything is professionally pre-configured and up to the latest standards, you save a tremendous amount of time and effort, which you can now spend focusing on what really matters - building your own, unique product. And it's completely free!",
+      "q4": "Is it easy to use? How do I get started?",
+      "a4": "SaaSy Land is extremely easy to use. You can get started by cloning a GitHub repo and following the documentation.",
+      "q5": "Can I get help and support?",
+      "a5": "Feel free to email us with any questions, or start a discussion on GitHub. While we are always happy to help, please keep in mind that this is a free product, which we develop out of passion in our free time and hence, we cannot guarantee any response times.",
+      "q6": "Is the product actively maintained?",
+      "a6": "SaaSy Land is currently under active development. We are working on adding new features and improving the existing ones. We are also working on improving the documentation and adding more examples. Stay tuned! You may also consider signing up for our newsletter to get notified about new major releases. We will not spam you, we promise!"
+    },
+    "newsletter": {
+      "title": "Sign Up to Our Newsletter",
+      "description": "Stay in the loop with updates on new features, boilerplate releases, and startup growth tips directly to your inbox.",
+      "placeholder": "Enter your email address",
+      "button": "Subscribe"
+    },
+    "contact": {
+      "title": "Let's Get in Touch",
+      "description": "Feel free to email us with any questions you might have. While we are always happy to help, please keep in mind that this is a free product and we cannot guarantee any response times. We would also love to know your feedback!",
+      "location": "Kraków, Poland",
+      "form": {
+        "firstName": "Name",
+        "email": "Email Address",
+        "message": "How can we help?",
+        "button": "Send Message"
+      }
+    },
+    "footer": {
+      "copyright": "© {year}"
+    }
+  },
+  "navigation": {
+    "items": {
+      "about": "About",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "docs": "Docs",
+      "blog": "Blog"
+    },
+    "getStarted": "Get Started"
   },
   "premiumPage": {
     "metadata": {
