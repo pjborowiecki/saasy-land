@@ -54,7 +54,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
         onSuccess: () => {
           triggerConfetti()
           toast.success(t("auth.signUpPage.form.success"))
-          router.push(CONSTANTS.ROUTES.APP)
+          router.push(CONSTANTS.ROUTES.ADMIN)
         },
       },
     })

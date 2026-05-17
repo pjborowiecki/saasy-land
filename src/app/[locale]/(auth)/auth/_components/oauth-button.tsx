@@ -33,7 +33,7 @@ export function OAuthButton({ provider, label, Icon, className, ...rest }: Reado
     startTransition(async () => {
       await authClient.signIn.social({
         provider,
-        callbackURL: CONSTANTS.ROUTES.APP,
+        callbackURL: CONSTANTS.ROUTES.ADMIN,
         fetchOptions: {
           onError: (ctx) => {
             const errorCode = (ctx.error.code as keyof typeof AUTH_ERRORS) ?? "UNKNOWN_ERROR"

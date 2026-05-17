@@ -11,7 +11,10 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["better-auth"],
   experimental: { rootParams: true },
   images: {
-    remotePatterns: [{ protocol: "https", hostname: "avatars.githubusercontent.com", pathname: "/**" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "avatars.githubusercontent.com", pathname: "/**" },
+      { protocol: "https", hostname: "i.pravatar.cc", pathname: "/**" },
+    ],
   },
 }
 
