@@ -2,17 +2,20 @@ import type { ComponentProps, JSX } from "react"
 
 import { cn } from "~/src/lib/utils"
 
-function Card({ className, size = "default", ...props }: ComponentProps<"div"> & { size?: "default" | "sm" }): JSX.Element {
+function Card({ className, size = "default", children, ...props }: ComponentProps<"div"> & { size?: "default" | "sm" }): JSX.Element {
   return (
     <div
       data-slot="card"
       data-size={size}
       className={cn(
-        "group/card flex flex-col gap-4 overflow-hidden rounded-lg bg-card py-4 text-card-foreground text-xs/relaxed ring-1 ring-foreground/10 has-[>img:first-child]:pt-0 has-data-[slot=card-footer]:pb-0 data-[size=sm]:gap-2 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-none *:[img:last-child]:rounded-none",
+        "group/card relative isolate flex flex-col gap-4 overflow-hidden rounded-lg bg-card py-4 text-card-foreground text-xs/relaxed ring-1 ring-foreground/10 transition-colors hover:ring-foreground/20 has-[>img:first-child]:pt-0 has-data-[slot=card-footer]:pb-0 data-[size=sm]:gap-2 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-none *:[img:last-child]:rounded-none",
         className,
       )}
       {...props}
-    />
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover/card:opacity-0" />
+      {children}
+    </div>
   )
 }
 

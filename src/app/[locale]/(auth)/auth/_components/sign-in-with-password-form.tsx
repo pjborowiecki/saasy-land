@@ -45,7 +45,7 @@ export function SignInWithPasswordForm(): JSX.Element {
         },
         onSuccess: () => {
           toast.success(t("auth.signInPage.form.success"))
-          router.push(CONSTANTS.ROUTES.APP)
+          router.push(CONSTANTS.ROUTES.ADMIN)
         },
       },
     })

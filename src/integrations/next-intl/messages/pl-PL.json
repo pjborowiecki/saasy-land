@@ -368,24 +368,6 @@
       }
     }
   },
-  "app": {
-    "page": {
-      "metadata": {
-        "description": "Strefa aplikacji po zalogowaniu."
-      },
-      "welcome": "Aplikacja — {name}"
-    },
-    "components": {
-      "userWidget": {
-        "signedInAs": "Zalogowano jako <user>{name}</user>"
-      },
-      "signOutButton": {
-        "signOut": "Wyloguj",
-        "signingOut": "Wylogowywanie...",
-        "success": "Do zobaczenia!"
-      }
-    }
-  },
   "blogPage": {
     "metadata": {
       "title": "Blog",
@@ -404,5 +386,1457 @@
       "writtenBy": "Autor",
       "dateLabel": "Data"
     }
+  },
+  "admin": {
+    "page": {
+      "metadata": {
+        "description": "Strefa aplikacji po zalogowaniu."
+      },
+      "welcome": "Aplikacja — {name}"
+    },
+    "components": {
+      "userWidget": {
+        "signedInAs": "Zalogowano jako <user>{name}</user>"
+      },
+      "signOutButton": {
+        "signOut": "Wyloguj",
+        "signingOut": "Wylogowywanie...",
+        "success": "Do zobaczenia!"
+      }
+    },
+    "payments": {
+      "metadata": {
+        "title": "Payments",
+        "description": "Manage revenue, transactions, and payout settings."
+      },
+      "title": "Payments",
+      "description": "Manage revenue, transactions, and payout settings.",
+      "actions": {
+        "export": "Export",
+        "settings": "Payment Settings"
+      },
+      "tabs": {
+        "transactions": "Transactions",
+        "subscriptions": "Subscriptions",
+        "payouts": "Payouts",
+        "refunds": "Refunds"
+      },
+      "stats": {
+        "refunded": {
+          "title": "Refunded (30d)",
+          "value": "$1,240.00",
+          "trend": "-12.4%"
+        },
+        "refundRate": {
+          "title": "Refund Rate",
+          "value": "1.2%",
+          "trend": "-0.2%"
+        },
+        "pending": {
+          "title": "Pending Approvals",
+          "subtitle": "Amounting to $407.00",
+          "value": "3"
+        },
+        "vsLastMonth": "vs last month"
+      },
+      "table": {
+        "title": "Recent Refunds",
+        "columns": {
+          "customer": "Customer",
+          "amount": "Amount",
+          "item": "Original Item",
+          "reason": "Reason",
+          "date": "Date",
+          "status": "Status"
+        },
+        "pagination": {
+          "showing": "Showing 1 to 4 of 24 results",
+          "previous": "Previous",
+          "next": "Next",
+          "page1": "1",
+          "page2": "2",
+          "ellipsis": "..."
+        },
+        "rows": [
+          {
+            "id": 1,
+            "initials": "AJ",
+            "name": "Alex Johnson",
+            "email": "alex@example.com",
+            "amount": "$199.00",
+            "type": "Full refund",
+            "item": "Pro Annual",
+            "reason": "Accidental renewal",
+            "date": "Nov 25, 2024",
+            "status": "Processed",
+            "statusColor": "bg-emerald-500",
+            "statusTextColor": "text-muted-foreground"
+          },
+          {
+            "id": 2,
+            "initials": "SS",
+            "name": "Sarah Smith",
+            "email": "sarah.s@domain.com",
+            "amount": "$9.50",
+            "type": "Partial refund",
+            "item": "Pro Monthly",
+            "reason": "Downtime compensation",
+            "date": "Nov 22, 2024",
+            "status": "Processed",
+            "statusColor": "bg-emerald-500",
+            "statusTextColor": "text-muted-foreground"
+          },
+          {
+            "id": 3,
+            "initials": "MB",
+            "name": "Michael Brown",
+            "email": "mike.b@startup.io",
+            "amount": "$9.00",
+            "type": "Full refund",
+            "item": "Starter Monthly",
+            "reason": "Not a fit",
+            "date": "Nov 20, 2024",
+            "status": "Pending",
+            "statusColor": "bg-amber-500",
+            "statusTextColor": "text-amber-500 dark:text-amber-400"
+          },
+          {
+            "id": 4,
+            "initials": "ED",
+            "name": "Emma Davis",
+            "email": "emma@design.co",
+            "amount": "$199.00",
+            "type": "Full refund",
+            "item": "Pro Annual",
+            "reason": "Fraudulent charge",
+            "date": "Nov 18, 2024",
+            "status": "Failed",
+            "statusColor": "bg-rose-500",
+            "statusTextColor": "text-rose-500 dark:text-rose-400"
+          }
+        ]
+      }
+    },
+    "sidebar": {
+      "title": "SaaSy Land",
+      "version": "v2.0.0",
+      "groups": {
+        "overview": "Overview",
+        "offerings": "Offerings",
+        "administration": "Administration",
+        "content": "Treść"
+      },
+      "links": {
+        "dashboard": "Dashboard",
+        "analytics": "Analytics",
+        "products": "Products",
+        "courses": "Kursy",
+        "pricingModels": "Pricing Models",
+        "contentAccess": "Content & Access",
+        "userManagement": "User Management",
+        "activeSessions": "Active Sessions",
+        "payments": "Payments & Billing",
+        "settings": "Settings",
+        "blog": "Blog",
+        "landingPage": "Landing Page"
+      },
+      "logo": "SL",
+      "badges": {
+        "activeSessionsBadge": "3"
+      }
+    },
+    "dashboard": {
+      "title": "Overview",
+      "description": "Welcome back, here is what is happening today.",
+      "actions": {
+        "last30Days": "Last 30 Days",
+        "addProduct": "Add Product"
+      },
+      "stats": {
+        "revenue": {
+          "title": "Total Revenue (MRR)",
+          "value": "$24,500.00",
+          "trend": "+12.5%"
+        },
+        "activeUsers": {
+          "title": "Active Users",
+          "value": "1,248",
+          "trend": "+4.2%"
+        },
+        "currentSessions": {
+          "title": "Current Sessions",
+          "value": "42",
+          "badge": "Active Now"
+        },
+        "churnRate": {
+          "title": "Churn Rate",
+          "value": "1.2%",
+          "trend": "-0.8%"
+        }
+      },
+      "chart": {
+        "title": "Revenue Overview",
+        "description": "Monthly recurring revenue over the last 12 months",
+        "filters": {
+          "12m": "12M",
+          "30d": "30D",
+          "7d": "7D"
+        },
+        "yAxis": ["$30k", "$20k", "$10k", "$0"],
+        "xAxis": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      },
+      "users": {
+        "title": "User Management",
+        "description": "Manage your team members and their account permissions here.",
+        "search": "Filter users...",
+        "filters": {
+          "role": "Role",
+          "status": "Status"
+        },
+        "export": "Export",
+        "table": {
+          "columns": {
+            "user": "User",
+            "role": "Role",
+            "status": "Status",
+            "lastActive": "Last Active",
+            "actions": "Actions"
+          },
+          "pagination": {
+            "showing": "Showing 1 to 3 of 42 entries",
+            "previous": "Previous",
+            "next": "Next"
+          },
+          "rows": [
+            {
+              "id": 1,
+              "name": "Sarah Jenkins",
+              "email": "sarah@example.com",
+              "avatar": "https://i.pravatar.cc/150?u=1",
+              "role": "Admin",
+              "status": "Online",
+              "lastActive": "Just now"
+            },
+            {
+              "id": 2,
+              "name": "Michael Ross",
+              "email": "michael@example.com",
+              "initials": "MR",
+              "role": "Editor",
+              "status": "Offline",
+              "lastActive": "2 hours ago"
+            },
+            {
+              "id": 3,
+              "name": "Elena Smith",
+              "email": "elena@example.com",
+              "avatar": "https://i.pravatar.cc/150?u=4",
+              "role": "Viewer",
+              "status": "Idle",
+              "lastActive": "15 mins ago"
+            }
+          ]
+        }
+      },
+      "sessions": {
+        "title": "Active Sessions",
+        "revoke": "Revoke",
+        "signoutAll": "Sign out all other sessions",
+        "current": "Current",
+        "items": [
+          {
+            "id": 1,
+            "device": "Mac OS • Safari",
+            "location": "New York, US • IP: 192.168.1.1",
+            "icon": "laptop",
+            "isCurrent": true
+          },
+          {
+            "id": 2,
+            "device": "iOS • Chrome",
+            "location": "London, UK • 2 hours ago",
+            "icon": "smartphone",
+            "isCurrent": false
+          }
+        ]
+      },
+      "security": {
+        "title": "Security Settings",
+        "mfa": "Two-Factor Auth",
+        "mfaDesc": "Require 2FA for all users",
+        "email": "Email Notifications",
+        "emailDesc": "Daily summary reports"
+      }
+    },
+    "courses": {
+      "create": {
+        "title": "Utwórz Kurs",
+        "actions": {
+          "cancel": "Anuluj",
+          "save": "Zapisz Kurs"
+        },
+        "sections": {
+          "general": {
+            "title": "Informacje Ogólne",
+            "name": {
+              "label": "Tytuł Kursu",
+              "placeholder": "np. Zaawansowane wzorce projektowe UI..."
+            },
+            "description": {
+              "label": "Opis",
+              "placeholder": "Krótko opisz czego nauczą się studenci...",
+              "help": "Będzie wyświetlany na stronie docelowej kursu."
+            }
+          },
+          "curriculum": {
+            "title": "Program Nauczania",
+            "description": "Zbuduj strukturę kursu na podstawie sekcji i lekcji.",
+            "expandAll": "Rozwiń Wszystko",
+            "addSection": "Dodaj Nową Sekcję",
+            "addLesson": "Dodaj Lekcję"
+          },
+          "pricing": {
+            "title": "Cennik i Dostęp",
+            "model": {
+              "label": "Model Rozliczeniowy",
+              "oneTime": "Jednorazowy Zakup",
+              "subscription": "Subskrypcja"
+            },
+            "price": {
+              "label": "Cena",
+              "placeholder": "0.00"
+            },
+            "duration": {
+              "label": "Czas Dostępu",
+              "lifetime": "Dożywotni Dostęp"
+            }
+          },
+          "status": {
+            "title": "Status",
+            "publish": {
+              "label": "Opublikuj Kurs",
+              "description": "Ustaw widoczność dla studentów"
+            },
+            "certificate": {
+              "label": "Wydaj Certyfikat",
+              "description": "Po 100% ukończeniu kursu"
+            }
+          },
+          "media": {
+            "title": "Miniaturka Kursu",
+            "upload": "Wgraj obraz",
+            "help": "Zalecane 1920x1080px"
+          },
+          "organization": {
+            "title": "Organizacja",
+            "category": {
+              "label": "Kategoria",
+              "placeholder": "Wybierz kategorię..."
+            },
+            "difficulty": {
+              "label": "Poziom Trudności",
+              "placeholder": "np. Początkujący, Zaawansowany..."
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "metadata": {
+        "title": "Settings | SaaSy Land",
+        "description": "Manage your workspace preferences, security, and billing."
+      },
+      "title": "Settings",
+      "description": "Manage your workspace preferences, security, and billing.",
+      "tabs": {
+        "general": "General",
+        "security": "Security",
+        "team": "Team & Members",
+        "billing": "Billing",
+        "integrations": "Integrations",
+        "api": "API Keys"
+      },
+      "profile": {
+        "title": "Workspace Profile",
+        "description": "Update your workspace identity and details.",
+        "uploadImage": "Upload image",
+        "removeImage": "Remove",
+        "imageHint": "Recommended size: 256x256px. Max 2MB.",
+        "workspaceName": "Workspace Name",
+        "supportEmail": "Support Email",
+        "workspaceUrl": "Workspace URL",
+        "urlHint": "This is your unique URL to log in to your dashboard.",
+        "saveChanges": "Save Changes",
+        "urlPrefix": "app.saasyland.com/"
+      },
+      "preferences": {
+        "title": "Preferences",
+        "description": "Configure regional and language settings for your workspace.",
+        "language": "Language",
+        "timezone": "Timezone",
+        "languages": {
+          "en": "English (US)",
+          "es": "Español",
+          "fr": "Français"
+        },
+        "timezones": {
+          "utc": "UTC (Coordinated Universal Time)",
+          "est": "EST (Eastern Standard Time)",
+          "pst": "PST (Pacific Standard Time)"
+        },
+        "announcements": {
+          "title": "Feature Announcements",
+          "description": "Receive emails about new features and updates."
+        }
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "description": "Irreversible actions for your workspace.",
+        "delete": {
+          "title": "Delete Workspace",
+          "description": "Permanently delete this workspace and all of its data. This action cannot be undone.",
+          "button": "Delete Workspace"
+        }
+      },
+      "security": {
+        "password": {
+          "title": "Change Password",
+          "description": "Update your password to keep your account secure.",
+          "current": "Current Password",
+          "new": "New Password",
+          "confirm": "Confirm New Password",
+          "requirements": {
+            "title": "Password requirements",
+            "length": "Minimum 8 characters long",
+            "case": "At least one uppercase and lowercase letter",
+            "special": "At least one number or special character"
+          },
+          "update": "Update Password"
+        },
+        "twoFactor": {
+          "title": "Two-Factor Authentication (2FA)",
+          "description": "Add an extra layer of security to your account.",
+          "app": "Authenticator App",
+          "appDescription": "Use an app like Google Authenticator or 1Password to generate time-based codes.",
+          "enable": "Enable 2FA"
+        },
+        "sessions": {
+          "title": "Active Sessions",
+          "description": "Manage devices that are currently logged into your account.",
+          "logoutAll": "Log out all other devices",
+          "currentBadge": "Current session",
+          "revoke": "Revoke",
+          "activeAgo": "Active {time} ago",
+          "list": [
+            {
+              "device": "Mac OS Safari",
+              "location": "New York, USA",
+              "ip": "192.168.1.1",
+              "isCurrent": true,
+              "icon": "laptop"
+            },
+            {
+              "device": "iOS Chrome",
+              "location": "London, UK",
+              "time": "2 hours",
+              "isCurrent": false,
+              "icon": "smartphone"
+            }
+          ],
+          "separator": " • "
+        }
+      }
+    },
+    "analytics": {
+      "metadata": {
+        "title": "Analytics | SaaSy Land",
+        "description": "Monitor your SaaS performance, revenue, and user engagement."
+      },
+      "title": "Analytics Overview",
+      "description": "Monitor your SaaS performance, revenue, and user engagement.",
+      "actions": {
+        "datePicker": "Last 30 Days"
+      },
+      "tabs": {
+        "overview": "Overview",
+        "revenue": "Revenue",
+        "audience": "Audience",
+        "retention": "Retention",
+        "reports": "Reports"
+      },
+      "kpi": {
+        "mrr": {
+          "title": "Total MRR",
+          "value": "$124,500",
+          "trend": "14.2%",
+          "trendLabel": "vs last month"
+        },
+        "activeUsers": {
+          "title": "Active Users",
+          "value": "45,231",
+          "trend": "5.4%",
+          "trendLabel": "vs last month"
+        },
+        "churn": {
+          "title": "Churn Rate",
+          "value": "1.2%",
+          "trend": "0.4%",
+          "trendLabel": "vs last month"
+        },
+        "arpu": {
+          "title": "Avg. Revenue Per User",
+          "value": "$42.50",
+          "trend": "2.1%",
+          "trendLabel": "vs last month"
+        }
+      },
+      "chart": {
+        "title": "Revenue Overview",
+        "description": "Daily revenue generated over the last 30 days.",
+        "legend": {
+          "new": "New Subscriptions",
+          "renewals": "Renewals"
+        },
+        "tooltip": "{date}: {value}",
+        "activeTooltip": "Today: {value}"
+      },
+      "regions": {
+        "title": "Top Regions",
+        "viewAll": "View All",
+        "list": [
+          {
+            "name": "United States",
+            "flag": "🇺🇸",
+            "percentage": 45
+          },
+          {
+            "name": "United Kingdom",
+            "flag": "🇬🇧",
+            "percentage": 22
+          },
+          {
+            "name": "Canada",
+            "flag": "🇨🇦",
+            "percentage": 15
+          },
+          {
+            "name": "Germany",
+            "flag": "🇩🇪",
+            "percentage": 8
+          },
+          {
+            "name": "Australia",
+            "flag": "🇦🇺",
+            "percentage": 10
+          }
+        ]
+      },
+      "upgrades": {
+        "title": "Recent Upgrades",
+        "viewAll": "View All",
+        "list": [
+          {
+            "initials": "AS",
+            "name": "Alice Smith",
+            "action": "Upgraded to Pro Plan",
+            "time": "2 mins ago",
+            "colors": "from-blue-600 to-indigo-400"
+          },
+          {
+            "initials": "MJ",
+            "name": "Michael Johnson",
+            "action": "Upgraded to Enterprise",
+            "time": "1 hour ago",
+            "colors": "from-emerald-600 to-teal-400"
+          },
+          {
+            "initials": "ER",
+            "name": "Emma Richards",
+            "action": "Upgraded to Pro Plan",
+            "time": "3 hours ago",
+            "colors": "from-rose-600 to-orange-400"
+          },
+          {
+            "initials": "DL",
+            "name": "David Lee",
+            "action": "Upgraded to Team Plan",
+            "time": "5 hours ago",
+            "colors": "border border-border/50 bg-secondary text-muted-foreground"
+          },
+          {
+            "initials": "SK",
+            "name": "Sarah Kline",
+            "action": "Upgraded to Pro Plan",
+            "time": "1 day ago",
+            "colors": "from-purple-600 to-fuchsia-400"
+          }
+        ]
+      }
+    },
+    "users": {
+      "metadata": {
+        "title": "User Management | SaaSy Land",
+        "description": "Manage your team members, permissions, and customer accounts."
+      },
+      "title": "User Management",
+      "description": "Manage your team members, permissions, and customer accounts.",
+      "actions": {
+        "export": "Export",
+        "addUser": "Add User"
+      },
+      "search": {
+        "placeholder": "Search users by name, email, or ID..."
+      },
+      "filters": {
+        "role": "Role: All",
+        "status": "Status: Active"
+      },
+      "tabs": {
+        "allUsers": "All Users",
+        "invitations": "Invitations",
+        "roles": "Roles & Permissions",
+        "security": "Security"
+      },
+      "table": {
+        "headers": {
+          "user": "User",
+          "role": "Role",
+          "status": "Status",
+          "lastActive": "Last Active"
+        }
+      },
+      "pagination": {
+        "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+      },
+      "list": [
+        {
+          "id": "u1",
+          "name": "Alice Smith",
+          "email": "alice.smith@example.com",
+          "initials": "AS",
+          "colors": "from-blue-600 to-indigo-400",
+          "role": "Administrator",
+          "status": "Active",
+          "statusColor": "emerald",
+          "lastActive": "Just now"
+        },
+        {
+          "id": "u2",
+          "name": "Michael Johnson",
+          "email": "m.johnson@example.com",
+          "avatar": "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+          "role": "Editor",
+          "status": "Active",
+          "statusColor": "emerald",
+          "lastActive": "2 hours ago"
+        },
+        {
+          "id": "u3",
+          "name": "Emma Richards",
+          "email": "emma.r@example.com",
+          "initials": "ER",
+          "colors": "from-rose-600 to-orange-400",
+          "role": "Viewer",
+          "status": "Pending",
+          "statusColor": "amber",
+          "lastActive": "Never"
+        },
+        {
+          "id": "u4",
+          "name": "David Lee",
+          "email": "david.lee@example.com",
+          "avatar": "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+          "isBanned": true,
+          "role": "Subscriber",
+          "status": "Banned",
+          "statusColor": "rose",
+          "lastActive": "Oct 12, 2023"
+        },
+        {
+          "id": "u5",
+          "name": "Sarah Kline",
+          "email": "s.kline@example.com",
+          "initials": "SK",
+          "colors": "from-purple-600 to-fuchsia-400",
+          "role": "Editor",
+          "status": "Active",
+          "statusColor": "emerald",
+          "lastActive": "1 day ago"
+        }
+      ],
+      "invitations": {
+        "title": "Invitations",
+        "description": "Manage pending team invitations and access links.",
+        "actions": {
+          "copyLink": "Copy Link",
+          "sendInvite": "Send Invite"
+        },
+        "search": {
+          "placeholder": "Search invites by email..."
+        },
+        "filters": {
+          "role": "Role: All",
+          "status": "Status: Pending"
+        },
+        "table": {
+          "headers": {
+            "email": "Email",
+            "role": "Role",
+            "status": "Status",
+            "sentDate": "Sent Date"
+          }
+        },
+        "pagination": {
+          "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+        },
+        "list": [
+          {
+            "id": "i1",
+            "email": "alex.chen@example.com",
+            "invitedBy": "John Doe",
+            "role": "Administrator",
+            "status": "Pending",
+            "statusColor": "amber",
+            "sentDate": "2 hours ago"
+          },
+          {
+            "id": "i2",
+            "email": "m.roberts@startup.io",
+            "invitedBy": "John Doe",
+            "role": "Viewer",
+            "status": "Pending",
+            "statusColor": "amber",
+            "sentDate": "Yesterday"
+          },
+          {
+            "id": "i3",
+            "email": "k.williams@acme.co",
+            "invitedBy": "Sarah Kline",
+            "role": "Editor",
+            "status": "Expired",
+            "statusColor": "rose",
+            "sentDate": "Oct 10, 2023"
+          },
+          {
+            "id": "i4",
+            "email": "j.miller@example.com",
+            "invitedBy": "John Doe",
+            "role": "Subscriber",
+            "status": "Pending",
+            "statusColor": "amber",
+            "sentDate": "Oct 20, 2023"
+          },
+          {
+            "id": "i5",
+            "email": "s.taylor@designco.com",
+            "invitedBy": "John Doe",
+            "role": "Editor",
+            "status": "Expired",
+            "statusColor": "rose",
+            "sentDate": "Sep 28, 2023"
+          }
+        ]
+      },
+      "roles": {
+        "title": "Roles & Permissions",
+        "description": "Define access levels and manage permissions across your organization.",
+        "actions": {
+          "createRole": "Create Role"
+        },
+        "search": {
+          "placeholder": "Search roles by name or description..."
+        },
+        "filters": {
+          "type": "Type: All"
+        },
+        "table": {
+          "headers": {
+            "name": "Role Name",
+            "description": "Description",
+            "type": "Type",
+            "users": "Users"
+          }
+        },
+        "pagination": {
+          "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> roles"
+        },
+        "list": [
+          {
+            "id": "r1",
+            "name": "Administrator",
+            "description": "Full access to all system features, billing, and settings.",
+            "type": "System",
+            "typeColor": "default",
+            "usersCount": "3 users",
+            "icon": "Shield",
+            "iconColor": "default"
+          },
+          {
+            "id": "r2",
+            "name": "Editor",
+            "description": "Can edit products and content, but cannot manage users.",
+            "type": "System",
+            "typeColor": "default",
+            "usersCount": "12 users",
+            "icon": "Pen",
+            "iconColor": "default"
+          },
+          {
+            "id": "r3",
+            "name": "Support Agent",
+            "description": "Access to user sessions and basic troubleshooting tools.",
+            "type": "Custom",
+            "typeColor": "fuchsia",
+            "usersCount": "5 users",
+            "icon": "HelpCircle",
+            "iconColor": "fuchsia"
+          },
+          {
+            "id": "r4",
+            "name": "Viewer",
+            "description": "Read-only access to analytics and dashboards.",
+            "type": "System",
+            "typeColor": "default",
+            "usersCount": "28 users",
+            "icon": "Eye",
+            "iconColor": "default"
+          },
+          {
+            "id": "r5",
+            "name": "API Developer",
+            "description": "Access to developer settings, API keys, and webhooks.",
+            "type": "Custom",
+            "typeColor": "fuchsia",
+            "usersCount": "2 users",
+            "icon": "Code",
+            "iconColor": "fuchsia"
+          }
+        ]
+      }
+    },
+    "products": {
+      "metadata": {
+        "title": "Products | SaaSy Land",
+        "description": "Manage physical merchandise, digital downloads, and protected content subscriptions."
+      },
+      "tabs": {
+        "all": "All Products",
+        "onetime": "One-time Purchases",
+        "subscriptions": "Subscriptions",
+        "drafts": "Drafts",
+        "categories": "Categories",
+        "collections": "Collections",
+        "courses": "Kursy"
+      },
+      "title": "Products",
+      "description": "Manage physical merchandise, digital downloads, and protected content subscriptions.",
+      "actions": {
+        "create": "Create Product"
+      },
+      "search": {
+        "placeholder": "Search products by name or SKU..."
+      },
+      "filters": {
+        "type": "Type: All",
+        "status": "Status: Active",
+        "category": "Category",
+        "collection": "Collection",
+        "cycle": "Cycle",
+        "model": "Model",
+        "visibility": "Visibility",
+        "sortby": "Sort by"
+      },
+      "table": {
+        "headers": {
+          "product": "Product",
+          "type": "Type",
+          "pricing": "Pricing",
+          "status": "Status",
+          "metrics": "Metrics"
+        }
+      },
+      "pagination": {
+        "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> products"
+      },
+      "list": [
+        {
+          "id": "p1",
+          "name": "Mastering Next.js Course",
+          "description": "85 video lessons • Protected access",
+          "type": "Subscription",
+          "price": "$49.00",
+          "billingCycle": "/ mo",
+          "status": "Active",
+          "statusColor": "emerald",
+          "metrics": "1,248 active",
+          "icon": "Video",
+          "iconColor": "fuchsia"
+        },
+        {
+          "id": "p2",
+          "name": "UI/UX Design Handbook",
+          "description": "PDF & ePub formats",
+          "type": "Digital",
+          "price": "$29.00",
+          "billingCycle": "one-time",
+          "status": "Active",
+          "statusColor": "emerald",
+          "metrics": "3,402 sales",
+          "icon": "Book",
+          "iconColor": "default"
+        },
+        {
+          "id": "p3",
+          "name": "SaaSy Land Signature Tee",
+          "description": "Apparel • Multiple variants",
+          "type": "Physical",
+          "price": "$35.00",
+          "billingCycle": "one-time",
+          "status": "Draft",
+          "statusColor": "neutral",
+          "metrics": "0 sales",
+          "icon": "Shirt",
+          "iconColor": "default"
+        },
+        {
+          "id": "p4",
+          "name": "Premium Creator Community",
+          "description": "Discord access & weekly calls",
+          "type": "Subscription",
+          "price": "$19.00",
+          "billingCycle": "/ mo",
+          "status": "Active",
+          "statusColor": "emerald",
+          "metrics": "890 active",
+          "icon": "Users",
+          "iconColor": "fuchsia"
+        }
+      ],
+      "onetime": {
+        "title": "One-time Purchases",
+        "description": "Manage individual products, digital downloads, and physical merchandise.",
+        "list": [
+          {
+            "id": "ot1",
+            "name": "UI/UX Design Handbook",
+            "description": "PDF & ePub formats",
+            "type": "Digital",
+            "price": "$29.00",
+            "billingCycle": "one-time",
+            "status": "Active",
+            "statusColor": "emerald",
+            "metrics": "3,402 sales",
+            "icon": "Book",
+            "iconColor": "default",
+            "tags": [
+              {
+                "icon": "Folder",
+                "text": "Ebooks",
+                "color": "default"
+              },
+              {
+                "icon": "Bookmark",
+                "text": "Best Sellers",
+                "color": "fuchsia"
+              }
+            ]
+          },
+          {
+            "id": "ot2",
+            "name": "Freelance Starter Kit",
+            "description": "Notion templates & assets",
+            "type": "Digital",
+            "price": "$49.00",
+            "billingCycle": "one-time",
+            "status": "Active",
+            "statusColor": "emerald",
+            "metrics": "1,120 sales",
+            "icon": "Layers",
+            "iconColor": "fuchsia",
+            "tags": [
+              {
+                "icon": "Folder",
+                "text": "Templates",
+                "color": "default"
+              },
+              {
+                "icon": "Bookmark",
+                "text": "Featured",
+                "color": "blue"
+              }
+            ]
+          },
+          {
+            "id": "ot3",
+            "name": "SaaSy Land Signature Tee",
+            "description": "Apparel • Multiple variants",
+            "type": "Physical",
+            "price": "$35.00",
+            "billingCycle": "one-time",
+            "status": "Draft",
+            "statusColor": "neutral",
+            "metrics": "0 sales",
+            "icon": "Shirt",
+            "iconColor": "default",
+            "tags": [
+              {
+                "icon": "Folder",
+                "text": "Apparel",
+                "color": "default"
+              },
+              {
+                "icon": "Bookmark",
+                "text": "Summer Drop",
+                "color": "emerald"
+              }
+            ]
+          }
+        ]
+      },
+      "subscriptions": {
+        "title": "Subscriptions",
+        "description": "Manage recurring billing plans, membership tiers, and usage-based pricing.",
+        "table": {
+          "headers": {
+            "product": "Plan Name",
+            "model": "Model",
+            "pricing": "Pricing",
+            "status": "Status",
+            "metrics": "Metrics"
+          }
+        },
+        "list": [
+          {
+            "id": "sub-1",
+            "name": "Pro Membership",
+            "description": "Unlimited access & premium features",
+            "type": "Recurring",
+            "price": "$29.00",
+            "billingCycle": "/ month",
+            "status": "Active",
+            "statusColor": "emerald",
+            "metrics": "1,204 active",
+            "icon": "Crown",
+            "iconColor": "fuchsia",
+            "tags": [
+              {
+                "icon": "Folder",
+                "text": "SaaS Tier",
+                "color": "default"
+              },
+              {
+                "icon": "Star",
+                "text": "Most Popular",
+                "color": "fuchsia"
+              }
+            ]
+          },
+          {
+            "id": "sub-2",
+            "name": "Team Workspace",
+            "description": "Up to 10 seats & shared resources",
+            "type": "Recurring",
+            "price": "$290.00",
+            "billingCycle": "/ year",
+            "status": "Active",
+            "statusColor": "emerald",
+            "metrics": "342 active",
+            "icon": "Users",
+            "iconColor": "default",
+            "tags": [
+              {
+                "icon": "Folder",
+                "text": "B2B",
+                "color": "default"
+              },
+              {
+                "icon": "Building2",
+                "text": "Business",
+                "color": "blue"
+              }
+            ]
+          },
+          {
+            "id": "sub-3",
+            "name": "Developer API Access",
+            "description": "Metered endpoints & webhook integrations",
+            "type": "Usage-based",
+            "price": "$0.05",
+            "billingCycle": "/ 1k req",
+            "status": "Active",
+            "statusColor": "emerald",
+            "metrics": "89 active",
+            "icon": "Server",
+            "iconColor": "emerald",
+            "tags": [
+              {
+                "icon": "Folder",
+                "text": "Add-ons",
+                "color": "default"
+              },
+              {
+                "icon": "Code",
+                "text": "Developer",
+                "color": "emerald"
+              }
+            ]
+          }
+        ]
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "Organize your products, subscription plans, and digital goods.",
+        "table": {
+          "headers": {
+            "category": "Category",
+            "visibility": "Visibility",
+            "items": "Items",
+            "lastUpdated": "Last Updated"
+          }
+        },
+        "list": [
+          {
+            "id": "cat-1",
+            "name": "SaaS Plans",
+            "description": "Core subscription tiers for standard users",
+            "visibility": "Public",
+            "visibilityStatus": "public",
+            "items": "12",
+            "lastUpdated": "Oct 24, 2023",
+            "icon": "FolderOpen"
+          },
+          {
+            "id": "cat-2",
+            "name": "Add-ons & Extras",
+            "description": "One-time extensions and API limits",
+            "visibility": "Public",
+            "visibilityStatus": "public",
+            "items": "8",
+            "lastUpdated": "Sep 12, 2023",
+            "icon": "Puzzle"
+          },
+          {
+            "id": "cat-3",
+            "name": "Legacy Plans",
+            "description": "Grandfathered plans no longer available for purchase",
+            "visibility": "Hidden",
+            "visibilityStatus": "hidden",
+            "items": "3",
+            "lastUpdated": "Jan 05, 2023",
+            "icon": "Archive"
+          }
+        ]
+      },
+      "collections": {
+        "title": "Collections",
+        "description": "Curate and group your products, subscription plans, and digital goods.",
+        "table": {
+          "headers": {
+            "collection": "Collection",
+            "visibility": "Visibility",
+            "items": "Items",
+            "lastUpdated": "Last Updated"
+          }
+        },
+        "list": [
+          {
+            "id": "col-1",
+            "name": "SaaS Plans",
+            "description": "Core subscription tiers for standard users",
+            "visibility": "Public",
+            "visibilityStatus": "public",
+            "items": "12",
+            "lastUpdated": "Oct 24, 2023",
+            "icon": "FolderOpen"
+          },
+          {
+            "id": "col-2",
+            "name": "Add-ons & Extras",
+            "description": "One-time extensions and API limits",
+            "visibility": "Public",
+            "visibilityStatus": "public",
+            "items": "8",
+            "lastUpdated": "Sep 12, 2023",
+            "icon": "Puzzle"
+          },
+          {
+            "id": "col-3",
+            "name": "Legacy Plans",
+            "description": "Grandfathered plans no longer available for purchase",
+            "visibility": "Hidden",
+            "visibilityStatus": "hidden",
+            "items": "3",
+            "lastUpdated": "Jan 05, 2023",
+            "icon": "Archive"
+          }
+        ]
+      },
+      "create": {
+        "title": "Create Product",
+        "actions": {
+          "cancel": "Cancel",
+          "save": "Save Product"
+        },
+        "sections": {
+          "general": {
+            "title": "General Information",
+            "name": {
+              "label": "Product Name",
+              "placeholder": "e.g. Pro Plan, E-book..."
+            },
+            "description": {
+              "label": "Description",
+              "placeholder": "Briefly describe what this product includes...",
+              "help": "Will be displayed on checkout and customer portal pages."
+            }
+          },
+          "pricing": {
+            "title": "Pricing & Billing",
+            "model": {
+              "label": "Billing Model",
+              "subscription": "Subscription",
+              "oneTime": "One-time"
+            },
+            "price": {
+              "label": "Price",
+              "placeholder": "0.00"
+            },
+            "period": {
+              "label": "Billing Period",
+              "monthly": "Monthly"
+            }
+          },
+          "media": {
+            "title": "Media & Images",
+            "upload": "Click to upload or drag and drop",
+            "help": "SVG, PNG, JPG or GIF (max. 800x400px)"
+          },
+          "status": {
+            "title": "Status",
+            "publish": {
+              "label": "Publish Product",
+              "description": "Make it visible to customers"
+            },
+            "requireLogin": {
+              "label": "Require Login",
+              "description": "User must be authenticated"
+            }
+          },
+          "organization": {
+            "title": "Organization",
+            "category": {
+              "label": "Category",
+              "placeholder": "Select category..."
+            },
+            "collection": {
+              "label": "Collection",
+              "placeholder": "Add to collection..."
+            }
+          }
+        }
+      }
+    },
+    "pricingModels": {
+      "title": "Modele Cenowe",
+      "description": "Zarządzaj poziomami subskrypcji i jednorazowymi płatnościami.",
+      "actions": {
+        "allTypes": "Wszystkie typy",
+        "createModel": "Utwórz Model"
+      },
+      "stats": {
+        "monthlyRecurring": "Miesięczne Przychody",
+        "activeSubscribers": "Aktywni Subskrybenci",
+        "activeModels": "Aktywne Modele"
+      },
+      "tags": {
+        "subscription": "Subskrypcja",
+        "oneTime": "Jednorazowo",
+        "mostPopular": "Najpopularniejszy"
+      },
+      "models": {
+        "monthly": {
+          "title": "Karnet Miesięczny",
+          "price": "129 zł",
+          "interval": "/ miesiąc",
+          "description": "Rozliczane miesięcznie. Anuluj w dowolnym momencie."
+        },
+        "annual": {
+          "title": "Karnet Roczny",
+          "price": "1290 zł",
+          "interval": "/ rok",
+          "description": "Oszczędzasz 258 zł w porównaniu z subskrypcją miesięczną."
+        },
+        "lifetime": {
+          "title": "Licencja na Kurs",
+          "price": "499 zł",
+          "interval": "/ na zawsze",
+          "description": "Standardowa cena za pojedyncze kursy."
+        }
+      },
+      "labels": {
+        "includedAccess": "Zawarty dostęp",
+        "activeUsers": "aktywnych: {count}",
+        "inactive": "Nieaktywny",
+        "editModel": "Edytuj Model",
+        "moreOptions": "Więcej opcji",
+        "deleteModel": "Usuń Model",
+        "toggleStatus": "Zmień status"
+      },
+      "features": {
+        "allCourses": "Wszystkie obecnie opublikowane kursy",
+        "discord": "Ekskluzywny społecznościowy Discord",
+        "qa": "Miesięczne sesje Q&A na żywo",
+        "everythingInMonthly": "Wszystko w Karnecie Miesięcznym",
+        "sourceFiles": "Pliki źródłowe do pobrania",
+        "portfolioReview": "Coroczny przegląd portfolio 1 na 1",
+        "standaloneCourse": "Wybrany pojedynczy kurs",
+        "lifetimeUpdates": "Dożywotnie aktualizacje materiałów",
+        "guarantee": "30-dniowa gwarancja zwrotu pieniędzy"
+      }
+    },
+    "blog": {
+      "title": "Publikacje",
+      "description": "Twórz, zarządzaj i analizuj zawartość swojego bloga.",
+      "actions": {
+        "categories": "Kategorie",
+        "writePost": "Napisz Post",
+        "loadMore": "Załaduj więcej artykułów"
+      },
+      "stats": {
+        "totalViews": "Całkowita liczba wyświetleń (30d)",
+        "subscribers": "Subskrybenci",
+        "publishedPosts": "Opublikowane Posty",
+        "draftsPending": "{count} szkiców oczekujących"
+      },
+      "filters": {
+        "all": "Wszystkie Posty",
+        "published": "Opublikowane",
+        "drafts": "Szkice",
+        "scheduled": "Zaplanowane",
+        "search": "Szukaj artykułów..."
+      },
+      "badges": {
+        "published": "Opublikowane",
+        "draft": "Szkic",
+        "scheduled": "Zaplanowane"
+      },
+      "meta": {
+        "readTime": "{minutes} min czytania",
+        "publishedOn": "{date}",
+        "lastEdited": "Ostatnio edytowano {time} temu",
+        "publishesTomorrow": "Publikacja jutro"
+      },
+      "labels": {
+        "gridView": "Widok Siatki",
+        "tableView": "Widok Tabeli",
+        "moreOptions": "Więcej opcji"
+      },
+      "table": {
+        "postDetails": "Szczegóły Posta",
+        "status": "Status",
+        "category": "Kategoria",
+        "author": "Autor",
+        "date": "Data",
+        "views": "Wyświetlenia",
+        "actions": "Akcje"
+      },
+      "pagination": {
+        "info": "Wyświetlanie od <highlight>{start}</highlight> do <highlight>{end}</highlight> z <highlight>{total}</highlight> postów"
+      },
+      "create": {
+        "title": "Napisz Post",
+        "description": "Utwórz nowy post na blogu z zaawansowanymi ustawieniami.",
+        "actions": {
+          "preview": "Podgląd",
+          "saveDraft": "Zapisz Szkic",
+          "publish": "Opublikuj"
+        },
+        "editor": {
+          "title": "Tytuł Posta",
+          "titlePlaceholder": "Wpisz tytuł posta tutaj...",
+          "slug": "Slug URL",
+          "slugPlaceholder": "tytul-posta-tutaj",
+          "contentPlaceholder": "Napisz treść posta tutaj... Możesz użyć formatowania Markdown.",
+          "fullscreen": "Pełny ekran"
+        },
+        "settings": {
+          "featuredImage": "Wyróżniony Obraz",
+          "upload": "Kliknij, aby przesłać",
+          "uploadHelp": "SVG, PNG, JPG lub GIF (max. 5MB)",
+          "publishing": "Publikacja",
+          "status": "Status",
+          "statusDraft": "Szkic",
+          "statusPublished": "Opublikowano",
+          "statusScheduled": "Zaplanowano",
+          "category": "Kategoria",
+          "categorySelect": "Wybierz Kategorię",
+          "categoryUpdates": "Aktualizacje Produktu",
+          "categoryTutorials": "Samouczki",
+          "categoryCompany": "Wiadomości Firmowe",
+          "tags": "Tagi",
+          "tagsPlaceholder": "Dodaj tagi oddzielone przecinkami...",
+          "excerpt": "Fragment",
+          "excerptPlaceholder": "Krótkie podsumowanie posta..."
+        }
+      }
+    },
+    "landingPage": {
+      "title": "Edytor Landing Page",
+      "description": "Zaprojektuj i dostosuj swój landing page wizualnie.",
+      "actions": {
+        "preview": "Podgląd",
+        "saveChanges": "Zapisz Zmiany",
+        "publish": "Opublikuj"
+      },
+      "sidebar": {
+        "addSection": "Dodaj Sekcję",
+        "sections": {
+          "hero": "Sekcja Główna",
+          "features": "Siatka Funkcji",
+          "video": "Prezentacja Wideo",
+          "testimonials": "Referencje",
+          "pricing": "Tabela Cen",
+          "gallery": "Galeria Zdjęć",
+          "faq": "Akordeon FAQ",
+          "contact": "Formularz Kontaktowy"
+        }
+      },
+      "canvas": {
+        "newRelease": "Nowe Wydanie v2.0",
+        "supercharge": "Przyspiesz Twój ",
+        "growth": "Wzrost SaaS",
+        "description": "Wszystko-w-jednym platforma do zarządzania klientami, płatnościami i treścią. Buduj szybciej, konwertuj lepiej.",
+        "getStarted": "Rozpocznij za Darmo",
+        "bookDemo": "Umów Demo",
+        "addSectionHere": "Dodaj Sekcję Tutaj",
+        "featuresHeading": "Potężne Funkcje",
+        "featuresSubheading": "Wszystko czego potrzebujesz do skalowania biznesu.",
+        "feature1": "Analityka",
+        "feature2": "Bezpieczeństwo",
+        "feature3": "Synchronizacja"
+      },
+      "properties": {
+        "title": "Właściwości Sekcji",
+        "description": "Dostosuj wybrany element",
+        "layout": "Wyrównanie",
+        "spacing": "Odstępy",
+        "paddingTop": "Odstęp Górny",
+        "paddingBot": "Odstęp Dolny",
+        "background": "Styl Tła",
+        "content": "Treść",
+        "generateAI": "Generuj AI",
+        "badgeText": "Tekst Plakietki",
+        "heading": "Nagłówek",
+        "subheading": "Podtytuł",
+        "buttonActions": "Akcje",
+        "primaryButton": "Główny Przycisk",
+        "secondaryButton": "Dodatkowy Przycisk",
+        "label": "Etykieta"
+      }
+    }
+  },
+  "appPage": {
+    "title": "Strona Aplikacji",
+    "description": "Witamy na stronie Aplikacji."
   }
 }

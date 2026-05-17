@@ -1,6 +1,7 @@
 import { CURRENCIES, DEFAULT_CURRENCY } from "~/src/constants/_constants/currencies"
 import { DEFAULT_LOCALE, LOCALE_COOKIE_NAME, LOCALES } from "~/src/constants/_constants/locales"
 import { ROUTES } from "~/src/constants/_constants/routes"
+import { SIDEBAR_CONFIG } from "~/src/constants/_constants/sidebar"
 
 export const CONSTANTS = {
   APP_NAME: "SaaSy Land",
@@ -15,4 +16,5 @@ export const CONSTANTS = {
   CURRENCIES,
   DEFAULT_CURRENCY,
   ROUTES,
+  SIDEBAR_CONFIG,
 } as const

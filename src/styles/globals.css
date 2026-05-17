@@ -35,7 +35,7 @@
   --chart-3: var(--color-fuchsia-500);
   --chart-4: oklch(0.488 0.243 264.376);
   --chart-5: oklch(0.424 0.199 265.638);
-  --radius: 0.5rem;
+  --radius: 0.25rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.129 0 0);
   --sidebar-primary: var(--color-fuchsia-500);

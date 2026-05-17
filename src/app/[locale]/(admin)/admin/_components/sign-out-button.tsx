@@ -30,7 +30,7 @@ export function SignOutButton() {
             toast.error(t(`auth.errors.${key}`))
           },
           onSuccess: () => {
-            toast.success(t("app.components.signOutButton.success"))
+            toast.success(t("admin.components.signOutButton.success"))
             router.push(CONSTANTS.ROUTES.HOME)
           },
         },
@@ -39,9 +39,15 @@ export function SignOutButton() {
   }
 
   return (
-    <Button type="button" variant="outline" disabled={isPending} onClick={handleSignout}>
+    <Button
+      type="button"
+      variant="ghost"
+      className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive"
+      disabled={isPending}
+      onClick={handleSignout}
+    >
       {isPending ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
-      {isPending ? t("app.components.signOutButton.signingOut") : t("app.components.signOutButton.signOut")}
+      {isPending ? t("admin.components.signOutButton.signingOut") : t("admin.components.signOutButton.signOut")}
     </Button>
   )
 }

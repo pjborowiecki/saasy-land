@@ -66,10 +66,15 @@ function SidebarProvider({
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(() => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen)
+
+  useEffect(() => {
     const persistedOpen = globalThis.localStorage?.getItem(SIDEBAR_STORAGE_KEY)
-    return persistedOpen === null ? defaultOpen : persistedOpen === "1"
-  })
+    if (persistedOpen !== null) {
+      setUncontrolledOpen(persistedOpen === "1")
+    }
+  }, [])
+
   const open = openProp ?? uncontrolledOpen
 
   const setOpen = useCallback(
@@ -535,9 +540,11 @@ function SidebarMenuSkeleton({
   showIcon?: boolean
 }): JSX.Element {
   // Random width between 50 to 90%.
-  const [width] = useState(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`
-  })
+  const [width, setWidth] = useState("70%")
+
+  useEffect(() => {
+    setWidth(`${Math.floor(Math.random() * 40) + 50}%`)
+  }, [])
 
   return (
     <div
