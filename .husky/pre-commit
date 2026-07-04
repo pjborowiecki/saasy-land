@@ -3,7 +3,10 @@ echo "🔍 RUNNING PROJECT CHECKS"
 echo "  ↳ TSC (Type check)..."
 bun run check
 
-echo "  ↳ Biome (Lint, Format, Sort Staged Files)..."
+echo "  ↳ Biome (Full project lint & format check)..."
+bunx biome ci .
+
+echo "  ↳ Biome (Format & fix staged files)..."
 bunx biome check --staged --write --files-ignore-unknown=true --no-errors-on-unmatched
 
 echo "  ↳ Vitest (Unit & Component tests)..."
