@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import type { JSX } from "react"
 
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { hasLocale } from "next-intl"
 
 import { env } from "~/src/environment"
@@ -57,6 +58,7 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
               {children}
               <Toaster />
               <Analytics />
+              <SpeedInsights />
             </TooltipProvider>
           </ThemeProvider>
         </TranslationsProvider>
