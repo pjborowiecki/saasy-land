@@ -8,7 +8,7 @@ import { toast } from "sonner"
 
 import { CONSTANTS } from "~/src/constants"
 
-import { authClient } from "~/src/integrations/better-auth/auth.client"
+import { authClient } from "~/src/integrations/better-auth/auth._client"
 import { AUTH_ERRORS } from "~/src/integrations/better-auth/auth.errors"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
@@ -25,8 +25,7 @@ export function SignOutButton() {
       await authClient.signOut({
         fetchOptions: {
           onError: (ctx) => {
-            const errorCode = (ctx.error.code as keyof typeof AUTH_ERRORS) ?? "UNKNOWN_ERROR"
-            const key = AUTH_ERRORS[errorCode] ?? AUTH_ERRORS.UNKNOWN_ERROR
+            const key = AUTH_ERRORS[ctx.error.code as keyof typeof AUTH_ERRORS] ?? AUTH_ERRORS.UNKNOWN_ERROR
             toast.error(t(`auth.errors.${key}`))
           },
           onSuccess: () => {

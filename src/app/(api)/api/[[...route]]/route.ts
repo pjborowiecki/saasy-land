@@ -1,6 +1,6 @@
 import { Elysia } from "elysia"
 
-import { auth } from "~/src/integrations/better-auth/auth.server"
+import { auth } from "~/src/integrations/better-auth/auth._server"
 import { fumadocsSearch } from "~/src/integrations/fumadocs/fumadocs.search"
 
 const app = new Elysia({ prefix: "/api" })
@@ -10,5 +10,10 @@ const app = new Elysia({ prefix: "/api" })
 
 export type App = typeof app
 
-export const GET = app.fetch
-export const POST = app.fetch
+const handle = app.fetch
+
+export const GET = handle
+export const POST = handle
+export const PUT = handle
+export const PATCH = handle
+export const DELETE = handle

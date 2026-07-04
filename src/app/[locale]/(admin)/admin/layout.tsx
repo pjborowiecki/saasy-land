@@ -1,6 +1,9 @@
 import type { JSX } from "react"
+import { Suspense } from "react"
 
 import { Bell, Search } from "lucide-react"
+
+import { requireAdminPanel } from "~/src/integrations/better-auth/auth.guards"
 
 import { AdminBreadcrumbs } from "~/src/components/custom/admin-breadcrumbs"
 import { AdminSidebar } from "~/src/components/custom/admin-sidebar"
@@ -8,10 +11,37 @@ import { Button } from "~/src/components/shadcn/button"
 import { Input } from "~/src/components/shadcn/input"
 import { Kbd, KbdGroup } from "~/src/components/shadcn/kbd"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "~/src/components/shadcn/sidebar"
+import { Skeleton } from "~/src/components/shadcn/skeleton"
 
 import { UserWidget } from "~/src/app/[locale]/(admin)/admin/_components/user-widget"
 
-export default function AdminLayout({ children }: Readonly<LayoutProps<"/[locale]/admin">>): JSX.Element {
+function AdminLayoutFallback(): JSX.Element {
+  return (
+    <div className="flex min-h-screen w-full">
+      <Skeleton className="hidden h-screen w-64 shrink-0 md:block" />
+      <div className="flex flex-1 flex-col">
+        <Skeleton className="h-16 w-full shrink-0" />
+        <div className="flex flex-1 flex-col gap-4 p-4 md:p-6">
+          <Skeleton className="h-8 w-48" />
+          <Skeleton className="h-4 w-72" />
+          <Skeleton className="min-h-96 w-full flex-1" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function AdminLayout(props: Readonly<LayoutProps<"/[locale]/admin">>): JSX.Element {
+  return (
+    <Suspense fallback={<AdminLayoutFallback />}>
+      <AdminLayoutContent {...props} />
+    </Suspense>
+  )
+}
+
+async function AdminLayoutContent({ children }: Readonly<LayoutProps<"/[locale]/admin">>): Promise<JSX.Element> {
+  await requireAdminPanel()
+
   return (
     <SidebarProvider>
       <AdminSidebar userWidget={<UserWidget />} />

@@ -17,7 +17,7 @@ import { ThemeSwitch } from "~/src/components/custom/theme-switch"
 export default async function DocumentationLayout({ children, params }: Readonly<LayoutProps<"/[locale]/docs">>): Promise<JSX.Element> {
   const { locale } = await params
 
-  if (!hasLocale(CONSTANTS.LOCALES, locale)) notFound()
+  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) notFound()
 
   return (
     <DocsProvider locale={locale}>

@@ -267,6 +267,30 @@
   "emails": {
     "test": {
       "title": "Test"
+    },
+    "resetPassword": {
+      "subject": "Zresetuj hasło",
+      "preview": "Zresetuj hasło w SaaSy Land",
+      "heading": "Zresetuj hasło",
+      "body": "Cześć {name}, otrzymaliśmy prośbę o zresetowanie hasła. Kliknij poniższy przycisk, aby ustawić nowe hasło.",
+      "button": "Zresetuj hasło",
+      "footer": "Jeśli to nie Ty wysłałeś tę prośbę, zignoruj tę wiadomość."
+    },
+    "verifyEmail": {
+      "subject": "Potwierdź adres e-mail",
+      "preview": "Potwierdź swój e-mail w SaaSy Land",
+      "heading": "Potwierdź e-mail",
+      "body": "Cześć {name}, dziękujemy za rejestrację. Potwierdź swój adres e-mail, aby dokończyć konfigurację konta.",
+      "button": "Potwierdź e-mail",
+      "footer": "Jeśli nie zakładałeś konta, zignoruj tę wiadomość."
+    },
+    "changeEmailConfirmation": {
+      "subject": "Potwierdź nowy adres e-mail",
+      "preview": "Potwierdź zmianę e-maila w SaaSy Land",
+      "heading": "Potwierdź zmianę e-maila",
+      "body": "Cześć {name}, otrzymaliśmy prośbę o zmianę adresu e-mail na {newEmail}. Kliknij przycisk poniżej, aby potwierdzić tę zmianę.",
+      "button": "Potwierdź zmianę e-maila",
+      "footer": "Jeśli to nie Ty wysłałeś tę prośbę, zignoruj tę wiadomość."
     }
   },
   "auth": {
@@ -365,6 +389,40 @@
         "or": "lub",
         "confirmPassword": "Potwierdź hasło",
         "termsAndPrivacy": "Rejestrując się, akceptujesz nasz <terms>Regulamin</terms> oraz <privacy>Politykę Prywatności</privacy>."
+      }
+    },
+    "forgotPasswordPage": {
+      "metadata": {
+        "title": "Przypomnienie hasła",
+        "description": "Poproś o link do resetu hasła dla konta {name}."
+      },
+      "form": {
+        "title": "Zapomniałeś hasła?",
+        "description": "Podaj swój e-mail, a wyślemy link do resetu, jeśli konto istnieje.",
+        "email": "E-mail",
+        "submit": "Wyślij link resetujący",
+        "submitting": "Wysyłanie...",
+        "success": "Jeśli konto z tym adresem istnieje, sprawdź skrzynkę odbiorczą.",
+        "error": "Coś poszło nie tak. Spróbuj ponownie.",
+        "rememberPassword": "Pamiętasz hasło? <signin>Zaloguj się</signin>"
+      }
+    },
+    "resetPasswordPage": {
+      "metadata": {
+        "title": "Reset hasła",
+        "description": "Ustaw nowe hasło do konta {name}."
+      },
+      "form": {
+        "title": "Ustaw nowe hasło",
+        "description": "Wprowadź i potwierdź nowe hasło poniżej.",
+        "password": "Nowe hasło",
+        "confirmPassword": "Potwierdź nowe hasło",
+        "submit": "Zaktualizuj hasło",
+        "submitting": "Aktualizowanie...",
+        "success": "Hasło zostało zaktualizowane. Możesz się teraz zalogować.",
+        "error": "Ten link resetujący jest nieprawidłowy lub wygasł. Poproś o nowy.",
+        "invalidToken": "Ten link resetujący jest nieprawidłowy lub wygasł.",
+        "requestNewLink": "Poproś o nowy link"
       }
     }
   },

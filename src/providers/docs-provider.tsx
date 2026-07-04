@@ -30,7 +30,7 @@ export function DocsProvider({ locale, children }: DocsProviderProps) {
       i18n={{
         ...i18nUI.provider(locale),
         onLocaleChange: (next) => {
-          if (hasLocale(CONSTANTS.LOCALES, next)) {
+          if (hasLocale(CONSTANTS.I18N.LOCALES, next)) {
             router.replace(pathname, { locale: next })
           }
         },

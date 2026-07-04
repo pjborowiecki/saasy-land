@@ -1,6 +1,6 @@
 import { BarChart, BookOpen, CreditCard, Home, MonitorSmartphone, Package, Settings, ShieldAlert, Tags, Users } from "lucide-react"
 
-import { ROUTES } from "~/src/constants/_constants/routes"
+import { ROUTES } from "./routes"
 
 export const SIDEBAR_CONFIG = [
   {

@@ -4,7 +4,7 @@ import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
 export const getFormats = (locale: Locale): Formats => {
-  const currency = CONSTANTS.CURRENCIES[locale]
+  const currency = CONSTANTS.I18N.CURRENCIES[locale]
 
   return {
     number: {

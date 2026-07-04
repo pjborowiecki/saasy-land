@@ -12,7 +12,7 @@ import { usePathname, useRouter } from "~/src/integrations/next-intl/i18n.naviga
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from "~/src/components/shadcn/select"
 
 type LocaleSwitchProps = {
-  locale: (typeof CONSTANTS.LOCALES)[number]
+  locale: (typeof CONSTANTS.I18N.LOCALES)[number]
 }
 
 export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Element {
@@ -23,7 +23,7 @@ export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Eleme
     <Select
       value={locale}
       onValueChange={(next) => {
-        if (hasLocale(CONSTANTS.LOCALES, next)) {
+        if (hasLocale(CONSTANTS.I18N.LOCALES, next)) {
           router.replace(pathname, { locale: next })
         }
       }}
@@ -31,7 +31,7 @@ export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Eleme
       <SelectTrigger className="w-full">{localeUiConfig[locale].displayName}</SelectTrigger>
       <SelectContent alignItemWithTrigger={false} side="top" sideOffset={4}>
         <SelectGroup>
-          {CONSTANTS.LOCALES.map((loc) => (
+          {CONSTANTS.I18N.LOCALES.map((loc) => (
             <SelectItem key={loc} value={loc}>
               {localeUiConfig[loc].displayName}
             </SelectItem>

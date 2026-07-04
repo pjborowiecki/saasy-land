@@ -4,8 +4,8 @@ import { defineI18nUI } from "fumadocs-ui/i18n"
 import { CONSTANTS } from "~/src/constants"
 
 export const i18n = defineI18n({
-  defaultLanguage: CONSTANTS.DEFAULT_LOCALE,
-  languages: [...CONSTANTS.LOCALES],
+  defaultLanguage: CONSTANTS.I18N.DEFAULT_LOCALE,
+  languages: [...CONSTANTS.I18N.LOCALES],
   hideLocale: "always",
   parser: "dot",
 })

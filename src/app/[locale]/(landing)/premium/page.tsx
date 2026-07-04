@@ -27,7 +27,7 @@ export function generateStaticParams(): Array<{ locale: Locale }> {
 export default async function PremiumPage({ params }: Readonly<PageProps<"/[locale]/premium">>): Promise<JSX.Element> {
   const { locale } = await params
 
-  if (!hasLocale(CONSTANTS.LOCALES, locale)) notFound()
+  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) notFound()
 
   const t = await getTranslations({ locale, namespace: "premiumPage" })
 
