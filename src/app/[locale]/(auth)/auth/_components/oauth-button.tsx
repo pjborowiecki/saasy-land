@@ -8,9 +8,9 @@ import { toast } from "sonner"
 
 import { CONSTANTS } from "~/src/constants"
 
-import { authClient } from "~/src/integrations/better-auth/auth.client"
+import { authClient } from "~/src/integrations/better-auth/auth._client"
+import type { auth } from "~/src/integrations/better-auth/auth._server"
 import { AUTH_ERRORS } from "~/src/integrations/better-auth/auth.errors"
-import type { auth } from "~/src/integrations/better-auth/auth.server"
 
 import { cn } from "~/src/lib/utils"
 
@@ -33,11 +33,10 @@ export function OAuthButton({ provider, label, Icon, className, ...rest }: Reado
     startTransition(async () => {
       await authClient.signIn.social({
         provider,
-        callbackURL: CONSTANTS.ROUTES.ADMIN,
+        callbackURL: CONSTANTS.ROUTES.AUTH_CALLBACK,
         fetchOptions: {
           onError: (ctx) => {
-            const errorCode = (ctx.error.code as keyof typeof AUTH_ERRORS) ?? "UNKNOWN_ERROR"
-            const key = AUTH_ERRORS[errorCode] ?? AUTH_ERRORS.UNKNOWN_ERROR
+            const key = AUTH_ERRORS[ctx.error.code as keyof typeof AUTH_ERRORS] ?? AUTH_ERRORS.UNKNOWN_ERROR
             toast.error(t(`auth.errors.${key}`))
           },
           onSuccess: () => {

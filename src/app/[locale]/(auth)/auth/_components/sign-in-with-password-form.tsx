@@ -11,7 +11,8 @@ import type z from "zod/v4"
 
 import { CONSTANTS } from "~/src/constants"
 
-import { signIn } from "~/src/integrations/better-auth/auth.client"
+import { signIn } from "~/src/integrations/better-auth/auth._client"
+import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
 import { AUTH_ERRORS } from "~/src/integrations/better-auth/auth.errors"
 import { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { Link, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
@@ -39,13 +40,12 @@ export function SignInWithPasswordForm(): JSX.Element {
       password: data.password,
       fetchOptions: {
         onError: (ctx) => {
-          const errorCode = (ctx.error.code as keyof typeof AUTH_ERRORS) ?? "UNKNOWN_ERROR"
-          const key = AUTH_ERRORS[errorCode] ?? AUTH_ERRORS.UNKNOWN_ERROR
+          const key = AUTH_ERRORS[ctx.error.code as keyof typeof AUTH_ERRORS] ?? AUTH_ERRORS.UNKNOWN_ERROR
           toast.error(t(`auth.errors.${key}`))
         },
-        onSuccess: () => {
+        onSuccess: (ctx) => {
           toast.success(t("auth.signInPage.form.success"))
-          router.push(CONSTANTS.ROUTES.ADMIN)
+          router.push(getPostAuthRedirect(ctx.data?.user?.role))
         },
       },
     })

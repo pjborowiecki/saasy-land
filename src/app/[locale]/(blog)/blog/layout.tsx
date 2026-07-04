@@ -8,7 +8,7 @@ import { CONSTANTS } from "~/src/constants"
 export default async function BlogLayout({ children, params }: Readonly<LayoutProps<"/[locale]/blog">>): Promise<JSX.Element> {
   const { locale } = await params
 
-  if (!hasLocale(CONSTANTS.LOCALES, locale)) notFound()
+  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) notFound()
 
   return <>{children}</>
 }

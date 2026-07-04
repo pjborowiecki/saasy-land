@@ -1,34 +1,39 @@
+import "server-only"
+
+import type { JSX } from "react"
+
 import { env } from "~/src/environment"
 
-import type { RequireAtLeastOne } from "~/src/types/utilities"
+import { CONSTANTS } from "~/src/constants"
 
-type SendEmailProps = { to: string; subject: string } & RequireAtLeastOne<{ html: string; text: string }>
-type SendEmailResult = { success: true; status: number } | { success: false; status: number; error: string }
+import { resend } from "~/src/integrations/resend/resend.config"
 
-export async function sendEmail(props: Readonly<SendEmailProps>): Promise<SendEmailResult> {
-  if (!props.html?.trim() && !props.text?.trim()) {
-    return { success: false, status: 400, error: "sendEmail requires a non-empty html or text body" }
+interface SendEmailOptions {
+  readonly from?: string
+  readonly react: JSX.Element
+  readonly subject: string
+  readonly to: string
+}
+
+export type SendEmailResult = { readonly success: true; readonly id: string } | { readonly success: false; readonly error: string }
+
+export async function sendEmail({ from, react, subject, to }: Readonly<SendEmailOptions>): Promise<SendEmailResult> {
+  const fromEmail = from ?? `${CONSTANTS.APP_NAME} <${env.RESEND_EMAIL_FROM}>`
+
+  try {
+    const { data, error } = await resend.emails.send({ from: fromEmail, react, subject, to })
+
+    if (error) {
+      return { success: false, error: error.message }
+    }
+
+    if (!data?.id) {
+      return { success: false, error: "Resend returned no email id" }
+    }
+
+    return { success: true, id: data.id }
+  } catch (cause) {
+    const message = cause instanceof Error ? cause.message : "Unknown error sending email"
+    return { success: false, error: message }
   }
-
-  const response = await fetch(env.CLOUDFLARE_EMAIL_SERVICE_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(props),
-  }).catch((error: unknown) => {
-    return error instanceof Error ? error : new Error(String(error))
-  })
-
-  if (response instanceof Error) {
-    return { success: false, status: 500, error: `Network error: ${response.message}` }
-  }
-
-  if (!response.ok) {
-    const errorText = await response.text().catch(() => "Unparseable error response")
-    return { success: false, status: response.status, error: errorText }
-  }
-
-  return { success: true, status: response.status }
 }

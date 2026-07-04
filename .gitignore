@@ -63,3 +63,6 @@ graphify-out/
 .DS_Store
 *.pem
 ._*
+
+# roadmap
+ROADMAP.md
