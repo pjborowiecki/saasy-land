@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.2/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -87,7 +87,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "style": {
         "noJsxLiterals": {
           "level": "error",
@@ -116,7 +116,9 @@
             "attributes": ["classList", "className"],
             "functions": ["clsx", "cn", "cva", "tw"]
           }
-        },
+        }
+      },
+      "correctness": {
         "useInlineScriptId": "error"
       }
     },
