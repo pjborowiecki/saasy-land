@@ -1,92 +1,66 @@
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
+import { localePathPrefixes, routing } from "~/src/integrations/next-intl/i18n.routing"
 
-function getLocalePathPrefixes(): Partial<Record<Locale, string>> {
-  const { localePrefix } = routing
-
-  if (typeof localePrefix === "object" && localePrefix !== null && "prefixes" in localePrefix) {
-    return localePrefix.prefixes ?? {}
+export function isLocale(value: string | undefined): value is Locale {
+  for (const locale of CONSTANTS.I18N.LOCALES) {
+    if (locale === value) {
+      return true
+    }
   }
 
-  return {}
-}
-
-function isLocale(value: string): value is Locale {
-  return CONSTANTS.I18N.LOCALES.includes(value as Locale)
+  return false
 }
 
 export function localeFromPathname(pathname: string): Locale | undefined {
-  const prefixes = getLocalePathPrefixes()
-
   for (const locale of routing.locales) {
-    const prefix = prefixes[locale]
+    const prefix = localePathPrefixes[locale]
 
-    if (!prefix) {
-      continue
-    }
-
-    if (pathname === prefix || pathname.startsWith(`${prefix}/`)) {
+    if (prefix?.length && (pathname === prefix || pathname.startsWith(`${prefix}/`))) {
       return locale
     }
   }
 
-  if (pathname.startsWith("/auth/") || pathname === "/auth") {
-    return routing.defaultLocale
-  }
-
-  return undefined
+  return pathname.startsWith("/auth/") || pathname === "/auth" ? routing.defaultLocale : undefined
 }
 
-export function localeFromCookie(cookieHeader: string | null): Locale | undefined {
-  if (!cookieHeader) {
-    return undefined
-  }
+export function localeFromCookie(cookieHeader: string | null | undefined): Locale | undefined {
+  const [, value] = cookieHeader?.match(new RegExp(String.raw`(?:^|;\s*)${CONSTANTS.I18N.COOKIE_NAME}=([^;]+)`, "u")) ?? []
 
-  const match = cookieHeader.match(new RegExp(`${CONSTANTS.I18N.COOKIE_NAME}=([^;]+)`))
-  const value = match?.[1]
-
-  if (value && isLocale(value)) {
-    return value
-  }
-
-  return undefined
+  return isLocale(value) ? value : undefined
 }
 
 function localeFromActionUrl(actionUrl: string): Locale | undefined {
-  try {
-    const url = new URL(actionUrl)
-    const callbackURL = url.searchParams.get("callbackURL")
-
-    if (callbackURL) {
-      const callback = new URL(decodeURIComponent(callbackURL))
-      const fromCallback = localeFromPathname(callback.pathname)
-
-      if (fromCallback) {
-        return fromCallback
-      }
-    }
-
-    return localeFromPathname(url.pathname)
-  } catch {
+  if (!URL.canParse(actionUrl, "http://localhost")) {
     return undefined
   }
+
+  const url = new URL(actionUrl, "http://localhost")
+  const callbackURL = url.searchParams.get("callbackURL")
+
+  if (callbackURL !== null && URL.canParse(callbackURL, "http://localhost")) {
+    const fromCallback = localeFromPathname(new URL(callbackURL, "http://localhost").pathname)
+
+    if (fromCallback) {
+      return fromCallback
+    }
+  }
+
+  return localeFromPathname(url.pathname)
 }
 
 export function resolveLocaleFromAuthRequest(request: Request | undefined, actionUrl: string): Locale {
-  const fromUrl = localeFromActionUrl(actionUrl)
+  const fromAction = localeFromActionUrl(actionUrl)
 
-  if (fromUrl) {
-    return fromUrl
+  if (fromAction) {
+    return fromAction
   }
 
-  if (request) {
-    const fromCookie = localeFromCookie(request.headers.get("cookie"))
+  const fromCookie = localeFromCookie(request?.headers.get("cookie"))
 
-    if (fromCookie) {
-      return fromCookie
-    }
+  if (fromCookie) {
+    return fromCookie
   }
 
   return routing.defaultLocale

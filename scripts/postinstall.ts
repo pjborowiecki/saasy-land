@@ -13,7 +13,7 @@ const STRATEGIES = {
 } as const
 
 function getMigrationStrategy(): keyof typeof STRATEGIES {
-  const env = process.env.VERCEL_ENV
+  const env = process.env["VERCEL_ENV"]
 
   if (env === "production" || env === "preview") {
     return "remote"

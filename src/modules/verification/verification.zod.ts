@@ -6,7 +6,7 @@ import { verification } from "~/src/modules/verification/verification.schema"
 const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
 
 export const verificationZodSchemas = {
-  select: createSelectSchema(verification),
   insert: createInsertSchema(verification),
+  select: createSelectSchema(verification),
   update: createUpdateSchema(verification),
 }

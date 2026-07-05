@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   const t = await getTranslations({ locale, namespace: "appPage" })
 
   return {
-    title: t("title"),
     description: t("description"),
+    title: t("title"),
   }
 }
 
@@ -19,7 +19,7 @@ export default async function AppPage({ params }: Readonly<PageProps<"/[locale]/
 
   return (
     <div className="flex flex-col gap-4 p-8">
-      <h1 className="font-semibold text-2xl tracking-tight">{t("title")}</h1>
+      <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
       <p className="text-muted-foreground">{t("description")}</p>
     </div>
   )

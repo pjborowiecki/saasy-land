@@ -13,9 +13,9 @@ export const AUTH_ERRORS = {
   ID_TOKEN_NOT_SUPPORTED: "idTokenNotSupported",
   INVALID_EMAIL: "invalidEmail",
   INVALID_EMAIL_OR_PASSWORD: "invalidEmailOrPassword",
-  INVITATION_NOT_FOUND: "invitationNotFound",
   INVALID_PASSWORD: "invalidPassword",
   INVALID_TOKEN: "invalidToken",
+  INVITATION_NOT_FOUND: "invitationNotFound",
   PASSWORD_TOO_LONG: "passwordTooLong",
   PASSWORD_TOO_SHORT: "passwordTooShort",
   PROVIDER_NOT_FOUND: "providerNotFound",
@@ -28,3 +28,21 @@ export const AUTH_ERRORS = {
   USER_EMAIL_NOT_FOUND: "userEmailNotFound",
   USER_NOT_FOUND: "userNotFound",
 } as const
+
+export type AuthErrorCode = keyof typeof AUTH_ERRORS
+export type AuthErrorMessageKey = (typeof AUTH_ERRORS)[AuthErrorCode]
+
+const AUTH_ERROR_BY_CODE: Record<string, AuthErrorMessageKey> = AUTH_ERRORS
+
+export function authErrorKey(error: unknown): AuthErrorMessageKey {
+  if (typeof error !== "object" || error === null || !("code" in error)) {
+    return AUTH_ERRORS.UNKNOWN_ERROR
+  }
+
+  const { code } = error
+  if (typeof code !== "string") {
+    return AUTH_ERRORS.UNKNOWN_ERROR
+  }
+
+  return AUTH_ERROR_BY_CODE[code] ?? AUTH_ERRORS.UNKNOWN_ERROR
+}

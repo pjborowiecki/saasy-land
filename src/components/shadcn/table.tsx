@@ -39,7 +39,7 @@ function TableHead({ className, ...props }: ComponentProps<"th">): JSX.Element {
     <th
       data-slot="table-head"
       className={cn(
-        "h-10 whitespace-nowrap px-2 text-left align-middle font-medium text-foreground [&:has([role=checkbox])]:pr-0",
+        "h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-foreground [&:has([role=checkbox])]:pr-0",
         className,
       )}
       {...props}
@@ -49,12 +49,12 @@ function TableHead({ className, ...props }: ComponentProps<"th">): JSX.Element {
 
 function TableCell({ className, ...props }: ComponentProps<"td">): JSX.Element {
   return (
-    <td data-slot="table-cell" className={cn("whitespace-nowrap p-2 align-middle [&:has([role=checkbox])]:pr-0", className)} {...props} />
+    <td data-slot="table-cell" className={cn("p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0", className)} {...props} />
   )
 }
 
 function TableCaption({ className, ...props }: ComponentProps<"caption">): JSX.Element {
-  return <caption data-slot="table-caption" className={cn("mt-4 text-muted-foreground text-xs", className)} {...props} />
+  return <caption data-slot="table-caption" className={cn("mt-4 text-xs text-muted-foreground", className)} {...props} />
 }
 
 export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow }

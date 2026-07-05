@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function LandingPage(): Promise<JSX.Element> {
+export default function LandingPage(): JSX.Element {
   return (
     <>
       <HeroSection />

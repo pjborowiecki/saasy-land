@@ -7,13 +7,13 @@ import { i18n } from "~/src/integrations/fumadocs/fumadocs.i18n"
 
 export const source = loader({
   baseUrl: "/docs",
-  source: docs.toFumadocsSource(),
-  plugins: [lucideIconsPlugin()],
   i18n,
+  plugins: [lucideIconsPlugin()],
+  source: docs.toFumadocsSource(),
 })
 
 export const blogSource = loader({
   baseUrl: "/blog",
-  source: toFumadocsSource(blog, []),
   i18n,
+  source: toFumadocsSource(blog, []),
 })

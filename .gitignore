@@ -13,9 +13,6 @@
 # bun
 .bun-cache
 
-# biome
-.biome-cache
-
 # testing
 /coverage
 /playwright-report

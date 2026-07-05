@@ -9,15 +9,15 @@ import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { AuthSeparator } from "~/src/app/[locale]/(auth)/auth/_components/auth-separator"
 import { OAuthButtons } from "~/src/app/[locale]/(auth)/auth/_components/oauth-buttons"
-import { SignInWithPasswordForm } from "~/src/app/[locale]/(auth)/auth/_components/sign-in-with-password-form"
+import { SignInWithPasswordForm } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-form"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/sign-in">>): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "auth.signInPage" })
 
   return {
-    title: t("metadata.title"),
     description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
+    title: t("metadata.title"),
   }
 }
 
@@ -34,8 +34,8 @@ export default async function SignInPage({ params }: Readonly<PageProps<"/[local
   return (
     <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">
       <div className="flex flex-col gap-2 text-center">
-        <h1 className="font-medium text-3xl text-foreground tracking-tight">{t("form.title")}</h1>
-        <p className="text-muted-foreground text-sm">{t("form.description", { name: CONSTANTS.APP_NAME })}</p>
+        <h1 className="text-3xl font-medium tracking-tight text-foreground">{t("form.title")}</h1>
+        <p className="text-sm text-muted-foreground">{t("form.description", { name: CONSTANTS.APP_NAME })}</p>
       </div>
 
       <div className="relative flex flex-col gap-6 overflow-hidden rounded-xl border border-white/8 bg-white/2 p-8 shadow-2xl backdrop-blur-2xl md:p-10">
@@ -47,7 +47,7 @@ export default async function SignInPage({ params }: Readonly<PageProps<"/[local
       </div>
 
       <div className="text-center">
-        <p className="text-muted-foreground text-sm">
+        <p className="text-sm text-muted-foreground">
           {t.rich("form.noAccount", {
             signup: renderSignUpLink,
           })}

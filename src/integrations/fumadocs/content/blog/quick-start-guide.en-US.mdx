@@ -38,11 +38,11 @@ cp .env.example .env.local
 
 At minimum, set:
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_APP_URL` | App URL — use `http://localhost:3000` locally |
-| `DATABASE_URL` | Pooled Postgres URL (e.g. from Neon “Connect” with the pooler) |
-| `AUTH_SECRET` | Secret for Better Auth — generate a strong value (e.g. `openssl rand -base64 96`) |
+| Variable              | Purpose                                                                           |
+| --------------------- | --------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_APP_URL` | App URL — use `http://localhost:3000` locally                                     |
+| `DATABASE_URL`        | Pooled Postgres URL (e.g. from Neon “Connect” with the pooler)                    |
+| `AUTH_SECRET`         | Secret for Better Auth — generate a strong value (e.g. `openssl rand -base64 96`) |
 
 See comments inside `.env.example` for optional `DATABASE_URL_UNPOOLED` and deployment notes.
 
@@ -68,13 +68,13 @@ Open **[http://localhost:3000](http://localhost:3000)** — with the default loc
 
 ## 6. Useful commands
 
-| Command | What it does |
-| --- | --- |
-| `bun run check` | TypeScript (`tsc --noEmit`) |
-| `bun run build` | Production build |
-| `bun run test` | Vitest unit tests |
-| `bun run test:e2e` | Playwright E2E |
-| `bun run typegen` | Next.js route types + MDX codegen hooks |
+| Command            | What it does                            |
+| ------------------ | --------------------------------------- |
+| `bun run check`    | TypeScript (`tsc --noEmit`)             |
+| `bun run build`    | Production build                        |
+| `bun run test`     | Vitest unit tests                       |
+| `bun run test:e2e` | Playwright E2E                          |
+| `bun run typegen`  | Next.js route types + MDX codegen hooks |
 
 ## Next steps
 

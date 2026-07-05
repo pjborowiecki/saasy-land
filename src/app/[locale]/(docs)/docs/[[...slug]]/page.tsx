@@ -15,19 +15,23 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/docs/[[.
   const { locale, slug } = await params
 
   const page = source.getPage(slug, locale)
-  if (!page) notFound()
+  if (!page) {
+    notFound()
+  }
 
   return {
-    title: page.data.title,
     description: page.data.description,
+    title: page.data.title,
   }
 }
 
-export function generateStaticParams(): Array<{ locale: Locale; slug: string[] | undefined }> {
+export function generateStaticParams(): { locale: Locale; slug: string[] | undefined }[] {
+  const EMPTY_SLUGS_LENGTH = 0
+
   return routing.locales.flatMap((locale) =>
     source.getPages(locale).map((page) => ({
       locale,
-      slug: page.slugs.length > 0 ? page.slugs : undefined,
+      slug: page.slugs.length > EMPTY_SLUGS_LENGTH ? page.slugs : undefined,
     })),
   )
 }
@@ -36,7 +40,9 @@ export default async function DocumentationPage({ params }: PageProps<"/[locale]
   const { locale, slug } = await params
 
   const page = source.getPage(slug, locale)
-  if (!page) notFound()
+  if (!page) {
+    notFound()
+  }
 
   const Mdx = page.data.body
 

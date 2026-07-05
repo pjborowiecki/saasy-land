@@ -52,8 +52,7 @@
       "startBuilding": "Zacznij Budować (Za Darmo)",
       "viewRecipes": "Poznaj Pro Recepty"
     },
-    "tech": {
-      "title": "Zbudowany z użyciem technologii, które znasz i kochasz",
+    "techMarquee": {
       "nextjs": "Next.js",
       "neon": "Neon",
       "stripe": "Stripe",
@@ -349,6 +348,15 @@
     "layout": {
       "backToHome": "Wróć na stronę główną"
     },
+    "form": {
+      "hidePassword": "Ukryj hasło",
+      "placeholderPassword": "••••••••",
+      "placeholders": {
+        "email": "jan@example.com",
+        "name": "Jan Kowalski"
+      },
+      "showPassword": "Pokaż hasło"
+    },
     "signInPage": {
       "metadata": {
         "title": "Logowanie",
@@ -514,65 +522,7 @@
           "page1": "1",
           "page2": "2",
           "ellipsis": "..."
-        },
-        "rows": [
-          {
-            "id": 1,
-            "initials": "AJ",
-            "name": "Alex Johnson",
-            "email": "alex@example.com",
-            "amount": "$199.00",
-            "type": "Full refund",
-            "item": "Pro Annual",
-            "reason": "Accidental renewal",
-            "date": "Nov 25, 2024",
-            "status": "Processed",
-            "statusColor": "bg-emerald-500",
-            "statusTextColor": "text-muted-foreground"
-          },
-          {
-            "id": 2,
-            "initials": "SS",
-            "name": "Sarah Smith",
-            "email": "sarah.s@domain.com",
-            "amount": "$9.50",
-            "type": "Partial refund",
-            "item": "Pro Monthly",
-            "reason": "Downtime compensation",
-            "date": "Nov 22, 2024",
-            "status": "Processed",
-            "statusColor": "bg-emerald-500",
-            "statusTextColor": "text-muted-foreground"
-          },
-          {
-            "id": 3,
-            "initials": "MB",
-            "name": "Michael Brown",
-            "email": "mike.b@startup.io",
-            "amount": "$9.00",
-            "type": "Full refund",
-            "item": "Starter Monthly",
-            "reason": "Not a fit",
-            "date": "Nov 20, 2024",
-            "status": "Pending",
-            "statusColor": "bg-amber-500",
-            "statusTextColor": "text-amber-500 dark:text-amber-400"
-          },
-          {
-            "id": 4,
-            "initials": "ED",
-            "name": "Emma Davis",
-            "email": "emma@design.co",
-            "amount": "$199.00",
-            "type": "Full refund",
-            "item": "Pro Annual",
-            "reason": "Fraudulent charge",
-            "date": "Nov 18, 2024",
-            "status": "Failed",
-            "statusColor": "bg-rose-500",
-            "statusTextColor": "text-rose-500 dark:text-rose-400"
-          }
-        ]
+        }
       }
     },
     "sidebar": {
@@ -639,9 +589,7 @@
           "12m": "12M",
           "30d": "30D",
           "7d": "7D"
-        },
-        "yAxis": ["$30k", "$20k", "$10k", "$0"],
-        "xAxis": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        }
       },
       "users": {
         "title": "User Management",
@@ -664,59 +612,14 @@
             "showing": "Showing 1 to 3 of 42 entries",
             "previous": "Previous",
             "next": "Next"
-          },
-          "rows": [
-            {
-              "id": 1,
-              "name": "Sarah Jenkins",
-              "email": "sarah@example.com",
-              "avatar": "https://i.pravatar.cc/150?u=1",
-              "role": "Admin",
-              "status": "Online",
-              "lastActive": "Just now"
-            },
-            {
-              "id": 2,
-              "name": "Michael Ross",
-              "email": "michael@example.com",
-              "initials": "MR",
-              "role": "Editor",
-              "status": "Offline",
-              "lastActive": "2 hours ago"
-            },
-            {
-              "id": 3,
-              "name": "Elena Smith",
-              "email": "elena@example.com",
-              "avatar": "https://i.pravatar.cc/150?u=4",
-              "role": "Viewer",
-              "status": "Idle",
-              "lastActive": "15 mins ago"
-            }
-          ]
+          }
         }
       },
       "sessions": {
         "title": "Active Sessions",
         "revoke": "Revoke",
         "signoutAll": "Sign out all other sessions",
-        "current": "Current",
-        "items": [
-          {
-            "id": 1,
-            "device": "Mac OS • Safari",
-            "location": "New York, US • IP: 192.168.1.1",
-            "icon": "laptop",
-            "isCurrent": true
-          },
-          {
-            "id": 2,
-            "device": "iOS • Chrome",
-            "location": "London, UK • 2 hours ago",
-            "icon": "smartphone",
-            "isCurrent": false
-          }
-        ]
+        "current": "Current"
       },
       "security": {
         "title": "Security Settings",
@@ -885,22 +788,6 @@
           "currentBadge": "Current session",
           "revoke": "Revoke",
           "activeAgo": "Active {time} ago",
-          "list": [
-            {
-              "device": "Mac OS Safari",
-              "location": "New York, USA",
-              "ip": "192.168.1.1",
-              "isCurrent": true,
-              "icon": "laptop"
-            },
-            {
-              "device": "iOS Chrome",
-              "location": "London, UK",
-              "time": "2 hours",
-              "isCurrent": false,
-              "icon": "smartphone"
-            }
-          ],
           "separator": " • "
         }
       }
@@ -960,75 +847,11 @@
       },
       "regions": {
         "title": "Top Regions",
-        "viewAll": "View All",
-        "list": [
-          {
-            "name": "United States",
-            "flag": "🇺🇸",
-            "percentage": 45
-          },
-          {
-            "name": "United Kingdom",
-            "flag": "🇬🇧",
-            "percentage": 22
-          },
-          {
-            "name": "Canada",
-            "flag": "🇨🇦",
-            "percentage": 15
-          },
-          {
-            "name": "Germany",
-            "flag": "🇩🇪",
-            "percentage": 8
-          },
-          {
-            "name": "Australia",
-            "flag": "🇦🇺",
-            "percentage": 10
-          }
-        ]
+        "viewAll": "View All"
       },
       "upgrades": {
         "title": "Recent Upgrades",
-        "viewAll": "View All",
-        "list": [
-          {
-            "initials": "AS",
-            "name": "Alice Smith",
-            "action": "Upgraded to Pro Plan",
-            "time": "2 mins ago",
-            "colors": "from-blue-600 to-indigo-400"
-          },
-          {
-            "initials": "MJ",
-            "name": "Michael Johnson",
-            "action": "Upgraded to Enterprise",
-            "time": "1 hour ago",
-            "colors": "from-emerald-600 to-teal-400"
-          },
-          {
-            "initials": "ER",
-            "name": "Emma Richards",
-            "action": "Upgraded to Pro Plan",
-            "time": "3 hours ago",
-            "colors": "from-rose-600 to-orange-400"
-          },
-          {
-            "initials": "DL",
-            "name": "David Lee",
-            "action": "Upgraded to Team Plan",
-            "time": "5 hours ago",
-            "colors": "border border-border/50 bg-secondary text-muted-foreground"
-          },
-          {
-            "initials": "SK",
-            "name": "Sarah Kline",
-            "action": "Upgraded to Pro Plan",
-            "time": "1 day ago",
-            "colors": "from-purple-600 to-fuchsia-400"
-          }
-        ]
+        "viewAll": "View All"
       }
     },
     "users": {
@@ -1066,62 +889,6 @@
       "pagination": {
         "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
       },
-      "list": [
-        {
-          "id": "u1",
-          "name": "Alice Smith",
-          "email": "alice.smith@example.com",
-          "initials": "AS",
-          "colors": "from-blue-600 to-indigo-400",
-          "role": "Administrator",
-          "status": "Active",
-          "statusColor": "emerald",
-          "lastActive": "Just now"
-        },
-        {
-          "id": "u2",
-          "name": "Michael Johnson",
-          "email": "m.johnson@example.com",
-          "avatar": "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-          "role": "Editor",
-          "status": "Active",
-          "statusColor": "emerald",
-          "lastActive": "2 hours ago"
-        },
-        {
-          "id": "u3",
-          "name": "Emma Richards",
-          "email": "emma.r@example.com",
-          "initials": "ER",
-          "colors": "from-rose-600 to-orange-400",
-          "role": "Viewer",
-          "status": "Pending",
-          "statusColor": "amber",
-          "lastActive": "Never"
-        },
-        {
-          "id": "u4",
-          "name": "David Lee",
-          "email": "david.lee@example.com",
-          "avatar": "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-          "isBanned": true,
-          "role": "Subscriber",
-          "status": "Banned",
-          "statusColor": "rose",
-          "lastActive": "Oct 12, 2023"
-        },
-        {
-          "id": "u5",
-          "name": "Sarah Kline",
-          "email": "s.kline@example.com",
-          "initials": "SK",
-          "colors": "from-purple-600 to-fuchsia-400",
-          "role": "Editor",
-          "status": "Active",
-          "statusColor": "emerald",
-          "lastActive": "1 day ago"
-        }
-      ],
       "invitations": {
         "title": "Invitations",
         "description": "Manage pending team invitations and access links.",
@@ -1146,54 +913,7 @@
         },
         "pagination": {
           "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
-        },
-        "list": [
-          {
-            "id": "i1",
-            "email": "alex.chen@example.com",
-            "invitedBy": "John Doe",
-            "role": "Administrator",
-            "status": "Pending",
-            "statusColor": "amber",
-            "sentDate": "2 hours ago"
-          },
-          {
-            "id": "i2",
-            "email": "m.roberts@startup.io",
-            "invitedBy": "John Doe",
-            "role": "Viewer",
-            "status": "Pending",
-            "statusColor": "amber",
-            "sentDate": "Yesterday"
-          },
-          {
-            "id": "i3",
-            "email": "k.williams@acme.co",
-            "invitedBy": "Sarah Kline",
-            "role": "Editor",
-            "status": "Expired",
-            "statusColor": "rose",
-            "sentDate": "Oct 10, 2023"
-          },
-          {
-            "id": "i4",
-            "email": "j.miller@example.com",
-            "invitedBy": "John Doe",
-            "role": "Subscriber",
-            "status": "Pending",
-            "statusColor": "amber",
-            "sentDate": "Oct 20, 2023"
-          },
-          {
-            "id": "i5",
-            "email": "s.taylor@designco.com",
-            "invitedBy": "John Doe",
-            "role": "Editor",
-            "status": "Expired",
-            "statusColor": "rose",
-            "sentDate": "Sep 28, 2023"
-          }
-        ]
+        }
       },
       "roles": {
         "title": "Roles & Permissions",
@@ -1217,59 +937,7 @@
         },
         "pagination": {
           "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> roles"
-        },
-        "list": [
-          {
-            "id": "r1",
-            "name": "Administrator",
-            "description": "Full access to all system features, billing, and settings.",
-            "type": "System",
-            "typeColor": "default",
-            "usersCount": "3 users",
-            "icon": "Shield",
-            "iconColor": "default"
-          },
-          {
-            "id": "r2",
-            "name": "Editor",
-            "description": "Can edit products and content, but cannot manage users.",
-            "type": "System",
-            "typeColor": "default",
-            "usersCount": "12 users",
-            "icon": "Pen",
-            "iconColor": "default"
-          },
-          {
-            "id": "r3",
-            "name": "Support Agent",
-            "description": "Access to user sessions and basic troubleshooting tools.",
-            "type": "Custom",
-            "typeColor": "fuchsia",
-            "usersCount": "5 users",
-            "icon": "HelpCircle",
-            "iconColor": "fuchsia"
-          },
-          {
-            "id": "r4",
-            "name": "Viewer",
-            "description": "Read-only access to analytics and dashboards.",
-            "type": "System",
-            "typeColor": "default",
-            "usersCount": "28 users",
-            "icon": "Eye",
-            "iconColor": "default"
-          },
-          {
-            "id": "r5",
-            "name": "API Developer",
-            "description": "Access to developer settings, API keys, and webhooks.",
-            "type": "Custom",
-            "typeColor": "fuchsia",
-            "usersCount": "2 users",
-            "icon": "Code",
-            "iconColor": "fuchsia"
-          }
-        ]
+        }
       }
     },
     "products": {
@@ -1316,140 +984,9 @@
       "pagination": {
         "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> products"
       },
-      "list": [
-        {
-          "id": "p1",
-          "name": "Mastering Next.js Course",
-          "description": "85 video lessons • Protected access",
-          "type": "Subscription",
-          "price": "$49.00",
-          "billingCycle": "/ mo",
-          "status": "Active",
-          "statusColor": "emerald",
-          "metrics": "1,248 active",
-          "icon": "Video",
-          "iconColor": "fuchsia"
-        },
-        {
-          "id": "p2",
-          "name": "UI/UX Design Handbook",
-          "description": "PDF & ePub formats",
-          "type": "Digital",
-          "price": "$29.00",
-          "billingCycle": "one-time",
-          "status": "Active",
-          "statusColor": "emerald",
-          "metrics": "3,402 sales",
-          "icon": "Book",
-          "iconColor": "default"
-        },
-        {
-          "id": "p3",
-          "name": "SaaSy Land Signature Tee",
-          "description": "Apparel • Multiple variants",
-          "type": "Physical",
-          "price": "$35.00",
-          "billingCycle": "one-time",
-          "status": "Draft",
-          "statusColor": "neutral",
-          "metrics": "0 sales",
-          "icon": "Shirt",
-          "iconColor": "default"
-        },
-        {
-          "id": "p4",
-          "name": "Premium Creator Community",
-          "description": "Discord access & weekly calls",
-          "type": "Subscription",
-          "price": "$19.00",
-          "billingCycle": "/ mo",
-          "status": "Active",
-          "statusColor": "emerald",
-          "metrics": "890 active",
-          "icon": "Users",
-          "iconColor": "fuchsia"
-        }
-      ],
       "onetime": {
         "title": "One-time Purchases",
-        "description": "Manage individual products, digital downloads, and physical merchandise.",
-        "list": [
-          {
-            "id": "ot1",
-            "name": "UI/UX Design Handbook",
-            "description": "PDF & ePub formats",
-            "type": "Digital",
-            "price": "$29.00",
-            "billingCycle": "one-time",
-            "status": "Active",
-            "statusColor": "emerald",
-            "metrics": "3,402 sales",
-            "icon": "Book",
-            "iconColor": "default",
-            "tags": [
-              {
-                "icon": "Folder",
-                "text": "Ebooks",
-                "color": "default"
-              },
-              {
-                "icon": "Bookmark",
-                "text": "Best Sellers",
-                "color": "fuchsia"
-              }
-            ]
-          },
-          {
-            "id": "ot2",
-            "name": "Freelance Starter Kit",
-            "description": "Notion templates & assets",
-            "type": "Digital",
-            "price": "$49.00",
-            "billingCycle": "one-time",
-            "status": "Active",
-            "statusColor": "emerald",
-            "metrics": "1,120 sales",
-            "icon": "Layers",
-            "iconColor": "fuchsia",
-            "tags": [
-              {
-                "icon": "Folder",
-                "text": "Templates",
-                "color": "default"
-              },
-              {
-                "icon": "Bookmark",
-                "text": "Featured",
-                "color": "blue"
-              }
-            ]
-          },
-          {
-            "id": "ot3",
-            "name": "SaaSy Land Signature Tee",
-            "description": "Apparel • Multiple variants",
-            "type": "Physical",
-            "price": "$35.00",
-            "billingCycle": "one-time",
-            "status": "Draft",
-            "statusColor": "neutral",
-            "metrics": "0 sales",
-            "icon": "Shirt",
-            "iconColor": "default",
-            "tags": [
-              {
-                "icon": "Folder",
-                "text": "Apparel",
-                "color": "default"
-              },
-              {
-                "icon": "Bookmark",
-                "text": "Summer Drop",
-                "color": "emerald"
-              }
-            ]
-          }
-        ]
+        "description": "Manage individual products, digital downloads, and physical merchandise."
       },
       "subscriptions": {
         "title": "Subscriptions",
@@ -1462,84 +999,7 @@
             "status": "Status",
             "metrics": "Metrics"
           }
-        },
-        "list": [
-          {
-            "id": "sub-1",
-            "name": "Pro Membership",
-            "description": "Unlimited access & premium features",
-            "type": "Recurring",
-            "price": "$29.00",
-            "billingCycle": "/ month",
-            "status": "Active",
-            "statusColor": "emerald",
-            "metrics": "1,204 active",
-            "icon": "Crown",
-            "iconColor": "fuchsia",
-            "tags": [
-              {
-                "icon": "Folder",
-                "text": "SaaS Tier",
-                "color": "default"
-              },
-              {
-                "icon": "Star",
-                "text": "Most Popular",
-                "color": "fuchsia"
-              }
-            ]
-          },
-          {
-            "id": "sub-2",
-            "name": "Team Workspace",
-            "description": "Up to 10 seats & shared resources",
-            "type": "Recurring",
-            "price": "$290.00",
-            "billingCycle": "/ year",
-            "status": "Active",
-            "statusColor": "emerald",
-            "metrics": "342 active",
-            "icon": "Users",
-            "iconColor": "default",
-            "tags": [
-              {
-                "icon": "Folder",
-                "text": "B2B",
-                "color": "default"
-              },
-              {
-                "icon": "Building2",
-                "text": "Business",
-                "color": "blue"
-              }
-            ]
-          },
-          {
-            "id": "sub-3",
-            "name": "Developer API Access",
-            "description": "Metered endpoints & webhook integrations",
-            "type": "Usage-based",
-            "price": "$0.05",
-            "billingCycle": "/ 1k req",
-            "status": "Active",
-            "statusColor": "emerald",
-            "metrics": "89 active",
-            "icon": "Server",
-            "iconColor": "emerald",
-            "tags": [
-              {
-                "icon": "Folder",
-                "text": "Add-ons",
-                "color": "default"
-              },
-              {
-                "icon": "Code",
-                "text": "Developer",
-                "color": "emerald"
-              }
-            ]
-          }
-        ]
+        }
       },
       "categories": {
         "title": "Categories",
@@ -1551,39 +1011,7 @@
             "items": "Items",
             "lastUpdated": "Last Updated"
           }
-        },
-        "list": [
-          {
-            "id": "cat-1",
-            "name": "SaaS Plans",
-            "description": "Core subscription tiers for standard users",
-            "visibility": "Public",
-            "visibilityStatus": "public",
-            "items": "12",
-            "lastUpdated": "Oct 24, 2023",
-            "icon": "FolderOpen"
-          },
-          {
-            "id": "cat-2",
-            "name": "Add-ons & Extras",
-            "description": "One-time extensions and API limits",
-            "visibility": "Public",
-            "visibilityStatus": "public",
-            "items": "8",
-            "lastUpdated": "Sep 12, 2023",
-            "icon": "Puzzle"
-          },
-          {
-            "id": "cat-3",
-            "name": "Legacy Plans",
-            "description": "Grandfathered plans no longer available for purchase",
-            "visibility": "Hidden",
-            "visibilityStatus": "hidden",
-            "items": "3",
-            "lastUpdated": "Jan 05, 2023",
-            "icon": "Archive"
-          }
-        ]
+        }
       },
       "collections": {
         "title": "Collections",
@@ -1595,39 +1023,7 @@
             "items": "Items",
             "lastUpdated": "Last Updated"
           }
-        },
-        "list": [
-          {
-            "id": "col-1",
-            "name": "SaaS Plans",
-            "description": "Core subscription tiers for standard users",
-            "visibility": "Public",
-            "visibilityStatus": "public",
-            "items": "12",
-            "lastUpdated": "Oct 24, 2023",
-            "icon": "FolderOpen"
-          },
-          {
-            "id": "col-2",
-            "name": "Add-ons & Extras",
-            "description": "One-time extensions and API limits",
-            "visibility": "Public",
-            "visibilityStatus": "public",
-            "items": "8",
-            "lastUpdated": "Sep 12, 2023",
-            "icon": "Puzzle"
-          },
-          {
-            "id": "col-3",
-            "name": "Legacy Plans",
-            "description": "Grandfathered plans no longer available for purchase",
-            "visibility": "Hidden",
-            "visibilityStatus": "hidden",
-            "items": "3",
-            "lastUpdated": "Jan 05, 2023",
-            "icon": "Archive"
-          }
-        ]
+        }
       },
       "create": {
         "title": "Create Product",
@@ -1661,7 +1057,8 @@
             },
             "period": {
               "label": "Billing Period",
-              "monthly": "Monthly"
+              "monthly": "Monthly",
+              "yearly": "Yearly"
             }
           },
           "media": {

@@ -10,63 +10,63 @@ export async function FeaturesSection(): Promise<JSX.Element> {
 
   const features = [
     {
-      id: "auth",
       Icon: Lock,
+      id: "auth",
     },
     {
-      id: "db",
       Icon: Database,
+      id: "db",
     },
     {
-      id: "stripe",
       Icon: Wallet,
+      id: "stripe",
     },
     {
-      id: "email",
       Icon: Mail,
+      id: "email",
     },
     {
-      id: "seo",
       Icon: Search,
+      id: "seo",
     },
     {
-      id: "ui",
       Icon: LayoutTemplate,
+      id: "ui",
     },
     {
-      id: "i18n",
       Icon: Globe,
+      id: "i18n",
     },
     {
-      id: "typeSafety",
       Icon: ShieldCheck,
+      id: "typeSafety",
     },
     {
-      id: "quality",
       Icon: Medal,
+      id: "quality",
     },
     {
-      id: "performance",
       Icon: Zap,
+      id: "performance",
     },
     {
-      id: "vercel",
       Icon: Triangle,
+      id: "vercel",
     },
     {
-      id: "blog",
       Icon: BookOpen,
+      id: "blog",
     },
   ]
 
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24">
       <div className="mx-auto mb-20 max-w-2xl text-center">
-        <h2 className="mb-6 font-medium text-4xl text-foreground tracking-tight md:text-5xl">
+        <h2 className="mb-6 text-4xl font-medium tracking-tight text-foreground md:text-5xl">
           {t("titlePart1")}
           <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">{t("titlePart2")}</span>
         </h2>
-        <p className="font-normal text-lg text-muted-foreground">{t("description")}</p>
+        <p className="text-lg font-normal text-muted-foreground">{t("description")}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -81,7 +81,7 @@ export async function FeaturesSection(): Promise<JSX.Element> {
               <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               {/* Giant translucent icon in the background */}
-              <div className="absolute -top-8 -right-8 z-0 opacity-[0.03] transition-transform duration-700 ease-out group-hover:rotate-12 group-hover:scale-110 group-hover:opacity-[0.05]">
+              <div className="absolute -top-8 -right-8 z-0 opacity-[0.03] transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-12 group-hover:opacity-[0.05]">
                 <Icon className="h-48 w-48" />
               </div>
 
@@ -89,8 +89,8 @@ export async function FeaturesSection(): Promise<JSX.Element> {
                 <div className="mb-6 flex size-12 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 shadow-inner transition-colors duration-300 group-hover:border-primary/30 group-hover:bg-primary/20">
                   <Icon className="size-6 text-primary" />
                 </div>
-                <CardTitle className="mb-3 font-medium text-foreground text-xl tracking-tight">{t(`list.${id}.title`)}</CardTitle>
-                <CardDescription className="text-muted-foreground text-sm leading-relaxed">{t(`list.${id}.description`)}</CardDescription>
+                <CardTitle className="mb-3 text-xl font-medium tracking-tight text-foreground">{t(`list.${id}.title`)}</CardTitle>
+                <CardDescription className="text-sm leading-relaxed text-muted-foreground">{t(`list.${id}.description`)}</CardDescription>
               </CardHeader>
             </Card>
           )

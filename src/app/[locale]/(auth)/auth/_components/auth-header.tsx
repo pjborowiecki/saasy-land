@@ -17,10 +17,10 @@ export async function AuthHeader(): Promise<JSX.Element> {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-linear-to-br from-secondary to-background transition-colors group-hover:border-border/80">
             <Rocket className="size-4 text-foreground" />
           </div>
-          <span className="font-medium text-foreground text-lg tracking-tight">{CONSTANTS.APP_NAME}</span>
+          <span className="text-lg font-medium tracking-tight text-foreground">{CONSTANTS.APP_NAME}</span>
         </Link>
 
-        <Link href="/" className="font-medium text-muted-foreground text-sm transition-colors hover:text-foreground">
+        <Link href="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
           {t("backToHome")}
         </Link>
       </div>

@@ -4,23 +4,23 @@ import { createMDX } from "fumadocs-mdx/next"
 import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  reactCompiler: true,
   cacheComponents: true,
-  typedRoutes: true,
-  serverExternalPackages: ["better-auth"],
   experimental: { rootParams: true },
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "avatars.githubusercontent.com", pathname: "/**" },
-      { protocol: "https", hostname: "i.pravatar.cc", pathname: "/**" },
+      { hostname: "avatars.githubusercontent.com", pathname: "/**", protocol: "https" },
+      { hostname: "i.pravatar.cc", pathname: "/**", protocol: "https" },
     ],
   },
+  reactCompiler: true,
+  reactStrictMode: true,
+  serverExternalPackages: ["better-auth"],
+  typedRoutes: true,
 }
 
 const withNextIntl = createNextIntlPlugin({
-  requestConfig: "./src/integrations/next-intl/i18n.request.ts",
   experimental: { createMessagesDeclaration: "./src/integrations/next-intl/messages/en-US.json" },
+  requestConfig: "./src/integrations/next-intl/i18n.request.ts",
 })
 
 const withMDX = createMDX({

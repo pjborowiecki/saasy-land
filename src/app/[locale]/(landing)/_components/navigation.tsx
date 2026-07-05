@@ -15,13 +15,13 @@ export function Navigation(): JSX.Element {
   const t = useTranslations("navigation")
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-border/50 border-b bg-background/60 backdrop-blur-2xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/60 backdrop-blur-2xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="group flex items-center gap-2.5">
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-linear-to-br from-muted to-muted/50 transition-colors group-hover:border-border">
             <Rocket className="size-4 text-foreground" />
           </div>
-          <span className="font-medium text-foreground text-lg tracking-tight">{CONSTANTS.APP_NAME}</span>
+          <span className="text-lg font-medium tracking-tight text-foreground">{CONSTANTS.APP_NAME}</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -29,7 +29,7 @@ export function Navigation(): JSX.Element {
             <Link
               key={item}
               href={`#${item}`}
-              className="font-medium text-muted-foreground text-sm transition-colors hover:text-foreground"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {t(`items.${item}`)}
             </Link>

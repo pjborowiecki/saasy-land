@@ -10,6 +10,30 @@ import { Button } from "~/src/components/shadcn/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
 import { Switch } from "~/src/components/shadcn/switch"
 
+const STARTER_INCLUDED_FEATURES = ["1", "2", "3"] as const
+const STARTER_DISABLED_FEATURES = ["4", "5"] as const
+const PRO_FEATURES = ["1", "2", "3", "4", "5"] as const
+const LIFETIME_FEATURES = ["1", "2", "3", "4", "5"] as const
+
+function PricingFeature({
+  icon: Icon,
+  iconClassName,
+  label,
+  muted,
+}: {
+  icon: typeof CheckCircle2
+  iconClassName: string
+  label: string
+  muted?: boolean
+}): JSX.Element {
+  return (
+    <li className={`flex items-center gap-3 text-sm ${muted === true ? "text-muted-foreground" : "text-foreground"}`}>
+      <Icon className={iconClassName} />
+      <span>{label}</span>
+    </li>
+  )
+}
+
 export function PricingSection(): JSX.Element {
   const t = useTranslations("landingPage.pricing")
   const [isYearly, setIsYearly] = useState<boolean>(false)
@@ -17,17 +41,17 @@ export function PricingSection(): JSX.Element {
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24">
       <div className="mx-auto mb-20 max-w-2xl text-center">
-        <h2 className="mb-6 font-medium text-4xl text-foreground tracking-tight md:text-5xl">
+        <h2 className="mb-6 text-4xl font-medium tracking-tight text-foreground md:text-5xl">
           {t("titlePart1")}
           <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">{t("titlePart2")}</span>
         </h2>
-        <p className="font-normal text-lg text-muted-foreground">{t("description")}</p>
+        <p className="text-lg font-normal text-muted-foreground">{t("description")}</p>
       </div>
 
       <div className="mb-16 flex items-center justify-center gap-4">
-        <span className="font-medium text-muted-foreground text-sm">{t("monthly")}</span>
+        <span className="text-sm font-medium text-muted-foreground">{t("monthly")}</span>
         <Switch checked={isYearly} onCheckedChange={setIsYearly} />
-        <span className="flex items-center gap-2 font-medium text-foreground text-sm">
+        <span className="flex items-center gap-2 text-sm font-medium text-foreground">
           {t("yearly")}
           <Badge variant="outline" className="border-primary/20 bg-primary/10 text-primary">
             {t("save20")}
@@ -43,13 +67,13 @@ export function PricingSection(): JSX.Element {
             <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
           <CardHeader className="relative z-10 flex flex-col items-start pt-8">
-            <CardTitle className="font-medium text-foreground text-xl tracking-tight">{t("starter.title")}</CardTitle>
+            <CardTitle className="text-xl font-medium tracking-tight text-foreground">{t("starter.title")}</CardTitle>
             <CardDescription className="mb-4">{t("starter.description")}</CardDescription>
             <div className="flex items-baseline gap-2">
-              <span className="font-medium text-5xl text-foreground tracking-tight">
+              <span className="text-5xl font-medium tracking-tight text-foreground">
                 {isYearly ? t("starter.priceYearly") : t("starter.priceMonthly")}
               </span>
-              <span className="text-muted-foreground text-sm">{t("starter.period")}</span>
+              <span className="text-sm text-muted-foreground">{t("starter.period")}</span>
             </div>
           </CardHeader>
           <CardContent className="relative z-10 flex flex-1 flex-col pb-8">
@@ -57,17 +81,22 @@ export function PricingSection(): JSX.Element {
               {t("starter.button")}
             </Button>
             <ul className="flex flex-1 flex-col space-y-4">
-              {[1, 2, 3].map((i) => (
-                <li key={`starter-${i}`} className="flex items-center gap-3 text-foreground text-sm">
-                  <CheckCircle2 className="size-5 shrink-0 text-primary" />
-                  <span>{t(`starter.features.f${i}`)}</span>
-                </li>
+              {STARTER_INCLUDED_FEATURES.map((i) => (
+                <PricingFeature
+                  key={`starter-${i}`}
+                  icon={CheckCircle2}
+                  iconClassName="size-5 shrink-0 text-primary"
+                  label={t(`starter.features.f${i}`)}
+                />
               ))}
-              {[4, 5].map((i) => (
-                <li key={`starter-no-${i}`} className="flex items-center gap-3 text-muted-foreground text-sm">
-                  <XCircle className="size-5 shrink-0" />
-                  <span>{t(`starter.features.f${i}`)}</span>
-                </li>
+              {STARTER_DISABLED_FEATURES.map((i) => (
+                <PricingFeature
+                  key={`starter-no-${i}`}
+                  icon={XCircle}
+                  iconClassName="size-5 shrink-0"
+                  label={t(`starter.features.f${i}`)}
+                  muted
+                />
               ))}
             </ul>
           </CardContent>
@@ -77,17 +106,17 @@ export function PricingSection(): JSX.Element {
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-lg">
             <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
-          <Badge className="absolute -top-3 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap bg-linear-to-r from-primary to-primary/60 px-4 py-1 text-xs shadow-lg">
+          <Badge className="absolute -top-3 left-1/2 z-20 -translate-x-1/2 bg-linear-to-r from-primary to-primary/60 px-4 py-1 text-xs whitespace-nowrap shadow-lg">
             {t("pro.badge")}
           </Badge>
           <CardHeader className="relative z-10 flex flex-col items-start pt-8">
-            <CardTitle className="font-medium text-foreground text-xl tracking-tight">{t("pro.title")}</CardTitle>
+            <CardTitle className="text-xl font-medium tracking-tight text-foreground">{t("pro.title")}</CardTitle>
             <CardDescription className="mb-4">{t("pro.description")}</CardDescription>
             <div className="flex items-baseline gap-2">
-              <span className="font-medium text-5xl text-foreground tracking-tight">
+              <span className="text-5xl font-medium tracking-tight text-foreground">
                 {isYearly ? t("pro.priceYearly") : t("pro.priceMonthly")}
               </span>
-              <span className="text-muted-foreground text-sm">{t("pro.period")}</span>
+              <span className="text-sm text-muted-foreground">{t("pro.period")}</span>
             </div>
           </CardHeader>
           <CardContent className="relative z-10 flex flex-1 flex-col pb-8">
@@ -98,11 +127,13 @@ export function PricingSection(): JSX.Element {
               {t("pro.button")}
             </Button>
             <ul className="flex flex-1 flex-col space-y-4">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <li key={`pro-${i}`} className="flex items-center gap-3 text-foreground text-sm">
-                  <CheckCircle2 className="size-5 shrink-0 text-primary" />
-                  <span>{t(`pro.features.f${i}`)}</span>
-                </li>
+              {PRO_FEATURES.map((i) => (
+                <PricingFeature
+                  key={`pro-${i}`}
+                  icon={CheckCircle2}
+                  iconClassName="size-5 shrink-0 text-primary"
+                  label={t(`pro.features.f${i}`)}
+                />
               ))}
             </ul>
           </CardContent>
@@ -113,29 +144,31 @@ export function PricingSection(): JSX.Element {
             <div className="absolute inset-0 bg-linear-to-br from-amber-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
           <CardHeader className="relative z-10 flex flex-col items-start pt-8">
-            <CardTitle className="font-medium text-foreground text-xl tracking-tight">{t("lifetime.title")}</CardTitle>
+            <CardTitle className="text-xl font-medium tracking-tight text-foreground">{t("lifetime.title")}</CardTitle>
             <CardDescription className="mb-4">{t("lifetime.description")}</CardDescription>
             <div className="flex items-baseline gap-2">
-              <span className="font-medium text-5xl text-foreground tracking-tight">
+              <span className="text-5xl font-medium tracking-tight text-foreground">
                 {isYearly ? t("lifetime.priceYearly") : t("lifetime.priceMonthly")}
               </span>
-              <span className="text-muted-foreground text-sm">{t("lifetime.period")}</span>
+              <span className="text-sm text-muted-foreground">{t("lifetime.period")}</span>
             </div>
           </CardHeader>
           <CardContent className="relative z-10 flex flex-1 flex-col pb-8">
             <Button
               variant="outline"
               size="lg"
-              className="mb-8 h-12 w-full border-amber-500/30 bg-amber-500/5 text-amber-500 text-base transition-colors hover:bg-amber-500/10 hover:text-amber-500"
+              className="mb-8 h-12 w-full border-amber-500/30 bg-amber-500/5 text-base text-amber-500 transition-colors hover:bg-amber-500/10 hover:text-amber-500"
             >
               {t("lifetime.button")}
             </Button>
             <ul className="flex flex-1 flex-col space-y-4">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <li key={`lifetime-${i}`} className="flex items-center gap-3 text-foreground text-sm">
-                  <CheckCircle2 className="size-5 shrink-0 text-amber-500" />
-                  <span>{t(`lifetime.features.f${i}`)}</span>
-                </li>
+              {LIFETIME_FEATURES.map((i) => (
+                <PricingFeature
+                  key={`lifetime-${i}`}
+                  icon={CheckCircle2}
+                  iconClassName="size-5 shrink-0 text-amber-500"
+                  label={t(`lifetime.features.f${i}`)}
+                />
               ))}
             </ul>
           </CardContent>

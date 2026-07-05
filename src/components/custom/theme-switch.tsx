@@ -1,6 +1,6 @@
 "use client"
 
-import { type JSX, useEffect, useState } from "react"
+import { type JSX, useCallback, useEffect, useState } from "react"
 
 import { useTheme } from "@wrksz/themes/client"
 import { useTranslations } from "next-intl"
@@ -9,11 +9,25 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Skeleton } from "~/src/components/shadcn/skeleton"
 
 const THEMES = ["light", "dark", "system"] as const
+type ThemeValue = (typeof THEMES)[number]
+
+function isThemeValue(value: string | null): value is ThemeValue {
+  return value !== null && THEMES.some((theme) => theme === value)
+}
 
 export function ThemeSwitch(): JSX.Element {
   const t = useTranslations("components.custom.themeSwitch")
 
   const { theme, setTheme } = useTheme()
+
+  const handleThemeChange = useCallback(
+    (value: ThemeValue | null) => {
+      if (isThemeValue(value)) {
+        setTheme(value)
+      }
+    },
+    [setTheme],
+  )
 
   const [mounted, setMounted] = useState(false)
   useEffect(function markThemeSwitchMounted() {
@@ -25,7 +39,7 @@ export function ThemeSwitch(): JSX.Element {
   }
 
   return (
-    <Select value={theme} onValueChange={(v) => v && setTheme(v)}>
+    <Select value={theme ?? undefined} onValueChange={handleThemeChange}>
       <SelectTrigger className="w-full capitalize">
         <SelectValue placeholder={t("placeholder")} />
       </SelectTrigger>

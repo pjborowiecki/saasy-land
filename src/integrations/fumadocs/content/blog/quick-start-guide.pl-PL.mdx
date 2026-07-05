@@ -38,11 +38,11 @@ cp .env.example .env.local
 
 Minimalnie ustaw:
 
-| Zmienna | Znaczenie |
-| --- | --- |
-| `NEXT_PUBLIC_APP_URL` | Adres aplikacji — lokalnie `http://localhost:3000` |
-| `DATABASE_URL` | Pooled Postgres (np. z Neon „Connect” z poolerem) |
-| `AUTH_SECRET` | Sekret Better Auth — wygeneruj silny ciąg (np. `openssl rand -base64 96`) |
+| Zmienna               | Znaczenie                                                                 |
+| --------------------- | ------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_APP_URL` | Adres aplikacji — lokalnie `http://localhost:3000`                        |
+| `DATABASE_URL`        | Pooled Postgres (np. z Neon „Connect” z poolerem)                         |
+| `AUTH_SECRET`         | Sekret Better Auth — wygeneruj silny ciąg (np. `openssl rand -base64 96`) |
 
 Szczegóły i opcjonalne `DATABASE_URL_UNPOOLED` są w komentarzach w `.env.example`.
 
@@ -68,13 +68,13 @@ Otwórz **[http://localhost:3000](http://localhost:3000)** — z domyślnym pref
 
 ## 6. Przydatne polecenia
 
-| Polecenie | Działanie |
-| --- | --- |
-| `bun run check` | TypeScript (`tsc --noEmit`) |
-| `bun run build` | Build produkcyjny |
-| `bun run test` | Testy Vitest |
-| `bun run test:e2e` | Playwright E2E |
-| `bun run typegen` | Typy tras Next + codegen MDX |
+| Polecenie          | Działanie                    |
+| ------------------ | ---------------------------- |
+| `bun run check`    | TypeScript (`tsc --noEmit`)  |
+| `bun run build`    | Build produkcyjny            |
+| `bun run test`     | Testy Vitest                 |
+| `bun run test:e2e` | Playwright E2E               |
+| `bun run typegen`  | Typy tras Next + codegen MDX |
 
 ## Co dalej
 

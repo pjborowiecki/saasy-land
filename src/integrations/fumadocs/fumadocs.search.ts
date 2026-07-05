@@ -25,7 +25,8 @@ const oramaLocaleMap: Record<Locale, Language> = {
   "pl-PL": "czech",
 }
 
-/** Orama-backed handler: call `fumadocsSearch.GET(request)` from Elysia (or any Web Request API). */
 export const fumadocsSearch = createFromSource(source, {
   localeMap: oramaLocaleMap,
 })
+
+export const fumadocsSearchGet = fumadocsSearch.GET

@@ -1,6 +1,6 @@
 "use client"
 
-import type { JSX } from "react"
+import { type JSX, useCallback } from "react"
 
 import { hasLocale } from "next-intl"
 
@@ -11,23 +11,27 @@ import { usePathname, useRouter } from "~/src/integrations/next-intl/i18n.naviga
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from "~/src/components/shadcn/select"
 
-type LocaleSwitchProps = {
-  locale: (typeof CONSTANTS.I18N.LOCALES)[number]
+type AppLocale = (typeof CONSTANTS.I18N.LOCALES)[number]
+
+interface LocaleSwitchProps {
+  locale: AppLocale
 }
 
 export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Element {
   const pathname = usePathname()
   const router = useRouter()
 
+  const handleLocaleChange = useCallback(
+    (next: AppLocale | null) => {
+      if (next !== null && hasLocale(CONSTANTS.I18N.LOCALES, next)) {
+        router.replace(pathname, { locale: next })
+      }
+    },
+    [pathname, router],
+  )
+
   return (
-    <Select
-      value={locale}
-      onValueChange={(next) => {
-        if (hasLocale(CONSTANTS.I18N.LOCALES, next)) {
-          router.replace(pathname, { locale: next })
-        }
-      }}
-    >
+    <Select value={locale} onValueChange={handleLocaleChange}>
       <SelectTrigger className="w-full">{localeUiConfig[locale].displayName}</SelectTrigger>
       <SelectContent alignItemWithTrigger={false} side="top" sideOffset={4}>
         <SelectGroup>

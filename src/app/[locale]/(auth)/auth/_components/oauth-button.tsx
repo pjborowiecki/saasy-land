@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentPropsWithoutRef, type ComponentType, type JSX, type SVGProps, useTransition } from "react"
+import { type ComponentPropsWithoutRef, type JSX, useCallback, useTransition } from "react"
 
 import { Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -10,7 +10,7 @@ import { CONSTANTS } from "~/src/constants"
 
 import { authClient } from "~/src/integrations/better-auth/auth._client"
 import type { auth } from "~/src/integrations/better-auth/auth._server"
-import { AUTH_ERRORS } from "~/src/integrations/better-auth/auth.errors"
+import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 
 import { cn } from "~/src/lib/utils"
 
@@ -22,30 +22,29 @@ const OAUTH_BUTTON_STYLES =
 interface OAuthButtonProps extends ComponentPropsWithoutRef<"button"> {
   provider: keyof typeof auth.options.socialProviders
   label: string
-  Icon: ComponentType<SVGProps<SVGElement>>
+  Icon: (props: Readonly<{ className?: string }>) => JSX.Element
 }
 
 export function OAuthButton({ provider, label, Icon, className, ...rest }: Readonly<OAuthButtonProps>): JSX.Element {
   const [isPending, startTransition] = useTransition()
   const t = useTranslations()
 
-  function handleSignIn() {
+  const handleSignIn = useCallback(() => {
     startTransition(async () => {
       await authClient.signIn.social({
-        provider,
         callbackURL: CONSTANTS.ROUTES.AUTH_CALLBACK,
         fetchOptions: {
           onError: (ctx) => {
-            const key = AUTH_ERRORS[ctx.error.code as keyof typeof AUTH_ERRORS] ?? AUTH_ERRORS.UNKNOWN_ERROR
-            toast.error(t(`auth.errors.${key}`))
+            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: () => {
             toast.success(t("auth.oAuth.success"))
           },
         },
+        provider,
       })
     })
-  }
+  }, [provider, startTransition, t])
 
   return (
     <Button

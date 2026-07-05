@@ -9,7 +9,11 @@ export const verification = pgTable(
     identifier: varchar("identifier", { length: 512 }).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(
+        () =>
+          /* @__PURE__ */
+          new Date(),
+      )
       .notNull(),
     value: varchar("value", { length: 8192 }).notNull(),
   },

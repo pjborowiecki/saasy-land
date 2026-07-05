@@ -9,6 +9,12 @@ import { cn } from "~/src/lib/utils"
 import { Label } from "~/src/components/shadcn/label"
 import { Separator } from "~/src/components/shadcn/separator"
 
+const SINGLE_FIELD_ERROR = 1
+
+function hasFieldSeparatorContent(children: ReactNode | undefined): boolean {
+  return children !== undefined && children !== null && children !== false && children !== ""
+}
+
 function FieldSet({ className, ...props }: ComponentProps<"fieldset">): JSX.Element {
   return (
     <fieldset
@@ -48,17 +54,17 @@ function FieldGroup({ className, ...props }: ComponentProps<"div">): JSX.Element
 }
 
 const fieldVariants = cva("group/field flex w-full gap-2 data-[invalid=true]:text-destructive", {
+  defaultVariants: {
+    orientation: "vertical",
+  },
   variants: {
     orientation: {
-      vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
       horizontal:
         "flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
       responsive:
-        "@md/field-group:flex-row flex-col @md/field-group:items-center *:w-full @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+        "flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+      vertical: "flex-col *:w-full [&>.sr-only]:w-auto",
     },
-  },
-  defaultVariants: {
-    orientation: "vertical",
   },
 })
 
@@ -77,7 +83,7 @@ function FieldLabel({ className, ...props }: ComponentProps<typeof Label>): JSX.
     <Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 font-medium text-foreground leading-snug has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-data-checked:border-primary/30 has-data-checked:bg-primary/5 *:data-[slot=field]:p-2 group-data-[disabled=true]/field:opacity-50 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug font-medium text-foreground group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className,
       )}
@@ -101,9 +107,9 @@ function FieldDescription({ className, ...props }: ComponentProps<"p">): JSX.Ele
     <p
       data-slot="field-description"
       className={cn(
-        "text-left font-normal text-muted-foreground text-xs/relaxed leading-normal group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
-        "nth-last-2:-mt-1 last:mt-0",
-        "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
+        "text-left text-xs/relaxed leading-normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
+        "last:mt-0 nth-last-2:-mt-1",
+        "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className,
       )}
       {...props}
@@ -118,19 +124,21 @@ function FieldSeparator({
 }: ComponentProps<"div"> & {
   children?: ReactNode
 }): JSX.Element {
+  const hasContent = hasFieldSeparatorContent(children)
+
   return (
     <div
       data-slot="field-separator"
-      data-content={!!children}
+      data-content={hasContent}
       className={cn("relative -my-2 h-5 text-xs group-data-[variant=outline]/field-group:-mb-2", className)}
       {...props}
     >
       <Separator className="absolute inset-0 top-1/2" />
-      {children && (
+      {hasContent ? (
         <span className="relative mx-auto block w-fit bg-background px-2 text-muted-foreground" data-slot="field-separator-content">
           {children}
         </span>
-      )}
+      ) : undefined}
     </div>
   )
 }
@@ -141,36 +149,40 @@ function FieldError({
   errors,
   ...props
 }: ComponentProps<"div"> & {
-  errors?: Array<{ message?: string } | undefined>
-}): JSX.Element | null {
+  errors?: ({ message?: string } | undefined)[]
+}): JSX.Element | undefined {
   const content = useMemo(() => {
-    if (children) {
+    if (children !== undefined && children !== null && children !== false && children !== "") {
       return children
     }
 
-    if (!errors?.length) {
-      return null
+    if (errors === undefined || errors.length === 0) {
+      return
     }
 
     const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()]
 
-    if (uniqueErrors?.length === 1) {
+    if (uniqueErrors.length === SINGLE_FIELD_ERROR) {
       return uniqueErrors[0]?.message
     }
 
     return (
       <ul className="ml-4 flex list-disc flex-col gap-1">
-        {uniqueErrors.map((error) => error?.message && <li key={error.message}>{error.message}</li>)}
+        {uniqueErrors
+          .filter((error): error is { message: string } => error?.message !== undefined && error.message !== "")
+          .map((error) => (
+            <li key={error.message}>{error.message}</li>
+          ))}
       </ul>
     )
   }, [children, errors])
 
-  if (!content) {
-    return null
+  if (content === undefined || content === null || content === "") {
+    return
   }
 
   return (
-    <div role="alert" data-slot="field-error" className={cn("font-normal text-destructive text-xs", className)} {...props}>
+    <div role="alert" data-slot="field-error" className={cn("text-xs font-normal text-destructive", className)} {...props}>
       {content}
     </div>
   )

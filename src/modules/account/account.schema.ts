@@ -19,7 +19,11 @@ export const account = pgTable(
     scope: varchar("scope", { length: 8192 }),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(
+        () =>
+          /* @__PURE__ */
+          new Date(),
+      )
       .notNull(),
     userId: uuid("user_id")
       .notNull()

@@ -6,7 +6,7 @@
 @import "fumadocs-ui/css/preset.css";
 
 @plugin "@tailwindcss/typography" {
-  className: wysiwyg;
+  classname: wysiwyg;
 }
 
 @custom-variant dark (&:is(.dark *));

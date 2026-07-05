@@ -1,10 +1,11 @@
 {
   "recommendations": [
-    "biomejs.biome",
+    "VoidZero.vite-plus-extension-pack",
     "bradlc.vscode-tailwindcss",
     "yoavbls.pretty-ts-errors",
     "SonarSource.sonarlint-vscode",
     "usernamehw.errorlens",
     "lokalise.i18n-ally"
-  ]
+  ],
+  "unwantedRecommendations": ["biomejs.biome"]
 }

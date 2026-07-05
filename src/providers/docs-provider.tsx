@@ -1,6 +1,6 @@
 "use client"
 
-import type { ComponentProps, FC, ReactNode } from "react"
+import { type ComponentProps, type ReactNode, useMemo } from "react"
 
 import { RootProvider } from "fumadocs-ui/provider/next"
 import { hasLocale } from "use-intl/core"
@@ -16,26 +16,44 @@ type DocsProviderProps = Readonly<{
   children: ReactNode
 }>
 
-type FumadocsLinkProps = ComponentProps<"a"> & { prefetch?: boolean }
-const FumadocsLink = Link as FC<FumadocsLinkProps>
+type RootProviderComponents = NonNullable<ComponentProps<typeof RootProvider>["components"]>
+type DocsLinkProps = ComponentProps<NonNullable<RootProviderComponents["Link"]>>
+
+function DocsLink({ prefetch: _prefetch, tw: _tw, href, children, className, target, rel, title }: DocsLinkProps) {
+  const linkHref = typeof href === "string" ? href : "/"
+
+  return (
+    <Link className={className} href={linkHref} rel={rel} target={target} title={title}>
+      {children}
+    </Link>
+  )
+}
+
+const DOCS_PROVIDER_COMPONENTS = {
+  Link: DocsLink,
+} satisfies RootProviderComponents
+
+const DOCS_THEME = { enabled: false } as const
 
 export function DocsProvider({ locale, children }: DocsProviderProps) {
   const pathname = usePathname()
   const router = useRouter()
 
+  const components = useMemo(() => DOCS_PROVIDER_COMPONENTS, [])
+  const i18n = useMemo(
+    () => ({
+      ...i18nUI.provider(locale),
+      onLocaleChange: (next: string) => {
+        if (hasLocale(CONSTANTS.I18N.LOCALES, next)) {
+          router.replace(pathname, { locale: next })
+        }
+      },
+    }),
+    [locale, pathname, router],
+  )
+
   return (
-    <RootProvider
-      components={{ Link: FumadocsLink }}
-      theme={{ enabled: false }}
-      i18n={{
-        ...i18nUI.provider(locale),
-        onLocaleChange: (next) => {
-          if (hasLocale(CONSTANTS.I18N.LOCALES, next)) {
-            router.replace(pathname, { locale: next })
-          }
-        },
-      }}
-    >
+    <RootProvider components={components} theme={DOCS_THEME} i18n={i18n}>
       {children}
     </RootProvider>
   )

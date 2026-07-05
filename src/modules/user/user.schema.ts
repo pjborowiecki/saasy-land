@@ -26,7 +26,11 @@ export const user = pgTable(
     twoFactorEnabled: boolean("two_factor_enabled").default(false).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(
+        () =>
+          /* @__PURE__ */
+          new Date(),
+      )
       .notNull(),
   },
   (table) => [index("user_createdAt_idx").on(table.createdAt), index("user_role_createdAt_idx").on(table.role, table.createdAt)],

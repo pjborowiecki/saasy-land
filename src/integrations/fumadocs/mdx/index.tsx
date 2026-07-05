@@ -17,10 +17,28 @@ const pre = ({ ref: _ref, ...props }: ComponentProps<typeof CodeBlock>) => (
   </CodeBlock>
 )
 
+const EMPTY_ALT_LENGTH = 0
+
+function isImgProps(value: unknown): value is ComponentPropsWithoutRef<"img"> {
+  return typeof value === "object" && value !== null
+}
+
 const img: MDXComponents["img"] = (props) => {
-  const { src, ...rest } = props as ComponentPropsWithoutRef<"img">
-  if (typeof src !== "string") return null
-  return <ImageZoom {...rest} src={src} />
+  if (!isImgProps(props)) {
+    return
+  }
+
+  const { alt, src } = props
+
+  if (typeof src !== "string") {
+    return
+  }
+
+  if (typeof alt === "string" && alt.length > EMPTY_ALT_LENGTH) {
+    return <ImageZoom src={src} alt={alt} />
+  }
+
+  return <ImageZoom src={src} />
 }
 
 const defaultMDXComponents: MDXComponents = {
@@ -31,13 +49,13 @@ const defaultMDXComponents: MDXComponents = {
   File,
   Files,
   Folder,
-  TypeTable,
   Step,
   Steps,
   Tab,
   Tabs,
-  pre,
+  TypeTable,
   img,
+  pre,
 }
 
 export function getMDXComponents(customMDXComponents?: MDXComponents): MDXComponents {

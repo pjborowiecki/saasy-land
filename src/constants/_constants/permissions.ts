@@ -27,6 +27,6 @@ export const PERMISSIONS = {
   ACTIONS,
   DEFAULT_ROLE,
   RESOURCES,
-  ROLE_VALUES,
   ROLES,
+  ROLE_VALUES,
 } as const

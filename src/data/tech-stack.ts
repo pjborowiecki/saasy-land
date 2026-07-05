@@ -1,13 +1,13 @@
 import { Box, CreditCard, Database, DatabaseBackup, Droplets, Layers, Mail, Server, ShieldCheck } from "lucide-react"
 
 export const TECH_STACK = [
-  { name: "Next.js", Icon: Box },
-  { name: "Neon", Icon: Database },
-  { name: "Stripe", Icon: CreditCard },
-  { name: "Resend", Icon: Mail },
-  { name: "Drizzle", Icon: DatabaseBackup },
-  { name: "Tailwind CSS", Icon: Droplets },
-  { name: "Shadcn/UI", Icon: Layers },
-  { name: "Elysia", Icon: Server },
-  { name: "Zod", Icon: ShieldCheck },
+  { Icon: Box, name: "Next.js" },
+  { Icon: Database, name: "Neon" },
+  { Icon: CreditCard, name: "Stripe" },
+  { Icon: Mail, name: "Resend" },
+  { Icon: DatabaseBackup, name: "Drizzle" },
+  { Icon: Droplets, name: "Tailwind CSS" },
+  { Icon: Layers, name: "Shadcn/UI" },
+  { Icon: Server, name: "Elysia" },
+  { Icon: ShieldCheck, name: "Zod" },
 ] as const

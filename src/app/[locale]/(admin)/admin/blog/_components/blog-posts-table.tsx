@@ -1,0 +1,76 @@
+import type { JSX } from "react"
+
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { getTranslations } from "next-intl/server"
+
+import { PAGINATION_FIRST_PAGE } from "~/src/lib/admin/constants"
+import { paginationHighlight } from "~/src/lib/admin/pagination-highlight"
+
+import { Button } from "~/src/components/shadcn/button"
+import { Card } from "~/src/components/shadcn/card"
+import { Checkbox } from "~/src/components/shadcn/checkbox"
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "~/src/components/shadcn/table"
+
+import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
+import { BlogPostTableRow } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-table-row"
+
+export async function BlogPostsTable(): Promise<JSX.Element> {
+  const t = await getTranslations("admin.blog")
+
+  return (
+    <Card className="overflow-hidden border-border/40">
+      <Table>
+        <TableHeader className="bg-secondary/30">
+          <TableRow>
+            <TableHead className="w-12 px-4 text-center">
+              <Checkbox className="mx-auto" />
+            </TableHead>
+            <TableHead className="w-[35%] font-medium">{t("table.postDetails")}</TableHead>
+            <TableHead className="font-medium">{t("table.status")}</TableHead>
+            <TableHead className="font-medium">{t("table.category")}</TableHead>
+            <TableHead className="font-medium">{t("table.author")}</TableHead>
+            <TableHead className="font-medium">{t("table.date")}</TableHead>
+            <TableHead className="font-medium">{t("table.views")}</TableHead>
+            <TableHead className="w-12 px-4 text-right" />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {DUMMY_POSTS.map((post) => (
+            <BlogPostTableRow key={post.id} post={post} />
+          ))}
+        </TableBody>
+      </Table>
+
+      <BlogPostsTablePagination />
+    </Card>
+  )
+}
+
+async function BlogPostsTablePagination(): Promise<JSX.Element> {
+  const t = await getTranslations("admin.blog")
+
+  return (
+    <div className="flex items-center justify-between border-t border-border/40 bg-secondary/10 px-4 py-3">
+      <span className="text-xs font-medium text-muted-foreground">
+        {t.rich("pagination.info", {
+          end: 6,
+          highlight: paginationHighlight,
+          start: 1,
+          total: 6,
+        })}
+      </span>
+
+      <div className="flex items-center gap-1">
+        <Button variant="ghost" size="icon" className="size-8 opacity-50" disabled>
+          <ChevronLeft className="size-4" />
+        </Button>
+        <Button variant="outline" size="sm" className="size-8 p-0">
+          {PAGINATION_FIRST_PAGE}
+        </Button>
+        <Button variant="ghost" size="icon" className="size-8 opacity-50" disabled>
+          <ChevronRight className="size-4" />
+        </Button>
+      </div>
+    </div>
+  )
+}

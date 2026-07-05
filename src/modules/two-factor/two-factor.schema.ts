@@ -3,18 +3,24 @@ import { boolean, integer, pgTable, timestamp, uniqueIndex, uuid, varchar } from
 
 import { user } from "~/src/modules/user/user.schema"
 
+const DEFAULT_FAILED_VERIFICATION_COUNT = 0
+
 export const twoFactor = pgTable(
   "two_factor",
   {
     backupCodes: varchar("backup_codes", { length: 8192 }).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    failedVerificationCount: integer("failed_verification_count").default(0).notNull(),
+    failedVerificationCount: integer("failed_verification_count").default(DEFAULT_FAILED_VERIFICATION_COUNT).notNull(),
     id: uuid("id").primaryKey(),
     lockedUntil: timestamp("locked_until", { withTimezone: true }),
     secret: varchar("secret", { length: 1024 }).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(
+        () =>
+          /* @__PURE__ */
+          new Date(),
+      )
       .notNull(),
     userId: uuid("user_id")
       .notNull()
