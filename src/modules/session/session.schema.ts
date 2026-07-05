@@ -14,7 +14,11 @@ export const session = pgTable(
     token: varchar("token", { length: 16_384 }).notNull().unique(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .$onUpdate(
+        () =>
+          /* @__PURE__ */
+          new Date(),
+      )
       .notNull(),
     userAgent: varchar("user_agent", { length: 4096 }),
     userId: uuid("user_id")

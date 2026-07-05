@@ -19,6 +19,9 @@ import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 import * as schema from "~/src/integrations/drizzle-orm/drizzle.schemas"
 import { redis } from "~/src/integrations/redis/redis.config"
 
+const INITIAL_COUNTER_VALUE = 1
+const MIN_TTL_SECONDS = 0
+
 const MAX_SIGNUP_ATTEMPTS = 3
 const MAX_SIGNIN_ATTEMPTS = 5
 const MAX_FORGET_PASSWORD_ATTEMPTS = 3
@@ -90,22 +93,20 @@ export const auth = betterAuth({
     delete: async (key) => {
       await redis.del(key)
     },
-    get: async (key) => {
-      return await redis.get<string>(key)
-    },
-    getAndDelete: async (key) => {
-      return await redis.getdel<string>(key)
-    },
+    get: (key) => redis.get<string>(key),
+    getAndDelete: (key) => redis.getdel<string>(key),
     increment: async (key, ttl) => {
       const count = await redis.incr(key)
-      if (count === 1 && ttl !== undefined && ttl > 0) {
+      if (count === INITIAL_COUNTER_VALUE && ttl !== undefined && ttl > MIN_TTL_SECONDS) {
         await redis.expire(key, ttl)
       }
       return count
     },
     set: async (key, value, ttl) => {
-      if (ttl === undefined || ttl <= 0) {
-        if (ttl !== undefined && ttl <= 0) await redis.del(key)
+      if (ttl === undefined || ttl <= MIN_TTL_SECONDS) {
+        if (ttl !== undefined && ttl <= MIN_TTL_SECONDS) {
+          await redis.del(key)
+        }
         return
       }
       await redis.set(key, value, { ex: ttl })

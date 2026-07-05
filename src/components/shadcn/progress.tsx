@@ -40,7 +40,7 @@ function ProgressLabel({ className, ...props }: Readonly<ProgressPrimitive.Label
 function ProgressValue({ className, ...props }: Readonly<ProgressPrimitive.Value.Props>): JSX.Element {
   return (
     <ProgressPrimitive.Value
-      className={cn("ml-auto text-muted-foreground text-xs tabular-nums", className)}
+      className={cn("ml-auto text-xs text-muted-foreground tabular-nums", className)}
       data-slot="progress-value"
       {...props}
     />

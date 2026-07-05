@@ -36,15 +36,15 @@ Smarter, cleaner, more robust and more powerful than ever. This release brings w
 
 ## Tech stack
 
-| Area | Technologies |
-| --- | --- |
-| Framework & API | [Next.js](https://nextjs.org), [Hono](https://hono.dev) |
-| Auth | [Better Auth](https://better-auth.com) |
-| Data | [Drizzle ORM](https://orm.drizzle.team), [Neon Postgres](https://neon.tech) |
-| UI & forms | [TanStack Query](https://tanstack.com/query/latest), [TanStack Table](https://tanstack.com/table/latest), [React Hook Form](https://react-hook-form.com), [Zod](https://zod.dev), [Tailwind CSS](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com) |
-| Infra & integrations | [Amazon S3](https://aws.amazon.com/s3), [Next-Intl](https://next-intl.dev), [Nuqs](https://nuqs.47ng.com), [Stripe](https://stripe.com), [Resend](https://resend.com), [OpenAI](https://openai.com) |
-| Docs & content | [Fumadocs](https://fumadocs.dev), [Scalar](https://scalar.com), [Content Collections](https://content-collections.dev) |
-| Language | [TypeScript](https://typescriptlang.org) |
+| Area                 | Technologies                                                                                                                                                                                                                                                  |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework & API      | [Next.js](https://nextjs.org), [Hono](https://hono.dev)                                                                                                                                                                                                       |
+| Auth                 | [Better Auth](https://better-auth.com)                                                                                                                                                                                                                        |
+| Data                 | [Drizzle ORM](https://orm.drizzle.team), [Neon Postgres](https://neon.tech)                                                                                                                                                                                   |
+| UI & forms           | [TanStack Query](https://tanstack.com/query/latest), [TanStack Table](https://tanstack.com/table/latest), [React Hook Form](https://react-hook-form.com), [Zod](https://zod.dev), [Tailwind CSS](https://tailwindcss.com), [shadcn/ui](https://ui.shadcn.com) |
+| Infra & integrations | [Amazon S3](https://aws.amazon.com/s3), [Next-Intl](https://next-intl.dev), [Nuqs](https://nuqs.47ng.com), [Stripe](https://stripe.com), [Resend](https://resend.com), [OpenAI](https://openai.com)                                                           |
+| Docs & content       | [Fumadocs](https://fumadocs.dev), [Scalar](https://scalar.com), [Content Collections](https://content-collections.dev)                                                                                                                                        |
+| Language             | [TypeScript](https://typescriptlang.org)                                                                                                                                                                                                                      |
 
 ## What’s new in 2.0
 

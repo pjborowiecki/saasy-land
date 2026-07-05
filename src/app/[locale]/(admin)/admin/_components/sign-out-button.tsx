@@ -1,6 +1,6 @@
 "use client"
 
-import { useTransition } from "react"
+import { useCallback, useTransition } from "react"
 
 import { Loader2, LogOut } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -9,7 +9,7 @@ import { toast } from "sonner"
 import { CONSTANTS } from "~/src/constants"
 
 import { authClient } from "~/src/integrations/better-auth/auth._client"
-import { AUTH_ERRORS } from "~/src/integrations/better-auth/auth.errors"
+import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { Button } from "~/src/components/shadcn/button"
@@ -20,13 +20,12 @@ export function SignOutButton() {
   const router = useRouter()
   const t = useTranslations()
 
-  function handleSignout() {
+  const handleSignout = useCallback(() => {
     startTransition(async () => {
       await authClient.signOut({
         fetchOptions: {
           onError: (ctx) => {
-            const key = AUTH_ERRORS[ctx.error.code as keyof typeof AUTH_ERRORS] ?? AUTH_ERRORS.UNKNOWN_ERROR
-            toast.error(t(`auth.errors.${key}`))
+            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: () => {
             toast.success(t("admin.components.signOutButton.success"))
@@ -35,7 +34,7 @@ export function SignOutButton() {
         },
       })
     })
-  }
+  }, [router, t])
 
   return (
     <Button

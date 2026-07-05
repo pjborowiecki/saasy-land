@@ -18,7 +18,7 @@ export function GithubInfo({ owner, repo, className, ...rest }: Readonly<GithubI
       rel="noreferrer noopener"
       href={`https://github.com/${owner}/${repo}`}
       className={cn(
-        "flex flex-col gap-1.5 rounded-lg p-2 text-fd-foreground/80 text-sm transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground",
+        "flex flex-col gap-1.5 rounded-lg p-2 text-sm text-fd-foreground/80 transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground",
         className,
       )}
       {...rest}

@@ -6,7 +6,7 @@ node_modules/
 opensrc/
 graphify-out/
 .source/
-.husky/
+.vite-hooks/
 e2e/
 test-results/
 playwright-report/
@@ -15,9 +15,8 @@ coverage/
 .DS_Store
 *.tsbuildinfo
 .bun-cache/
-.biome-cache/
 playwright.config.ts
-vitest.config.ts
+vite.config.ts
 # Markdown & Docs
 *.md
 AGENTS.md

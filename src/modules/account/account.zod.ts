@@ -6,7 +6,7 @@ import { account } from "~/src/modules/account/account.schema"
 const { createSelectSchema, createInsertSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
 
 export const accountZodSchemas = {
-  select: createSelectSchema(account),
   insert: createInsertSchema(account),
+  select: createSelectSchema(account),
   update: createUpdateSchema(account),
 }

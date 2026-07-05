@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 
 const MOBILE_BREAKPOINT = 768
+const MOBILE_MEDIA_OFFSET = 1
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined)
+  const [isMobile, setIsMobile] = useState<boolean | undefined>()
 
   useEffect(function subscribeToMobileBreakpointChanges() {
-    const mql = globalThis.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
+    const mql = globalThis.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - MOBILE_MEDIA_OFFSET}px)`)
 
     function syncIsMobileFromViewport() {
       setIsMobile(globalThis.innerWidth < MOBILE_BREAKPOINT)
@@ -20,5 +21,5 @@ export function useIsMobile() {
     }
   }, [])
 
-  return !!isMobile
+  return Boolean(isMobile)
 }

@@ -25,28 +25,28 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
 type CarouselOptions = UseCarouselParameters[0]
 type CarouselPlugin = UseCarouselParameters[1]
 
-type CarouselProps = {
-  opts?: CarouselOptions
-  plugins?: CarouselPlugin
-  orientation?: "horizontal" | "vertical"
-  setApi?: (api: CarouselApi) => void
+interface CarouselProps {
+  opts?: CarouselOptions | undefined
+  plugins?: CarouselPlugin | undefined
+  orientation?: "horizontal" | "vertical" | undefined
+  setApi?: ((api: CarouselApi) => void) | undefined
 }
 
-type CarouselContextProps = {
+interface CarouselContextProps extends CarouselProps {
   carouselRef: ReturnType<typeof useEmblaCarousel>[0]
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
-} & CarouselProps
+}
 
-const CarouselContext = createContext<CarouselContextProps | null>(null)
+const CarouselContext = createContext<CarouselContextProps | undefined>(undefined)
 
 function useCarousel() {
   const context = useContext(CarouselContext)
 
-  if (!context) {
+  if (context === undefined) {
     throw new Error("useCarousel must be used within a <Carousel />")
   }
 
@@ -74,10 +74,12 @@ function Carousel({
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
 
-  const onSelect = useCallback((api: CarouselApi) => {
-    if (!api) return
-    setCanScrollPrev(api.canScrollPrev())
-    setCanScrollNext(api.canScrollNext())
+  const onSelect = useCallback((carouselApi: CarouselApi) => {
+    if (carouselApi === undefined) {
+      return
+    }
+    setCanScrollPrev(carouselApi.canScrollPrev())
+    setCanScrollNext(carouselApi.canScrollNext())
   }, [])
 
   const scrollPrev = useCallback(() => {
@@ -103,7 +105,9 @@ function Carousel({
 
   useEffect(
     function publishCarouselApi() {
-      if (!api || !setApi) return
+      if (!api || !setApi) {
+        return
+      }
       setApi(api)
     },
     [api, setApi],
@@ -111,7 +115,9 @@ function Carousel({
 
   useEffect(
     function syncCarouselScrollState() {
-      if (!api) return
+      if (!api) {
+        return
+      }
       onSelect(api)
       api.on("reInit", onSelect)
       api.on("select", onSelect)
@@ -128,16 +134,16 @@ function Carousel({
 
   const contextValue = useMemo<CarouselContextProps>(
     () => ({
+      api,
+      canScrollNext,
+      canScrollPrev,
       carouselRef,
-      api: api,
       opts,
       orientation: resolvedOrientation,
-      scrollPrev,
-      scrollNext,
-      canScrollPrev,
-      canScrollNext,
-      setApi,
       plugins,
+      scrollNext,
+      scrollPrev,
+      setApi,
     }),
     [carouselRef, api, opts, resolvedOrientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext, setApi, plugins],
   )

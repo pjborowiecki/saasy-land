@@ -15,19 +15,21 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   const t = await getTranslations({ locale, namespace: "premiumPage" })
 
   return {
-    title: t("title"),
     description: t("description"),
+    title: t("title"),
   }
 }
 
-export function generateStaticParams(): Array<{ locale: Locale }> {
+export function generateStaticParams(): { locale: Locale }[] {
   return routing.locales.map((locale) => ({ locale }))
 }
 
 export default async function PremiumPage({ params }: Readonly<PageProps<"/[locale]/premium">>): Promise<JSX.Element> {
   const { locale } = await params
 
-  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) notFound()
+  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) {
+    notFound()
+  }
 
   const t = await getTranslations({ locale, namespace: "premiumPage" })
 

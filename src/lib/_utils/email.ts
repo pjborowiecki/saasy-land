@@ -24,16 +24,16 @@ export async function sendEmail({ from, react, subject, to }: Readonly<SendEmail
     const { data, error } = await resend.emails.send({ from: fromEmail, react, subject, to })
 
     if (error) {
-      return { success: false, error: error.message }
+      return { error: error.message, success: false }
     }
 
     if (!data?.id) {
-      return { success: false, error: "Resend returned no email id" }
+      return { error: "Resend returned no email id", success: false }
     }
 
-    return { success: true, id: data.id }
-  } catch (cause) {
-    const message = cause instanceof Error ? cause.message : "Unknown error sending email"
-    return { success: false, error: message }
+    return { id: data.id, success: true }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error sending email"
+    return { error: message, success: false }
   }
 }

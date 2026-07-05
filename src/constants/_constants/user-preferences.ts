@@ -1,7 +1,7 @@
 const TIMEZONES = {
-  UTC: "UTC",
-  AMERICA_NEW_YORK: "America/New_York",
   AMERICA_LOS_ANGELES: "America/Los_Angeles",
+  AMERICA_NEW_YORK: "America/New_York",
+  UTC: "UTC",
 } as const
 
 const TIMEZONE_VALUES = [TIMEZONES.UTC, TIMEZONES.AMERICA_NEW_YORK, TIMEZONES.AMERICA_LOS_ANGELES] as const

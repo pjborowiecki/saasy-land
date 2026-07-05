@@ -27,12 +27,12 @@ export const ac = createAccessControl(PERMISSIONS_STATEMENTS)
 export const ROLES_CONFIG = {
   [ROLES.ADMIN]: ac.newRole({
     ...APP_GRANTS,
-    user: [...adminAc.statements.user],
     session: [...adminAc.statements.session],
+    user: [...adminAc.statements.user],
   }),
   [ROLES.CUSTOMER]: ac.newRole({
     ...EMPTY_APP_GRANTS,
-    user: [],
     session: [],
+    user: [],
   }),
 } as const

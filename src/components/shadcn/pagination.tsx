@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server"
 
 import { cn } from "~/src/lib/utils"
 
-import { Button } from "~/src/components/shadcn/button"
+import { PaginationLink } from "~/src/components/shadcn/pagination-link"
 
 async function Pagination({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }): Promise<JSX.Element> {
   const t = await getTranslations("components.shadcn.pagination")
@@ -26,23 +26,6 @@ function PaginationContent({ className, ...props }: ComponentProps<"ul">): JSX.E
 
 function PaginationItem({ ...props }: ComponentProps<"li">): JSX.Element {
   return <li data-slot="pagination-item" {...props} />
-}
-
-type PaginationLinkProps = {
-  isActive?: boolean
-} & Pick<ComponentProps<typeof Button>, "size"> &
-  ComponentProps<"a">
-
-function PaginationLink({ className, isActive, size = "icon", ...props }: PaginationLinkProps): JSX.Element {
-  return (
-    <Button
-      variant={isActive ? "outline" : "ghost"}
-      size={size}
-      className={cn(className)}
-      nativeButton={false}
-      render={<a aria-current={isActive ? "page" : undefined} data-slot="pagination-link" data-active={isActive} {...props} />}
-    />
-  )
 }
 
 async function PaginationPrevious({
@@ -93,4 +76,5 @@ async function PaginationEllipsis({ className, srLabel, ...props }: ComponentPro
   )
 }
 
-export { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious }
+export { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationNext, PaginationPrevious }
+export { PaginationLink, type PaginationLinkProps } from "~/src/components/shadcn/pagination-link"

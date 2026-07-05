@@ -10,6 +10,8 @@ import { cn } from "~/src/lib/utils"
 
 import { Button } from "~/src/components/shadcn/button"
 
+const SHEET_CLOSE_BUTTON_RENDER = <Button variant="ghost" className="absolute top-3 right-3" size="icon-sm" />
+
 function Sheet({ ...props }: Readonly<SheetPrimitive.Root.Props>): JSX.Element {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
@@ -58,17 +60,14 @@ function SheetContent({
         data-slot="sheet-content"
         data-side={side}
         className={cn(
-          "fixed z-50 flex flex-col bg-popover bg-clip-padding text-popover-foreground text-xs/relaxed shadow-lg transition duration-200 ease-in-out data-[side=left]:data-ending-style:-translate-x-10 data-[side=left]:data-starting-style:-translate-x-10 data-[side=right]:data-ending-style:translate-x-10 data-[side=right]:data-starting-style:translate-x-10 data-[side=bottom]:data-ending-style:translate-y-10 data-[side=bottom]:data-starting-style:translate-y-10 data-[side=top]:data-ending-style:-translate-y-10 data-[side=top]:data-starting-style:-translate-y-10 data-[side=bottom]:inset-x-0 data-[side=top]:inset-x-0 data-[side=left]:inset-y-0 data-[side=right]:inset-y-0 data-[side=top]:top-0 data-[side=right]:right-0 data-[side=bottom]:bottom-0 data-[side=left]:left-0 data-[side=bottom]:h-auto data-[side=left]:h-full data-[side=right]:h-full data-[side=top]:h-auto data-[side=left]:w-3/4 data-[side=right]:w-3/4 data-[side=bottom]:border-t data-[side=left]:border-r data-[side=top]:border-b data-[side=right]:border-l data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm",
+          "fixed z-50 flex flex-col bg-popover bg-clip-padding text-xs/relaxed text-popover-foreground shadow-lg transition duration-200 ease-in-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=bottom]:data-ending-style:translate-y-10 data-[side=bottom]:data-starting-style:translate-y-10 data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-r data-[side=left]:data-ending-style:-translate-x-10 data-[side=left]:data-starting-style:-translate-x-10 data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-l data-[side=right]:data-ending-style:translate-x-10 data-[side=right]:data-starting-style:translate-x-10 data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=top]:data-ending-style:-translate-y-10 data-[side=top]:data-starting-style:-translate-y-10 data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm",
           className,
         )}
         {...props}
       >
         {children}
         {showCloseButton && (
-          <SheetPrimitive.Close
-            data-slot="sheet-close"
-            render={<Button variant="ghost" className="absolute top-3 right-3" size="icon-sm" />}
-          >
+          <SheetPrimitive.Close data-slot="sheet-close" render={SHEET_CLOSE_BUTTON_RENDER}>
             <XIcon />
             <span className="sr-only">{t("close")}</span>
           </SheetPrimitive.Close>
@@ -87,14 +86,14 @@ function SheetFooter({ className, ...props }: ComponentProps<"div">): JSX.Elemen
 }
 
 function SheetTitle({ className, ...props }: Readonly<SheetPrimitive.Title.Props>): JSX.Element {
-  return <SheetPrimitive.Title data-slot="sheet-title" className={cn("font-medium text-foreground text-sm", className)} {...props} />
+  return <SheetPrimitive.Title data-slot="sheet-title" className={cn("text-sm font-medium text-foreground", className)} {...props} />
 }
 
 function SheetDescription({ className, ...props }: Readonly<SheetPrimitive.Description.Props>): JSX.Element {
   return (
     <SheetPrimitive.Description
       data-slot="sheet-description"
-      className={cn("text-muted-foreground text-xs/relaxed", className)}
+      className={cn("text-xs/relaxed text-muted-foreground", className)}
       {...props}
     />
   )

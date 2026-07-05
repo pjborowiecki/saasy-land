@@ -17,7 +17,7 @@ function BreadcrumbList({ className, ...props }: ComponentProps<"ol">): JSX.Elem
   return (
     <ol
       data-slot="breadcrumb-list"
-      className={cn("wrap-break-word flex flex-wrap items-center gap-1.5 text-muted-foreground text-xs", className)}
+      className={cn("flex flex-wrap items-center gap-1.5 text-xs wrap-break-word text-muted-foreground", className)}
       {...props}
     />
   )

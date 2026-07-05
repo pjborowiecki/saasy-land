@@ -7,22 +7,39 @@ import { useTranslations } from "next-intl"
 
 import { Link, usePathname } from "~/src/integrations/next-intl/i18n.navigation"
 
-export function AdminBreadcrumbs(): JSX.Element | null {
+import { EMPTY_PATH_PARTS_LENGTH } from "~/src/lib/admin/constants"
+
+const ADMIN_PATH_INDEX = 0
+const ADMIN_ROUTE_INDEX = 1
+const MIN_ADMIN_PATH_PARTS = 1
+
+const routeMappings: Record<string, { group: string; link: string }> = {
+  analytics: { group: "overview", link: "analytics" },
+  blog: { group: "content", link: "blog" },
+  "content-access": { group: "offerings", link: "contentAccess" },
+  "landing-page": { group: "content", link: "landingPage" },
+  payments: { group: "administration", link: "payments" },
+  "pricing-models": { group: "offerings", link: "pricingModels" },
+  products: { group: "offerings", link: "products" },
+  sessions: { group: "administration", link: "activeSessions" },
+  settings: { group: "administration", link: "settings" },
+  users: { group: "administration", link: "userManagement" },
+}
+
+export function AdminBreadcrumbs(): JSX.Element | undefined {
   const pathname = usePathname()
   const t = useTranslations("admin.sidebar")
 
-  // This is a simple heuristic based on the sidebar config to generate breadcrumbs.
-  // In a real app, you might map route paths to specific breadcrumb arrays.
-
   const pathParts = pathname.split("/").filter(Boolean)
-  if (pathParts.length === 0 || pathParts[0] !== "admin") return null
+  if (pathParts.length === EMPTY_PATH_PARTS_LENGTH || pathParts[ADMIN_PATH_INDEX] !== "admin") {
+    return undefined
+  }
 
-  // If we're at /admin, maybe just show Home
-  if (pathParts.length === 1) {
+  if (pathParts.length === MIN_ADMIN_PATH_PARTS) {
     return (
-      <div className="hidden items-center gap-2 font-medium text-muted-foreground text-sm sm:flex">
+      <div className="hidden items-center gap-2 text-sm font-medium text-muted-foreground sm:flex">
         <Link href="/admin" className="transition-colors hover:text-foreground">
-          {"Home"}
+          Home
         </Link>
         <ChevronRight className="size-3.5" />
         <span className="cursor-default">{t("groups.overview")}</span>
@@ -32,45 +49,29 @@ export function AdminBreadcrumbs(): JSX.Element | null {
     )
   }
 
-  // /admin/products -> "Offerings" -> "Products"
-  // For now we'll do a simple mapping
-  const routeMappings: Record<string, { group: string; link: string }> = {
-    products: { group: "offerings", link: "products" },
-    "pricing-models": { group: "offerings", link: "pricingModels" },
-    "content-access": { group: "offerings", link: "contentAccess" },
-    blog: { group: "content", link: "blog" },
-    "landing-page": { group: "content", link: "landingPage" },
-    users: { group: "administration", link: "userManagement" },
-    sessions: { group: "administration", link: "activeSessions" },
-    payments: { group: "administration", link: "payments" },
-    settings: { group: "administration", link: "settings" },
-    analytics: { group: "overview", link: "analytics" },
-  }
-
-  const currentPath = pathParts[1]
-  const mapping = currentPath ? routeMappings[currentPath] : null
-  const action = pathParts[2]
+  const [currentPath, action] = pathParts.slice(ADMIN_ROUTE_INDEX)
+  const mapping = currentPath === undefined ? undefined : routeMappings[currentPath]
 
   return (
-    <div className="hidden items-center gap-2 font-medium text-muted-foreground text-sm sm:flex">
+    <div className="hidden items-center gap-2 text-sm font-medium text-muted-foreground sm:flex">
       <Link href="/admin" className="transition-colors hover:text-foreground">
-        {"Home"}
+        Home
       </Link>
 
-      {mapping && (
+      {mapping === undefined ? undefined : (
         <>
           <ChevronRight className="size-3.5" />
           <span className="cursor-default">{t(`groups.${mapping.group}`)}</span>
           <ChevronRight className="size-3.5" />
-          {action ? (
+          {action === undefined ? (
+            <span className="text-foreground">{t(`links.${mapping.link}`)}</span>
+          ) : (
             <Link href={`/admin/${currentPath}`} className="transition-colors hover:text-foreground">
               {t(`links.${mapping.link}`)}
             </Link>
-          ) : (
-            <span className="text-foreground">{t(`links.${mapping.link}`)}</span>
           )}
 
-          {action && (
+          {action === undefined ? undefined : (
             <>
               <ChevronRight className="size-3.5" />
               <span className="text-foreground capitalize">{action}</span>

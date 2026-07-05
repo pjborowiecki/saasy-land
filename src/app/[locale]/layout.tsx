@@ -24,7 +24,7 @@ import { Toaster } from "~/src/components/shadcn/sonner"
 
 import "~/src/styles/globals.css"
 
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: {
@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export function generateStaticParams(): Array<{ locale: Locale }> {
+export function generateStaticParams(): { locale: Locale }[] {
   return routing.locales.map((locale) => ({ locale }))
 }
 

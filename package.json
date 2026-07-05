@@ -1,11 +1,20 @@
 {
   "name": "saasyland",
-  "description": "",
   "version": "2.0.0",
-  "license": "MIT",
   "private": true,
-  "type": "module",
+  "description": "",
+  "keywords": [
+    "full-stack starter",
+    "full-stack template",
+    "saas boilerplate",
+    "saas starter",
+    "saas template"
+  ],
   "homepage": "https://saasyland.com",
+  "bugs": {
+    "url": "https://github.com/pjborowiecki/saasyland.com/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "Piotr Borowiecki",
     "email": "hello@pjborowiecki.com",
@@ -15,21 +24,12 @@
     "type": "git",
     "url": "https://github.com/pjborowiecki/saasyland.com.git"
   },
-  "bugs": {
-    "url": "https://github.com/pjborowiecki/saasyland.com/issues"
-  },
-  "keywords": [
-    "saas starter",
-    "saas template",
-    "saas boilerplate",
-    "full-stack template",
-    "full-stack starter"
-  ],
+  "type": "module",
   "scripts": {
     "build": "bun run --bun next build",
     "dev": "bun run --bun next dev",
     "start": "bun run --bun next start",
-    "clean": "rm -rf .next .source tsconfig.tsbuildinfo coverage playwright-report test-results blob-report .biome-cache .bun-cache",
+    "clean": "rm -rf .next .source tsconfig.tsbuildinfo coverage playwright-report test-results blob-report .bun-cache",
     "clean:deep": "bun run clean && rm -rf node_modules",
     "clean:hardcore": "bun run clean:deep && rm -rf bun.lock skills-lock.json",
     "db:generate": "bun --env-file=.env.local run drizzle-kit generate --config=./src/integrations/drizzle-orm/drizzle.config.ts",
@@ -37,18 +37,23 @@
     "db:push": "bun --env-file=.env.local run drizzle-kit push --config=./src/integrations/drizzle-orm/drizzle.config.ts",
     "db:introspect": "bun --env-file=.env.local run drizzle-kit introspect --config=./src/integrations/drizzle-orm/drizzle.config.ts",
     "db:studio": "bun --env-file=.env.local run drizzle-kit studio --config=./src/integrations/drizzle-orm/drizzle.config.ts",
-    "check": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest --watch",
-    "test:coverage": "vitest run --coverage",
+    "check": "vp check && bun run check:i18n",
+    "check:fix": "vp check --fix && bun run check:i18n",
+    "check:i18n": "bun scripts/check-i18n.ts",
+    "check:pre-commit": "vp staged && bun run check:i18n",
+    "fmt": "vp fmt",
+    "fmt:check": "vp fmt --check",
+    "lint": "vp lint",
+    "test": "vp test run",
+    "test:watch": "vp test",
+    "test:coverage": "vp test run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:smoke": "playwright test e2e/smoke.spec.ts --project=chromium",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
-    "format": "biome check --write .",
-    "format:check": "biome check .",
-    "lint": "biome check",
-    "prepare": "husky",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "prepare": "vp config --no-agent",
     "typegen": "bun run --bun next typegen",
     "postinstall": "bun scripts/postinstall.ts",
     "deploy:prod": "bunx vercel deploy --prod -y",
@@ -101,32 +106,29 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.2",
-    "@commitlint/cli": "^21.2.0",
-    "@commitlint/config-conventional": "^21.2.0",
+    "@lingual/i18n-check": "^0.8.14",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4.3.2",
     "@tailwindcss/typography": "^0.5.20",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
     "@types/bun": "^1.3.14",
     "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^26.1.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@voidzero-dev/vite-plus-core": "^0.2.2",
     "babel-plugin-react-compiler": "1.0.0",
-    "conventional-changelog-conventionalcommits": "^10.2.0",
     "drizzle-kit": "^0.31.10",
-    "husky": "^9.1.7",
-    "jsdom": "^29.1.1",
     "shadcn": "^4.13.0",
     "tailwindcss": "^4.3.2",
     "tw-animate-css": "^1.4.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vite-plus": "^0.2.2"
   },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vitest": "4.1.9"
+  },
+  "packageManager": "bun@1.3.13",
   "ignoreScripts": [
     "sharp",
     "unrs-resolver",
@@ -136,6 +138,5 @@
     "sharp",
     "unrs-resolver",
     "next"
-  ],
-  "packageManager": "bun@1.3.9"
+  ]
 }

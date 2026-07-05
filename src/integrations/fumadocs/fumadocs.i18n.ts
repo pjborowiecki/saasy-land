@@ -5,37 +5,37 @@ import { CONSTANTS } from "~/src/constants"
 
 export const i18n = defineI18n({
   defaultLanguage: CONSTANTS.I18N.DEFAULT_LOCALE,
-  languages: [...CONSTANTS.I18N.LOCALES],
   hideLocale: "always",
+  languages: [...CONSTANTS.I18N.LOCALES],
   parser: "dot",
 })
 
 export const localeUiConfig = {
   "en-US": {
+    chooseLanguage: "Choose a language",
+    chooseTheme: "Theme",
     displayName: "English",
+    editOnGithub: "Edit on GitHub",
+    lastUpdate: "Last updated on",
+    nextPage: "Next page",
+    previousPage: "Previous page",
     search: "Search",
     searchNoResult: "No results found",
     toc: "On this page",
     tocNoHeadings: "No headings",
-    lastUpdate: "Last updated on",
-    chooseLanguage: "Choose a language",
-    nextPage: "Next page",
-    previousPage: "Previous page",
-    chooseTheme: "Theme",
-    editOnGithub: "Edit on GitHub",
   },
   "pl-PL": {
+    chooseLanguage: "Wybierz język",
+    chooseTheme: "Motyw",
     displayName: "Polski",
+    editOnGithub: "Edytuj na GitHubie",
+    lastUpdate: "Ostatnia aktualizacja",
+    nextPage: "Następna strona",
+    previousPage: "Poprzednia strona",
     search: "Szukaj",
     searchNoResult: "Brak wyników",
     toc: "Na tej stronie",
     tocNoHeadings: "Brak nagłówków",
-    lastUpdate: "Ostatnia aktualizacja",
-    chooseLanguage: "Wybierz język",
-    nextPage: "Następna strona",
-    previousPage: "Poprzednia strona",
-    chooseTheme: "Motyw",
-    editOnGithub: "Edytuj na GitHubie",
   },
 }
 

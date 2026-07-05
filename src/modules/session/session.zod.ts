@@ -6,7 +6,7 @@ import { session } from "~/src/modules/session/session.schema"
 const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
 
 export const sessionZodSchemas = {
-  select: createSelectSchema(session),
   insert: createInsertSchema(session),
+  select: createSelectSchema(session),
   update: createUpdateSchema(session),
 }
