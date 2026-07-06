@@ -3,7 +3,7 @@
 import { type JSX, useCallback } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -11,13 +11,12 @@ import { getSession, signUp } from "~/src/integrations/better-auth/auth._client"
 import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
 import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { signUpWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
-import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { useConfetti } from "~/src/hooks/use-confetti"
 
 import { PasswordRequirements } from "~/src/app/[locale]/(auth)/auth/_components/password-requirements"
-import { AUTH_FORM_IDS, authFormElementId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
-import { useFormSubmitHandler } from "~/src/app/[locale]/(auth)/auth/_utils/use-form-submit-handler"
+import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 import {
   SignUpFormFields,
   type SignUpFormValues,
@@ -28,11 +27,10 @@ export function SignUpWithPasswordForm(): JSX.Element {
   const { triggerConfetti } = useConfetti()
 
   const router = useRouter()
-  const t = useTranslations("pages.auth.sign-up")
-  const tAuth = useTranslations("auth")
-  const tValidations = useTranslations("auth.validations")
+  const locale = useLocale()
+  const t = useTranslations()
 
-  const formSchema = signUpWithPasswordSchema(tValidations)
+  const formSchema = signUpWithPasswordSchema((key, params) => t(`auth.validations.${key}`, params))
   const form = useForm<SignUpFormValues>({
     defaultValues: { confirmPassword: "", email: "", name: "", password: "" },
     mode: "onChange",
@@ -45,27 +43,30 @@ export function SignUpWithPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
+            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: async () => {
             triggerConfetti()
-            toast.success(t("form.success"))
+            toast.success(t("pages.auth.sign-up.form.success"))
             const { data: session } = await getSession()
-            router.push(getPostAuthRedirect(session?.user.role))
+            router.push(
+              getPathname({
+                href: getPostAuthRedirect(session?.user.role),
+                locale,
+              }),
+            )
           },
         },
         name: data.name,
         password: data.password,
       })
     },
-    [router, t, tAuth, triggerConfetti],
+    [locale, router, t, triggerConfetti],
   )
-
-  const handleFormSubmit = useFormSubmitHandler(form, onSubmit)
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={authFormElementId(AUTH_FORM_IDS.SIGN_UP)} onSubmit={handleFormSubmit}>
+      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.SIGN_UP}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <SignUpFormFields />
         <PasswordRequirements />
         <SignUpSubmitButton />

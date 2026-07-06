@@ -10,7 +10,7 @@ export function usePasswordRules(): {
   hasSpecialChar: boolean
 } {
   const { control } = useFormContext<{ password?: string }>()
-  const password = useWatch({ control, defaultValue: "", name: "password" }) ?? ""
+  const password = useWatch({ control, name: "password" }) ?? ""
 
   return {
     hasSpecialChar: SPECIAL_CHAR_PATTERN.test(password),

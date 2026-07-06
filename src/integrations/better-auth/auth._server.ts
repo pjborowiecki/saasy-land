@@ -114,7 +114,7 @@ export const auth = betterAuth({
   },
   secret: env.AUTH_SECRET,
   session: {
-    cookieCache: { enabled: true, maxAge: COOKIE_CACHE_MAX_AGE_IN_SECONDS },
+    cookieCache: { enabled: true, maxAge: COOKIE_CACHE_MAX_AGE_IN_SECONDS, version: "2" },
     storeSessionInDatabase: true,
   },
   socialProviders: {

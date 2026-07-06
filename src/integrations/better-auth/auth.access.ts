@@ -7,14 +7,21 @@ import { ROLES_CONFIG } from "~/src/integrations/better-auth/auth.permissions"
 export const ADMIN_PANEL_ROLES = [CONSTANTS.PERMISSIONS.ROLES.ADMIN] as const
 
 const ADMIN_PANEL_ROLE_SET: ReadonlySet<string> = new Set(ADMIN_PANEL_ROLES)
-const EMPTY_ROLE_LENGTH = 0
 
-export function hasAdminAccess(role: string | null | undefined) {
-  if (role === null || role === undefined || role.length === EMPTY_ROLE_LENGTH) {
-    return false
+/** Better Auth admin plugin stores one or more comma-separated roles on the user record. */
+export function parseUserRoles(role?: string | null): readonly string[] {
+  if (role === undefined || role === null || role.length === 0) {
+    return []
   }
 
-  return ADMIN_PANEL_ROLE_SET.has(role)
+  return role
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+}
+
+export function hasAdminAccess(role?: string | null) {
+  return parseUserRoles(role).some((entry) => ADMIN_PANEL_ROLE_SET.has(entry))
 }
 
 export function getPostAuthRedirect(role: string | null | undefined) {

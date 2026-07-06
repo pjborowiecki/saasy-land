@@ -6,7 +6,3 @@ export const AUTH_FORM_IDS = {
 } as const
 
 export type AuthFormId = (typeof AUTH_FORM_IDS)[keyof typeof AUTH_FORM_IDS]
-
-export function authFormElementId(formId: AuthFormId): `${AuthFormId}-form` {
-  return `${formId}-form`
-}

@@ -1,7 +1,5 @@
-const EMPTY_COLLECTION_LENGTH = 0
-
-export function isBlogIndex(slug: string[] | undefined): boolean {
-  return slug === undefined || slug.length === EMPTY_COLLECTION_LENGTH
+export function isBlogIndex(slug?: string[]): boolean {
+  return slug === undefined || slug.length === 0
 }
 
 export function summaryFromFrontmatter(data: { excerpt?: string | undefined; description?: string | undefined }): string | undefined {

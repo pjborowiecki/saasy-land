@@ -1,6 +1,6 @@
 "use client"
 
-import type { JSX } from "react"
+import type { ComponentProps, JSX } from "react"
 
 import { ChevronsUpDown, User2 } from "lucide-react"
 
@@ -11,11 +11,16 @@ interface UserWidgetTriggerProps {
   readonly name: string
 }
 
-export function UserWidgetTrigger({ email, name }: UserWidgetTriggerProps): JSX.Element {
+export function UserWidgetTrigger({
+  email,
+  name,
+  ...props
+}: UserWidgetTriggerProps & ComponentProps<typeof SidebarMenuButton>): JSX.Element {
   return (
     <SidebarMenuButton
       size="lg"
-      className="bg-sidebar-accent/50 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+      className="bg-sidebar-accent/50 data-open:bg-sidebar-accent data-open:text-sidebar-accent-foreground"
+      {...props}
     >
       <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
         <User2 className="size-4" />

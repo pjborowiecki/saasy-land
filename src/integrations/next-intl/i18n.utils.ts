@@ -8,9 +8,9 @@ export type Messages = typeof enMessages
 
 type MessageTree = Record<string, unknown>
 
-function resolveMessagesDir(): string {
-  if (typeof import.meta.dirname === "string") {
-    return join(import.meta.dirname, "messages")
+export function resolveMessagesDir(dirname: string | undefined = import.meta.dirname): string {
+  if (typeof dirname === "string") {
+    return join(dirname, "messages")
   }
 
   return join(process.cwd(), "src/integrations/next-intl/messages")
