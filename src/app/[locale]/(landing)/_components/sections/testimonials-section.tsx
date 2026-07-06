@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server"
 
 import { cn } from "~/src/lib/utils"
 
-import { Avatar, AvatarFallback, AvatarImage } from "~/src/components/shadcn/avatar"
+import { Avatar, AvatarFallback } from "~/src/components/shadcn/avatar"
 import { Card, CardContent, CardHeader } from "~/src/components/shadcn/card"
 
 import { TESTIMONIALS, type Testimonial } from "~/src/data/testimonials"
@@ -13,7 +13,6 @@ function TestimonialAuthor({ item }: { item: Testimonial }): JSX.Element {
   return (
     <div className="flex items-center gap-4">
       <Avatar className="size-12 border-border/50">
-        <AvatarImage alt={item.name} src={item.avatar} />
         <AvatarFallback className={cn("bg-linear-to-tr font-medium text-foreground", item.avatarColor)}>{item.initials}</AvatarFallback>
       </Avatar>
       <div>

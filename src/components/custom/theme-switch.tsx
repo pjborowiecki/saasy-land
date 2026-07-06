@@ -15,9 +15,19 @@ function isThemeValue(value: string | null): value is ThemeValue {
   return value !== null && (THEMES as readonly string[]).includes(value)
 }
 
-export function ThemeSwitch(): JSX.Element {
-  const t = useTranslations("components.custom.theme-switch")
-
+export function ThemeSwitchClient({
+  darkLabel,
+  label,
+  lightLabel,
+  placeholder,
+  systemLabel,
+}: {
+  darkLabel: string
+  label: string
+  lightLabel: string
+  placeholder: string
+  systemLabel: string
+}): JSX.Element {
   const { theme, setTheme } = useTheme()
 
   const handleThemeChange = useCallback(
@@ -41,18 +51,30 @@ export function ThemeSwitch(): JSX.Element {
   return (
     <Select value={theme ?? undefined} onValueChange={handleThemeChange}>
       <SelectTrigger className="w-full capitalize">
-        <SelectValue placeholder={t("placeholder")} />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>{t("label")}</SelectLabel>
-          {THEMES.map((key) => (
-            <SelectItem key={key} value={key}>
-              {t(key)}
-            </SelectItem>
-          ))}
+          <SelectLabel>{label}</SelectLabel>
+          <SelectItem value="light">{lightLabel}</SelectItem>
+          <SelectItem value="dark">{darkLabel}</SelectItem>
+          <SelectItem value="system">{systemLabel}</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
+  )
+}
+
+export function ThemeSwitch(): JSX.Element {
+  const t = useTranslations("components.custom.theme-switch")
+
+  return (
+    <ThemeSwitchClient
+      darkLabel={t("dark")}
+      label={t("label")}
+      lightLabel={t("light")}
+      placeholder={t("placeholder")}
+      systemLabel={t("system")}
+    />
   )
 }

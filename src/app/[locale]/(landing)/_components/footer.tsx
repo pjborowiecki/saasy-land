@@ -1,12 +1,10 @@
-import { Suspense, type JSX } from "react"
+import { type JSX, Suspense } from "react"
 
 import { Rocket } from "lucide-react"
 
 import { CONSTANTS } from "~/src/constants"
 
 import { FooterCopyright } from "~/src/app/[locale]/(landing)/_components/footer-copyright"
-
-const footerCopyrightFallback = <span className="ml-2 text-xs text-muted-foreground">©</span>
 
 export function Footer(): JSX.Element {
   return (
@@ -16,7 +14,7 @@ export function Footer(): JSX.Element {
           <div className="flex items-center gap-2">
             <Rocket className="size-5 text-foreground" />
             <span className="text-sm font-medium text-foreground">{CONSTANTS.APP_NAME}</span>
-            <Suspense fallback={footerCopyrightFallback}>
+            <Suspense>
               <FooterCopyright />
             </Suspense>
           </div>

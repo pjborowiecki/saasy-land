@@ -17,6 +17,7 @@ function resolveMessagesDir(): string {
 }
 
 const MESSAGES_DIR = resolveMessagesDir()
+const localeMessagesCache = new Map<string, Messages>()
 
 function isPlainObject(value: unknown): value is MessageTree {
   return value !== null && typeof value === "object" && !Array.isArray(value)
@@ -77,6 +78,13 @@ export function getLocaleMessagesDir(): string {
 }
 
 export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES_DIR): Messages {
+  const cacheKey = `${messagesDir}:${locale}`
+  const cached = localeMessagesCache.get(cacheKey)
+
+  if (cached !== undefined) {
+    return cached
+  }
+
   const localeDir = join(messagesDir, locale)
   const files = readdirSync(localeDir)
     .filter((file) => file.endsWith(".json"))
@@ -91,5 +99,7 @@ export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES
     messages = deepMergeMessages(messages, nested)
   }
 
-  return assertLocaleMessages(messages, locale)
+  const resolvedMessages = assertLocaleMessages(messages, locale)
+  localeMessagesCache.set(cacheKey, resolvedMessages)
+  return resolvedMessages
 }

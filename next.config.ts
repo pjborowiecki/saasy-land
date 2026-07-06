@@ -5,7 +5,10 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-  experimental: { rootParams: true },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+    rootParams: true,
+  },
   images: {
     remotePatterns: [
       { hostname: "avatars.githubusercontent.com", pathname: "/**", protocol: "https" },
