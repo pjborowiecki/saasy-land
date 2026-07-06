@@ -8,17 +8,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src
 
 const BENEFIT_IMAGE_SIZES = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 
-function BenefitImage({ alt, priority, src }: { alt: string; priority?: boolean; src: string }): JSX.Element {
+function BenefitImage({ alt, src }: { alt: string; src: string }): JSX.Element {
   return (
     <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-2xl border border-border/50 shadow-2xl transition-colors group-hover:border-border">
-      <Image
-        alt={alt}
-        className="object-cover"
-        fill
-        sizes={BENEFIT_IMAGE_SIZES}
-        src={src}
-        {...(priority === true ? { priority: true } : {})}
-      />
+      <Image alt={alt} className="object-cover" fill loading="lazy" sizes={BENEFIT_IMAGE_SIZES} src={src} />
     </div>
   )
 }
@@ -50,7 +43,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <BenefitImage alt={t("cards.timeSaver.imageAlt")} priority src="/images/benefits/time-saver.webp" />
+              <BenefitImage alt={t("cards.timeSaver.imageAlt")} src="/images/benefits/time-saver.webp" />
             </CardContent>
           </Card>
 

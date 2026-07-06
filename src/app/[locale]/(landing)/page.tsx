@@ -3,6 +3,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
+import { LandingSectionSuspense } from "~/src/app/[locale]/(landing)/_components/landing-section-suspense"
 import { BenefitsSection } from "~/src/app/[locale]/(landing)/_components/sections/benefits-section"
 import { ContactSection } from "~/src/app/[locale]/(landing)/_components/sections/contact-section"
 import { FaqSection } from "~/src/app/[locale]/(landing)/_components/sections/faq-section"
@@ -27,13 +28,27 @@ export default function LandingPage(): JSX.Element {
     <>
       <HeroSection />
       <TechSection />
-      <BenefitsSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <PricingSection />
-      <FaqSection />
-      <NewsletterSection />
-      <ContactSection />
+      <LandingSectionSuspense>
+        <BenefitsSection />
+      </LandingSectionSuspense>
+      <LandingSectionSuspense>
+        <FeaturesSection />
+      </LandingSectionSuspense>
+      <LandingSectionSuspense>
+        <TestimonialsSection />
+      </LandingSectionSuspense>
+      <LandingSectionSuspense>
+        <PricingSection />
+      </LandingSectionSuspense>
+      <LandingSectionSuspense>
+        <FaqSection />
+      </LandingSectionSuspense>
+      <LandingSectionSuspense>
+        <NewsletterSection />
+      </LandingSectionSuspense>
+      <LandingSectionSuspense>
+        <ContactSection />
+      </LandingSectionSuspense>
     </>
   )
 }

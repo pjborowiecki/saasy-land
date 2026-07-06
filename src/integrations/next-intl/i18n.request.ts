@@ -1,9 +1,11 @@
+import { cacheLife } from "next/cache"
+
 import { getRequestConfig } from "next-intl/server"
 
 import { getFormats } from "~/src/integrations/next-intl/i18n.formats"
 import { isLocale } from "~/src/integrations/next-intl/i18n.locale"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { loadLocaleMessagesFromDir, type Messages } from "~/src/integrations/next-intl/i18n.utils"
 
 async function resolveRootLocale(): Promise<string | undefined> {
   const rootParamsModule: unknown = await import("next/root-params")
@@ -22,6 +24,13 @@ async function resolveRootLocale(): Promise<string | undefined> {
   return undefined
 }
 
+async function getCachedLocaleMessages(locale: string): Promise<Messages> {
+  "use cache"
+  cacheLife("max")
+  await Promise.resolve()
+  return loadLocaleMessagesFromDir(locale)
+}
+
 export default getRequestConfig(async ({ locale }) => {
   const rootLocale = await resolveRootLocale()
   const target = locale ?? rootLocale
@@ -29,6 +38,6 @@ export default getRequestConfig(async ({ locale }) => {
   return {
     formats: getFormats(resolvedLocale),
     locale: resolvedLocale,
-    messages: loadLocaleMessagesFromDir(resolvedLocale),
+    messages: await getCachedLocaleMessages(resolvedLocale),
   }
 })

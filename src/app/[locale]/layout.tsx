@@ -2,8 +2,6 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import type { JSX } from "react"
 
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import { hasLocale } from "next-intl"
 
 import { env } from "~/src/environment"
@@ -21,6 +19,8 @@ import { geistMono, geistSans } from "~/src/lib/fonts"
 import { cn } from "~/src/lib/utils"
 
 import { Toaster } from "~/src/components/shadcn/sonner"
+
+import { VercelObservability } from "~/src/components/custom/vercel-observability"
 
 import "~/src/styles/globals.css"
 
@@ -57,8 +57,7 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
             <TooltipProvider>
               {children}
               <Toaster />
-              <Analytics />
-              <SpeedInsights />
+              <VercelObservability />
             </TooltipProvider>
           </ThemeProvider>
         </TranslationsProvider>

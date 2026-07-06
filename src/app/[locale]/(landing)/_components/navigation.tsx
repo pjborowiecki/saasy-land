@@ -1,7 +1,7 @@
 import type { JSX } from "react"
 
-import { Moon, Rocket } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { Rocket } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 import { CONSTANTS } from "~/src/constants"
 
@@ -11,11 +11,16 @@ import { cn } from "~/src/lib/utils"
 
 import { buttonVariants } from "~/src/components/shadcn/button"
 
-export function Navigation(): JSX.Element {
-  const t = useTranslations("pages.landing.components.navigation")
+import { ThemeSwitchClient } from "~/src/components/custom/theme-switch"
+
+export async function Navigation(): Promise<JSX.Element> {
+  const [t, themeT] = await Promise.all([
+    getTranslations("pages.landing.components.navigation"),
+    getTranslations("components.custom.theme-switch"),
+  ])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/60 backdrop-blur-2xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="group flex items-center gap-2.5">
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-linear-to-br from-muted to-muted/50 transition-colors group-hover:border-border">
@@ -37,9 +42,15 @@ export function Navigation(): JSX.Element {
         </nav>
 
         <div className="flex items-center gap-5">
-          <button type="button" className="flex items-center justify-center text-muted-foreground transition-colors hover:text-foreground">
-            <Moon className="size-5" />
-          </button>
+          <div className="hidden w-28 sm:block">
+            <ThemeSwitchClient
+              darkLabel={themeT("dark")}
+              label={themeT("label")}
+              lightLabel={themeT("light")}
+              placeholder={themeT("placeholder")}
+              systemLabel={themeT("system")}
+            />
+          </div>
 
           <Link
             href={CONSTANTS.ROUTES.SIGN_UP}
