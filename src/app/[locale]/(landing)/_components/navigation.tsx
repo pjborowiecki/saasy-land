@@ -12,7 +12,7 @@ import { cn } from "~/src/lib/utils"
 import { buttonVariants } from "~/src/components/shadcn/button"
 
 export function Navigation(): JSX.Element {
-  const t = useTranslations("navigation")
+  const t = useTranslations("pages.landing.components.navigation")
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/50 bg-background/60 backdrop-blur-2xl">

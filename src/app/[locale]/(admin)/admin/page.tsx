@@ -4,8 +4,6 @@ import type { JSX } from "react"
 import { Calendar, PlusCircle } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { DASHBOARD_CHART_X_AXIS, DASHBOARD_CHART_Y_AXIS, DASHBOARD_SESSION_ITEMS, DASHBOARD_USER_ROWS } from "~/src/lib/admin/demo-data"
-
 import { Button } from "~/src/components/shadcn/button"
 
 import { DashboardChart } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-chart"
@@ -13,10 +11,11 @@ import { DashboardSecurityCard } from "~/src/app/[locale]/(admin)/admin/_compone
 import { DashboardSessionsCard } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-sessions-card"
 import { DashboardStatsGrid } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-stats-grid"
 import { DashboardUsersTable } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table"
+import { DASHBOARD_CHART_X_AXIS, DASHBOARD_CHART_Y_AXIS, DASHBOARD_SESSION_ITEMS, DASHBOARD_USER_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.dashboard" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.dashboard" })
 
   return {
     description: t("description"),
@@ -26,7 +25,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 
 export default async function AppPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.dashboard" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.dashboard" })
 
   const users = DASHBOARD_USER_ROWS
   const sessions = DASHBOARD_SESSION_ITEMS

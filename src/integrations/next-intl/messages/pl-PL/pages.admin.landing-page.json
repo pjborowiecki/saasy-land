@@ -1,0 +1,54 @@
+{
+  "title": "Edytor Landing Page",
+  "description": "Zaprojektuj i dostosuj swój landing page wizualnie.",
+  "actions": {
+    "preview": "Podgląd",
+    "saveChanges": "Zapisz Zmiany",
+    "publish": "Opublikuj"
+  },
+  "sidebar": {
+    "addSection": "Dodaj Sekcję",
+    "sections": {
+      "hero": "Sekcja Główna",
+      "features": "Siatka Funkcji",
+      "video": "Prezentacja Wideo",
+      "testimonials": "Referencje",
+      "pricing": "Tabela Cen",
+      "gallery": "Galeria Zdjęć",
+      "faq": "Akordeon FAQ",
+      "contact": "Formularz Kontaktowy"
+    }
+  },
+  "canvas": {
+    "newRelease": "Nowe Wydanie v2.0",
+    "supercharge": "Przyspiesz Twój ",
+    "growth": "Wzrost SaaS",
+    "description": "Wszystko-w-jednym platforma do zarządzania klientami, płatnościami i treścią. Buduj szybciej, konwertuj lepiej.",
+    "getStarted": "Rozpocznij za Darmo",
+    "bookDemo": "Umów Demo",
+    "addSectionHere": "Dodaj Sekcję Tutaj",
+    "featuresHeading": "Potężne Funkcje",
+    "featuresSubheading": "Wszystko czego potrzebujesz do skalowania biznesu.",
+    "feature1": "Analityka",
+    "feature2": "Bezpieczeństwo",
+    "feature3": "Synchronizacja"
+  },
+  "properties": {
+    "title": "Właściwości Sekcji",
+    "description": "Dostosuj wybrany element",
+    "layout": "Wyrównanie",
+    "spacing": "Odstępy",
+    "paddingTop": "Odstęp Górny",
+    "paddingBot": "Odstęp Dolny",
+    "background": "Styl Tła",
+    "content": "Treść",
+    "generateAI": "Generuj AI",
+    "badgeText": "Tekst Plakietki",
+    "heading": "Nagłówek",
+    "subheading": "Podtytuł",
+    "buttonActions": "Akcje",
+    "primaryButton": "Główny Przycisk",
+    "secondaryButton": "Dodatkowy Przycisk",
+    "label": "Etykieta"
+  }
+}

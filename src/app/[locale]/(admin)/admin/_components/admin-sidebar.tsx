@@ -10,15 +10,15 @@ import { usePathname } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarMenu } from "~/src/components/shadcn/sidebar"
 
-import { AdminSidebarHeader } from "~/src/components/custom/admin-sidebar-header"
-import { AdminSidebarNavItem } from "~/src/components/custom/admin-sidebar-nav-item"
+import { AdminSidebarHeader } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar-header"
+import { AdminSidebarNavItem } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar-nav-item"
 
 interface AdminSidebarProps {
   readonly children: ReactNode
 }
 
 export function AdminSidebar({ children }: AdminSidebarProps): JSX.Element {
-  const t = useTranslations("admin.sidebar")
+  const t = useTranslations("pages.admin.sidebar")
   const pathname = usePathname()
 
   return (

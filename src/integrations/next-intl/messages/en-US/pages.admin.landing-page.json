@@ -1,0 +1,54 @@
+{
+  "title": "Landing Page Editor",
+  "description": "Design and customize your landing page visually.",
+  "actions": {
+    "preview": "Preview",
+    "saveChanges": "Save Changes",
+    "publish": "Publish"
+  },
+  "sidebar": {
+    "addSection": "Add Section",
+    "sections": {
+      "hero": "Hero Section",
+      "features": "Features Grid",
+      "video": "Video Showcase",
+      "testimonials": "Testimonials",
+      "pricing": "Pricing Table",
+      "gallery": "Image Gallery",
+      "faq": "FAQ Accordion",
+      "contact": "Contact Form"
+    }
+  },
+  "canvas": {
+    "newRelease": "New v2.0 Release",
+    "supercharge": "Supercharge Your ",
+    "growth": "SaaS Growth",
+    "description": "The all-in-one platform to manage your customers, billing, and content. Build faster, convert better.",
+    "getStarted": "Get Started Free",
+    "bookDemo": "Book a Demo",
+    "addSectionHere": "Add Section Here",
+    "featuresHeading": "Powerful Features",
+    "featuresSubheading": "Everything you need to scale your business.",
+    "feature1": "Analytics",
+    "feature2": "Security",
+    "feature3": "Team Sync"
+  },
+  "properties": {
+    "title": "Section Properties",
+    "description": "Customize the selected element",
+    "layout": "Alignment",
+    "spacing": "Spacing",
+    "paddingTop": "Padding Top",
+    "paddingBot": "Padding Bot",
+    "background": "Background Style",
+    "content": "Content",
+    "generateAI": "Generate AI",
+    "badgeText": "Badge Text",
+    "heading": "Heading",
+    "subheading": "Subheading",
+    "buttonActions": "Actions",
+    "primaryButton": "Primary Button",
+    "secondaryButton": "Secondary Button",
+    "label": "Label"
+  }
+}

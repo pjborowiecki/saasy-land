@@ -35,7 +35,7 @@ function PricingFeature({
 }
 
 export function PricingSection(): JSX.Element {
-  const t = useTranslations("landingPage.pricing")
+  const t = useTranslations("pages.landing.pricing")
   const [isYearly, setIsYearly] = useState<boolean>(false)
 
   return (

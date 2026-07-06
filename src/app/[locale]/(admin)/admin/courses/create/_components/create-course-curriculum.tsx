@@ -19,7 +19,7 @@ import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
 
 export async function CreateCourseCurriculum(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.courses.create")
+  const t = await getTranslations("pages.admin.courses.create")
   return (
     <Card className="p-5 sm:p-6">
       <div className="mb-6 flex items-center justify-between">

@@ -9,8 +9,9 @@ import { DocsProvider } from "~/src/providers/docs-provider"
 
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
 
-import { DocsLayoutClient } from "~/src/components/custom/docs-layout-client"
 import { GithubInfo } from "~/src/components/custom/github-info"
+
+import { DocsLayoutClient } from "~/src/app/[locale]/(docs)/docs/_components/docs-layout-client"
 
 const DOCS_LINKS = [
   {

@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.blog.create" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.blog.create" })
 
   return {
     description: t("description"),
@@ -29,7 +29,7 @@ export default async function CreateBlogPostPage({
   params: Promise<{ locale: string }>
 }>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.blog.create" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.blog.create" })
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">

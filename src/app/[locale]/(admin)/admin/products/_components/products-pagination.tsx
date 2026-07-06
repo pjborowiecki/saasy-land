@@ -3,10 +3,10 @@ import type { JSX } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { PAGINATION_FIRST_PAGE } from "~/src/lib/admin/constants"
-import { paginationHighlight } from "~/src/lib/admin/pagination-highlight"
-
 import { Button } from "~/src/components/shadcn/button"
+
+import { PAGINATION_FIRST_PAGE } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
+import { paginationHighlight } from "~/src/app/[locale]/(admin)/admin/_lib/pagination-highlight"
 
 interface ProductsPaginationProps {
   readonly end: number
@@ -14,7 +14,7 @@ interface ProductsPaginationProps {
 }
 
 export async function ProductsPagination({ end, total }: ProductsPaginationProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.products")
+  const t = await getTranslations("pages.admin.products")
   return (
     <div className="flex items-center justify-between border-t border-border/40 bg-secondary/10 px-4 py-3">
       <span className="text-xs font-medium text-muted-foreground">

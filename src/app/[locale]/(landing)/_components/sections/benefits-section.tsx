@@ -24,7 +24,7 @@ function BenefitImage({ alt, priority, src }: { alt: string; priority?: boolean;
 }
 
 export async function BenefitsSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.benefits")
+  const t = await getTranslations("pages.landing.benefits")
 
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24">
@@ -50,7 +50,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <BenefitImage alt="Time Saver Growth" priority src="/images/benefits/time-saver.webp" />
+              <BenefitImage alt={t("cards.timeSaver.imageAlt")} priority src="/images/benefits/time-saver.webp" />
             </CardContent>
           </Card>
 
@@ -66,7 +66,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
             </CardHeader>
             <div className="absolute -inset-x-10 -bottom-20 h-[400px] bg-linear-to-tr from-indigo-500/20 via-primary/20 to-pink-500/20 opacity-60 blur-[80px] transition-opacity duration-700 group-hover:opacity-100" />
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <BenefitImage alt="Modern Tech" src="/images/benefits/modern-tech.webp" />
+              <BenefitImage alt={t("cards.modernTech.imageAlt")} src="/images/benefits/modern-tech.webp" />
             </CardContent>
           </Card>
         </div>
@@ -86,7 +86,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <BenefitImage alt="Quality Code" src="/images/benefits/quality.webp" />
+              <BenefitImage alt={t("cards.quality.imageAlt")} src="/images/benefits/quality.webp" />
             </CardContent>
           </Card>
 
@@ -101,7 +101,7 @@ export async function BenefitsSection(): Promise<JSX.Element> {
               </CardDescription>
             </CardHeader>
             <CardContent className="relative z-10 mt-auto px-6 pt-0 pb-6">
-              <BenefitImage alt="Flexibility Shapes" src="/images/benefits/flexibility.webp" />
+              <BenefitImage alt={t("cards.flexibility.imageAlt")} src="/images/benefits/flexibility.webp" />
             </CardContent>
           </Card>
         </div>

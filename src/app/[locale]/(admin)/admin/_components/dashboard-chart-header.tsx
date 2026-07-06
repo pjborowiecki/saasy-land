@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server"
 import { Button } from "~/src/components/shadcn/button"
 
 export async function DashboardChartHeader(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <div className="mb-8 flex items-center justify-between">
       <div>

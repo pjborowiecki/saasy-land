@@ -18,23 +18,24 @@ export function SignOutButton() {
   const [isPending, startTransition] = useTransition()
 
   const router = useRouter()
-  const t = useTranslations()
+  const t = useTranslations("pages.admin.components.signOutButton")
+  const tAuth = useTranslations("auth")
 
   const handleSignout = useCallback(() => {
     startTransition(async () => {
       await authClient.signOut({
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
+            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: () => {
-            toast.success(t("admin.components.signOutButton.success"))
+            toast.success(t("success"))
             router.push(CONSTANTS.ROUTES.HOME)
           },
         },
       })
     })
-  }, [router, t])
+  }, [router, t, tAuth])
 
   return (
     <Button
@@ -45,7 +46,7 @@ export function SignOutButton() {
       onClick={handleSignout}
     >
       {isPending ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
-      {isPending ? t("admin.components.signOutButton.signingOut") : t("admin.components.signOutButton.signOut")}
+      {isPending ? t("signingOut") : t("signOut")}
     </Button>
   )
 }

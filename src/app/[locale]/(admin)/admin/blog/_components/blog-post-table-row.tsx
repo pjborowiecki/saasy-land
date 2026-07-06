@@ -3,13 +3,12 @@ import type { JSX } from "react"
 import { Eye, MoreHorizontal } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { getBlogPostStatusDotClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
 import { Checkbox } from "~/src/components/shadcn/checkbox"
 import { TableCell, TableRow } from "~/src/components/shadcn/table"
 
+import { getBlogPostStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import {
   getGridMetaTextClass,
@@ -22,7 +21,7 @@ interface BlogPostTableRowProps {
 }
 
 export async function BlogPostTableRow({ post }: BlogPostTableRowProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog")
+  const t = await getTranslations("pages.admin.blog")
 
   return (
     <TableRow className="group transition-colors hover:bg-muted/50">

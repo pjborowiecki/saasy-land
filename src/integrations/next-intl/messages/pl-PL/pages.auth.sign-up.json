@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Rejestracja",
+    "description": "Zarejestruj się w aplikacji {name}."
+  },
+  "form": {
+    "title": "Rejestracja",
+    "description": "Zarejestruj się w aplikacji {name}.",
+    "name": "Imię",
+    "email": "E-mail",
+    "password": "Hasło",
+    "submit": "Kontynuuj",
+    "submitting": "Rejestracja...",
+    "success": "Konto zostało pomyślnie utworzone!",
+    "error": "Wystąpił błąd podczas rejestracji. Spróbuj ponownie.",
+    "hasAccount": "Masz już konto? <signin>Zaloguj się</signin>",
+    "or": "lub",
+    "confirmPassword": "Potwierdź hasło",
+    "termsAndPrivacy": "Rejestrując się, akceptujesz nasz <terms>Regulamin</terms> oraz <privacy>Politykę Prywatności</privacy>."
+  }
+}

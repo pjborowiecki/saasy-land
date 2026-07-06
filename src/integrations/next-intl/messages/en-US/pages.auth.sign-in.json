@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Sign In",
+    "description": "Sign in to your account at {name}."
+  },
+  "form": {
+    "title": "Welcome back",
+    "description": "Enter your details to sign in to your account.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Continue",
+    "submitting": "Signing In...",
+    "success": "Signed in successfully!",
+    "error": "Invalid email or password. Please try again.",
+    "noAccount": "Don't have an account? <signup>Sign up</signup>",
+    "forgotPassword": "Forgot password?",
+    "continueWithGithub": "Continue with GitHub",
+    "continueWithGoogle": "Continue with Google",
+    "or": "or"
+  }
+}

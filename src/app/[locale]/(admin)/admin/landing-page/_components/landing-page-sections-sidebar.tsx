@@ -18,7 +18,7 @@ const LANDING_SECTIONS: {
 ]
 
 export async function LandingPageSectionsSidebar(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
   return (
     <div className="flex h-full w-full shrink-0 flex-col lg:w-64">
       <div className="custom-scrollbar flex-1 overflow-y-auto rounded-xl border border-border/40 bg-card p-4">

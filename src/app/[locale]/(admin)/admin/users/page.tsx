@@ -4,18 +4,17 @@ import type { JSX } from "react"
 import { Download, UserPlus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { ADMIN_INVITATION_ROWS, ADMIN_ROLE_ROWS, ADMIN_USER_ROWS } from "~/src/lib/admin/demo-data"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
 
 import { UsersAllUsersTab } from "~/src/app/[locale]/(admin)/admin/users/_components/users-all-users-tab"
 import { UsersInvitationsTab } from "~/src/app/[locale]/(admin)/admin/users/_components/users-invitations-tab"
 import { UsersRolesTab } from "~/src/app/[locale]/(admin)/admin/users/_components/users-roles-tab"
+import { ADMIN_INVITATION_ROWS, ADMIN_ROLE_ROWS, ADMIN_USER_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.users" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.users" })
 
   return {
     description: t("metadata.description"),
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 
 export default async function UsersPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.users" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.users" })
   const users = ADMIN_USER_ROWS
   const invitations = ADMIN_INVITATION_ROWS
   const roles = ADMIN_ROLE_ROWS

@@ -15,7 +15,7 @@ interface AnalyticsKpiCardProps {
 }
 
 export async function AnalyticsKpiCard({ icon: Icon, metric, trendIcon: TrendIcon }: AnalyticsKpiCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.analytics")
+  const t = await getTranslations("pages.admin.analytics")
   return (
     <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
       <CardContent className="p-5">

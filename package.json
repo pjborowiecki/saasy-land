@@ -37,10 +37,10 @@
     "db:push": "bun --env-file=.env.local run drizzle-kit push --config=./src/integrations/drizzle-orm/drizzle.config.ts",
     "db:introspect": "bun --env-file=.env.local run drizzle-kit introspect --config=./src/integrations/drizzle-orm/drizzle.config.ts",
     "db:studio": "bun --env-file=.env.local run drizzle-kit studio --config=./src/integrations/drizzle-orm/drizzle.config.ts",
-    "check": "vp check && bun run check:i18n",
-    "check:fix": "vp check --fix && bun run check:i18n",
+    "check": "bun run check:i18n && vp check",
+    "check:fix": "bun run check:i18n && vp check --fix",
     "check:i18n": "bun scripts/check-i18n.ts",
-    "check:pre-commit": "vp staged && bun run check:i18n",
+    "check:pre-commit": "bun run check:i18n && vp staged",
     "fmt": "vp fmt",
     "fmt:check": "vp fmt --check",
     "lint": "vp lint",
@@ -106,7 +106,6 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@lingual/i18n-check": "^0.8.14",
     "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4.3.2",
     "@tailwindcss/typography": "^0.5.20",

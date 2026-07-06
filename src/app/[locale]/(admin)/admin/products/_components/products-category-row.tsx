@@ -2,12 +2,11 @@ import type { JSX } from "react"
 
 import { Eye, EyeOff } from "lucide-react"
 
-import type { AdminCategoryRow } from "~/src/lib/admin/demo-data.types"
-import { getVisibilityBadgeClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 
 import { AdminTableCheckbox } from "~/src/app/[locale]/(admin)/admin/_components/admin-table-checkbox"
+import { getVisibilityBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
+import type { AdminCategoryRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsRowActionsButton } from "~/src/app/[locale]/(admin)/admin/products/_components/products-row-actions-button"
 
 interface ProductsCategoryRowProps {

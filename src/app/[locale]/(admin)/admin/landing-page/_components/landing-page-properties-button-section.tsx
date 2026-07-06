@@ -11,7 +11,7 @@ interface ButtonActionConfigProps {
 }
 
 async function ButtonActionConfig({ defaultLabel, title }: ButtonActionConfigProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="space-y-3 rounded-lg border border-border/40 bg-secondary/10 p-3">
@@ -30,7 +30,7 @@ async function ButtonActionConfig({ defaultLabel, title }: ButtonActionConfigPro
 }
 
 export async function LandingPagePropertiesButtonSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="space-y-4 border-t border-border/40 pt-4">

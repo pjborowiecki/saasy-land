@@ -17,7 +17,7 @@ export async function ProductsTabToolbar({
   showStatusFilter = true,
   showTypeFilter = true,
 }: ProductsTabToolbarProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.products")
+  const t = await getTranslations("pages.admin.products")
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
       <div className="flex items-center gap-3">

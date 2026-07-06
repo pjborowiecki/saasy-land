@@ -1,9 +1,8 @@
 import type { JSX } from "react"
 
-import type { AdminAnalyticsRegionRow, AdminAnalyticsUpgradeRow } from "~/src/lib/admin/demo-data.types"
-
 import { TabsContent } from "~/src/components/shadcn/tabs"
 
+import type { AdminAnalyticsRegionRow, AdminAnalyticsUpgradeRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { AnalyticsKpiCards } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-kpi-cards"
 import { AnalyticsRegionsUpgrades } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-regions-upgrades"
 import { AnalyticsRevenueChart } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-revenue-chart"

@@ -25,7 +25,7 @@ function ContentField({ children, label }: ContentFieldProps): JSX.Element {
 }
 
 export async function LandingPagePropertiesContentSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="space-y-4 border-t border-border/40 pt-4">

@@ -2,17 +2,17 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { AdminAnalyticsUpgradeRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
+
+import type { AdminAnalyticsUpgradeRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface AnalyticsUpgradesCardProps {
   readonly upgrades: readonly AdminAnalyticsUpgradeRow[]
 }
 
 export async function AnalyticsUpgradesCard({ upgrades }: AnalyticsUpgradesCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.analytics")
+  const t = await getTranslations("pages.admin.analytics")
   return (
     <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
       <div className="flex items-center justify-between border-b border-border/40 p-5">

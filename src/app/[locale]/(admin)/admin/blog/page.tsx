@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.blog" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.blog" })
   return {
     title: `${t("title")} | SaaSy Land`,
   }
@@ -34,7 +34,7 @@ export default function BlogAdminPage({ searchParams }: { searchParams: SearchPa
 }
 
 async function BlogAdminContent({ searchParams }: { searchParams: SearchParams }): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog")
+  const t = await getTranslations("pages.admin.blog")
   const resolvedParams = await searchParams
   const view = resolvedParams["view"] === "table" ? "table" : "grid"
 

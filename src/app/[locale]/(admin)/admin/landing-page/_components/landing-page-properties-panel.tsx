@@ -9,7 +9,7 @@ import { LandingPagePropertiesLayoutSection } from "~/src/app/[locale]/(admin)/a
 import { LandingPagePropertiesSpacingSection } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-properties-spacing-section"
 
 export async function LandingPagePropertiesPanel(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="flex h-full w-full shrink-0 flex-col lg:w-80">

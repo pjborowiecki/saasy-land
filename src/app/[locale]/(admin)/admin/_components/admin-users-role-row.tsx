@@ -2,11 +2,11 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import type { AdminRoleRow } from "~/src/lib/admin/demo-data.types"
-import { getRoleTypeBadgeClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
+
+import { getRoleTypeBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
+import type { AdminRoleRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 type RoleRow = AdminRoleRow
 

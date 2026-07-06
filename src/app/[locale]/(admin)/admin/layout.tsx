@@ -5,9 +5,8 @@ import { requireAdminPanel } from "~/src/integrations/better-auth/auth.guards"
 import { SidebarInset, SidebarProvider } from "~/src/components/shadcn/sidebar"
 import { Skeleton } from "~/src/components/shadcn/skeleton"
 
-import { AdminSidebar } from "~/src/components/custom/admin-sidebar"
-
 import { AdminLayoutHeader } from "~/src/app/[locale]/(admin)/admin/_components/admin-layout-header"
+import { AdminSidebar } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar"
 import { UserWidget } from "~/src/app/[locale]/(admin)/admin/_components/user-widget"
 
 const ADMIN_LAYOUT_FALLBACK = (

@@ -101,7 +101,7 @@ function ContactForm({
 }
 
 export async function ContactSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.contact")
+  const t = await getTranslations("pages.landing.contact")
 
   return (
     <section className="relative z-10 py-16 md:py-24">

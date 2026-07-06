@@ -4,16 +4,15 @@ import type { JSX } from "react"
 import { Download, Settings } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { ADMIN_PAYMENT_ROWS } from "~/src/lib/admin/demo-data"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
 
 import { PaymentsRefundsTab } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refunds-tab"
+import { ADMIN_PAYMENT_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.payments" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.payments" })
 
   return {
     description: t("metadata.description"),
@@ -23,7 +22,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 
 export default async function PaymentsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.payments" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.payments" })
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">

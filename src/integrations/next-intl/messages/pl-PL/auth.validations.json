@@ -1,0 +1,18 @@
+{
+  "emailRequired": "E-mail jest wymagany.",
+  "emailInvalid": "Wprowadź poprawny adres e-mail.",
+  "emailMaxLength": "E-mail nie może być dłuższy niż {max} znaków.",
+  "nameRequired": "Imię jest wymagane.",
+  "nameMaxLength": "Imię nie może być dłuższe niż {max} znaków.",
+  "passwordRequired": "Hasło jest wymagane.",
+  "passwordMinLength": "Hasło musi mieć co najmniej {min} znaków.",
+  "passwordMaxLength": "Hasło nie może być dłuższe niż {max} znaków.",
+  "passwordUppercase": "Hasło musi zawierać co najmniej jedną wielką literę.",
+  "passwordSpecialCharacter": "Hasło musi zawierać co najmniej jeden znak specjalny.",
+  "confirmPasswordRequired": "Potwierdź swoje hasło.",
+  "passwordsMustMatch": "Hasła muszą się zgadzać.",
+  "atLeastMinCharactersLong": "Co najmniej {min} znaków",
+  "atLeastOneSpecialCharacter": "Co najmniej jeden znak specjalny",
+  "atLeastOneUppercase": "Co najmniej jedna wielka litera",
+  "requirementsListLabel": "Wymagania dotyczące hasła"
+}

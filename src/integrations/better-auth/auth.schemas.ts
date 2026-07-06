@@ -1,6 +1,8 @@
 import z from "zod/v4"
 
-type AuthSchemaTranslator = (key: string, params?: Record<string, string | number>) => string
+import type { AuthValidationMessageKey } from "~/src/integrations/better-auth/auth.validations"
+
+type AuthSchemaTranslator = (key: AuthValidationMessageKey, params?: Record<string, string | number>) => string
 
 const EMAIL_MAX_LENGTH = 64
 const NAME_MAX_LENGTH = 32
@@ -9,34 +11,33 @@ const PASSWORD_MAX_LENGTH = 1024
 const MIN_FIELD_LENGTH = 1
 
 export const emailSchema = (t: AuthSchemaTranslator) =>
-  z.email({ message: t("auth.validations.emailInvalid") }).max(EMAIL_MAX_LENGTH, {
-    message: t("auth.validations.emailMaxLength", { max: EMAIL_MAX_LENGTH }),
+  z.email({ message: t("emailInvalid") }).max(EMAIL_MAX_LENGTH, {
+    message: t("emailMaxLength", { max: EMAIL_MAX_LENGTH }),
   })
 
 const nameSchema = (t: AuthSchemaTranslator) =>
   z
     .string()
-    .min(MIN_FIELD_LENGTH, { message: t("auth.validations.nameRequired") })
-    .max(NAME_MAX_LENGTH, { message: t("auth.validations.nameMaxLength", { max: NAME_MAX_LENGTH }) })
+    .min(MIN_FIELD_LENGTH, { message: t("nameRequired") })
+    .max(NAME_MAX_LENGTH, { message: t("nameMaxLength", { max: NAME_MAX_LENGTH }) })
 
 const strictPasswordSchema = (t: AuthSchemaTranslator) =>
   z
     .string()
-    .min(MIN_FIELD_LENGTH, { message: t("auth.validations.passwordRequired") })
-    .min(PASSWORD_MIN_LENGTH, { message: t("auth.validations.passwordMinLength", { min: PASSWORD_MIN_LENGTH }) })
-    .max(PASSWORD_MAX_LENGTH, { message: t("auth.validations.passwordMaxLength", { max: PASSWORD_MAX_LENGTH }) })
+    .min(MIN_FIELD_LENGTH, { message: t("passwordRequired") })
+    .min(PASSWORD_MIN_LENGTH, { message: t("passwordMinLength", { min: PASSWORD_MIN_LENGTH }) })
+    .max(PASSWORD_MAX_LENGTH, { message: t("passwordMaxLength", { max: PASSWORD_MAX_LENGTH }) })
     .refine((value) => /[A-Z]/u.test(value), {
-      message: t("auth.validations.passwordUppercase"),
+      message: t("passwordUppercase"),
     })
     .refine((value) => /[^A-Za-z0-9]/u.test(value), {
-      message: t("auth.validations.passwordSpecialCharacter"),
+      message: t("passwordSpecialCharacter"),
     })
 
-const signInPasswordSchema = (t: AuthSchemaTranslator) =>
-  z.string().min(MIN_FIELD_LENGTH, { message: t("auth.validations.passwordRequired") })
+const signInPasswordSchema = (t: AuthSchemaTranslator) => z.string().min(MIN_FIELD_LENGTH, { message: t("passwordRequired") })
 
 const passwordConfirmationShape = (t: AuthSchemaTranslator) => ({
-  confirmPassword: z.string().min(MIN_FIELD_LENGTH, { message: t("auth.validations.confirmPasswordRequired") }),
+  confirmPassword: z.string().min(MIN_FIELD_LENGTH, { message: t("confirmPasswordRequired") }),
   password: strictPasswordSchema(t),
 })
 
@@ -44,7 +45,7 @@ const passwordConfirmationSchema = (t: AuthSchemaTranslator) => z.object(passwor
 
 const withMatchingPasswords = <T extends z.ZodType<{ confirmPassword: string; password: string }>>(schema: T, t: AuthSchemaTranslator) =>
   schema.refine((data) => data.password === data.confirmPassword, {
-    message: t("auth.validations.passwordsMustMatch"),
+    message: t("passwordsMustMatch"),
     path: ["confirmPassword"],
   })
 

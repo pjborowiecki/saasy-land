@@ -1,0 +1,28 @@
+{
+  "title": "SaaSy Land",
+  "version": "v2.0.0",
+  "groups": {
+    "overview": "Overview",
+    "offerings": "Offerings",
+    "administration": "Administration",
+    "content": "Content"
+  },
+  "links": {
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "products": "Products",
+    "courses": "Courses",
+    "pricingModels": "Pricing Models",
+    "contentAccess": "Content & Access",
+    "userManagement": "User Management",
+    "activeSessions": "Active Sessions",
+    "payments": "Payments & Billing",
+    "settings": "Settings",
+    "blog": "Blog",
+    "landingPage": "Landing Page"
+  },
+  "logo": "SL",
+  "badges": {
+    "activeSessionsBadge": "3"
+  }
+}

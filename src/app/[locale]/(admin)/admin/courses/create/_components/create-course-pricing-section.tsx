@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
 
 export async function CreateCoursePricingSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.courses.create")
+  const t = await getTranslations("pages.admin.courses.create")
 
   return (
     <Card className="p-5 sm:p-6">

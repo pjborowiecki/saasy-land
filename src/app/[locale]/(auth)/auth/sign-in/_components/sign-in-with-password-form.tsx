@@ -23,9 +23,11 @@ import { SignInSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-in/_comp
 
 export function SignInWithPasswordForm(): JSX.Element {
   const router = useRouter()
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.sign-in")
+  const tAuth = useTranslations("auth")
+  const tValidations = useTranslations("auth.validations")
 
-  const formSchema = signInWithPasswordSchema(t)
+  const formSchema = signInWithPasswordSchema(tValidations)
   const form = useForm<SignInFormValues>({
     defaultValues: { email: "", password: "" },
     resolver: zodResolver(formSchema),
@@ -37,10 +39,10 @@ export function SignInWithPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
+            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: async () => {
-            toast.success(t("auth.signInPage.form.success"))
+            toast.success(t("form.success"))
             const { data: session } = await getSession()
             router.push(getPostAuthRedirect(session?.user.role))
           },
@@ -48,7 +50,7 @@ export function SignInWithPasswordForm(): JSX.Element {
         password: data.password,
       })
     },
-    [router, t],
+    [router, t, tAuth],
   )
 
   const handleFormSubmit = useFormSubmitHandler(form, onSubmit)

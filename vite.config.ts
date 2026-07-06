@@ -21,7 +21,7 @@ const ignorePatterns = [
   "**/*.d.ts",
   "**/*.tsbuildinfo",
   "src/types/env.d.ts",
-  "src/integrations/next-intl/messages/*.d.json.ts",
+  "src/integrations/next-intl/*.d.json.ts",
   "src/integrations/drizzle-orm/migrations/**",
 ]
 
@@ -143,6 +143,12 @@ export default defineConfig({
         files: ["src/integrations/next-intl/i18n.formats.ts"],
         rules: {
           "eslint/no-inline-comments": "off",
+        },
+      },
+      {
+        files: ["src/integrations/next-intl/i18n.utils.ts"],
+        rules: {
+          "import/no-nodejs-modules": "off",
         },
       },
     ],

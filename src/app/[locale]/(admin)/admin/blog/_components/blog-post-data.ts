@@ -1,4 +1,4 @@
-import type { BlogPostStatus } from "~/src/lib/admin/status-colors"
+import type { BlogPostStatus } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 
 export interface DummyPost {
   author: { initials: string; name: string }

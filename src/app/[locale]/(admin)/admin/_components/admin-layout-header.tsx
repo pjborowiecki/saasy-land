@@ -7,7 +7,7 @@ import { Input } from "~/src/components/shadcn/input"
 import { Kbd, KbdGroup } from "~/src/components/shadcn/kbd"
 import { SidebarTrigger } from "~/src/components/shadcn/sidebar"
 
-import { AdminBreadcrumbs } from "~/src/components/custom/admin-breadcrumbs"
+import { AdminBreadcrumbs } from "~/src/app/[locale]/(admin)/admin/_components/admin-breadcrumbs"
 
 export function AdminLayoutHeader(): JSX.Element {
   return (

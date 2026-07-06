@@ -26,7 +26,7 @@ function StatusToggleRow({
 }
 
 export async function CreateProductStatusSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.products.create")
+  const t = await getTranslations("pages.admin.products.create")
 
   return (
     <Card className="p-5 sm:p-6">

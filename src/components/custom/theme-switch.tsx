@@ -12,11 +12,11 @@ const THEMES = ["light", "dark", "system"] as const
 type ThemeValue = (typeof THEMES)[number]
 
 function isThemeValue(value: string | null): value is ThemeValue {
-  return value !== null && THEMES.some((theme) => theme === value)
+  return value !== null && (THEMES as readonly string[]).includes(value)
 }
 
 export function ThemeSwitch(): JSX.Element {
-  const t = useTranslations("components.custom.themeSwitch")
+  const t = useTranslations("components.custom.theme-switch")
 
   const { theme, setTheme } = useTheme()
 

@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl"
 
 import { Link, usePathname } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { EMPTY_PATH_PARTS_LENGTH } from "~/src/lib/admin/constants"
+import { EMPTY_PATH_PARTS_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 
 const ADMIN_PATH_INDEX = 0
 const ADMIN_ROUTE_INDEX = 1
@@ -28,7 +28,7 @@ const routeMappings: Record<string, { group: string; link: string }> = {
 
 export function AdminBreadcrumbs(): JSX.Element | undefined {
   const pathname = usePathname()
-  const t = useTranslations("admin.sidebar")
+  const t = useTranslations("pages.admin.sidebar")
 
   const pathParts = pathname.split("/").filter(Boolean)
   if (pathParts.length === EMPTY_PATH_PARTS_LENGTH || pathParts[ADMIN_PATH_INDEX] !== "admin") {

@@ -2,11 +2,11 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import type { AdminInvitationRow } from "~/src/lib/admin/demo-data.types"
-import { getStatusBadgeClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
+
+import { getStatusBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
+import type { AdminInvitationRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 type InvitationRow = AdminInvitationRow
 

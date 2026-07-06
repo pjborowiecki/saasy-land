@@ -18,7 +18,7 @@ import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-fo
 export type SignInFormValues = z.infer<ReturnType<typeof signInWithPasswordSchema>>
 
 function SignInPasswordField(): JSX.Element {
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.sign-in")
 
   return (
     <AuthPasswordField<SignInFormValues>
@@ -26,9 +26,9 @@ function SignInPasswordField(): JSX.Element {
       formId={AUTH_FORM_IDS.SIGN_IN}
       label={
         <>
-          <span>{t("auth.signInPage.form.password")}</span>
+          <span>{t("form.password")}</span>
           <Link className="text-muted-foreground transition-colors hover:text-foreground" href={CONSTANTS.ROUTES.FORGOT_PASSWORD}>
-            {t("auth.signInPage.form.forgotPassword")}
+            {t("form.forgotPassword")}
           </Link>
         </>
       }
@@ -39,11 +39,11 @@ function SignInPasswordField(): JSX.Element {
 }
 
 export function SignInFormFields(): JSX.Element {
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.sign-in")
 
   return (
     <FieldGroup className="flex flex-col gap-6">
-      <AuthTextField<SignInFormValues> formId={AUTH_FORM_IDS.SIGN_IN} label={t("auth.signInPage.form.email")} name="email" />
+      <AuthTextField<SignInFormValues> formId={AUTH_FORM_IDS.SIGN_IN} label={t("form.email")} name="email" />
       <SignInPasswordField />
     </FieldGroup>
   )

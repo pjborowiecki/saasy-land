@@ -37,7 +37,7 @@ export async function PricingModelCard({
   tagIcon: TagIcon,
   tagKey,
 }: PricingModelCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.pricingModels")
+  const t = await getTranslations("pages.admin.pricing-models")
   return (
     <Card className={`group relative flex h-full flex-col ${cardClassName ?? ""}`}>
       {popularBadge && <Badge className="absolute -top-3 left-6 px-3 py-1 text-xs font-medium">{t("tags.mostPopular")}</Badge>}

@@ -6,7 +6,7 @@ import { Button } from "~/src/components/shadcn/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
 
 export async function SettingsDangerZoneCard(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <Card className="overflow-hidden border-destructive/20 bg-destructive/5">
       <CardHeader className="border-b border-destructive/10 p-5">

@@ -1,7 +1,6 @@
 import type { JSX } from "react"
 
-import type { AdminAnalyticsRegionRow, AdminAnalyticsUpgradeRow } from "~/src/lib/admin/demo-data.types"
-
+import type { AdminAnalyticsRegionRow, AdminAnalyticsUpgradeRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { AnalyticsRegionsCard } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-regions-card"
 import { AnalyticsUpgradesCard } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-upgrades-card"
 

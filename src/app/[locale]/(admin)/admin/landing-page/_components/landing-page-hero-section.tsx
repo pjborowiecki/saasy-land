@@ -8,7 +8,7 @@ import { Button } from "~/src/components/shadcn/button"
 import { LandingPageSectionActions } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-section-actions"
 
 export async function LandingPageHeroSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="group relative overflow-hidden rounded-xl border border-border/10 bg-card p-12 text-center shadow-sm ring-2 ring-fuchsia-500">
@@ -34,7 +34,7 @@ export async function LandingPageHeroSection(): Promise<JSX.Element> {
 }
 
 async function LandingPageHeroActions(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="flex items-center justify-center gap-4">

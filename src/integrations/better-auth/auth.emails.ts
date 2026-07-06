@@ -1,12 +1,14 @@
 import "server-only"
 
+import { createTranslator } from "next-intl"
+
 import { resolveLocaleFromAuthRequest } from "~/src/integrations/next-intl/i18n.locale"
+import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 import { ChangeEmailConfirmationEmail as changeEmailConfirmationEmailTemplate } from "~/src/integrations/resend/templates/change-email-confirmation"
 import { ResetPasswordEmail as resetPasswordEmailTemplate } from "~/src/integrations/resend/templates/reset-password"
 import { VerifyEmail as verifyEmailTemplate } from "~/src/integrations/resend/templates/verify-email"
 
 import { sendEmail } from "~/src/lib/_utils/email"
-import { createRootTranslator, loadLocaleMessages } from "~/src/lib/_utils/i18n"
 
 interface BetterAuthEmailPayload {
   readonly token: string
@@ -20,16 +22,16 @@ interface ChangeEmailConfirmationPayload extends BetterAuthEmailPayload {
 
 async function sendResetPasswordEmail(payload: Readonly<BetterAuthEmailPayload>, request?: Request): Promise<void> {
   const locale = resolveLocaleFromAuthRequest(request, payload.url)
-  const messages = await loadLocaleMessages(locale)
-  const t = createRootTranslator(messages, locale)
-  const react = await resetPasswordEmailTemplate({
+  const messages = loadLocaleMessagesFromDir(locale)
+  const t = createTranslator({ locale, messages, namespace: "emails.resetPassword" })
+  const react = resetPasswordEmailTemplate({
     locale,
     name: payload.user.name,
     resetPasswordUrl: payload.url,
   })
   const result = await sendEmail({
     react,
-    subject: t("emails.resetPassword.subject"),
+    subject: t("subject"),
     to: payload.user.email,
   })
 
@@ -44,16 +46,16 @@ async function sendResetPasswordEmail(payload: Readonly<BetterAuthEmailPayload>,
 
 async function sendVerificationEmail(payload: Readonly<BetterAuthEmailPayload>, request?: Request): Promise<void> {
   const locale = resolveLocaleFromAuthRequest(request, payload.url)
-  const messages = await loadLocaleMessages(locale)
-  const t = createRootTranslator(messages, locale)
-  const react = await verifyEmailTemplate({
+  const messages = loadLocaleMessagesFromDir(locale)
+  const t = createTranslator({ locale, messages, namespace: "emails.verifyEmail" })
+  const react = verifyEmailTemplate({
     locale,
     name: payload.user.name,
     verifyUrl: payload.url,
   })
   const result = await sendEmail({
     react,
-    subject: t("emails.verifyEmail.subject"),
+    subject: t("subject"),
     to: payload.user.email,
   })
 
@@ -68,9 +70,9 @@ async function sendVerificationEmail(payload: Readonly<BetterAuthEmailPayload>, 
 
 async function sendChangeEmailConfirmationEmail(payload: Readonly<ChangeEmailConfirmationPayload>, request?: Request): Promise<void> {
   const locale = resolveLocaleFromAuthRequest(request, payload.url)
-  const messages = await loadLocaleMessages(locale)
-  const t = createRootTranslator(messages, locale)
-  const react = await changeEmailConfirmationEmailTemplate({
+  const messages = loadLocaleMessagesFromDir(locale)
+  const t = createTranslator({ locale, messages, namespace: "emails.changeEmailConfirmation" })
+  const react = changeEmailConfirmationEmailTemplate({
     confirmUrl: payload.url,
     locale,
     name: payload.user.name,
@@ -78,7 +80,7 @@ async function sendChangeEmailConfirmationEmail(payload: Readonly<ChangeEmailCon
   })
   const result = await sendEmail({
     react,
-    subject: t("emails.changeEmailConfirmation.subject"),
+    subject: t("subject"),
     to: payload.user.email,
   })
 

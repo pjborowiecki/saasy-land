@@ -1,0 +1,76 @@
+{
+  "title": "Overview",
+  "description": "Welcome back, here is what is happening today.",
+  "actions": {
+    "last30Days": "Last 30 Days",
+    "addProduct": "Add Product"
+  },
+  "stats": {
+    "revenue": {
+      "title": "Total Revenue (MRR)",
+      "value": "$24,500.00",
+      "trend": "+12.5%"
+    },
+    "activeUsers": {
+      "title": "Active Users",
+      "value": "1,248",
+      "trend": "+4.2%"
+    },
+    "currentSessions": {
+      "title": "Current Sessions",
+      "value": "42",
+      "badge": "Active Now"
+    },
+    "churnRate": {
+      "title": "Churn Rate",
+      "value": "1.2%",
+      "trend": "-0.8%"
+    }
+  },
+  "chart": {
+    "title": "Revenue Overview",
+    "description": "Monthly recurring revenue over the last 12 months",
+    "filters": {
+      "12m": "12M",
+      "30d": "30D",
+      "7d": "7D"
+    }
+  },
+  "users": {
+    "title": "User Management",
+    "description": "Manage your team members and their account permissions here.",
+    "search": "Filter users...",
+    "filters": {
+      "role": "Role",
+      "status": "Status"
+    },
+    "export": "Export",
+    "table": {
+      "columns": {
+        "user": "User",
+        "role": "Role",
+        "status": "Status",
+        "lastActive": "Last Active",
+        "actions": "Actions"
+      },
+      "pagination": {
+        "showing": "Showing 1 to 3 of 42 entries",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    }
+  },
+  "sessions": {
+    "title": "Active Sessions",
+    "revoke": "Revoke",
+    "signoutAll": "Sign out all other sessions",
+    "current": "Current"
+  },
+  "security": {
+    "title": "Security Settings",
+    "mfa": "Two-Factor Auth",
+    "mfaDesc": "Require 2FA for all users",
+    "email": "Email Notifications",
+    "emailDesc": "Daily summary reports"
+  }
+}

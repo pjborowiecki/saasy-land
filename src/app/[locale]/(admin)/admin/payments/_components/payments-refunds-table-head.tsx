@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server"
 import { TableHead, TableHeader, TableRow } from "~/src/components/shadcn/table"
 
 export async function PaymentsRefundsTableHead(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.payments")
+  const t = await getTranslations("pages.admin.payments")
   return (
     <TableHeader>
       <TableRow>

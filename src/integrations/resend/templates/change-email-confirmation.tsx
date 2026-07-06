@@ -1,11 +1,12 @@
 import type { JSX } from "react"
 
+import { createTranslator } from "next-intl"
 import { Body, Button, Container, Head, Heading, Html, Preview, Section, Tailwind, Text } from "react-email"
 
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
-import { createNamespacedTranslator, loadLocaleMessages } from "~/src/lib/_utils/i18n"
+import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
 interface ChangeEmailConfirmationEmailProps {
   readonly confirmUrl: string
@@ -14,14 +15,17 @@ interface ChangeEmailConfirmationEmailProps {
   readonly newEmail: string
 }
 
-export async function ChangeEmailConfirmationEmail({
+export function ChangeEmailConfirmationEmail({
   confirmUrl,
   locale,
   name,
   newEmail,
-}: Readonly<ChangeEmailConfirmationEmailProps>): Promise<JSX.Element> {
-  const messages = await loadLocaleMessages(locale)
-  const t = createNamespacedTranslator(messages, locale, "emails.changeEmailConfirmation")
+}: Readonly<ChangeEmailConfirmationEmailProps>): JSX.Element {
+  const t = createTranslator({
+    locale,
+    messages: loadLocaleMessagesFromDir(locale),
+    namespace: "emails.changeEmailConfirmation",
+  })
 
   return (
     <Html>

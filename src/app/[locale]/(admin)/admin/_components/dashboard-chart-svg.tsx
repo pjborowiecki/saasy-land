@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { getTranslations } from "next-intl/server"
 
 export async function DashboardChartSvg(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <svg viewBox="0 0 1000 240" preserveAspectRatio="none" className="h-full w-full overflow-visible">
       <title>{t("chart.title")}</title>

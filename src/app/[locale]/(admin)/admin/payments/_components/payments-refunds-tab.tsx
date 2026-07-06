@@ -3,12 +3,11 @@ import type { JSX } from "react"
 import { Clock, CreditCard, Filter, TrendingDown } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import type { AdminPaymentRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
 import { Table, TableBody } from "~/src/components/shadcn/table"
 
+import type { AdminPaymentRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { PaymentsRefundRow } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refund-row"
 import { PaymentsRefundStatCard } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refund-stat-card"
 import { PaymentsRefundsTableHead } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refunds-table-head"
@@ -19,7 +18,7 @@ interface PaymentsRefundsTabProps {
 }
 
 export async function PaymentsRefundsTab({ paymentRows }: PaymentsRefundsTabProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.payments")
+  const t = await getTranslations("pages.admin.payments")
   return (
     <div className="mt-6 space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">

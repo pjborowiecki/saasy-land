@@ -3,13 +3,12 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import { EMPTY_STRING_LENGTH } from "~/src/lib/admin/constants"
-import type { AdminUserRow } from "~/src/lib/admin/demo-data.types"
-import { getStatusBadgeClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
 
+import { EMPTY_STRING_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
+import { getStatusBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
+import type { AdminUserRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { UsersTableCheckbox } from "~/src/app/[locale]/(admin)/admin/users/_components/users-table-checkbox"
 
 interface UsersAllUsersRowProps {

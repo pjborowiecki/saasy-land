@@ -1,0 +1,58 @@
+{
+  "title": "Pricing Models",
+  "description": "Manage subscription tiers and one-time payment options.",
+  "actions": {
+    "allTypes": "All Types",
+    "createModel": "Create Model"
+  },
+  "stats": {
+    "monthlyRecurring": "Monthly Recurring",
+    "activeSubscribers": "Active Subscribers",
+    "activeModels": "Active Models"
+  },
+  "tags": {
+    "subscription": "Subscription",
+    "oneTime": "One-Time",
+    "mostPopular": "Most Popular"
+  },
+  "models": {
+    "monthly": {
+      "title": "Monthly Pass",
+      "price": "$29",
+      "interval": "/ month",
+      "description": "Billed monthly. Cancel anytime."
+    },
+    "annual": {
+      "title": "Annual Pass",
+      "price": "$290",
+      "interval": "/ year",
+      "description": "Save $58 compared to monthly."
+    },
+    "lifetime": {
+      "title": "Course License",
+      "price": "$99",
+      "interval": "/ lifetime",
+      "description": "Standard pricing for standalone items."
+    }
+  },
+  "labels": {
+    "includedAccess": "Included Access",
+    "activeUsers": "{count} active",
+    "inactive": "Inactive",
+    "editModel": "Edit Model",
+    "moreOptions": "More Options",
+    "deleteModel": "Delete Model",
+    "toggleStatus": "Toggle Status"
+  },
+  "features": {
+    "allCourses": "All currently published courses",
+    "discord": "Exclusive community Discord",
+    "qa": "Monthly live Q&A sessions",
+    "everythingInMonthly": "Everything in Monthly Pass",
+    "sourceFiles": "Downloadable source files",
+    "portfolioReview": "1-on-1 yearly portfolio review",
+    "standaloneCourse": "Selected standalone course",
+    "lifetimeUpdates": "Lifetime updates for material",
+    "guarantee": "30-day money-back guarantee"
+  }
+}

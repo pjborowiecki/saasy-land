@@ -1,0 +1,71 @@
+{
+  "title": "Create Course",
+  "actions": {
+    "cancel": "Cancel",
+    "save": "Save Course"
+  },
+  "sections": {
+    "general": {
+      "title": "General Information",
+      "name": {
+        "label": "Course Title",
+        "placeholder": "e.g. Advanced UI Design Patterns..."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Briefly describe what students will learn...",
+        "help": "Will be displayed on the course landing page."
+      }
+    },
+    "curriculum": {
+      "title": "Curriculum",
+      "description": "Structure your course into sections and lessons.",
+      "expandAll": "Expand All",
+      "addSection": "Add New Section",
+      "addLesson": "Add Lesson"
+    },
+    "pricing": {
+      "title": "Pricing & Access",
+      "model": {
+        "label": "Billing Model",
+        "oneTime": "One-time Purchase",
+        "subscription": "Subscription"
+      },
+      "price": {
+        "label": "Price",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "Access Duration",
+        "lifetime": "Lifetime Access"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "publish": {
+        "label": "Publish Course",
+        "description": "Make it visible to students"
+      },
+      "certificate": {
+        "label": "Issue Certificate",
+        "description": "Upon 100% completion"
+      }
+    },
+    "media": {
+      "title": "Course Thumbnail",
+      "upload": "Upload image",
+      "help": "1920x1080px recommended"
+    },
+    "organization": {
+      "title": "Organization",
+      "category": {
+        "label": "Category",
+        "placeholder": "Select category..."
+      },
+      "difficulty": {
+        "label": "Difficulty Level",
+        "placeholder": "e.g. Beginner, Advanced..."
+      }
+    }
+  }
+}

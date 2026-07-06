@@ -3,19 +3,18 @@ import type { JSX } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { PAGINATION_FIRST_PAGE } from "~/src/lib/admin/constants"
-import { paginationHighlight } from "~/src/lib/admin/pagination-highlight"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
 import { Checkbox } from "~/src/components/shadcn/checkbox"
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "~/src/components/shadcn/table"
 
+import { PAGINATION_FIRST_PAGE } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
+import { paginationHighlight } from "~/src/app/[locale]/(admin)/admin/_lib/pagination-highlight"
 import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { BlogPostTableRow } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-table-row"
 
 export async function BlogPostsTable(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog")
+  const t = await getTranslations("pages.admin.blog")
 
   return (
     <Card className="overflow-hidden border-border/40">
@@ -47,7 +46,7 @@ export async function BlogPostsTable(): Promise<JSX.Element> {
 }
 
 async function BlogPostsTablePagination(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog")
+  const t = await getTranslations("pages.admin.blog")
 
   return (
     <div className="flex items-center justify-between border-t border-border/40 bg-secondary/10 px-4 py-3">

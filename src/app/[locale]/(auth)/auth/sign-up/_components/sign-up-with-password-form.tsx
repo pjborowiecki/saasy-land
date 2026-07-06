@@ -28,9 +28,11 @@ export function SignUpWithPasswordForm(): JSX.Element {
   const { triggerConfetti } = useConfetti()
 
   const router = useRouter()
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.sign-up")
+  const tAuth = useTranslations("auth")
+  const tValidations = useTranslations("auth.validations")
 
-  const formSchema = signUpWithPasswordSchema(t)
+  const formSchema = signUpWithPasswordSchema(tValidations)
   const form = useForm<SignUpFormValues>({
     defaultValues: { confirmPassword: "", email: "", name: "", password: "" },
     mode: "onChange",
@@ -43,11 +45,11 @@ export function SignUpWithPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
+            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: async () => {
             triggerConfetti()
-            toast.success(t("auth.signUpPage.form.success"))
+            toast.success(t("form.success"))
             const { data: session } = await getSession()
             router.push(getPostAuthRedirect(session?.user.role))
           },
@@ -56,7 +58,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
         password: data.password,
       })
     },
-    [router, t, triggerConfetti],
+    [router, t, tAuth, triggerConfetti],
   )
 
   const handleFormSubmit = useFormSubmitHandler(form, onSubmit)

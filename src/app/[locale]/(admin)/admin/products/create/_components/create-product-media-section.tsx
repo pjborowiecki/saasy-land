@@ -7,7 +7,7 @@ import { Card } from "~/src/components/shadcn/card"
 import { AdminMediaUploadZone } from "~/src/app/[locale]/(admin)/admin/_components/admin-media-upload-zone"
 
 export async function CreateProductMediaSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.products.create")
+  const t = await getTranslations("pages.admin.products.create")
 
   return (
     <Card className="p-5 sm:p-6">

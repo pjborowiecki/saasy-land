@@ -3,13 +3,12 @@ import type { JSX } from "react"
 import { ChevronDown, Filter, Search } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import type { AdminUserRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
 import { Input } from "~/src/components/shadcn/input"
 import { TabsContent } from "~/src/components/shadcn/tabs"
 
+import type { AdminUserRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { UsersAllUsersPagination } from "~/src/app/[locale]/(admin)/admin/users/_components/users-all-users-pagination"
 import { UsersAllUsersRow } from "~/src/app/[locale]/(admin)/admin/users/_components/users-all-users-row"
 import { UsersAllUsersTableHead } from "~/src/app/[locale]/(admin)/admin/users/_components/users-all-users-table-head"
@@ -19,7 +18,7 @@ interface UsersAllUsersTabProps {
 }
 
 export async function UsersAllUsersTab({ users }: UsersAllUsersTabProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.users")
+  const t = await getTranslations("pages.admin.users")
   return (
     <TabsContent value="allUsers" className="mt-6 space-y-8 outline-none">
       <div className="flex flex-col gap-3 sm:flex-row">
