@@ -1,11 +1,12 @@
 import type { JSX } from "react"
 
+import { createTranslator } from "next-intl"
 import { Body, Button, Container, Head, Heading, Html, Preview, Section, Tailwind, Text } from "react-email"
 
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
-import { createNamespacedTranslator, loadLocaleMessages } from "~/src/lib/_utils/i18n"
+import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
 interface ResetPasswordEmailProps {
   readonly locale: Locale
@@ -13,9 +14,12 @@ interface ResetPasswordEmailProps {
   readonly resetPasswordUrl: string
 }
 
-export async function ResetPasswordEmail({ locale, name, resetPasswordUrl }: Readonly<ResetPasswordEmailProps>): Promise<JSX.Element> {
-  const messages = await loadLocaleMessages(locale)
-  const t = createNamespacedTranslator(messages, locale, "emails.resetPassword")
+export function ResetPasswordEmail({ locale, name, resetPasswordUrl }: Readonly<ResetPasswordEmailProps>): JSX.Element {
+  const t = createTranslator({
+    locale,
+    messages: loadLocaleMessagesFromDir(locale),
+    namespace: "emails.resetPassword",
+  })
 
   return (
     <Html>

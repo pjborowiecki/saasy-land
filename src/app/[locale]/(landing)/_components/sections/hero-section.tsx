@@ -12,7 +12,7 @@ import { cn } from "~/src/lib/utils"
 import { buttonVariants } from "~/src/components/shadcn/button"
 
 export async function HeroSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.hero")
+  const t = await getTranslations("pages.landing.hero")
 
   return (
     <section className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 pt-48 pb-24 text-center">

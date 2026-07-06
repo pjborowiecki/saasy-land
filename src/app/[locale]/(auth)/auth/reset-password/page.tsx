@@ -13,7 +13,7 @@ import { ResetPasswordForm } from "~/src/app/[locale]/(auth)/auth/reset-password
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/reset-password">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.resetPasswordPage" })
+  const t = await getTranslations({ locale, namespace: "pages.auth.reset-password" })
 
   return {
     description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
@@ -30,7 +30,7 @@ export default async function ResetPasswordPage({
   searchParams,
 }: Readonly<PageProps<"/[locale]/auth/reset-password">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.resetPasswordPage" })
+  const t = await getTranslations({ locale, namespace: "pages.auth.reset-password" })
 
   return (
     <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">
@@ -54,7 +54,7 @@ async function ResetPasswordPageCard({
 }: Readonly<Pick<PageProps<"/[locale]/auth/reset-password">, "searchParams">>): Promise<JSX.Element> {
   const { error, token } = await searchParams
 
-  const t = await getTranslations("auth.resetPasswordPage")
+  const t = await getTranslations("pages.auth.reset-password")
 
   if (error === undefined && typeof token === "string") {
     return <ResetPasswordForm token={token} />

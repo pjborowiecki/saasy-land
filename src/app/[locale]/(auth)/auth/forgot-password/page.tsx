@@ -11,7 +11,7 @@ import { ForgotPasswordForm } from "~/src/app/[locale]/(auth)/auth/forgot-passwo
 
 export async function generateMetadata({ params }: Readonly<{ params: Promise<{ locale: string }> }>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.forgotPasswordPage" })
+  const t = await getTranslations({ locale, namespace: "pages.auth.forgot-password" })
 
   return {
     description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
@@ -27,7 +27,7 @@ const renderSignInLink = (chunks: ReactNode) => (
 
 export default async function ForgotPasswordPage({ params }: Readonly<{ params: Promise<{ locale: string }> }>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.forgotPasswordPage" })
+  const t = await getTranslations({ locale, namespace: "pages.auth.forgot-password" })
 
   return (
     <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">

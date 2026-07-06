@@ -1,13 +1,12 @@
 import type { JSX } from "react"
 
-import { NON_EMPTY_COLLECTION_LENGTH } from "~/src/lib/admin/constants"
-import type { AdminProductRow } from "~/src/lib/admin/demo-data.types"
-import { getTagBadgeClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 
 import { AdminTableCheckbox } from "~/src/app/[locale]/(admin)/admin/_components/admin-table-checkbox"
 import { ProductStatusBadge } from "~/src/app/[locale]/(admin)/admin/_components/product-status-badge"
+import { NON_EMPTY_COLLECTION_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
+import { getTagBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
+import type { AdminProductRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsRowActionsButton } from "~/src/app/[locale]/(admin)/admin/products/_components/products-row-actions-button"
 
 interface ProductsTaggedRowProps {

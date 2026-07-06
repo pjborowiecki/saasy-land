@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "title": "Products | SaaSy Land",
+    "description": "Manage physical merchandise, digital downloads, and protected content subscriptions."
+  },
+  "tabs": {
+    "all": "All Products",
+    "onetime": "One-time Purchases",
+    "subscriptions": "Subscriptions",
+    "drafts": "Drafts",
+    "categories": "Categories",
+    "collections": "Collections",
+    "courses": "Courses"
+  },
+  "title": "Products",
+  "description": "Manage physical merchandise, digital downloads, and protected content subscriptions.",
+  "actions": {
+    "create": "Create Product"
+  },
+  "search": {
+    "placeholder": "Search products by name or SKU..."
+  },
+  "filters": {
+    "type": "Type: All",
+    "status": "Status: Active",
+    "category": "Category",
+    "collection": "Collection",
+    "cycle": "Cycle",
+    "model": "Model",
+    "visibility": "Visibility",
+    "sortby": "Sort by"
+  },
+  "table": {
+    "headers": {
+      "product": "Product",
+      "type": "Type",
+      "pricing": "Pricing",
+      "status": "Status",
+      "metrics": "Metrics"
+    }
+  },
+  "pagination": {
+    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> products"
+  },
+  "onetime": {
+    "title": "One-time Purchases",
+    "description": "Manage individual products, digital downloads, and physical merchandise."
+  },
+  "subscriptions": {
+    "title": "Subscriptions",
+    "description": "Manage recurring billing plans, membership tiers, and usage-based pricing.",
+    "table": {
+      "headers": {
+        "product": "Plan Name",
+        "model": "Model",
+        "pricing": "Pricing",
+        "status": "Status",
+        "metrics": "Metrics"
+      }
+    }
+  },
+  "categories": {
+    "title": "Categories",
+    "description": "Organize your products, subscription plans, and digital goods.",
+    "table": {
+      "headers": {
+        "category": "Category",
+        "visibility": "Visibility",
+        "items": "Items",
+        "lastUpdated": "Last Updated"
+      }
+    }
+  },
+  "collections": {
+    "title": "Collections",
+    "description": "Curate and group your products, subscription plans, and digital goods.",
+    "table": {
+      "headers": {
+        "collection": "Collection",
+        "visibility": "Visibility",
+        "items": "Items",
+        "lastUpdated": "Last Updated"
+      }
+    }
+  }
+}

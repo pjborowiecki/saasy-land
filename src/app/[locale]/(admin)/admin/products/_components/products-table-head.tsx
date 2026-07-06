@@ -53,7 +53,7 @@ function getTableHeaders(variant: ProductsTableHeadVariant, t: Awaited<ReturnTyp
 }
 
 export async function ProductsTableHead({ variant }: ProductsTableHeadProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.products")
+  const t = await getTranslations("pages.admin.products")
   const headers = getTableHeaders(variant, t)
 
   return (

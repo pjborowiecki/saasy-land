@@ -3,16 +3,15 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { ADMIN_SECURITY_SESSION_ROWS } from "~/src/lib/admin/demo-data"
-
 import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
 
 import { SettingsGeneralTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-general-tab"
 import { SettingsSecurityTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-tab"
+import { ADMIN_SECURITY_SESSION_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.settings" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.settings" })
 
   return {
     description: t("metadata.description"),
@@ -22,7 +21,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 
 export default async function SettingsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.settings" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.settings" })
   const securitySessions = ADMIN_SECURITY_SESSION_ROWS
 
   return (

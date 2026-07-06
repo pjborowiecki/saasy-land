@@ -3,14 +3,13 @@ import type { JSX } from "react"
 import { ChevronDown, Filter, PlusCircle, Search } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import type { AdminRoleRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
 import { Input } from "~/src/components/shadcn/input"
 import { TabsContent } from "~/src/components/shadcn/tabs"
 
 import { AdminUsersRoleRow } from "~/src/app/[locale]/(admin)/admin/_components/admin-users-role-row"
+import type { AdminRoleRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { UsersRolesPagination } from "~/src/app/[locale]/(admin)/admin/users/_components/users-roles-pagination"
 import { UsersRolesTableHead } from "~/src/app/[locale]/(admin)/admin/users/_components/users-roles-table-head"
 
@@ -19,7 +18,7 @@ interface UsersRolesTabProps {
 }
 
 export async function UsersRolesTab({ roles }: UsersRolesTabProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.users")
+  const t = await getTranslations("pages.admin.users")
   return (
     <TabsContent value="roles" className="mt-0 space-y-8 outline-none">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

@@ -26,7 +26,7 @@ function StatusToggleRow({
 }
 
 export async function CreateCourseStatusSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.courses.create")
+  const t = await getTranslations("pages.admin.courses.create")
 
   return (
     <Card className="p-5 sm:p-6">

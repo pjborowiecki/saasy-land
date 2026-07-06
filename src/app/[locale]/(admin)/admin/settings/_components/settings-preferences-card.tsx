@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { Switch } from "~/src/components/shadcn/switch"
 
 export async function SettingsPreferencesCard(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <Card className="overflow-hidden">
       <CardHeader className="border-b border-border/40 p-5">
@@ -24,7 +24,7 @@ export async function SettingsPreferencesCard(): Promise<JSX.Element> {
 }
 
 async function SettingsPreferencesSelects(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <div className="space-y-1.5">
@@ -58,7 +58,7 @@ async function SettingsPreferencesSelects(): Promise<JSX.Element> {
 }
 
 async function SettingsAnnouncementsToggle(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="flex items-center justify-between py-2">
       <div>

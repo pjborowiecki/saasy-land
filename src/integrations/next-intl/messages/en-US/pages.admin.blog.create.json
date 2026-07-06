@@ -1,0 +1,36 @@
+{
+  "title": "Write Post",
+  "description": "Create a new markdown blog post with advanced settings.",
+  "actions": {
+    "preview": "Preview",
+    "saveDraft": "Save Draft",
+    "publish": "Publish"
+  },
+  "editor": {
+    "title": "Post Title",
+    "titlePlaceholder": "Enter post title here...",
+    "slug": "URL Slug",
+    "slugPlaceholder": "post-title-here",
+    "contentPlaceholder": "Write your post content here... You can use Markdown.",
+    "fullscreen": "Fullscreen"
+  },
+  "settings": {
+    "featuredImage": "Featured Image",
+    "upload": "Click to upload",
+    "uploadHelp": "SVG, PNG, JPG or GIF (max. 5MB)",
+    "publishing": "Publishing",
+    "status": "Status",
+    "statusDraft": "Draft",
+    "statusPublished": "Published",
+    "statusScheduled": "Scheduled",
+    "category": "Category",
+    "categorySelect": "Select Category",
+    "categoryUpdates": "Product Updates",
+    "categoryTutorials": "Tutorials",
+    "categoryCompany": "Company News",
+    "tags": "Tags",
+    "tagsPlaceholder": "Add tags separated by commas...",
+    "excerpt": "Excerpt",
+    "excerptPlaceholder": "Brief summary of the post..."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "title": "Modele Cenowe",
+  "description": "Zarządzaj poziomami subskrypcji i jednorazowymi płatnościami.",
+  "actions": {
+    "allTypes": "Wszystkie typy",
+    "createModel": "Utwórz Model"
+  },
+  "stats": {
+    "monthlyRecurring": "Miesięczne Przychody",
+    "activeSubscribers": "Aktywni Subskrybenci",
+    "activeModels": "Aktywne Modele"
+  },
+  "tags": {
+    "subscription": "Subskrypcja",
+    "oneTime": "Jednorazowo",
+    "mostPopular": "Najpopularniejszy"
+  },
+  "models": {
+    "monthly": {
+      "title": "Karnet Miesięczny",
+      "price": "129 zł",
+      "interval": "/ miesiąc",
+      "description": "Rozliczane miesięcznie. Anuluj w dowolnym momencie."
+    },
+    "annual": {
+      "title": "Karnet Roczny",
+      "price": "1290 zł",
+      "interval": "/ rok",
+      "description": "Oszczędzasz 258 zł w porównaniu z subskrypcją miesięczną."
+    },
+    "lifetime": {
+      "title": "Licencja na Kurs",
+      "price": "499 zł",
+      "interval": "/ na zawsze",
+      "description": "Standardowa cena za pojedyncze kursy."
+    }
+  },
+  "labels": {
+    "includedAccess": "Zawarty dostęp",
+    "activeUsers": "aktywnych: {count}",
+    "inactive": "Nieaktywny",
+    "editModel": "Edytuj Model",
+    "moreOptions": "Więcej opcji",
+    "deleteModel": "Usuń Model",
+    "toggleStatus": "Zmień status"
+  },
+  "features": {
+    "allCourses": "Wszystkie obecnie opublikowane kursy",
+    "discord": "Ekskluzywny społecznościowy Discord",
+    "qa": "Miesięczne sesje Q&A na żywo",
+    "everythingInMonthly": "Wszystko w Karnecie Miesięcznym",
+    "sourceFiles": "Pliki źródłowe do pobrania",
+    "portfolioReview": "Coroczny przegląd portfolio 1 na 1",
+    "standaloneCourse": "Wybrany pojedynczy kurs",
+    "lifetimeUpdates": "Dożywotnie aktualizacje materiałów",
+    "guarantee": "30-dniowa gwarancja zwrotu pieniędzy"
+  }
+}

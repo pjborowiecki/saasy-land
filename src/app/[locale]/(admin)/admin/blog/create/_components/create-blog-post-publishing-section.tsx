@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { Textarea } from "~/src/components/shadcn/textarea"
 
 export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog.create")
+  const t = await getTranslations("pages.admin.blog.create")
 
   return (
     <Card className="border-border/40 p-5 sm:p-6">

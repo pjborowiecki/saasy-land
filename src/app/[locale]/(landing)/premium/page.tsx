@@ -12,7 +12,7 @@ import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/premium">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "premiumPage" })
+  const t = await getTranslations({ locale, namespace: "pages.premium" })
 
   return {
     description: t("description"),
@@ -31,7 +31,7 @@ export default async function PremiumPage({ params }: Readonly<PageProps<"/[loca
     notFound()
   }
 
-  const t = await getTranslations({ locale, namespace: "premiumPage" })
+  const t = await getTranslations({ locale, namespace: "pages.premium" })
 
   return <div>{t("title")}</div>
 }

@@ -28,9 +28,10 @@ export function ForgotPasswordForm(): JSX.Element {
   const [submitted, setSubmitted] = useState<boolean>(false)
 
   const locale = useLocale()
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.forgot-password")
+  const tValidations = useTranslations("auth.validations")
 
-  const formSchema = forgotPasswordSchema(t)
+  const formSchema = forgotPasswordSchema(tValidations)
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { email: "" },
     resolver: zodResolver(formSchema),
@@ -47,11 +48,11 @@ export function ForgotPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: () => {
-            toast.error(t("auth.forgotPasswordPage.form.error"))
+            toast.error(t("form.error"))
           },
           onSuccess: () => {
             setSubmitted(true)
-            toast.success(t("auth.forgotPasswordPage.form.success"))
+            toast.success(t("form.success"))
           },
         },
         redirectTo,
@@ -66,23 +67,18 @@ export function ForgotPasswordForm(): JSX.Element {
     <FormProvider {...form}>
       <form className="flex flex-col gap-4" id={authFormElementId(AUTH_FORM_IDS.FORGOT_PASSWORD)} onSubmit={handleFormSubmit}>
         <FieldGroup className="flex flex-col gap-6">
-          <AuthTextField
-            disabled={submitted}
-            formId={AUTH_FORM_IDS.FORGOT_PASSWORD}
-            label={t("auth.forgotPasswordPage.form.email")}
-            name="email"
-          />
+          <AuthTextField disabled={submitted} formId={AUTH_FORM_IDS.FORGOT_PASSWORD} label={t("form.email")} name="email" />
         </FieldGroup>
 
         <Button
-          aria-label={t("auth.forgotPasswordPage.form.submit")}
+          aria-label={t("form.submit")}
           className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
           data-testid="forgot-password-form-submit-button"
           disabled={form.formState.isSubmitting || submitted}
           type="submit"
         >
           {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-          {form.formState.isSubmitting ? t("auth.forgotPasswordPage.form.submitting") : t("auth.forgotPasswordPage.form.submit")}
+          {form.formState.isSubmitting ? t("form.submitting") : t("form.submit")}
         </Button>
       </form>
     </FormProvider>

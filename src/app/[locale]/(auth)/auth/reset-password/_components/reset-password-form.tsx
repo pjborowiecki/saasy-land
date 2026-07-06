@@ -30,9 +30,11 @@ interface ResetPasswordFormProps {
 
 export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): JSX.Element {
   const router = useRouter()
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.reset-password")
+  const tAuth = useTranslations("auth")
+  const tValidations = useTranslations("auth.validations")
 
-  const formSchema = resetPasswordSchema(t)
+  const formSchema = resetPasswordSchema(tValidations)
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { confirmPassword: "", password: "" },
     mode: "onChange",
@@ -44,10 +46,10 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
       await resetPassword({
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
+            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: () => {
-            toast.success(t("auth.resetPasswordPage.form.success"))
+            toast.success(t("form.success"))
             router.push(CONSTANTS.ROUTES.SIGN_IN)
           },
         },
@@ -55,7 +57,7 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
         token,
       })
     },
-    [router, t, token],
+    [router, t, tAuth, token],
   )
 
   const handleFormSubmit = useFormSubmitHandler(form, onSubmit)
@@ -64,25 +66,21 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
     <FormProvider {...form}>
       <form className="flex flex-col gap-4" id={authFormElementId(AUTH_FORM_IDS.RESET_PASSWORD)} onSubmit={handleFormSubmit}>
         <FieldGroup className="flex flex-col gap-4">
-          <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("auth.resetPasswordPage.form.password")} name="password" />
-          <AuthPasswordField
-            formId={AUTH_FORM_IDS.RESET_PASSWORD}
-            label={t("auth.resetPasswordPage.form.confirmPassword")}
-            name="confirmPassword"
-          />
+          <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("form.password")} name="password" />
+          <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("form.confirmPassword")} name="confirmPassword" />
         </FieldGroup>
 
         <PasswordRequirements />
 
         <Button
-          aria-label={t("auth.resetPasswordPage.form.submit")}
+          aria-label={t("form.submit")}
           className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
           data-testid="reset-password-form-submit-button"
           disabled={form.formState.isSubmitting}
           type="submit"
         >
           {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-          {form.formState.isSubmitting ? t("auth.resetPasswordPage.form.submitting") : t("auth.resetPasswordPage.form.submit")}
+          {form.formState.isSubmitting ? t("form.submitting") : t("form.submit")}
         </Button>
       </form>
     </FormProvider>

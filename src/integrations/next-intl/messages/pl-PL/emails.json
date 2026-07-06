@@ -1,0 +1,29 @@
+{
+  "test": {
+    "title": "Test"
+  },
+  "resetPassword": {
+    "subject": "Zresetuj hasło",
+    "preview": "Zresetuj hasło w SaaSy Land",
+    "heading": "Zresetuj hasło",
+    "body": "Cześć {name}, otrzymaliśmy prośbę o zresetowanie hasła. Kliknij poniższy przycisk, aby ustawić nowe hasło.",
+    "button": "Zresetuj hasło",
+    "footer": "Jeśli to nie Ty wysłałeś tę prośbę, zignoruj tę wiadomość."
+  },
+  "verifyEmail": {
+    "subject": "Potwierdź adres e-mail",
+    "preview": "Potwierdź swój e-mail w SaaSy Land",
+    "heading": "Potwierdź e-mail",
+    "body": "Cześć {name}, dziękujemy za rejestrację. Potwierdź swój adres e-mail, aby dokończyć konfigurację konta.",
+    "button": "Potwierdź e-mail",
+    "footer": "Jeśli nie zakładałeś konta, zignoruj tę wiadomość."
+  },
+  "changeEmailConfirmation": {
+    "subject": "Potwierdź nowy adres e-mail",
+    "preview": "Potwierdź zmianę e-maila w SaaSy Land",
+    "heading": "Potwierdź zmianę e-maila",
+    "body": "Cześć {name}, otrzymaliśmy prośbę o zmianę adresu e-mail na {newEmail}. Kliknij przycisk poniżej, aby potwierdzić tę zmianę.",
+    "button": "Potwierdź zmianę e-maila",
+    "footer": "Jeśli to nie Ty wysłałeś tę prośbę, zignoruj tę wiadomość."
+  }
+}

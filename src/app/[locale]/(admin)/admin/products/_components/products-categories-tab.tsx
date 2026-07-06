@@ -1,9 +1,8 @@
 import type { JSX } from "react"
 
-import type { AdminCategoryRow } from "~/src/lib/admin/demo-data.types"
-
 import { TabsContent } from "~/src/components/shadcn/tabs"
 
+import type { AdminCategoryRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsCategoryRow } from "~/src/app/[locale]/(admin)/admin/products/_components/products-category-row"
 import { ProductsTabToolbar } from "~/src/app/[locale]/(admin)/admin/products/_components/products-tab-toolbar"
 import { ProductsTableCard } from "~/src/app/[locale]/(admin)/admin/products/_components/products-table-card"

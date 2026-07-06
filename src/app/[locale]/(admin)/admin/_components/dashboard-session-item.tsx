@@ -3,17 +3,17 @@ import type { JSX } from "react"
 import { Laptop, Smartphone } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import type { DashboardSessionItem as DashboardSessionItemType } from "~/src/lib/admin/demo-data.types"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
+
+import type { DashboardSessionItem as DashboardSessionItemType } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface DashboardSessionItemProps {
   readonly session: DashboardSessionItemType
 }
 
 export async function DashboardSessionItem({ session }: DashboardSessionItemProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <div className="group flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-secondary/50">
       <div className="flex items-center gap-3">
@@ -44,7 +44,7 @@ async function DashboardSessionItemDetails({
   readonly isCurrent: boolean | undefined
   readonly location: string
 }): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <div>
       <p className="flex items-center gap-2 text-sm font-medium text-foreground">

@@ -6,7 +6,7 @@ import { Card } from "~/src/components/shadcn/card"
 import { Switch } from "~/src/components/shadcn/switch"
 
 export async function DashboardSecurityCard(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <Card className="group relative overflow-hidden border-border/80 p-5 transition-colors hover:border-border/40">
       <h2 className="mb-4 text-base font-medium text-foreground">{t("security.title")}</h2>

@@ -30,7 +30,7 @@ const ANALYTICS_CHART_BARS: AnalyticsChartBarData[] = [
 const ANALYTICS_Y_AXIS_LABELS = ["$4k", "$3k", "$2k", "$1k", "$0"] as const
 
 export async function AnalyticsRevenueChart(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.analytics")
+  const t = await getTranslations("pages.admin.analytics")
   return (
     <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
       <div className="flex flex-col gap-4 border-b border-border/40 p-5 sm:flex-row sm:items-center sm:justify-between lg:p-6">

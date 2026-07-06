@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server"
 import { Button } from "~/src/components/shadcn/button"
 
 export async function PaymentsRefundsTablePagination(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.payments")
+  const t = await getTranslations("pages.admin.payments")
   return (
     <div className="flex items-center justify-between border-t border-border/40 px-5 py-3 text-xs text-muted-foreground">
       <span>{t("table.pagination.showing")}</span>

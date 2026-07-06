@@ -6,7 +6,7 @@ import { Button } from "~/src/components/shadcn/button"
 import { Input } from "~/src/components/shadcn/input"
 
 export async function NewsletterSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.newsletter")
+  const t = await getTranslations("pages.landing.newsletter")
 
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24">

@@ -12,7 +12,7 @@ import { LandingPageSectionsSidebar } from "~/src/app/[locale]/(admin)/admin/lan
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.landingPage" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.landing-page" })
 
   return {
     description: t("description"),
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 
 export default async function LandingPageEditor({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.landingPage" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.landing-page" })
 
   return (
     <div className="flex h-[calc(100vh-(--spacing(16)))] w-full animate-in flex-col pb-8 duration-500 fade-in-50">

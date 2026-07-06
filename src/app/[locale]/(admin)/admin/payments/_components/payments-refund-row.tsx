@@ -2,10 +2,10 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import type { AdminPaymentRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { TableCell, TableRow } from "~/src/components/shadcn/table"
+
+import type { AdminPaymentRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface PaymentsRefundRowProps {
   readonly row: AdminPaymentRow

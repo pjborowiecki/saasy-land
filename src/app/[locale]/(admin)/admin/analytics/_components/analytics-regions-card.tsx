@@ -2,19 +2,18 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { AdminAnalyticsRegionRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card, CardContent } from "~/src/components/shadcn/card"
 
 import { RegionProgressBar } from "~/src/app/[locale]/(admin)/admin/_components/region-progress-bar"
+import type { AdminAnalyticsRegionRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface AnalyticsRegionsCardProps {
   readonly regions: readonly AdminAnalyticsRegionRow[]
 }
 
 export async function AnalyticsRegionsCard({ regions }: AnalyticsRegionsCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.analytics")
+  const t = await getTranslations("pages.admin.analytics")
   return (
     <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
       <div className="flex items-center justify-between border-b border-border/40 p-5">

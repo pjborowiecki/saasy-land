@@ -10,7 +10,7 @@ import type {
   AdminUserRow,
   DashboardSessionItem,
   DashboardUserRow,
-} from "~/src/lib/admin/demo-data.types"
+} from "~/src/app/[locale]/(admin)/admin/_types"
 
 export const DASHBOARD_CHART_Y_AXIS = ["$30k", "$20k", "$10k", "$0"] as const
 

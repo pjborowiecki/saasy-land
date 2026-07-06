@@ -1,0 +1,50 @@
+{
+  "title": "Publications",
+  "description": "Create, manage, and analyze your blog content.",
+  "actions": {
+    "categories": "Categories",
+    "writePost": "Write Post",
+    "loadMore": "Load More Articles"
+  },
+  "stats": {
+    "totalViews": "Total Views (30d)",
+    "subscribers": "Subscribers",
+    "publishedPosts": "Published Posts",
+    "draftsPending": "{count} drafts pending"
+  },
+  "filters": {
+    "all": "All Posts",
+    "published": "Published",
+    "drafts": "Drafts",
+    "scheduled": "Scheduled",
+    "search": "Search articles..."
+  },
+  "badges": {
+    "published": "Published",
+    "draft": "Draft",
+    "scheduled": "Scheduled"
+  },
+  "meta": {
+    "readTime": "{minutes} min read",
+    "publishedOn": "{date}",
+    "lastEdited": "Last edited {time} ago",
+    "publishesTomorrow": "Publishes tomorrow"
+  },
+  "labels": {
+    "gridView": "Grid View",
+    "tableView": "Table View",
+    "moreOptions": "More Options"
+  },
+  "table": {
+    "postDetails": "Post Details",
+    "status": "Status",
+    "category": "Category",
+    "author": "Author",
+    "date": "Date",
+    "views": "Views",
+    "actions": "Actions"
+  },
+  "pagination": {
+    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> posts"
+  }
+}

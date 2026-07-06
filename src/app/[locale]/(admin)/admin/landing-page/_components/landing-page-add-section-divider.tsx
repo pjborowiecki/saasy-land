@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server"
 import { Button } from "~/src/components/shadcn/button"
 
 export async function LandingPageAddSectionDivider(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="flex items-center justify-center py-2 opacity-0 transition-opacity group-hover:opacity-100 hover:opacity-100">

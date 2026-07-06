@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server"
 import { Card, CardContent } from "~/src/components/shadcn/card"
 
 export async function PricingModelsStats(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.pricingModels")
+  const t = await getTranslations("pages.admin.pricing-models")
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <Card>

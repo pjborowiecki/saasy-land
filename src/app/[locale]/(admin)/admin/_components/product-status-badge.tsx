@@ -1,8 +1,8 @@
 import type { JSX } from "react"
 
-import { getStatusBadgeClass, getStatusDotClass, type AdminStatusColor } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
+
+import { getStatusBadgeClass, getStatusDotClass, type AdminStatusColor } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 
 interface ProductStatusBadgeProps {
   readonly status: string

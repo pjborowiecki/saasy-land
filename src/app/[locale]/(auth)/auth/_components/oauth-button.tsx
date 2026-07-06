@@ -21,13 +21,12 @@ const OAUTH_BUTTON_STYLES =
 
 interface OAuthButtonProps extends ComponentPropsWithoutRef<"button"> {
   provider: keyof typeof auth.options.socialProviders
-  label: string
   Icon: (props: Readonly<{ className?: string }>) => JSX.Element
 }
 
-export function OAuthButton({ provider, label, Icon, className, ...rest }: Readonly<OAuthButtonProps>): JSX.Element {
+export function OAuthButton({ provider, Icon, className, ...rest }: Readonly<OAuthButtonProps>): JSX.Element {
   const [isPending, startTransition] = useTransition()
-  const t = useTranslations()
+  const tAuth = useTranslations("auth")
 
   const handleSignIn = useCallback(() => {
     startTransition(async () => {
@@ -35,16 +34,16 @@ export function OAuthButton({ provider, label, Icon, className, ...rest }: Reado
         callbackURL: CONSTANTS.ROUTES.AUTH_CALLBACK,
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
+            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: () => {
-            toast.success(t("auth.oAuth.success"))
+            toast.success(tAuth("oauth.success"))
           },
         },
         provider,
       })
     })
-  }, [provider, startTransition, t])
+  }, [provider, startTransition, tAuth])
 
   return (
     <Button
@@ -53,12 +52,12 @@ export function OAuthButton({ provider, label, Icon, className, ...rest }: Reado
       disabled={isPending}
       onClick={handleSignIn}
       id={`oauth-button-${provider}`}
-      aria-label={t(`auth.oAuth.${provider}`)}
+      aria-label={tAuth(`oauth.${provider}`)}
       className={cn(OAUTH_BUTTON_STYLES, className)}
       {...rest}
     >
       {isPending ? <Loader2 className="size-4 animate-spin" /> : <Icon className="size-4" />}
-      {label}
+      {tAuth(`oauth.${provider}`)}
     </Button>
   )
 }

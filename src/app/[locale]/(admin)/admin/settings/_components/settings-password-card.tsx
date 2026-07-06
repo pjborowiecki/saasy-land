@@ -9,7 +9,7 @@ import { Input } from "~/src/components/shadcn/input"
 import { Label } from "~/src/components/shadcn/label"
 
 export async function SettingsPasswordCard(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <Card className="overflow-hidden">
       <CardHeader className="border-b border-border/40 p-5">
@@ -32,7 +32,7 @@ export async function SettingsPasswordCard(): Promise<JSX.Element> {
 }
 
 async function SettingsPasswordFields(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="space-y-4">
       <div className="space-y-1.5">
@@ -52,7 +52,7 @@ async function SettingsPasswordFields(): Promise<JSX.Element> {
 }
 
 async function SettingsPasswordRequirements(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="rounded-lg border border-border/40 bg-secondary/30 p-5">
       <h3 className="mb-4 text-xs font-medium text-foreground">{t("security.password.requirements.title")}</h3>

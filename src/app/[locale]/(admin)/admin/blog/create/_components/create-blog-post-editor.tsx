@@ -10,7 +10,7 @@ import { Label } from "~/src/components/shadcn/label"
 import { Textarea } from "~/src/components/shadcn/textarea"
 
 export async function CreateBlogPostEditor(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog.create")
+  const t = await getTranslations("pages.admin.blog.create")
   return (
     <div className="space-y-6 lg:col-span-2">
       <div className="space-y-1.5">

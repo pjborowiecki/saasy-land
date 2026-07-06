@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server"
 import { Card, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
 
 export async function FeaturesSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.features")
+  const t = await getTranslations("pages.landing.features")
 
   const features = [
     {

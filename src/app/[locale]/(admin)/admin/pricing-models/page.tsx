@@ -18,14 +18,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.pricingModels" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.pricing-models" })
   return {
     title: `${t("title")} | SaaSy Land`,
   }
 }
 
 export default async function PricingModelsPage(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.pricingModels")
+  const t = await getTranslations("pages.admin.pricing-models")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 pb-8 duration-500 fade-in-50">

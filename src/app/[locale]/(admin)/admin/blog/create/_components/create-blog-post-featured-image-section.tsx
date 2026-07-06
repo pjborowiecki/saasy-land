@@ -7,7 +7,7 @@ import { Card } from "~/src/components/shadcn/card"
 import { AdminMediaUploadZone } from "~/src/app/[locale]/(admin)/admin/_components/admin-media-upload-zone"
 
 export async function CreateBlogPostFeaturedImageSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog.create")
+  const t = await getTranslations("pages.admin.blog.create")
 
   return (
     <Card className="border-border/40 p-5 sm:p-6">

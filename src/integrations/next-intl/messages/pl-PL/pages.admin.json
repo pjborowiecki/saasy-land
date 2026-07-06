@@ -1,0 +1,18 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Strefa aplikacji po zalogowaniu."
+    },
+    "welcome": "Aplikacja — {name}"
+  },
+  "components": {
+    "userWidget": {
+      "signedInAs": "Zalogowano jako <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Wyloguj",
+      "signingOut": "Wylogowywanie...",
+      "success": "Do zobaczenia!"
+    }
+  }
+}

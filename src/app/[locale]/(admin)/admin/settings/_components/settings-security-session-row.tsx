@@ -3,17 +3,17 @@ import type { JSX } from "react"
 import { Laptop, Smartphone } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import type { AdminSecuritySessionRow } from "~/src/lib/admin/demo-data.types"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
+
+import type { AdminSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface SettingsSecuritySessionRowProps {
   readonly session: AdminSecuritySessionRow
 }
 
 export async function SettingsSecuritySessionRow({ session }: SettingsSecuritySessionRowProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-secondary/20">
       <div className="flex items-center gap-4">
@@ -36,7 +36,7 @@ export async function SettingsSecuritySessionRow({ session }: SettingsSecuritySe
 }
 
 async function SettingsSecuritySessionDetails({ session }: SettingsSecuritySessionRowProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div>
       <div className="mb-0.5 flex items-center gap-2">

@@ -6,7 +6,7 @@ import { Checkbox } from "~/src/components/shadcn/checkbox"
 import { TableHead, TableHeader, TableRow } from "~/src/components/shadcn/table"
 
 export async function DashboardUsersTableHead(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <TableHeader>
       <TableRow>

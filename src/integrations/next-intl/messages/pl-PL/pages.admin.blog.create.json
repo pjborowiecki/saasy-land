@@ -1,0 +1,36 @@
+{
+  "title": "Napisz Post",
+  "description": "Utwórz nowy post na blogu z zaawansowanymi ustawieniami.",
+  "actions": {
+    "preview": "Podgląd",
+    "saveDraft": "Zapisz Szkic",
+    "publish": "Opublikuj"
+  },
+  "editor": {
+    "title": "Tytuł Posta",
+    "titlePlaceholder": "Wpisz tytuł posta tutaj...",
+    "slug": "Slug URL",
+    "slugPlaceholder": "tytul-posta-tutaj",
+    "contentPlaceholder": "Napisz treść posta tutaj... Możesz użyć formatowania Markdown.",
+    "fullscreen": "Pełny ekran"
+  },
+  "settings": {
+    "featuredImage": "Wyróżniony Obraz",
+    "upload": "Kliknij, aby przesłać",
+    "uploadHelp": "SVG, PNG, JPG lub GIF (max. 5MB)",
+    "publishing": "Publikacja",
+    "status": "Status",
+    "statusDraft": "Szkic",
+    "statusPublished": "Opublikowano",
+    "statusScheduled": "Zaplanowano",
+    "category": "Kategoria",
+    "categorySelect": "Wybierz Kategorię",
+    "categoryUpdates": "Aktualizacje Produktu",
+    "categoryTutorials": "Samouczki",
+    "categoryCompany": "Wiadomości Firmowe",
+    "tags": "Tagi",
+    "tagsPlaceholder": "Dodaj tagi oddzielone przecinkami...",
+    "excerpt": "Fragment",
+    "excerptPlaceholder": "Krótkie podsumowanie posta..."
+  }
+}

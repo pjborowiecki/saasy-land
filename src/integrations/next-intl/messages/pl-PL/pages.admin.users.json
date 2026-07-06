@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "title": "User Management | SaaSy Land",
+    "description": "Manage your team members, permissions, and customer accounts."
+  },
+  "title": "User Management",
+  "description": "Manage your team members, permissions, and customer accounts.",
+  "actions": {
+    "export": "Export",
+    "addUser": "Add User"
+  },
+  "search": {
+    "placeholder": "Search users by name, email, or ID..."
+  },
+  "filters": {
+    "role": "Role: All",
+    "status": "Status: Active"
+  },
+  "tabs": {
+    "allUsers": "All Users",
+    "invitations": "Invitations",
+    "roles": "Roles & Permissions",
+    "security": "Security"
+  },
+  "table": {
+    "headers": {
+      "user": "User",
+      "role": "Role",
+      "status": "Status",
+      "lastActive": "Last Active"
+    }
+  },
+  "pagination": {
+    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+  },
+  "invitations": {
+    "title": "Invitations",
+    "description": "Manage pending team invitations and access links.",
+    "actions": {
+      "copyLink": "Copy Link",
+      "sendInvite": "Send Invite"
+    },
+    "search": {
+      "placeholder": "Search invites by email..."
+    },
+    "filters": {
+      "role": "Role: All",
+      "status": "Status: Pending"
+    },
+    "table": {
+      "headers": {
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "sentDate": "Sent Date"
+      }
+    },
+    "pagination": {
+      "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+    }
+  },
+  "roles": {
+    "title": "Roles & Permissions",
+    "description": "Define access levels and manage permissions across your organization.",
+    "actions": {
+      "createRole": "Create Role"
+    },
+    "search": {
+      "placeholder": "Search roles by name or description..."
+    },
+    "filters": {
+      "type": "Type: All"
+    },
+    "table": {
+      "headers": {
+        "name": "Role Name",
+        "description": "Description",
+        "type": "Type",
+        "users": "Users"
+      }
+    },
+    "pagination": {
+      "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> roles"
+    }
+  }
+}

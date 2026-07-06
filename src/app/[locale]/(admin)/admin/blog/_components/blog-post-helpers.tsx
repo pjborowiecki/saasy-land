@@ -3,9 +3,8 @@ import type { JSX, ReactNode } from "react"
 import { Calendar } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { EMPTY_PATH_PARTS_LENGTH } from "~/src/lib/admin/constants"
-import type { BlogPostStatus } from "~/src/lib/admin/status-colors"
-
+import { EMPTY_PATH_PARTS_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
+import type { BlogPostStatus } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 
 export function hasPostViews(views: string | undefined): views is string {
@@ -21,7 +20,7 @@ export function getGridMetaTextClass(status: BlogPostStatus): string {
 }
 
 export async function GridPostMeta({ post }: { readonly post: DummyPost }): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog")
+  const t = await getTranslations("pages.admin.blog")
   if (post.status === "scheduled") {
     return (
       <>

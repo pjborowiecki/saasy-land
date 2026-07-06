@@ -9,7 +9,7 @@ function TableHeaderCell({ children }: { readonly children: string }): JSX.Eleme
 }
 
 export async function UsersAllUsersTableHead(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.users")
+  const t = await getTranslations("pages.admin.users")
   return (
     <thead>
       <tr className="border-b border-border/40 bg-secondary/20">

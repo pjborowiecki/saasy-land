@@ -1,0 +1,71 @@
+{
+  "title": "Utwórz Kurs",
+  "actions": {
+    "cancel": "Anuluj",
+    "save": "Zapisz Kurs"
+  },
+  "sections": {
+    "general": {
+      "title": "Informacje Ogólne",
+      "name": {
+        "label": "Tytuł Kursu",
+        "placeholder": "np. Zaawansowane wzorce projektowe UI..."
+      },
+      "description": {
+        "label": "Opis",
+        "placeholder": "Krótko opisz czego nauczą się studenci...",
+        "help": "Będzie wyświetlany na stronie docelowej kursu."
+      }
+    },
+    "curriculum": {
+      "title": "Program Nauczania",
+      "description": "Zbuduj strukturę kursu na podstawie sekcji i lekcji.",
+      "expandAll": "Rozwiń Wszystko",
+      "addSection": "Dodaj Nową Sekcję",
+      "addLesson": "Dodaj Lekcję"
+    },
+    "pricing": {
+      "title": "Cennik i Dostęp",
+      "model": {
+        "label": "Model Rozliczeniowy",
+        "oneTime": "Jednorazowy Zakup",
+        "subscription": "Subskrypcja"
+      },
+      "price": {
+        "label": "Cena",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "Czas Dostępu",
+        "lifetime": "Dożywotni Dostęp"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "publish": {
+        "label": "Opublikuj Kurs",
+        "description": "Ustaw widoczność dla studentów"
+      },
+      "certificate": {
+        "label": "Wydaj Certyfikat",
+        "description": "Po 100% ukończeniu kursu"
+      }
+    },
+    "media": {
+      "title": "Miniaturka Kursu",
+      "upload": "Wgraj obraz",
+      "help": "Zalecane 1920x1080px"
+    },
+    "organization": {
+      "title": "Organizacja",
+      "category": {
+        "label": "Kategoria",
+        "placeholder": "Wybierz kategorię..."
+      },
+      "difficulty": {
+        "label": "Poziom Trudności",
+        "placeholder": "np. Początkujący, Zaawansowany..."
+      }
+    }
+  }
+}

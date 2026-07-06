@@ -9,7 +9,7 @@ import { Input } from "~/src/components/shadcn/input"
 import { Label } from "~/src/components/shadcn/label"
 
 export async function SettingsProfileCard(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <Card className="overflow-hidden">
       <CardHeader className="border-b border-border/40 p-5">
@@ -30,7 +30,7 @@ export async function SettingsProfileCard(): Promise<JSX.Element> {
 }
 
 async function SettingsProfileImageSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="flex items-center gap-6">
       <div className="flex size-16 shrink-0 items-center justify-center rounded-xl border border-border/50 bg-secondary shadow-inner">
@@ -52,7 +52,7 @@ async function SettingsProfileImageSection(): Promise<JSX.Element> {
 }
 
 async function SettingsProfileFields(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">

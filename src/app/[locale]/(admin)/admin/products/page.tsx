@@ -3,14 +3,6 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import {
-  ADMIN_CATEGORY_ROWS,
-  ADMIN_COLLECTION_ROWS,
-  ADMIN_ONETIME_PRODUCT_ROWS,
-  ADMIN_PRODUCT_ROWS,
-  ADMIN_SUBSCRIPTION_ROWS,
-} from "~/src/lib/admin/demo-data"
-
 import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
 
 import { ProductsAllTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-all-tab"
@@ -19,10 +11,17 @@ import { ProductsCollectionsTab } from "~/src/app/[locale]/(admin)/admin/product
 import { ProductsCoursesTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-courses-tab"
 import { ProductsOnetimeTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-onetime-tab"
 import { ProductsSubscriptionsTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-subscriptions-tab"
+import {
+  ADMIN_CATEGORY_ROWS,
+  ADMIN_COLLECTION_ROWS,
+  ADMIN_ONETIME_PRODUCT_ROWS,
+  ADMIN_PRODUCT_ROWS,
+  ADMIN_SUBSCRIPTION_ROWS,
+} from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.products" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.products" })
 
   return {
     description: t("metadata.description"),
@@ -32,7 +31,7 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 
 export default async function ProductsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "admin.products" })
+  const t = await getTranslations({ locale, namespace: "pages.admin.products" })
   const products = ADMIN_PRODUCT_ROWS
   const oneTimeProducts = ADMIN_ONETIME_PRODUCT_ROWS
   const subscriptionProducts = ADMIN_SUBSCRIPTION_ROWS

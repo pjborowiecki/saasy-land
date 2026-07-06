@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "title": "Blog",
+    "description": "Notes and updates from SaaSy Land."
+  },
+  "nav": {
+    "docs": "Docs",
+    "blog": "Blog"
+  },
+  "index": {
+    "title": "Blog",
+    "description": "Markdown posts compiled with Fumadocs MDX."
+  },
+  "post": {
+    "backToBlog": "Back to blog",
+    "writtenBy": "Written by",
+    "dateLabel": "Published"
+  }
+}

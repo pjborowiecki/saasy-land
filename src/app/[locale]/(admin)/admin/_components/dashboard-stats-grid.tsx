@@ -7,7 +7,7 @@ import { Badge } from "~/src/components/shadcn/badge"
 import { Card, CardContent, CardHeader } from "~/src/components/shadcn/card"
 
 export async function DashboardStatsGrid(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">

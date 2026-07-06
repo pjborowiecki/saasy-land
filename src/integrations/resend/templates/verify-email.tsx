@@ -1,11 +1,12 @@
 import type { JSX } from "react"
 
+import { createTranslator } from "next-intl"
 import { Body, Button, Container, Head, Heading, Html, Preview, Section, Tailwind, Text } from "react-email"
 
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
-import { createNamespacedTranslator, loadLocaleMessages } from "~/src/lib/_utils/i18n"
+import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
 interface VerifyEmailProps {
   readonly locale: Locale
@@ -13,9 +14,12 @@ interface VerifyEmailProps {
   readonly verifyUrl: string
 }
 
-export async function VerifyEmail({ locale, name, verifyUrl }: Readonly<VerifyEmailProps>): Promise<JSX.Element> {
-  const messages = await loadLocaleMessages(locale)
-  const t = createNamespacedTranslator(messages, locale, "emails.verifyEmail")
+export function VerifyEmail({ locale, name, verifyUrl }: Readonly<VerifyEmailProps>): JSX.Element {
+  const t = createTranslator({
+    locale,
+    messages: loadLocaleMessagesFromDir(locale),
+    namespace: "emails.verifyEmail",
+  })
 
   return (
     <Html>

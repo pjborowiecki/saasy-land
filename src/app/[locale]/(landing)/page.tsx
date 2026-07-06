@@ -15,7 +15,7 @@ import { TestimonialsSection } from "~/src/app/[locale]/(landing)/_components/se
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "landingPage" })
+  const t = await getTranslations({ locale, namespace: "pages.landing" })
 
   return {
     description: t("metadata.description"),

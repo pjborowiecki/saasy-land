@@ -15,18 +15,14 @@ import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-fo
 export type SignUpFormValues = z.infer<ReturnType<typeof signUpWithPasswordSchema>>
 
 export function SignUpFormFields(): JSX.Element {
-  const t = useTranslations()
+  const t = useTranslations("pages.auth.sign-up")
 
   return (
     <FieldGroup className="flex flex-col gap-4">
-      <AuthTextField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("auth.signUpPage.form.name")} name="name" />
-      <AuthTextField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("auth.signUpPage.form.email")} name="email" />
-      <AuthPasswordField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("auth.signUpPage.form.password")} name="password" />
-      <AuthPasswordField<SignUpFormValues>
-        formId={AUTH_FORM_IDS.SIGN_UP}
-        label={t("auth.signUpPage.form.confirmPassword")}
-        name="confirmPassword"
-      />
+      <AuthTextField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.name")} name="name" />
+      <AuthTextField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.email")} name="email" />
+      <AuthPasswordField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.password")} name="password" />
+      <AuthPasswordField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.confirmPassword")} name="confirmPassword" />
     </FieldGroup>
   )
 }

@@ -13,7 +13,7 @@ import { SignInWithPasswordForm } from "~/src/app/[locale]/(auth)/auth/sign-in/_
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/sign-in">>): Promise<Metadata> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.signInPage" })
+  const t = await getTranslations({ locale, namespace: "pages.auth.sign-in" })
 
   return {
     description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
@@ -29,7 +29,7 @@ const renderSignUpLink = (chunks: ReactNode) => (
 
 export default async function SignInPage({ params }: Readonly<PageProps<"/[locale]/auth/sign-in">>): Promise<JSX.Element> {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.signInPage" })
+  const t = await getTranslations({ locale, namespace: "pages.auth.sign-in" })
 
   return (
     <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">

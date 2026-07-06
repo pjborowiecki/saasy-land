@@ -2,11 +2,10 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { AdminSecuritySessionRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card } from "~/src/components/shadcn/card"
 
+import type { AdminSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { SettingsSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-session-row"
 
 interface SettingsSessionsCardProps {
@@ -14,7 +13,7 @@ interface SettingsSessionsCardProps {
 }
 
 export async function SettingsSessionsCard({ securitySessions }: SettingsSessionsCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.settings")
+  const t = await getTranslations("pages.admin.settings")
   return (
     <Card className="overflow-hidden">
       <div className="flex flex-col justify-between gap-4 border-b border-border/40 p-5 sm:flex-row sm:items-center">

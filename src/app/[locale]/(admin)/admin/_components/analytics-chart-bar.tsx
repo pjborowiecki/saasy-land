@@ -2,7 +2,7 @@
 
 import type { CSSProperties, JSX } from "react"
 
-import { EMPTY_STRING_LENGTH } from "~/src/lib/admin/constants"
+import { EMPTY_STRING_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 
 export interface AnalyticsChartBarData {
   active?: boolean

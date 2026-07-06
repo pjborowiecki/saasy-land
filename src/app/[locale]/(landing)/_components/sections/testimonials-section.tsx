@@ -40,7 +40,7 @@ function TestimonialCard({ item }: { item: Testimonial }): JSX.Element {
 }
 
 export async function TestimonialsSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.testimonials")
+  const t = await getTranslations("pages.landing.testimonials")
 
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24">

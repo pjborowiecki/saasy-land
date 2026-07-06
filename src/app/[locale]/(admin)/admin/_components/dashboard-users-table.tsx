@@ -2,8 +2,6 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { DashboardUserRow } from "~/src/lib/admin/demo-data.types"
-
 import { Button } from "~/src/components/shadcn/button"
 import { Card, CardHeader, CardTitle } from "~/src/components/shadcn/card"
 import { Table, TableBody } from "~/src/components/shadcn/table"
@@ -11,13 +9,14 @@ import { Table, TableBody } from "~/src/components/shadcn/table"
 import { DashboardUsersTableHead } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table-head"
 import { DashboardUsersTableRow } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table-row"
 import { DashboardUsersTableToolbar } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table-toolbar"
+import type { DashboardUserRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface DashboardUsersTableProps {
   readonly users: readonly DashboardUserRow[]
 }
 
 export async function DashboardUsersTable({ users }: DashboardUsersTableProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <Card className="group relative flex flex-col overflow-hidden border-border/80 transition-colors hover:border-border/40">
       <CardHeader className="flex flex-row items-center justify-between border-b border-border/40 p-5">

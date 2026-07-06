@@ -7,7 +7,7 @@ import { Label } from "~/src/components/shadcn/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/components/shadcn/select"
 
 export async function CreateCourseOrganizationSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.courses.create")
+  const t = await getTranslations("pages.admin.courses.create")
 
   return (
     <Card className="p-5 sm:p-6">

@@ -1,11 +1,10 @@
 import type { JSX } from "react"
 
-import type { AdminProductRow } from "~/src/lib/admin/demo-data.types"
-
 import { Badge } from "~/src/components/shadcn/badge"
 
 import { AdminTableCheckbox } from "~/src/app/[locale]/(admin)/admin/_components/admin-table-checkbox"
 import { ProductStatusBadge } from "~/src/app/[locale]/(admin)/admin/_components/product-status-badge"
+import type { AdminProductRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsRowActionsButton } from "~/src/app/[locale]/(admin)/admin/products/_components/products-row-actions-button"
 
 interface ProductsTableRowProps {

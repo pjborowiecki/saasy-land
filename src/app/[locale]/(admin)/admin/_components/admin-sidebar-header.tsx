@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl"
 import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "~/src/components/shadcn/sidebar"
 
 export function AdminSidebarHeader(): JSX.Element {
-  const t = useTranslations("admin.sidebar")
+  const t = useTranslations("pages.admin.sidebar")
 
   return (
     <SidebarHeader className="h-16 justify-center border-b border-border/40 py-0">

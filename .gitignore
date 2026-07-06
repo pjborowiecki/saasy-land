@@ -31,7 +31,7 @@
 /dist
 
 # next-intl
-messages/*.d.json.ts
+src/integrations/next-intl/*.d.json.ts
 
 # debug
 npm-debug.log*

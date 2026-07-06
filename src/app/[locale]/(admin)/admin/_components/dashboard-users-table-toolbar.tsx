@@ -7,7 +7,7 @@ import { Button } from "~/src/components/shadcn/button"
 import { Input } from "~/src/components/shadcn/input"
 
 export async function DashboardUsersTableToolbar(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.dashboard")
+  const t = await getTranslations("pages.admin.dashboard")
   return (
     <div className="flex flex-col justify-between gap-4 border-b border-border/40 bg-secondary/20 p-4 sm:flex-row sm:items-center">
       <div className="flex items-center gap-3">

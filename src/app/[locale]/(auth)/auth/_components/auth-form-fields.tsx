@@ -21,8 +21,8 @@ const AUTH_PASSWORD_GROUP_CLASS =
 const AUTH_PASSWORD_INPUT_CLASS = "px-4 text-sm text-foreground placeholder:text-muted-foreground"
 
 const TEXT_FIELD_CONFIG = {
-  email: { autoComplete: "email", placeholder: "auth.form.placeholders.email", type: "email" },
-  name: { autoComplete: "name", placeholder: "auth.form.placeholders.name", type: "text" },
+  email: { autoComplete: "email", placeholder: "placeholders.email", type: "email" },
+  name: { autoComplete: "name", placeholder: "placeholders.name", type: "text" },
 } as const
 
 type TextFieldName = keyof typeof TEXT_FIELD_CONFIG
@@ -46,7 +46,7 @@ export function AuthTextField<T extends FieldValues>({
   labelClassName,
   name,
 }: Readonly<AuthTextFieldProps<T>>): JSX.Element {
-  const t = useTranslations()
+  const t = useTranslations("auth.form")
 
   const form = useFormContext<T>()
   const { field, fieldState } = useController({ control: form.control, name })
@@ -94,7 +94,7 @@ export function AuthPasswordField<T extends FieldValues>({
 }: Readonly<AuthPasswordFieldProps<T>>): JSX.Element {
   const [visible, setVisible] = useState(false)
 
-  const t = useTranslations()
+  const t = useTranslations("auth.form")
 
   const form = useFormContext<T>()
   const { field, fieldState } = useController({ control: form.control, name })
@@ -117,12 +117,12 @@ export function AuthPasswordField<T extends FieldValues>({
             className={AUTH_PASSWORD_INPUT_CLASS}
             disabled={disabled || form.formState.isSubmitting}
             id={authFieldId(formId, name)}
-            placeholder={t("auth.form.placeholderPassword")}
+            placeholder={t("placeholderPassword")}
             type={visible ? "text" : "password"}
           />
           <InputGroupAddon align="inline-end" className="pr-1.5">
             <InputGroupButton
-              aria-label={visible ? t("auth.form.hidePassword") : t("auth.form.showPassword")}
+              aria-label={visible ? t("hidePassword") : t("showPassword")}
               className="text-muted-foreground hover:bg-white/5 hover:text-foreground"
               onClick={toggleVisible}
               size="icon-sm"

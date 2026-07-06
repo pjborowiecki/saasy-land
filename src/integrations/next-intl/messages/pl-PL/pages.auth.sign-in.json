@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Logowanie",
+    "description": "Zaloguj się do aplikacji {name}."
+  },
+  "form": {
+    "title": "Witaj ponownie",
+    "description": "Wprowadź swoje dane, aby się zalogować.",
+    "email": "E-mail",
+    "password": "Hasło",
+    "submit": "Kontynuuj",
+    "submitting": "Logowanie...",
+    "success": "Zalogowano pomyślnie!",
+    "error": "Nieprawidłowy adres e-mail lub hasło. Spróbuj ponownie.",
+    "noAccount": "Nie masz konta? <signup>Zarejestruj się</signup>",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "continueWithGithub": "Kontynuuj z GitHub",
+    "continueWithGoogle": "Kontynuuj z Google",
+    "or": "lub"
+  }
+}

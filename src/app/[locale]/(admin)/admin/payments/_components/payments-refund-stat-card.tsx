@@ -16,7 +16,7 @@ export async function PaymentsRefundStatCard({
   statKey,
   trendIcon: TrendIcon,
 }: PaymentsRefundStatCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.payments")
+  const t = await getTranslations("pages.admin.payments")
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -38,7 +38,7 @@ async function PaymentsRefundStatTrend({
   readonly statKey: PaymentsRefundStatCardProps["statKey"]
   readonly trendIcon: LucideIcon | undefined
 }): Promise<JSX.Element> {
-  const t = await getTranslations("admin.payments")
+  const t = await getTranslations("pages.admin.payments")
 
   if (statKey === "pending") {
     return (

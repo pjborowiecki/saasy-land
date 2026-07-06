@@ -22,7 +22,7 @@ interface AdminSidebarNavItemProps {
 }
 
 export function AdminSidebarNavItem({ item, pathname }: AdminSidebarNavItemProps): JSX.Element {
-  const t = useTranslations("admin.sidebar")
+  const t = useTranslations("pages.admin.sidebar")
 
   const isActive = item.url === "/admin" ? pathname === "/admin" : pathname === item.url || pathname.startsWith(`${item.url}/`)
 

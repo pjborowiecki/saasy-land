@@ -2,15 +2,15 @@ import type { JSX } from "react"
 
 import { PenLine, Trash2 } from "lucide-react"
 
-import { AVATAR_INITIALS_LENGTH, AVATAR_INITIALS_START } from "~/src/lib/admin/constants"
-import type { DashboardUserRow } from "~/src/lib/admin/demo-data.types"
-import { getDashboardStatusDotClass } from "~/src/lib/admin/status-colors"
-
 import { Avatar, AvatarFallback, AvatarImage } from "~/src/components/shadcn/avatar"
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
 import { Checkbox } from "~/src/components/shadcn/checkbox"
 import { TableCell, TableRow } from "~/src/components/shadcn/table"
+
+import { AVATAR_INITIALS_LENGTH, AVATAR_INITIALS_START } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
+import { getDashboardStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
+import type { DashboardUserRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
 interface DashboardUsersTableRowProps {
   readonly row: DashboardUserRow

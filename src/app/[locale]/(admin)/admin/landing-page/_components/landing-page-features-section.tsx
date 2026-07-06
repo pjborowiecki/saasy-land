@@ -24,7 +24,7 @@ function LandingPageFeatureCard({ barWidth1, barWidth2, icon: Icon, title }: Fea
 }
 
 export async function LandingPageFeaturesSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="group relative rounded-xl border border-dashed border-border/30 bg-secondary/5 p-12 transition-colors hover:border-border/60">

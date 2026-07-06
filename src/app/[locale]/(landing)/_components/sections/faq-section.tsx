@@ -8,7 +8,7 @@ const FAQ_DEFAULT_OPEN: string[] = ["item-1"]
 const FAQ_ITEMS = ["1", "2", "3", "4", "5", "6"] as const
 
 export async function FaqSection(): Promise<JSX.Element> {
-  const t = await getTranslations("landingPage.faq")
+  const t = await getTranslations("pages.landing.faq")
 
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:py-24">

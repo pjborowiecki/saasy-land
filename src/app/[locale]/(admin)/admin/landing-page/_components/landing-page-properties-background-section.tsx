@@ -4,7 +4,7 @@ import { ImageIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 export async function LandingPagePropertiesBackgroundSection(): Promise<JSX.Element> {
-  const t = await getTranslations("admin.landingPage")
+  const t = await getTranslations("pages.admin.landing-page")
 
   return (
     <div className="space-y-3">

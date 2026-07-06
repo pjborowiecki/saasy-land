@@ -3,11 +3,10 @@ import type { JSX } from "react"
 import { Eye, MoreHorizontal } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { getBlogPostStatusDotClass } from "~/src/lib/admin/status-colors"
-
 import { Badge } from "~/src/components/shadcn/badge"
 import { Button } from "~/src/components/shadcn/button"
 
+import { getBlogPostStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { getGridMetaTextClass, GridPostMeta, hasPostViews } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-helpers"
 
@@ -16,7 +15,7 @@ interface BlogPostGridCardProps {
 }
 
 export async function BlogPostGridCard({ post }: BlogPostGridCardProps): Promise<JSX.Element> {
-  const t = await getTranslations("admin.blog")
+  const t = await getTranslations("pages.admin.blog")
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/40 bg-card transition-all duration-300 hover:border-border/80 hover:bg-card/60">

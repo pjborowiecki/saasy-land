@@ -1,0 +1,18 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Signed-in app area."
+    },
+    "welcome": "App — {name}"
+  },
+  "components": {
+    "userWidget": {
+      "signedInAs": "Signed in as <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Sign Out",
+      "signingOut": "Signing out...",
+      "success": "See you later!"
+    }
+  }
+}
