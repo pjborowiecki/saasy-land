@@ -1,5 +1,9 @@
 import type { JSX } from "react"
 
+import { cn } from "~/src/lib/_utils/ui"
+
+import { backgroundGridPatternClassName } from "~/src/components/custom/background"
+
 import { LandingPageAddSectionDivider } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-add-section-divider"
 import { LandingPageCanvasToolbar } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-canvas-toolbar"
 import { LandingPageFeaturesSection } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-features-section"
@@ -10,7 +14,7 @@ export function LandingPageEditorCanvas(): JSX.Element {
     <div className="flex flex-1 flex-col overflow-hidden rounded-xl border border-border/40 bg-card shadow-lg">
       <LandingPageCanvasToolbar />
 
-      <div className="custom-scrollbar flex-1 overflow-y-auto bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[24px_24px] p-4 lg:p-8">
+      <div className={cn("custom-scrollbar flex-1 overflow-y-auto p-4 lg:p-8", backgroundGridPatternClassName)}>
         <div className="mx-auto max-w-4xl space-y-4">
           <LandingPageHeroSection />
           <LandingPageAddSectionDivider />

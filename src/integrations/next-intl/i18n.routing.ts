@@ -6,7 +6,7 @@ import type { Locale } from "~/src/constants/types"
 export const localePathPrefixes = {
   "en-US": "/en",
   "pl-PL": "/pl",
-} as const satisfies Partial<Record<Locale, string>>
+} satisfies Partial<Record<Locale, string>>
 
 export const routing = defineRouting({
   alternateLinks: true,

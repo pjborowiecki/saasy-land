@@ -48,8 +48,11 @@ jobs:
       - name: Format, lint, typecheck, and i18n
         run: bun run check
 
-      - name: Unit & component tests
+      - name: Unit, integration, and component tests
         run: bun run test
+
+      - name: Coverage gate
+        run: bun run test:coverage
 
       - name: Build (for E2E)
         run: bun run build
@@ -63,5 +66,5 @@ jobs:
       - name: Install Playwright browsers
         run: bunx playwright install --with-deps
 
-      - name: E2E smoke tests (Chromium only)
-        run: bun run test:e2e:smoke
+      - name: E2E PR suite (Chromium)
+        run: bun run test:e2e:pr

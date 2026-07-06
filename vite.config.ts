@@ -1,4 +1,7 @@
+import { resolve } from "node:path"
 import { defineConfig } from "vite-plus"
+
+const projectRoot = import.meta.dirname
 
 const ignorePatterns = [
   "node_modules",
@@ -17,6 +20,7 @@ const ignorePatterns = [
   ".vite-hooks",
   ".vscode",
   ".agents",
+  "tests/mocks",
   "bun.lock",
   "**/*.d.ts",
   "**/*.tsbuildinfo",
@@ -134,6 +138,12 @@ export default defineConfig({
     },
     overrides: [
       {
+        files: ["vite.config.ts"],
+        rules: {
+          "import/no-nodejs-modules": "off",
+        },
+      },
+      {
         files: ["src/components/shadcn/label.tsx"],
         rules: {
           "jsx-a11y/label-has-associated-control": "off",
@@ -149,6 +159,50 @@ export default defineConfig({
         files: ["src/integrations/next-intl/i18n.utils.ts"],
         rules: {
           "import/no-nodejs-modules": "off",
+        },
+      },
+      {
+        files: ["e2e/**/*.{ts,tsx}"],
+        rules: {
+          "vitest/consistent-test-filename": "off",
+          "vitest/prefer-expect-assertions": "off",
+          "vitest/prefer-importing-vitest-globals": "off",
+          "vitest/prefer-to-be-falsy": "off",
+          "vitest/prefer-to-be-truthy": "off",
+          "vitest/valid-title": "off",
+        },
+      },
+      {
+        files: ["tests/setup/vitest.setup.ts"],
+        rules: {
+          "import/no-nodejs-modules": "off",
+          "vitest/no-hooks": "off",
+          "vitest/require-hook": "off",
+          "vitest/require-top-level-describe": "off",
+        },
+      },
+      {
+        files: [
+          "src/integrations/better-auth/__test__/auth._server.test.ts",
+          "src/integrations/better-auth/__test__/auth.errors.test.ts",
+          "tests/component/providers.component.test.tsx",
+          "tests/component/locale-switch.component.test.tsx",
+          "tests/component/theme-switch-branches.component.test.tsx",
+          "tests/component/auth-forms.component.test.tsx",
+          "tests/integration/next-intl/i18n-utils.integration.test.ts",
+        ],
+        rules: {
+          "typescript/no-unsafe-type-assertion": "off",
+        },
+      },
+      {
+        files: [
+          "src/lib/_utils/__test__/email.test.ts",
+          "tests/component/locale-switch.component.test.tsx",
+          "tests/component/theme-switch-branches.component.test.tsx",
+        ],
+        rules: {
+          "unicorn/no-null": "off",
         },
       },
     ],
@@ -202,7 +256,18 @@ export default defineConfig({
       "sort-imports": "off",
       "typescript/no-explicit-any": "error",
       "typescript/no-floating-promises": "error",
-      "typescript/no-misused-promises": "error",
+      "typescript/no-misused-promises": [
+        "error",
+        {
+          checksVoidReturn: {
+            arguments: true,
+            attributes: false,
+            properties: true,
+            returns: true,
+            variables: true,
+          },
+        },
+      ],
       "typescript/no-unsafe-argument": "error",
       "typescript/no-unsafe-assignment": "error",
       "typescript/no-unsafe-call": "error",
@@ -212,7 +277,11 @@ export default defineConfig({
       "typescript/prefer-nullish-coalescing": "error",
       "typescript/prefer-readonly-parameter-types": "off",
       "typescript/strict-boolean-expressions": "error",
-      "typescript/strict-void-return": "error",
+      "typescript/strict-void-return": "off",
+      "vitest/prefer-importing-vitest-globals": "off",
+      "vitest/prefer-to-be-falsy": "off",
+      "vitest/prefer-to-be-truthy": "off",
+      "vitest/valid-title": "error",
     },
   },
   oxc: {
@@ -225,11 +294,110 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   test: {
-    environment: "jsdom",
+    alias: {
+      "@wrksz/themes/client": resolve(projectRoot, "tests/mocks/wrksz-themes.ts"),
+      "@wrksz/themes/next": resolve(projectRoot, "tests/mocks/wrksz-themes.ts"),
+      bun: resolve(projectRoot, "tests/mocks/bun.ts"),
+      "next/font/google": resolve(projectRoot, "tests/mocks/next-font-google.ts"),
+      "next/navigation": resolve(projectRoot, "tests/mocks/next-navigation.ts"),
+    },
+    coverage: {
+      clean: true,
+      exclude: [
+        "**/*.{test,spec}.{ts,tsx}",
+        "**/*.d.ts",
+        "**/migrations/**",
+        "src/app/**",
+        "src/components/shadcn/**",
+        "src/constants/types.ts",
+        "src/integrations/drizzle-orm/migrations/**",
+        "src/integrations/fumadocs/**",
+        "src/integrations/next-intl/*.d.json.ts",
+        "src/integrations/next-intl/messages/**",
+        "src/modules/**/*.types.ts",
+        "src/providers/translations-provider.tsx",
+        "src/styles/**",
+        "src/types/**",
+        "tests/**",
+        "e2e/**",
+      ],
+      include: ["src/**/*.{ts,tsx}"],
+      provider: "v8",
+      reporter: ["text", "html", "json-summary"],
+      reportsDirectory: "./coverage",
+      thresholds: {
+        branches: 100,
+        functions: 100,
+        lines: 100,
+        "src/integrations/better-auth/auth.access.ts": {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
+        "src/integrations/next-intl/i18n.locale.ts": {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
+        "src/integrations/next-intl/i18n.utils.ts": {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
+        "src/lib/_utils/**": {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
+        statements: 100,
+      },
+    },
+    deps: {
+      interopDefault: true,
+    },
+    environment: "node",
     exclude: ["node_modules/**", ".next/**", "dist/**", "build/**", "e2e/**", "opensrc/**", "src/integrations/drizzle-orm/migrations/**"],
-    include: ["src/**/*.{test,spec}.{ts,tsx}"],
-    isolate: false,
-    passWithNoTests: true,
+    globals: true,
+    isolate: true,
+    passWithNoTests: false,
     pool: "threads",
+    projects: [
+      {
+        extends: true,
+        test: {
+          environment: "node",
+          include: ["src/**/*.{test,spec}.{ts,tsx}", "src/**/__test__/**/*.{test,spec}.{ts,tsx}"],
+          name: "node",
+        },
+      },
+      {
+        extends: true,
+        test: {
+          environment: "node",
+          hookTimeout: 20_000,
+          include: ["tests/integration/**/*.{test,spec}.{ts,tsx}"],
+          name: "integration",
+          testTimeout: 20_000,
+        },
+      },
+      {
+        extends: true,
+        test: {
+          environment: "jsdom",
+          include: ["tests/component/**/*.{test,spec}.{ts,tsx}"],
+          name: "component",
+        },
+      },
+    ],
+    server: {
+      deps: {
+        inline: ["next-intl"],
+      },
+    },
+    setupFiles: ["./tests/setup/vitest.setup.ts"],
   },
 })

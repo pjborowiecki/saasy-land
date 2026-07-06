@@ -21,8 +21,7 @@ import { FieldGroup } from "~/src/components/shadcn/field"
 
 import { AuthPasswordField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { PasswordRequirements } from "~/src/app/[locale]/(auth)/auth/_components/password-requirements"
-import { AUTH_FORM_IDS, authFormElementId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
-import { useFormSubmitHandler } from "~/src/app/[locale]/(auth)/auth/_utils/use-form-submit-handler"
+import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 
 interface ResetPasswordFormProps {
   readonly token: string
@@ -30,11 +29,9 @@ interface ResetPasswordFormProps {
 
 export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): JSX.Element {
   const router = useRouter()
-  const t = useTranslations("pages.auth.reset-password")
-  const tAuth = useTranslations("auth")
-  const tValidations = useTranslations("auth.validations")
+  const t = useTranslations()
 
-  const formSchema = resetPasswordSchema(tValidations)
+  const formSchema = resetPasswordSchema((key, params) => t(`auth.validations.${key}`, params))
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { confirmPassword: "", password: "" },
     mode: "onChange",
@@ -46,10 +43,10 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
       await resetPassword({
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
+            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: () => {
-            toast.success(t("form.success"))
+            toast.success(t("pages.auth.reset-password.form.success"))
             router.push(CONSTANTS.ROUTES.SIGN_IN)
           },
         },
@@ -57,30 +54,32 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
         token,
       })
     },
-    [router, t, tAuth, token],
+    [router, t, token],
   )
-
-  const handleFormSubmit = useFormSubmitHandler(form, onSubmit)
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={authFormElementId(AUTH_FORM_IDS.RESET_PASSWORD)} onSubmit={handleFormSubmit}>
+      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.RESET_PASSWORD}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup className="flex flex-col gap-4">
-          <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("form.password")} name="password" />
-          <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("form.confirmPassword")} name="confirmPassword" />
+          <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("pages.auth.reset-password.form.password")} name="password" />
+          <AuthPasswordField
+            formId={AUTH_FORM_IDS.RESET_PASSWORD}
+            label={t("pages.auth.reset-password.form.confirmPassword")}
+            name="confirmPassword"
+          />
         </FieldGroup>
 
         <PasswordRequirements />
 
         <Button
-          aria-label={t("form.submit")}
+          aria-label={t("pages.auth.reset-password.form.submit")}
           className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
           data-testid="reset-password-form-submit-button"
           disabled={form.formState.isSubmitting}
           type="submit"
         >
           {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-          {form.formState.isSubmitting ? t("form.submitting") : t("form.submit")}
+          {form.formState.isSubmitting ? t("pages.auth.reset-password.form.submitting") : t("pages.auth.reset-password.form.submit")}
         </Button>
       </form>
     </FormProvider>

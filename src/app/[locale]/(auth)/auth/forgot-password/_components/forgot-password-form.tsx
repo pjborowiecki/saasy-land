@@ -21,17 +21,15 @@ import { Button } from "~/src/components/shadcn/button"
 import { FieldGroup } from "~/src/components/shadcn/field"
 
 import { AuthTextField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
-import { AUTH_FORM_IDS, authFormElementId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
-import { useFormSubmitHandler } from "~/src/app/[locale]/(auth)/auth/_utils/use-form-submit-handler"
+import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 
 export function ForgotPasswordForm(): JSX.Element {
   const [submitted, setSubmitted] = useState<boolean>(false)
 
   const locale = useLocale()
-  const t = useTranslations("pages.auth.forgot-password")
-  const tValidations = useTranslations("auth.validations")
+  const t = useTranslations()
 
-  const formSchema = forgotPasswordSchema(tValidations)
+  const formSchema = forgotPasswordSchema((key, params) => t(`auth.validations.${key}`, params))
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: { email: "" },
     resolver: zodResolver(formSchema),
@@ -48,11 +46,11 @@ export function ForgotPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: () => {
-            toast.error(t("form.error"))
+            toast.error(t("pages.auth.forgot-password.form.error"))
           },
           onSuccess: () => {
             setSubmitted(true)
-            toast.success(t("form.success"))
+            toast.success(t("pages.auth.forgot-password.form.success"))
           },
         },
         redirectTo,
@@ -61,24 +59,27 @@ export function ForgotPasswordForm(): JSX.Element {
     [locale, t],
   )
 
-  const handleFormSubmit = useFormSubmitHandler(form, onSubmit)
-
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={authFormElementId(AUTH_FORM_IDS.FORGOT_PASSWORD)} onSubmit={handleFormSubmit}>
+      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.FORGOT_PASSWORD}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup className="flex flex-col gap-6">
-          <AuthTextField disabled={submitted} formId={AUTH_FORM_IDS.FORGOT_PASSWORD} label={t("form.email")} name="email" />
+          <AuthTextField
+            disabled={submitted}
+            formId={AUTH_FORM_IDS.FORGOT_PASSWORD}
+            label={t("pages.auth.forgot-password.form.email")}
+            name="email"
+          />
         </FieldGroup>
 
         <Button
-          aria-label={t("form.submit")}
+          aria-label={t("pages.auth.forgot-password.form.submit")}
           className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
           data-testid="forgot-password-form-submit-button"
           disabled={form.formState.isSubmitting || submitted}
           type="submit"
         >
           {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-          {form.formState.isSubmitting ? t("form.submitting") : t("form.submit")}
+          {form.formState.isSubmitting ? t("pages.auth.forgot-password.form.submitting") : t("pages.auth.forgot-password.form.submit")}
         </Button>
       </form>
     </FormProvider>

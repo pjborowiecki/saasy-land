@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { getCurrentSession } from "~/src/integrations/better-auth/auth.guards"
+import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
 import { UserWidgetClient } from "~/src/app/[locale]/(admin)/admin/_components/user-widget-client"
 

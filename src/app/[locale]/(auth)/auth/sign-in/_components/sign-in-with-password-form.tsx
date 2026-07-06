@@ -3,7 +3,7 @@
 import { type JSX, useCallback } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -11,10 +11,9 @@ import { getSession, signIn } from "~/src/integrations/better-auth/auth._client"
 import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
 import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
-import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { AUTH_FORM_IDS, authFormElementId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
-import { useFormSubmitHandler } from "~/src/app/[locale]/(auth)/auth/_utils/use-form-submit-handler"
+import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 import {
   SignInFormFields,
   type SignInFormValues,
@@ -23,11 +22,10 @@ import { SignInSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-in/_comp
 
 export function SignInWithPasswordForm(): JSX.Element {
   const router = useRouter()
-  const t = useTranslations("pages.auth.sign-in")
-  const tAuth = useTranslations("auth")
-  const tValidations = useTranslations("auth.validations")
+  const locale = useLocale()
+  const t = useTranslations()
 
-  const formSchema = signInWithPasswordSchema(tValidations)
+  const formSchema = signInWithPasswordSchema((key, params) => t(`auth.validations.${key}`, params))
   const form = useForm<SignInFormValues>({
     defaultValues: { email: "", password: "" },
     resolver: zodResolver(formSchema),
@@ -39,25 +37,28 @@ export function SignInWithPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))
+            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
           },
           onSuccess: async () => {
-            toast.success(t("form.success"))
+            toast.success(t("pages.auth.sign-in.form.success"))
             const { data: session } = await getSession()
-            router.push(getPostAuthRedirect(session?.user.role))
+            router.push(
+              getPathname({
+                href: getPostAuthRedirect(session?.user.role),
+                locale,
+              }),
+            )
           },
         },
         password: data.password,
       })
     },
-    [router, t, tAuth],
+    [locale, router, t],
   )
-
-  const handleFormSubmit = useFormSubmitHandler(form, onSubmit)
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={authFormElementId(AUTH_FORM_IDS.SIGN_IN)} onSubmit={handleFormSubmit}>
+      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.SIGN_IN}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <SignInFormFields />
         <SignInSubmitButton />
       </form>
