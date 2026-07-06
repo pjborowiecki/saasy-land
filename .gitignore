@@ -30,8 +30,7 @@
 /build
 /dist
 
-# next-intl
-src/integrations/next-intl/*.d.json.ts
+# next-intl (generated types are committed; see check:i18n)
 
 # debug
 npm-debug.log*

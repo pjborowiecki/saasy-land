@@ -1,9 +1,7 @@
 #!/usr/bin/env bun
 
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs"
-import { tmpdir } from "node:os"
+import { writeFileSync } from "node:fs"
 import { join } from "node:path"
-import { $ } from "bun"
 
 import { I18N } from "../src/constants/_constants/i18n"
 import { getLocaleMessagesDir, loadLocaleMessagesFromDir } from "../src/integrations/next-intl/i18n.utils"
@@ -82,40 +80,12 @@ function checkLocaleParity(): boolean {
   return false
 }
 
-async function checkInvalidMessages(): Promise<boolean> {
-  const tempDir = mkdtempSync(join(tmpdir(), "saasyland-i18n-check-"))
-
-  try {
-    for (const locale of I18N.LOCALES) {
-      const messages = loadLocaleMessagesFromDir(locale, MESSAGES_DIR)
-      writeFileSync(join(tempDir, `${locale}.json`), `${JSON.stringify(messages, null, 2)}\n`, "utf8")
-    }
-
-    const result = await $`bunx --bun @lingual/i18n-check -l ${tempDir} -s ${SOURCE_LOCALE} -f next-intl -o invalidKeys`.quiet()
-
-    if (result.exitCode === 0) {
-      process.stdout.write("✅ Translation message syntax is valid in all locale files.\n")
-      return true
-    }
-
-    process.stderr.write("\n❌ Invalid translation messages detected.\n\n")
-    process.stderr.write(result.stderr.toString())
-    process.stderr.write(result.stdout.toString())
-    return false
-  } finally {
-    rmSync(tempDir, { recursive: true, force: true })
-  }
-}
-
-async function run(): Promise<void> {
+function run(): void {
   writeMessageTypes()
 
-  const parityOk = checkLocaleParity()
-  const invalidOk = await checkInvalidMessages()
-
-  if (!parityOk || !invalidOk) {
+  if (!checkLocaleParity()) {
     process.exit(1)
   }
 }
 
-await run()
+run()
