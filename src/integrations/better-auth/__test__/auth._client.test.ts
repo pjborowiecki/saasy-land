@@ -67,10 +67,53 @@ describe("better auth client", () => {
 
     expect(onTwoFactorRedirect).toBeDefined()
 
-    const location = { href: "" }
+    const location = { href: "", pathname: "/auth/sign-in" }
     vi.stubGlobal("location", location)
     onTwoFactorRedirect?.()
     expect(location.href).toBe(CONSTANTS.ROUTES.TWO_FACTOR)
     expect(authClient).toBeDefined()
+  })
+
+  it("prefixes two-factor redirect with the active locale", () => {
+    expect.hasAssertions()
+    const onTwoFactorRedirect = readTwoFactorRedirect()
+    const location = { href: "", pathname: "/en/auth/sign-in" }
+
+    vi.stubGlobal("location", location)
+    onTwoFactorRedirect?.()
+
+    expect(location.href).toBe(`/en${CONSTANTS.ROUTES.TWO_FACTOR}`)
+  })
+
+  it("uses the locale prefix when pathname matches the locale root", () => {
+    expect.hasAssertions()
+    const onTwoFactorRedirect = readTwoFactorRedirect()
+    const location = { href: "", pathname: "/pl" }
+
+    vi.stubGlobal("location", location)
+    onTwoFactorRedirect?.()
+
+    expect(location.href).toBe(`/pl${CONSTANTS.ROUTES.TWO_FACTOR}`)
+  })
+
+  it("falls back to the base path when location is unavailable", () => {
+    expect.hasAssertions()
+    const onTwoFactorRedirect = readTwoFactorRedirect()
+    const unavailableLocation: Location | undefined = undefined
+
+    vi.stubGlobal("location", unavailableLocation)
+
+    expect(() => onTwoFactorRedirect?.()).toThrow(TypeError)
+  })
+
+  it("falls back to the base path when pathname is missing", () => {
+    expect.hasAssertions()
+    const onTwoFactorRedirect = readTwoFactorRedirect()
+    const location = { href: "" }
+
+    vi.stubGlobal("location", location)
+    onTwoFactorRedirect?.()
+
+    expect(location.href).toBe(CONSTANTS.ROUTES.TWO_FACTOR)
   })
 })

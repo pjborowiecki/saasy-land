@@ -71,3 +71,28 @@ export const signInWithPasswordSchema = (t: AuthSchemaTranslator) =>
 export const forgotPasswordSchema = emailFormSchema
 
 export const resetPasswordSchema = (t: AuthSchemaTranslator) => withMatchingPasswords(passwordConfirmationSchema(t), t)
+
+const TWO_FACTOR_CODE_LENGTH = 6
+const BACKUP_CODE_MIN_LENGTH = 8
+const BACKUP_CODE_MAX_LENGTH = 12
+
+export const twoFactorTotpSchema = (t: AuthSchemaTranslator) =>
+  z.object({
+    code: z
+      .string()
+      .min(TWO_FACTOR_CODE_LENGTH, { message: t("twoFactorCodeRequired") })
+      .max(TWO_FACTOR_CODE_LENGTH, { message: t("twoFactorCodeLength", { length: TWO_FACTOR_CODE_LENGTH }) }),
+  })
+
+export const twoFactorBackupCodeSchema = (t: AuthSchemaTranslator) =>
+  z.object({
+    code: z
+      .string()
+      .min(BACKUP_CODE_MIN_LENGTH, { message: t("backupCodeRequired") })
+      .max(BACKUP_CODE_MAX_LENGTH, { message: t("backupCodeMaxLength", { max: BACKUP_CODE_MAX_LENGTH }) }),
+  })
+
+export const enableTwoFactorSchema = (t: AuthSchemaTranslator) =>
+  z.object({
+    password: signInPasswordSchema(t),
+  })

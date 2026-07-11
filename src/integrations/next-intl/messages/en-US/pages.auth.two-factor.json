@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "title": "Two-Factor Authentication",
+    "description": "Enter your two-factor authentication code for {name}."
+  },
+  "form": {
+    "title": "Two-factor authentication",
+    "description": "Enter the 6-digit code from your authenticator app, or use a backup code.",
+    "code": "Authentication code",
+    "backupCode": "Backup code",
+    "submit": "Verify",
+    "submitting": "Verifying…",
+    "success": "Signed in successfully!",
+    "useBackupCode": "Use a backup code instead",
+    "useAuthenticator": "Use authenticator app instead"
+  }
+}

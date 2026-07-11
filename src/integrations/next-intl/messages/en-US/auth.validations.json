@@ -14,5 +14,9 @@
   "atLeastMinCharactersLong": "At least {min} characters long",
   "atLeastOneSpecialCharacter": "At least one special character",
   "atLeastOneUppercase": "At least one uppercase letter",
-  "requirementsListLabel": "Password requirements"
+  "requirementsListLabel": "Password requirements",
+  "twoFactorCodeRequired": "Authentication code is required.",
+  "twoFactorCodeLength": "Authentication code must be {length} digits.",
+  "backupCodeRequired": "Backup code is required.",
+  "backupCodeMaxLength": "Backup code cannot be longer than {max} characters."
 }

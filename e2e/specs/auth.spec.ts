@@ -57,4 +57,36 @@ test.describe("auth", () => {
 
     await expect(page).toHaveURL(/\/auth\/sign-up/u)
   })
+
+  test("verify-email page renders pending state", async ({ authPage }) => {
+    await authPage.gotoVerifyEmail()
+
+    await expect(authPage.signInHeading()).toBeVisible()
+    await expect(authPage.verifyEmailResendButton()).toBeVisible()
+  })
+
+  test("verify-email page with token shows verifying state", async ({ authPage }) => {
+    await authPage.gotoVerifyEmail("", "?token=test-token")
+
+    await expect(authPage.verifyEmailVerifyingState()).toBeVisible()
+  })
+
+  test("two-factor page renders authentication form", async ({ authPage }) => {
+    await authPage.gotoTwoFactor()
+
+    await expect(authPage.signInHeading()).toBeVisible()
+    await expect(authPage.twoFactorSubmitButton()).toBeVisible()
+  })
+
+  test("terms page renders legal content", async ({ authPage }) => {
+    await authPage.gotoTerms()
+
+    await expect(authPage.legalDocumentTitle()).toBeVisible()
+  })
+
+  test("privacy page renders legal content", async ({ authPage }) => {
+    await authPage.gotoPrivacy()
+
+    await expect(authPage.legalDocumentTitle()).toBeVisible()
+  })
 })

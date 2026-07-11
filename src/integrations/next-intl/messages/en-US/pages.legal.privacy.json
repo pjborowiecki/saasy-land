@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "title": "Privacy Policy",
+    "description": "Privacy Policy for {name}."
+  },
+  "title": "Privacy Policy",
+  "description": "This policy describes how {name} collects, uses, and protects your personal information.",
+  "lastUpdated": "Last updated: July 2026",
+  "sections": {
+    "collection": {
+      "title": "Information we collect",
+      "body": "We collect information you provide when you create an account (such as name and email), usage data necessary to operate the service, and technical data such as IP address and device type for security and reliability."
+    },
+    "usage": {
+      "title": "How we use information",
+      "body": "We use your information to provide and improve {name}, authenticate users, send transactional emails (such as verification and password reset), and protect against abuse."
+    },
+    "contact": {
+      "title": "Contact",
+      "body": "For privacy-related questions about {name}, contact us through the support channels listed in the application."
+    }
+  }
+}

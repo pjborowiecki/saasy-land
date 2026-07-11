@@ -50,4 +50,19 @@ describe("load locale messages from dir component", () => {
     expect.hasAssertions()
     expect(getLocaleMessagesDir()).toContain("messages")
   })
+
+  it("skips the in-memory cache while NODE_ENV is development", () => {
+    expect.hasAssertions()
+    vi.stubEnv("NODE_ENV", "development")
+
+    try {
+      const firstLoad = loadLocaleMessagesFromDir("en-US", MERGE_FIXTURE)
+      const secondLoad = loadLocaleMessagesFromDir("en-US", MERGE_FIXTURE)
+
+      expect(firstLoad).toStrictEqual(secondLoad)
+      expect(firstLoad.pages).toBeDefined()
+    } finally {
+      vi.unstubAllEnvs()
+    }
+  })
 })

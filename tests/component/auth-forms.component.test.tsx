@@ -248,7 +248,8 @@ describe("sign up with password form component", () => {
       )
     })
     expect(triggerConfettiMock).toHaveBeenCalledWith()
-    expect(pushMock).toHaveBeenCalledWith(expect.stringContaining(CONSTANTS.ROUTES.APP))
+    expect(pushMock).toHaveBeenCalledWith(expect.stringContaining(CONSTANTS.ROUTES.VERIFY_EMAIL))
+    expect(pushMock).toHaveBeenCalledWith(expect.stringContaining(encodeURIComponent(TEST_EMAIL)))
   })
 })
 

@@ -53,6 +53,46 @@ export class AuthPage extends BasePage {
     return this.page.getByRole("button", { name: /sign in with github/iu })
   }
 
+  async gotoVerifyEmail(localePrefix = "", query = ""): Promise<void> {
+    const path = localePrefix.length > 0 ? `${localePrefix}/auth/verify-email${query}` : `/auth/verify-email${query}`
+    await this.gotoPath(path)
+    await this.waitForAppReady()
+  }
+
+  async gotoTwoFactor(localePrefix = ""): Promise<void> {
+    const path = localePrefix.length > 0 ? `${localePrefix}/auth/two-factor` : "/auth/two-factor"
+    await this.gotoPath(path)
+    await this.waitForAppReady()
+  }
+
+  async gotoTerms(localePrefix = ""): Promise<void> {
+    const path = localePrefix.length > 0 ? `${localePrefix}/terms` : "/terms"
+    await this.gotoPath(path)
+    await this.waitForAppReady()
+  }
+
+  async gotoPrivacy(localePrefix = ""): Promise<void> {
+    const path = localePrefix.length > 0 ? `${localePrefix}/privacy` : "/privacy"
+    await this.gotoPath(path)
+    await this.waitForAppReady()
+  }
+
+  twoFactorSubmitButton(): Locator {
+    return this.page.getByTestId("two-factor-form-submit-button")
+  }
+
+  verifyEmailResendButton(): Locator {
+    return this.page.getByTestId("verify-email-resend-button")
+  }
+
+  verifyEmailVerifyingState(): Locator {
+    return this.page.getByTestId("verify-email-verifying")
+  }
+
+  legalDocumentTitle(): Locator {
+    return this.page.getByTestId("legal-document-title")
+  }
+
   async gotoResetPassword(localePrefix = "", query = ""): Promise<void> {
     const path = localePrefix.length > 0 ? `${localePrefix}/auth/reset-password${query}` : `/auth/reset-password${query}`
     await this.gotoPath(path)

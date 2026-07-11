@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "title": "Uwierzytelnianie dwuskładnikowe",
+    "description": "Wprowadź kod uwierzytelniania dwuskładnikowego dla {name}."
+  },
+  "form": {
+    "title": "Uwierzytelnianie dwuskładnikowe",
+    "description": "Wprowadź 6-cyfrowy kod z aplikacji authenticator lub użyj kodu zapasowego.",
+    "code": "Kod uwierzytelniający",
+    "backupCode": "Kod zapasowy",
+    "submit": "Zweryfikuj",
+    "submitting": "Weryfikowanie…",
+    "success": "Zalogowano pomyślnie!",
+    "useBackupCode": "Użyj kodu zapasowego",
+    "useAuthenticator": "Użyj aplikacji authenticator"
+  }
+}
