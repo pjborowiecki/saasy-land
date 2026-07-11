@@ -24,6 +24,10 @@ async function resolveRootLocale(): Promise<string | undefined> {
   return undefined
 }
 
+function getLocaleMessages(locale: string): Messages {
+  return loadLocaleMessagesFromDir(locale)
+}
+
 async function getCachedLocaleMessages(locale: string): Promise<Messages> {
   "use cache"
   cacheLife("max")
@@ -35,9 +39,10 @@ export default getRequestConfig(async ({ locale }) => {
   const rootLocale = await resolveRootLocale()
   const target = locale ?? rootLocale
   const resolvedLocale = isLocale(target) ? target : routing.defaultLocale
+  const isDevelopment = process.env.NODE_ENV === "development"
   return {
     formats: getFormats(resolvedLocale),
     locale: resolvedLocale,
-    messages: await getCachedLocaleMessages(resolvedLocale),
+    messages: isDevelopment ? getLocaleMessages(resolvedLocale) : await getCachedLocaleMessages(resolvedLocale),
   }
 })

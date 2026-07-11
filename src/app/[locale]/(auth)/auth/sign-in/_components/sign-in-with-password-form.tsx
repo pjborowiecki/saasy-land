@@ -7,9 +7,11 @@ import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
+import { CONSTANTS } from "~/src/constants"
+
 import { getSession, signIn } from "~/src/integrations/better-auth/auth._client"
 import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
+import { AUTH_ERRORS, authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
@@ -37,7 +39,20 @@ export function SignInWithPasswordForm(): JSX.Element {
         email: data.email,
         fetchOptions: {
           onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
+            const errorKey = authErrorKey(ctx.error)
+
+            if (errorKey === AUTH_ERRORS.EMAIL_NOT_VERIFIED) {
+              toast.error(t(`auth.errors.${errorKey}`))
+              router.push(
+                getPathname({
+                  href: `${CONSTANTS.ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+                  locale,
+                }),
+              )
+              return
+            }
+
+            toast.error(t(`auth.errors.${errorKey}`))
           },
           onSuccess: async () => {
             toast.success(t("pages.auth.sign-in.form.success"))

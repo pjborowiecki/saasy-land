@@ -71,11 +71,22 @@
       "update": "Update Password"
     },
     "twoFactor": {
-      "title": "Two-Factor Authentication (2FA)",
-      "description": "Add an extra layer of security to your account.",
-      "app": "Authenticator App",
-      "appDescription": "Use an app like Google Authenticator or 1Password to generate time-based codes.",
-      "enable": "Enable 2FA"
+      "title": "Uwierzytelnianie dwuskładnikowe (2FA)",
+      "description": "Dodaj dodatkową warstwę zabezpieczeń do konta.",
+      "app": "Aplikacja authenticator",
+      "appDescription": "Użyj aplikacji takiej jak Google Authenticator lub 1Password do generowania kodów czasowych.",
+      "enable": "Włącz 2FA",
+      "dialogTitle": "Włącz uwierzytelnianie dwuskładnikowe",
+      "dialogDescription": "Potwierdź hasło, a następnie dodaj kod konfiguracyjny do aplikacji authenticator.",
+      "password": "Aktualne hasło",
+      "continue": "Kontynuuj",
+      "scanInstructions": "Dodaj ten sekret do aplikacji authenticator lub zeskanuj URI w menedżerze haseł.",
+      "verificationCode": "Kod weryfikacyjny",
+      "verifyAndEnable": "Zweryfikuj i włącz",
+      "backupCodesDescription": "Zapisz te kody zapasowe w bezpiecznym miejscu. Każdy kod można użyć raz, gdy utracisz dostęp do authenticatora.",
+      "done": "Gotowe",
+      "setupError": "Nie udało się rozpocząć konfiguracji 2FA. Spróbuj ponownie.",
+      "enabledSuccess": "Uwierzytelnianie dwuskładnikowe zostało włączone."
     },
     "sessions": {
       "title": "Active Sessions",

@@ -12,6 +12,7 @@
     "submit": "Kontynuuj",
     "submitting": "Rejestracja...",
     "success": "Konto zostało pomyślnie utworzone!",
+    "successCheckEmail": "Konto utworzone! Sprawdź e-mail, aby zweryfikować adres.",
     "error": "Wystąpił błąd podczas rejestracji. Spróbuj ponownie.",
     "hasAccount": "Masz już konto? <signin>Zaloguj się</signin>",
     "or": "lub",

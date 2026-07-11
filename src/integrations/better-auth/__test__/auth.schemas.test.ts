@@ -1,9 +1,12 @@
 import {
   emailSchema,
+  enableTwoFactorSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
   signInWithPasswordSchema,
   signUpWithPasswordSchema,
+  twoFactorBackupCodeSchema,
+  twoFactorTotpSchema,
 } from "~/src/integrations/better-auth/auth.schemas"
 
 const t = (key: string) => key
@@ -118,5 +121,43 @@ describe("reset password schema component", () => {
         password: "Secret1!",
       }).success,
     ).toBe(false)
+  })
+})
+
+describe("two factor totp schema component", () => {
+  it("accepts a six-digit code", () => {
+    expect.hasAssertions()
+    expect(twoFactorTotpSchema(t).safeParse({ code: "123456" }).success).toBe(true)
+  })
+
+  it("rejects invalid code lengths", () => {
+    expect.hasAssertions()
+    expect(twoFactorTotpSchema(t).safeParse({ code: "12345" }).success).toBe(false)
+    expect(twoFactorTotpSchema(t).safeParse({ code: "1234567" }).success).toBe(false)
+  })
+})
+
+describe("two factor backup code schema component", () => {
+  it("accepts valid backup codes", () => {
+    expect.hasAssertions()
+    expect(twoFactorBackupCodeSchema(t).safeParse({ code: "backup12" }).success).toBe(true)
+  })
+
+  it("rejects invalid backup code lengths", () => {
+    expect.hasAssertions()
+    expect(twoFactorBackupCodeSchema(t).safeParse({ code: "short" }).success).toBe(false)
+    expect(twoFactorBackupCodeSchema(t).safeParse({ code: "toolongbackup" }).success).toBe(false)
+  })
+})
+
+describe("enable two factor schema component", () => {
+  it("accepts a non-empty password", () => {
+    expect.hasAssertions()
+    expect(enableTwoFactorSchema(t).safeParse({ password: "Secret1!" }).success).toBe(true)
+  })
+
+  it("rejects an empty password", () => {
+    expect.hasAssertions()
+    expect(enableTwoFactorSchema(t).safeParse({ password: "" }).success).toBe(false)
   })
 })

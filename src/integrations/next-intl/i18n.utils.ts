@@ -79,7 +79,8 @@ export function getLocaleMessagesDir(): string {
 
 export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES_DIR): Messages {
   const cacheKey = `${messagesDir}:${locale}`
-  const cached = localeMessagesCache.get(cacheKey)
+  const isDevelopment = process.env.NODE_ENV === "development"
+  const cached = isDevelopment ? undefined : localeMessagesCache.get(cacheKey)
 
   if (cached !== undefined) {
     return cached
@@ -100,6 +101,10 @@ export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES
   }
 
   const resolvedMessages = assertLocaleMessages(messages, locale)
-  localeMessagesCache.set(cacheKey, resolvedMessages)
+
+  if (!isDevelopment) {
+    localeMessagesCache.set(cacheKey, resolvedMessages)
+  }
+
   return resolvedMessages
 }

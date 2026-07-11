@@ -7,8 +7,9 @@ import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { getSession, signUp } from "~/src/integrations/better-auth/auth._client"
-import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
+import { CONSTANTS } from "~/src/constants"
+
+import { signUp } from "~/src/integrations/better-auth/auth._client"
 import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { signUpWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
@@ -45,13 +46,12 @@ export function SignUpWithPasswordForm(): JSX.Element {
           onError: (ctx) => {
             toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
           },
-          onSuccess: async () => {
+          onSuccess: () => {
             triggerConfetti()
-            toast.success(t("pages.auth.sign-up.form.success"))
-            const { data: session } = await getSession()
+            toast.success(t("pages.auth.sign-up.form.successCheckEmail"))
             router.push(
               getPathname({
-                href: getPostAuthRedirect(session?.user.role),
+                href: `${CONSTANTS.ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
                 locale,
               }),
             )

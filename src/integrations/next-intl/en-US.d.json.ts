@@ -65,7 +65,11 @@ declare const messages: {
       "atLeastMinCharactersLong": "At least {min} characters long",
       "atLeastOneSpecialCharacter": "At least one special character",
       "atLeastOneUppercase": "At least one uppercase letter",
-      "requirementsListLabel": "Password requirements"
+      "requirementsListLabel": "Password requirements",
+      "twoFactorCodeRequired": "Authentication code is required.",
+      "twoFactorCodeLength": "Authentication code must be {length} digits.",
+      "backupCodeRequired": "Backup code is required.",
+      "backupCodeMaxLength": "Backup code cannot be longer than {max} characters."
     }
   },
   "common": {
@@ -855,7 +859,18 @@ declare const messages: {
             "description": "Add an extra layer of security to your account.",
             "app": "Authenticator App",
             "appDescription": "Use an app like Google Authenticator or 1Password to generate time-based codes.",
-            "enable": "Enable 2FA"
+            "enable": "Enable 2FA",
+            "dialogTitle": "Enable two-factor authentication",
+            "dialogDescription": "Confirm your password, then scan the setup code with your authenticator app.",
+            "password": "Current password",
+            "continue": "Continue",
+            "scanInstructions": "Add this secret to your authenticator app, or scan the URI from your password manager.",
+            "verificationCode": "Verification code",
+            "verifyAndEnable": "Verify and enable",
+            "backupCodesDescription": "Save these backup codes in a secure place. Each code can be used once if you lose access to your authenticator.",
+            "done": "Done",
+            "setupError": "Could not start two-factor setup. Please try again.",
+            "enabledSuccess": "Two-factor authentication is now enabled."
           },
           "sessions": {
             "title": "Active Sessions",
@@ -1057,11 +1072,50 @@ declare const messages: {
           "submit": "Continue",
           "submitting": "Signing Up...",
           "success": "Account created successfully!",
+          "successCheckEmail": "Account created! Check your email to verify your address.",
           "error": "An error occurred during sign up. Please try again.",
           "hasAccount": "Already have an account? <signin>Sign in</signin>",
           "or": "or",
           "confirmPassword": "Confirm password",
           "termsAndPrivacy": "By signing up, you agree to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>."
+        }
+      },
+      "two-factor": {
+        "metadata": {
+          "title": "Two-Factor Authentication",
+          "description": "Enter your two-factor authentication code for {name}."
+        },
+        "form": {
+          "title": "Two-factor authentication",
+          "description": "Enter the 6-digit code from your authenticator app, or use a backup code.",
+          "code": "Authentication code",
+          "backupCode": "Backup code",
+          "submit": "Verify",
+          "submitting": "Verifying…",
+          "success": "Signed in successfully!",
+          "useBackupCode": "Use a backup code instead",
+          "useAuthenticator": "Use authenticator app instead"
+        }
+      },
+      "verify-email": {
+        "metadata": {
+          "title": "Verify Email",
+          "description": "Verify your email address for your {name} account."
+        },
+        "form": {
+          "title": "Verify your email",
+          "description": "Confirm your email address to finish setting up your account.",
+          "verifying": "Verifying your email…",
+          "success": "Your email has been verified.",
+          "continue": "Continue",
+          "invalidToken": "This verification link is invalid or has expired.",
+          "pendingDescription": "We sent a verification link to your email. Enter your address below to resend it.",
+          "email": "Email",
+          "emailPlaceholder": "you@example.com",
+          "emailRequired": "Enter your email address to resend the verification link.",
+          "resend": "Resend verification email",
+          "resendSuccess": "If an account exists for that email, a new verification link has been sent.",
+          "backToSignIn": "Back to sign in"
         }
       }
     },
@@ -1304,6 +1358,54 @@ declare const messages: {
             "blog": "Blog"
           },
           "getStarted": "Get Started"
+        }
+      }
+    },
+    "legal": {
+      "privacy": {
+        "metadata": {
+          "title": "Privacy Policy",
+          "description": "Privacy Policy for {name}."
+        },
+        "title": "Privacy Policy",
+        "description": "This policy describes how {name} collects, uses, and protects your personal information.",
+        "lastUpdated": "Last updated: July 2026",
+        "sections": {
+          "collection": {
+            "title": "Information we collect",
+            "body": "We collect information you provide when you create an account (such as name and email), usage data necessary to operate the service, and technical data such as IP address and device type for security and reliability."
+          },
+          "usage": {
+            "title": "How we use information",
+            "body": "We use your information to provide and improve {name}, authenticate users, send transactional emails (such as verification and password reset), and protect against abuse."
+          },
+          "contact": {
+            "title": "Contact",
+            "body": "For privacy-related questions about {name}, contact us through the support channels listed in the application."
+          }
+        }
+      },
+      "terms": {
+        "metadata": {
+          "title": "Terms of Service",
+          "description": "Terms of Service for {name}."
+        },
+        "title": "Terms of Service",
+        "description": "These terms govern your use of {name}. By creating an account, you agree to them.",
+        "lastUpdated": "Last updated: July 2026",
+        "sections": {
+          "acceptance": {
+            "title": "Acceptance of terms",
+            "body": "By accessing or using {name}, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, do not use the service."
+          },
+          "accounts": {
+            "title": "Accounts and security",
+            "body": "You are responsible for maintaining the confidentiality of your account credentials and for all activity under your account. Notify us promptly of any unauthorized use."
+          },
+          "changes": {
+            "title": "Changes to these terms",
+            "body": "We may update these terms from time to time. Continued use of {name} after changes take effect constitutes acceptance of the revised terms."
+          }
         }
       }
     },

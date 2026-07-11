@@ -75,7 +75,18 @@
       "description": "Add an extra layer of security to your account.",
       "app": "Authenticator App",
       "appDescription": "Use an app like Google Authenticator or 1Password to generate time-based codes.",
-      "enable": "Enable 2FA"
+      "enable": "Enable 2FA",
+      "dialogTitle": "Enable two-factor authentication",
+      "dialogDescription": "Confirm your password, then scan the setup code with your authenticator app.",
+      "password": "Current password",
+      "continue": "Continue",
+      "scanInstructions": "Add this secret to your authenticator app, or scan the URI from your password manager.",
+      "verificationCode": "Verification code",
+      "verifyAndEnable": "Verify and enable",
+      "backupCodesDescription": "Save these backup codes in a secure place. Each code can be used once if you lose access to your authenticator.",
+      "done": "Done",
+      "setupError": "Could not start two-factor setup. Please try again.",
+      "enabledSuccess": "Two-factor authentication is now enabled."
     },
     "sessions": {
       "title": "Active Sessions",
