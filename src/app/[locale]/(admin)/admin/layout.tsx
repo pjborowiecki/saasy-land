@@ -12,17 +12,19 @@ const SIDEBAR_USER_WIDGET_FALLBACK = <div className="h-10 animate-pulse rounded-
 
 export default function AdminLayout({ children }: Readonly<LayoutProps<"/[locale]/admin">>): JSX.Element {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="h-svh overflow-hidden">
       <AdminSidebar>
         <Suspense fallback={SIDEBAR_USER_WIDGET_FALLBACK}>
           <UserWidget />
         </Suspense>
       </AdminSidebar>
 
-      <SidebarInset className="relative">
+      <SidebarInset className="relative min-h-0 overflow-hidden">
         <Background className="z-[-1]" glow={false} />
         <AdminLayoutHeader />
-        <div className="custom-scrollbar flex flex-1 flex-col overflow-y-auto p-4 pt-4 md:p-6 md:pt-6">{children}</div>
+        <div className="flex custom-scrollbar min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   )

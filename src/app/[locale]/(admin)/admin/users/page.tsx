@@ -1,16 +1,14 @@
 import type { Metadata } from "next"
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
-import { Download, UserPlus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { UsersPageTabs } from "~/src/app/[locale]/(admin)/admin/users/_components/users-page-tabs"
+import { UsersTabFallback } from "~/src/app/[locale]/(admin)/admin/users/_components/users-tab-fallback"
+import { UsersTabPanel } from "~/src/app/[locale]/(admin)/admin/users/_components/users-tab-panel"
+import { loadUsersPageSearchParams } from "~/src/app/[locale]/(admin)/admin/users/_lib/users-search-params"
 
-import { UsersAllUsersTab } from "~/src/app/[locale]/(admin)/admin/users/_components/users-all-users-tab"
-import { UsersInvitationsTab } from "~/src/app/[locale]/(admin)/admin/users/_components/users-invitations-tab"
-import { UsersRolesTab } from "~/src/app/[locale]/(admin)/admin/users/_components/users-roles-tab"
-import { ADMIN_INVITATION_ROWS, ADMIN_ROLE_ROWS, ADMIN_USER_ROWS } from "~/src/data/admin/mock-data"
+const USERS_TAB_SUSPENSE_FALLBACK = <UsersTabFallback />
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
@@ -22,55 +20,36 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function UsersPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
+export default async function UsersPage({ params, searchParams }: Readonly<PageProps<"/[locale]/admin/users">>): Promise<JSX.Element> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.admin.users" })
-  const users = ADMIN_USER_ROWS
-  const invitations = ADMIN_INVITATION_ROWS
-  const roles = ADMIN_ROLE_ROWS
 
   return (
-    <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">
-      <div className="flex flex-col gap-4">
-        <div>
-          <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("title")}</h1>
-          <p className="text-sm text-muted-foreground">{t("description")}</p>
-        </div>
-      </div>
-
-      <Tabs defaultValue="allUsers" className="w-full">
-        <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
-          <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-            <TabsTrigger value="allUsers" className="flex-none px-0 text-sm">
-              {t("tabs.allUsers")}
-            </TabsTrigger>
-            <TabsTrigger value="invitations" className="flex-none px-0 text-sm">
-              {t("tabs.invitations")}
-            </TabsTrigger>
-            <TabsTrigger value="roles" className="flex-none px-0 text-sm">
-              {t("tabs.roles")}
-            </TabsTrigger>
-            <TabsTrigger value="security" className="flex-none px-0 text-sm">
-              {t("tabs.security")}
-            </TabsTrigger>
-          </TabsList>
-
-          <div className="flex flex-wrap items-center gap-3 pb-3 sm:pb-0">
-            <Button variant="outline" size="sm" className="h-9 gap-2">
-              <Download className="size-4 text-muted-foreground" />
-              {t("actions.export")}
-            </Button>
-            <Button size="sm" className="h-9 gap-2">
-              <UserPlus className="size-4" />
-              {t("actions.addUser")}
-            </Button>
-          </div>
-        </div>
-
-        <UsersAllUsersTab users={users} />
-        <UsersInvitationsTab invitations={invitations} />
-        <UsersRolesTab roles={roles} />
-      </Tabs>
+    <div className="flex min-h-0 w-full flex-1 animate-in flex-col overflow-hidden duration-500 fade-in-50">
+      <Suspense fallback={USERS_TAB_SUSPENSE_FALLBACK}>
+        <UsersPageTabbedContent description={t("description")} searchParams={searchParams} title={t("title")} />
+      </Suspense>
     </div>
+  )
+}
+
+async function UsersPageTabbedContent({
+  description,
+  searchParams,
+  title,
+}: Readonly<
+  Pick<PageProps<"/[locale]/admin/users">, "searchParams"> & {
+    description: string
+    title: string
+  }
+>): Promise<JSX.Element> {
+  const { tab } = await loadUsersPageSearchParams(searchParams)
+
+  return (
+    <UsersPageTabs activeTab={tab} description={description} title={title}>
+      <Suspense fallback={USERS_TAB_SUSPENSE_FALLBACK}>
+        <UsersTabPanel tab={tab} />
+      </Suspense>
+    </UsersPageTabs>
   )
 }

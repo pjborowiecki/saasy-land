@@ -4,7 +4,7 @@ import { Input as InputPrimitive } from "@base-ui/react/input"
 
 import { cn } from "~/src/lib/utils"
 
-function Input({ className, type, ...props }: ComponentProps<"input">): JSX.Element {
+function Input({ className, type, ...props }: ComponentProps<typeof InputPrimitive>): JSX.Element {
   return (
     <InputPrimitive
       type={type}

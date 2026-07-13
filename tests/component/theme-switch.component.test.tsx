@@ -1,3 +1,5 @@
+/** @vitest-environment jsdom */
+
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { NextIntlClientProvider } from "next-intl"
@@ -39,7 +41,7 @@ describe("theme switch client component", () => {
     })
   })
 
-  it("ignores invalid theme values", async () => {
+  it("does not update theme when the select is opened without a selection", async () => {
     expect.hasAssertions()
     setThemeMock.mockClear()
     const user = userEvent.setup()
@@ -66,9 +68,7 @@ describe("theme switch client component", () => {
     })
 
     await user.click(screen.getByRole("combobox"))
-    await waitFor(async () => {
-      await user.click(screen.getByRole("option", { name: "Dark" }))
-    })
+    await user.click(await screen.findByRole("option", { name: themeSwitchLabels.darkLabel }))
     expect(setThemeMock).toHaveBeenCalledWith("dark")
   })
 })

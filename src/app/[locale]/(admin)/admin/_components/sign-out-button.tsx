@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useTransition } from "react"
+import { useCallback, useTransition, type JSX } from "react"
 
 import { Loader2, LogOut } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -12,9 +12,9 @@ import { authClient } from "~/src/integrations/better-auth/auth._client"
 import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
+import { DropdownMenuItem } from "~/src/components/shadcn/dropdown-menu"
 
-export function SignOutButton() {
+export function SignOutButton(): JSX.Element {
   const [isPending, startTransition] = useTransition()
 
   const router = useRouter()
@@ -38,15 +38,9 @@ export function SignOutButton() {
   }, [router, t, tAuth])
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      className="w-full justify-start text-destructive hover:bg-destructive/10 hover:text-destructive"
-      disabled={isPending}
-      onClick={handleSignout}
-    >
+    <DropdownMenuItem disabled={isPending} variant="destructive" onClick={handleSignout}>
       {isPending ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
       {isPending ? t("signingOut") : t("signOut")}
-    </Button>
+    </DropdownMenuItem>
   )
 }

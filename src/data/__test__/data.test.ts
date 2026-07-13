@@ -20,5 +20,8 @@ describe("static data exports", () => {
     expect(DASHBOARD_USER_ROWS.length).toBeGreaterThan(0)
     expect(ADMIN_USER_ROWS.length).toBeGreaterThan(0)
     expect(ADMIN_ANALYTICS_REGION_ROWS.length).toBeGreaterThan(0)
+
+    expect(ADMIN_USER_ROWS.find((row) => row.id === "u1")?.colors).toBeTypeOf("string")
+    expect(ADMIN_USER_ROWS.find((row) => row.id === "u2")?.avatar).toBeTypeOf("string")
   })
 })

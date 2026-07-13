@@ -70,9 +70,7 @@ describe("locale switch component", () => {
     })
 
     await user.click(screen.getByRole("combobox"))
-    await waitFor(async () => {
-      await user.click(screen.getByRole("option", { name: polishDisplayName }))
-    })
+    await user.click(await screen.findByRole("option", { name: polishDisplayName }))
     expect(replaceMock).toHaveBeenCalledWith("/about", { locale: POLISH_LOCALE })
   })
 

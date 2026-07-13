@@ -25,27 +25,11 @@ export function UserWidgetTrigger({
       <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
         <User2 className="size-4" />
       </div>
-      <div className="flex flex-col gap-0.5 leading-none">
-        <span className="font-medium">{name}</span>
+      <div className="flex min-w-0 flex-col gap-0.5 leading-none">
+        <span className="truncate font-medium">{name}</span>
         <span className="truncate text-xs text-muted-foreground">{email}</span>
       </div>
-      <ChevronsUpDown className="ml-auto size-4" />
+      <ChevronsUpDown className="ml-auto size-4 shrink-0" />
     </SidebarMenuButton>
-  )
-}
-
-export function UserWidgetMenuHeader({ email, name }: UserWidgetTriggerProps): JSX.Element {
-  return (
-    <div className="p-0 font-normal">
-      <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-        <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <User2 className="size-4" />
-        </div>
-        <div className="flex flex-col gap-0.5 leading-none">
-          <span className="font-medium">{name}</span>
-          <span className="truncate text-xs text-muted-foreground">{email}</span>
-        </div>
-      </div>
-    </div>
   )
 }

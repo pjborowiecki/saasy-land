@@ -1,0 +1,37 @@
+{
+  "actions": {
+    "header": "Actions",
+    "rowButton": "Row actions"
+  },
+  "columnHeader": {
+    "clearSort": "Clear sort",
+    "menu": "Column options",
+    "sortAsc": "Sort ascending",
+    "sortDesc": "Sort descending"
+  },
+  "empty": "No results.",
+  "loading": "Loading…",
+  "pagination": {
+    "rowCount": "{count, plural, =0 {No rows} one {# row} other {# rows}}",
+    "selectedCount": "{selected, plural, one {# selected} other {# selected}}",
+    "rowsPerPage": "Rows per page",
+    "pageIndicator": "Page {current} of {total}"
+  },
+  "settings": {
+    "trigger": "Table settings",
+    "title": "Table settings",
+    "rowDensity": {
+      "label": "Row size",
+      "compact": "Compact",
+      "default": "Default",
+      "comfortable": "Comfortable"
+    }
+  },
+  "toolbar": {
+    "exportCsv": "Export CSV",
+    "fetch": "Fetch",
+    "filtersToggle": "Toggle filters",
+    "refetch": "Refetch",
+    "searchPlaceholder": "Search…"
+  }
+}

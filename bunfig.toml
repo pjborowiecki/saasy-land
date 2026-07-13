@@ -1,0 +1,9 @@
+# Bun's native `bun test` is NOT this repo's test runner.
+# Project tests run through Vitest: `bun run test`
+#
+# The guard below fails fast if someone runs `bun test` by mistake.
+# `bun run test` is unaffected — it runs `vp test run` from package.json.
+
+[test]
+root = "scripts/bun-test-guard"
+pathIgnorePatterns = ["opensrc/**", "e2e/**", "tests/**", "src/**", "node_modules/**", ".next/**"]
