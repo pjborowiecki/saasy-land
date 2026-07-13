@@ -1,13 +1,15 @@
 /** @vitest-environment jsdom */
 
-import { createElement, type ComponentProps } from "react"
+import { createElement, type ComponentProps, type ReactNode } from "react"
 
 import type * as BaseUiTooltip from "@base-ui/react/tooltip"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import type * as FumadocsProvider from "fumadocs-ui/provider/next"
+import type * as NuqsNextApp from "nuqs/adapters/next/app"
 
 import { DocsProvider } from "~/src/providers/docs-provider"
+import { NuqsProvider } from "~/src/providers/nuqs-provider"
 import { ThemeProvider } from "~/src/providers/theme-provider"
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
@@ -67,6 +69,10 @@ function TooltipProviderMock(props: Readonly<ComponentProps<typeof BaseUiTooltip
   return createElement("div", { "data-props": JSON.stringify(rest), "data-testid": "tooltip-provider" }, children)
 }
 
+function NuqsAdapterMock({ children }: Readonly<{ children: ReactNode }>) {
+  return createElement("div", { "data-testid": "nuqs-adapter" }, children)
+}
+
 vi.mock(import("@base-ui/react/tooltip"), async (importOriginal): Promise<Partial<typeof BaseUiTooltip>> => {
   const actual = await importOriginal<typeof BaseUiTooltip>()
 
@@ -82,6 +88,13 @@ vi.mock(
   import("fumadocs-ui/provider/next"),
   (): Partial<typeof FumadocsProvider> => ({
     RootProvider: DocsRootProviderMock,
+  }),
+)
+
+vi.mock(
+  import("nuqs/adapters/next/app"),
+  (): Partial<typeof NuqsNextApp> => ({
+    NuqsAdapter: NuqsAdapterMock,
   }),
 )
 
@@ -120,6 +133,19 @@ describe("translations provider component", () => {
   it("re-exports next-intl provider", () => {
     expect.hasAssertions()
     expect(TranslationsProvider).toBeDefined()
+  })
+})
+
+describe("nuqs provider component", () => {
+  it("wraps children with nuqs adapter", () => {
+    expect.hasAssertions()
+    render(
+      <NuqsProvider>
+        <span>child</span>
+      </NuqsProvider>,
+    )
+    expect(screen.getByTestId("nuqs-adapter")).toBeInTheDocument()
+    expect(screen.getByText("child")).toBeInTheDocument()
   })
 })
 

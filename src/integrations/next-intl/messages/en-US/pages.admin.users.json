@@ -6,15 +6,38 @@
   "title": "User Management",
   "description": "Manage your team members, permissions, and customer accounts.",
   "actions": {
-    "export": "Export",
-    "addUser": "Add User"
+    "addUser": "Add User",
+    "row": {
+      "ban": "Ban user",
+      "delete": "Delete user",
+      "edit": "Edit user",
+      "resetPassword": "Reset password",
+      "viewProfile": "View profile"
+    }
   },
   "search": {
     "placeholder": "Search users by name, email, or ID..."
   },
   "filters": {
-    "role": "Role: All",
-    "status": "Status: Active"
+    "role": {
+      "all": "Role: All",
+      "value": "Role: {role}",
+      "options": {
+        "Administrator": "Administrator",
+        "Editor": "Editor",
+        "Viewer": "Viewer",
+        "Subscriber": "Subscriber"
+      }
+    },
+    "status": {
+      "all": "Status: All",
+      "value": "Status: {status}",
+      "options": {
+        "Active": "Active",
+        "Pending": "Pending",
+        "Banned": "Banned"
+      }
+    }
   },
   "tabs": {
     "allUsers": "All Users",
@@ -23,6 +46,7 @@
     "security": "Security"
   },
   "table": {
+    "empty": "No users found.",
     "headers": {
       "user": "User",
       "role": "Role",

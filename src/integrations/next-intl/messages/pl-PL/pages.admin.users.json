@@ -1,86 +1,110 @@
 {
   "metadata": {
-    "title": "User Management | SaaSy Land",
-    "description": "Manage your team members, permissions, and customer accounts."
+    "title": "Zarządzanie użytkownikami | SaaSy Land",
+    "description": "Zarządzaj członkami zespołu, uprawnieniami i kontami klientów."
   },
-  "title": "User Management",
-  "description": "Manage your team members, permissions, and customer accounts.",
+  "title": "Zarządzanie użytkownikami",
+  "description": "Zarządzaj członkami zespołu, uprawnieniami i kontami klientów.",
   "actions": {
-    "export": "Export",
-    "addUser": "Add User"
+    "addUser": "Dodaj użytkownika",
+    "row": {
+      "ban": "Zablokuj użytkownika",
+      "delete": "Usuń użytkownika",
+      "edit": "Edytuj użytkownika",
+      "resetPassword": "Resetuj hasło",
+      "viewProfile": "Zobacz profil"
+    }
   },
   "search": {
-    "placeholder": "Search users by name, email, or ID..."
+    "placeholder": "Szukaj użytkowników po nazwie, e-mailu lub ID..."
   },
   "filters": {
-    "role": "Role: All",
-    "status": "Status: Active"
+    "role": {
+      "all": "Rola: Wszystkie",
+      "value": "Rola: {role}",
+      "options": {
+        "Administrator": "Administrator",
+        "Editor": "Edytor",
+        "Viewer": "Obserwator",
+        "Subscriber": "Subskrybent"
+      }
+    },
+    "status": {
+      "all": "Status: Wszystkie",
+      "value": "Status: {status}",
+      "options": {
+        "Active": "Aktywny",
+        "Pending": "Oczekujący",
+        "Banned": "Zablokowany"
+      }
+    }
   },
   "tabs": {
-    "allUsers": "All Users",
-    "invitations": "Invitations",
-    "roles": "Roles & Permissions",
-    "security": "Security"
+    "allUsers": "Wszyscy użytkownicy",
+    "invitations": "Zaproszenia",
+    "roles": "Role i uprawnienia",
+    "security": "Bezpieczeństwo"
   },
   "table": {
+    "empty": "Nie znaleziono użytkowników.",
     "headers": {
-      "user": "User",
-      "role": "Role",
+      "user": "Użytkownik",
+      "role": "Rola",
       "status": "Status",
-      "lastActive": "Last Active"
+      "lastActive": "Ostatnia aktywność"
     }
   },
   "pagination": {
-    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+    "info": "Wyświetlanie <highlight>{start}</highlight>–<highlight>{end}</highlight> z <highlight>{total}</highlight> wyników"
   },
   "invitations": {
-    "title": "Invitations",
-    "description": "Manage pending team invitations and access links.",
+    "title": "Zaproszenia",
+    "description": "Zarządzaj oczekującymi zaproszeniami do zespołu i linkami dostępu.",
     "actions": {
-      "copyLink": "Copy Link",
-      "sendInvite": "Send Invite"
+      "copyLink": "Kopiuj link",
+      "sendInvite": "Wyślij zaproszenie"
     },
     "search": {
-      "placeholder": "Search invites by email..."
+      "placeholder": "Szukaj zaproszeń po e-mailu..."
     },
     "filters": {
-      "role": "Role: All",
-      "status": "Status: Pending"
+      "role": "Rola: Wszystkie",
+      "status": "Status: Oczekujące"
     },
     "table": {
       "headers": {
-        "email": "Email",
-        "role": "Role",
+        "email": "E-mail",
+        "role": "Rola",
         "status": "Status",
-        "sentDate": "Sent Date"
+        "sentDate": "Data wysłania"
       }
     },
     "pagination": {
-      "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+      "info": "Wyświetlanie <highlight>{start}</highlight>–<highlight>{end}</highlight> z <highlight>{total}</highlight> wyników"
     }
   },
   "roles": {
-    "title": "Roles & Permissions",
-    "description": "Define access levels and manage permissions across your organization.",
+    "title": "Role i uprawnienia",
+    "description": "Definiuj poziomy dostępu i zarządzaj uprawnieniami w organizacji.",
     "actions": {
-      "createRole": "Create Role"
+      "createRole": "Utwórz rolę"
     },
     "search": {
-      "placeholder": "Search roles by name or description..."
+      "placeholder": "Szukaj ról po nazwie lub opisie..."
     },
     "filters": {
-      "type": "Type: All"
+      "type": "Typ: Wszystkie"
     },
     "table": {
       "headers": {
-        "name": "Role Name",
-        "description": "Description",
-        "type": "Type",
-        "users": "Users"
+        "name": "Nazwa roli",
+        "description": "Opis",
+        "type": "Typ",
+        "users": "Użytkownicy"
       }
     },
     "pagination": {
-      "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> roles"
+      "info": "Wyświetlanie <highlight>{start}</highlight>–<highlight>{end}</highlight> z <highlight>{total}</highlight> ról"
     }
   }
 }

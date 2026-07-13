@@ -73,6 +73,7 @@
     "@react-email/editor": "^1.6.2",
     "@react-email/ui": "^6.6.6",
     "@t3-oss/env-nextjs": "^0.13.11",
+    "@tanstack/react-table": "^8.21.3",
     "@types/mdx": "^2.0.14",
     "@upstash/redis": "^1.38.0",
     "@vercel/analytics": "^2.0.1",

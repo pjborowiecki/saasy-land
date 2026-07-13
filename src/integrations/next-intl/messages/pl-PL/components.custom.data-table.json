@@ -1,0 +1,37 @@
+{
+  "actions": {
+    "header": "Akcje",
+    "rowButton": "Akcje wiersza"
+  },
+  "columnHeader": {
+    "clearSort": "Wyczyść sortowanie",
+    "menu": "Opcje kolumny",
+    "sortAsc": "Sortuj rosnąco",
+    "sortDesc": "Sortuj malejąco"
+  },
+  "empty": "Brak wyników.",
+  "loading": "Ładowanie…",
+  "pagination": {
+    "rowCount": "{count, plural, =0 {Brak wierszy} one {# wiersz} few {# wiersze} many {# wierszy} other {# wiersza}}",
+    "selectedCount": "{selected, plural, one {# zaznaczony} few {# zaznaczone} many {# zaznaczonych} other {# zaznaczonego}}",
+    "rowsPerPage": "Wierszy na stronę",
+    "pageIndicator": "Strona {current} z {total}"
+  },
+  "settings": {
+    "trigger": "Ustawienia tabeli",
+    "title": "Ustawienia tabeli",
+    "rowDensity": {
+      "label": "Wysokość wiersza",
+      "compact": "Zwarty",
+      "default": "Domyślny",
+      "comfortable": "Luźny"
+    }
+  },
+  "toolbar": {
+    "exportCsv": "Eksportuj CSV",
+    "fetch": "Pobierz",
+    "filtersToggle": "Pokaż filtry",
+    "refetch": "Odśwież",
+    "searchPlaceholder": "Szukaj…"
+  }
+}

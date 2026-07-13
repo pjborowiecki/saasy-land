@@ -38,7 +38,7 @@ export function AdminSidebar({ children }: AdminSidebarProps): JSX.Element {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter>{children}</SidebarFooter>
+      <SidebarFooter className="pb-2 md:pb-3">{children}</SidebarFooter>
     </Sidebar>
   )
 }

@@ -339,9 +339,18 @@ describe("sign out button component", () => {
     expect.hasAssertions()
     setupSignOutButtonMocks()
     const user = userEvent.setup()
-    renderWithAuthMessages(<SignOutButton />)
+    const { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } = await import("~/src/components/shadcn/dropdown-menu")
 
-    await user.click(screen.getByRole("button", { name: /sign out/iu }))
+    renderWithAuthMessages(
+      <DropdownMenu defaultOpen>
+        <DropdownMenuTrigger>Account</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <SignOutButton />
+        </DropdownMenuContent>
+      </DropdownMenu>,
+    )
+
+    await user.click(screen.getByRole("menuitem", { name: /sign out/iu }))
 
     await waitFor(() => {
       expect(signOutMock).toHaveBeenCalledWith(expect.objectContaining({}))

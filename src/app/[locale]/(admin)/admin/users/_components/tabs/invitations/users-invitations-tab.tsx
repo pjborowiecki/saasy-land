@@ -9,16 +9,12 @@ import { Input } from "~/src/components/shadcn/input"
 import { TabsContent } from "~/src/components/shadcn/tabs"
 
 import { AdminUsersInvitationRow } from "~/src/app/[locale]/(admin)/admin/_components/admin-users-invitation-row"
-import type { AdminInvitationRow } from "~/src/app/[locale]/(admin)/admin/_types"
-import { UsersInvitationsPagination } from "~/src/app/[locale]/(admin)/admin/users/_components/users-invitations-pagination"
-import { UsersInvitationsTableHead } from "~/src/app/[locale]/(admin)/admin/users/_components/users-invitations-table-head"
+import { UsersInvitationsPagination } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/invitations/_components/users-invitations-pagination"
+import { UsersInvitationsTableHead } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/invitations/_components/users-invitations-table-head"
+import { getAdminInvitations } from "~/src/app/[locale]/(admin)/admin/users/_lib/users-data"
 
-interface UsersInvitationsTabProps {
-  readonly invitations: readonly AdminInvitationRow[]
-}
-
-export async function UsersInvitationsTab({ invitations }: UsersInvitationsTabProps): Promise<JSX.Element> {
-  const t = await getTranslations("pages.admin.users")
+export async function UsersInvitationsTab(): Promise<JSX.Element> {
+  const [t, invitations] = await Promise.all([getTranslations("pages.admin.users"), getAdminInvitations()])
   return (
     <TabsContent value="invitations" className="mt-0 space-y-8 outline-none">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

@@ -188,6 +188,7 @@ export default defineConfig({
           "tests/component/providers.component.test.tsx",
           "tests/component/locale-switch.component.test.tsx",
           "tests/component/theme-switch-branches.component.test.tsx",
+          "tests/component/data-table-coverage.component.test.tsx",
           "tests/component/auth-forms.component.test.tsx",
           "tests/integration/next-intl/i18n-utils.integration.test.ts",
         ],
@@ -200,6 +201,7 @@ export default defineConfig({
           "src/lib/_utils/__test__/email.test.ts",
           "tests/component/locale-switch.component.test.tsx",
           "tests/component/theme-switch-branches.component.test.tsx",
+          "tests/component/data-table-coverage.component.test.tsx",
         ],
         rules: {
           "unicorn/no-null": "off",

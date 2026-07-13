@@ -12,6 +12,67 @@ import type {
   DashboardUserRow,
 } from "~/src/app/[locale]/(admin)/admin/_types"
 
+const ADDITIONAL_ADMIN_USER_COUNT = 25
+const ADDITIONAL_ADMIN_USER_START_ID = 6
+const ADMIN_USER_AVATAR_EVERY_N = 3
+const ASCII_UPPERCASE_A = 65
+const ALPHABET_LENGTH = 26
+const ADMIN_USER_NAME_OFFSET = 7
+
+function createAdditionalAdminUserRows(): AdminUserRow[] {
+  const roles = ["Administrator", "Editor", "Viewer", "Subscriber"] as const
+  const statusVariants: {
+    isBanned?: boolean
+    lastActive: string
+    status: string
+    statusColor: AdminUserRow["statusColor"]
+  }[] = [
+    { lastActive: "Just now", status: "Active", statusColor: "emerald" },
+    { lastActive: "15 mins ago", status: "Active", statusColor: "emerald" },
+    { lastActive: "3 hours ago", status: "Active", statusColor: "emerald" },
+    { lastActive: "Yesterday", status: "Pending", statusColor: "amber" },
+    { isBanned: true, lastActive: "Sep 4, 2024", status: "Banned", statusColor: "rose" },
+  ]
+  const colorVariants = [
+    "from-cyan-600 to-blue-400",
+    "from-emerald-600 to-teal-400",
+    "from-amber-600 to-yellow-400",
+    "from-violet-600 to-purple-400",
+    "from-slate-600 to-zinc-400",
+  ] as const
+
+  return Array.from({ length: ADDITIONAL_ADMIN_USER_COUNT }, (_, index) => {
+    const id = String(index + ADDITIONAL_ADMIN_USER_START_ID)
+    const variant = statusVariants[index % statusVariants.length]!
+    const role = roles[index % roles.length]!
+    const letterA = String.fromCodePoint(ASCII_UPPERCASE_A + (index % ALPHABET_LENGTH))
+    const letterB = String.fromCodePoint(ASCII_UPPERCASE_A + ((index + ADMIN_USER_NAME_OFFSET) % ALPHABET_LENGTH))
+    const row: AdminUserRow = {
+      email: `user.${id}@example.com`,
+      id: `u${id}`,
+      lastActive: variant.lastActive,
+      name: `Demo User ${letterA}${letterB}${id}`,
+      role,
+      status: variant.status,
+      statusColor: variant.statusColor,
+    }
+
+    if (variant.isBanned === true) {
+      row.isBanned = true
+    }
+
+    if (index % ADMIN_USER_AVATAR_EVERY_N === 0) {
+      row.avatar = `https://i.pravatar.cc/150?u=admin-user-${id}`
+    } else {
+      const color = colorVariants[index % colorVariants.length]!
+      row.colors = color
+      row.initials = `${letterA}${letterB}`
+    }
+
+    return row
+  })
+}
+
 export const DASHBOARD_CHART_Y_AXIS = ["$30k", "$20k", "$10k", "$0"] as const
 
 export const DASHBOARD_CHART_X_AXIS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
@@ -118,6 +179,7 @@ export const ADMIN_USER_ROWS: AdminUserRow[] = [
     status: "Active",
     statusColor: "emerald",
   },
+  ...createAdditionalAdminUserRows(),
 ]
 
 export const ADMIN_INVITATION_ROWS: AdminInvitationRow[] = [

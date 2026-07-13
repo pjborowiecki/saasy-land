@@ -82,6 +82,43 @@ declare const messages: {
   },
   "components": {
     "custom": {
+      "data-table": {
+        "actions": {
+          "header": "Actions",
+          "rowButton": "Row actions"
+        },
+        "columnHeader": {
+          "clearSort": "Clear sort",
+          "menu": "Column options",
+          "sortAsc": "Sort ascending",
+          "sortDesc": "Sort descending"
+        },
+        "empty": "No results.",
+        "loading": "Loading…",
+        "pagination": {
+          "rowCount": "{count, plural, =0 {No rows} one {# row} other {# rows}}",
+          "selectedCount": "{selected, plural, one {# selected} other {# selected}}",
+          "rowsPerPage": "Rows per page",
+          "pageIndicator": "Page {current} of {total}"
+        },
+        "settings": {
+          "trigger": "Table settings",
+          "title": "Table settings",
+          "rowDensity": {
+            "label": "Row size",
+            "compact": "Compact",
+            "default": "Default",
+            "comfortable": "Comfortable"
+          }
+        },
+        "toolbar": {
+          "exportCsv": "Export CSV",
+          "fetch": "Fetch",
+          "filtersToggle": "Toggle filters",
+          "refetch": "Refetch",
+          "searchPlaceholder": "Search…"
+        }
+      },
       "theme-switch": {
         "label": "Choose a theme",
         "placeholder": "Theme",
@@ -456,6 +493,7 @@ declare const messages: {
       },
       "components": {
         "userWidget": {
+          "settings": "Settings",
           "signedInAs": "Signed in as <user>{name}</user>"
         },
         "signOutButton": {
@@ -919,15 +957,38 @@ declare const messages: {
         "title": "User Management",
         "description": "Manage your team members, permissions, and customer accounts.",
         "actions": {
-          "export": "Export",
-          "addUser": "Add User"
+          "addUser": "Add User",
+          "row": {
+            "ban": "Ban user",
+            "delete": "Delete user",
+            "edit": "Edit user",
+            "resetPassword": "Reset password",
+            "viewProfile": "View profile"
+          }
         },
         "search": {
           "placeholder": "Search users by name, email, or ID..."
         },
         "filters": {
-          "role": "Role: All",
-          "status": "Status: Active"
+          "role": {
+            "all": "Role: All",
+            "value": "Role: {role}",
+            "options": {
+              "Administrator": "Administrator",
+              "Editor": "Editor",
+              "Viewer": "Viewer",
+              "Subscriber": "Subscriber"
+            }
+          },
+          "status": {
+            "all": "Status: All",
+            "value": "Status: {status}",
+            "options": {
+              "Active": "Active",
+              "Pending": "Pending",
+              "Banned": "Banned"
+            }
+          }
         },
         "tabs": {
           "allUsers": "All Users",
@@ -936,6 +997,7 @@ declare const messages: {
           "security": "Security"
         },
         "table": {
+          "empty": "No users found.",
           "headers": {
             "user": "User",
             "role": "Role",

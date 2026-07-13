@@ -1,0 +1,33 @@
+"use client"
+"use no memo"
+
+import type { ComponentProps, JSX } from "react"
+
+import { cn } from "~/src/lib/utils"
+
+import { TableHeader } from "~/src/components/shadcn/table"
+
+import { DataTableHead } from "~/src/components/custom/data-table/_components/data-table-head"
+import { useDataTable } from "~/src/components/custom/data-table/_components/data-table-provider"
+import { DataTableRow } from "~/src/components/custom/data-table/_components/data-table-row"
+import { DATA_TABLE } from "~/src/components/custom/data-table/_constants/data-table.constants"
+
+export function DataTableHeader({ className, ...props }: ComponentProps<typeof TableHeader>): JSX.Element {
+  const { classNames, table } = useDataTable()
+
+  return (
+    <TableHeader
+      className={cn(DATA_TABLE.CLASSES.LAYOUT.HEADER, classNames?.header, className)}
+      data-testid={DATA_TABLE.TEST_IDS.HEADER}
+      {...props}
+    >
+      {table.getHeaderGroups().map((headerGroup) => (
+        <DataTableRow key={headerGroup.id} className="hover:bg-transparent data-[state=selected]:bg-transparent">
+          {headerGroup.headers.map((header) => (
+            <DataTableHead key={header.id} header={header} />
+          ))}
+        </DataTableRow>
+      ))}
+    </TableHeader>
+  )
+}

@@ -4,9 +4,9 @@ import type { ComponentProps, JSX } from "react"
 
 import { cn } from "~/src/lib/utils"
 
-function Table({ className, ...props }: ComponentProps<"table">): JSX.Element {
+function Table({ className, containerClassName, ...props }: ComponentProps<"table"> & { containerClassName?: string }): JSX.Element {
   return (
-    <div data-slot="table-container" className="relative w-full overflow-x-auto">
+    <div data-slot="table-container" className={cn("relative w-full", containerClassName ?? "custom-scrollbar overflow-x-auto")}>
       <table data-slot="table" className={cn("w-full caption-bottom text-xs", className)} {...props} />
     </div>
   )

@@ -15,11 +15,17 @@ vi.mock(import("~/src/hooks/use-mobile"), () => ({
 }))
 
 vi.mock(import("~/src/app/[locale]/(admin)/admin/_components/sign-out-button"), () => ({
-  SignOutButton: () => <button type="button">Sign out</button>,
+  SignOutButton: () => (
+    <button type="button" role="menuitem">
+      Sign out
+    </button>
+  ),
 }))
 
+const EXPECTED_NAME_OCCURRENCES = 1
+
 describe("user widget client component", () => {
-  it("opens the account menu and shows sign out", async () => {
+  it("opens the account menu with settings and sign out only", async () => {
     expect.hasAssertions()
     const user = userEvent.setup()
 
@@ -33,6 +39,8 @@ describe("user widget client component", () => {
 
     await user.click(screen.getByRole("button", { name: /piotr/iu }))
 
-    await expect(screen.findByRole("button", { name: /sign out/iu })).resolves.toBeVisible()
+    await expect(screen.findByRole("menuitem", { name: /settings/iu })).resolves.toBeVisible()
+    await expect(screen.findByRole("menuitem", { name: /sign out/iu })).resolves.toBeVisible()
+    expect(screen.getAllByText("Piotr")).toHaveLength(EXPECTED_NAME_OCCURRENCES)
   })
 })

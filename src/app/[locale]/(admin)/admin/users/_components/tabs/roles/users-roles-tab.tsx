@@ -9,16 +9,12 @@ import { Input } from "~/src/components/shadcn/input"
 import { TabsContent } from "~/src/components/shadcn/tabs"
 
 import { AdminUsersRoleRow } from "~/src/app/[locale]/(admin)/admin/_components/admin-users-role-row"
-import type { AdminRoleRow } from "~/src/app/[locale]/(admin)/admin/_types"
-import { UsersRolesPagination } from "~/src/app/[locale]/(admin)/admin/users/_components/users-roles-pagination"
-import { UsersRolesTableHead } from "~/src/app/[locale]/(admin)/admin/users/_components/users-roles-table-head"
+import { UsersRolesPagination } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/roles/_components/users-roles-pagination"
+import { UsersRolesTableHead } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/roles/_components/users-roles-table-head"
+import { getAdminRoles } from "~/src/app/[locale]/(admin)/admin/users/_lib/users-data"
 
-interface UsersRolesTabProps {
-  readonly roles: readonly AdminRoleRow[]
-}
-
-export async function UsersRolesTab({ roles }: UsersRolesTabProps): Promise<JSX.Element> {
-  const t = await getTranslations("pages.admin.users")
+export async function UsersRolesTab(): Promise<JSX.Element> {
+  const [t, roles] = await Promise.all([getTranslations("pages.admin.users"), getAdminRoles()])
   return (
     <TabsContent value="roles" className="mt-0 space-y-8 outline-none">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

@@ -11,7 +11,7 @@ import { AdminBreadcrumbs } from "~/src/app/[locale]/(admin)/admin/_components/a
 
 export function AdminLayoutHeader(): JSX.Element {
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border/40 px-4 backdrop-blur-xl md:px-6">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border/40 bg-secondary/20 px-4 backdrop-blur-xl md:px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger className="-ml-2" />
         <AdminBreadcrumbs />
