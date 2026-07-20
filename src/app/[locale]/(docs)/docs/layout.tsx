@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import type { ReactNode } from "react"
+import { Suspense, type ReactNode } from "react"
 
 import { hasLocale } from "next-intl"
 
@@ -20,6 +20,8 @@ const DOCS_LINKS = [
   },
 ]
 
+const DOCS_LAYOUT_FALLBACK = <div className="min-h-svh w-full animate-pulse bg-fd-background" />
+
 export default async function DocumentationLayout({ children, params }: Readonly<LayoutProps<"/[locale]/docs">>): Promise<ReactNode> {
   const { locale } = await params
 
@@ -28,10 +30,12 @@ export default async function DocumentationLayout({ children, params }: Readonly
   }
 
   return (
-    <DocsProvider locale={locale}>
-      <DocsLayoutClient links={DOCS_LINKS} locale={locale} tree={source.getPageTree(locale)}>
-        {children}
-      </DocsLayoutClient>
-    </DocsProvider>
+    <Suspense fallback={DOCS_LAYOUT_FALLBACK}>
+      <DocsProvider locale={locale}>
+        <DocsLayoutClient links={DOCS_LINKS} locale={locale} tree={source.getPageTree(locale)}>
+          {children}
+        </DocsLayoutClient>
+      </DocsProvider>
+    </Suspense>
   )
 }

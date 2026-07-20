@@ -9,7 +9,6 @@ import { env } from "~/src/environment"
 import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
-import { NuqsProvider } from "~/src/providers/nuqs-provider"
 import { ThemeProvider } from "~/src/providers/theme-provider"
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
@@ -56,7 +55,7 @@ export default async function RootLayout({ children, params }: Readonly<LayoutPr
         <TranslationsProvider>
           <ThemeProvider>
             <TooltipProvider>
-              <NuqsProvider>{children}</NuqsProvider>
+              {children}
               <Toaster />
               <VercelObservability />
             </TooltipProvider>

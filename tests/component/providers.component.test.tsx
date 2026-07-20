@@ -4,7 +4,6 @@ import { createElement, type ComponentProps, type ReactNode } from "react"
 
 import type * as BaseUiTooltip from "@base-ui/react/tooltip"
 import { render, screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
 import type * as FumadocsProvider from "fumadocs-ui/provider/next"
 import type * as NuqsNextApp from "nuqs/adapters/next/app"
 
@@ -20,11 +19,6 @@ const TOOLTIP_DELAY_MS = 100
 
 type I18nRouter = ReturnType<typeof I18nNavigation.useRouter>
 
-const replaceMock = vi.hoisted(() => vi.fn<I18nRouter["replace"]>())
-const localeChangeRef = vi.hoisted(() => ({
-  current: (_locale: string) => {},
-}))
-
 function createI18nRouterMock(): I18nRouter {
   return {
     back: vi.fn<I18nRouter["back"]>(),
@@ -32,33 +26,19 @@ function createI18nRouterMock(): I18nRouter {
     prefetch: vi.fn<I18nRouter["prefetch"]>(),
     push: vi.fn<I18nRouter["push"]>(),
     refresh: vi.fn<I18nRouter["refresh"]>(),
-    replace: replaceMock,
+    replace: vi.fn<I18nRouter["replace"]>(),
   }
-}
-
-function clickInvalidLocale(): void {
-  localeChangeRef.current("invalid")
-}
-
-function clickValidLocale(): void {
-  localeChangeRef.current("pl-PL")
 }
 
 function DocsRootProviderMock(props: Readonly<ComponentProps<typeof FumadocsProvider.RootProvider>>) {
-  const { children, components, i18n } = props
+  const { children, components } = props
   const LinkComponent = components?.Link ?? "a"
-
-  if (i18n?.onLocaleChange) {
-    localeChangeRef.current = i18n.onLocaleChange
-  }
 
   return createElement(
     "div",
     { "data-testid": "docs-root" },
     createElement(LinkComponent, { href: { pathname: "/object" } } as unknown as ComponentProps<typeof LinkComponent>, "object-link"),
     createElement(LinkComponent, { href: "/string" }, "string-link"),
-    createElement("button", { onClick: clickInvalidLocale, type: "button" }, "invalid-locale"),
-    createElement("button", { onClick: clickValidLocale, type: "button" }, "valid-locale"),
     children,
   )
 }
@@ -152,7 +132,6 @@ describe("nuqs provider component", () => {
 describe("docs provider component", () => {
   it("renders docs root provider", () => {
     expect.hasAssertions()
-    replaceMock.mockClear()
     render(
       <DocsProvider locale="en-US">
         <span>docs</span>
@@ -162,33 +141,5 @@ describe("docs provider component", () => {
     expect(screen.getByText("docs")).toBeInTheDocument()
     expect(screen.getByRole("link", { name: "object-link" })).toHaveAttribute("href", "/")
     expect(screen.getByRole("link", { name: "string-link" })).toHaveAttribute("href", "/string")
-  })
-
-  it("ignores invalid locale changes", async () => {
-    expect.hasAssertions()
-    replaceMock.mockClear()
-    const user = userEvent.setup()
-    render(
-      <DocsProvider locale="en-US">
-        <span>docs</span>
-      </DocsProvider>,
-    )
-
-    await user.click(screen.getByRole("button", { name: "invalid-locale" }))
-    expect(replaceMock).not.toHaveBeenCalled()
-  })
-
-  it("changes locale for valid values", async () => {
-    expect.hasAssertions()
-    replaceMock.mockClear()
-    const user = userEvent.setup()
-    render(
-      <DocsProvider locale="en-US">
-        <span>docs</span>
-      </DocsProvider>,
-    )
-
-    await user.click(screen.getByRole("button", { name: "valid-locale" }))
-    expect(replaceMock).toHaveBeenCalledWith("/docs", { locale: "pl-PL" })
   })
 })

@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentProps, type JSX, type ReactNode, useMemo } from "react"
+import { type ComponentProps, type JSX, type ReactNode, Suspense, useMemo } from "react"
 
 import { DocsLayout } from "fumadocs-ui/layouts/docs"
 
@@ -9,6 +9,8 @@ import type { Locale } from "~/src/constants/types"
 
 import { LocaleSwitch } from "~/src/components/custom/locale-switch"
 import { ThemeSwitch } from "~/src/components/custom/theme-switch"
+
+const LOCALE_SWITCH_FALLBACK = <div className="h-9 w-full rounded-md bg-fd-muted/50" />
 
 const DOCS_NAV = { title: CONSTANTS.APP_NAME } as const
 const DOCS_THEME_SWITCH = { enabled: false } as const
@@ -28,7 +30,9 @@ export function DocsLayoutClient({ children, links, locale, tree }: DocsLayoutCl
     () => ({
       footer: (
         <div className="flex flex-col gap-2">
-          <LocaleSwitch locale={locale} />
+          <Suspense fallback={LOCALE_SWITCH_FALLBACK}>
+            <LocaleSwitch locale={locale} />
+          </Suspense>
           <ThemeSwitch />
         </div>
       ),

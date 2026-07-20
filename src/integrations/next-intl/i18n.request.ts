@@ -5,23 +5,10 @@ import { getRequestConfig } from "next-intl/server"
 import { getFormats } from "~/src/integrations/next-intl/i18n.formats"
 import { isLocale } from "~/src/integrations/next-intl/i18n.locale"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
-import { loadLocaleMessagesFromDir, type Messages } from "~/src/integrations/next-intl/i18n.utils"
+import { loadLocaleMessagesFromDir, resolveLocaleFromRootParamsModule, type Messages } from "~/src/integrations/next-intl/i18n.utils"
 
 async function resolveRootLocale(): Promise<string | undefined> {
-  const rootParamsModule: unknown = await import("next/root-params")
-
-  if (typeof rootParamsModule !== "object" || rootParamsModule === null || !("locale" in rootParamsModule)) {
-    return undefined
-  }
-
-  const localeProp = rootParamsModule["locale"]
-
-  if (typeof localeProp === "function") {
-    const resolved: unknown = await localeProp.call(rootParamsModule)
-    return typeof resolved === "string" ? resolved : undefined
-  }
-
-  return undefined
+  return resolveLocaleFromRootParamsModule(await import("next/root-params"))
 }
 
 function getLocaleMessages(locale: string): Messages {
