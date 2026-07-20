@@ -9,9 +9,9 @@ import { useTranslations } from "next-intl"
 
 import { cn } from "~/src/lib/utils"
 
-import { buttonVariants } from "~/src/components/shadcn/button"
+import { Button } from "~/src/components/shadcn/button"
 import { Checkbox } from "~/src/components/shadcn/checkbox"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "~/src/components/shadcn/dropdown-menu"
+import { DropdownMenu, DropdownMenuTrigger } from "~/src/components/shadcn/dropdown-menu"
 
 import { DATA_TABLE } from "~/src/components/custom/data-table/_constants/data-table.constants"
 import {
@@ -30,19 +30,15 @@ function DataTableSystemColumnInner({ children }: Readonly<{ children: ReactNode
   )
 }
 
-function DataTableSelectHeader<TData extends RowData>(context: HeaderContext<TData, unknown>): JSX.Element {
-  // Read selection so the header checkbox tracks page selection (all / some / none).
-  void context.table.getState().rowSelection
-  const checkboxProps = getDataTableSelectHeaderCheckboxPropsFromContext(context)
-
+function DataTableSelectHeader<TData extends RowData>(context: Readonly<HeaderContext<TData, unknown>>): JSX.Element {
   return (
     <DataTableSystemColumnInner>
-      <Checkbox {...checkboxProps} />
+      <Checkbox {...getDataTableSelectHeaderCheckboxPropsFromContext(context)} />
     </DataTableSystemColumnInner>
   )
 }
 
-function DataTableSelectCell<TData extends RowData>(context: CellContext<TData, unknown>): JSX.Element {
+function DataTableSelectCell<TData extends RowData>(context: Readonly<CellContext<TData, unknown>>): JSX.Element {
   return (
     <DataTableSystemColumnInner>
       <Checkbox {...getDataTableSelectCellCheckboxPropsFromContext(context)} />
@@ -67,25 +63,22 @@ export interface DataTableRowActionsButtonProps {
 /** Kebab trigger + menu. Pass `DropdownMenuItem`s (or separators) as children. */
 export function DataTableRowActionsButton({ children }: Readonly<DataTableRowActionsButtonProps>): JSX.Element {
   const t = useTranslations()
-  const ariaLabel = t("components.custom.data-table.actions.rowButton")
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        aria-label={ariaLabel}
-        className={cn(
-          buttonVariants({ size: "icon", variant: "ghost" }),
-          "size-8 shrink-0 text-muted-foreground hover:bg-secondary hover:text-foreground",
-        )}
+    <DropdownMenuTrigger>
+      <Button
+        aria-label={t("components.custom.data-table.actions.rowButton")}
+        className={cn("size-8 shrink-0 text-muted-foreground hover:bg-secondary hover:text-foreground")}
         data-slot="data-table-row-actions"
-        type="button"
+        size="icon"
+        variant="ghost"
       >
         <MoreHorizontal />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-auto min-w-44" side="bottom" sideOffset={4} size="default">
+      </Button>
+      <DropdownMenu className="w-auto min-w-44" offset={4} placement="bottom end">
         {children}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </DropdownMenu>
+    </DropdownMenuTrigger>
   )
 }
 
@@ -101,9 +94,9 @@ export function createDataTableActionsColumn<TData extends RowData>(
   renderActions: (context: CellContext<TData, unknown>) => ReactNode,
 ): ColumnDef<TData> {
   return {
-    // Mount as a component so row action renderers may use hooks.
     cell: (context) => {
       const RenderActions = renderActions
+
       return (
         <DataTableSystemColumnInner>
           <RenderActions {...context} />

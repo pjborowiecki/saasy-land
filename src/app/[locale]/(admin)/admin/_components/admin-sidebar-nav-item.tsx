@@ -1,12 +1,10 @@
 "use client"
 
-import { type JSX, useMemo } from "react"
+import type { JSX } from "react"
 
 import { useTranslations } from "next-intl"
 
 import type { SidebarNavItem } from "~/src/constants/_constants/sidebar"
-
-import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem } from "~/src/components/shadcn/sidebar"
 
@@ -26,22 +24,15 @@ export function AdminSidebarNavItem({ item, pathname }: AdminSidebarNavItemProps
 
   const isActive = item.url === "/admin" ? pathname === "/admin" : pathname === item.url || pathname.startsWith(`${item.url}/`)
 
-  const linkRender = useMemo(
-    () => (
-      <Link href={item.url}>
-        <item.icon className="size-[18px] opacity-70" />
-        <span className="text-[14px] font-medium">{t(`links.${item.titleKey}`)}</span>
-      </Link>
-    ),
-    [item, t],
-  )
-
   const badgeKey = "badgeKey" in item ? item.badgeKey : undefined
   const badgeLabel = badgeKey !== undefined && isSidebarBadgeKey(badgeKey) ? t(`badges.${badgeKey}`) : undefined
 
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton isActive={isActive} className="h-9" render={linkRender} />
+      <SidebarMenuButton className="h-9" href={item.url} isActive={isActive}>
+        <item.icon className="size-[18px] opacity-70" />
+        <span className="text-[14px] font-medium">{t(`links.${item.titleKey}`)}</span>
+      </SidebarMenuButton>
       {badgeLabel === undefined ? undefined : <SidebarMenuBadge>{badgeLabel}</SidebarMenuBadge>}
     </SidebarMenuItem>
   )

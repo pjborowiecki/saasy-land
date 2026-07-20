@@ -74,10 +74,5 @@ export function TableWrap({ className, ...props }: ElProps<"div">): JSX.Element 
 }
 
 export function Prose({ className, ...props }: Readonly<HTMLAttributes<HTMLElement>>): JSX.Element {
-  return (
-    <article
-      className={cn("prose max-w-none font-sans prose-neutral dark:prose-invert", "prose-headings:scroll-mt-24", className)}
-      {...props}
-    />
-  )
+  return <article className={cn("typeset typeset-docs max-w-none [&_:is(h1,h2,h3,h4,h5,h6)]:scroll-mt-24", className)} {...props} />
 }

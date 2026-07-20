@@ -17,10 +17,10 @@ export async function CreateProductPricingSection(): Promise<JSX.Element> {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <div className="space-y-1.5">
           <Label>{t("sections.pricing.model.label")}</Label>
-          <Tabs defaultValue="subscription" className="w-fit">
+          <Tabs defaultSelectedKey="subscription" className="w-fit">
             <TabsList className="w-fit">
-              <TabsTrigger value="subscription">{t("sections.pricing.model.subscription")}</TabsTrigger>
-              <TabsTrigger value="onetime">{t("sections.pricing.model.oneTime")}</TabsTrigger>
+              <TabsTrigger id="subscription">{t("sections.pricing.model.subscription")}</TabsTrigger>
+              <TabsTrigger id="onetime">{t("sections.pricing.model.oneTime")}</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
@@ -38,8 +38,8 @@ export async function CreateProductPricingSection(): Promise<JSX.Element> {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="monthly">{t("sections.pricing.period.monthly")}</SelectItem>
-              <SelectItem value="yearly">{t("sections.pricing.period.yearly")}</SelectItem>
+              <SelectItem id="monthly">{t("sections.pricing.period.monthly")}</SelectItem>
+              <SelectItem id="yearly">{t("sections.pricing.period.yearly")}</SelectItem>
             </SelectContent>
           </Select>
         </div>

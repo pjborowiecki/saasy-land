@@ -6,6 +6,7 @@ import { type CellContext, type ColumnDef } from "@tanstack/react-table"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { NextIntlClientProvider } from "next-intl"
+import type { Selection } from "react-aria-components"
 
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
@@ -18,8 +19,9 @@ import { DATA_TABLE_ACTIONS_COLUMN_ID } from "~/src/components/custom/data-table
 import type { DataTableOptions, DataTableRowDensity } from "~/src/components/custom/data-table/_types/data-table.types"
 import { DataTable, useDataTable } from "~/src/components/custom/data-table/data-table"
 
-type PageSizeChangeHandler = (value: unknown) => void
-type RowDensityChangeHandler = (value: string[]) => void
+type PageSizeChangeHandler = NonNullable<ComponentProps<typeof ShadcnSelect.Select>["onChange"]>
+/** Matches `DataTableToolbarSettings` — RAC `Selection` includes `"all" | Set<Key>`. */
+type RowDensityChangeHandler = (keys: Selection) => void
 
 const enMessages = loadLocaleMessagesFromDir("en-US")
 const { TEST_IDS } = DATA_TABLE
@@ -27,7 +29,7 @@ const EXPORT_CALL_COUNT = 1
 const BLOB_URL = "blob:coverage-csv"
 const CONTROLLED_SEARCH_VALUE = "controlled-query"
 const SEARCH_QUERY = "ali"
-const CLEARED_PAGE_SIZE: unknown = JSON.parse("null")
+const CLEARED_PAGE_SIZE = null
 
 interface Person {
   id: string
@@ -47,26 +49,22 @@ vi.mock(import("~/src/components/shadcn/select"), async (importOriginal): Promis
   const actual = await importOriginal<typeof ShadcnSelect>()
 
   function Select(props: ComponentProps<typeof actual.Select>) {
-    if (props.onValueChange) {
-      pageSizeChangeHandler.current = (value) => {
-        props.onValueChange?.(value, {} as Parameters<NonNullable<typeof props.onValueChange>>[1])
-      }
+    if (props.onChange !== undefined) {
+      pageSizeChangeHandler.current = props.onChange
     }
 
     return createElement(actual.Select, props)
   }
 
-  return { ...actual, Select: Select as typeof actual.Select }
+  return { ...actual, Select }
 })
 
 vi.mock(import("~/src/components/shadcn/toggle-group"), async (importOriginal): Promise<Partial<typeof ShadcnToggleGroup>> => {
   const actual = await importOriginal<typeof ShadcnToggleGroup>()
 
   function ToggleGroup(props: ComponentProps<typeof actual.ToggleGroup>) {
-    if (props.onValueChange) {
-      rowDensityChangeHandler.current = (value) => {
-        props.onValueChange?.(value, {} as Parameters<NonNullable<typeof props.onValueChange>>[1])
-      }
+    if (props.onSelectionChange !== undefined) {
+      rowDensityChangeHandler.current = props.onSelectionChange as RowDensityChangeHandler
     }
 
     return createElement(actual.ToggleGroup, props)
@@ -179,8 +177,9 @@ describe("data table coverage pagination and settings", () => {
     await user.click(screen.getByRole("button", { name: "Table settings" }))
     expect(rowDensityChangeHandler.current).toBeDefined()
 
-    rowDensityChangeHandler.current?.([])
-    rowDensityChangeHandler.current?.(["not-a-density"])
+    rowDensityChangeHandler.current?.("all")
+    rowDensityChangeHandler.current?.(new Set())
+    rowDensityChangeHandler.current?.(new Set(["not-a-density"]))
 
     expect(screen.getByTestId(TEST_IDS.TABLE)).toHaveAttribute("data-density", "default")
   })
@@ -218,7 +217,7 @@ describe("data table coverage pagination and settings", () => {
     expect(screen.getByTestId(TEST_IDS.TABLE)).toHaveAttribute("data-density", "default")
 
     await user.click(screen.getByRole("button", { name: "Table settings" }))
-    await user.click(screen.getByRole("button", { name: "Compact" }))
+    await user.click(screen.getByRole("radio", { name: "Compact" }))
 
     expect(screen.getByTestId(TEST_IDS.TABLE)).toHaveAttribute("data-density", "compact")
   })

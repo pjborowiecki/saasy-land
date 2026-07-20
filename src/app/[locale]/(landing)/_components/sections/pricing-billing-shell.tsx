@@ -22,7 +22,7 @@ export function PricingBillingShell({
     <>
       <div className="mb-16 flex items-center justify-center gap-4">
         <span className="text-sm font-medium text-muted-foreground">{monthlyLabel}</span>
-        <Switch checked={isYearly} onCheckedChange={setIsYearly} />
+        <Switch isSelected={isYearly} onChange={setIsYearly} />
         <span className="flex items-center gap-2 text-sm font-medium text-foreground">
           {yearlyLabel}
           <Badge variant="outline" className="border-primary/20 bg-primary/10 text-primary">

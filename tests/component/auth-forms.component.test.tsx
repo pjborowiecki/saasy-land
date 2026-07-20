@@ -13,6 +13,9 @@ import type * as AuthClient from "~/src/integrations/better-auth/auth._client"
 import type * as I18nNavigation from "~/src/integrations/next-intl/i18n.navigation"
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
+import { Button } from "~/src/components/shadcn/button"
+import { DropdownMenu, DropdownMenuTrigger } from "~/src/components/shadcn/dropdown-menu"
+
 import { SignOutButton } from "~/src/app/[locale]/(admin)/admin/_components/sign-out-button"
 import { OAuthButton } from "~/src/app/[locale]/(auth)/auth/_components/oauth-button"
 import { ForgotPasswordForm } from "~/src/app/[locale]/(auth)/auth/forgot-password/_components/forgot-password-form"
@@ -339,15 +342,14 @@ describe("sign out button component", () => {
     expect.hasAssertions()
     setupSignOutButtonMocks()
     const user = userEvent.setup()
-    const { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } = await import("~/src/components/shadcn/dropdown-menu")
 
     renderWithAuthMessages(
-      <DropdownMenu defaultOpen>
-        <DropdownMenuTrigger>Account</DropdownMenuTrigger>
-        <DropdownMenuContent>
+      <DropdownMenuTrigger defaultOpen>
+        <Button>Account</Button>
+        <DropdownMenu>
           <SignOutButton />
-        </DropdownMenuContent>
-      </DropdownMenu>,
+        </DropdownMenu>
+      </DropdownMenuTrigger>,
     )
 
     await user.click(screen.getByRole("menuitem", { name: /sign out/iu }))

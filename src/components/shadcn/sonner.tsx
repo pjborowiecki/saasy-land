@@ -1,12 +1,10 @@
 "use client"
 
-import type { JSX } from "react"
-
 import { useTheme } from "@wrksz/themes/client"
 import { CircleCheckIcon, InfoIcon, Loader2Icon, OctagonXIcon, TriangleAlertIcon } from "lucide-react"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
 
-import { cssVars } from "~/src/lib/utils"
+import { CONSTANTS } from "~/src/constants"
 
 const TOASTER_ICONS = {
   error: <OctagonXIcon className="size-4" />,
@@ -16,24 +14,23 @@ const TOASTER_ICONS = {
   warning: <TriangleAlertIcon className="size-4" />,
 } as const
 
-const TOASTER_STYLE = cssVars({
-  "--border-radius": "var(--radius)",
-  "--normal-bg": "var(--popover)",
-  "--normal-border": "var(--border)",
-  "--normal-text": "var(--popover-foreground)",
-})
-
 const TOAST_OPTIONS = {
   classNames: {
-    toast: "cn-toast",
+    toast: "border-border bg-popover text-popover-foreground",
   },
 } as const
 
-const Toaster = ({ ...props }: ToasterProps): JSX.Element => {
-  const { theme = "system" } = useTheme()
+function Toaster(props: Readonly<ToasterProps>) {
+  const { theme = CONSTANTS.THEME.DEFAULT_THEME } = useTheme()
 
   return (
-    <Sonner theme={theme} className="toaster group" icons={TOASTER_ICONS} style={TOASTER_STYLE} toastOptions={TOAST_OPTIONS} {...props} />
+    <Sonner
+      className="toaster group [--border-radius:var(--radius)] [--normal-bg:var(--popover)] [--normal-border:var(--border)] [--normal-text:var(--popover-foreground)]"
+      icons={TOASTER_ICONS}
+      theme={theme}
+      toastOptions={TOAST_OPTIONS}
+      {...props}
+    />
   )
 }
 

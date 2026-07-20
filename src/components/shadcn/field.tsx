@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentProps, type JSX, type ReactNode, useMemo } from "react"
+import { useMemo, type ComponentProps, type ReactNode } from "react"
 
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -9,17 +9,25 @@ import { cn } from "~/src/lib/utils"
 import { Label } from "~/src/components/shadcn/label"
 import { Separator } from "~/src/components/shadcn/separator"
 
-const SINGLE_FIELD_ERROR = 1
+const SINGLE_ERROR_COUNT = 1
 
-function hasFieldSeparatorContent(children: ReactNode | undefined): boolean {
-  return children !== undefined && children !== null && children !== false && children !== ""
+function hasRenderableNode(node: ReactNode): boolean {
+  if (node === undefined || node === null || node === false || node === true) {
+    return false
+  }
+
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node).length > 0
+  }
+
+  return true
 }
 
-function FieldSet({ className, ...props }: ComponentProps<"fieldset">): JSX.Element {
+function FieldSet({ className, ...props }: ComponentProps<"fieldset">) {
   return (
     <fieldset
-      data-slot="field-set"
       className={cn("flex flex-col gap-4 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3", className)}
+      data-slot="field-set"
       {...props}
     />
   )
@@ -29,25 +37,27 @@ function FieldLegend({
   className,
   variant = "legend",
   ...props
-}: ComponentProps<"legend"> & { variant?: "legend" | "label" }): JSX.Element {
+}: ComponentProps<"legend"> & {
+  variant?: "label" | "legend"
+}) {
   return (
     <legend
+      className={cn("mb-1.5 font-medium data-[variant=label]:text-sm data-[variant=legend]:text-base", className)}
       data-slot="field-legend"
       data-variant={variant}
-      className={cn("mb-2.5 font-medium data-[variant=label]:text-xs data-[variant=legend]:text-sm", className)}
       {...props}
     />
   )
 }
 
-function FieldGroup({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function FieldGroup({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      data-slot="field-group"
       className={cn(
         "group/field-group @container/field-group flex w-full flex-col gap-5 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4",
         className,
       )}
+      data-slot="field-group"
       {...props}
     />
   )
@@ -68,50 +78,50 @@ const fieldVariants = cva("group/field flex w-full gap-2 data-[invalid=true]:tex
   },
 })
 
-function Field({ className, orientation = "vertical", ...props }: ComponentProps<"div"> & VariantProps<typeof fieldVariants>): JSX.Element {
-  return <div data-slot="field" data-orientation={orientation} className={cn(fieldVariants({ orientation }), className)} {...props} />
+function Field({ className, orientation = "vertical", ...props }: ComponentProps<"fieldset"> & VariantProps<typeof fieldVariants>) {
+  return <fieldset className={cn(fieldVariants({ orientation }), className)} data-orientation={orientation} data-slot="field" {...props} />
 }
 
-function FieldContent({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function FieldContent({ className, ...props }: ComponentProps<"div">) {
   return (
-    <div data-slot="field-content" className={cn("group/field-content flex flex-1 flex-col gap-0.5 leading-snug", className)} {...props} />
+    <div className={cn("group/field-content flex flex-1 flex-col gap-0.5 leading-snug", className)} data-slot="field-content" {...props} />
   )
 }
 
-function FieldLabel({ className, ...props }: ComponentProps<typeof Label>): JSX.Element {
+function FieldLabel({ className, ...props }: ComponentProps<typeof Label>) {
   return (
     <Label
-      data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug font-medium text-foreground group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-data-selected:border-primary/30 has-data-selected:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border *:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10 dark:has-data-selected:border-primary/20 dark:has-data-selected:bg-primary/10",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         className,
       )}
+      data-slot="field-label"
       {...props}
     />
   )
 }
 
-function FieldTitle({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function FieldTitle({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      className={cn("flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50", className)}
       data-slot="field-label"
-      className={cn("flex w-fit items-center gap-2 text-xs/relaxed leading-snug group-data-[disabled=true]/field:opacity-50", className)}
       {...props}
     />
   )
 }
 
-function FieldDescription({ className, ...props }: ComponentProps<"p">): JSX.Element {
+function FieldDescription({ className, ...props }: ComponentProps<"p">) {
   return (
     <p
-      data-slot="field-description"
       className={cn(
-        "text-left text-xs/relaxed leading-normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
+        "text-left text-sm leading-normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
         "last:mt-0 nth-last-2:-mt-1",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className,
       )}
+      data-slot="field-description"
       {...props}
     />
   )
@@ -123,14 +133,14 @@ function FieldSeparator({
   ...props
 }: ComponentProps<"div"> & {
   children?: ReactNode
-}): JSX.Element {
-  const hasContent = hasFieldSeparatorContent(children)
+}) {
+  const hasContent = hasRenderableNode(children)
 
   return (
     <div
+      className={cn("relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2", className)}
+      data-content={hasContent ? "true" : undefined}
       data-slot="field-separator"
-      data-content={hasContent}
-      className={cn("relative -my-2 h-5 text-xs group-data-[variant=outline]/field-group:-mb-2", className)}
       {...props}
     >
       <Separator className="absolute inset-0 top-1/2" />
@@ -144,15 +154,15 @@ function FieldSeparator({
 }
 
 function FieldError({
-  className,
   children,
+  className,
   errors,
   ...props
 }: ComponentProps<"div"> & {
   errors?: ({ message?: string } | undefined)[]
-}): JSX.Element | undefined {
-  const content = useMemo(() => {
-    if (children !== undefined && children !== null && children !== false && children !== "") {
+}) {
+  const content = useMemo((): ReactNode => {
+    if (hasRenderableNode(children)) {
       return children
     }
 
@@ -162,27 +172,25 @@ function FieldError({
 
     const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()]
 
-    if (uniqueErrors.length === SINGLE_FIELD_ERROR) {
+    if (uniqueErrors.length === SINGLE_ERROR_COUNT) {
       return uniqueErrors[0]?.message
     }
 
     return (
       <ul className="ml-4 flex list-disc flex-col gap-1">
-        {uniqueErrors
-          .filter((error): error is { message: string } => error?.message !== undefined && error.message !== "")
-          .map((error) => (
-            <li key={error.message}>{error.message}</li>
-          ))}
+        {uniqueErrors.map((error) =>
+          error?.message !== undefined && error.message !== "" ? <li key={error.message}>{error.message}</li> : undefined,
+        )}
       </ul>
     )
   }, [children, errors])
 
-  if (content === undefined || content === null || content === "") {
+  if (!hasRenderableNode(content)) {
     return
   }
 
   return (
-    <div role="alert" data-slot="field-error" className={cn("text-xs font-normal text-destructive", className)} {...props}>
+    <div className={cn("text-sm font-normal text-destructive", className)} data-slot="field-error" role="alert" {...props}>
       {content}
     </div>
   )

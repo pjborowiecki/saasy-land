@@ -6,10 +6,10 @@ export const DATA_TABLE_SELECT_COLUMN_ID = "select"
 
 export interface DataTableSelectCheckboxProps {
   "aria-label": string
-  checked: boolean
-  disabled?: boolean
-  indeterminate?: boolean
-  onCheckedChange: (checked: boolean) => void
+  isDisabled?: boolean
+  isIndeterminate?: boolean
+  isSelected: boolean
+  onChange: (isSelected: boolean) => void
 }
 
 /** Shared column options for TanStack row-selection checkboxes. */
@@ -26,27 +26,40 @@ export const DATA_TABLE_SELECT_COLUMN_DEF = {
 }
 
 export function getDataTableSelectHeaderCheckboxProps<TData extends RowData>(table: Table<TData>): DataTableSelectCheckboxProps {
+  // Read selection state directly so React Compiler tracks it as a render dependency.
+  const { rowSelection } = table.getState()
+  const selectablePageRowIds = table
+    .getRowModel()
+    .rows.filter((row) => row.getCanSelect())
+    .map((row) => row.id)
+  const selectedOnPageCount = selectablePageRowIds.filter((id) => rowSelection[id] === true).length
+  const selectableOnPageCount = selectablePageRowIds.length
+
   return {
     "aria-label": "Select all rows",
-    checked: table.getIsAllPageRowsSelected(),
-    indeterminate: table.getIsSomePageRowsSelected() && !table.getIsAllPageRowsSelected(),
-    onCheckedChange: (checked) => {
-      table.toggleAllPageRowsSelected(checked)
+    isIndeterminate: selectedOnPageCount > 0 && selectedOnPageCount < selectableOnPageCount,
+    isSelected: selectableOnPageCount > 0 && selectedOnPageCount === selectableOnPageCount,
+    onChange: (isSelected) => {
+      table.toggleAllPageRowsSelected(isSelected)
     },
   }
 }
 
-export function getDataTableSelectCellCheckboxProps<TData extends RowData>(row: Row<TData>): DataTableSelectCheckboxProps {
+export function getDataTableSelectCellCheckboxProps<TData extends RowData>(
+  row: Row<TData>,
+  rowSelection: Readonly<Record<string, boolean>>,
+): DataTableSelectCheckboxProps {
   const props: DataTableSelectCheckboxProps = {
     "aria-label": "Select row",
-    checked: row.getIsSelected(),
-    onCheckedChange: (checked) => {
-      row.toggleSelected(checked)
+    // Derive from `rowSelection` so React Compiler tracks selection as a render dependency.
+    isSelected: rowSelection[row.id] === true,
+    onChange: (isSelected) => {
+      row.toggleSelected(isSelected)
     },
   }
 
   if (!row.getCanSelect()) {
-    props.disabled = true
+    props.isDisabled = true
   }
 
   return props
@@ -61,5 +74,6 @@ export function getDataTableSelectHeaderCheckboxPropsFromContext<TData extends R
 export function getDataTableSelectCellCheckboxPropsFromContext<TData extends RowData>(
   context: CellContext<TData, unknown>,
 ): DataTableSelectCheckboxProps {
-  return getDataTableSelectCellCheckboxProps(context.row)
+  const { rowSelection } = context.table.getState()
+  return getDataTableSelectCellCheckboxProps(context.row, rowSelection)
 }

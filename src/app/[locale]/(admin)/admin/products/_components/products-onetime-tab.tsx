@@ -14,7 +14,7 @@ interface ProductsOnetimeTabProps {
 
 export function ProductsOnetimeTab({ products }: ProductsOnetimeTabProps): JSX.Element {
   return (
-    <TabsContent value="onetime" className="mt-6 space-y-4 outline-none">
+    <TabsContent id="onetime" className="mt-6 space-y-4 outline-none">
       <ProductsTabToolbar />
 
       <ProductsTableCard end={3} total={3}>

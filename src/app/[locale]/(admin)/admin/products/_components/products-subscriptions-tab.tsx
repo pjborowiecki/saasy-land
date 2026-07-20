@@ -14,7 +14,7 @@ interface ProductsSubscriptionsTabProps {
 
 export function ProductsSubscriptionsTab({ products }: ProductsSubscriptionsTabProps): JSX.Element {
   return (
-    <TabsContent value="subscriptions" className="mt-6 space-y-4 outline-none">
+    <TabsContent id="subscriptions" className="mt-6 space-y-4 outline-none">
       <ProductsTabToolbar />
 
       <ProductsTableCard end={3} total={3}>

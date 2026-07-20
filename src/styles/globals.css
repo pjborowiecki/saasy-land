@@ -2,12 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@import "./typeset.css";
+
 @import "fumadocs-ui/css/shadcn.css";
 @import "fumadocs-ui/css/preset.css";
-
-@plugin "@tailwindcss/typography" {
-  classname: wysiwyg;
-}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -83,7 +81,9 @@
 }
 
 @theme inline {
-  --font-mono: var(--font-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -140,50 +140,64 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground;
   }
 }
 
-/**
- * Thin, token-colored scrollbars for overflow surfaces (tables, panels, etc.).
- * Pair with `scrollbar-gutter-stable` on vertical scroll areas that must not
- * shift layout when the bar appears.
- */
-@utility custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--border) 90%, transparent) transparent;
+.typeset-docs {
+  --typeset-font-body: var(--font-sans);
+  --typeset-font-heading: var(--font-heading);
+  --typeset-font-mono: var(--font-mono);
+  --typeset-size: 15px;
+  --typeset-leading: 1.75;
+  --typeset-flow: 1.5em;
+}
 
-  /* Same treatment for vertical (width) and horizontal (height) scrollbars. */
-  &::-webkit-scrollbar {
+.typeset-chat {
+  --typeset-font-body: var(--font-sans);
+  --typeset-font-heading: var(--font-heading);
+  --typeset-font-mono: var(--font-mono);
+  --typeset-size: 1em;
+  --typeset-leading: 1.6;
+  --typeset-flow: 1em;
+}
+
+@layer utilities {
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--border) 90%, transparent) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
     width: 0.5rem;
     height: 0.5rem;
   }
 
-  &::-webkit-scrollbar-track {
+  .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  &::-webkit-scrollbar-thumb {
+  .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: color-mix(in oklab, var(--border) 90%, transparent);
     border-radius: 9999px;
     border: 2px solid transparent;
     background-clip: content-box;
   }
 
-  &::-webkit-scrollbar-thumb:hover {
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: color-mix(in oklab, var(--muted-foreground) 45%, transparent);
   }
 
-  &::-webkit-scrollbar-corner {
+  .custom-scrollbar::-webkit-scrollbar-corner {
     background: transparent;
   }
-}
 
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-  &::-webkit-scrollbar {
+  .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
 }

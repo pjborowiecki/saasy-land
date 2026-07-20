@@ -1,87 +1,108 @@
 "use client"
 
-import { createContext, type JSX, useContext, useMemo } from "react"
+import { createContext, use, useMemo, type CSSProperties, type ReactNode } from "react"
 
-import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
-import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group"
-import type { VariantProps } from "class-variance-authority"
+import { type VariantProps } from "class-variance-authority"
+import {
+  ToggleButton as TogglePrimitive,
+  ToggleButtonGroup as ToggleGroupPrimitive,
+  type ToggleButtonGroupProps,
+  type ToggleButtonProps,
+} from "react-aria-components"
 
-import { cn, cssVars } from "~/src/lib/utils"
+import { cn } from "~/src/lib/utils"
 
 import { toggleVariants } from "~/src/components/shadcn/toggle"
 
-const ToggleGroupContext = createContext<
-  VariantProps<typeof toggleVariants> & {
-    spacing?: number
-    orientation?: "horizontal" | "vertical"
-  }
->({
+const DEFAULT_SPACING = 2
+
+type ToggleGroupContextValue = VariantProps<typeof toggleVariants> & {
+  orientation?: "horizontal" | "vertical"
+  spacing?: number
+}
+
+const ToggleGroupContext = createContext<ToggleGroupContextValue>({
   orientation: "horizontal",
   size: "default",
-  spacing: 0,
+  spacing: DEFAULT_SPACING,
   variant: "default",
 })
 
 function ToggleGroup({
-  className,
-  variant,
-  size,
-  spacing = 0,
-  orientation = "horizontal",
   children,
+  className,
+  orientation = "horizontal",
+  size,
+  spacing = DEFAULT_SPACING,
+  variant,
   ...props
-}: ToggleGroupPrimitive.Props &
+}: Omit<ToggleButtonGroupProps, "children"> &
   VariantProps<typeof toggleVariants> & {
-    spacing?: number
+    children?: ReactNode
     orientation?: "horizontal" | "vertical"
-  }): JSX.Element {
-  const contextValue = useMemo(() => ({ orientation, size, spacing, variant }), [orientation, size, spacing, variant])
-  const groupStyle = useMemo(() => cssVars({ "--gap": spacing }), [spacing])
+    spacing?: number
+  }) {
+  const contextValue = useMemo(
+    (): ToggleGroupContextValue => ({
+      orientation,
+      size,
+      spacing,
+      variant,
+    }),
+    [orientation, size, spacing, variant],
+  )
+
+  const gapStyle = useMemo(
+    (): CSSProperties & Record<`--${string}`, string> => ({
+      "--gap": `calc(var(--spacing) * ${String(spacing)})`,
+    }),
+    [spacing],
+  )
 
   return (
     <ToggleGroupPrimitive
-      data-slot="toggle-group"
-      data-variant={variant}
-      data-size={size}
-      data-spacing={spacing}
-      data-orientation={orientation}
-      style={groupStyle}
       className={cn(
-        "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-lg data-[spacing=0]:overflow-hidden data-vertical:flex-col data-vertical:items-stretch",
+        "group/toggle-group flex w-fit flex-row items-center gap-(--gap) rounded-lg data-[size=sm]:rounded-[min(var(--radius-md),10px)] data-vertical:flex-col data-vertical:items-stretch",
         className,
       )}
+      data-size={size}
+      data-slot="toggle-group"
+      data-spacing={spacing}
+      data-variant={variant}
+      orientation={orientation}
+      style={gapStyle}
       {...props}
     >
-      <ToggleGroupContext.Provider value={contextValue}>{children}</ToggleGroupContext.Provider>
+      <ToggleGroupContext value={contextValue}>{children}</ToggleGroupContext>
     </ToggleGroupPrimitive>
   )
 }
 
 function ToggleGroupItem({
-  className,
   children,
-  variant = "default",
+  className,
   size = "default",
+  variant = "default",
   ...props
-}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>): JSX.Element {
-  const context = useContext(ToggleGroupContext)
-  const resolvedVariant = context.variant ?? variant
+}: ToggleButtonProps & VariantProps<typeof toggleVariants>) {
+  const context = use(ToggleGroupContext)
   const resolvedSize = context.size ?? size
+  const resolvedVariant = context.variant ?? variant
 
   return (
     <TogglePrimitive
-      data-slot="toggle-group-item"
-      data-variant={resolvedVariant}
-      data-size={resolvedSize}
-      data-spacing={context.spacing}
       className={cn(
-        "shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10 focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-none group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-none group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-none group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-none group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
+        "shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10 focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-lg group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-lg group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-lg group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-lg group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
         toggleVariants({
           size: resolvedSize,
           variant: resolvedVariant,
         }),
         className,
       )}
+      data-size={resolvedSize}
+      data-slot="toggle-group-item"
+      data-spacing={context.spacing}
+      data-variant={resolvedVariant}
       {...props}
     >
       {children}

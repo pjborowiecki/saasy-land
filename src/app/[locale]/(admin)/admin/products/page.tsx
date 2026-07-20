@@ -47,28 +47,28 @@ export default async function ProductsPage({ params }: Readonly<PageProps<"/[loc
         </div>
       </div>
 
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs defaultSelectedKey="all" className="w-full">
         <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
           <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-            <TabsTrigger value="all" className="flex-none px-0 text-sm">
+            <TabsTrigger id="all" className="flex-none px-0 text-sm">
               {t("tabs.all")}
             </TabsTrigger>
-            <TabsTrigger value="onetime" className="flex-none px-0 text-sm">
+            <TabsTrigger id="onetime" className="flex-none px-0 text-sm">
               {t("tabs.onetime")}
             </TabsTrigger>
-            <TabsTrigger value="subscriptions" className="flex-none px-0 text-sm">
+            <TabsTrigger id="subscriptions" className="flex-none px-0 text-sm">
               {t("tabs.subscriptions")}
             </TabsTrigger>
-            <TabsTrigger value="categories" className="flex-none px-0 text-sm">
+            <TabsTrigger id="categories" className="flex-none px-0 text-sm">
               {t("tabs.categories")}
             </TabsTrigger>
-            <TabsTrigger value="collections" className="flex-none px-0 text-sm">
+            <TabsTrigger id="collections" className="flex-none px-0 text-sm">
               {t("tabs.collections")}
             </TabsTrigger>
-            <TabsTrigger value="drafts" className="flex-none px-0 text-sm">
+            <TabsTrigger id="drafts" className="flex-none px-0 text-sm">
               {t("tabs.drafts")}
             </TabsTrigger>
-            <TabsTrigger value="courses" className="flex-none px-0 text-sm">
+            <TabsTrigger id="courses" className="flex-none px-0 text-sm">
               {t("tabs.courses")}
             </TabsTrigger>
           </TabsList>

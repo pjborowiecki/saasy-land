@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl"
 
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
+import { DropdownMenuItem } from "~/src/components/shadcn/dropdown-menu"
 import { SidebarProvider } from "~/src/components/shadcn/sidebar"
 
 import { UserWidgetClient } from "~/src/app/[locale]/(admin)/admin/_components/user-widget-client"
@@ -15,11 +16,7 @@ vi.mock(import("~/src/hooks/use-mobile"), () => ({
 }))
 
 vi.mock(import("~/src/app/[locale]/(admin)/admin/_components/sign-out-button"), () => ({
-  SignOutButton: () => (
-    <button type="button" role="menuitem">
-      Sign out
-    </button>
-  ),
+  SignOutButton: () => <DropdownMenuItem textValue="Sign out">Sign out</DropdownMenuItem>,
 }))
 
 const EXPECTED_NAME_OCCURRENCES = 1

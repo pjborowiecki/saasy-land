@@ -66,14 +66,14 @@ export function TwoFactorTotpForm({ onToggleMode }: Readonly<TwoFactorTotpFormPr
         <Button
           className="h-11 gap-2 bg-foreground text-background hover:bg-foreground/80"
           data-testid="two-factor-form-submit-button"
-          disabled={totpForm.formState.isSubmitting}
+          isDisabled={totpForm.formState.isSubmitting}
           type="submit"
         >
           {totpForm.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
           {totpForm.formState.isSubmitting ? t("pages.auth.two-factor.form.submitting") : t("pages.auth.two-factor.form.submit")}
         </Button>
 
-        <Button className="h-11" onClick={onToggleMode} type="button" variant="outline">
+        <Button className="h-11" onPress={onToggleMode} type="button" variant="outline">
           {t("pages.auth.two-factor.form.useBackupCode")}
         </Button>
       </form>

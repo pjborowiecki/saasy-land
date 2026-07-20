@@ -16,7 +16,7 @@ export async function DashboardSecurityCard(): Promise<JSX.Element> {
             <p className="text-sm font-medium text-foreground">{t("security.mfa")}</p>
             <p className="text-xs text-muted-foreground">{t("security.mfaDesc")}</p>
           </div>
-          <Switch defaultChecked />
+          <Switch defaultSelected />
         </div>
         <div className="flex items-center justify-between">
           <div>

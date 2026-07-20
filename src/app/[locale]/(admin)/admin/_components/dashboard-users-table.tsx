@@ -42,7 +42,7 @@ export async function DashboardUsersTable({ users }: DashboardUsersTableProps): 
       <div className="flex items-center justify-between border-t border-border/40 p-4 text-xs text-muted-foreground">
         <span>{t("users.table.pagination.showing")}</span>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="h-7 px-2" disabled>
+          <Button variant="outline" size="sm" className="h-7 px-2" isDisabled>
             {t("users.table.pagination.previous")}
           </Button>
           <Button variant="outline" size="sm" className="h-7 px-2">

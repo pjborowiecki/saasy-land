@@ -53,7 +53,7 @@ describe("data table select column", () => {
     const props = getDataTableSelectHeaderCheckboxProps(result.current)
 
     act(() => {
-      props.onCheckedChange(true)
+      props.onChange(true)
     })
 
     expect(toggleAllPageRowsSelected).toHaveBeenCalledWith(true)
@@ -66,6 +66,6 @@ describe("data table select column", () => {
     const secondRow = result.current.getRowModel().rows.at(SECOND_ROW_INDEX)
 
     expect(secondRow).toBeDefined()
-    expect(getDataTableSelectCellCheckboxProps(secondRow!).disabled).toBe(true)
+    expect(getDataTableSelectCellCheckboxProps(secondRow!, result.current.getState().rowSelection).isDisabled).toBe(true)
   })
 })

@@ -3,6 +3,7 @@
 
 import { useCallback, type ComponentProps, type JSX } from "react"
 
+import type { Key } from "@react-types/shared"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -25,18 +26,18 @@ export function DataTablePagination({ className, pageSizeOptions, ...props }: Re
 
   const resolvedPageSizeOptions = pageSizeOptions ?? paginationPageSizeOptions ?? DATA_TABLE.PAGINATION.DEFAULT_PAGE_SIZE_OPTIONS
 
-  const { pageIndex, pageSize } = table.getState().pagination
-  // Subscribe to selection so the footer updates when rows are selected / cleared.
-  void table.getState().rowSelection
+  const { pagination, rowSelection } = table.getState()
+  const { pageIndex, pageSize } = pagination
   const rowCount = table.getFilteredRowModel().rows.length
-  const selectedCount = table.getFilteredSelectedRowModel().rows.length
+  // Derive from `rowSelection` so React Compiler tracks selection as a render dependency.
+  const selectedCount = table.getFilteredSelectedRowModel().rows.filter((row) => rowSelection[row.id] === true).length
   const currentPage = pageIndex + DATA_TABLE.PAGINATION.PAGE_INDEX_DISPLAY_OFFSET
   const pageCount = Math.max(DATA_TABLE.PAGINATION.PAGE_INDEX_DISPLAY_OFFSET, table.getPageCount())
   const pageSizeLabel = t("components.custom.data-table.pagination.rowsPerPage")
 
   const handlePageSizeChange = useCallback(
-    (value: string | null) => {
-      if (typeof value !== "string") {
+    (value: Key | null) => {
+      if (typeof value !== "string" && typeof value !== "number") {
         return
       }
       table.setPageSize(Number(value))
@@ -75,7 +76,7 @@ export function DataTablePagination({ className, pageSizeOptions, ...props }: Re
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
           <span className="text-xs font-medium">{pageSizeLabel}</span>
-          <Select value={String(pageSize)} onValueChange={handlePageSizeChange}>
+          <Select value={String(pageSize)} onChange={handlePageSizeChange}>
             <SelectTrigger
               aria-label={pageSizeLabel}
               className="h-8 min-w-16 gap-1.5 rounded-lg px-2.5 text-xs"
@@ -84,9 +85,9 @@ export function DataTablePagination({ className, pageSizeOptions, ...props }: Re
             >
               <SelectValue />
             </SelectTrigger>
-            <SelectContent align="end">
+            <SelectContent placement="bottom end">
               {resolvedPageSizeOptions.map((size) => (
-                <SelectItem key={size} className="text-xs" value={String(size)}>
+                <SelectItem key={size} className="text-xs" id={String(size)}>
                   {size}
                 </SelectItem>
               ))}
@@ -103,8 +104,8 @@ export function DataTablePagination({ className, pageSizeOptions, ...props }: Re
             aria-label={t("components.shadcn.pagination.goToPreviousPage")}
             className="size-8"
             data-testid={DATA_TABLE.TEST_IDS.PAGINATION_PREVIOUS}
-            disabled={!table.getCanPreviousPage()}
-            onClick={goToPreviousPage}
+            isDisabled={!table.getCanPreviousPage()}
+            onPress={goToPreviousPage}
             size="icon"
             variant="outline"
           >
@@ -114,8 +115,8 @@ export function DataTablePagination({ className, pageSizeOptions, ...props }: Re
             aria-label={t("components.shadcn.pagination.goToNextPage")}
             className="size-8"
             data-testid={DATA_TABLE.TEST_IDS.PAGINATION_NEXT}
-            disabled={!table.getCanNextPage()}
-            onClick={goToNextPage}
+            isDisabled={!table.getCanNextPage()}
+            onPress={goToNextPage}
             size="icon"
             variant="outline"
           >

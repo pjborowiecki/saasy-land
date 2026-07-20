@@ -1,24 +1,24 @@
-import type { ComponentProps, JSX } from "react"
+import type { ComponentProps } from "react"
 
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "~/src/lib/utils"
 
-function Empty({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function Empty({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      data-slot="empty"
       className={cn(
-        "flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 rounded-lg border-dashed p-6 text-center text-balance",
+        "flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 rounded-xl border-dashed p-6 text-center text-balance",
         className,
       )}
+      data-slot="empty"
       {...props}
     />
   )
 }
 
-function EmptyHeader({ className, ...props }: ComponentProps<"div">): JSX.Element {
-  return <div data-slot="empty-header" className={cn("flex max-w-sm flex-col items-center gap-2", className)} {...props} />
+function EmptyHeader({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("flex max-w-sm flex-col items-center gap-2", className)} data-slot="empty-header" {...props} />
 }
 
 const emptyMediaVariants = cva("mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0", {
@@ -33,33 +33,29 @@ const emptyMediaVariants = cva("mb-2 flex shrink-0 items-center justify-center [
   },
 })
 
-function EmptyMedia({
-  className,
-  variant = "default",
-  ...props
-}: ComponentProps<"div"> & VariantProps<typeof emptyMediaVariants>): JSX.Element {
-  return <div data-slot="empty-icon" data-variant={variant} className={cn(emptyMediaVariants({ className, variant }))} {...props} />
+function EmptyMedia({ className, variant = "default", ...props }: ComponentProps<"div"> & VariantProps<typeof emptyMediaVariants>) {
+  return <div className={cn(emptyMediaVariants({ className, variant }))} data-slot="empty-icon" data-variant={variant} {...props} />
 }
 
-function EmptyTitle({ className, ...props }: ComponentProps<"div">): JSX.Element {
-  return <div data-slot="empty-title" className={cn("text-sm font-medium", className)} {...props} />
+function EmptyTitle({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("cn-font-heading text-sm font-medium tracking-tight", className)} data-slot="empty-title" {...props} />
 }
 
-function EmptyDescription({ className, ...props }: ComponentProps<"p">): JSX.Element {
+function EmptyDescription({ className, ...props }: ComponentProps<"p">) {
   return (
     <div
+      className={cn("text-sm/relaxed text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary", className)}
       data-slot="empty-description"
-      className={cn("text-xs/relaxed text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary", className)}
       {...props}
     />
   )
 }
 
-function EmptyContent({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function EmptyContent({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      className={cn("flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-sm text-balance", className)}
       data-slot="empty-content"
-      className={cn("flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-xs text-balance", className)}
       {...props}
     />
   )

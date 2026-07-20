@@ -14,7 +14,7 @@ interface ProductsCategoriesTabProps {
 
 export function ProductsCategoriesTab({ categories }: ProductsCategoriesTabProps): JSX.Element {
   return (
-    <TabsContent value="categories" className="mt-6 space-y-4 outline-none">
+    <TabsContent id="categories" className="mt-6 space-y-4 outline-none">
       <ProductsTabToolbar showTypeFilter={false} />
 
       <ProductsTableCard end={3} total={3}>

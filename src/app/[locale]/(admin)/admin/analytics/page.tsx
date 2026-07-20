@@ -35,22 +35,22 @@ export default async function AnalyticsPage({ params }: Readonly<PageProps<"/[lo
         </div>
       </div>
 
-      <Tabs defaultValue="overview" className="w-full">
+      <Tabs defaultSelectedKey="overview" className="w-full">
         <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
           <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-            <TabsTrigger value="overview" className="flex-none px-0 text-sm">
+            <TabsTrigger id="overview" className="flex-none px-0 text-sm">
               {t("tabs.overview")}
             </TabsTrigger>
-            <TabsTrigger value="revenue" className="flex-none px-0 text-sm">
+            <TabsTrigger id="revenue" className="flex-none px-0 text-sm">
               {t("tabs.revenue")}
             </TabsTrigger>
-            <TabsTrigger value="audience" className="flex-none px-0 text-sm">
+            <TabsTrigger id="audience" className="flex-none px-0 text-sm">
               {t("tabs.audience")}
             </TabsTrigger>
-            <TabsTrigger value="retention" className="flex-none px-0 text-sm">
+            <TabsTrigger id="retention" className="flex-none px-0 text-sm">
               {t("tabs.retention")}
             </TabsTrigger>
-            <TabsTrigger value="reports" className="flex-none px-0 text-sm">
+            <TabsTrigger id="reports" className="flex-none px-0 text-sm">
               {t("tabs.reports")}
             </TabsTrigger>
           </TabsList>

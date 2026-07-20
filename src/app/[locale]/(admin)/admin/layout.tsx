@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: Readonly<LayoutProps<"/[locale
         <SidebarInset className="relative min-h-0 overflow-hidden">
           <Background className="z-[-1]" glow={false} />
           <AdminLayoutHeader />
-          <div className="flex custom-scrollbar min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3">
+          <div className="custom-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3">
             {children}
           </div>
         </SidebarInset>

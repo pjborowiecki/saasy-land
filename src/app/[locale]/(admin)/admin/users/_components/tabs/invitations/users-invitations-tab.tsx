@@ -16,7 +16,7 @@ import { getAdminInvitations } from "~/src/app/[locale]/(admin)/admin/users/_lib
 export async function UsersInvitationsTab(): Promise<JSX.Element> {
   const [t, invitations] = await Promise.all([getTranslations("pages.admin.users"), getAdminInvitations()])
   return (
-    <TabsContent value="invitations" className="mt-0 space-y-8 outline-none">
+    <TabsContent id="invitations" className="mt-0 space-y-8 outline-none">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("invitations.title")}</h1>

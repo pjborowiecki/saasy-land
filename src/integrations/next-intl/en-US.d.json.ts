@@ -137,12 +137,20 @@ declare const messages: {
         "previousSlide": "Previous slide",
         "carouselLabel": "Carousel"
       },
+      "combobox": {
+        "clear": "Clear"
+      },
       "command": {
         "title": "Command palette",
-        "description": "Search for a command to run..."
+        "description": "Search for a command to run...",
+        "search": "Search"
       },
       "dialog": {
         "close": "Close"
+      },
+      "message-scroller": {
+        "scrollToEnd": "Scroll to end",
+        "scrollToStart": "Scroll to start"
       },
       "pagination": {
         "navLabel": "Pagination",
@@ -154,6 +162,14 @@ declare const messages: {
       },
       "sheet": {
         "close": "Close"
+      },
+      "sidebar": {
+        "description": "Displays the mobile sidebar.",
+        "title": "Sidebar",
+        "toggle": "Toggle Sidebar"
+      },
+      "spinner": {
+        "loading": "Loading"
       }
     }
   },

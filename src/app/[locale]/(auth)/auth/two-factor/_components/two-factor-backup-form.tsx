@@ -75,14 +75,14 @@ export function TwoFactorBackupForm({ onToggleMode }: Readonly<TwoFactorBackupFo
         <Button
           className="h-11 gap-2 bg-foreground text-background hover:bg-foreground/80"
           data-testid="two-factor-backup-submit-button"
-          disabled={backupForm.formState.isSubmitting}
+          isDisabled={backupForm.formState.isSubmitting}
           type="submit"
         >
           {backupForm.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
           {backupForm.formState.isSubmitting ? t("pages.auth.two-factor.form.submitting") : t("pages.auth.two-factor.form.submit")}
         </Button>
 
-        <Button className="h-11" onClick={onToggleMode} type="button" variant="outline">
+        <Button className="h-11" onPress={onToggleMode} type="button" variant="outline">
           {t("pages.auth.two-factor.form.useAuthenticator")}
         </Button>
       </form>

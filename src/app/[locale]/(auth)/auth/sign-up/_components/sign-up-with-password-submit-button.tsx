@@ -18,7 +18,7 @@ export function SignUpSubmitButton(): JSX.Element {
     <Button
       aria-label={t("form.submit")}
       className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-foreground px-8 text-sm font-medium text-background shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all hover:bg-foreground/90 hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]"
-      disabled={form.formState.isSubmitting}
+      isDisabled={form.formState.isSubmitting}
       id="sign-up-form-submit-button"
       type="submit"
     >

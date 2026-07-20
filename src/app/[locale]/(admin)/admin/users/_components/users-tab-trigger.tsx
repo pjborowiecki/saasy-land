@@ -20,14 +20,19 @@ export function UsersTabTrigger({ children, className, tab }: Readonly<UsersTabT
 
   const linkRender = useMemo(
     () =>
-      function renderUsersTabLink(props: ComponentProps<"a">) {
-        return <Link {...props} href={href} prefetch />
+      function renderUsersTabLink(props: ComponentProps<"a"> | ComponentProps<"div">) {
+        if (!("href" in props)) {
+          throw new Error("UsersTabTrigger expected link props with href")
+        }
+
+        const { href: _href, ...linkProps } = props
+        return <Link {...linkProps} href={href} prefetch />
       },
     [href],
   )
 
   return (
-    <TabsTrigger value={tab} nativeButton={false} render={linkRender} className={className}>
+    <TabsTrigger href={href} id={tab} render={linkRender} {...(className === undefined ? {} : { className })}>
       {children}
     </TabsTrigger>
   )

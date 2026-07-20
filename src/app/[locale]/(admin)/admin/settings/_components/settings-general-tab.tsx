@@ -8,7 +8,7 @@ import { SettingsProfileCard } from "~/src/app/[locale]/(admin)/admin/settings/_
 
 export function SettingsGeneralTab(): JSX.Element {
   return (
-    <TabsContent value="general" className="mt-8 space-y-6 outline-none">
+    <TabsContent id="general" className="mt-8 space-y-6 outline-none">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <SettingsProfileCard />
         <SettingsPreferencesCard />

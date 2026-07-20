@@ -7,16 +7,8 @@ import type { Header, RowData } from "@tanstack/react-table"
 import { ArrowDown, ArrowUp, Check, EllipsisVertical } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { cn } from "~/src/lib/utils"
-
-import { buttonVariants } from "~/src/components/shadcn/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "~/src/components/shadcn/dropdown-menu"
+import { Button } from "~/src/components/shadcn/button"
+import { DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "~/src/components/shadcn/dropdown-menu"
 
 interface DataTableColumnHeaderProps<TData extends RowData, TValue> {
   readonly children: ReactNode
@@ -52,24 +44,22 @@ export function DataTableColumnHeader<TData extends RowData, TValue>({
       <span className="min-w-0 flex-1 truncate">{children}</span>
       {sorted === "asc" ? <ArrowUp aria-hidden className="size-3.5 shrink-0 text-primary" /> : undefined}
       {sorted === "desc" ? <ArrowDown aria-hidden className="size-3.5 shrink-0 text-primary" /> : undefined}
-      <DropdownMenu>
-        <DropdownMenuTrigger
+      <DropdownMenuTrigger>
+        <Button
           aria-label={t("menu")}
-          className={cn(
-            buttonVariants({ size: "icon-xs", variant: "ghost" }),
-            "size-6 shrink-0 text-muted-foreground opacity-70 transition-opacity group-hover/head:opacity-100 hover:bg-secondary/60 hover:text-foreground data-popup-open:bg-secondary/60 data-popup-open:opacity-100",
-          )}
-          type="button"
+          className="size-6 shrink-0 text-muted-foreground opacity-70 transition-opacity group-hover/head:opacity-100 hover:bg-secondary/60 hover:text-foreground data-popup-open:bg-secondary/60 data-popup-open:opacity-100"
+          size="icon-xs"
+          variant="ghost"
         >
           <EllipsisVertical />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-44" size="sm">
-          <DropdownMenuItem onClick={sortAscending}>
+        </Button>
+        <DropdownMenu className="w-44" placement="bottom end">
+          <DropdownMenuItem onAction={sortAscending}>
             <ArrowUp />
             {t("sortAsc")}
             {sorted === "asc" ? <Check className="ml-auto size-3.5" /> : undefined}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={sortDescending}>
+          <DropdownMenuItem onAction={sortDescending}>
             <ArrowDown />
             {t("sortDesc")}
             {sorted === "desc" ? <Check className="ml-auto size-3.5" /> : undefined}
@@ -77,11 +67,11 @@ export function DataTableColumnHeader<TData extends RowData, TValue>({
           {sorted === false ? undefined : (
             <>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={clearSorting}>{t("clearSort")}</DropdownMenuItem>
+              <DropdownMenuItem onAction={clearSorting}>{t("clearSort")}</DropdownMenuItem>
             </>
           )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </DropdownMenu>
+      </DropdownMenuTrigger>
     </div>
   )
 }

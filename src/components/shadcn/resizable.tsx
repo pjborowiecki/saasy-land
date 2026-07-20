@@ -1,12 +1,10 @@
 "use client"
 
-import type { JSX } from "react"
-
 import * as ResizablePrimitive from "react-resizable-panels"
 
 import { cn } from "~/src/lib/utils"
 
-function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupProps): JSX.Element {
+function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupProps) {
   return (
     <ResizablePrimitive.Group
       data-slot="resizable-panel-group"
@@ -16,7 +14,7 @@ function ResizablePanelGroup({ className, ...props }: ResizablePrimitive.GroupPr
   )
 }
 
-function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps): JSX.Element {
+function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {
   return <ResizablePrimitive.Panel data-slot="resizable-panel" {...props} />
 }
 
@@ -26,7 +24,7 @@ function ResizableHandle({
   ...props
 }: ResizablePrimitive.SeparatorProps & {
   withHandle?: boolean
-}): JSX.Element {
+}) {
   return (
     <ResizablePrimitive.Separator
       data-slot="resizable-handle"
@@ -36,7 +34,7 @@ function ResizableHandle({
       )}
       {...props}
     >
-      {withHandle === true && <div className="z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border" />}
+      {withHandle === true ? <div className="z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border" /> : undefined}
     </ResizablePrimitive.Separator>
   )
 }

@@ -3,31 +3,34 @@
 
 import { useCallback, useMemo, type JSX } from "react"
 
+import type { Key } from "@react-types/shared"
 import { Settings2 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import type { Selection } from "react-aria-components"
 
-import { cn } from "~/src/lib/utils"
-
-import { buttonVariants } from "~/src/components/shadcn/button"
-import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "~/src/components/shadcn/popover"
+import { Button } from "~/src/components/shadcn/button"
+import { Popover, PopoverHeader, PopoverTitle, PopoverTrigger } from "~/src/components/shadcn/popover"
 import { ToggleGroup, ToggleGroupItem } from "~/src/components/shadcn/toggle-group"
 
 import { useDataTable } from "~/src/components/custom/data-table/_components/data-table-provider"
 import { DATA_TABLE } from "~/src/components/custom/data-table/_constants/data-table.constants"
 import { DATA_TABLE_ROW_DENSITIES, type DataTableRowDensity } from "~/src/components/custom/data-table/_types/data-table.types"
 
-function isDataTableRowDensity(value: string | undefined): value is DataTableRowDensity {
-  return value !== undefined && (DATA_TABLE_ROW_DENSITIES as readonly string[]).includes(value)
+function isDataTableRowDensity(value: Key | undefined): value is DataTableRowDensity {
+  return typeof value === "string" && (DATA_TABLE_ROW_DENSITIES as readonly string[]).includes(value)
 }
 
 export function DataTableToolbarSettings(): JSX.Element {
   const t = useTranslations()
   const { rowDensity, setRowDensity } = useDataTable()
-  const rowDensityValue = useMemo(() => [rowDensity] as const, [rowDensity])
+  const selectedKeys = useMemo(() => new Set<Key>([rowDensity]), [rowDensity])
 
   const handleRowDensityChange = useCallback(
-    (groupValue: string[]) => {
-      const [next] = groupValue
+    (keys: Selection) => {
+      if (keys === "all") {
+        return
+      }
+      const [next] = keys
       if (!isDataTableRowDensity(next)) {
         return
       }
@@ -37,16 +40,17 @@ export function DataTableToolbarSettings(): JSX.Element {
   )
 
   return (
-    <Popover>
-      <PopoverTrigger
+    <PopoverTrigger>
+      <Button
         aria-label={t("components.custom.data-table.settings.trigger")}
-        className={cn(buttonVariants({ size: "icon", variant: "outline" }), "size-10 shrink-0")}
+        className="size-10 shrink-0"
         data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_SETTINGS}
-        type="button"
+        size="icon"
+        variant="outline"
       >
         <Settings2 className="size-4 text-muted-foreground" />
-      </PopoverTrigger>
-      <PopoverContent align="end" className="w-64 gap-3 p-3" side="bottom" sideOffset={6}>
+      </Button>
+      <Popover className="w-64 gap-3 p-3" offset={6} placement="bottom end">
         <PopoverHeader>
           <PopoverTitle>{t("components.custom.data-table.settings.title")}</PopoverTitle>
         </PopoverHeader>
@@ -56,19 +60,21 @@ export function DataTableToolbarSettings(): JSX.Element {
           <ToggleGroup
             className="grid w-full grid-cols-3"
             data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_SETTINGS_ROW_DENSITY}
+            disallowEmptySelection
+            selectedKeys={selectedKeys}
+            selectionMode="single"
             size="sm"
-            value={rowDensityValue}
             variant="outline"
-            onValueChange={handleRowDensityChange}
+            onSelectionChange={handleRowDensityChange}
           >
             {DATA_TABLE_ROW_DENSITIES.map((density) => (
-              <ToggleGroupItem key={density} className="px-2" value={density}>
+              <ToggleGroupItem key={density} className="px-2" id={density}>
                 {t(`components.custom.data-table.settings.rowDensity.${density}`)}
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
         </div>
-      </PopoverContent>
-    </Popover>
+      </Popover>
+    </PopoverTrigger>
   )
 }

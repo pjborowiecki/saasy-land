@@ -9,7 +9,7 @@ import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { cn } from "~/src/lib/utils"
 
-import { buttonVariants } from "~/src/components/shadcn/button"
+import { buttonVariants } from "~/src/components/shadcn/_lib/button-variants"
 
 import { ThemeSwitchClient } from "~/src/components/custom/theme-switch"
 

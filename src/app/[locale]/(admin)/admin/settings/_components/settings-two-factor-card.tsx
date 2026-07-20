@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 
 import { Button } from "~/src/components/shadcn/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "~/src/components/shadcn/dialog"
+import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "~/src/components/shadcn/dialog"
 
 import { SettingsTwoFactorConfirmStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-confirm-step"
 import { SettingsTwoFactorPasswordStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-password-step"
@@ -68,24 +68,22 @@ export function SettingsTwoFactorCard(): JSX.Element {
               <p className="text-sm font-medium text-foreground">{t("security.twoFactor.app")}</p>
               <p className="mt-1 text-xs text-muted-foreground">{t("security.twoFactor.appDescription")}</p>
             </div>
-            <Button className="h-8 shrink-0 px-4 text-xs" onClick={handleEnableOpen} size="sm" variant="outline">
+            <Button className="h-8 shrink-0 px-4 text-xs" onPress={handleEnableOpen} size="sm" variant="outline">
               {t("security.twoFactor.enable")}
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Dialog onOpenChange={handleOpenChange} open={open}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>{t("security.twoFactor.dialogTitle")}</DialogTitle>
-            <DialogDescription>{t("security.twoFactor.dialogDescription")}</DialogDescription>
-          </DialogHeader>
+      <Dialog className="max-w-md" isOpen={open} onOpenChange={handleOpenChange}>
+        <DialogHeader>
+          <DialogTitle>{t("security.twoFactor.dialogTitle")}</DialogTitle>
+          <DialogDescription>{t("security.twoFactor.dialogDescription")}</DialogDescription>
+        </DialogHeader>
 
-          {step === "password" && <SettingsTwoFactorPasswordStep onEnabled={handleEnabled} />}
-          {step === "verify" && <SettingsTwoFactorVerifyStep onVerified={handleVerified} totpUri={totpUri} />}
-          {step === "confirm" && <SettingsTwoFactorConfirmStep backupCodes={backupCodes} onDone={handleDone} />}
-        </DialogContent>
+        {step === "password" ? <SettingsTwoFactorPasswordStep onEnabled={handleEnabled} /> : undefined}
+        {step === "verify" ? <SettingsTwoFactorVerifyStep onVerified={handleVerified} totpUri={totpUri} /> : undefined}
+        {step === "confirm" ? <SettingsTwoFactorConfirmStep backupCodes={backupCodes} onDone={handleDone} /> : undefined}
       </Dialog>
     </>
   )

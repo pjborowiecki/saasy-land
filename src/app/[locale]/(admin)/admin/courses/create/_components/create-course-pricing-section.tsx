@@ -17,10 +17,10 @@ export async function CreateCoursePricingSection(): Promise<JSX.Element> {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <div className="space-y-1.5">
           <Label>{t("sections.pricing.model.label")}</Label>
-          <Tabs defaultValue="subscription" className="w-fit">
+          <Tabs defaultSelectedKey="subscription" className="w-fit">
             <TabsList className="w-fit">
-              <TabsTrigger value="onetime">{t("sections.pricing.model.oneTime")}</TabsTrigger>
-              <TabsTrigger value="subscription">{t("sections.pricing.model.subscription")}</TabsTrigger>
+              <TabsTrigger id="onetime">{t("sections.pricing.model.oneTime")}</TabsTrigger>
+              <TabsTrigger id="subscription">{t("sections.pricing.model.subscription")}</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
@@ -38,8 +38,8 @@ export async function CreateCoursePricingSection(): Promise<JSX.Element> {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="lifetime">{t("sections.pricing.duration.lifetime")}</SelectItem>
-              <SelectItem value="1year">1 Year Access</SelectItem>
+              <SelectItem id="lifetime">{t("sections.pricing.duration.lifetime")}</SelectItem>
+              <SelectItem id="1year">1 Year Access</SelectItem>
             </SelectContent>
           </Select>
         </div>

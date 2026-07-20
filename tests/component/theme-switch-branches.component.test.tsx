@@ -11,24 +11,22 @@ import { ThemeSwitchClient } from "~/src/components/custom/theme-switch"
 
 import { setThemeMock, themeState } from "~/tests/mocks/wrksz-themes"
 
-type ThemeSelectOnValueChange = (value: string | null) => void
+type ThemeSelectOnChange = NonNullable<ComponentProps<typeof ShadcnSelect.Select>["onChange"]>
 
-const themeChangeHandler = vi.hoisted((): { current?: ThemeSelectOnValueChange } => ({}))
+const themeChangeHandler = vi.hoisted((): { current?: ThemeSelectOnChange } => ({}))
 
 vi.mock(import("~/src/components/shadcn/select"), async (importOriginal): Promise<Partial<typeof ShadcnSelect>> => {
   const actual = await importOriginal<typeof ShadcnSelect>()
 
   function Select(props: ComponentProps<typeof actual.Select>) {
-    if (props.onValueChange) {
-      themeChangeHandler.current = (value) => {
-        props.onValueChange?.(value, {} as Parameters<NonNullable<typeof props.onValueChange>>[1])
-      }
+    if (props.onChange !== undefined) {
+      themeChangeHandler.current = props.onChange
     }
 
     return createElement(actual.Select, props)
   }
 
-  return { ...actual, Select: Select as typeof actual.Select }
+  return { ...actual, Select }
 })
 
 const themeSwitchLabels = {
@@ -48,7 +46,7 @@ describe("themeSwitchClient branches", () => {
     render(<ThemeSwitchClient {...themeSwitchLabels} />)
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toHaveTextContent(themeSwitchLabels.placeholder)
+      expect(screen.getByRole("button", { name: themeSwitchLabels.placeholder })).toBeInTheDocument()
     })
   })
 
@@ -61,14 +59,14 @@ describe("themeSwitchClient branches", () => {
     render(<ThemeSwitchClient {...themeSwitchLabels} />)
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: themeSwitchLabels.lightLabel })).toBeInTheDocument()
     })
 
-    await user.click(screen.getByRole("combobox"))
+    await user.click(screen.getByRole("button", { name: themeSwitchLabels.lightLabel }))
     expect(setThemeMock).not.toHaveBeenCalled()
   })
 
-  it("ignores null and invalid theme values from onValueChange", async () => {
+  it("ignores null and invalid theme values from onChange", async () => {
     expect.hasAssertions()
     setThemeMock.mockClear()
     themeState.value = "light"

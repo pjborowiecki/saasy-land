@@ -60,13 +60,13 @@ async function BlogPostsTablePagination(): Promise<JSX.Element> {
       </span>
 
       <div className="flex items-center gap-1">
-        <Button variant="ghost" size="icon" className="size-8 opacity-50" disabled>
+        <Button variant="ghost" size="icon" className="size-8 opacity-50" isDisabled>
           <ChevronLeft className="size-4" />
         </Button>
         <Button variant="outline" size="sm" className="size-8 p-0">
           {PAGINATION_FIRST_PAGE}
         </Button>
-        <Button variant="ghost" size="icon" className="size-8 opacity-50" disabled>
+        <Button variant="ghost" size="icon" className="size-8 opacity-50" isDisabled>
           <ChevronRight className="size-4" />
         </Button>
       </div>
