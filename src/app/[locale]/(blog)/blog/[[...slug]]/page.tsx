@@ -137,8 +137,10 @@ export default async function BlogPage({ params }: BlogSlugPageProps): Promise<J
         </Link>
       </div>
       <article className="mx-auto flex w-full max-w-[1400px] flex-col px-4 py-8">
-        <div className="prose min-w-0 dark:prose-invert">
-          <InlineTOC items={data.toc} />
+        <div className="typeset typeset-docs min-w-0">
+          <div className="not-typeset">
+            <InlineTOC items={data.toc} />
+          </div>
           <Mdx components={getMDXComponents({ a: createRelativeLink(blogSource, page) })} />
         </div>
         <div className="mt-8 flex flex-col gap-4 text-sm">

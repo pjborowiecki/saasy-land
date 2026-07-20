@@ -13,29 +13,27 @@ import type * as ShadcnSelect from "~/src/components/shadcn/select"
 import { LocaleSwitch } from "~/src/components/custom/locale-switch"
 
 type I18nRouter = ReturnType<typeof I18nNavigation.useRouter>
-type LocaleSelectOnValueChange = (value: string | null) => void
+type LocaleSelectOnChange = NonNullable<ComponentProps<typeof ShadcnSelect.Select>["onChange"]>
 
 const POLISH_LOCALE = "pl-PL"
 const polishDisplayName = localeUiConfig[POLISH_LOCALE].displayName
 
 const replaceMock = vi.hoisted(() => vi.fn<I18nRouter["replace"]>())
 
-const localeChangeHandler = vi.hoisted((): { current?: LocaleSelectOnValueChange } => ({}))
+const localeChangeHandler = vi.hoisted((): { current?: LocaleSelectOnChange } => ({}))
 
 vi.mock(import("~/src/components/shadcn/select"), async (importOriginal): Promise<Partial<typeof ShadcnSelect>> => {
   const actual = await importOriginal<typeof ShadcnSelect>()
 
   function Select(props: ComponentProps<typeof actual.Select>) {
-    if (props.onValueChange) {
-      localeChangeHandler.current = (value) => {
-        props.onValueChange?.(value, {} as Parameters<NonNullable<typeof props.onValueChange>>[1])
-      }
+    if (props.onChange !== undefined) {
+      localeChangeHandler.current = props.onChange
     }
 
     return createElement(actual.Select, props)
   }
 
-  return { ...actual, Select: Select as typeof actual.Select }
+  return { ...actual, Select }
 })
 
 function createI18nRouterMock(): I18nRouter {
@@ -65,11 +63,13 @@ describe("locale switch component", () => {
 
     render(<LocaleSwitch locale="en-US" />)
 
+    const englishLabel = localeUiConfig["en-US"].displayName
+
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: englishLabel })).toBeInTheDocument()
     })
 
-    await user.click(screen.getByRole("combobox"))
+    await user.click(screen.getByRole("button", { name: englishLabel }))
     await user.click(await screen.findByRole("option", { name: polishDisplayName }))
     expect(replaceMock).toHaveBeenCalledWith("/about", { locale: POLISH_LOCALE })
   })
@@ -78,18 +78,19 @@ describe("locale switch component", () => {
     expect.hasAssertions()
     replaceMock.mockClear()
     const user = userEvent.setup()
+    const englishLabel = localeUiConfig["en-US"].displayName
 
     render(<LocaleSwitch locale="en-US" />)
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: englishLabel })).toBeInTheDocument()
     })
 
-    await user.click(screen.getByRole("combobox"))
+    await user.click(screen.getByRole("button", { name: englishLabel }))
     expect(replaceMock).not.toHaveBeenCalled()
   })
 
-  it("ignores null and invalid locale values from onValueChange", async () => {
+  it("ignores null and invalid locale values from onChange", async () => {
     expect.hasAssertions()
     replaceMock.mockClear()
 

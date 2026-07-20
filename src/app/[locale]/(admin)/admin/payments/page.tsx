@@ -33,19 +33,19 @@ export default async function PaymentsPage({ params }: Readonly<PageProps<"/[loc
         </div>
       </div>
 
-      <Tabs defaultValue="refunds" className="w-full">
+      <Tabs defaultSelectedKey="refunds" className="w-full">
         <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
           <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-            <TabsTrigger value="transactions" className="flex-none px-0 text-sm">
+            <TabsTrigger id="transactions" className="flex-none px-0 text-sm">
               {t("tabs.transactions")}
             </TabsTrigger>
-            <TabsTrigger value="subscriptions" className="flex-none px-0 text-sm">
+            <TabsTrigger id="subscriptions" className="flex-none px-0 text-sm">
               {t("tabs.subscriptions")}
             </TabsTrigger>
-            <TabsTrigger value="payouts" className="flex-none px-0 text-sm">
+            <TabsTrigger id="payouts" className="flex-none px-0 text-sm">
               {t("tabs.payouts")}
             </TabsTrigger>
-            <TabsTrigger value="refunds" className="flex-none px-0 text-sm">
+            <TabsTrigger id="refunds" className="flex-none px-0 text-sm">
               {t("tabs.refunds")}
             </TabsTrigger>
           </TabsList>
@@ -61,7 +61,7 @@ export default async function PaymentsPage({ params }: Readonly<PageProps<"/[loc
           </div>
         </div>
 
-        <TabsContent value="refunds">
+        <TabsContent id="refunds">
           <PaymentsRefundsTab paymentRows={ADMIN_PAYMENT_ROWS} />
         </TabsContent>
       </Tabs>

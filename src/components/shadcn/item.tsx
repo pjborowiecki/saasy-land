@@ -1,33 +1,30 @@
-import type { ComponentProps, JSX } from "react"
+"use client"
 
-import { mergeProps } from "@base-ui/react/merge-props"
-import { useRender } from "@base-ui/react/use-render"
+import type { ComponentProps, HTMLAttributes } from "react"
+
 import { cva, type VariantProps } from "class-variance-authority"
+import { Link as LinkPrimitive, type LinkProps } from "react-aria-components"
 
 import { cn } from "~/src/lib/utils"
 
 import { Separator } from "~/src/components/shadcn/separator"
 
-function ItemGroup({ className, ...props }: ComponentProps<"ul">): JSX.Element {
+function ItemGroup({ className, ...props }: ComponentProps<"ul">) {
   return (
     <ul
-      data-slot="item-group"
       className={cn("group/item-group flex w-full list-none flex-col gap-4 has-data-[size=sm]:gap-2.5 has-data-[size=xs]:gap-2", className)}
+      data-slot="item-group"
       {...props}
     />
   )
 }
 
-function ItemSeparator({ className, ...props }: ComponentProps<typeof Separator>): JSX.Element {
-  return (
-    <li aria-hidden className="list-none">
-      <Separator data-slot="item-separator" orientation="horizontal" className={cn("my-2", className)} {...props} />
-    </li>
-  )
+function ItemSeparator({ className, ...props }: ComponentProps<typeof Separator>) {
+  return <Separator className={cn("my-2", className)} data-slot="item-separator" orientation="horizontal" {...props} />
 }
 
 const itemVariants = cva(
-  "group/item flex w-full flex-wrap items-center rounded-lg border text-xs transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted",
+  "group/item flex w-full flex-wrap items-center rounded-lg border text-sm transition-colors duration-100 outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [a]:transition-colors [a]:hover:bg-muted",
   {
     defaultVariants: {
       size: "default",
@@ -50,28 +47,21 @@ const itemVariants = cva(
 
 function Item({
   className,
-  variant = "default",
   size = "default",
-  render,
+  variant = "default",
   ...props
-}: useRender.ComponentProps<"li"> & VariantProps<typeof itemVariants>): JSX.Element {
-  const itemClassName = cn(itemVariants({ className, size, variant }))
+}: Omit<LinkProps, "children"> & HTMLAttributes<HTMLElement> & VariantProps<typeof itemVariants>) {
+  const Element = "href" in props ? LinkPrimitive : "div"
 
-  return useRender({
-    defaultTagName: "li",
-    props: mergeProps<"li">(
-      {
-        className: itemClassName,
-      },
-      props,
-    ),
-    render,
-    state: {
-      size,
-      slot: "item",
-      variant,
-    },
-  })
+  return (
+    <Element
+      className={cn(itemVariants({ className, size, variant }))}
+      data-size={size}
+      data-slot="item"
+      data-variant={variant}
+      {...props}
+    />
+  )
 }
 
 const itemMediaVariants = cva(
@@ -85,63 +75,59 @@ const itemMediaVariants = cva(
         default: "bg-transparent",
         icon: "[&_svg:not([class*='size-'])]:size-4",
         image:
-          "size-10 overflow-hidden rounded-lg group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 [&_img]:size-full [&_img]:object-cover",
+          "size-10 overflow-hidden rounded-sm group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 [&_img]:size-full [&_img]:object-cover",
       },
     },
   },
 )
 
-function ItemMedia({
-  className,
-  variant = "default",
-  ...props
-}: ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>): JSX.Element {
-  return <div data-slot="item-media" data-variant={variant} className={cn(itemMediaVariants({ className, variant }))} {...props} />
+function ItemMedia({ className, variant = "default", ...props }: ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
+  return <div className={cn(itemMediaVariants({ className, variant }))} data-slot="item-media" data-variant={variant} {...props} />
 }
 
-function ItemContent({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function ItemContent({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      data-slot="item-content"
       className={cn("flex flex-1 flex-col gap-1 group-data-[size=xs]/item:gap-0 [&+[data-slot=item-content]]:flex-none", className)}
+      data-slot="item-content"
       {...props}
     />
   )
 }
 
-function ItemTitle({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function ItemTitle({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
+      className={cn("line-clamp-1 flex w-fit items-center gap-2 text-sm leading-snug font-medium underline-offset-4", className)}
       data-slot="item-title"
-      className={cn("line-clamp-1 flex w-fit items-center gap-2 text-xs font-medium underline-offset-4", className)}
       {...props}
     />
   )
 }
 
-function ItemDescription({ className, ...props }: ComponentProps<"p">): JSX.Element {
+function ItemDescription({ className, ...props }: ComponentProps<"p">) {
   return (
     <p
-      data-slot="item-description"
       className={cn(
-        "line-clamp-2 text-left text-xs/relaxed font-normal text-muted-foreground group-data-[size=xs]/item:text-xs/relaxed [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+        "line-clamp-2 text-left text-sm leading-normal font-normal text-muted-foreground group-data-[size=xs]/item:text-xs [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className,
       )}
+      data-slot="item-description"
       {...props}
     />
   )
 }
 
-function ItemActions({ className, ...props }: ComponentProps<"div">): JSX.Element {
-  return <div data-slot="item-actions" className={cn("flex items-center gap-2", className)} {...props} />
+function ItemActions({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("flex items-center gap-2", className)} data-slot="item-actions" {...props} />
 }
 
-function ItemHeader({ className, ...props }: ComponentProps<"div">): JSX.Element {
-  return <div data-slot="item-header" className={cn("flex basis-full items-center justify-between gap-2", className)} {...props} />
+function ItemHeader({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("flex basis-full items-center justify-between gap-2", className)} data-slot="item-header" {...props} />
 }
 
-function ItemFooter({ className, ...props }: ComponentProps<"div">): JSX.Element {
-  return <div data-slot="item-footer" className={cn("flex basis-full items-center justify-between gap-2", className)} {...props} />
+function ItemFooter({ className, ...props }: ComponentProps<"div">) {
+  return <div className={cn("flex basis-full items-center justify-between gap-2", className)} data-slot="item-footer" {...props} />
 }
 
 export { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle }

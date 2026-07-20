@@ -51,7 +51,7 @@ export async function PricingModelCard({
             <h2 className="text-lg font-medium tracking-tight text-foreground">{t(`models.${modelKey}.title`)}</h2>
           </div>
           <div title={t("labels.toggleStatus")} className="mt-1">
-            {defaultChecked ? <Switch defaultChecked /> : <Switch checked={false} />}
+            {defaultChecked ? <Switch defaultSelected /> : <Switch isSelected={false} />}
           </div>
         </div>
 
@@ -85,20 +85,20 @@ export async function PricingModelCard({
               : t("labels.inactive")}
           </div>
           <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-            <Button variant="ghost" size="icon" className="size-8 text-muted-foreground" title={t("labels.editModel")}>
+            <Button aria-label={t("labels.editModel")} className="size-8 text-muted-foreground" size="icon" variant="ghost">
               <Pencil className="size-4" />
             </Button>
             {showDeleteAction ? (
               <Button
-                variant="ghost"
-                size="icon"
+                aria-label={t("labels.deleteModel")}
                 className="size-8 text-muted-foreground hover:text-destructive"
-                title={t("labels.deleteModel")}
+                size="icon"
+                variant="ghost"
               >
                 <Trash2 className="size-4" />
               </Button>
             ) : (
-              <Button variant="ghost" size="icon" className="size-8 text-muted-foreground" title={t("labels.moreOptions")}>
+              <Button aria-label={t("labels.moreOptions")} className="size-8 text-muted-foreground" size="icon" variant="ghost">
                 <MoreHorizontal className="size-4" />
               </Button>
             )}

@@ -20,7 +20,7 @@ function StatusToggleRow({
         <span className="text-sm font-medium text-foreground">{label}</span>
         <span className="text-xs text-muted-foreground">{description}</span>
       </div>
-      <Switch defaultChecked={defaultChecked} />
+      <Switch {...(defaultChecked === undefined ? {} : { defaultSelected: defaultChecked })} />
     </div>
   )
 }

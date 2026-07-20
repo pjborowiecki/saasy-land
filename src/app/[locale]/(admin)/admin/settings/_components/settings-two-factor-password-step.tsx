@@ -75,7 +75,7 @@ export function SettingsTwoFactorPasswordStep({ onEnabled }: Readonly<SettingsTw
           </FieldContent>
         </Field>
 
-        <Button className="gap-2" disabled={passwordForm.formState.isSubmitting} type="submit">
+        <Button className="gap-2" isDisabled={passwordForm.formState.isSubmitting} type="submit">
           {passwordForm.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
           {t("security.twoFactor.continue")}
         </Button>

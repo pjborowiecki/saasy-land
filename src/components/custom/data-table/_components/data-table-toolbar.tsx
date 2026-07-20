@@ -135,8 +135,9 @@ function DataTableToolbarSearch({ search }: Readonly<{ search: DataTableToolbarS
   const ariaLabel = search["aria-label"] ?? placeholder
   const value = search.value ?? globalFilter
 
-  const handleValueChange = useCallback(
-    (nextValue: string) => {
+  const handleChange = useCallback(
+    (event: { currentTarget: { value: string } }) => {
+      const nextValue = event.currentTarget.value
       table.setGlobalFilter(nextValue)
       search.onValueChange?.(nextValue)
     },
@@ -152,7 +153,7 @@ function DataTableToolbarSearch({ search }: Readonly<{ search: DataTableToolbarS
         data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_SEARCH}
         placeholder={placeholder}
         value={value}
-        onValueChange={handleValueChange}
+        onChange={handleChange}
       />
     </div>
   )
@@ -183,7 +184,7 @@ function DataTableToolbarExportCsv({ exportCsv }: Readonly<{ exportCsv: true | D
       className="h-10 gap-2 whitespace-nowrap"
       data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_EXPORT_CSV}
       type="button"
-      onClick={handleExport}
+      onPress={handleExport}
     >
       <Download className="size-4 text-muted-foreground" />
       {label}
@@ -212,9 +213,9 @@ function DataTableToolbarFetch({ fetch }: Readonly<{ fetch: DataTableToolbarFetc
         "border-primary/40 text-foreground": isDirty,
       })}
       data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_FETCH}
-      disabled={fetch.isFetching === true}
+      isDisabled={fetch.isFetching === true}
       type="button"
-      onClick={handleFetch}
+      onPress={handleFetch}
     >
       {fetch.isFetching === true ? (
         <Loader2 className="size-4 animate-spin text-muted-foreground" />
@@ -250,7 +251,7 @@ function DataTableToolbarFiltersToggle({
       size="icon"
       type="button"
       variant="outline"
-      onClick={handleClick}
+      onPress={handleClick}
     >
       <Filter className="size-4 text-muted-foreground" />
     </Button>

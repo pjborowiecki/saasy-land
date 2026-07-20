@@ -15,26 +15,26 @@ export async function CreateCourseOrganizationSection(): Promise<JSX.Element> {
       <div className="flex flex-col gap-5 sm:flex-row">
         <div className="flex-1 space-y-1.5">
           <Label>{t("sections.organization.category.label")}</Label>
-          <Select>
+          <Select placeholder={t("sections.organization.category.placeholder")}>
             <SelectTrigger className="w-full text-muted-foreground">
-              <SelectValue placeholder={t("sections.organization.category.placeholder")} />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="dev">Development</SelectItem>
-              <SelectItem value="design">Design</SelectItem>
+              <SelectItem id="dev">Development</SelectItem>
+              <SelectItem id="design">Design</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="flex-1 space-y-1.5">
           <Label>{t("sections.organization.difficulty.label")}</Label>
-          <Select>
+          <Select placeholder={t("sections.organization.difficulty.placeholder")}>
             <SelectTrigger className="w-full text-muted-foreground">
-              <SelectValue placeholder={t("sections.organization.difficulty.placeholder")} />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="beginner">Beginner</SelectItem>
-              <SelectItem value="intermediate">Intermediate</SelectItem>
-              <SelectItem value="advanced">Advanced</SelectItem>
+              <SelectItem id="beginner">Beginner</SelectItem>
+              <SelectItem id="intermediate">Intermediate</SelectItem>
+              <SelectItem id="advanced">Advanced</SelectItem>
             </SelectContent>
           </Select>
         </div>

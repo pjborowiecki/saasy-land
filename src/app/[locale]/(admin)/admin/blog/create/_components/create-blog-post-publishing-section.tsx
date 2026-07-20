@@ -22,22 +22,22 @@ export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="draft">{t("settings.statusDraft")}</SelectItem>
-              <SelectItem value="published">{t("settings.statusPublished")}</SelectItem>
-              <SelectItem value="scheduled">{t("settings.statusScheduled")}</SelectItem>
+              <SelectItem id="draft">{t("settings.statusDraft")}</SelectItem>
+              <SelectItem id="published">{t("settings.statusPublished")}</SelectItem>
+              <SelectItem id="scheduled">{t("settings.statusScheduled")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-1.5">
           <Label className="text-xs tracking-wider text-muted-foreground uppercase">{t("settings.category")}</Label>
-          <Select>
+          <Select placeholder={t("settings.categorySelect")}>
             <SelectTrigger className="w-full bg-card">
-              <SelectValue placeholder={t("settings.categorySelect")} />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="updates">{t("settings.categoryUpdates")}</SelectItem>
-              <SelectItem value="tutorials">{t("settings.categoryTutorials")}</SelectItem>
-              <SelectItem value="company">{t("settings.categoryCompany")}</SelectItem>
+              <SelectItem id="updates">{t("settings.categoryUpdates")}</SelectItem>
+              <SelectItem id="tutorials">{t("settings.categoryTutorials")}</SelectItem>
+              <SelectItem id="company">{t("settings.categoryCompany")}</SelectItem>
             </SelectContent>
           </Select>
         </div>

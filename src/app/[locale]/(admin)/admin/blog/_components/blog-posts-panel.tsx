@@ -19,7 +19,7 @@ interface BlogPostsPanelProps {
 export async function BlogPostsPanel({ view }: BlogPostsPanelProps): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog")
   return (
-    <TabsContent value="all" className="mt-6 space-y-4 outline-none">
+    <TabsContent id="all" className="mt-6 space-y-4 outline-none">
       <div className="flex flex-col gap-3 sm:flex-row">
         <div className="flex items-center gap-3">
           <Button variant="outline" size="sm" className="h-10 gap-2 whitespace-nowrap">

@@ -1,8 +1,6 @@
 "use client"
 
-import type { ComponentProps, JSX } from "react"
-
-import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
+import { useCallback, useState, type ComponentProps } from "react"
 
 import { cn } from "~/src/lib/utils"
 
@@ -10,11 +8,11 @@ function Avatar({
   className,
   size = "default",
   ...props
-}: AvatarPrimitive.Root.Props & {
+}: ComponentProps<"div"> & {
   size?: "default" | "sm" | "lg"
-}): JSX.Element {
+}) {
   return (
-    <AvatarPrimitive.Root
+    <div
       data-slot="avatar"
       data-size={size}
       className={cn(
@@ -26,22 +24,39 @@ function Avatar({
   )
 }
 
-function AvatarImage({ className, ...props }: Readonly<AvatarPrimitive.Image.Props>): JSX.Element {
+type ImageState = "loading" | "loaded" | "error"
+
+function AvatarImage({ className, alt, src, ...props }: ComponentProps<"img">) {
+  const [state, setState] = useState<ImageState>(() => (typeof src === "string" && src.length > 0 ? "loading" : "error"))
+
+  const handleLoad = useCallback(() => {
+    setState("loaded")
+  }, [])
+
+  const handleError = useCallback(() => {
+    setState("error")
+  }, [])
+
   return (
-    <AvatarPrimitive.Image
+    <img
       data-slot="avatar-image"
-      className={cn("aspect-square size-full rounded-full object-cover", className)}
+      alt={alt ?? ""}
+      src={src}
+      data-state={state}
+      onLoad={handleLoad}
+      onError={handleError}
+      className={cn("peer aspect-square size-full rounded-full object-cover data-[state=error]:hidden", className)}
       {...props}
     />
   )
 }
 
-function AvatarFallback({ className, ...props }: Readonly<AvatarPrimitive.Fallback.Props>): JSX.Element {
+function AvatarFallback({ className, ...props }: ComponentProps<"div">) {
   return (
-    <AvatarPrimitive.Fallback
+    <div
       data-slot="avatar-fallback"
       className={cn(
-        "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
+        "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs peer-data-[state=error]:flex peer-[*]:hidden",
         className,
       )}
       {...props}
@@ -49,7 +64,7 @@ function AvatarFallback({ className, ...props }: Readonly<AvatarPrimitive.Fallba
   )
 }
 
-function AvatarBadge({ className, ...props }: ComponentProps<"span">): JSX.Element {
+function AvatarBadge({ className, ...props }: ComponentProps<"span">) {
   return (
     <span
       data-slot="avatar-badge"
@@ -65,7 +80,7 @@ function AvatarBadge({ className, ...props }: ComponentProps<"span">): JSX.Eleme
   )
 }
 
-function AvatarGroup({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function AvatarGroup({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group"
@@ -75,12 +90,12 @@ function AvatarGroup({ className, ...props }: ComponentProps<"div">): JSX.Elemen
   )
 }
 
-function AvatarGroupCount({ className, ...props }: ComponentProps<"div">): JSX.Element {
+function AvatarGroupCount({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group-count"
       className={cn(
-        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-xs text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
         className,
       )}
       {...props}
@@ -88,4 +103,4 @@ function AvatarGroupCount({ className, ...props }: ComponentProps<"div">): JSX.E
   )
 }
 
-export { Avatar, AvatarBadge, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage }
+export { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarBadge }

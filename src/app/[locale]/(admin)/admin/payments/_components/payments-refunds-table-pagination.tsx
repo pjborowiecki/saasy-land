@@ -10,7 +10,7 @@ export async function PaymentsRefundsTablePagination(): Promise<JSX.Element> {
     <div className="flex items-center justify-between border-t border-border/40 px-5 py-3 text-xs text-muted-foreground">
       <span>{t("table.pagination.showing")}</span>
       <div className="flex items-center gap-1">
-        <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs" disabled>
+        <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs" isDisabled>
           {t("table.pagination.previous")}
         </Button>
         <Button variant="secondary" size="icon" className="size-8 text-xs font-medium">

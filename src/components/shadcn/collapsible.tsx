@@ -1,19 +1,24 @@
 "use client"
 
-import type { JSX } from "react"
+import {
+  DisclosurePanel as CollapsibleContentPrimitive,
+  Disclosure as CollapsiblePrimitive,
+  Button as CollapsibleTriggerPrimitive,
+  type ButtonProps,
+  type DisclosurePanelProps,
+  type DisclosureProps,
+} from "react-aria-components"
 
-import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
-
-function Collapsible({ ...props }: Readonly<CollapsiblePrimitive.Root.Props>): JSX.Element {
-  return <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />
+function Collapsible({ ...props }: Readonly<DisclosureProps>) {
+  return <CollapsiblePrimitive data-slot="collapsible" {...props} />
 }
 
-function CollapsibleTrigger({ ...props }: Readonly<CollapsiblePrimitive.Trigger.Props>): JSX.Element {
-  return <CollapsiblePrimitive.Trigger data-slot="collapsible-trigger" {...props} />
+function CollapsibleTrigger({ ...props }: Readonly<ButtonProps>) {
+  return <CollapsibleTriggerPrimitive slot="trigger" data-slot="collapsible-trigger" {...props} />
 }
 
-function CollapsibleContent({ ...props }: Readonly<CollapsiblePrimitive.Panel.Props>): JSX.Element {
-  return <CollapsiblePrimitive.Panel data-slot="collapsible-content" {...props} />
+function CollapsibleContent({ ...props }: Readonly<DisclosurePanelProps>) {
+  return <CollapsibleContentPrimitive data-slot="collapsible-content" {...props} />
 }
 
-export { Collapsible, CollapsibleContent, CollapsibleTrigger }
+export { Collapsible, CollapsibleTrigger, CollapsibleContent }

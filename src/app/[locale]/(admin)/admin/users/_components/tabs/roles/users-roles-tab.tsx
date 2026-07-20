@@ -16,7 +16,7 @@ import { getAdminRoles } from "~/src/app/[locale]/(admin)/admin/users/_lib/users
 export async function UsersRolesTab(): Promise<JSX.Element> {
   const [t, roles] = await Promise.all([getTranslations("pages.admin.users"), getAdminRoles()])
   return (
-    <TabsContent value="roles" className="mt-0 space-y-8 outline-none">
+    <TabsContent id="roles" className="mt-0 space-y-8 outline-none">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("roles.title")}</h1>

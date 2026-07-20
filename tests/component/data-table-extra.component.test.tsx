@@ -79,20 +79,26 @@ const selectiveRowOptions = {
   enableRowSelection: (row: { original: Person }) => row.original.id === "1",
 } as const
 
-function handleSelectionCheckboxChange(onCheckedChange: (checked: boolean) => void, event: React.ChangeEvent<HTMLInputElement>): void {
-  onCheckedChange(event.currentTarget.checked)
+function handleSelectionCheckboxChange(onChange: (isSelected: boolean) => void, event: React.ChangeEvent<HTMLInputElement>): void {
+  onChange(event.currentTarget.checked)
 }
 
 function SelectionTestCheckbox(props: DataTableSelectCheckboxProps): JSX.Element {
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      handleSelectionCheckboxChange(props.onCheckedChange, event)
+      handleSelectionCheckboxChange(props.onChange, event)
     },
-    [props.onCheckedChange],
+    [props.onChange],
   )
 
   return (
-    <input aria-label={props["aria-label"]} checked={props.checked} disabled={props.disabled} onChange={handleChange} type="checkbox" />
+    <input
+      aria-label={props["aria-label"]}
+      checked={props.isSelected}
+      disabled={props.isDisabled === true}
+      onChange={handleChange}
+      type="checkbox"
+    />
   )
 }
 
@@ -544,7 +550,7 @@ describe("data table toolbar fetch and settings", () => {
     expect(screen.getByTestId(TEST_IDS.TABLE)).toHaveAttribute("data-density", "default")
 
     await user.click(screen.getByRole("button", { name: "Table settings" }))
-    await user.click(screen.getByRole("button", { name: "Compact" }))
+    await user.click(screen.getByRole("radio", { name: "Compact" }))
 
     expect(screen.getByTestId(TEST_IDS.TABLE)).toHaveAttribute("data-density", "compact")
   })

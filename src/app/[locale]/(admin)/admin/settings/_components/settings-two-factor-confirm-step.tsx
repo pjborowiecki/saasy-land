@@ -26,7 +26,7 @@ export function SettingsTwoFactorConfirmStep({ backupCodes, onDone }: Readonly<S
           <li key={code}>{code}</li>
         ))}
       </ul>
-      <Button onClick={handleDone} type="button">
+      <Button onPress={handleDone} type="button">
         {t("security.twoFactor.done")}
       </Button>
     </div>

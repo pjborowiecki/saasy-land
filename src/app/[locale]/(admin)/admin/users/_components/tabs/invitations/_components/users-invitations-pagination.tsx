@@ -22,7 +22,7 @@ export async function UsersInvitationsPagination(): Promise<JSX.Element> {
       </span>
 
       <div className="flex items-center gap-1">
-        <Button variant="ghost" size="icon" className="size-8 opacity-50" disabled aria-label="Previous page">
+        <Button variant="ghost" size="icon" className="size-8 opacity-50" isDisabled aria-label="Previous page">
           <ChevronLeft className="size-4" />
         </Button>
         {PAGINATION_PAGES.map((page) => (

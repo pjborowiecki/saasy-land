@@ -49,19 +49,19 @@ async function BlogAdminContent({ searchParams }: { searchParams: SearchParams }
 
       <BlogAdminStats />
 
-      <Tabs defaultValue="all" className="w-full">
+      <Tabs defaultSelectedKey="all" className="w-full">
         <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
           <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-            <TabsTrigger value="all" className="flex-none px-0 text-sm">
+            <TabsTrigger id="all" className="flex-none px-0 text-sm">
               {t("filters.all")}
             </TabsTrigger>
-            <TabsTrigger value="published" className="flex-none px-0 text-sm">
+            <TabsTrigger id="published" className="flex-none px-0 text-sm">
               {t("filters.published")}
             </TabsTrigger>
-            <TabsTrigger value="drafts" className="flex-none px-0 text-sm">
+            <TabsTrigger id="drafts" className="flex-none px-0 text-sm">
               {t("filters.drafts")}
             </TabsTrigger>
-            <TabsTrigger value="scheduled" className="flex-none px-0 text-sm">
+            <TabsTrigger id="scheduled" className="flex-none px-0 text-sm">
               {t("filters.scheduled")}
             </TabsTrigger>
           </TabsList>

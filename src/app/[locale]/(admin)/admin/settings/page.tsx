@@ -33,25 +33,25 @@ export default async function SettingsPage({ params }: Readonly<PageProps<"/[loc
         </div>
       </div>
 
-      <Tabs defaultValue="general" className="w-full">
+      <Tabs defaultSelectedKey="general" className="w-full">
         <div className="border-b border-border">
           <TabsList variant="line" className="no-scrollbar w-full justify-start gap-6 overflow-x-auto">
-            <TabsTrigger value="general" className="flex-none px-0 text-sm">
+            <TabsTrigger id="general" className="flex-none px-0 text-sm">
               {t("tabs.general")}
             </TabsTrigger>
-            <TabsTrigger value="security" className="flex-none px-0 text-sm">
+            <TabsTrigger id="security" className="flex-none px-0 text-sm">
               {t("tabs.security")}
             </TabsTrigger>
-            <TabsTrigger value="team" className="flex-none px-0 text-sm">
+            <TabsTrigger id="team" className="flex-none px-0 text-sm">
               {t("tabs.team")}
             </TabsTrigger>
-            <TabsTrigger value="billing" className="flex-none px-0 text-sm">
+            <TabsTrigger id="billing" className="flex-none px-0 text-sm">
               {t("tabs.billing")}
             </TabsTrigger>
-            <TabsTrigger value="integrations" className="flex-none px-0 text-sm">
+            <TabsTrigger id="integrations" className="flex-none px-0 text-sm">
               {t("tabs.integrations")}
             </TabsTrigger>
-            <TabsTrigger value="api" className="flex-none px-0 text-sm">
+            <TabsTrigger id="api" className="flex-none px-0 text-sm">
               {t("tabs.api")}
             </TabsTrigger>
           </TabsList>

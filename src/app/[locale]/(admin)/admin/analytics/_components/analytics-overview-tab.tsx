@@ -14,7 +14,7 @@ interface AnalyticsOverviewTabProps {
 
 export function AnalyticsOverviewTab({ regions, upgrades }: AnalyticsOverviewTabProps): JSX.Element {
   return (
-    <TabsContent value="overview" className="mt-8 space-y-6 outline-none">
+    <TabsContent id="overview" className="mt-8 space-y-6 outline-none">
       <AnalyticsKpiCards />
       <AnalyticsRevenueChart />
       <AnalyticsRegionsUpgrades regions={regions} upgrades={upgrades} />

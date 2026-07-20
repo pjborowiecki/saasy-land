@@ -73,7 +73,7 @@ export function SettingsTwoFactorVerifyStep({ onVerified, totpUri }: Readonly<Se
         </FieldContent>
       </Field>
 
-      <Button disabled={verificationCode.length !== TOTP_CODE_LENGTH} onClick={handleVerifyClick} type="button">
+      <Button isDisabled={verificationCode.length !== TOTP_CODE_LENGTH} onPress={handleVerifyClick} type="button">
         {t("security.twoFactor.verifyAndEnable")}
       </Button>
     </div>

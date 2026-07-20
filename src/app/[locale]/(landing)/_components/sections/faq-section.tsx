@@ -17,12 +17,12 @@ export async function FaqSection(): Promise<JSX.Element> {
         <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">{t("titlePart2")}</span>
       </h2>
       <div className="mx-auto max-w-[1100px]">
-        <Accordion className="w-full space-y-4" defaultValue={FAQ_DEFAULT_OPEN}>
+        <Accordion className="w-full space-y-4" defaultExpandedKeys={FAQ_DEFAULT_OPEN}>
           {FAQ_ITEMS.map((i) => (
             <AccordionItem
               key={i}
-              value={`item-${i}`}
-              className="rounded-2xl border border-border/50 bg-background/80 px-6 backdrop-blur-md transition-colors hover:bg-muted/80 data-[state=open]:bg-muted/80"
+              id={`item-${i}`}
+              className="rounded-2xl border border-border/50 bg-background/80 px-6 backdrop-blur-md transition-colors hover:bg-muted/80 data-expanded:bg-muted/80"
             >
               <AccordionTrigger className="text-base font-medium hover:no-underline">{t(`q${i}`)}</AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground">{t(`a${i}`)}</AccordionContent>

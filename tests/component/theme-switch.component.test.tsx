@@ -8,7 +8,7 @@ import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.uti
 
 import { ThemeSwitch, ThemeSwitchClient } from "~/src/components/custom/theme-switch"
 
-import { setThemeMock } from "~/tests/mocks/wrksz-themes"
+import { setThemeMock, themeState } from "~/tests/mocks/wrksz-themes"
 
 const themeMessages = loadLocaleMessagesFromDir("en-US").components.custom["theme-switch"]
 const emptyMessages = {}
@@ -24,6 +24,8 @@ const themeSwitchLabels = {
 describe("theme switch client component", () => {
   it("renders translated theme options after mount", async () => {
     expect.hasAssertions()
+    themeState.value = "system"
+
     render(
       <NextIntlClientProvider locale="en-US" messages={emptyMessages}>
         <ThemeSwitchClient
@@ -37,37 +39,39 @@ describe("theme switch client component", () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: themeMessages.system })).toBeInTheDocument()
     })
   })
 
   it("does not update theme when the select is opened without a selection", async () => {
     expect.hasAssertions()
     setThemeMock.mockClear()
+    themeState.value = "system"
     const user = userEvent.setup()
 
     render(<ThemeSwitchClient {...themeSwitchLabels} />)
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: themeSwitchLabels.systemLabel })).toBeInTheDocument()
     })
 
-    await user.click(screen.getByRole("combobox"))
+    await user.click(screen.getByRole("button", { name: themeSwitchLabels.systemLabel }))
     expect(setThemeMock).not.toHaveBeenCalled()
   })
 
   it("updates theme for valid selection", async () => {
     expect.hasAssertions()
     setThemeMock.mockClear()
+    themeState.value = "system"
     const user = userEvent.setup()
 
     render(<ThemeSwitchClient {...themeSwitchLabels} />)
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: themeSwitchLabels.systemLabel })).toBeInTheDocument()
     })
 
-    await user.click(screen.getByRole("combobox"))
+    await user.click(screen.getByRole("button", { name: themeSwitchLabels.systemLabel }))
     await user.click(await screen.findByRole("option", { name: themeSwitchLabels.darkLabel }))
     expect(setThemeMock).toHaveBeenCalledWith("dark")
   })
@@ -76,6 +80,8 @@ describe("theme switch client component", () => {
 describe("theme switch component", () => {
   it("loads labels from translations", async () => {
     expect.hasAssertions()
+    themeState.value = "system"
+
     render(
       <NextIntlClientProvider locale="en-US" messages={loadLocaleMessagesFromDir("en-US")}>
         <ThemeSwitch />
@@ -83,7 +89,7 @@ describe("theme switch component", () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: themeMessages.system })).toBeInTheDocument()
     })
   })
 })

@@ -38,7 +38,7 @@ export function SignOutButton(): JSX.Element {
   }, [router, t, tAuth])
 
   return (
-    <DropdownMenuItem disabled={isPending} variant="destructive" onClick={handleSignout}>
+    <DropdownMenuItem isDisabled={isPending} onAction={handleSignout} variant="destructive">
       {isPending ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
       {isPending ? t("signingOut") : t("signOut")}
     </DropdownMenuItem>

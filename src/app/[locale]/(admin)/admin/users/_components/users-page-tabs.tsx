@@ -20,7 +20,7 @@ export function UsersPageTabs({ activeTab, children, description, title }: Reado
   const t = useTranslations("pages.admin.users")
 
   return (
-    <Tabs value={activeTab} className="flex min-h-0 w-full flex-1 flex-col overflow-hidden">
+    <Tabs selectedKey={activeTab} className="flex min-h-0 w-full flex-1 flex-col overflow-hidden">
       <div className="-mx-4 -mt-4 shrink-0 bg-secondary/20 px-4 pt-4 md:-mx-6 md:-mt-6 md:px-6 md:pt-6">
         <div className="mb-4">
           <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{title}</h1>

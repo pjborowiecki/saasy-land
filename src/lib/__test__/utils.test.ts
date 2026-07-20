@@ -1,5 +1,5 @@
 import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/lib/_utils/blog"
-import { cn, cssVars } from "~/src/lib/_utils/ui"
+import { cn } from "~/src/lib/_utils/ui"
 import * as utils from "~/src/lib/utils"
 
 describe("lib/utils re-exports", () => {
@@ -20,6 +20,5 @@ describe("lib/utils re-exports", () => {
   it("re-exports ui helpers", () => {
     expect.hasAssertions()
     expect(cn("a", "b")).toBe("a b")
-    expect(cssVars({ "--x": "1" })).toStrictEqual({ "--x": "1" })
   })
 })

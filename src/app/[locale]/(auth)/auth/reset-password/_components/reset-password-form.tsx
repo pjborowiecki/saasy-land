@@ -75,7 +75,7 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
           aria-label={t("pages.auth.reset-password.form.submit")}
           className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
           data-testid="reset-password-form-submit-button"
-          disabled={form.formState.isSubmitting}
+          isDisabled={form.formState.isSubmitting}
           type="submit"
         >
           {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}

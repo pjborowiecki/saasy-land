@@ -2,7 +2,8 @@ import { I18N } from "./_constants/i18n"
 import { PERMISSIONS } from "./_constants/permissions"
 import { ROUTES } from "./_constants/routes"
 import { SIDEBAR_CONFIG } from "./_constants/sidebar"
-import { USER_PREFERENCES } from "./_constants/user-preferences"
+import { THEME } from "./_constants/theme"
+import { TIMEZONE } from "./_constants/timezone"
 
 export const CONSTANTS = {
   APP_GITHUB_OWNER: "pjborowiecki",
@@ -15,5 +16,6 @@ export const CONSTANTS = {
   PERMISSIONS,
   ROUTES,
   SIDEBAR_CONFIG,
-  USER_PREFERENCES,
+  THEME,
+  TIMEZONE,
 } as const

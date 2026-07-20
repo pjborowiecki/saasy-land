@@ -34,9 +34,9 @@ async function SettingsPreferencesSelects(): Promise<JSX.Element> {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="en">{t("preferences.languages.en")}</SelectItem>
-            <SelectItem value="es">{t("preferences.languages.es")}</SelectItem>
-            <SelectItem value="fr">{t("preferences.languages.fr")}</SelectItem>
+            <SelectItem id="en">{t("preferences.languages.en")}</SelectItem>
+            <SelectItem id="es">{t("preferences.languages.es")}</SelectItem>
+            <SelectItem id="fr">{t("preferences.languages.fr")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -47,9 +47,9 @@ async function SettingsPreferencesSelects(): Promise<JSX.Element> {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="utc">{t("preferences.timezones.utc")}</SelectItem>
-            <SelectItem value="est">{t("preferences.timezones.est")}</SelectItem>
-            <SelectItem value="pst">{t("preferences.timezones.pst")}</SelectItem>
+            <SelectItem id="utc">{t("preferences.timezones.utc")}</SelectItem>
+            <SelectItem id="est">{t("preferences.timezones.est")}</SelectItem>
+            <SelectItem id="pst">{t("preferences.timezones.pst")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -65,7 +65,7 @@ async function SettingsAnnouncementsToggle(): Promise<JSX.Element> {
         <p className="text-sm font-medium text-foreground">{t("preferences.announcements.title")}</p>
         <p className="text-xs text-muted-foreground">{t("preferences.announcements.description")}</p>
       </div>
-      <Switch defaultChecked />
+      <Switch defaultSelected />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 {
   "title": "Command palette",
-  "description": "Search for a command to run..."
+  "description": "Search for a command to run...",
+  "search": "Search"
 }

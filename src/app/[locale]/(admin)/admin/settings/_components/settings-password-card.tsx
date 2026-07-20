@@ -23,7 +23,7 @@ export async function SettingsPasswordCard(): Promise<JSX.Element> {
         </div>
       </CardContent>
       <div className="flex justify-end border-t border-border/40 bg-secondary/20 p-4">
-        <Button size="sm" className="h-8 px-4 text-xs opacity-50 shadow-sm" disabled>
+        <Button size="sm" className="h-8 px-4 text-xs opacity-50 shadow-sm" isDisabled>
           {t("security.password.update")}
         </Button>
       </div>

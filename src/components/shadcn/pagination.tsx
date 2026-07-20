@@ -1,73 +1,111 @@
-import type { ComponentProps, JSX } from "react"
+"use client"
+
+import type { ComponentProps } from "react"
 
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { useTranslations } from "next-intl"
 
 import { cn } from "~/src/lib/utils"
 
-import { PaginationLink } from "~/src/components/shadcn/pagination-link"
+import { LinkButton } from "~/src/components/shadcn/button"
 
-async function Pagination({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("components.shadcn.pagination")
+function Pagination({
+  ariaLabel,
+  className,
+  ...props
+}: ComponentProps<"nav"> & {
+  ariaLabel?: string
+}) {
+  const t = useTranslations("components.shadcn.pagination")
 
   return (
     <nav
       aria-label={ariaLabel ?? t("navLabel")}
-      data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
+      data-slot="pagination"
       {...props}
     />
   )
 }
 
-function PaginationContent({ className, ...props }: ComponentProps<"ul">): JSX.Element {
-  return <ul data-slot="pagination-content" className={cn("flex items-center gap-0.5", className)} {...props} />
+function PaginationContent({ className, ...props }: ComponentProps<"ul">) {
+  return <ul className={cn("flex items-center gap-0.5", className)} data-slot="pagination-content" {...props} />
 }
 
-function PaginationItem({ ...props }: ComponentProps<"li">): JSX.Element {
+function PaginationItem({ ...props }: ComponentProps<"li">) {
   return <li data-slot="pagination-item" {...props} />
 }
 
-async function PaginationPrevious({
+interface PaginationLinkProps extends Omit<ComponentProps<typeof LinkButton>, "variant"> {
+  isActive?: boolean
+}
+
+function PaginationLink({ className, isActive, size = "icon", ...props }: PaginationLinkProps) {
+  return (
+    <LinkButton
+      aria-current={isActive === true ? "page" : undefined}
+      className={cn(className)}
+      data-active={isActive}
+      data-slot="pagination-link"
+      size={size}
+      variant={isActive === true ? "outline" : "ghost"}
+      {...props}
+    />
+  )
+}
+
+function PaginationPrevious({
+  ariaLabel,
   className,
   text,
-  ariaLabel,
   ...props
-}: ComponentProps<typeof PaginationLink> & { text?: string; ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("components.shadcn.pagination")
+}: ComponentProps<typeof PaginationLink> & {
+  ariaLabel?: string
+  text?: string
+}) {
+  const t = useTranslations("components.shadcn.pagination")
 
   return (
-    <PaginationLink aria-label={ariaLabel ?? t("goToPreviousPage")} size="default" className={cn("pl-1.5!", className)} {...props}>
-      <ChevronLeftIcon data-icon="inline-start" />
+    <PaginationLink aria-label={ariaLabel ?? t("goToPreviousPage")} className={cn("pl-1.5!", className)} size="default" {...props}>
+      <ChevronLeftIcon className="cn-rtl-flip" data-icon="inline-start" />
       <span className="hidden sm:block">{text ?? t("previousPage")}</span>
     </PaginationLink>
   )
 }
 
-async function PaginationNext({
+function PaginationNext({
+  ariaLabel,
   className,
   text,
-  ariaLabel,
   ...props
-}: ComponentProps<typeof PaginationLink> & { text?: string; ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("components.shadcn.pagination")
+}: ComponentProps<typeof PaginationLink> & {
+  ariaLabel?: string
+  text?: string
+}) {
+  const t = useTranslations("components.shadcn.pagination")
 
   return (
-    <PaginationLink aria-label={ariaLabel ?? t("goToNextPage")} size="default" className={cn("pr-1.5!", className)} {...props}>
+    <PaginationLink aria-label={ariaLabel ?? t("goToNextPage")} className={cn("pr-1.5!", className)} size="default" {...props}>
       <span className="hidden sm:block">{text ?? t("nextPage")}</span>
-      <ChevronRightIcon data-icon="inline-end" />
+      <ChevronRightIcon className="cn-rtl-flip" data-icon="inline-end" />
     </PaginationLink>
   )
 }
 
-async function PaginationEllipsis({ className, srLabel, ...props }: ComponentProps<"span"> & { srLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("components.shadcn.pagination")
+function PaginationEllipsis({
+  className,
+  srLabel,
+  ...props
+}: ComponentProps<"span"> & {
+  srLabel?: string
+}) {
+  const t = useTranslations("components.shadcn.pagination")
 
   return (
     <span
       aria-hidden
-      data-slot="pagination-ellipsis"
       className={cn("flex size-8 items-center justify-center [&_svg:not([class*='size-'])]:size-4", className)}
+      data-slot="pagination-ellipsis"
       {...props}
     >
       <MoreHorizontalIcon />
@@ -76,5 +114,13 @@ async function PaginationEllipsis({ className, srLabel, ...props }: ComponentPro
   )
 }
 
-export { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationNext, PaginationPrevious }
-export { PaginationLink, type PaginationLinkProps } from "~/src/components/shadcn/pagination-link"
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  type PaginationLinkProps,
+}

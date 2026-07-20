@@ -9,7 +9,7 @@ export async function UsersAllUsersTab(): Promise<JSX.Element> {
   const users = await getAdminUsers()
 
   return (
-    <TabsContent value="allUsers" className="flex min-h-0 flex-1 flex-col overflow-hidden outline-none">
+    <TabsContent id="allUsers" className="flex min-h-0 flex-1 flex-col overflow-hidden outline-none">
       <UsersAllUsersTabView initialUsers={users} />
     </TabsContent>
   )

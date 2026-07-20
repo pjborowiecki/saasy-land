@@ -2,6 +2,7 @@
 
 import { type JSX, useCallback } from "react"
 
+import type { Key } from "@react-types/shared"
 import { hasLocale } from "next-intl"
 
 import { CONSTANTS } from "~/src/constants"
@@ -22,8 +23,8 @@ export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Eleme
   const router = useRouter()
 
   const handleLocaleChange = useCallback(
-    (next: AppLocale | null) => {
-      if (next !== null && hasLocale(CONSTANTS.I18N.LOCALES, next)) {
+    (next: Key | null) => {
+      if (typeof next === "string" && hasLocale(CONSTANTS.I18N.LOCALES, next)) {
         router.replace(pathname, { locale: next })
       }
     },
@@ -31,12 +32,12 @@ export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Eleme
   )
 
   return (
-    <Select value={locale} onValueChange={handleLocaleChange}>
+    <Select value={locale} onChange={handleLocaleChange}>
       <SelectTrigger className="w-full">{localeUiConfig[locale].displayName}</SelectTrigger>
-      <SelectContent alignItemWithTrigger={false} side="top" sideOffset={4}>
+      <SelectContent offset={4} placement="top">
         <SelectGroup>
           {CONSTANTS.I18N.LOCALES.map((loc) => (
-            <SelectItem key={loc} value={loc}>
+            <SelectItem key={loc} id={loc}>
               {localeUiConfig[loc].displayName}
             </SelectItem>
           ))}

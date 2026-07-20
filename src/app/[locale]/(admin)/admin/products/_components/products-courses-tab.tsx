@@ -7,7 +7,7 @@ import { ProductsTabToolbar } from "~/src/app/[locale]/(admin)/admin/products/_c
 
 export function ProductsCoursesTab(): JSX.Element {
   return (
-    <TabsContent value="courses" className="mt-6 space-y-4 outline-none">
+    <TabsContent id="courses" className="mt-6 space-y-4 outline-none">
       <ProductsTabToolbar />
 
       <Card className="overflow-hidden">

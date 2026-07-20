@@ -2,17 +2,19 @@
 
 import { type JSX, useCallback, useEffect, useState } from "react"
 
+import type { Key } from "@react-types/shared"
 import { useTheme } from "@wrksz/themes/client"
 import { useTranslations } from "next-intl"
+
+import { CONSTANTS } from "~/src/constants"
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "~/src/components/shadcn/select"
 import { Skeleton } from "~/src/components/shadcn/skeleton"
 
-const THEMES = ["light", "dark", "system"] as const
-type ThemeValue = (typeof THEMES)[number]
+type ThemeValue = (typeof CONSTANTS.THEME.THEMES)[number]
 
-function isThemeValue(value: string | null): value is ThemeValue {
-  return value !== null && (THEMES as readonly string[]).includes(value)
+function isThemeValue(value: Key | null): value is ThemeValue {
+  return typeof value === "string" && (CONSTANTS.THEME.THEMES as readonly string[]).includes(value)
 }
 
 export function ThemeSwitchClient({
@@ -31,7 +33,7 @@ export function ThemeSwitchClient({
   const { theme, setTheme } = useTheme()
 
   const handleThemeChange = useCallback(
-    (value: ThemeValue | null) => {
+    (value: Key | null) => {
       if (isThemeValue(value)) {
         setTheme(value)
       }
@@ -48,17 +50,25 @@ export function ThemeSwitchClient({
     return <Skeleton className="h-8 w-full" />
   }
 
+  const themeLabels = {
+    dark: darkLabel,
+    light: lightLabel,
+    system: systemLabel,
+  } satisfies Record<ThemeValue, string>
+
   return (
-    <Select value={theme ?? undefined} onValueChange={handleThemeChange}>
+    <Select placeholder={placeholder} onChange={handleThemeChange} {...(theme === undefined ? {} : { value: theme })}>
       <SelectTrigger className="w-full capitalize">
-        <SelectValue placeholder={placeholder} />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>{label}</SelectLabel>
-          <SelectItem value="light">{lightLabel}</SelectItem>
-          <SelectItem value="dark">{darkLabel}</SelectItem>
-          <SelectItem value="system">{systemLabel}</SelectItem>
+          {CONSTANTS.THEME.THEMES.map((themeValue) => (
+            <SelectItem key={themeValue} id={themeValue}>
+              {themeLabels[themeValue]}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>

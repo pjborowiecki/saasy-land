@@ -13,7 +13,7 @@ interface SettingsSecurityTabProps {
 
 export function SettingsSecurityTab({ securitySessions }: SettingsSecurityTabProps): JSX.Element {
   return (
-    <TabsContent value="security" className="mt-8 space-y-6 outline-none">
+    <TabsContent id="security" className="mt-8 space-y-6 outline-none">
       <SettingsPasswordCard />
       <SettingsTwoFactorCard />
       <SettingsSessionsCard securitySessions={securitySessions} />

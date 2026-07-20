@@ -1,6 +1,6 @@
 "use client"
 
-import { type ComponentPropsWithoutRef, type JSX, useCallback, useTransition } from "react"
+import { type JSX, useCallback, useTransition } from "react"
 
 import { Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -14,12 +14,12 @@ import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 
 import { cn } from "~/src/lib/utils"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button, type ButtonProps } from "~/src/components/shadcn/button"
 
 const OAUTH_BUTTON_STYLES =
   "h-11 w-full gap-2 rounded-xl border-white/10 bg-white/5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] backdrop-blur-md hover:bg-white/10"
 
-interface OAuthButtonProps extends ComponentPropsWithoutRef<"button"> {
+interface OAuthButtonProps extends Omit<ButtonProps, "children" | "type" | "variant"> {
   provider: keyof typeof auth.options.socialProviders
   Icon: (props: Readonly<{ className?: string }>) => JSX.Element
 }
@@ -49,8 +49,8 @@ export function OAuthButton({ provider, Icon, className, ...rest }: Readonly<OAu
     <Button
       type="button"
       variant="outline"
-      disabled={isPending}
-      onClick={handleSignIn}
+      isDisabled={isPending}
+      onPress={handleSignIn}
       id={`oauth-button-${provider}`}
       aria-label={tAuth(`oauth.${provider}`)}
       className={cn(OAUTH_BUTTON_STYLES, className)}

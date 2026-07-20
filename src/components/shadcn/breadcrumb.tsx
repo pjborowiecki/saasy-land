@@ -1,69 +1,87 @@
-import type { ComponentProps, JSX } from "react"
+"use client"
 
-import { mergeProps } from "@base-ui/react/merge-props"
-import { useRender } from "@base-ui/react/use-render"
-import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import type { ComponentProps } from "react"
+
+import { useTranslations } from "next-intl"
+import {
+  Breadcrumb as BreadcrumbPrimitive,
+  Breadcrumbs as BreadcrumbsPrimitive,
+  composeRenderProps,
+  Link as LinkPrimitive,
+  type BreadcrumbProps,
+  type BreadcrumbsProps,
+  type LinkProps,
+} from "react-aria-components"
 
 import { cn } from "~/src/lib/utils"
 
-async function Breadcrumb({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }): Promise<JSX.Element> {
-  const t = await getTranslations("components.shadcn.breadcrumb")
+const BREADCRUMB_CHEVRON_ICON_SRC = `data:image/svg+xml,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>',
+)}`
+
+const BREADCRUMB_MORE_ICON_SRC = `data:image/svg+xml,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>',
+)}`
+
+function Breadcrumb({ className, ariaLabel, ...props }: ComponentProps<"nav"> & { ariaLabel?: string }) {
+  const t = useTranslations("components.shadcn.breadcrumb")
 
   return <nav aria-label={ariaLabel ?? t("navLabel")} data-slot="breadcrumb" className={cn(className)} {...props} />
 }
 
-function BreadcrumbList({ className, ...props }: ComponentProps<"ol">): JSX.Element {
+function BreadcrumbList<T extends object>({ className, ...props }: Readonly<BreadcrumbsProps<T>>) {
   return (
-    <ol
+    <BreadcrumbsPrimitive
       data-slot="breadcrumb-list"
-      className={cn("flex flex-wrap items-center gap-1.5 text-xs wrap-break-word text-muted-foreground", className)}
+      className={cn("flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground", className)}
       {...props}
     />
   )
 }
 
-function BreadcrumbItem({ className, ...props }: ComponentProps<"li">): JSX.Element {
-  return <li data-slot="breadcrumb-item" className={cn("inline-flex items-center gap-1", className)} {...props} />
-}
-
-function BreadcrumbLink({ className, render, ...props }: useRender.ComponentProps<"a">): JSX.Element {
-  return useRender({
-    defaultTagName: "a",
-    props: mergeProps<"a">(
-      {
-        className: cn("transition-colors hover:text-foreground", className),
-      },
-      props,
-    ),
-    render,
-    state: {
-      slot: "breadcrumb-link",
-    },
-  })
-}
-
-function BreadcrumbPage({ className, ...props }: ComponentProps<"span">): JSX.Element {
-  return <span data-slot="breadcrumb-page" aria-current="page" className={cn("font-normal text-foreground", className)} {...props} />
-}
-
-function BreadcrumbSeparator({ children, className, ...props }: ComponentProps<"li">): JSX.Element {
+function BreadcrumbItem({ className, children, separatorClassName, ...props }: BreadcrumbProps & { separatorClassName?: string }) {
   return (
-    <li data-slot="breadcrumb-separator" aria-hidden="true" className={cn("[&>svg]:size-3.5", className)} {...props}>
-      {children ?? <ChevronRightIcon />}
-    </li>
+    <BreadcrumbPrimitive data-slot="breadcrumb-item" className={cn("inline-flex items-center gap-1", className)} {...props}>
+      {composeRenderProps(children, (child, { isCurrent }) => (
+        <>
+          {child}
+          {!isCurrent && (
+            <img
+              alt=""
+              data-slot="breadcrumb-separator"
+              className={cn("cn-rtl-flip size-3.5", separatorClassName)}
+              src={BREADCRUMB_CHEVRON_ICON_SRC}
+            />
+          )}
+        </>
+      ))}
+    </BreadcrumbPrimitive>
   )
 }
 
-async function BreadcrumbEllipsis({ className, ...props }: ComponentProps<"span">): Promise<JSX.Element> {
-  const t = await getTranslations("components.shadcn.breadcrumb")
+function BreadcrumbLink({ className, render, ...props }: Readonly<LinkProps>) {
+  return (
+    <LinkPrimitive
+      data-slot="breadcrumb-link"
+      className={cn("transition-colors hover:text-foreground", className)}
+      {...props}
+      {...(render === undefined ? {} : { render })}
+    />
+  )
+}
+
+function BreadcrumbPage({ className, ...props }: ComponentProps<"span">) {
+  return <span data-slot="breadcrumb-page" aria-current="page" className={cn("font-normal text-foreground", className)} {...props} />
+}
+
+function BreadcrumbEllipsis({ className, ...props }: ComponentProps<"span">) {
+  const t = useTranslations("components.shadcn.breadcrumb")
 
   return (
-    <span data-slot="breadcrumb-ellipsis" className={cn("flex size-5 items-center justify-center [&>svg]:size-4", className)} {...props}>
-      <MoreHorizontalIcon aria-hidden="true" focusable="false" />
-      <span className="sr-only">{t("more")}</span>
+    <span data-slot="breadcrumb-ellipsis" className={cn("flex size-5 items-center justify-center", className)} {...props}>
+      <img alt={t("more")} className="size-4" src={BREADCRUMB_MORE_ICON_SRC} />
     </span>
   )
 }
 
-export { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator }
+export { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbEllipsis }

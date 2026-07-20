@@ -30,7 +30,7 @@ function VerifyEmailSuccessView({
   return (
     <div className="flex flex-col gap-4 text-center">
       <p className="text-sm text-muted-foreground">{successLabel}</p>
-      <Button className="h-11 bg-foreground text-background hover:bg-foreground/80" onClick={onContinue} type="button">
+      <Button className="h-11 bg-foreground text-background hover:bg-foreground/80" onPress={onContinue} type="button">
         {continueLabel}
       </Button>
     </div>
@@ -45,7 +45,7 @@ function VerifyEmailErrorView({
   return (
     <div className="flex flex-col gap-4 text-center">
       <p className="text-sm text-muted-foreground">{invalidTokenLabel}</p>
-      <Button className="h-11 bg-foreground text-background hover:bg-foreground/80" onClick={onResend} type="button">
+      <Button className="h-11 bg-foreground text-background hover:bg-foreground/80" onPress={onResend} type="button">
         {resendLabel}
       </Button>
     </div>
@@ -91,13 +91,13 @@ function VerifyEmailPendingView({
       <Button
         className="h-11 bg-foreground text-background hover:bg-foreground/80"
         data-testid="verify-email-resend-button"
-        onClick={onResend}
+        onPress={onResend}
         type="button"
       >
         {resendLabel}
       </Button>
 
-      <Button className="h-11" onClick={onBackToSignIn} type="button" variant="outline">
+      <Button className="h-11" onPress={onBackToSignIn} type="button" variant="outline">
         {backToSignInLabel}
       </Button>
     </div>

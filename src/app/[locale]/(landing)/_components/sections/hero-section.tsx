@@ -9,7 +9,7 @@ import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { cn } from "~/src/lib/utils"
 
-import { buttonVariants } from "~/src/components/shadcn/button"
+import { buttonVariants } from "~/src/components/shadcn/_lib/button-variants"
 
 export async function HeroSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.landing.hero")

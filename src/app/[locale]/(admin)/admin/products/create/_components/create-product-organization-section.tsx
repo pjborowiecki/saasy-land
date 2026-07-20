@@ -15,25 +15,25 @@ export async function CreateProductOrganizationSection(): Promise<JSX.Element> {
       <div className="flex flex-col gap-5 sm:flex-row">
         <div className="flex-1 space-y-1.5">
           <Label>{t("sections.organization.category.label")}</Label>
-          <Select>
+          <Select placeholder={t("sections.organization.category.placeholder")}>
             <SelectTrigger className="w-full text-muted-foreground">
-              <SelectValue placeholder={t("sections.organization.category.placeholder")} />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="saas">SaaS Plans</SelectItem>
-              <SelectItem value="addons">Add-ons</SelectItem>
+              <SelectItem id="saas">SaaS Plans</SelectItem>
+              <SelectItem id="addons">Add-ons</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="flex-1 space-y-1.5">
           <Label>{t("sections.organization.collection.label")}</Label>
-          <Select>
+          <Select placeholder={t("sections.organization.collection.placeholder")}>
             <SelectTrigger className="w-full text-muted-foreground">
-              <SelectValue placeholder={t("sections.organization.collection.placeholder")} />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="core">Core Subscription</SelectItem>
-              <SelectItem value="legacy">Legacy</SelectItem>
+              <SelectItem id="core">Core Subscription</SelectItem>
+              <SelectItem id="legacy">Legacy</SelectItem>
             </SelectContent>
           </Select>
         </div>

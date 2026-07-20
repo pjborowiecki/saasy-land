@@ -14,7 +14,7 @@ interface ProductsAllTabProps {
 
 export function ProductsAllTab({ products }: ProductsAllTabProps): JSX.Element {
   return (
-    <TabsContent value="all" className="mt-6 space-y-4 outline-none">
+    <TabsContent id="all" className="mt-6 space-y-4 outline-none">
       <ProductsTabToolbar />
 
       <ProductsTableCard end={4} total={4}>
