@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   experimental: {
     optimizePackageImports: ["lucide-react"],
-    rootParams: true,
+    useTypeScriptCli: true,
   },
   images: {
     remotePatterns: [

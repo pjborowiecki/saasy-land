@@ -3,13 +3,11 @@
 import { type ComponentProps, type ReactNode, useMemo } from "react"
 
 import { RootProvider } from "fumadocs-ui/provider/next"
-import { hasLocale } from "use-intl/core"
 
-import { CONSTANTS } from "~/src/constants"
 import type { Locale } from "~/src/constants/types"
 
 import { i18nUI } from "~/src/integrations/fumadocs/fumadocs.i18n"
-import { Link, usePathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 type DocsProviderProps = Readonly<{
   locale: Locale
@@ -36,21 +34,8 @@ const DOCS_PROVIDER_COMPONENTS = {
 const DOCS_THEME = { enabled: false } as const
 
 export function DocsProvider({ locale, children }: DocsProviderProps) {
-  const pathname = usePathname()
-  const router = useRouter()
-
   const components = useMemo(() => DOCS_PROVIDER_COMPONENTS, [])
-  const i18n = useMemo(
-    () => ({
-      ...i18nUI.provider(locale),
-      onLocaleChange: (next: string) => {
-        if (hasLocale(CONSTANTS.I18N.LOCALES, next)) {
-          router.replace(pathname, { locale: next })
-        }
-      },
-    }),
-    [locale, pathname, router],
-  )
+  const i18n = useMemo(() => i18nUI.provider(locale), [locale])
 
   return (
     <RootProvider components={components} theme={DOCS_THEME} i18n={i18n}>

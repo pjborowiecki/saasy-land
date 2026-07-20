@@ -1,4 +1,9 @@
-import { getLocaleMessagesDir, loadLocaleMessagesFromDir, resolveMessagesDir } from "~/src/integrations/next-intl/i18n.utils"
+import {
+  getLocaleMessagesDir,
+  loadLocaleMessagesFromDir,
+  resolveLocaleFromRootParamsModule,
+  resolveMessagesDir,
+} from "~/src/integrations/next-intl/i18n.utils"
 
 const FIXTURES_ROOT = "tests/fixtures/i18n-utils"
 const INVALID_ARRAY_FIXTURE = `${FIXTURES_ROOT}/invalid-array`
@@ -7,6 +12,7 @@ const NESTED_INVALID_FIXTURE = `${FIXTURES_ROOT}/nested-invalid`
 const MERGE_FIXTURE = `${FIXTURES_ROOT}/merge`
 const CUSTOM_MESSAGES_ROOT = "/tmp/messages-root"
 const EXPECTED_MESSAGES_SUFFIX = "src/integrations/next-intl/messages"
+const NON_STRING_LOCALE_VALUE = 123
 
 describe("load locale messages from dir component", () => {
   it("throws for invalid message files", () => {
@@ -64,5 +70,35 @@ describe("load locale messages from dir component", () => {
     } finally {
       vi.unstubAllEnvs()
     }
+  })
+})
+
+describe("root locale module resolution", () => {
+  it("returns undefined when the module has no locale export", async () => {
+    expect.hasAssertions()
+    await expect(resolveLocaleFromRootParamsModule({})).resolves.toBeUndefined()
+  })
+
+  it("returns undefined when locale is not a function", async () => {
+    expect.hasAssertions()
+    await expect(resolveLocaleFromRootParamsModule({ locale: "en-US" })).resolves.toBeUndefined()
+  })
+
+  it("returns undefined when locale resolves to a non-string", async () => {
+    expect.hasAssertions()
+    await expect(
+      resolveLocaleFromRootParamsModule({
+        locale: (): Promise<number> => Promise.resolve(NON_STRING_LOCALE_VALUE),
+      }),
+    ).resolves.toBeUndefined()
+  })
+
+  it("returns the string locale when locale resolves successfully", async () => {
+    expect.hasAssertions()
+    await expect(
+      resolveLocaleFromRootParamsModule({
+        locale: (): Promise<string> => Promise.resolve("pl-PL"),
+      }),
+    ).resolves.toBe("pl-PL")
   })
 })
