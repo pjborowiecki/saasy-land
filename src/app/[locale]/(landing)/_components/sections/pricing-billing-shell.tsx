@@ -2,8 +2,8 @@
 
 import { type JSX, type ReactNode, useState } from "react"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Switch } from "~/src/components/shadcn/switch"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Switch } from "~/src/presentation/components/shadcn/switch"
 
 export function PricingBillingShell({
   children,

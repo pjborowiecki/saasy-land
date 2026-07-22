@@ -5,9 +5,9 @@ import type { JSX } from "react"
 import { type CellContext } from "@tanstack/react-table"
 import { useTranslations } from "next-intl"
 
-import { DropdownMenuItem, DropdownMenuSeparator } from "~/src/components/shadcn/dropdown-menu"
+import { DropdownMenuItem, DropdownMenuSeparator } from "~/src/presentation/components/shadcn/dropdown-menu"
 
-import { DataTableRowActionsButton } from "~/src/components/custom/data-table/data-table"
+import { DataTableRowActionsButton } from "~/src/presentation/components/custom/data-table/data-table"
 
 import type { AdminUserRow } from "~/src/app/[locale]/(admin)/admin/_types"
 

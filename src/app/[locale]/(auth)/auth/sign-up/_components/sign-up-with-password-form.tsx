@@ -7,11 +7,10 @@ import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
+import { signUp } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
+import { signUpWithPasswordSchema } from "~/src/modules/identity-access/infrastructure/auth/auth.schemas"
 
-import { signUp } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { signUpWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { useConfetti } from "~/src/hooks/use-confetti"
@@ -23,6 +22,7 @@ import {
   type SignUpFormValues,
 } from "~/src/app/[locale]/(auth)/auth/sign-up/_components/sign-up-with-password-form-fields"
 import { SignUpSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-up/_components/sign-up-with-password-submit-button"
+import { ROUTES } from "~/src/routes"
 
 export function SignUpWithPasswordForm(): JSX.Element {
   const { triggerConfetti } = useConfetti()
@@ -51,7 +51,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
             toast.success(t("pages.auth.sign-up.form.successCheckEmail"))
             router.push(
               getPathname({
-                href: `${CONSTANTS.ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+                href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
                 locale,
               }),
             )

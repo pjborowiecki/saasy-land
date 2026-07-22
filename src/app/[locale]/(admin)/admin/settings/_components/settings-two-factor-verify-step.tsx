@@ -5,13 +5,13 @@ import { type JSX, useCallback, useState } from "react"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { twoFactor } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { extractTotpSecret, createOtpSlotIndices } from "~/src/integrations/better-auth/auth.two-factor"
+import { twoFactor } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
+import { extractTotpSecret, createOtpSlotIndices } from "~/src/modules/identity-access/infrastructure/auth/auth.two-factor"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Field, FieldContent, FieldLabel } from "~/src/components/shadcn/field"
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/components/shadcn/input-otp"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/presentation/components/shadcn/input-otp"
 
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 

@@ -3,14 +3,14 @@ import type { JSX, ReactNode } from "react"
 import { Code2, Mail, MapPin, type LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
-import { Textarea } from "~/src/components/shadcn/textarea"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
+import { Textarea } from "~/src/presentation/components/shadcn/textarea"
+
+import { APP_GITHUB_URL, CONTACT_EMAIL } from "~/src/presentation/branding"
 
 const FORM_INPUT_CLASS =
   "h-11 w-full rounded-xl border border-white/10 bg-transparent px-4 text-sm text-foreground shadow-inner transition-all placeholder:text-muted-foreground focus-visible:border-primary/50 focus-visible:ring-1 focus-visible:ring-primary/50 focus-visible:outline-none"
@@ -48,7 +48,7 @@ function ContactSidebar({ description, location, title }: { description: string;
         <p className="mb-12 max-w-sm text-sm leading-relaxed text-muted-foreground">{description}</p>
 
         <div className="space-y-6">
-          <ContactDetailItem icon={Mail}>{CONSTANTS.CONTACT_EMAIL}</ContactDetailItem>
+          <ContactDetailItem icon={Mail}>{CONTACT_EMAIL}</ContactDetailItem>
           <ContactDetailItem icon={MapPin}>{location}</ContactDetailItem>
         </div>
       </div>
@@ -56,7 +56,7 @@ function ContactSidebar({ description, location, title }: { description: string;
       <div className="relative z-10 mt-16 flex gap-4">
         <Link
           className="flex size-10 items-center justify-center rounded-full border border-border/50 bg-background/50 text-muted-foreground transition-all hover:bg-white/10 hover:text-foreground"
-          href={CONSTANTS.APP_GITHUB_URL}
+          href={APP_GITHUB_URL}
         >
           <Code2 className="size-5" />
         </Link>

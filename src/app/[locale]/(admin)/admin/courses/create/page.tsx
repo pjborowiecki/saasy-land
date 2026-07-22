@@ -4,7 +4,7 @@ import type { JSX } from "react"
 import { CheckCircle } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { CreateCourseForm } from "~/src/app/[locale]/(admin)/admin/courses/create/_components/create-course-form"
 

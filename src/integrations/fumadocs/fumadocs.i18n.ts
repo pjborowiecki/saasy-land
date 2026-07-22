@@ -1,12 +1,12 @@
 import { defineI18n } from "fumadocs-core/i18n"
 import { defineI18nUI } from "fumadocs-ui/i18n"
 
-import { CONSTANTS } from "~/src/constants"
+import { I18N } from "~/src/integrations/next-intl/i18n.config"
 
 export const i18n = defineI18n({
-  defaultLanguage: CONSTANTS.I18N.DEFAULT_LOCALE,
+  defaultLanguage: I18N.DEFAULT_LOCALE,
   hideLocale: "always",
-  languages: [...CONSTANTS.I18N.LOCALES],
+  languages: [...I18N.LOCALES],
   parser: "dot",
 })
 

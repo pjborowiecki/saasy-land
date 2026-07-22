@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { Background } from "~/src/components/custom/background"
+import { Background } from "~/src/presentation/components/custom/background"
 
 import { AuthHeader } from "~/src/app/[locale]/(auth)/auth/_components/auth-header"
 

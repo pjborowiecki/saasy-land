@@ -4,14 +4,19 @@ import type { JSX } from "react"
 import { Calendar, PlusCircle } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { DashboardChart } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-chart"
 import { DashboardSecurityCard } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-security-card"
 import { DashboardSessionsCard } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-sessions-card"
 import { DashboardStatsGrid } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-stats-grid"
 import { DashboardUsersTable } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table"
-import { DASHBOARD_CHART_X_AXIS, DASHBOARD_CHART_Y_AXIS, DASHBOARD_SESSION_ITEMS, DASHBOARD_USER_ROWS } from "~/src/data/admin/mock-data"
+import {
+  DASHBOARD_CHART_X_AXIS,
+  DASHBOARD_CHART_Y_AXIS,
+  DASHBOARD_SESSION_ITEMS,
+  DASHBOARD_USER_ROWS,
+} from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params

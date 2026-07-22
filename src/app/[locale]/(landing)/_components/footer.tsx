@@ -2,9 +2,8 @@ import { type JSX, Suspense } from "react"
 
 import { Rocket } from "lucide-react"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { FooterCopyright } from "~/src/app/[locale]/(landing)/_components/footer-copyright"
+import { APP_NAME } from "~/src/presentation/branding"
 
 export function Footer(): JSX.Element {
   return (
@@ -13,7 +12,7 @@ export function Footer(): JSX.Element {
         <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
           <div className="flex items-center gap-2">
             <Rocket className="size-5 text-foreground" />
-            <span className="text-sm font-medium text-foreground">{CONSTANTS.APP_NAME}</span>
+            <span className="text-sm font-medium text-foreground">{APP_NAME}</span>
             <Suspense>
               <FooterCopyright />
             </Suspense>

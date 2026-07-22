@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { Badge } from "~/src/components/shadcn/badge"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
 
 import { getStatusBadgeClass, getStatusDotClass, type AdminStatusColor } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 

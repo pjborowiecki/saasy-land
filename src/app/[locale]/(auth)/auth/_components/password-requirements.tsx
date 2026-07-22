@@ -5,7 +5,7 @@ import type { JSX } from "react"
 import { BadgeCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/presentation/utils"
 
 import { usePasswordRules } from "~/src/hooks/use-password-rules"
 

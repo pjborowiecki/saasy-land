@@ -7,12 +7,11 @@ import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
+import { getSession, signIn } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { hasAdminAccess } from "~/src/modules/identity-access/infrastructure/auth/auth.access"
+import { AUTH_ERRORS, authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
+import { signInWithPasswordSchema } from "~/src/modules/identity-access/infrastructure/auth/auth.schemas"
 
-import { getSession, signIn } from "~/src/integrations/better-auth/auth._client"
-import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
-import { AUTH_ERRORS, authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
@@ -21,6 +20,7 @@ import {
   type SignInFormValues,
 } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-form-fields"
 import { SignInSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-submit-button"
+import { ROUTES } from "~/src/routes"
 
 export function SignInWithPasswordForm(): JSX.Element {
   const router = useRouter()
@@ -45,7 +45,7 @@ export function SignInWithPasswordForm(): JSX.Element {
               toast.error(t(`auth.errors.${errorKey}`))
               router.push(
                 getPathname({
-                  href: `${CONSTANTS.ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+                  href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
                   locale,
                 }),
               )
@@ -57,12 +57,13 @@ export function SignInWithPasswordForm(): JSX.Element {
           onSuccess: async () => {
             toast.success(t("pages.auth.sign-in.form.success"))
             const { data: session } = await getSession()
-            router.push(
-              getPathname({
-                href: getPostAuthRedirect(session?.user.role),
-                locale,
-              }),
-            )
+            let href: string = ROUTES.APP
+
+            if (hasAdminAccess(session?.user.role)) {
+              href = ROUTES.ADMIN
+            }
+
+            router.push(getPathname({ href, locale }))
           },
         },
         password: data.password,

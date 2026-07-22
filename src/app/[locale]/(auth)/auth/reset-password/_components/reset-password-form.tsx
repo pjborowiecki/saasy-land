@@ -9,19 +9,19 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { CONSTANTS } from "~/src/constants"
+import { resetPassword } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
+import { resetPasswordSchema } from "~/src/modules/identity-access/infrastructure/auth/auth.schemas"
 
-import { resetPassword } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { resetPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
-import { FieldGroup } from "~/src/components/shadcn/field"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
 import { AuthPasswordField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { PasswordRequirements } from "~/src/app/[locale]/(auth)/auth/_components/password-requirements"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { ROUTES } from "~/src/routes"
 
 interface ResetPasswordFormProps {
   readonly token: string
@@ -47,7 +47,7 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
           },
           onSuccess: () => {
             toast.success(t("pages.auth.reset-password.form.success"))
-            router.push(CONSTANTS.ROUTES.SIGN_IN)
+            router.push(ROUTES.SIGN_IN)
           },
         },
         newPassword: data.password,

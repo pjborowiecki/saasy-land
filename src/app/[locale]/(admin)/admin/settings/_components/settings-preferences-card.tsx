@@ -2,10 +2,23 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
-import { Label } from "~/src/components/shadcn/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/components/shadcn/select"
-import { Switch } from "~/src/components/shadcn/switch"
+import { Timezone, type TimezoneCode } from "~/src/modules/shared-kernel/domain/value-objects/timezone"
+
+import { I18N } from "~/src/integrations/next-intl/i18n.config"
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
+import { Label } from "~/src/presentation/components/shadcn/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/presentation/components/shadcn/select"
+import { Switch } from "~/src/presentation/components/shadcn/switch"
+
+/** Common preference options from the shared-kernel timezone catalog (not the full IANA set). */
+const PREFERENCE_TIMEZONES = [
+  "UTC",
+  "America/New_York",
+  "America/Los_Angeles",
+  "Europe/London",
+  "Europe/Warsaw",
+] as const satisfies readonly TimezoneCode[]
 
 export async function SettingsPreferencesCard(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.settings")
@@ -25,31 +38,38 @@ export async function SettingsPreferencesCard(): Promise<JSX.Element> {
 
 async function SettingsPreferencesSelects(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.settings")
+  const tLocales = await getTranslations("locales")
+  const tTimezones = await getTranslations("timezones")
+
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <div className="space-y-1.5">
         <Label className="text-xs">{t("preferences.language")}</Label>
-        <Select defaultValue="en">
+        <Select defaultValue={I18N.DEFAULT_LOCALE}>
           <SelectTrigger className="w-full">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem id="en">{t("preferences.languages.en")}</SelectItem>
-            <SelectItem id="es">{t("preferences.languages.es")}</SelectItem>
-            <SelectItem id="fr">{t("preferences.languages.fr")}</SelectItem>
+            {I18N.LOCALES.map((code) => (
+              <SelectItem id={code} key={code}>
+                {tLocales(code)}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
       <div className="space-y-1.5">
         <Label className="text-xs">{t("preferences.timezone")}</Label>
-        <Select defaultValue="est">
+        <Select defaultValue={Timezone.DEFAULT_CODE}>
           <SelectTrigger className="w-full">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem id="utc">{t("preferences.timezones.utc")}</SelectItem>
-            <SelectItem id="est">{t("preferences.timezones.est")}</SelectItem>
-            <SelectItem id="pst">{t("preferences.timezones.pst")}</SelectItem>
+            {PREFERENCE_TIMEZONES.map((iana) => (
+              <SelectItem id={iana} key={iana}>
+                {tTimezones(iana)}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>

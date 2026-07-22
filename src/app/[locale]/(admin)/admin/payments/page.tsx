@@ -4,11 +4,11 @@ import type { JSX } from "react"
 import { Download, Settings } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
+import { ADMIN_PAYMENT_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 import { PaymentsRefundsTab } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refunds-tab"
-import { ADMIN_PAYMENT_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params

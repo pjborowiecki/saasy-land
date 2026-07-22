@@ -3,9 +3,9 @@ import type { JSX } from "react"
 import { CheckCircle2, XCircle } from "lucide-react"
 import type { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Button } from "~/src/components/shadcn/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 
 const STARTER_INCLUDED_FEATURES = ["1", "2", "3"] as const
 const STARTER_DISABLED_FEATURES = ["4", "5"] as const

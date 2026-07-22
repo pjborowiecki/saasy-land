@@ -1,9 +1,9 @@
+import { ADMIN_USER_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 import {
   DEFAULT_ADMIN_USERS_FILTERS,
   areAdminUsersFiltersEqual,
   filterAdminUsers,
 } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_lib/users-filters"
-import { ADMIN_USER_ROWS } from "~/src/data/admin/mock-data"
 
 describe("users filters", () => {
   it("treats matching filter snapshots as equal", () => {

@@ -4,10 +4,10 @@ import { type JSX, type ReactNode } from "react"
 
 import { useController, useFormContext, type FieldPath, type FieldValues } from "react-hook-form"
 
-import { createOtpSlotIndices } from "~/src/integrations/better-auth/auth.two-factor"
+import { createOtpSlotIndices } from "~/src/modules/identity-access/infrastructure/auth/auth.two-factor"
 
-import { Field, FieldContent, FieldError, FieldLabel } from "~/src/components/shadcn/field"
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/components/shadcn/input-otp"
+import { Field, FieldContent, FieldError, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/presentation/components/shadcn/input-otp"
 
 import { type AuthFormId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 

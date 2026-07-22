@@ -31,16 +31,6 @@
     "description": "Configure regional and language settings for your workspace.",
     "language": "Language",
     "timezone": "Timezone",
-    "languages": {
-      "en": "English (US)",
-      "es": "Español",
-      "fr": "Français"
-    },
-    "timezones": {
-      "utc": "UTC (Coordinated Universal Time)",
-      "est": "EST (Eastern Standard Time)",
-      "pst": "PST (Pacific Standard Time)"
-    },
     "announcements": {
       "title": "Feature Announcements",
       "description": "Receive emails about new features and updates."

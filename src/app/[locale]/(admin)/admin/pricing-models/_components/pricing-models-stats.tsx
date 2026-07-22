@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { Tag, Users, Wallet } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Card, CardContent } from "~/src/components/shadcn/card"
+import { Card, CardContent } from "~/src/presentation/components/shadcn/card"
 
 export async function PricingModelsStats(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.pricing-models")

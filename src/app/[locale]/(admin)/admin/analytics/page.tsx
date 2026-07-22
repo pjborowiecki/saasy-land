@@ -4,11 +4,11 @@ import type { JSX } from "react"
 import { Calendar, ChevronDown } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
+import { ADMIN_ANALYTICS_REGION_ROWS, ADMIN_ANALYTICS_UPGRADE_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 import { AnalyticsOverviewTab } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-overview-tab"
-import { ADMIN_ANALYTICS_REGION_ROWS, ADMIN_ANALYTICS_UPGRADE_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params

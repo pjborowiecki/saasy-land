@@ -3,9 +3,9 @@ import type { JSX } from "react"
 import { Clock, CreditCard, Filter, TrendingDown } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card } from "~/src/components/shadcn/card"
-import { Table, TableBody } from "~/src/components/shadcn/table"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { Table, TableBody } from "~/src/presentation/components/shadcn/table"
 
 import type { AdminPaymentRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { PaymentsRefundRow } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refund-row"

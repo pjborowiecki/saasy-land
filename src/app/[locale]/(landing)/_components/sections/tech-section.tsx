@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { TECH_STACK } from "~/src/data/tech-stack"
+import { TECH_STACK } from "~/src/app/[locale]/(landing)/_lib/tech-stack"
 
 const MARQUEE_DUPLICATES = ["first", "second"] as const
 

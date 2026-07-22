@@ -2,9 +2,9 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card } from "~/src/components/shadcn/card"
-import { Label } from "~/src/components/shadcn/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/components/shadcn/select"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { Label } from "~/src/presentation/components/shadcn/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/presentation/components/shadcn/select"
 
 export async function CreateProductOrganizationSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.products.create")

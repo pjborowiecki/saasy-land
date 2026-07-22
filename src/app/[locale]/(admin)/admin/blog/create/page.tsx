@@ -4,7 +4,7 @@ import type { JSX } from "react"
 import { Eye, Save, Send } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { CreateBlogPostEditor } from "~/src/app/[locale]/(admin)/admin/blog/create/_components/create-blog-post-editor"
 import { CreateBlogPostSettings } from "~/src/app/[locale]/(admin)/admin/blog/create/_components/create-blog-post-settings"

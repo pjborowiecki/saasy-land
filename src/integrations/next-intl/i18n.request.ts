@@ -2,7 +2,6 @@ import { cacheLife } from "next/cache"
 
 import { getRequestConfig } from "next-intl/server"
 
-import { getFormats } from "~/src/integrations/next-intl/i18n.formats"
 import { isLocale } from "~/src/integrations/next-intl/i18n.locale"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 import { loadLocaleMessagesFromDir, resolveLocaleFromRootParamsModule, type Messages } from "~/src/integrations/next-intl/i18n.utils"
@@ -28,7 +27,6 @@ export default getRequestConfig(async ({ locale }) => {
   const resolvedLocale = isLocale(target) ? target : routing.defaultLocale
   const isDevelopment = process.env.NODE_ENV === "development"
   return {
-    formats: getFormats(resolvedLocale),
     locale: resolvedLocale,
     messages: isDevelopment ? getLocaleMessages(resolvedLocale) : await getCachedLocaleMessages(resolvedLocale),
   }

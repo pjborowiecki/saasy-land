@@ -1,10 +1,10 @@
 import { type JSX, Suspense } from "react"
 
-import { NuqsProvider } from "~/src/providers/nuqs-provider"
+import { NuqsProvider } from "~/src/presentation/providers/nuqs-provider"
 
-import { SidebarInset, SidebarProvider } from "~/src/components/shadcn/sidebar"
+import { SidebarInset, SidebarProvider } from "~/src/presentation/components/shadcn/sidebar"
 
-import { Background } from "~/src/components/custom/background"
+import { Background } from "~/src/presentation/components/custom/background"
 
 import { AdminLayoutHeader } from "~/src/app/[locale]/(admin)/admin/_components/admin-layout-header"
 import { AdminSidebar } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar"

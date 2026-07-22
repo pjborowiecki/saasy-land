@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Button } from "~/src/components/shadcn/button"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { getRoleTypeBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 import type { AdminRoleRow } from "~/src/app/[locale]/(admin)/admin/_types"

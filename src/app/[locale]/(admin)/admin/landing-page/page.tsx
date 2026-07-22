@@ -4,7 +4,7 @@ import type { JSX } from "react"
 import { Eye, Save, UploadCloud } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { LandingPageEditorCanvas } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-editor-canvas"
 import { LandingPagePropertiesPanel } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-properties-panel"

@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { Star } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { LandingPageSectionActions } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-section-actions"
 

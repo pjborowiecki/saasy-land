@@ -29,7 +29,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: "1.3.13"
+          bun-version: 1.3.14
 
       - name: Setup Vite+
         uses: voidzero-dev/setup-vp@v1
@@ -45,7 +45,8 @@ jobs:
         run: bun run typegen
 
       - name: Build
-        run: bun run build
+        # Bun can SIGILL in N-API teardown after a successful Next build; accept .next/BUILD_ID.
+        run: bun run build || test -f .next/BUILD_ID
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4

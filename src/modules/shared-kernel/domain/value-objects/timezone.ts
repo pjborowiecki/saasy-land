@@ -1,0 +1,258 @@
+import { nonEmptyTuple } from "~/src/modules/shared-kernel/domain/catalog"
+import { ValidationError } from "~/src/modules/shared-kernel/domain/errors/validation.error"
+import type { CountryCode } from "~/src/modules/shared-kernel/domain/value-objects/country"
+
+export interface IsoTimeZone {
+  readonly iana: string
+  readonly country: CountryCode | undefined
+  readonly latitude: number
+  readonly longitude: number
+}
+
+export const TIMEZONES = [
+  { country: "CI", iana: "Africa/Abidjan", latitude: 5.3166, longitude: -4.0333 },
+  { country: "GH", iana: "Africa/Accra", latitude: 5.55, longitude: -0.2166 },
+  { country: "ET", iana: "Africa/Addis_Ababa", latitude: 9.0333, longitude: 38.7 },
+  { country: "DZ", iana: "Africa/Algiers", latitude: 36.7833, longitude: 3.05 },
+  { country: "ER", iana: "Africa/Asmara", latitude: 15.3333, longitude: 38.9333 },
+  { country: "ML", iana: "Africa/Bamako", latitude: 12.65, longitude: -8 },
+  { country: "CF", iana: "Africa/Bangui", latitude: 4.3666, longitude: 18.5833 },
+  { country: "GM", iana: "Africa/Banjul", latitude: 13.45, longitude: -16.5666 },
+  { country: "GW", iana: "Africa/Bissau", latitude: 11.85, longitude: -15.5833 },
+  { country: "MW", iana: "Africa/Blantyre", latitude: -15.7833, longitude: 35 },
+  { country: "CG", iana: "Africa/Brazzaville", latitude: -4.2666, longitude: 15.2833 },
+  { country: "BI", iana: "Africa/Bujumbura", latitude: -3.3833, longitude: 29.3666 },
+  { country: "EG", iana: "Africa/Cairo", latitude: 30.05, longitude: 31.25 },
+  { country: "MA", iana: "Africa/Casablanca", latitude: 33.6, longitude: -7.6333 },
+  { country: "ES", iana: "Africa/Ceuta", latitude: 35.8833, longitude: -5.3166 },
+  { country: "GN", iana: "Africa/Conakry", latitude: 9.5166, longitude: -13.7166 },
+  { country: "SN", iana: "Africa/Dakar", latitude: 14.6666, longitude: -17.4333 },
+  { country: "TZ", iana: "Africa/Dar_es_Salaam", latitude: -6.8, longitude: 39.2833 },
+  { country: "DJ", iana: "Africa/Djibouti", latitude: 11.6, longitude: 43.15 },
+  { country: "CM", iana: "Africa/Douala", latitude: 4.05, longitude: 9.7 },
+  { country: "EH", iana: "Africa/El_Aaiun", latitude: 27.15, longitude: -13.2 },
+  { country: "SL", iana: "Africa/Freetown", latitude: 8.4833, longitude: -13.2333 },
+  { country: "BW", iana: "Africa/Gaborone", latitude: -24.6333, longitude: 25.9 },
+  { country: "ZW", iana: "Africa/Harare", latitude: -17.8333, longitude: 31.05 },
+  { country: "ZA", iana: "Africa/Johannesburg", latitude: -26.2, longitude: 28.0333 },
+  { country: "SS", iana: "Africa/Juba", latitude: 4.85, longitude: 31.6 },
+  { country: "UG", iana: "Africa/Kampala", latitude: 0.3166, longitude: 32.5833 },
+  { country: "SD", iana: "Africa/Khartoum", latitude: 15.6, longitude: 32.5333 },
+  { country: "RW", iana: "Africa/Kigali", latitude: -1.95, longitude: 30.05 },
+  { country: "CD", iana: "Africa/Kinshasa", latitude: -4.3, longitude: 15.3 },
+  { country: "NG", iana: "Africa/Lagos", latitude: 6.45, longitude: 3.4 },
+  { country: "GA", iana: "Africa/Libreville", latitude: 0.3833, longitude: 9.45 },
+  { country: "TG", iana: "Africa/Lome", latitude: 6.1333, longitude: 1.2166 },
+  { country: "AO", iana: "Africa/Luanda", latitude: -8.8333, longitude: 13.2333 },
+  { country: "CD", iana: "Africa/Lubumbashi", latitude: -11.6666, longitude: 27.4666 },
+  { country: "ZM", iana: "Africa/Lusaka", latitude: -15.4166, longitude: 28.2833 },
+  { country: "GQ", iana: "Africa/Malabo", latitude: 3.75, longitude: 8.7833 },
+  { country: "MZ", iana: "Africa/Maputo", latitude: -25.9666, longitude: 32.5833 },
+  { country: "LS", iana: "Africa/Maseru", latitude: -29.3166, longitude: 27.4833 },
+  { country: "SZ", iana: "Africa/Mbabane", latitude: -26.3166, longitude: 31.1333 },
+  { country: "SO", iana: "Africa/Mogadishu", latitude: 2.0666, longitude: 45.3666 },
+  { country: "LR", iana: "Africa/Monrovia", latitude: 6.3, longitude: -10.8 },
+  { country: "KE", iana: "Africa/Nairobi", latitude: -1.2833, longitude: 36.8166 },
+  { country: "TD", iana: "Africa/Ndjamena", latitude: 12.1166, longitude: 15.0333 },
+  { country: "NE", iana: "Africa/Niamey", latitude: 13.5166, longitude: 2.1166 },
+  { country: "MR", iana: "Africa/Nouakchott", latitude: 18.1, longitude: -15.9666 },
+  { country: "BF", iana: "Africa/Ouagadougou", latitude: 12.3666, longitude: -1.5166 },
+  { country: "BJ", iana: "Africa/Porto-Novo", latitude: 6.4833, longitude: 2.6166 },
+  { country: "ST", iana: "Africa/Sao_Tome", latitude: 0.3333, longitude: 6.7333 },
+  { country: "LY", iana: "Africa/Tripoli", latitude: 32.9, longitude: 13.1833 },
+  { country: "TN", iana: "Africa/Tunis", latitude: 36.8, longitude: 10.1833 },
+  { country: "NA", iana: "Africa/Windhoek", latitude: -22.5666, longitude: 17.0833 },
+  { country: "US", iana: "America/Anchorage", latitude: 61.2181, longitude: -149.9003 },
+  { country: "AI", iana: "America/Anguilla", latitude: 18.2, longitude: -63.05 },
+  { country: "AG", iana: "America/Antigua", latitude: 17.05, longitude: -61.8 },
+  { country: "BR", iana: "America/Araguaina", latitude: -7.2, longitude: -48.2 },
+  { country: "AR", iana: "America/Argentina/Buenos_Aires", latitude: -34.6, longitude: -58.45 },
+  { country: "AR", iana: "America/Argentina/Cordoba", latitude: -31.4, longitude: -64.1833 },
+  { country: "AR", iana: "America/Argentina/Mendoza", latitude: -32.8833, longitude: -68.8333 },
+  { country: "PY", iana: "America/Asuncion", latitude: -25.2666, longitude: -57.6666 },
+  { country: "BR", iana: "America/Bahia", latitude: -12.9833, longitude: -38.5166 },
+  { country: "BB", iana: "America/Barbados", latitude: 13.1, longitude: -59.6166 },
+  { country: "BR", iana: "America/Belem", latitude: -1.45, longitude: -48.4833 },
+  { country: "BZ", iana: "America/Belize", latitude: 17.5, longitude: -88.2 },
+  { country: "BR", iana: "America/Boa_Vista", latitude: 2.8166, longitude: -60.6666 },
+  { country: "CO", iana: "America/Bogota", latitude: 4.6, longitude: -74.0833 },
+  { country: "US", iana: "America/Boise", latitude: 43.6135, longitude: -116.2035 },
+  { country: "BR", iana: "America/Campo_Grande", latitude: -20.45, longitude: -54.6166 },
+  { country: "MX", iana: "America/Cancun", latitude: 21.1666, longitude: -86.8333 },
+  { country: "VE", iana: "America/Caracas", latitude: 10.5, longitude: -66.9333 },
+  { country: "GF", iana: "America/Cayenne", latitude: 4.9333, longitude: -52.3333 },
+  { country: "US", iana: "America/Chicago", latitude: 41.85, longitude: -87.65 },
+  { country: "MX", iana: "America/Chihuahua", latitude: 28.6333, longitude: -106.0833 },
+  { country: "CR", iana: "America/Costa_Rica", latitude: 9.9333, longitude: -84.0833 },
+  { country: "BR", iana: "America/Cuiaba", latitude: -15.6, longitude: -56.1 },
+  { country: "US", iana: "America/Denver", latitude: 39.7392, longitude: -104.9847 },
+  { country: "US", iana: "America/Detroit", latitude: 42.3314, longitude: -83.0458 },
+  { country: "CA", iana: "America/Edmonton", latitude: 53.55, longitude: -113.5 },
+  { country: "SV", iana: "America/El_Salvador", latitude: 13.7, longitude: -89.2 },
+  { country: "BR", iana: "America/Fortaleza", latitude: -3.7166, longitude: -38.5166 },
+  { country: "GT", iana: "America/Guatemala", latitude: 14.6333, longitude: -90.5166 },
+  { country: "EC", iana: "America/Guayaquil", latitude: -2.2, longitude: -79.9 },
+  { country: "GY", iana: "America/Guyana", latitude: 6.8, longitude: -58.1666 },
+  { country: "CA", iana: "America/Halifax", latitude: 44.65, longitude: -63.6 },
+  { country: "CU", iana: "America/Havana", latitude: 23.1333, longitude: -82.3833 },
+  { country: "JM", iana: "America/Jamaica", latitude: 17.9666, longitude: -76.8 },
+  { country: "BO", iana: "America/La_Paz", latitude: -16.5, longitude: -68.15 },
+  { country: "PE", iana: "America/Lima", latitude: -12.05, longitude: -77.05 },
+  { country: "US", iana: "America/Los_Angeles", latitude: 34.0522, longitude: -118.2437 },
+  { country: "NI", iana: "America/Managua", latitude: 12.15, longitude: -86.2833 },
+  { country: "BR", iana: "America/Manaus", latitude: -3.1, longitude: -60.0166 },
+  { country: "MX", iana: "America/Mexico_City", latitude: 19.4333, longitude: -99.1333 },
+  { country: "MX", iana: "America/Monterrey", latitude: 25.6666, longitude: -100.3166 },
+  { country: "UY", iana: "America/Montevideo", latitude: -34.8833, longitude: -56.1666 },
+  { country: "US", iana: "America/New_York", latitude: 40.7128, longitude: -74.006 },
+  { country: "PA", iana: "America/Panama", latitude: 8.9666, longitude: -79.5333 },
+  { country: "SR", iana: "America/Paramaribo", latitude: 5.8333, longitude: -55.1666 },
+  { country: "US", iana: "America/Phoenix", latitude: 33.4484, longitude: -112.074 },
+  { country: "HT", iana: "America/Port-au-Prince", latitude: 18.5333, longitude: -72.3333 },
+  { country: "PR", iana: "America/Puerto_Rico", latitude: 18.4666, longitude: -66.1166 },
+  { country: "CA", iana: "America/Regina", latitude: 50.45, longitude: -104.6 },
+  { country: "CL", iana: "America/Santiago", latitude: -33.45, longitude: -70.6666 },
+  { country: "DO", iana: "America/Santo_Domingo", latitude: 18.4666, longitude: -69.9 },
+  { country: "BR", iana: "America/Sao_Paulo", latitude: -23.5333, longitude: -46.6166 },
+  { country: "MX", iana: "America/Tijuana", latitude: 32.5333, longitude: -117.0166 },
+  { country: "CA", iana: "America/Toronto", latitude: 43.65, longitude: -79.3833 },
+  { country: "CA", iana: "America/Vancouver", latitude: 49.25, longitude: -123.1166 },
+  { country: "KZ", iana: "Asia/Almaty", latitude: 43.25, longitude: 76.95 },
+  { country: "JO", iana: "Asia/Amman", latitude: 31.95, longitude: 35.9333 },
+  { country: "TM", iana: "Asia/Ashgabat", latitude: 37.95, longitude: 58.3833 },
+  { country: "IQ", iana: "Asia/Baghdad", latitude: 33.3333, longitude: 44.4 },
+  { country: "AZ", iana: "Asia/Baku", latitude: 40.3833, longitude: 49.8666 },
+  { country: "TH", iana: "Asia/Bangkok", latitude: 13.75, longitude: 100.5166 },
+  { country: "LB", iana: "Asia/Beirut", latitude: 33.8833, longitude: 35.5 },
+  { country: "KG", iana: "Asia/Bishkek", latitude: 42.8666, longitude: 74.6 },
+  { country: "LK", iana: "Asia/Colombo", latitude: 6.9333, longitude: 79.85 },
+  { country: "SY", iana: "Asia/Damascus", latitude: 33.5, longitude: 36.3 },
+  { country: "BD", iana: "Asia/Dhaka", latitude: 23.7166, longitude: 90.4 },
+  { country: "AE", iana: "Asia/Dubai", latitude: 25.25, longitude: 55.3 },
+  { country: "TJ", iana: "Asia/Dushanbe", latitude: 38.5833, longitude: 68.7833 },
+  { country: "HK", iana: "Asia/Hong_Kong", latitude: 22.2833, longitude: 114.15 },
+  { country: "VN", iana: "Asia/Ho_Chi_Minh", latitude: 10.75, longitude: 106.6666 },
+  { country: "ID", iana: "Asia/Jakarta", latitude: -6.1666, longitude: 106.8166 },
+  { country: "IL", iana: "Asia/Jerusalem", latitude: 31.7666, longitude: 35.2333 },
+  { country: "AF", iana: "Asia/Kabul", latitude: 34.5166, longitude: 69.1833 },
+  { country: "PK", iana: "Asia/Karachi", latitude: 24.8666, longitude: 67.05 },
+  { country: "NP", iana: "Asia/Kathmandu", latitude: 27.7166, longitude: 85.3166 },
+  { country: "IN", iana: "Asia/Kolkata", latitude: 22.5333, longitude: 88.3666 },
+  { country: "MY", iana: "Asia/Kuala_Lumpur", latitude: 3.1666, longitude: 101.7 },
+  { country: "KW", iana: "Asia/Kuwait", latitude: 29.3666, longitude: 47.9666 },
+  { country: "MO", iana: "Asia/Macau", latitude: 22.2, longitude: 113.5333 },
+  { country: "PH", iana: "Asia/Manila", latitude: 14.5833, longitude: 120.9666 },
+  { country: "OM", iana: "Asia/Muscat", latitude: 23.6, longitude: 58.5833 },
+  { country: "CY", iana: "Asia/Nicosia", latitude: 35.1666, longitude: 33.3666 },
+  { country: "QA", iana: "Asia/Qatar", latitude: 25.2833, longitude: 51.5333 },
+  { country: "SA", iana: "Asia/Riyadh", latitude: 24.6333, longitude: 46.7166 },
+  { country: "KR", iana: "Asia/Seoul", latitude: 37.55, longitude: 126.9666 },
+  { country: "CN", iana: "Asia/Shanghai", latitude: 31.2333, longitude: 121.4666 },
+  { country: "SG", iana: "Asia/Singapore", latitude: 1.2833, longitude: 103.85 },
+  { country: "TW", iana: "Asia/Taipei", latitude: 25.05, longitude: 121.5 },
+  { country: "UZ", iana: "Asia/Tashkent", latitude: 41.3166, longitude: 69.25 },
+  { country: "GE", iana: "Asia/Tbilisi", latitude: 41.7166, longitude: 44.8333 },
+  { country: "IR", iana: "Asia/Tehran", latitude: 35.6833, longitude: 51.4166 },
+  { country: "JP", iana: "Asia/Tokyo", latitude: 35.6833, longitude: 139.75 },
+  { country: "MN", iana: "Asia/Ulaanbaatar", latitude: 47.9166, longitude: 106.8833 },
+  { country: "RU", iana: "Asia/Vladivostok", latitude: 43.1166, longitude: 131.9333 },
+  { country: "AM", iana: "Asia/Yerevan", latitude: 40.1833, longitude: 44.5 },
+  { country: "AU", iana: "Australia/Adelaide", latitude: -34.9333, longitude: 138.6 },
+  { country: "AU", iana: "Australia/Brisbane", latitude: -27.4666, longitude: 153.0333 },
+  { country: "AU", iana: "Australia/Darwin", latitude: -12.4666, longitude: 130.8333 },
+  { country: "AU", iana: "Australia/Hobart", latitude: -42.8833, longitude: 147.3166 },
+  { country: "AU", iana: "Australia/Melbourne", latitude: -37.8166, longitude: 144.9666 },
+  { country: "AU", iana: "Australia/Perth", latitude: -31.95, longitude: 115.85 },
+  { country: "AU", iana: "Australia/Sydney", latitude: -33.8666, longitude: 151.2166 },
+  { country: "NL", iana: "Europe/Amsterdam", latitude: 52.3666, longitude: 4.9 },
+  { country: "AD", iana: "Europe/Andorra", latitude: 42.5, longitude: 1.5166 },
+  { country: "GR", iana: "Europe/Athens", latitude: 37.9833, longitude: 23.7333 },
+  { country: "RS", iana: "Europe/Belgrade", latitude: 44.8333, longitude: 20.5 },
+  { country: "DE", iana: "Europe/Berlin", latitude: 52.5, longitude: 13.3666 },
+  { country: "SK", iana: "Europe/Bratislava", latitude: 48.15, longitude: 17.1166 },
+  { country: "BE", iana: "Europe/Brussels", latitude: 50.8333, longitude: 4.3333 },
+  { country: "RO", iana: "Europe/Bucharest", latitude: 44.4333, longitude: 26.1 },
+  { country: "HU", iana: "Europe/Budapest", latitude: 47.5, longitude: 19.0833 },
+  { country: "MD", iana: "Europe/Chisinau", latitude: 47, longitude: 28.8333 },
+  { country: "DK", iana: "Europe/Copenhagen", latitude: 55.6666, longitude: 12.5833 },
+  { country: "IE", iana: "Europe/Dublin", latitude: 53.3333, longitude: -6.25 },
+  { country: "FI", iana: "Europe/Helsinki", latitude: 60.1666, longitude: 24.9666 },
+  { country: "TR", iana: "Europe/Istanbul", latitude: 41.0166, longitude: 28.9666 },
+  { country: "UA", iana: "Europe/Kiev", latitude: 50.4333, longitude: 30.5166 },
+  { country: "PT", iana: "Europe/Lisbon", latitude: 38.7166, longitude: -9.1333 },
+  { country: "SI", iana: "Europe/Ljubljana", latitude: 46.05, longitude: 14.5166 },
+  { country: "GB", iana: "Europe/London", latitude: 51.5, longitude: -0.1166 },
+  { country: "LU", iana: "Europe/Luxembourg", latitude: 49.6, longitude: 6.1666 },
+  { country: "ES", iana: "Europe/Madrid", latitude: 40.4, longitude: -3.6833 },
+  { country: "MT", iana: "Europe/Malta", latitude: 35.9, longitude: 14.5166 },
+  { country: "BY", iana: "Europe/Minsk", latitude: 53.9, longitude: 27.5666 },
+  { country: "MC", iana: "Europe/Monaco", latitude: 43.7333, longitude: 7.4166 },
+  { country: "RU", iana: "Europe/Moscow", latitude: 55.75, longitude: 37.6166 },
+  { country: "NO", iana: "Europe/Oslo", latitude: 59.9166, longitude: 10.75 },
+  { country: "FR", iana: "Europe/Paris", latitude: 48.8666, longitude: 2.3333 },
+  { country: "CZ", iana: "Europe/Prague", latitude: 50.0833, longitude: 14.4333 },
+  { country: "LV", iana: "Europe/Riga", latitude: 56.95, longitude: 24.1 },
+  { country: "IT", iana: "Europe/Rome", latitude: 41.9, longitude: 12.4833 },
+  { country: "BG", iana: "Europe/Sofia", latitude: 42.6833, longitude: 23.3166 },
+  { country: "SE", iana: "Europe/Stockholm", latitude: 59.3333, longitude: 18.05 },
+  { country: "EE", iana: "Europe/Tallinn", latitude: 59.4333, longitude: 24.7166 },
+  { country: "AT", iana: "Europe/Vienna", latitude: 48.2, longitude: 16.3666 },
+  { country: "LT", iana: "Europe/Vilnius", latitude: 54.6833, longitude: 25.3166 },
+  { country: "PL", iana: "Europe/Warsaw", latitude: 52.25, longitude: 21 },
+  { country: "CH", iana: "Europe/Zurich", latitude: 47.3833, longitude: 8.5333 },
+  { country: "NZ", iana: "Pacific/Auckland", latitude: -36.8666, longitude: 174.7666 },
+  { country: "FJ", iana: "Pacific/Fiji", latitude: -18.1333, longitude: 178.4166 },
+  { country: "GU", iana: "Pacific/Guam", latitude: 13.4666, longitude: 144.75 },
+  { country: "US", iana: "Pacific/Honolulu", latitude: 21.3069, longitude: -157.8583 },
+  { country: undefined, iana: "UTC", latitude: 0, longitude: 0 },
+] as const satisfies readonly IsoTimeZone[]
+
+export type TimezoneCode = (typeof TIMEZONES)[number]["iana"]
+
+const TIMEZONE_BY_IANA = new Map<string, (typeof TIMEZONES)[number]>(TIMEZONES.map((timezone) => [timezone.iana, timezone]))
+
+function isTimezoneCode(value: string): value is TimezoneCode {
+  return TIMEZONE_BY_IANA.has(value)
+}
+
+export const TIMEZONE_CODES = nonEmptyTuple(TIMEZONES.map((timezone) => timezone.iana))
+
+export class Timezone {
+  static readonly DEFAULT_CODE: TimezoneCode = "UTC"
+
+  readonly iana: TimezoneCode
+  readonly country: CountryCode | undefined
+  readonly latitude: number
+  readonly longitude: number
+
+  private constructor(meta: (typeof TIMEZONES)[number]) {
+    this.iana = meta.iana
+    this.country = meta.country
+    this.latitude = meta.latitude
+    this.longitude = meta.longitude
+  }
+
+  static create(value: string): Timezone {
+    const normalized = value.trim()
+    if (!isTimezoneCode(normalized)) {
+      throw new ValidationError(`Unsupported timezone: ${value}`)
+    }
+    return new Timezone(TIMEZONE_BY_IANA.get(normalized)!)
+  }
+
+  static default(): Timezone {
+    return Timezone.create(Timezone.DEFAULT_CODE)
+  }
+
+  equals(other: Timezone): boolean {
+    return this.iana === other.iana
+  }
+
+  get messageKey(): `timezones.${TimezoneCode}` {
+    return `timezones.${this.iana}`
+  }
+
+  toString(): string {
+    return this.iana
+  }
+}

@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/src/components/shadcn/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "~/src/presentation/components/shadcn/accordion"
 
 const FAQ_DEFAULT_OPEN: string[] = ["item-1"]
 const FAQ_ITEMS = ["1", "2", "3", "4", "5", "6"] as const

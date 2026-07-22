@@ -6,13 +6,14 @@ import { Loader2, LogOut } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
+import { authClient } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
 
-import { authClient } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { DropdownMenuItem } from "~/src/components/shadcn/dropdown-menu"
+import { DropdownMenuItem } from "~/src/presentation/components/shadcn/dropdown-menu"
+
+import { ROUTES } from "~/src/routes"
 
 export function SignOutButton(): JSX.Element {
   const [isPending, startTransition] = useTransition()
@@ -30,7 +31,7 @@ export function SignOutButton(): JSX.Element {
           },
           onSuccess: () => {
             toast.success(t("success"))
-            router.push(CONSTANTS.ROUTES.HOME)
+            router.push(ROUTES.HOME)
           },
         },
       })

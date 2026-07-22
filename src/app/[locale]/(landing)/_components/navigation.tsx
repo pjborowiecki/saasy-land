@@ -3,15 +3,16 @@ import type { JSX } from "react"
 import { Rocket } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/presentation/utils"
 
-import { buttonVariants } from "~/src/components/shadcn/_lib/button-variants"
+import { buttonVariants } from "~/src/presentation/components/shadcn/_lib/button-variants"
 
-import { ThemeSwitchClient } from "~/src/components/custom/theme-switch"
+import { ThemeSwitchClient } from "~/src/presentation/components/custom/theme-switch"
+
+import { APP_NAME } from "~/src/presentation/branding"
+import { ROUTES } from "~/src/routes"
 
 export async function Navigation(): Promise<JSX.Element> {
   const [t, themeT] = await Promise.all([
@@ -26,7 +27,7 @@ export async function Navigation(): Promise<JSX.Element> {
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-linear-to-br from-muted to-muted/50 transition-colors group-hover:border-border">
             <Rocket className="size-4 text-foreground" />
           </div>
-          <span className="text-lg font-medium tracking-tight text-foreground">{CONSTANTS.APP_NAME}</span>
+          <span className="text-lg font-medium tracking-tight text-foreground">{APP_NAME}</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -53,7 +54,7 @@ export async function Navigation(): Promise<JSX.Element> {
           </div>
 
           <Link
-            href={CONSTANTS.ROUTES.SIGN_UP}
+            href={ROUTES.SIGN_UP}
             className={cn(
               buttonVariants(),
               "h-9 rounded-lg bg-linear-to-b from-primary to-primary/80 px-4 text-primary-foreground shadow-[0_0_20px_-5px_var(--color-primary)] transition-all hover:opacity-90",

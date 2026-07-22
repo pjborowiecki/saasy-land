@@ -4,7 +4,7 @@ import { type ChangeEvent, type JSX } from "react"
 
 import { Loader2 } from "lucide-react"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { useVerifyEmailPanel, type VerifyEmailStatus } from "~/src/app/[locale]/(auth)/auth/verify-email/_components/use-verify-email-panel"
 

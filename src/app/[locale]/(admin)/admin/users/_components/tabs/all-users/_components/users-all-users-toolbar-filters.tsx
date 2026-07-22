@@ -5,7 +5,7 @@ import { useCallback, type JSX } from "react"
 import type { Key } from "@react-types/shared"
 import { useTranslations } from "next-intl"
 
-import { Select, SelectContent, SelectItem, SelectTrigger } from "~/src/components/shadcn/select"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "~/src/presentation/components/shadcn/select"
 
 import {
   USER_ROLES,

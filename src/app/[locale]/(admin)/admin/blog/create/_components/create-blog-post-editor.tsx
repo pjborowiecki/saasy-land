@@ -3,11 +3,11 @@ import type { JSX } from "react"
 import { Bold, Code, Heading, Image as ImageIcon, Italic, Link as LinkIcon, Maximize2, Quote, Underline } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card } from "~/src/components/shadcn/card"
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
-import { Textarea } from "~/src/components/shadcn/textarea"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
+import { Textarea } from "~/src/presentation/components/shadcn/textarea"
 
 export async function CreateBlogPostEditor(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog.create")

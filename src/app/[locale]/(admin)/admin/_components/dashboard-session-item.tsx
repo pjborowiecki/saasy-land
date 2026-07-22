@@ -3,8 +3,8 @@ import type { JSX } from "react"
 import { Laptop, Smartphone } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Button } from "~/src/components/shadcn/button"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import type { DashboardSessionItem as DashboardSessionItemType } from "~/src/app/[locale]/(admin)/admin/_types"
 

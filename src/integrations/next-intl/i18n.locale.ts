@@ -1,10 +1,10 @@
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
+import { env } from "~/src/platform/env"
 
+import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
 import { localePathPrefixes, routing } from "~/src/integrations/next-intl/i18n.routing"
 
 export function isLocale(value?: string): value is Locale {
-  for (const locale of CONSTANTS.I18N.LOCALES) {
+  for (const locale of I18N.LOCALES) {
     if (locale === value) {
       return true
     }
@@ -26,21 +26,23 @@ export function localeFromPathname(pathname: string): Locale | undefined {
 }
 
 export function localeFromCookie(cookieHeader?: string | null): Locale | undefined {
-  const [, value] = cookieHeader?.match(new RegExp(String.raw`(?:^|;\s*)${CONSTANTS.I18N.COOKIE_NAME}=([^;]+)`, "u")) ?? []
+  const [, value] = cookieHeader?.match(new RegExp(String.raw`(?:^|;\s*)${I18N.COOKIE_NAME}=([^;]+)`, "u")) ?? []
 
   return isLocale(value) ? value : undefined
 }
 
 function localeFromActionUrl(actionUrl: string): Locale | undefined {
-  if (!URL.canParse(actionUrl, "http://localhost")) {
+  const baseUrl = env.NEXT_PUBLIC_APP_URL
+
+  if (!URL.canParse(actionUrl, baseUrl)) {
     return undefined
   }
 
-  const url = new URL(actionUrl, "http://localhost")
+  const url = new URL(actionUrl, baseUrl)
   const callbackURL = url.searchParams.get("callbackURL")
 
-  if (callbackURL !== null && URL.canParse(callbackURL, "http://localhost")) {
-    const fromCallback = localeFromPathname(new URL(callbackURL, "http://localhost").pathname)
+  if (callbackURL !== null && URL.canParse(callbackURL, baseUrl)) {
+    const fromCallback = localeFromPathname(new URL(callbackURL, baseUrl).pathname)
 
     if (fromCallback) {
       return fromCallback

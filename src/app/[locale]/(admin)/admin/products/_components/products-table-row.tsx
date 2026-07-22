@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { Badge } from "~/src/components/shadcn/badge"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
 
 import { AdminTableCheckbox } from "~/src/app/[locale]/(admin)/admin/_components/admin-table-checkbox"
 import { ProductStatusBadge } from "~/src/app/[locale]/(admin)/admin/_components/product-status-badge"

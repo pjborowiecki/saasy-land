@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card } from "~/src/components/shadcn/card"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card } from "~/src/presentation/components/shadcn/card"
 
 import type { AdminSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { SettingsSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-session-row"

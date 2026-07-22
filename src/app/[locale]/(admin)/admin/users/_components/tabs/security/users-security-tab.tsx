@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 export async function UsersSecurityTab(): Promise<JSX.Element> {
   const t = await getTranslations("common")

@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
 
 interface ButtonActionConfigProps {
   readonly defaultLabel: string

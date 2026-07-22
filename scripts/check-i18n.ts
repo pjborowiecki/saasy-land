@@ -3,8 +3,8 @@
 import { writeFileSync } from "node:fs"
 import { join } from "node:path"
 
-import { I18N } from "../src/constants/_constants/i18n"
 import { getLocaleMessagesDir, loadLocaleMessagesFromDir } from "../src/integrations/next-intl/i18n.utils"
+import { I18N } from "~/src/integrations/next-intl/i18n.config"
 
 const MESSAGES_DIR = getLocaleMessagesDir()
 const SOURCE_LOCALE = I18N.DEFAULT_LOCALE

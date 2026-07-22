@@ -1,9 +1,8 @@
 import type { Language } from "@orama/orama"
 import { createFromSource } from "fumadocs-core/search/server"
 
-import type { Locale } from "~/src/constants/types"
-
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 
 /**
  * Maps app locales (BCP-47, aligned with next-intl) to Orama {@link Language} ids.

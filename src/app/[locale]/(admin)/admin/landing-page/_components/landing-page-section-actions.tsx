@@ -2,9 +2,9 @@ import type { JSX } from "react"
 
 import { Copy, Pen, Trash2 } from "lucide-react"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/presentation/utils"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 interface LandingPageSectionActionsProps {
   readonly className?: string

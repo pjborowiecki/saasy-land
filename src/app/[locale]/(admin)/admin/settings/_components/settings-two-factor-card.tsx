@@ -4,9 +4,9 @@ import { type JSX, useCallback, useState } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
-import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "~/src/components/shadcn/dialog"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
+import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "~/src/presentation/components/shadcn/dialog"
 
 import { SettingsTwoFactorConfirmStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-confirm-step"
 import { SettingsTwoFactorPasswordStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-password-step"

@@ -4,7 +4,7 @@ import type { ComponentProps, JSX } from "react"
 
 import { ChevronsUpDown, User2 } from "lucide-react"
 
-import { SidebarMenuButton } from "~/src/components/shadcn/sidebar"
+import { SidebarMenuButton } from "~/src/presentation/components/shadcn/sidebar"
 
 interface UserWidgetTriggerProps {
   readonly email: string

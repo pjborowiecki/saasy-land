@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 import type { AdminCategoryRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsCategoryRow } from "~/src/app/[locale]/(admin)/admin/products/_components/products-category-row"

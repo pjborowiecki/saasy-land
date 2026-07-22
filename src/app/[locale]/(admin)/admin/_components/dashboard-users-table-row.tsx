@@ -2,11 +2,11 @@ import type { JSX } from "react"
 
 import { PenLine, Trash2 } from "lucide-react"
 
-import { Avatar, AvatarFallback, AvatarImage } from "~/src/components/shadcn/avatar"
-import { Badge } from "~/src/components/shadcn/badge"
-import { Button } from "~/src/components/shadcn/button"
-import { Checkbox } from "~/src/components/shadcn/checkbox"
-import { TableCell, TableRow } from "~/src/components/shadcn/table"
+import { Avatar, AvatarFallback, AvatarImage } from "~/src/presentation/components/shadcn/avatar"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
+import { TableCell, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import { AVATAR_INITIALS_LENGTH, AVATAR_INITIALS_START } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import { getDashboardStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"

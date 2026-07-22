@@ -9,19 +9,19 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { env } from "~/src/environment"
+import { env } from "~/src/platform/env"
 
-import { CONSTANTS } from "~/src/constants"
+import { requestPasswordReset } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { forgotPasswordSchema } from "~/src/modules/identity-access/infrastructure/auth/auth.schemas"
 
-import { requestPasswordReset } from "~/src/integrations/better-auth/auth._client"
-import { forgotPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { getPathname } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
-import { FieldGroup } from "~/src/components/shadcn/field"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
 import { AuthTextField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { ROUTES } from "~/src/routes"
 
 export function ForgotPasswordForm(): JSX.Element {
   const [submitted, setSubmitted] = useState<boolean>(false)
@@ -38,7 +38,7 @@ export function ForgotPasswordForm(): JSX.Element {
   const onSubmit = useCallback(
     async (data: z.infer<typeof formSchema>) => {
       const redirectTo = `${env.NEXT_PUBLIC_APP_URL}${getPathname({
-        href: CONSTANTS.ROUTES.RESET_PASSWORD,
+        href: ROUTES.RESET_PASSWORD,
         locale,
       })}`
 

@@ -20,13 +20,15 @@ const ignorePatterns = [
   ".vite-hooks",
   ".vscode",
   ".agents",
-  "tests/mocks",
+  "src/platform/testing/mocks",
+  "src/presentation/providers/__test__/mocks",
+  "src/integrations/next-intl/__test__/mocks",
   "bun.lock",
   "**/*.d.ts",
   "**/*.tsbuildinfo",
   "src/types/env.d.ts",
   "src/integrations/next-intl/*.d.json.ts",
-  "src/integrations/drizzle-orm/migrations/**",
+  "src/platform/db/migrations/**",
 ]
 
 export default defineConfig({
@@ -51,15 +53,19 @@ export default defineConfig({
           groupName: "react-and-next",
         },
         {
-          elementNamePattern: ["~/src/environment", "~/src/environment/**"],
+          elementNamePattern: ["~/src/platform/env", "~/src/platform/env/**"],
           groupName: "environment",
         },
         {
-          elementNamePattern: ["~/src/constants", "~/src/constants/**"],
-          groupName: "constants",
+          elementNamePattern: ["~/src/platform/**"],
+          groupName: "platform",
         },
         {
-          elementNamePattern: ["~/src/providers/**"],
+          elementNamePattern: ["~/src/modules/**"],
+          groupName: "modules",
+        },
+        {
+          elementNamePattern: ["~/src/presentation/providers/**"],
           groupName: "providers",
         },
         {
@@ -67,27 +73,27 @@ export default defineConfig({
           groupName: "integrations",
         },
         {
-          elementNamePattern: ["~/src/lib/**"],
-          groupName: "lib",
+          elementNamePattern: ["~/src/presentation/utils", "~/src/presentation/utils/**"],
+          groupName: "presentation-utils",
         },
         {
           elementNamePattern: ["~/src/hooks/**"],
           groupName: "hooks",
         },
         {
-          elementNamePattern: ["~/src/components/shadcn/**"],
+          elementNamePattern: ["~/src/presentation/components/shadcn/**"],
           groupName: "components-shadcn",
         },
         {
-          elementNamePattern: ["~/src/components/custom/**"],
+          elementNamePattern: ["~/src/presentation/components/custom/**"],
           groupName: "components-custom",
         },
         {
-          elementNamePattern: ["~/src/components", "~/src/components/**"],
+          elementNamePattern: ["~/src/presentation/components/**"],
           groupName: "components-other",
         },
         {
-          elementNamePattern: ["~/src/styles", "~/src/styles/**"],
+          elementNamePattern: ["~/src/presentation/styles/**"],
           groupName: "styles",
         },
       ],
@@ -97,13 +103,15 @@ export default defineConfig({
         "react-and-next",
         ["builtin", "external"],
         "environment",
-        "constants",
+        "platform",
+        "modules",
         "providers",
         "integrations",
-        "lib",
+        "presentation-utils",
         "hooks",
         "components-shadcn",
         "components-custom",
+        "components-other",
         "styles",
         ["internal", "parent", "sibling", "index"],
         "unknown",
@@ -115,7 +123,7 @@ export default defineConfig({
     sortTailwindcss: {
       attributes: ["className", "classList"],
       functions: ["clsx", "cn", "cva", "tw"],
-      stylesheet: "./src/styles/globals.css",
+      stylesheet: "./src/presentation/styles/globals.css",
     },
     tabWidth: 2,
     trailingComma: "all",
@@ -144,15 +152,9 @@ export default defineConfig({
         },
       },
       {
-        files: ["src/components/shadcn/label.tsx"],
+        files: ["src/presentation/components/shadcn/label.tsx"],
         rules: {
           "jsx-a11y/label-has-associated-control": "off",
-        },
-      },
-      {
-        files: ["src/integrations/next-intl/i18n.formats.ts"],
-        rules: {
-          "eslint/no-inline-comments": "off",
         },
       },
       {
@@ -173,7 +175,7 @@ export default defineConfig({
         },
       },
       {
-        files: ["tests/setup/vitest.setup.ts"],
+        files: ["src/platform/testing/vitest.setup.ts"],
         rules: {
           "import/no-nodejs-modules": "off",
           "vitest/no-hooks": "off",
@@ -182,29 +184,87 @@ export default defineConfig({
         },
       },
       {
-        files: [
-          "src/integrations/better-auth/__test__/auth._server.test.ts",
-          "src/integrations/better-auth/__test__/auth.errors.test.ts",
-          "tests/component/providers.component.test.tsx",
-          "tests/component/locale-switch.component.test.tsx",
-          "tests/component/theme-switch-branches.component.test.tsx",
-          "tests/component/data-table-coverage.component.test.tsx",
-          "tests/component/auth-forms.component.test.tsx",
-          "tests/integration/next-intl/i18n-utils.integration.test.ts",
-        ],
+        files: ["src/modules/*/domain/**/*.{ts,tsx}", "src/modules/shared-kernel/domain/**/*.{ts,tsx}"],
         rules: {
-          "typescript/no-unsafe-type-assertion": "off",
+          "no-restricted-imports": [
+            "error",
+            {
+              patterns: [
+                {
+                  group: [
+                    "react",
+                    "react/**",
+                    "next",
+                    "next/**",
+                    "drizzle-orm",
+                    "drizzle-orm/**",
+                    "~/src/app/**",
+                    "~/src/presentation/**",
+                    "~/src/platform/**",
+                    "~/src/integrations/**",
+                    "~/src/modules/*/infrastructure/**",
+                    "~/src/modules/*/application/**",
+                  ],
+                  message: "Domain may only import shared-kernel domain and same-context domain code.",
+                },
+              ],
+            },
+          ],
         },
       },
       {
-        files: [
-          "src/lib/_utils/__test__/email.test.ts",
-          "tests/component/locale-switch.component.test.tsx",
-          "tests/component/theme-switch-branches.component.test.tsx",
-          "tests/component/data-table-coverage.component.test.tsx",
-        ],
+        files: ["src/modules/*/application/**/*.{ts,tsx}", "src/modules/shared-kernel/application/**/*.{ts,tsx}"],
         rules: {
-          "unicorn/no-null": "off",
+          "no-restricted-imports": [
+            "error",
+            {
+              patterns: [
+                {
+                  group: [
+                    "react",
+                    "react/**",
+                    "next",
+                    "next/**",
+                    "drizzle-orm",
+                    "drizzle-orm/**",
+                    "~/src/app/**",
+                    "~/src/presentation/**",
+                    "~/src/platform/**",
+                    "~/src/integrations/**",
+                    "~/src/modules/*/infrastructure/**",
+                  ],
+                  message: "Application may only import domain, shared-kernel, and own application ports.",
+                },
+              ],
+            },
+          ],
+        },
+      },
+      {
+        files: ["src/presentation/**/*.{ts,tsx}"],
+        rules: {
+          "no-restricted-imports": [
+            "error",
+            {
+              paths: [
+                {
+                  message: "Import from `~/src/integrations/next-intl/i18n.navigation` instead.",
+                  name: "next/link",
+                },
+                {
+                  importNames: ["redirect", "permanentRedirect", "useRouter", "usePathname"],
+                  message: "Import from `~/src/integrations/next-intl/i18n.navigation` instead.",
+                  name: "next/navigation",
+                },
+              ],
+              patterns: [
+                {
+                  group: ["drizzle-orm", "drizzle-orm/**", "~/src/modules/*/infrastructure/**", "~/src/platform/db/**"],
+                  message: "Presentation must call application use cases, not infrastructure or Drizzle.",
+                },
+              ],
+            },
+          ],
         },
       },
     ],
@@ -297,30 +357,29 @@ export default defineConfig({
   },
   test: {
     alias: {
-      "@wrksz/themes/client": resolve(projectRoot, "tests/mocks/wrksz-themes.ts"),
-      "@wrksz/themes/next": resolve(projectRoot, "tests/mocks/wrksz-themes.ts"),
-      bun: resolve(projectRoot, "tests/mocks/bun.ts"),
-      "next/font/google": resolve(projectRoot, "tests/mocks/next-font-google.ts"),
-      "next/navigation": resolve(projectRoot, "tests/mocks/next-navigation.ts"),
+      "@wrksz/themes/client": resolve(projectRoot, "src/presentation/providers/__test__/mocks/wrksz-themes.ts"),
+      "@wrksz/themes/next": resolve(projectRoot, "src/presentation/providers/__test__/mocks/wrksz-themes.ts"),
+      bun: resolve(projectRoot, "src/platform/testing/mocks/bun.ts"),
+      "next/font/google": resolve(projectRoot, "src/platform/testing/mocks/next-font-google.ts"),
+      "next/navigation": resolve(projectRoot, "src/platform/testing/mocks/next-navigation.ts"),
     },
     coverage: {
       clean: true,
       exclude: [
         "**/*.{test,spec}.{ts,tsx}",
+        "**/__test__/**",
         "**/*.d.ts",
         "**/migrations/**",
         "src/app/**",
-        "src/components/shadcn/**",
-        "src/constants/types.ts",
-        "src/integrations/drizzle-orm/migrations/**",
+        "src/presentation/components/shadcn/**",
+        "src/platform/db/migrations/**",
         "src/integrations/fumadocs/**",
         "src/integrations/next-intl/*.d.json.ts",
         "src/integrations/next-intl/messages/**",
-        "src/modules/**/*.types.ts",
-        "src/providers/translations-provider.tsx",
-        "src/styles/**",
+        "src/presentation/providers/translations-provider.tsx",
+        "src/presentation/styles/**",
         "src/types/**",
-        "tests/**",
+        "src/platform/testing/**",
         "e2e/**",
       ],
       include: ["src/**/*.{ts,tsx}"],
@@ -331,12 +390,6 @@ export default defineConfig({
         branches: 100,
         functions: 100,
         lines: 100,
-        "src/integrations/better-auth/auth.access.ts": {
-          branches: 100,
-          functions: 100,
-          lines: 100,
-          statements: 100,
-        },
         "src/integrations/next-intl/i18n.locale.ts": {
           branches: 100,
           functions: 100,
@@ -355,6 +408,12 @@ export default defineConfig({
           lines: 100,
           statements: 100,
         },
+        "src/modules/identity-access/infrastructure/auth/auth.access.ts": {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
         statements: 100,
       },
     },
@@ -362,7 +421,7 @@ export default defineConfig({
       interopDefault: true,
     },
     environment: "node",
-    exclude: ["node_modules/**", ".next/**", "dist/**", "build/**", "e2e/**", "opensrc/**", "src/integrations/drizzle-orm/migrations/**"],
+    exclude: ["node_modules/**", ".next/**", "dist/**", "build/**", "e2e/**", "opensrc/**", "src/platform/db/migrations/**"],
     globals: true,
     isolate: true,
     passWithNoTests: false,
@@ -372,6 +431,7 @@ export default defineConfig({
         extends: true,
         test: {
           environment: "node",
+          exclude: ["src/**/*.component.test.{ts,tsx}", "src/**/*.integration.test.{ts,tsx}"],
           include: ["src/**/*.{test,spec}.{ts,tsx}", "src/**/__test__/**/*.{test,spec}.{ts,tsx}"],
           name: "node",
         },
@@ -381,7 +441,7 @@ export default defineConfig({
         test: {
           environment: "node",
           hookTimeout: 20_000,
-          include: ["tests/integration/**/*.{test,spec}.{ts,tsx}"],
+          include: ["src/**/*.integration.test.{ts,tsx}"],
           name: "integration",
           testTimeout: 20_000,
         },
@@ -390,7 +450,7 @@ export default defineConfig({
         extends: true,
         test: {
           environment: "jsdom",
-          include: ["tests/component/**/*.{test,spec}.{ts,tsx}"],
+          include: ["src/**/*.component.test.{ts,tsx}"],
           name: "component",
         },
       },
@@ -400,6 +460,6 @@ export default defineConfig({
         inline: ["next-intl"],
       },
     },
-    setupFiles: ["./tests/setup/vitest.setup.ts"],
+    setupFiles: ["./src/platform/testing/vitest.setup.ts"],
   },
 })

@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { PAGINATION_FIRST_PAGE } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import { paginationHighlight } from "~/src/app/[locale]/(admin)/admin/_lib/pagination-highlight"

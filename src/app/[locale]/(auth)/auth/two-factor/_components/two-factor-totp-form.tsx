@@ -9,11 +9,11 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { twoFactor } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { twoFactorTotpSchema } from "~/src/integrations/better-auth/auth.schemas"
+import { twoFactor } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
+import { twoFactorTotpSchema } from "~/src/modules/identity-access/infrastructure/auth/auth.schemas"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { AuthOtpField } from "~/src/app/[locale]/(auth)/auth/_components/auth-otp-field"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"

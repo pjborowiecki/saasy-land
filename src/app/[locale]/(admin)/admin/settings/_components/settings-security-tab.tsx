@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 import type { AdminSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { SettingsPasswordCard } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-password-card"

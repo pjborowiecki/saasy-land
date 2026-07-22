@@ -4,7 +4,7 @@ import { useMemo, type JSX } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { DataTable } from "~/src/components/custom/data-table/data-table"
+import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
 import { UsersAllUsersAddUserButton } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-add-user-button"
 import { useUsersAllUsersColumns } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-columns"

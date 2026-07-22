@@ -9,14 +9,14 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { twoFactor } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { enableTwoFactorSchema } from "~/src/integrations/better-auth/auth.schemas"
-import { parseTwoFactorEnableData } from "~/src/integrations/better-auth/auth.two-factor"
+import { twoFactor } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
+import { enableTwoFactorSchema } from "~/src/modules/identity-access/infrastructure/auth/auth.schemas"
+import { parseTwoFactorEnableData } from "~/src/modules/identity-access/infrastructure/auth/auth.two-factor"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Field, FieldContent, FieldError, FieldLabel } from "~/src/components/shadcn/field"
-import { Input } from "~/src/components/shadcn/input"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Field, FieldContent, FieldError, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { Input } from "~/src/presentation/components/shadcn/input"
 
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 

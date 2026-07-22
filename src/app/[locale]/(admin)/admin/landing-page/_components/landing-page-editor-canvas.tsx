@@ -1,8 +1,8 @@
 import type { JSX } from "react"
 
-import { cn } from "~/src/lib/_utils/ui"
+import { cn } from "~/src/presentation/utils"
 
-import { backgroundGridPatternClassName } from "~/src/components/custom/background"
+import { backgroundGridPatternClassName } from "~/src/presentation/components/custom/background"
 
 import { LandingPageAddSectionDivider } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-add-section-divider"
 import { LandingPageCanvasToolbar } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-canvas-toolbar"

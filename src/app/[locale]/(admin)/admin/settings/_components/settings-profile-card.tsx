@@ -3,10 +3,10 @@ import type { JSX } from "react"
 import { ImageIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
 
 export async function SettingsProfileCard(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.settings")

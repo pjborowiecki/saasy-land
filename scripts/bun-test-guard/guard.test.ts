@@ -1,8 +1,8 @@
-import { describe, it } from "bun:test"
+import { describe, expect, it } from "bun:test"
 
 describe("test runner", () => {
   it("use Vitest via bun run test", () => {
-    throw new Error(
+    expect().fail(
       [
         "This repo does not use Bun's native test runner.",
         "",

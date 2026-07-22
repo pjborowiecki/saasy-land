@@ -3,13 +3,14 @@ import type { JSX } from "react"
 import { ArrowRight, Code2, Star } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/presentation/utils"
 
-import { buttonVariants } from "~/src/components/shadcn/_lib/button-variants"
+import { buttonVariants } from "~/src/presentation/components/shadcn/_lib/button-variants"
+
+import { APP_GITHUB_URL } from "~/src/presentation/branding"
+import { ROUTES } from "~/src/routes"
 
 export async function HeroSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.landing.hero")
@@ -19,7 +20,7 @@ export async function HeroSection(): Promise<JSX.Element> {
       <Link
         target="_blank"
         rel="noopener noreferrer"
-        href={CONSTANTS.APP_GITHUB_URL}
+        href={APP_GITHUB_URL}
         className="mb-10 inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/50 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-md transition-colors hover:bg-white/5"
       >
         <Star className="size-4 text-primary" />
@@ -36,7 +37,7 @@ export async function HeroSection(): Promise<JSX.Element> {
 
       <div className="flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row">
         <Link
-          href={CONSTANTS.ROUTES.SIGN_UP}
+          href={ROUTES.SIGN_UP}
           className={cn(
             buttonVariants({ size: "lg" }),
             "h-12 w-full rounded-xl bg-linear-to-b from-primary to-primary/80 px-8 text-primary-foreground shadow-[0_0_15px_-3px_var(--color-primary)] transition-all hover:opacity-90 sm:w-auto",
@@ -47,7 +48,7 @@ export async function HeroSection(): Promise<JSX.Element> {
         </Link>
 
         <Link
-          href={CONSTANTS.APP_GITHUB_URL}
+          href={APP_GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(

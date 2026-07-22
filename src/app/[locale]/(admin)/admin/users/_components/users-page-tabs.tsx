@@ -4,7 +4,7 @@ import { type JSX, type ReactNode } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { Tabs, TabsList } from "~/src/components/shadcn/tabs"
+import { Tabs, TabsList } from "~/src/presentation/components/shadcn/tabs"
 
 import { UsersTabTrigger } from "~/src/app/[locale]/(admin)/admin/users/_components/users-tab-trigger"
 import type { UsersPageTab } from "~/src/app/[locale]/(admin)/admin/users/_lib/users-page-tabs"

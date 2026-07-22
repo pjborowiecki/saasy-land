@@ -4,14 +4,13 @@ import { type JSX, type ReactNode } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { usePathname } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarMenu } from "~/src/components/shadcn/sidebar"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarMenu } from "~/src/presentation/components/shadcn/sidebar"
 
 import { AdminSidebarHeader } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar-header"
 import { AdminSidebarNavItem } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar-nav-item"
+import { SIDEBAR_CONFIG } from "~/src/app/[locale]/(admin)/admin/_lib/sidebar"
 
 interface AdminSidebarProps {
   readonly children: ReactNode
@@ -25,7 +24,7 @@ export function AdminSidebar({ children }: AdminSidebarProps): JSX.Element {
     <Sidebar>
       <AdminSidebarHeader />
       <SidebarContent className="gap-6 pt-4">
-        {CONSTANTS.SIDEBAR_CONFIG.map((group) => (
+        {SIDEBAR_CONFIG.map((group) => (
           <SidebarGroup key={group.titleKey}>
             <div className="mb-2 px-3 text-xs font-medium tracking-wider text-muted-foreground uppercase">
               {t(`groups.${group.titleKey}`)}

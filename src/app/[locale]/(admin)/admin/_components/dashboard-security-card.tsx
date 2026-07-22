@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card } from "~/src/components/shadcn/card"
-import { Switch } from "~/src/components/shadcn/switch"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { Switch } from "~/src/presentation/components/shadcn/switch"
 
 export async function DashboardSecurityCard(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.dashboard")

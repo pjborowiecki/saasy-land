@@ -1,7 +1,7 @@
 import type { JSX } from "react"
 
-import { Card } from "~/src/components/shadcn/card"
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 import { ProductsTabToolbar } from "~/src/app/[locale]/(admin)/admin/products/_components/products-tab-toolbar"
 

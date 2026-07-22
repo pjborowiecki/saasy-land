@@ -5,12 +5,13 @@ import { type ChangeEvent, useCallback, useEffect, useRef, useState } from "reac
 import { useLocale, useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
+import { getSession, sendVerificationEmail, verifyEmail } from "~/src/modules/identity-access/infrastructure/auth/auth._client"
+import { hasAdminAccess } from "~/src/modules/identity-access/infrastructure/auth/auth.access"
+import { authErrorKey } from "~/src/modules/identity-access/infrastructure/auth/auth.errors"
 
-import { getSession, sendVerificationEmail, verifyEmail } from "~/src/integrations/better-auth/auth._client"
-import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+
+import { ROUTES } from "~/src/routes"
 
 export type VerifyEmailStatus = "error" | "pending" | "success" | "verifying"
 
@@ -40,12 +41,13 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
 
   const redirectAfterVerification = useCallback(async () => {
     const { data: session } = await getSession()
-    router.push(
-      getPathname({
-        href: getPostAuthRedirect(session?.user.role),
-        locale,
-      }),
-    )
+    let href: string = ROUTES.APP
+
+    if (hasAdminAccess(session?.user.role)) {
+      href = ROUTES.ADMIN
+    }
+
+    router.push(getPathname({ href, locale }))
   }, [locale, router])
 
   useEffect(() => {
@@ -104,7 +106,7 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
   }, [])
 
   const handleBackToSignIn = useCallback(() => {
-    router.push(CONSTANTS.ROUTES.SIGN_IN)
+    router.push(ROUTES.SIGN_IN)
   }, [router])
 
   return {

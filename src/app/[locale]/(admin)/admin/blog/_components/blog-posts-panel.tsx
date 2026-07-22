@@ -5,9 +5,9 @@ import { getTranslations } from "next-intl/server"
 
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Input } from "~/src/components/shadcn/input"
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 import { BlogPostsGrid } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-posts-grid"
 import { BlogPostsTable } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-posts-table"

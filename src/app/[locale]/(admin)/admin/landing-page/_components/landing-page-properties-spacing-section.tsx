@@ -3,8 +3,8 @@ import type { JSX } from "react"
 import { ArrowDown, ArrowUp } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
 
 function PaddingTopField({ label }: { readonly label: string }): JSX.Element {
   return (

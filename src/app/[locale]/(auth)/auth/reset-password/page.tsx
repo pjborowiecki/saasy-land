@@ -3,20 +3,20 @@ import { type JSX, Suspense } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
-
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 import { ResetPasswordForm } from "~/src/app/[locale]/(auth)/auth/reset-password/_components/reset-password-form"
+import { APP_NAME } from "~/src/presentation/branding"
+import { ROUTES } from "~/src/routes"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/reset-password">>): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.auth.reset-password" })
 
   return {
-    description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
+    description: t("metadata.description", { name: APP_NAME }),
     title: t("metadata.title"),
   }
 }
@@ -64,7 +64,7 @@ async function ResetPasswordPageCard({
     <div className="flex flex-col gap-4 text-center">
       <p className="text-sm text-muted-foreground">{typeof error === "string" ? error : t("form.invalidToken")}</p>
       <Link
-        href={CONSTANTS.ROUTES.FORGOT_PASSWORD}
+        href={ROUTES.FORGOT_PASSWORD}
         className="inline-flex h-11 items-center justify-center rounded-lg bg-foreground px-4 text-sm text-background transition-all hover:bg-foreground/80"
       >
         {t("form.requestNewLink")}

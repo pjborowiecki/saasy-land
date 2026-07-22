@@ -3,19 +3,18 @@ import { type JSX, Suspense } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
-
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 import { VerifyEmailPanel } from "~/src/app/[locale]/(auth)/auth/verify-email/_components/verify-email-panel"
+import { APP_NAME } from "~/src/presentation/branding"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/verify-email">>): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.auth.verify-email" })
 
   return {
-    description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
+    description: t("metadata.description", { name: APP_NAME }),
     title: t("metadata.title"),
   }
 }

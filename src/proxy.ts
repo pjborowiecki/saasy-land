@@ -2,12 +2,14 @@ import { type NextRequest, NextResponse } from "next/server"
 
 import createMiddleware from "next-intl/middleware"
 
-import { CONSTANTS } from "~/src/constants"
+import { auth } from "~/src/modules/identity-access/infrastructure/auth/auth._server"
+import { hasAdminAccess } from "~/src/modules/identity-access/infrastructure/auth/auth.access"
 
-import { auth } from "~/src/integrations/better-auth/auth._server"
-import { getPostAuthRedirect, hasAdminAccess } from "~/src/integrations/better-auth/auth.access"
+import { I18N } from "~/src/integrations/next-intl/i18n.config"
 import { localizedPathname, redirectPathname, resolveLocaleFromRequest } from "~/src/integrations/next-intl/i18n.locale"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
+
+import { ROUTES } from "~/src/routes"
 
 const intlMiddleware = createMiddleware(routing)
 
@@ -17,28 +19,35 @@ const APP_ROUTE = new RegExp(String.raw`^${LOCALE_PREFIX}\/app(?:\/|$)`, "u")
 const ADMIN_ROUTE = new RegExp(String.raw`^${LOCALE_PREFIX}\/admin(?:\/|$)`, "u")
 const BARE_APP_PATH = /^\/(?:dashboard|app)(?:\/|$)/u
 
+function redirectTo(req: NextRequest, path: string) {
+  const { pathname } = req.nextUrl
+  const cookieHeader = req.cookies.get(I18N.COOKIE_NAME)?.value
+
+  return NextResponse.redirect(new URL(redirectPathname(pathname, path, cookieHeader), req.url))
+}
+
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
-  const cookieHeader = req.cookies.get(CONSTANTS.I18N.COOKIE_NAME)?.value
+  const cookieHeader = req.cookies.get(I18N.COOKIE_NAME)?.value
 
-  if (AUTH_CALLBACK.test(pathname)) {
-    const session = await auth.api.getSession({ headers: req.headers })
-    const destination = session?.user ? getPostAuthRedirect(session.user.role) : CONSTANTS.ROUTES.SIGN_IN
+  const isAuthCallback = AUTH_CALLBACK.test(pathname)
+  const isProtectedApp = APP_ROUTE.test(pathname) || ADMIN_ROUTE.test(pathname)
 
-    return NextResponse.redirect(new URL(redirectPathname(pathname, destination, cookieHeader), req.url))
-  }
-
-  if (APP_ROUTE.test(pathname) || ADMIN_ROUTE.test(pathname)) {
+  if (isAuthCallback || isProtectedApp) {
     const session = await auth.api.getSession({ headers: req.headers })
 
     if (!session?.user) {
-      return NextResponse.redirect(new URL(redirectPathname(pathname, CONSTANTS.ROUTES.SIGN_IN, cookieHeader), req.url))
+      return redirectTo(req, ROUTES.SIGN_IN)
     }
 
-    if (ADMIN_ROUTE.test(pathname) && !hasAdminAccess(session.user.role)) {
-      const destination = getPostAuthRedirect(session.user.role)
+    const isAdmin = hasAdminAccess(session.user.role)
 
-      return NextResponse.redirect(new URL(redirectPathname(pathname, destination, cookieHeader), req.url))
+    if (isAuthCallback) {
+      return redirectTo(req, isAdmin ? ROUTES.ADMIN : ROUTES.APP)
+    }
+
+    if (ADMIN_ROUTE.test(pathname) && !isAdmin) {
+      return redirectTo(req, ROUTES.APP)
     }
   }
 

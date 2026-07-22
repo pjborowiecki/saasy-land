@@ -2,12 +2,12 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/presentation/utils"
 
-import { Avatar, AvatarFallback } from "~/src/components/shadcn/avatar"
-import { Card, CardContent, CardHeader } from "~/src/components/shadcn/card"
+import { Avatar, AvatarFallback } from "~/src/presentation/components/shadcn/avatar"
+import { Card, CardContent, CardHeader } from "~/src/presentation/components/shadcn/card"
 
-import { TESTIMONIALS, type Testimonial } from "~/src/data/testimonials"
+import { TESTIMONIALS, type Testimonial } from "~/src/app/[locale]/(landing)/_lib/testimonials"
 
 function TestimonialAuthor({ item }: { item: Testimonial }): JSX.Element {
   return (

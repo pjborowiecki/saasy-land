@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import type { LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Card, CardContent, CardHeader, CardTitle } from "~/src/components/shadcn/card"
+import { Card, CardContent, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 
 interface PaymentsRefundStatCardProps {
   readonly icon: LucideIcon

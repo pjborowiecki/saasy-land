@@ -3,10 +3,10 @@ import type { JSX } from "react"
 import { CheckCircle2, MoreHorizontal, Pencil, Trash2, Users, type LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Button } from "~/src/components/shadcn/button"
-import { Card, CardContent } from "~/src/components/shadcn/card"
-import { Switch } from "~/src/components/shadcn/switch"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card, CardContent } from "~/src/presentation/components/shadcn/card"
+import { Switch } from "~/src/presentation/components/shadcn/switch"
 
 interface PricingModelCardProps {
   readonly activeUserCount?: number

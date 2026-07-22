@@ -3,24 +3,24 @@ import type { JSX, ReactNode } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { ForgotPasswordForm } from "~/src/app/[locale]/(auth)/auth/forgot-password/_components/forgot-password-form"
+import { APP_NAME } from "~/src/presentation/branding"
+import { ROUTES } from "~/src/routes"
 
 export async function generateMetadata({ params }: Readonly<{ params: Promise<{ locale: string }> }>): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.auth.forgot-password" })
 
   return {
-    description: t("metadata.description", { name: CONSTANTS.APP_NAME }),
+    description: t("metadata.description", { name: APP_NAME }),
     title: t("metadata.title"),
   }
 }
 
 const renderSignInLink = (chunks: ReactNode) => (
-  <Link href={CONSTANTS.ROUTES.SIGN_IN} className="font-medium text-foreground transition-colors hover:text-primary">
+  <Link href={ROUTES.SIGN_IN} className="font-medium text-foreground transition-colors hover:text-primary">
     {chunks}
   </Link>
 )

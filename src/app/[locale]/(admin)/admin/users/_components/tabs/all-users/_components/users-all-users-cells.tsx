@@ -6,9 +6,9 @@ import type { JSX } from "react"
 import { type CellContext } from "@tanstack/react-table"
 import { useTranslations } from "next-intl"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/presentation/utils"
 
-import { Badge } from "~/src/components/shadcn/badge"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
 
 import { EMPTY_STRING_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import { getStatusBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"

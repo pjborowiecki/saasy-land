@@ -2,10 +2,10 @@ import type { JSX } from "react"
 
 import { Bell, Search } from "lucide-react"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Input } from "~/src/components/shadcn/input"
-import { Kbd, KbdGroup } from "~/src/components/shadcn/kbd"
-import { SidebarTrigger } from "~/src/components/shadcn/sidebar"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Kbd, KbdGroup } from "~/src/presentation/components/shadcn/kbd"
+import { SidebarTrigger } from "~/src/presentation/components/shadcn/sidebar"
 
 import { AdminBreadcrumbs } from "~/src/app/[locale]/(admin)/admin/_components/admin-breadcrumbs"
 

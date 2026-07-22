@@ -3,11 +3,11 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
+import { ADMIN_SECURITY_SESSION_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 import { SettingsGeneralTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-general-tab"
 import { SettingsSecurityTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-tab"
-import { ADMIN_SECURITY_SESSION_ROWS } from "~/src/data/admin/mock-data"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params

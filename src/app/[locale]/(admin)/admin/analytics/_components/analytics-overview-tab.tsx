@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 import type { AdminAnalyticsRegionRow, AdminAnalyticsUpgradeRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { AnalyticsKpiCards } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-kpi-cards"
