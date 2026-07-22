@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { Background } from "~/src/components/custom/background"
+import { Background } from "~/src/presentation/components/custom/background"
 
 import { Footer } from "~/src/app/[locale]/(landing)/_components/footer"
 import { Navigation } from "~/src/app/[locale]/(landing)/_components/navigation"

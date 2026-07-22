@@ -1,5 +1,9 @@
 import { AUTH_ERRORS, authErrorKey, type AuthErrorCode } from "~/src/integrations/better-auth/auth.errors"
 
+function isAuthErrorCode(code: string): code is AuthErrorCode {
+  return Object.hasOwn(AUTH_ERRORS, code)
+}
+
 describe("auth error key component", () => {
   it("maps known auth error codes", () => {
     expect.hasAssertions()
@@ -13,8 +17,8 @@ describe("auth error key component", () => {
   it("maps every declared auth error code", () => {
     expect.hasAssertions()
 
-    for (const [code, messageKey] of Object.entries(AUTH_ERRORS)) {
-      expect(authErrorKey({ code: code as AuthErrorCode })).toBe(messageKey)
+    for (const code of Object.keys(AUTH_ERRORS).filter((value): value is AuthErrorCode => isAuthErrorCode(value))) {
+      expect(authErrorKey({ code })).toBe(AUTH_ERRORS[code])
     }
   })
 

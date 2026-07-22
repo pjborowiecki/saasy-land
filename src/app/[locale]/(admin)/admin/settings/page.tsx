@@ -1,13 +1,14 @@
 import type { Metadata } from "next"
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
 import { SettingsGeneralTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-general-tab"
 import { SettingsSecurityTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-tab"
-import { ADMIN_SECURITY_SESSION_ROWS } from "~/src/data/admin/mock-data"
+
+const SETTINGS_SECURITY_TAB_FALLBACK = <div className="mt-8 h-48 animate-pulse rounded-lg border border-border/40 bg-secondary/30" />
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
@@ -22,7 +23,6 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 export default async function SettingsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.admin.settings" })
-  const securitySessions = ADMIN_SECURITY_SESSION_ROWS
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">
@@ -58,7 +58,9 @@ export default async function SettingsPage({ params }: Readonly<PageProps<"/[loc
         </div>
 
         <SettingsGeneralTab />
-        <SettingsSecurityTab securitySessions={securitySessions} />
+        <Suspense fallback={SETTINGS_SECURITY_TAB_FALLBACK}>
+          <SettingsSecurityTab />
+        </Suspense>
       </Tabs>
     </div>
   )

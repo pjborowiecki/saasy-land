@@ -3,8 +3,8 @@ import type { JSX } from "react"
 import type { LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Card, CardContent } from "~/src/components/shadcn/card"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Card, CardContent } from "~/src/presentation/components/shadcn/card"
 
 type AnalyticsKpiMetric = "mrr" | "activeUsers" | "churn" | "arpu"
 

@@ -1,8 +1,8 @@
 import type { AdminUserRow } from "~/src/app/[locale]/(admin)/admin/_types"
 
-export const USERS_FILTER_ALL = "all" as const
+export { ROLE_VALUES as USER_ROLES } from "~/src/integrations/better-auth/auth.access"
 
-export const USER_ROLES = ["Administrator", "Editor", "Viewer", "Subscriber"] as const
+export const USERS_FILTER_ALL = "all" as const
 export const USER_STATUSES = ["Active", "Pending", "Banned"] as const
 
 export interface AdminUsersListFilters {

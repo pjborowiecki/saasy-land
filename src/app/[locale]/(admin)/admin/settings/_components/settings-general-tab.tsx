@@ -1,6 +1,6 @@
 import type { JSX } from "react"
 
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
 import { SettingsDangerZoneCard } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-danger-zone-card"
 import { SettingsPreferencesCard } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-preferences-card"

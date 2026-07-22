@@ -1,6 +1,6 @@
 "use client"
 
-import { type JSX, useCallback } from "react"
+import { type JSX, useCallback, useTransition } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
@@ -9,16 +9,18 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { twoFactor } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { twoFactorBackupCodeSchema } from "~/src/integrations/better-auth/auth.schemas"
+import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
+import { verifyBackupCode } from "~/src/modules/two-factor/use-cases/verify-backup-code.use-case"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Field, FieldContent, FieldError, FieldLabel } from "~/src/components/shadcn/field"
-import { Input } from "~/src/components/shadcn/input"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { Input } from "~/src/presentation/components/shadcn/input"
 
+import { AuthFieldError } from "~/src/app/[locale]/(auth)/auth/_components/auth-field-error"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 import { useTwoFactorRedirect } from "~/src/app/[locale]/(auth)/auth/two-factor/_components/use-two-factor-redirect"
+
+const verifyBackupCodeInputSchema = twoFactorZodSchemas.verifyBackupCode
 
 interface TwoFactorBackupFormProps {
   readonly onToggleMode: () => void
@@ -26,27 +28,25 @@ interface TwoFactorBackupFormProps {
 
 export function TwoFactorBackupForm({ onToggleMode }: Readonly<TwoFactorBackupFormProps>): JSX.Element {
   const t = useTranslations()
+  const [isPending, startTransition] = useTransition()
   const redirectAfterVerification = useTwoFactorRedirect()
 
-  const backupSchema = twoFactorBackupCodeSchema((key, params) => t(`auth.validations.${key}`, params))
-  const backupForm = useForm<z.infer<typeof backupSchema>>({
-    defaultValues: { code: "" },
-    resolver: zodResolver(backupSchema),
+  const backupForm = useForm<z.infer<typeof verifyBackupCodeInputSchema>>({
+    defaultValues: { code: "", trustDevice: true },
+    resolver: zodResolver(verifyBackupCodeInputSchema),
   })
 
   const onSubmitBackup = useCallback(
-    async (data: z.infer<typeof backupSchema>) => {
-      await twoFactor.verifyBackupCode({
-        code: data.code,
-        fetchOptions: {
-          onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
-          },
-          onSuccess: async () => {
-            await redirectAfterVerification()
-          },
-        },
-        trustDevice: true,
+    (data: z.infer<typeof verifyBackupCodeInputSchema>) => {
+      startTransition(async () => {
+        const result = await verifyBackupCode(data)
+
+        if (result.serverError) {
+          toast.error(t("auth.errors.unexpectedError"))
+          return
+        }
+
+        await redirectAfterVerification()
       })
     },
     [redirectAfterVerification, t],
@@ -68,18 +68,20 @@ export function TwoFactorBackupForm({ onToggleMode }: Readonly<TwoFactorBackupFo
               className="h-11 rounded-xl border border-white/10 bg-transparent px-4 text-sm"
               id={`${AUTH_FORM_IDS.TWO_FACTOR}-backup-code`}
             />
-            {backupForm.formState.errors.code && <FieldError>{backupForm.formState.errors.code.message}</FieldError>}
+            <AuthFieldError message={backupForm.formState.errors.code?.message} />
           </FieldContent>
         </Field>
 
         <Button
           className="h-11 gap-2 bg-foreground text-background hover:bg-foreground/80"
           data-testid="two-factor-backup-submit-button"
-          isDisabled={backupForm.formState.isSubmitting}
+          isDisabled={isPending || backupForm.formState.isSubmitting}
           type="submit"
         >
-          {backupForm.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-          {backupForm.formState.isSubmitting ? t("pages.auth.two-factor.form.submitting") : t("pages.auth.two-factor.form.submit")}
+          {(isPending || backupForm.formState.isSubmitting) && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+          {isPending || backupForm.formState.isSubmitting
+            ? t("pages.auth.two-factor.form.submitting")
+            : t("pages.auth.two-factor.form.submit")}
         </Button>
 
         <Button className="h-11" onPress={onToggleMode} type="button" variant="outline">

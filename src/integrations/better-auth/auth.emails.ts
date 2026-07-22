@@ -2,13 +2,12 @@ import "server-only"
 
 import { createTranslator } from "next-intl"
 
+import { ChangeEmailConfirmationEmail as changeEmailConfirmationEmailTemplate } from "~/src/integrations/better-auth/email-templates/change-email-confirmation.email-template"
+import { ResetPasswordEmail as resetPasswordEmailTemplate } from "~/src/integrations/better-auth/email-templates/reset-password.email-template"
+import { VerifyEmail as verifyEmailTemplate } from "~/src/integrations/better-auth/email-templates/verify-email.email-template"
 import { resolveLocaleFromAuthRequest } from "~/src/integrations/next-intl/i18n.locale"
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
-import { ChangeEmailConfirmationEmail as changeEmailConfirmationEmailTemplate } from "~/src/integrations/resend/templates/change-email-confirmation"
-import { ResetPasswordEmail as resetPasswordEmailTemplate } from "~/src/integrations/resend/templates/reset-password"
-import { VerifyEmail as verifyEmailTemplate } from "~/src/integrations/resend/templates/verify-email"
-
-import { sendEmail } from "~/src/lib/_utils/email"
+import { sendEmail } from "~/src/integrations/resend/resend.utils"
 
 interface BetterAuthEmailPayload {
   readonly token: string

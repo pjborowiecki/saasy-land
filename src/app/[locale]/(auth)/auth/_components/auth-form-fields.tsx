@@ -6,10 +6,11 @@ import { Eye, EyeOff } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useController, useFormContext, type FieldPath, type FieldValues } from "react-hook-form"
 
-import { Field, FieldContent, FieldError, FieldLabel } from "~/src/components/shadcn/field"
-import { Input } from "~/src/components/shadcn/input"
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "~/src/components/shadcn/input-group"
+import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "~/src/presentation/components/shadcn/input-group"
 
+import { AuthFieldError } from "~/src/app/[locale]/(auth)/auth/_components/auth-field-error"
 import { type AuthFormId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 
 const AUTH_TEXT_INPUT_CLASS =
@@ -69,7 +70,7 @@ export function AuthTextField<T extends FieldValues>({
           placeholder={t(config.placeholder)}
           type={config.type}
         />
-        {fieldState.error && <FieldError>{fieldState.error.message}</FieldError>}
+        <AuthFieldError message={fieldState.error?.message} />
       </FieldContent>
     </Field>
   )
@@ -133,7 +134,7 @@ export function AuthPasswordField<T extends FieldValues>({
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
-        {fieldState.error && <FieldError>{fieldState.error.message}</FieldError>}
+        <AuthFieldError message={fieldState.error?.message} />
       </FieldContent>
     </Field>
   )

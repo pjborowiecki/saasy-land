@@ -6,15 +6,15 @@ import { Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
-
-import { authClient } from "~/src/integrations/better-auth/auth._client"
-import type { auth } from "~/src/integrations/better-auth/auth._server"
+import { authClient } from "~/src/integrations/better-auth/auth.client"
 import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
+import type { auth } from "~/src/integrations/better-auth/auth.server"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/utils"
 
-import { Button, type ButtonProps } from "~/src/components/shadcn/button"
+import { Button, type ButtonProps } from "~/src/presentation/components/shadcn/button"
+
+import { ROUTES } from "~/src/routes"
 
 const OAUTH_BUTTON_STYLES =
   "h-11 w-full gap-2 rounded-xl border-white/10 bg-white/5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] backdrop-blur-md hover:bg-white/10"
@@ -31,7 +31,7 @@ export function OAuthButton({ provider, Icon, className, ...rest }: Readonly<OAu
   const handleSignIn = useCallback(() => {
     startTransition(async () => {
       await authClient.signIn.social({
-        callbackURL: CONSTANTS.ROUTES.AUTH_CALLBACK,
+        callbackURL: ROUTES.AUTH_CALLBACK,
         fetchOptions: {
           onError: (ctx) => {
             toast.error(tAuth(`errors.${authErrorKey(ctx.error)}`))

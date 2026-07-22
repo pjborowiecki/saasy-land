@@ -5,10 +5,9 @@ import type { JSX } from "react"
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from "fumadocs-ui/layouts/docs/page"
 import { createRelativeLink } from "fumadocs-ui/mdx"
 
-import type { Locale } from "~/src/constants/types"
-
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
 import { getMDXComponents } from "~/src/integrations/fumadocs/mdx"
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/docs/[[...slug]]">): Promise<Metadata> {

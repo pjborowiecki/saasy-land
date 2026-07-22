@@ -7,14 +7,13 @@ import { InlineTOC } from "fumadocs-ui/components/inline-toc"
 import { createRelativeLink } from "fumadocs-ui/mdx"
 import { getTranslations } from "next-intl/server"
 
-import type { Locale } from "~/src/constants/types"
-
 import { blogSource } from "~/src/integrations/fumadocs/fumadocs.source"
 import { getMDXComponents } from "~/src/integrations/fumadocs/mdx"
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
-import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/lib/utils"
+import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
 
 const EMPTY_TAGS_LENGTH = 0
 

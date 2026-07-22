@@ -4,15 +4,16 @@ import { type ComponentProps, type JSX, type ReactNode, Suspense, useMemo } from
 
 import { DocsLayout } from "fumadocs-ui/layouts/docs"
 
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 
-import { LocaleSwitch } from "~/src/components/custom/locale-switch"
-import { ThemeSwitch } from "~/src/components/custom/theme-switch"
+import { LocaleSwitch } from "~/src/presentation/components/custom/locale-switch"
+import { ThemeSwitch } from "~/src/presentation/components/custom/theme-switch"
+
+import { APP_NAME } from "~/src/presentation/branding"
 
 const LOCALE_SWITCH_FALLBACK = <div className="h-9 w-full rounded-md bg-fd-muted/50" />
 
-const DOCS_NAV = { title: CONSTANTS.APP_NAME } as const
+const DOCS_NAV = { title: APP_NAME } as const
 const DOCS_THEME_SWITCH = { enabled: false } as const
 const DOCS_SLOTS = { languageSelect: false } as const
 

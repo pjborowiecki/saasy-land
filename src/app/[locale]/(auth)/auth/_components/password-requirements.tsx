@@ -4,20 +4,27 @@ import type { JSX } from "react"
 
 import { BadgeCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { useFormContext, useWatch } from "react-hook-form"
 
-import { cn } from "~/src/lib/utils"
+import { getPasswordRuleState, PASSWORD_MIN_LENGTH } from "~/src/integrations/better-auth/auth.constraints"
 
-import { usePasswordRules } from "~/src/hooks/use-password-rules"
+import { cn } from "~/src/utils"
 
-export function PasswordRequirements(): JSX.Element {
+interface PasswordRequirementsProps {
+  readonly fieldName?: string
+}
+
+export function PasswordRequirements({ fieldName = "password" }: PasswordRequirementsProps): JSX.Element {
   const t = useTranslations("auth.validations")
-  const { isMinLength, hasUppercase, hasSpecialChar } = usePasswordRules()
+  const { control } = useFormContext<Record<string, string>>()
+  const password = useWatch({ control, name: fieldName }) ?? ""
+  const { isMinLength, hasUppercase, hasSpecialChar } = getPasswordRuleState(password)
 
   return (
     <ul className="flex list-none flex-col gap-1.5 py-2 text-xs text-muted-foreground" aria-label={t("requirementsListLabel")}>
       <li className="flex items-center gap-2">
         <BadgeCheck aria-hidden="true" className={cn("size-4", isMinLength ? "text-primary" : "text-destructive-foreground")} />
-        <span>{t("atLeastMinCharactersLong", { min: 8 })}</span>
+        <span>{t("atLeastMinCharactersLong", { min: PASSWORD_MIN_LENGTH })}</span>
       </li>
       <li className="flex items-center gap-2">
         <BadgeCheck aria-hidden="true" className={cn("size-4", hasSpecialChar ? "text-primary" : "text-destructive-foreground")} />

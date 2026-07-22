@@ -8,7 +8,7 @@ export type Messages = typeof enMessages
 
 type MessageTree = Record<string, unknown>
 
-export function resolveMessagesDir(dirname: string | undefined = import.meta.dirname): string {
+export function resolveMessagesDir(dirname: unknown = import.meta.dirname): string {
   if (typeof dirname === "string") {
     return join(dirname, "messages")
   }

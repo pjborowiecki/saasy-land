@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card } from "~/src/components/shadcn/card"
+import { Card } from "~/src/presentation/components/shadcn/card"
 
 import { AdminMediaUploadZone } from "~/src/app/[locale]/(admin)/admin/_components/admin-media-upload-zone"
 

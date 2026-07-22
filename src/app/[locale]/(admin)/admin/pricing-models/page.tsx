@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { Archive, Calendar, ChevronDown, Filter, PlusCircle, ShoppingBag } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { PricingModelCard } from "~/src/app/[locale]/(admin)/admin/pricing-models/_components/pricing-model-card"
 import { PricingModelsStats } from "~/src/app/[locale]/(admin)/admin/pricing-models/_components/pricing-models-stats"

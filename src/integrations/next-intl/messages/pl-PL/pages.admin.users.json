@@ -7,11 +7,32 @@
   "description": "Zarządzaj członkami zespołu, uprawnieniami i kontami klientów.",
   "actions": {
     "addUser": "Dodaj użytkownika",
+    "feedback": {
+      "banSuccess": "Użytkownik został zablokowany.",
+      "deleteSuccess": "Użytkownik został usunięty.",
+      "error": "Coś poszło nie tak. Spróbuj ponownie.",
+      "resetPasswordSuccess": "Hasło zostało zresetowane.",
+      "unbanSuccess": "Użytkownik został odblokowany."
+    },
+    "deleteDialog": {
+      "cancel": "Anuluj",
+      "confirm": "Usuń użytkownika",
+      "description": "Trwale usuń {name} i dane konta. Tej operacji nie można cofnąć.",
+      "title": "Usunąć użytkownika?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Anuluj",
+      "confirm": "Resetuj hasło",
+      "description": "Ustaw nowe hasło dla {name}.",
+      "password": "Nowe hasło",
+      "title": "Resetuj hasło"
+    },
     "row": {
       "ban": "Zablokuj użytkownika",
       "delete": "Usuń użytkownika",
       "edit": "Edytuj użytkownika",
       "resetPassword": "Resetuj hasło",
+      "unban": "Odblokuj użytkownika",
       "viewProfile": "Zobacz profil"
     }
   },
@@ -23,10 +44,8 @@
       "all": "Rola: Wszystkie",
       "value": "Rola: {role}",
       "options": {
-        "Administrator": "Administrator",
-        "Editor": "Edytor",
-        "Viewer": "Obserwator",
-        "Subscriber": "Subskrybent"
+        "admin": "Administrator",
+        "customer": "Klient"
       }
     },
     "status": {

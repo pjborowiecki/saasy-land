@@ -2,10 +2,10 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card } from "~/src/components/shadcn/card"
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
-import { Textarea } from "~/src/components/shadcn/textarea"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
+import { Textarea } from "~/src/presentation/components/shadcn/textarea"
 
 export async function CreateProductGeneralSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.products.create")

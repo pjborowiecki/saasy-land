@@ -2,26 +2,17 @@
 
 import { useCallback } from "react"
 
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { getSession } from "~/src/integrations/better-auth/auth._client"
-import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
-import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+import { usePostAuthRedirect } from "~/src/hooks/use-post-auth-redirect"
 
 export function useTwoFactorRedirect(): () => Promise<void> {
-  const router = useRouter()
-  const locale = useLocale()
   const t = useTranslations()
+  const redirectAfterAuth = usePostAuthRedirect()
 
   return useCallback(async () => {
     toast.success(t("pages.auth.two-factor.form.success"))
-    const { data: session } = await getSession()
-    router.push(
-      getPathname({
-        href: getPostAuthRedirect(session?.user.role),
-        locale,
-      }),
-    )
-  }, [locale, router, t])
+    await redirectAfterAuth()
+  }, [redirectAfterAuth, t])
 }

@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import { Button } from "~/src/components/shadcn/button"
-import { TableCell, TableRow } from "~/src/components/shadcn/table"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { TableCell, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import type { AdminPaymentRow } from "~/src/app/[locale]/(admin)/admin/_types"
 

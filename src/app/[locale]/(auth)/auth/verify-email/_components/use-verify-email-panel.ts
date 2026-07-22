@@ -2,15 +2,17 @@
 
 import { type ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
 
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
+import { sendVerificationEmail } from "~/src/modules/verification/use-cases/send-verification-email.use-case"
+import { verifyEmail } from "~/src/modules/verification/use-cases/verify-email.use-case"
 
-import { getSession, sendVerificationEmail, verifyEmail } from "~/src/integrations/better-auth/auth._client"
-import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+
+import { usePostAuthRedirect } from "~/src/hooks/use-post-auth-redirect"
+
+import { ROUTES } from "~/src/routes"
 
 export type VerifyEmailStatus = "error" | "pending" | "success" | "verifying"
 
@@ -31,22 +33,11 @@ interface UseVerifyEmailPanelResult {
 
 export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPanelOptions>): UseVerifyEmailPanelResult {
   const router = useRouter()
-  const locale = useLocale()
   const t = useTranslations("pages.auth.verify-email")
-  const tErrors = useTranslations("auth.errors")
+  const redirectAfterAuth = usePostAuthRedirect()
   const [status, setStatus] = useState<VerifyEmailStatus>(token === undefined ? "pending" : "verifying")
   const [resendEmail, setResendEmail] = useState(email ?? "")
   const hasVerifiedRef = useRef(false)
-
-  const redirectAfterVerification = useCallback(async () => {
-    const { data: session } = await getSession()
-    router.push(
-      getPathname({
-        href: getPostAuthRedirect(session?.user.role),
-        locale,
-      }),
-    )
-  }, [locale, router])
 
   useEffect(() => {
     if (token === undefined || hasVerifiedRef.current) {
@@ -56,21 +47,20 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
     hasVerifiedRef.current = true
     setStatus("verifying")
 
-    void verifyEmail({
-      fetchOptions: {
-        onError: (ctx) => {
-          setStatus("error")
-          toast.error(tErrors(authErrorKey(ctx.error)))
-        },
-        onSuccess: async () => {
-          setStatus("success")
-          toast.success(t("form.success"))
-          await redirectAfterVerification()
-        },
-      },
-      query: { token },
-    })
-  }, [redirectAfterVerification, t, tErrors, token])
+    void (async () => {
+      const result = await verifyEmail({ token })
+
+      if (result.serverError) {
+        setStatus("error")
+        toast.error(result.serverError.message)
+        return
+      }
+
+      setStatus("success")
+      toast.success(t("form.success"))
+      await redirectAfterAuth()
+    })()
+  }, [redirectAfterAuth, t, token])
 
   const handleResend = useCallback(async () => {
     if (resendEmail.length === 0) {
@@ -78,22 +68,19 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
       return
     }
 
-    await sendVerificationEmail({
-      email: resendEmail,
-      fetchOptions: {
-        onError: (ctx) => {
-          toast.error(tErrors(authErrorKey(ctx.error)))
-        },
-        onSuccess: () => {
-          toast.success(t("form.resendSuccess"))
-        },
-      },
-    })
-  }, [resendEmail, t, tErrors])
+    const result = await sendVerificationEmail({ email: resendEmail })
+
+    if (result.serverError) {
+      toast.error(result.serverError.message)
+      return
+    }
+
+    toast.success(t("form.resendSuccess"))
+  }, [resendEmail, t])
 
   const handleContinue = useCallback(() => {
-    void redirectAfterVerification()
-  }, [redirectAfterVerification])
+    void redirectAfterAuth()
+  }, [redirectAfterAuth])
 
   const handleResendClick = useCallback(() => {
     void handleResend()
@@ -104,7 +91,7 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
   }, [])
 
   const handleBackToSignIn = useCallback(() => {
-    router.push(CONSTANTS.ROUTES.SIGN_IN)
+    router.push(ROUTES.SIGN_IN)
   }, [router])
 
   return {

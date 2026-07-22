@@ -4,12 +4,12 @@ import { useMemo, type JSX } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { DataTable } from "~/src/components/custom/data-table/data-table"
+import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
+import { UserRowActions } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/user-row-actions"
 import { UsersAllUsersAddUserButton } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-add-user-button"
 import { useUsersAllUsersColumns } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-columns"
 import { useUsersAllUsers } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-provider"
-import { UsersAllUsersRowActions } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-row-actions"
 import { UsersAllUsersToolbarFilters } from "~/src/app/[locale]/(admin)/admin/users/_components/tabs/all-users/_components/users-all-users-toolbar-filters"
 
 export function UsersAllUsersTable(): JSX.Element {
@@ -24,7 +24,7 @@ export function UsersAllUsersTable(): JSX.Element {
     () => ({
       emptyMessage: t("table.empty"),
       loading: isFetching,
-      rowActions: UsersAllUsersRowActions,
+      rowActions: UserRowActions,
       toolbar: {
         exportCsv: { filename: "users.csv" },
         fetch: {

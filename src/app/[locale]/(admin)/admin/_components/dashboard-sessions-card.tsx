@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card, CardContent, CardHeader, CardTitle } from "~/src/components/shadcn/card"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card, CardContent, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 
 import { DashboardSessionItem as DashboardSessionItemRow } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-session-item"
 import type { DashboardSessionItem } from "~/src/app/[locale]/(admin)/admin/_types"

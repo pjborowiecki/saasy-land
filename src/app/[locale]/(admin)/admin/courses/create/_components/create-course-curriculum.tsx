@@ -15,8 +15,8 @@ import {
 } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card } from "~/src/components/shadcn/card"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card } from "~/src/presentation/components/shadcn/card"
 
 export async function CreateCourseCurriculum(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.courses.create")

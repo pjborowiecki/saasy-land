@@ -1,23 +1,38 @@
-export const AUTH_VALIDATIONS = {
-  AT_LEAST_MIN_CHARACTERS_LONG: "atLeastMinCharactersLong",
-  AT_LEAST_ONE_SPECIAL_CHARACTER: "atLeastOneSpecialCharacter",
-  AT_LEAST_ONE_UPPERCASE: "atLeastOneUppercase",
-  BACKUP_CODE_MAX_LENGTH: "backupCodeMaxLength",
-  BACKUP_CODE_REQUIRED: "backupCodeRequired",
-  CONFIRM_PASSWORD_REQUIRED: "confirmPasswordRequired",
-  EMAIL_INVALID: "emailInvalid",
-  EMAIL_MAX_LENGTH: "emailMaxLength",
-  EMAIL_REQUIRED: "emailRequired",
-  NAME_MAX_LENGTH: "nameMaxLength",
-  NAME_REQUIRED: "nameRequired",
-  PASSWORDS_MUST_MATCH: "passwordsMustMatch",
-  PASSWORD_MAX_LENGTH: "passwordMaxLength",
-  PASSWORD_MIN_LENGTH: "passwordMinLength",
-  PASSWORD_REQUIRED: "passwordRequired",
-  PASSWORD_SPECIAL_CHARACTER: "passwordSpecialCharacter",
-  PASSWORD_UPPERCASE: "passwordUppercase",
-  TWO_FACTOR_CODE_LENGTH: "twoFactorCodeLength",
-  TWO_FACTOR_CODE_REQUIRED: "twoFactorCodeRequired",
-} as const
+import {
+  BACKUP_CODE_MAX_LENGTH,
+  EMAIL_MAX_LENGTH,
+  NAME_MAX_LENGTH,
+  PASSWORD_MAX_LENGTH,
+  PASSWORD_MIN_LENGTH,
+  TWO_FACTOR_CODE_LENGTH,
+} from "~/src/integrations/better-auth/auth.constraints"
+import type { AuthValidationMessageKey } from "~/src/integrations/next-intl/i18n.types"
 
-export type AuthValidationMessageKey = (typeof AUTH_VALIDATIONS)[keyof typeof AUTH_VALIDATIONS]
+/** Keys under `auth.validations` — translate at the UI with `useTranslations("auth.validations")`. */
+export const AUTH_VALIDATION_MESSAGE = {
+  backupCodeMaxLength: "backupCodeMaxLength",
+  backupCodeRequired: "backupCodeRequired",
+  confirmPasswordRequired: "confirmPasswordRequired",
+  emailInvalid: "emailInvalid",
+  emailMaxLength: "emailMaxLength",
+  emailRequired: "emailRequired",
+  nameMaxLength: "nameMaxLength",
+  nameRequired: "nameRequired",
+  passwordMaxLength: "passwordMaxLength",
+  passwordMinLength: "passwordMinLength",
+  passwordRequired: "passwordRequired",
+  passwordSpecialCharacter: "passwordSpecialCharacter",
+  passwordUppercase: "passwordUppercase",
+  passwordsMustMatch: "passwordsMustMatch",
+  twoFactorCodeLength: "twoFactorCodeLength",
+  twoFactorCodeRequired: "twoFactorCodeRequired",
+} as const satisfies Record<string, AuthValidationMessageKey>
+
+export const AUTH_VALIDATION_PARAMS = {
+  backupCodeMaxLength: { max: BACKUP_CODE_MAX_LENGTH },
+  emailMaxLength: { max: EMAIL_MAX_LENGTH },
+  nameMaxLength: { max: NAME_MAX_LENGTH },
+  passwordMaxLength: { max: PASSWORD_MAX_LENGTH },
+  passwordMinLength: { min: PASSWORD_MIN_LENGTH },
+  twoFactorCodeLength: { length: TWO_FACTOR_CODE_LENGTH },
+} as const satisfies Partial<Record<keyof typeof AUTH_VALIDATION_MESSAGE, Record<string, string | number>>>

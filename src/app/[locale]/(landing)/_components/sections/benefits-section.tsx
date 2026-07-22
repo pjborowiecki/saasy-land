@@ -3,8 +3,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 
 const BENEFIT_IMAGE_SIZES = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 

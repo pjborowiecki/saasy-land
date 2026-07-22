@@ -1,7 +1,7 @@
 import type * as NextHeadersModule from "next/headers"
 
-import type { auth } from "~/src/integrations/better-auth/auth._server"
-import * as authServer from "~/src/integrations/better-auth/auth._server"
+import type { auth } from "~/src/integrations/better-auth/auth.server"
+import * as authServer from "~/src/integrations/better-auth/auth.server"
 import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
 const CALL_COUNT = 1

@@ -1,0 +1,5 @@
+export const APP_NAME = "SaaSy Land"
+export const APP_GITHUB_OWNER = "pjborowiecki"
+export const APP_GITHUB_REPO = "saasyland.com"
+export const APP_GITHUB_URL = "https://github.com/pjborowiecki/saasyland.com"
+export const CONTACT_EMAIL = "hello@saasyland.com"

@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { MoreHorizontal } from "lucide-react"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 export function ProductsRowActionsButton(): JSX.Element {
   return (

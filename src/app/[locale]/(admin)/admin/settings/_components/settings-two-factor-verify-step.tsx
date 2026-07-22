@@ -1,17 +1,16 @@
 "use client"
 
-import { type JSX, useCallback, useState } from "react"
+import { type JSX, useCallback, useState, useTransition } from "react"
 
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 
-import { twoFactor } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { extractTotpSecret, createOtpSlotIndices } from "~/src/integrations/better-auth/auth.two-factor"
+import { createOtpSlotIndices, extractTotpSecret } from "~/src/modules/two-factor/two-factor.utils"
+import { verifyTotp } from "~/src/modules/two-factor/use-cases/verify-totp.use-case"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Field, FieldContent, FieldLabel } from "~/src/components/shadcn/field"
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/components/shadcn/input-otp"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/presentation/components/shadcn/input-otp"
 
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 
@@ -24,30 +23,29 @@ interface SettingsTwoFactorVerifyStepProps {
 
 export function SettingsTwoFactorVerifyStep({ onVerified, totpUri }: Readonly<SettingsTwoFactorVerifyStepProps>): JSX.Element {
   const t = useTranslations("pages.admin.settings")
-  const tErrors = useTranslations("auth.errors")
+  const [isPending, startTransition] = useTransition()
   const [verificationCode, setVerificationCode] = useState("")
 
   const handleVerificationCodeChange = useCallback((value: string) => {
     setVerificationCode(value)
   }, [])
 
-  const onVerifySetup = useCallback(async () => {
-    await twoFactor.verifyTotp({
-      code: verificationCode,
-      fetchOptions: {
-        onError: (ctx) => {
-          toast.error(tErrors(authErrorKey(ctx.error)))
-        },
-        onSuccess: () => {
-          onVerified()
-          toast.success(t("security.twoFactor.enabledSuccess"))
-        },
-      },
+  const onVerifySetup = useCallback(() => {
+    startTransition(async () => {
+      const result = await verifyTotp({ code: verificationCode })
+
+      if (result.serverError) {
+        toast.error(result.serverError.message)
+        return
+      }
+
+      onVerified()
+      toast.success(t("security.twoFactor.enabledSuccess"))
     })
-  }, [onVerified, t, tErrors, verificationCode])
+  }, [onVerified, t, verificationCode])
 
   const handleVerifyClick = useCallback(() => {
-    void onVerifySetup()
+    onVerifySetup()
   }, [onVerifySetup])
 
   return (
@@ -73,7 +71,7 @@ export function SettingsTwoFactorVerifyStep({ onVerified, totpUri }: Readonly<Se
         </FieldContent>
       </Field>
 
-      <Button isDisabled={verificationCode.length !== TOTP_CODE_LENGTH} onPress={handleVerifyClick} type="button">
+      <Button isDisabled={isPending || verificationCode.length !== TOTP_CODE_LENGTH} onPress={handleVerifyClick} type="button">
         {t("security.twoFactor.verifyAndEnable")}
       </Button>
     </div>

@@ -2,9 +2,9 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Card, CardHeader, CardTitle } from "~/src/components/shadcn/card"
-import { Table, TableBody } from "~/src/components/shadcn/table"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Card, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
+import { Table, TableBody } from "~/src/presentation/components/shadcn/table"
 
 import { DashboardUsersTableHead } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table-head"
 import { DashboardUsersTableRow } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table-row"

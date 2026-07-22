@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Checkbox } from "~/src/components/shadcn/checkbox"
-import { TableHead, TableHeader, TableRow } from "~/src/components/shadcn/table"
+import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
+import { TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 export async function DashboardUsersTableHead(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.dashboard")

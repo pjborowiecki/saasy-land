@@ -1,38 +1,130 @@
-import { CONSTANTS } from "~/src/constants"
-import type { Role } from "~/src/constants/types"
+import { createAccessControl } from "better-auth/plugins/access"
+import { adminAc, defaultStatements } from "better-auth/plugins/admin/access"
 
-import { ROLES_CONFIG } from "~/src/integrations/better-auth/auth.permissions"
+export const RoleCode = {
+  ADMIN: "admin",
+  CUSTOMER: "customer",
+} as const
 
-/** Roles allowed to use the admin panel and Better Auth admin APIs. */
-export const ADMIN_PANEL_ROLES = [CONSTANTS.PERMISSIONS.ROLES.ADMIN] as const
+export type RoleName = (typeof RoleCode)[keyof typeof RoleCode]
 
-const ADMIN_PANEL_ROLE_SET: ReadonlySet<string> = new Set(ADMIN_PANEL_ROLES)
+export const ROLE_VALUES = [RoleCode.ADMIN, RoleCode.CUSTOMER] as const satisfies readonly RoleName[]
 
-/** Better Auth admin plugin stores one or more comma-separated roles on the user record. */
-export function parseUserRoles(role?: string | null): readonly string[] {
-  if (role === undefined || role === null || role.length === 0) {
-    return []
-  }
+export const DEFAULT_ROLE = RoleCode.CUSTOMER
 
-  return role
-    .split(",")
-    .map((entry) => entry.trim())
-    .filter(Boolean)
+const ACTIONS = {
+  CREATE: "create",
+  DELETE: "delete",
+  MANAGE: "manage",
+  PUBLISH: "publish",
+  READ: "read",
+  REFUND: "refund",
+  UPDATE: "update",
+} as const
+
+const RESOURCES = {
+  CATEGORY: "category",
+  ORDER: "order",
+  PRODUCT: "product",
+  SETTINGS: "settings",
+} as const
+
+export const PERMISSIONS = {
+  ACTIONS,
+  DEFAULT_ROLE,
+  RESOURCES,
+  ROLES: RoleCode,
+  ROLE_VALUES,
+  category: {
+    create: { category: ["create"] },
+    delete: { category: ["delete"] },
+    read: { category: ["read"] },
+    update: { category: ["update"] },
+  },
+  order: {
+    read: { order: ["read"] },
+    refund: { order: ["refund"] },
+    update: { order: ["update"] },
+  },
+  product: {
+    create: { product: ["create"] },
+    delete: { product: ["delete"] },
+    publish: { product: ["publish"] },
+    read: { product: ["read"] },
+    update: { product: ["update"] },
+  },
+  session: {
+    list: { session: ["list"] },
+    revoke: { session: ["revoke"] },
+  },
+  settings: {
+    manage: { settings: ["manage"] },
+  },
+  user: {
+    ban: { user: ["ban"] },
+    create: { user: ["create"] },
+    delete: { user: ["delete"] },
+    get: { user: ["get"] },
+    impersonate: { user: ["impersonate"] },
+    list: { user: ["list"] },
+    setPassword: { user: ["set-password"] },
+    setRole: { user: ["set-role"] },
+    update: { user: ["update"] },
+  },
+} as const
+
+const APP_GRANTS = {
+  [RESOURCES.CATEGORY]: [ACTIONS.CREATE, ACTIONS.READ, ACTIONS.UPDATE, ACTIONS.DELETE],
+  [RESOURCES.ORDER]: [ACTIONS.READ, ACTIONS.UPDATE, ACTIONS.REFUND],
+  [RESOURCES.PRODUCT]: [ACTIONS.CREATE, ACTIONS.READ, ACTIONS.UPDATE, ACTIONS.DELETE, ACTIONS.PUBLISH],
+  [RESOURCES.SETTINGS]: [ACTIONS.MANAGE],
+} as const
+
+export const ac = createAccessControl({
+  ...defaultStatements,
+  ...APP_GRANTS,
+})
+
+export const ROLES_CONFIG = {
+  [RoleCode.ADMIN]: ac.newRole({
+    ...APP_GRANTS,
+    session: [...adminAc.statements.session],
+    user: [...adminAc.statements.user],
+  }),
+  [RoleCode.CUSTOMER]: ac.newRole({
+    category: [],
+    order: [],
+    product: [],
+    session: [],
+    settings: [],
+    user: [],
+  }),
+} as const
+
+export const ADMIN_PANEL_ROLES = [RoleCode.ADMIN] as const
+
+export type PermissionRequest = Record<string, string | readonly string[]>
+
+function isRoleName(value: string): value is RoleName {
+  return value in ROLES_CONFIG
 }
 
-export function hasAdminAccess(role?: string | null) {
-  return parseUserRoles(role).some((entry) => ADMIN_PANEL_ROLE_SET.has(entry))
-}
-
-export function getPostAuthRedirect(role: string | null | undefined) {
-  return hasAdminAccess(role) ? CONSTANTS.ROUTES.ADMIN : CONSTANTS.ROUTES.APP
-}
-
-export function canAccess(role: Role, permission: Record<string, string | string[]>) {
-  if (!(role in ROLES_CONFIG)) {
+export function hasPermission(role: string | null | undefined, permission: PermissionRequest): boolean {
+  if (!role?.length) {
     return false
   }
 
-  const roleConfig = ROLES_CONFIG[role]
-  return roleConfig.authorize(permission).success
+  for (const roleName of role.split(",")) {
+    const trimmedRole = roleName.trim()
+
+    if (isRoleName(trimmedRole) && ROLES_CONFIG[trimmedRole].authorize(permission).success) {
+      return true
+    }
+  }
+
+  return false
+}
+
+export function hasAdminPanelAccess(role?: string | null): boolean {
+  return hasPermission(role, PERMISSIONS.user.list)
 }

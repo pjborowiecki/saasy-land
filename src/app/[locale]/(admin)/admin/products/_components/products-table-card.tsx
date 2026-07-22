@@ -1,6 +1,6 @@
 import type { JSX, ReactNode } from "react"
 
-import { Card } from "~/src/components/shadcn/card"
+import { Card } from "~/src/presentation/components/shadcn/card"
 
 import { ProductsPagination } from "~/src/app/[locale]/(admin)/admin/products/_components/products-pagination"
 

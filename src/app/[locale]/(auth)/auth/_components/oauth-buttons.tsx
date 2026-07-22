@@ -2,9 +2,9 @@
 
 import type { ComponentPropsWithoutRef, JSX } from "react"
 
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/utils"
 
-import { Icons } from "~/src/components/custom/icons"
+import { Icons } from "~/src/presentation/components/custom/icons"
 
 import { OAuthButton } from "~/src/app/[locale]/(auth)/auth/_components/oauth-button"
 

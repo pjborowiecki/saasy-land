@@ -4,7 +4,7 @@ import { type JSX, useCallback } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 interface SettingsTwoFactorConfirmStepProps {
   readonly backupCodes: readonly string[]

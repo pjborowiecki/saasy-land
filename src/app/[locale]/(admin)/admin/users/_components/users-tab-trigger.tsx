@@ -4,7 +4,7 @@ import { type ComponentProps, type JSX, type ReactNode, useMemo } from "react"
 
 import { Link, usePathname } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { TabsTrigger } from "~/src/components/shadcn/tabs"
+import { TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
 import { getUsersPageTabHref, type UsersPageTab } from "~/src/app/[locale]/(admin)/admin/users/_lib/users-page-tabs"
 

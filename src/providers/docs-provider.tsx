@@ -4,9 +4,8 @@ import { type ComponentProps, type ReactNode, useMemo } from "react"
 
 import { RootProvider } from "fumadocs-ui/provider/next"
 
-import type { Locale } from "~/src/constants/types"
-
 import { i18nUI } from "~/src/integrations/fumadocs/fumadocs.i18n"
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 type DocsProviderProps = Readonly<{

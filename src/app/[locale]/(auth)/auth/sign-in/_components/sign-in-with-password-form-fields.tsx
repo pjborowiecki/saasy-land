@@ -5,17 +5,16 @@ import { type JSX } from "react"
 import { useTranslations } from "next-intl"
 import type z from "zod/v4"
 
-import { CONSTANTS } from "~/src/constants"
-
-import type { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
+import type { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { FieldGroup } from "~/src/components/shadcn/field"
+import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
 import { AuthPasswordField, AuthTextField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { ROUTES } from "~/src/routes"
 
-export type SignInFormValues = z.infer<ReturnType<typeof signInWithPasswordSchema>>
+export type SignInFormValues = z.infer<typeof signInWithPasswordSchema>
 
 function SignInPasswordField(): JSX.Element {
   const t = useTranslations("pages.auth.sign-in")
@@ -27,7 +26,7 @@ function SignInPasswordField(): JSX.Element {
       label={
         <>
           <span>{t("form.password")}</span>
-          <Link className="text-muted-foreground transition-colors hover:text-foreground" href={CONSTANTS.ROUTES.FORGOT_PASSWORD}>
+          <Link className="text-muted-foreground transition-colors hover:text-foreground" href={ROUTES.FORGOT_PASSWORD}>
             {t("form.forgotPassword")}
           </Link>
         </>

@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFormContext } from "react-hook-form"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { type SignInFormValues } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-form-fields"
 

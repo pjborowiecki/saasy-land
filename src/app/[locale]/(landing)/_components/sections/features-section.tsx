@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { BookOpen, Database, Globe, LayoutTemplate, Lock, Mail, Medal, Search, ShieldCheck, Triangle, Wallet, Zap } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Card, CardDescription, CardHeader, CardTitle } from "~/src/components/shadcn/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 
 export async function FeaturesSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.landing.features")

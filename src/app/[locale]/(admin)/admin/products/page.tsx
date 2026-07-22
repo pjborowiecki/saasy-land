@@ -1,23 +1,14 @@
+/* eslint-disable react-perf/jsx-no-new-object-as-prop -- RSC page builds i18n label bag once per render */
 import type { Metadata } from "next"
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { ProductsPageTabs } from "~/src/app/[locale]/(admin)/admin/products/_components/products-page-tabs"
+import { getAdminCategoryCatalog } from "~/src/app/[locale]/(admin)/admin/products/_lib/categories-data"
+import { getAdminProducts } from "~/src/app/[locale]/(admin)/admin/products/_lib/products-data"
 
-import { ProductsAllTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-all-tab"
-import { ProductsCategoriesTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-categories-tab"
-import { ProductsCollectionsTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-collections-tab"
-import { ProductsCoursesTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-courses-tab"
-import { ProductsOnetimeTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-onetime-tab"
-import { ProductsSubscriptionsTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-subscriptions-tab"
-import {
-  ADMIN_CATEGORY_ROWS,
-  ADMIN_COLLECTION_ROWS,
-  ADMIN_ONETIME_PRODUCT_ROWS,
-  ADMIN_PRODUCT_ROWS,
-  ADMIN_SUBSCRIPTION_ROWS,
-} from "~/src/data/admin/mock-data"
+const PRODUCTS_CATALOG_FALLBACK = <div className="mt-6 h-64 animate-pulse rounded-lg border border-border/60 bg-muted/30" />
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
@@ -32,11 +23,6 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
 export default async function ProductsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.admin.products" })
-  const products = ADMIN_PRODUCT_ROWS
-  const oneTimeProducts = ADMIN_ONETIME_PRODUCT_ROWS
-  const subscriptionProducts = ADMIN_SUBSCRIPTION_ROWS
-  const categories = ADMIN_CATEGORY_ROWS
-  const collections = ADMIN_COLLECTION_ROWS
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">
@@ -47,40 +33,37 @@ export default async function ProductsPage({ params }: Readonly<PageProps<"/[loc
         </div>
       </div>
 
-      <Tabs defaultSelectedKey="all" className="w-full">
-        <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
-          <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-            <TabsTrigger id="all" className="flex-none px-0 text-sm">
-              {t("tabs.all")}
-            </TabsTrigger>
-            <TabsTrigger id="onetime" className="flex-none px-0 text-sm">
-              {t("tabs.onetime")}
-            </TabsTrigger>
-            <TabsTrigger id="subscriptions" className="flex-none px-0 text-sm">
-              {t("tabs.subscriptions")}
-            </TabsTrigger>
-            <TabsTrigger id="categories" className="flex-none px-0 text-sm">
-              {t("tabs.categories")}
-            </TabsTrigger>
-            <TabsTrigger id="collections" className="flex-none px-0 text-sm">
-              {t("tabs.collections")}
-            </TabsTrigger>
-            <TabsTrigger id="drafts" className="flex-none px-0 text-sm">
-              {t("tabs.drafts")}
-            </TabsTrigger>
-            <TabsTrigger id="courses" className="flex-none px-0 text-sm">
-              {t("tabs.courses")}
-            </TabsTrigger>
-          </TabsList>
-        </div>
-
-        <ProductsAllTab products={products} />
-        <ProductsOnetimeTab products={oneTimeProducts} />
-        <ProductsSubscriptionsTab products={subscriptionProducts} />
-        <ProductsCategoriesTab categories={categories} />
-        <ProductsCollectionsTab collections={collections} />
-        <ProductsCoursesTab />
-      </Tabs>
+      <Suspense fallback={PRODUCTS_CATALOG_FALLBACK}>
+        <ProductsCatalog
+          labels={{
+            all: t("tabs.all"),
+            categories: t("tabs.categories"),
+            collections: t("tabs.collections"),
+            courses: t("tabs.courses"),
+            drafts: t("tabs.drafts"),
+            onetime: t("tabs.onetime"),
+            subscriptions: t("tabs.subscriptions"),
+          }}
+        />
+      </Suspense>
     </div>
   )
+}
+
+async function ProductsCatalog({
+  labels,
+}: {
+  readonly labels: {
+    readonly all: string
+    readonly categories: string
+    readonly collections: string
+    readonly courses: string
+    readonly drafts: string
+    readonly onetime: string
+    readonly subscriptions: string
+  }
+}): Promise<JSX.Element> {
+  const [products, { categories, collections }] = await Promise.all([getAdminProducts(), getAdminCategoryCatalog()])
+
+  return <ProductsPageTabs categories={categories} collections={collections} labels={labels} products={products} />
 }

@@ -4,7 +4,7 @@ import type { JSX } from "react"
 
 import { useTranslations } from "next-intl"
 
-import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "~/src/components/shadcn/sidebar"
+import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "~/src/presentation/components/shadcn/sidebar"
 
 export function AdminSidebarHeader(): JSX.Element {
   const t = useTranslations("pages.admin.sidebar")

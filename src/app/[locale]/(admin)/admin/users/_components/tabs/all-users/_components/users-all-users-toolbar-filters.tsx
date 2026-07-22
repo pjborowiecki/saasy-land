@@ -5,7 +5,7 @@ import { useCallback, type JSX } from "react"
 import type { Key } from "@react-types/shared"
 import { useTranslations } from "next-intl"
 
-import { Select, SelectContent, SelectItem, SelectTrigger } from "~/src/components/shadcn/select"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "~/src/presentation/components/shadcn/select"
 
 import {
   USER_ROLES,
@@ -52,9 +52,9 @@ export function UsersAllUsersToolbarFilters({
 
   return (
     <>
-      <Select value={roleFilter} onChange={handleRoleChange}>
+      <Select fieldLabel={t("table.headers.role")} fieldLabelClassName="sr-only" value={roleFilter} onChange={handleRoleChange}>
         <SelectTrigger className="min-w-36" size="sm">
-          {roleFilter === USERS_FILTER_ALL ? t("filters.role.all") : t("filters.role.value", { role: roleLabel })}
+          {roleFilter === USERS_FILTER_ALL ? t("filters.role.all") : t("filters.role", { role: roleLabel })}
         </SelectTrigger>
         <SelectContent placement="bottom start">
           <SelectItem id={USERS_FILTER_ALL}>{t("filters.role.all")}</SelectItem>
@@ -66,9 +66,9 @@ export function UsersAllUsersToolbarFilters({
         </SelectContent>
       </Select>
 
-      <Select value={statusFilter} onChange={handleStatusChange}>
+      <Select fieldLabel={t("table.headers.status")} fieldLabelClassName="sr-only" value={statusFilter} onChange={handleStatusChange}>
         <SelectTrigger className="min-w-36" size="sm">
-          {statusFilter === USERS_FILTER_ALL ? t("filters.status.all") : t("filters.status.value", { status: statusLabel })}
+          {statusFilter === USERS_FILTER_ALL ? t("filters.status.all") : t("filters.status", { status: statusLabel })}
         </SelectTrigger>
         <SelectContent placement="bottom start">
           <SelectItem id={USERS_FILTER_ALL}>{t("filters.status.all")}</SelectItem>

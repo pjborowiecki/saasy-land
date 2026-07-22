@@ -9,19 +9,21 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { env } from "~/src/environment"
+import { env } from "~/src/platform/env"
 
-import { CONSTANTS } from "~/src/constants"
+import { requestPasswordReset } from "~/src/modules/verification/use-cases/request-password-reset.use-case"
+import { verificationZodSchemas } from "~/src/modules/verification/verification.zod"
 
-import { requestPasswordReset } from "~/src/integrations/better-auth/auth._client"
-import { forgotPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
 import { getPathname } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
-import { FieldGroup } from "~/src/components/shadcn/field"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
 import { AuthTextField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { ROUTES } from "~/src/routes"
+
+const forgotPasswordSchema = verificationZodSchemas.forgotPassword
 
 export function ForgotPasswordForm(): JSX.Element {
   const [submitted, setSubmitted] = useState<boolean>(false)
@@ -29,32 +31,30 @@ export function ForgotPasswordForm(): JSX.Element {
   const locale = useLocale()
   const t = useTranslations()
 
-  const formSchema = forgotPasswordSchema((key, params) => t(`auth.validations.${key}`, params))
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     defaultValues: { email: "" },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(forgotPasswordSchema),
   })
 
   const onSubmit = useCallback(
-    async (data: z.infer<typeof formSchema>) => {
+    async (data: z.infer<typeof forgotPasswordSchema>) => {
       const redirectTo = `${env.NEXT_PUBLIC_APP_URL}${getPathname({
-        href: CONSTANTS.ROUTES.RESET_PASSWORD,
+        href: ROUTES.RESET_PASSWORD,
         locale,
       })}`
 
-      await requestPasswordReset({
+      const result = await requestPasswordReset({
         email: data.email,
-        fetchOptions: {
-          onError: () => {
-            toast.error(t("pages.auth.forgot-password.form.error"))
-          },
-          onSuccess: () => {
-            setSubmitted(true)
-            toast.success(t("pages.auth.forgot-password.form.success"))
-          },
-        },
         redirectTo,
       })
+
+      if (result.serverError) {
+        toast.error(t("pages.auth.forgot-password.form.error"))
+        return
+      }
+
+      setSubmitted(true)
+      toast.success(t("pages.auth.forgot-password.form.success"))
     },
     [locale, t],
   )

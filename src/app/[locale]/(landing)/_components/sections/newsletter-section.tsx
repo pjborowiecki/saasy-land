@@ -2,8 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Input } from "~/src/components/shadcn/input"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Input } from "~/src/presentation/components/shadcn/input"
 
 export async function NewsletterSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.landing.newsletter")

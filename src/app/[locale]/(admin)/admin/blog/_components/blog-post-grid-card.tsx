@@ -3,8 +3,8 @@ import type { JSX } from "react"
 import { Eye, MoreHorizontal } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Button } from "~/src/components/shadcn/button"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { getBlogPostStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"

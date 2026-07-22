@@ -4,9 +4,9 @@ import type { JSX } from "react"
 
 import { useTranslations } from "next-intl"
 
-import type { SidebarNavItem } from "~/src/constants/_constants/sidebar"
+import { SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem } from "~/src/presentation/components/shadcn/sidebar"
 
-import { SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem } from "~/src/components/shadcn/sidebar"
+import type { SidebarNavItem } from "~/src/app/[locale]/(admin)/admin/_lib/sidebar"
 
 type SidebarBadgeKey = "activeSessionsBadge"
 

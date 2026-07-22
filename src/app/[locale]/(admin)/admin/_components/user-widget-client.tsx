@@ -5,15 +5,14 @@ import { type JSX, useCallback } from "react"
 import { Settings } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger } from "~/src/components/shadcn/dropdown-menu"
-import { SidebarMenu, SidebarMenuItem } from "~/src/components/shadcn/sidebar"
+import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger } from "~/src/presentation/components/shadcn/dropdown-menu"
+import { SidebarMenu, SidebarMenuItem } from "~/src/presentation/components/shadcn/sidebar"
 
 import { SignOutButton } from "~/src/app/[locale]/(admin)/admin/_components/sign-out-button"
 import { UserWidgetTrigger } from "~/src/app/[locale]/(admin)/admin/_components/user-widget-trigger"
+import { ROUTES } from "~/src/routes"
 
 interface UserWidgetClientProps {
   readonly email: string
@@ -25,7 +24,7 @@ export function UserWidgetClient({ email, name }: UserWidgetClientProps): JSX.El
   const t = useTranslations("pages.admin.components.userWidget")
 
   const handleOpenSettings = useCallback(() => {
-    router.push(CONSTANTS.ROUTES.ADMIN_SETTINGS)
+    router.push(ROUTES.ADMIN_SETTINGS)
   }, [router])
 
   return (

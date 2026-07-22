@@ -3,7 +3,7 @@ import "server-only"
 import { headers } from "next/headers"
 import { cache } from "react"
 
-import { auth } from "~/src/integrations/better-auth/auth._server"
+import { auth } from "~/src/integrations/better-auth/auth.server"
 
 export const getCurrentSession = cache(async () =>
   auth.api.getSession({

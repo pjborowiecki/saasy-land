@@ -1,8 +1,6 @@
 import { useFormContext, useWatch } from "react-hook-form"
 
-const MIN_PASSWORD_LENGTH = 8
-const SPECIAL_CHAR_PATTERN = /[^A-Za-z0-9]/u
-const UPPERCASE_PATTERN = /[A-Z]/u
+import { getPasswordRuleState } from "~/src/integrations/better-auth/auth.constraints"
 
 export function usePasswordRules(): {
   isMinLength: boolean
@@ -12,9 +10,5 @@ export function usePasswordRules(): {
   const { control } = useFormContext<{ password?: string }>()
   const password = useWatch({ control, name: "password" }) ?? ""
 
-  return {
-    hasSpecialChar: SPECIAL_CHAR_PATTERN.test(password),
-    hasUppercase: UPPERCASE_PATTERN.test(password),
-    isMinLength: password.length >= MIN_PASSWORD_LENGTH,
-  }
+  return getPasswordRuleState(password)
 }

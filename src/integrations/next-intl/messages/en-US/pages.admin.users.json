@@ -7,11 +7,32 @@
   "description": "Manage your team members, permissions, and customer accounts.",
   "actions": {
     "addUser": "Add User",
+    "feedback": {
+      "banSuccess": "User banned.",
+      "deleteSuccess": "User deleted.",
+      "error": "Something went wrong. Please try again.",
+      "resetPasswordSuccess": "Password reset successfully.",
+      "unbanSuccess": "User unbanned."
+    },
+    "deleteDialog": {
+      "cancel": "Cancel",
+      "confirm": "Delete user",
+      "description": "Permanently delete {name} and their account data. This cannot be undone.",
+      "title": "Delete user?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Cancel",
+      "confirm": "Reset password",
+      "description": "Set a new password for {name}.",
+      "password": "New password",
+      "title": "Reset password"
+    },
     "row": {
       "ban": "Ban user",
       "delete": "Delete user",
       "edit": "Edit user",
       "resetPassword": "Reset password",
+      "unban": "Unban user",
       "viewProfile": "View profile"
     }
   },
@@ -23,10 +44,8 @@
       "all": "Role: All",
       "value": "Role: {role}",
       "options": {
-        "Administrator": "Administrator",
-        "Editor": "Editor",
-        "Viewer": "Viewer",
-        "Subscriber": "Subscriber"
+        "admin": "Admin",
+        "customer": "Customer"
       }
     },
     "status": {

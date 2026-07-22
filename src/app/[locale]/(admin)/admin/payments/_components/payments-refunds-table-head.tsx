@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { TableHead, TableHeader, TableRow } from "~/src/components/shadcn/table"
+import { TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 export async function PaymentsRefundsTableHead(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.payments")

@@ -5,9 +5,7 @@ import type { JSX } from "react"
 import { hasLocale } from "next-intl"
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
-
+import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/premium">>): Promise<Metadata> {
@@ -27,7 +25,7 @@ export function generateStaticParams(): { locale: Locale }[] {
 export default async function PremiumPage({ params }: Readonly<PageProps<"/[locale]/premium">>): Promise<JSX.Element> {
   const { locale } = await params
 
-  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) {
+  if (!hasLocale(I18N.LOCALES, locale)) {
     notFound()
   }
 

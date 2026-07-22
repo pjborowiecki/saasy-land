@@ -1,0 +1,5 @@
+{
+  "atLeastOneFieldRequired": "At least one field is required.",
+  "nameRequired": "Category name is required.",
+  "nameMaxLength": "Category name cannot be longer than {max} characters."
+}

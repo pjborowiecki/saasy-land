@@ -5,8 +5,8 @@ import { getTranslations } from "next-intl/server"
 
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Input } from "~/src/components/shadcn/input"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Input } from "~/src/presentation/components/shadcn/input"
 
 interface ProductsTabToolbarProps {
   readonly showStatusFilter?: boolean

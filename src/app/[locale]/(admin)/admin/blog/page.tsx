@@ -2,7 +2,7 @@ import { type JSX, Suspense } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Tabs, TabsList, TabsTrigger } from "~/src/components/shadcn/tabs"
+import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
 import { BlogAdminStats } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-admin-stats"
 import { BlogPostsPanel } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-posts-panel"

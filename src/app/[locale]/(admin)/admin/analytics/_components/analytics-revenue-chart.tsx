@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card } from "~/src/components/shadcn/card"
+import { Card } from "~/src/presentation/components/shadcn/card"
 
 import { AnalyticsChartBar, type AnalyticsChartBarData } from "~/src/app/[locale]/(admin)/admin/_components/analytics-chart-bar"
 

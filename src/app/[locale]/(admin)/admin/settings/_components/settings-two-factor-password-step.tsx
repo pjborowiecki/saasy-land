@@ -1,6 +1,6 @@
 "use client"
 
-import { type JSX, useCallback } from "react"
+import { type JSX, useCallback, useTransition } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
@@ -9,16 +9,18 @@ import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import type z from "zod/v4"
 
-import { twoFactor } from "~/src/integrations/better-auth/auth._client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { enableTwoFactorSchema } from "~/src/integrations/better-auth/auth.schemas"
-import { parseTwoFactorEnableData } from "~/src/integrations/better-auth/auth.two-factor"
+import { parseTwoFactorEnableData } from "~/src/modules/two-factor/two-factor.utils"
+import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
+import { enableTwoFactor } from "~/src/modules/two-factor/use-cases/enable-two-factor.use-case"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Field, FieldContent, FieldError, FieldLabel } from "~/src/components/shadcn/field"
-import { Input } from "~/src/components/shadcn/input"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
+import { Input } from "~/src/presentation/components/shadcn/input"
 
+import { AuthFieldError } from "~/src/app/[locale]/(auth)/auth/_components/auth-field-error"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+
+const enableTwoFactorSchema = twoFactorZodSchemas.enableTwoFactor
 
 interface SettingsTwoFactorPasswordStepProps {
   readonly onEnabled: (totpUri: string, backupCodes: readonly string[]) => void
@@ -26,37 +28,34 @@ interface SettingsTwoFactorPasswordStepProps {
 
 export function SettingsTwoFactorPasswordStep({ onEnabled }: Readonly<SettingsTwoFactorPasswordStepProps>): JSX.Element {
   const t = useTranslations("pages.admin.settings")
-  const tErrors = useTranslations("auth.errors")
-  const tValidations = useTranslations("auth.validations")
+  const [isPending, startTransition] = useTransition()
 
-  const passwordSchema = enableTwoFactorSchema((key, params) => tValidations(key, params))
-  const passwordForm = useForm<z.infer<typeof passwordSchema>>({
+  const passwordForm = useForm<z.infer<typeof enableTwoFactorSchema>>({
     defaultValues: { password: "" },
-    resolver: zodResolver(passwordSchema),
+    resolver: zodResolver(enableTwoFactorSchema),
   })
 
   const onEnable = useCallback(
-    async (data: z.infer<typeof passwordSchema>) => {
-      await twoFactor.enable({
-        fetchOptions: {
-          onError: (ctx) => {
-            toast.error(tErrors(authErrorKey(ctx.error)))
-          },
-          onSuccess: (ctx) => {
-            const enableData = parseTwoFactorEnableData(ctx.data)
+    (data: z.infer<typeof enableTwoFactorSchema>) => {
+      startTransition(async () => {
+        const result = await enableTwoFactor({ password: data.password })
 
-            if (enableData === undefined) {
-              toast.error(t("security.twoFactor.setupError"))
-              return
-            }
+        if (result.serverError) {
+          toast.error(result.serverError.message)
+          return
+        }
 
-            onEnabled(enableData.totpURI, enableData.backupCodes)
-          },
-        },
-        password: data.password,
+        const enableData = parseTwoFactorEnableData(result.data)
+
+        if (enableData === undefined) {
+          toast.error(t("security.twoFactor.setupError"))
+          return
+        }
+
+        onEnabled(enableData.totpURI, enableData.backupCodes)
       })
     },
-    [onEnabled, t, tErrors],
+    [onEnabled, t],
   )
 
   return (
@@ -71,12 +70,12 @@ export function SettingsTwoFactorPasswordStep({ onEnabled }: Readonly<SettingsTw
               id={`${AUTH_FORM_IDS.TWO_FACTOR}-enable-password`}
               type="password"
             />
-            {passwordForm.formState.errors.password && <FieldError>{passwordForm.formState.errors.password.message}</FieldError>}
+            <AuthFieldError message={passwordForm.formState.errors.password?.message} />
           </FieldContent>
         </Field>
 
-        <Button className="gap-2" isDisabled={passwordForm.formState.isSubmitting} type="submit">
-          {passwordForm.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+        <Button className="gap-2" isDisabled={isPending || passwordForm.formState.isSubmitting} type="submit">
+          {(isPending || passwordForm.formState.isSubmitting) && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
           {t("security.twoFactor.continue")}
         </Button>
       </form>

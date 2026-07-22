@@ -1,0 +1,6 @@
+{
+  "atLeastOneFieldRequired": "At least one field is required.",
+  "nameRequired": "Product name is required.",
+  "nameMaxLength": "Product name cannot be longer than {max} characters.",
+  "priceCentsMin": "Price must be zero or greater."
+}

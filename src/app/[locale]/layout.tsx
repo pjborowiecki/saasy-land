@@ -4,32 +4,32 @@ import type { JSX } from "react"
 
 import { hasLocale } from "next-intl"
 
-import { env } from "~/src/environment"
-
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
+import { env } from "~/src/platform/env"
 
 import { ThemeProvider } from "~/src/providers/theme-provider"
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
 
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
-import { geistMono, geistSans } from "~/src/lib/fonts"
-import { cn } from "~/src/lib/utils"
+import { cn } from "~/src/utils"
 
-import { Toaster } from "~/src/components/shadcn/sonner"
+import { Toaster } from "~/src/presentation/components/shadcn/sonner"
 
-import { VercelObservability } from "~/src/components/custom/vercel-observability"
+import { VercelObservability } from "~/src/presentation/components/custom/vercel-observability"
 
-import "~/src/styles/globals.css"
+import "~/src/presentation/styles/globals.css"
+
+import { APP_NAME } from "~/src/presentation/branding"
+import { geistMono, geistSans } from "~/src/presentation/fonts"
 
 export function generateMetadata(): Metadata {
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: {
-      default: CONSTANTS.APP_NAME,
-      template: `%s | ${CONSTANTS.APP_NAME}`,
+      default: APP_NAME,
+      template: `%s | ${APP_NAME}`,
     },
   }
 }

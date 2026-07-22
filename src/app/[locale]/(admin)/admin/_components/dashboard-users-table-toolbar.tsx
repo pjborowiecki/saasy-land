@@ -3,8 +3,8 @@ import type { JSX } from "react"
 import { ArrowDownUp, Download, Filter, Search } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
-import { Input } from "~/src/components/shadcn/input"
+import { Button } from "~/src/presentation/components/shadcn/button"
+import { Input } from "~/src/presentation/components/shadcn/input"
 
 export async function DashboardUsersTableToolbar(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.dashboard")

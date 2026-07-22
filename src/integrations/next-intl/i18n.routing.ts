@@ -1,7 +1,6 @@
 import { defineRouting } from "next-intl/routing"
 
-import { CONSTANTS } from "~/src/constants"
-import type { Locale } from "~/src/constants/types"
+import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
 
 export const localePathPrefixes = {
   "en-US": "/en",
@@ -10,11 +9,11 @@ export const localePathPrefixes = {
 
 export const routing = defineRouting({
   alternateLinks: true,
-  defaultLocale: CONSTANTS.I18N.DEFAULT_LOCALE,
+  defaultLocale: I18N.DEFAULT_LOCALE,
   localeDetection: false,
   localePrefix: {
     mode: "as-needed",
     prefixes: localePathPrefixes,
   },
-  locales: CONSTANTS.I18N.LOCALES,
+  locales: I18N.LOCALES,
 })

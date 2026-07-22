@@ -3,9 +3,9 @@ import type { JSX } from "react"
 import { Rocket } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { CONSTANTS } from "~/src/constants"
-
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
+
+import { APP_NAME } from "~/src/presentation/branding"
 
 export async function AuthHeader(): Promise<JSX.Element> {
   const t = await getTranslations("auth.layout")
@@ -17,7 +17,7 @@ export async function AuthHeader(): Promise<JSX.Element> {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-linear-to-br from-secondary to-background transition-colors group-hover:border-border/80">
             <Rocket className="size-4 text-foreground" />
           </div>
-          <span className="text-lg font-medium tracking-tight text-foreground">{CONSTANTS.APP_NAME}</span>
+          <span className="text-lg font-medium tracking-tight text-foreground">{APP_NAME}</span>
         </Link>
 
         <Link href="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">

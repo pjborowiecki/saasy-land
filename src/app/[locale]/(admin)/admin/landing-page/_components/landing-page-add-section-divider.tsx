@@ -3,7 +3,7 @@ import type { JSX } from "react"
 import { PlusCircle } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Button } from "~/src/components/shadcn/button"
+import { Button } from "~/src/presentation/components/shadcn/button"
 
 export async function LandingPageAddSectionDivider(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.landing-page")

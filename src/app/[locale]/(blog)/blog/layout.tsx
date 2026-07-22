@@ -3,12 +3,12 @@ import type React from "react"
 
 import { hasLocale } from "next-intl"
 
-import { CONSTANTS } from "~/src/constants"
+import { I18N } from "~/src/integrations/next-intl/i18n.config"
 
 export default async function BlogLayout({ children, params }: Readonly<LayoutProps<"/[locale]/blog">>): Promise<React.ReactNode> {
   const { locale } = await params
 
-  if (!hasLocale(CONSTANTS.I18N.LOCALES, locale)) {
+  if (!hasLocale(I18N.LOCALES, locale)) {
     notFound()
   }
 

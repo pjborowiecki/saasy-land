@@ -3,15 +3,15 @@ import type { JSX } from "react"
 import { AlertTriangle, ShieldCheck, TrendingDown, TrendingUp, Users, Wallet } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { Badge } from "~/src/components/shadcn/badge"
-import { Card, CardContent, CardHeader } from "~/src/components/shadcn/card"
+import { Badge } from "~/src/presentation/components/shadcn/badge"
+import { Card, CardContent, CardHeader } from "~/src/presentation/components/shadcn/card"
 
 export async function DashboardStatsGrid(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.dashboard")
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
             <Wallet className="size-4 text-muted-foreground" />
@@ -28,7 +28,7 @@ export async function DashboardStatsGrid(): Promise<JSX.Element> {
       </Card>
 
       <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
             <Users className="size-4 text-muted-foreground" />
@@ -45,7 +45,7 @@ export async function DashboardStatsGrid(): Promise<JSX.Element> {
       </Card>
 
       <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
             <ShieldCheck className="size-4 text-muted-foreground" />
@@ -61,7 +61,7 @@ export async function DashboardStatsGrid(): Promise<JSX.Element> {
       </Card>
 
       <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
         <CardHeader className="flex flex-row items-center justify-between pb-2">
           <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
             <AlertTriangle className="size-4 text-muted-foreground" />

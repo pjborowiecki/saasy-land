@@ -1,22 +1,20 @@
 import type { JSX } from "react"
 
-import { TabsContent } from "~/src/components/shadcn/tabs"
+import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
-import type { AdminSecuritySessionRow } from "~/src/app/[locale]/(admin)/admin/_types"
-import { SettingsPasswordCard } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-password-card"
-import { SettingsSessionsCard } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-sessions-card"
+import { SettingsPasswordFormClient } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-password-form-client"
+import { SettingsSessionsCardClient } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-sessions-card-client"
 import { SettingsTwoFactorCard } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-card"
+import { getSettingsSessions } from "~/src/app/[locale]/(admin)/admin/settings/_lib/settings-data"
 
-interface SettingsSecurityTabProps {
-  readonly securitySessions: readonly AdminSecuritySessionRow[]
-}
+export async function SettingsSecurityTab(): Promise<JSX.Element> {
+  const securitySessions = await getSettingsSessions()
 
-export function SettingsSecurityTab({ securitySessions }: SettingsSecurityTabProps): JSX.Element {
   return (
     <TabsContent id="security" className="mt-8 space-y-6 outline-none">
-      <SettingsPasswordCard />
+      <SettingsPasswordFormClient />
       <SettingsTwoFactorCard />
-      <SettingsSessionsCard securitySessions={securitySessions} />
+      <SettingsSessionsCardClient securitySessions={securitySessions} />
     </TabsContent>
   )
 }

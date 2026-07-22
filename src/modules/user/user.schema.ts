@@ -1,12 +1,15 @@
 import { relations } from "drizzle-orm"
-import { boolean, index, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { boolean, index, pgEnum, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
 
-import { PERMISSIONS } from "~/src/constants/_constants/permissions"
-
+import { TIMEZONE_CODES } from "~/src/modules/_core/constants/timezone"
 import { account } from "~/src/modules/account/account.schema"
 import { session } from "~/src/modules/session/session.schema"
 import { twoFactor } from "~/src/modules/two-factor/two-factor.schema"
-import { userRoleEnum, userTimezoneEnum } from "~/src/modules/user/user.enums"
+
+import { DEFAULT_ROLE, ROLE_VALUES } from "~/src/integrations/better-auth/auth.access"
+
+export const userRoleEnum = pgEnum("user_role", ROLE_VALUES)
+export const userTimezoneEnum = pgEnum("user_timezone", TIMEZONE_CODES)
 
 export const user = pgTable(
   "user",
@@ -21,7 +24,7 @@ export const user = pgTable(
     image: varchar("image", { length: 2048 }),
     isAnonymous: boolean("is_anonymous").default(false).notNull(),
     name: varchar("name", { length: 32 }).notNull(),
-    role: userRoleEnum().default(PERMISSIONS.DEFAULT_ROLE).notNull(),
+    role: userRoleEnum().default(DEFAULT_ROLE).notNull(),
     timezone: userTimezoneEnum(),
     twoFactorEnabled: boolean("two_factor_enabled").default(false).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
@@ -41,5 +44,3 @@ export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   twoFactors: many(twoFactor),
 }))
-
-export { userRoleEnum, userTimezoneEnum } from "~/src/modules/user/user.enums"

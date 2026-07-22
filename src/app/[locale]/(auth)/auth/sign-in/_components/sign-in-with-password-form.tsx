@@ -7,13 +7,12 @@ import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { CONSTANTS } from "~/src/constants"
-
-import { getSession, signIn } from "~/src/integrations/better-auth/auth._client"
-import { getPostAuthRedirect } from "~/src/integrations/better-auth/auth.access"
+import { signIn } from "~/src/integrations/better-auth/auth.client"
 import { AUTH_ERRORS, authErrorKey } from "~/src/integrations/better-auth/auth.errors"
-import { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.schemas"
+import { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+
+import { usePostAuthRedirect } from "~/src/hooks/use-post-auth-redirect"
 
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 import {
@@ -21,16 +20,17 @@ import {
   type SignInFormValues,
 } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-form-fields"
 import { SignInSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-submit-button"
+import { ROUTES } from "~/src/routes"
 
 export function SignInWithPasswordForm(): JSX.Element {
   const router = useRouter()
   const locale = useLocale()
   const t = useTranslations()
+  const redirectAfterAuth = usePostAuthRedirect()
 
-  const formSchema = signInWithPasswordSchema((key, params) => t(`auth.validations.${key}`, params))
   const form = useForm<SignInFormValues>({
     defaultValues: { email: "", password: "" },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signInWithPasswordSchema),
   })
 
   const onSubmit = useCallback(
@@ -45,7 +45,7 @@ export function SignInWithPasswordForm(): JSX.Element {
               toast.error(t(`auth.errors.${errorKey}`))
               router.push(
                 getPathname({
-                  href: `${CONSTANTS.ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+                  href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
                   locale,
                 }),
               )
@@ -56,19 +56,13 @@ export function SignInWithPasswordForm(): JSX.Element {
           },
           onSuccess: async () => {
             toast.success(t("pages.auth.sign-in.form.success"))
-            const { data: session } = await getSession()
-            router.push(
-              getPathname({
-                href: getPostAuthRedirect(session?.user.role),
-                locale,
-              }),
-            )
+            await redirectAfterAuth()
           },
         },
         password: data.password,
       })
     },
-    [locale, router, t],
+    [locale, redirectAfterAuth, router, t],
   )
 
   return (

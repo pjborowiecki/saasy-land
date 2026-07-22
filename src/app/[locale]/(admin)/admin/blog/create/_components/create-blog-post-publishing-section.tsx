@@ -2,11 +2,11 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Card } from "~/src/components/shadcn/card"
-import { Input } from "~/src/components/shadcn/input"
-import { Label } from "~/src/components/shadcn/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/components/shadcn/select"
-import { Textarea } from "~/src/components/shadcn/textarea"
+import { Card } from "~/src/presentation/components/shadcn/card"
+import { Input } from "~/src/presentation/components/shadcn/input"
+import { Label } from "~/src/presentation/components/shadcn/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/presentation/components/shadcn/select"
+import { Textarea } from "~/src/presentation/components/shadcn/textarea"
 
 export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog.create")
@@ -16,8 +16,11 @@ export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
       <h3 className="mb-4 text-sm font-medium text-foreground">{t("settings.publishing")}</h3>
       <div className="space-y-4">
         <div className="space-y-1.5">
-          <Label className="text-xs tracking-wider text-muted-foreground uppercase">{t("settings.status")}</Label>
-          <Select defaultValue="draft">
+          <Select
+            fieldLabel={t("settings.status")}
+            fieldLabelClassName="text-xs tracking-wider text-muted-foreground uppercase"
+            defaultValue="draft"
+          >
             <SelectTrigger className="w-full bg-card">
               <SelectValue />
             </SelectTrigger>
@@ -29,8 +32,11 @@ export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
           </Select>
         </div>
         <div className="space-y-1.5">
-          <Label className="text-xs tracking-wider text-muted-foreground uppercase">{t("settings.category")}</Label>
-          <Select placeholder={t("settings.categorySelect")}>
+          <Select
+            fieldLabel={t("settings.category")}
+            fieldLabelClassName="text-xs tracking-wider text-muted-foreground uppercase"
+            placeholder={t("settings.categorySelect")}
+          >
             <SelectTrigger className="w-full bg-card">
               <SelectValue />
             </SelectTrigger>

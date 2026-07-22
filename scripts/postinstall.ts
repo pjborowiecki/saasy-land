@@ -4,7 +4,7 @@ import { $ } from "bun"
 
 import { existsSync } from "node:fs"
 
-const DRIZZLE_CONFIG = "./src/integrations/drizzle-orm/drizzle.config.ts"
+const DRIZZLE_CONFIG = "./src/platform/db/drizzle.config.ts"
 
 const STRATEGIES = {
   remote: () => $`bun run db:migrate`,
