@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
 import { hasLocale } from "next-intl"
 
@@ -17,6 +17,7 @@ import { cn } from "~/src/utils"
 
 import { Toaster } from "~/src/presentation/components/shadcn/sonner"
 
+import { HtmlLang } from "~/src/presentation/components/custom/html-lang"
 import { VercelObservability } from "~/src/presentation/components/custom/vercel-observability"
 
 import "~/src/presentation/styles/globals.css"
@@ -38,20 +39,31 @@ export function generateStaticParams(): { locale: Locale }[] {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-export default async function RootLayout({ children, params }: Readonly<LayoutProps<"/[locale]">>): Promise<JSX.Element> {
+async function LocaleDocumentLang({
+  params,
+}: Readonly<{
+  params: LayoutProps<"/[locale]">["params"]
+}>): Promise<JSX.Element> {
   const { locale } = await params
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
 
+  return <HtmlLang locale={locale} />
+}
+
+export default function RootLayout({ children, params }: Readonly<LayoutProps<"/[locale]">>): JSX.Element {
   return (
     <html
-      lang={locale}
+      lang={routing.defaultLocale}
       className={cn(geistSans.variable, geistMono.variable, "h-full bg-background text-foreground antialiased")}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning className="flex min-h-full flex-col">
+        <Suspense fallback={undefined}>
+          <LocaleDocumentLang params={params} />
+        </Suspense>
         <TranslationsProvider>
           <ThemeProvider>
             <TooltipProvider>

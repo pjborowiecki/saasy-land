@@ -1,0 +1,14 @@
+---
+title: "Rozwiązywanie problemów"
+description: "Objaw → naprawa dla problemów lokalnych i deploy."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+| Symptom                     | Likely fix                                              |
+| --------------------------- | ------------------------------------------------------- |
+| Env parse errors            | Fill `.env.local` per example; check AUTH_SECRET length |
+| OAuth redirect mismatch     | Add localhost + deploy URLs in provider consoles        |
+| Admin 403 / redirect to app | User role not `admin`                                   |
+| Migrate fails               | Use unpooled URL for DDL; check Neon availability       |
+| i18n check fails            | Sync message keys across locales                        |

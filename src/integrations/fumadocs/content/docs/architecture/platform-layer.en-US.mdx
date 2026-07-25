@@ -1,0 +1,19 @@
+---
+title: "Platform layer"
+description: "Env validation, database, and test process wiring."
+---
+
+## `platform/env`
+
+Typed env via t3. Import `env` instead of `process.env` in app code.
+
+## `platform/db`
+
+- `schema.ts` — Drizzle tables
+- `client.ts` — DB client
+- `migrations/` — SQL migrations
+- `drizzle.config.ts` — kit config (scripts point here)
+
+## `platform/testing`
+
+Shared test utilities and process helpers for Vitest projects.

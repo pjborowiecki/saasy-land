@@ -33,7 +33,12 @@ export function applyLocaleNavigation(
 }
 
 export function formatLocaleSwitchDisplayText(selectedText: string | null | undefined, locale: AppLocale): string {
-  return selectedText ?? localeUiConfig[locale].displayName
+  // react-aria can yield "" after remount/locale navigation — treat empty like missing.
+  if (selectedText === undefined || selectedText === null || selectedText.length === 0) {
+    return localeUiConfig[locale].displayName
+  }
+
+  return selectedText
 }
 
 interface LocaleSwitchProps {
@@ -52,8 +57,8 @@ export function LocaleSwitch({ locale }: Readonly<LocaleSwitchProps>): JSX.Eleme
   )
 
   return (
-    <Select fieldLabel="Language" fieldLabelClassName="sr-only" value={locale} onChange={handleLocaleChange}>
-      <SelectTrigger className="w-full">
+    <Select className="w-full" fieldLabel="Language" fieldLabelClassName="sr-only" value={locale} onChange={handleLocaleChange}>
+      <SelectTrigger className="h-9 w-full data-[size=default]:h-9">
         <SelectValue>{({ selectedText }) => formatLocaleSwitchDisplayText(selectedText, locale)}</SelectValue>
       </SelectTrigger>
       <SelectContent offset={4} placement="top">

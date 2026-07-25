@@ -1,0 +1,16 @@
+---
+title: "Presentation layer"
+description: "Shared UI kit, DataTable, theme, and branding."
+---
+
+## Folders
+
+- `components/shadcn` — primitives (Button, Tabs, …) on React Aria / Base UI
+- `components/custom` — DataTable, filters, form builder, locale/theme switches
+- `theme` / `branding` / `fonts` / `styles`
+
+## Rules
+
+- Shared visuals belong here; feature-specific screens stay under `app/.../_components`
+- Prefer composition over boolean prop sprawl (see Vercel composition skills)
+- DataTable options + column defs are feature-owned; the kit stays generic

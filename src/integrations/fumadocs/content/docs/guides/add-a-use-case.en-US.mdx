@@ -1,0 +1,17 @@
+---
+title: "Add a use-case"
+description: "Create a permissioned server action in a module."
+---
+
+## Steps
+
+1. Add `modules/<domain>/use-cases/<verb>-<noun>.use-case.ts`
+2. Use `authedActionClient(PERMISSIONS…)` from next-safe-action wiring
+3. Validate input with module Zod schemas
+4. Call auth/DB; map failures to domain errors
+5. Add `__test__` covering happy path + forbidden
+6. Export and call from the page/action UI
+
+## Naming
+
+`list-users.use-case.ts`, `ban-user.use-case.ts` — verb-first, kebab-case.

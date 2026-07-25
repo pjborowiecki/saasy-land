@@ -68,16 +68,27 @@ export function ThemeSwitchClient({
     system: systemLabel,
   } satisfies Record<ThemeValue, string>
 
+  const selectedLabel = theme === undefined ? undefined : themeLabels[theme]
+
   return (
     <Select
+      className="w-full"
       fieldLabel={label}
       fieldLabelClassName="sr-only"
       placeholder={placeholder}
       onChange={handleThemeChange}
       {...(theme === undefined ? {} : { value: theme })}
     >
-      <SelectTrigger className="w-full capitalize">
-        <SelectValue />
+      <SelectTrigger className="h-9 w-full capitalize data-[size=default]:h-9">
+        <SelectValue>
+          {({ selectedText }) => {
+            if (selectedText !== undefined && selectedText !== null && selectedText.length > 0) {
+              return selectedText
+            }
+
+            return selectedLabel ?? placeholder
+          }}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

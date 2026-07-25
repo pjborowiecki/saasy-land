@@ -1,0 +1,20 @@
+---
+title: "Writing tests"
+description: "Vitest projects, coverage gates, and Playwright smoke."
+---
+
+## Vitest projects
+
+| Project       | Use for                       |
+| ------------- | ----------------------------- |
+| `node`        | Use-cases, utils, pure logic  |
+| `component`   | React Testing Library + jsdom |
+| `integration` | Heavier wired tests           |
+
+## Coverage
+
+`bun run test:coverage` enforces global 100% thresholds on included sources (`src/app/**` may be excluded — see `vite.config.ts`).
+
+## E2E
+
+Playwright specs under `e2e/`. Start with `test:e2e:smoke`.

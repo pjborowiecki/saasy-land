@@ -1,0 +1,15 @@
+---
+title: "I18n messages"
+description: "Add and organize next-intl message catalogs."
+---
+
+## Config
+
+- Enabled locales: `integrations/next-intl/i18n.config.ts`
+- Messages split by area under the next-intl integration content
+
+## Rules
+
+- Use `useTranslations` in client, `getTranslations` in server components only
+- Run `bun run check:i18n` before commit
+- Never import `next-intl/server` into client files

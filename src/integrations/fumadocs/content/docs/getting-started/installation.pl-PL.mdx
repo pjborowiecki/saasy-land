@@ -1,0 +1,27 @@
+---
+title: "Instalacja"
+description: "Sklonuj repozytorium i zainstaluj zależności."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Clone and install
+
+```bash
+git clone https://github.com/pjborowiecki/saasyland.com.git
+cd saasyland.com
+bun install
+```
+
+`postinstall` runs project wiring (including Fumadocs/MDX generation and DB migrate when env is present). Prefer a filled `.env.local` before relying on migrate-from-postinstall locally — or run `bun run db:migrate` explicitly after env setup.
+
+## Verify tooling
+
+```bash
+bun run check
+bun run test:unit
+```
+
+## Monorepo note
+
+This repository is a **single Next.js app**, not an npm workspaces monorepo. `opensrc/` holds optional upstream source mirrors for agents; it is not part of the runtime bundle.

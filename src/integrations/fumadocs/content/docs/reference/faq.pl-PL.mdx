@@ -1,0 +1,18 @@
+---
+title: "FAQ"
+description: "Częste pytania."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Why is my build failing with getTranslations in Client Components?
+
+A `"use client"` file imported a server module using `next-intl/server`. Keep skeletons dumb or client-translated only.
+
+## Why is Suspense fallback crashing under Cache Components?
+
+A library called `Date.now` during render (e.g. TanStack Table debug). Don’t mount it in fallbacks.
+
+## Where do I change roles?
+
+Only `auth.access.ts`.

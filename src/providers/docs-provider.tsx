@@ -16,11 +16,12 @@ type DocsProviderProps = Readonly<{
 type RootProviderComponents = NonNullable<ComponentProps<typeof RootProvider>["components"]>
 type DocsLinkProps = ComponentProps<NonNullable<RootProviderComponents["Link"]>>
 
-function DocsLink({ prefetch: _prefetch, tw: _tw, href, children, className, target, rel, title }: DocsLinkProps) {
+function DocsLink({ prefetch: _prefetch, tw: _tw, href, children, ...props }: DocsLinkProps) {
   const linkHref = typeof href === "string" ? href : "/"
 
+  // Forward style/data-* so Fumadocs sidebar indentation and active states work.
   return (
-    <Link className={className} href={linkHref} rel={rel} target={target} title={title}>
+    <Link {...props} href={linkHref}>
       {children}
     </Link>
   )

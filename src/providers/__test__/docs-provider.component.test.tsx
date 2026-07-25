@@ -34,12 +34,18 @@ function DocsRootProviderMock(props: Readonly<ComponentProps<typeof FumadocsProv
 
   const missingHrefProps: DocsLinkProps = {}
   const stringLinkProps: DocsLinkProps = { href: "/string" }
+  const styledLinkProps: DocsLinkProps = {
+    className: "sidebar-item",
+    href: "/styled",
+    style: { paddingInlineStart: "20px" },
+  }
 
   return createElement(
     "div",
     { "data-testid": "docs-root" },
     createElement(LinkComponent, missingHrefProps, "fallback-link"),
     createElement(LinkComponent, stringLinkProps, "string-link"),
+    createElement(LinkComponent, styledLinkProps, "styled-link"),
     children,
   )
 }
@@ -70,5 +76,17 @@ describe("docs provider component", () => {
     expect(screen.getByText("docs")).toBeInTheDocument()
     expect(screen.getByRole("link", { name: "fallback-link" })).toHaveAttribute("href", "/")
     expect(screen.getByRole("link", { name: "string-link" })).toHaveAttribute("href", "/string")
+  })
+
+  it("forwards style and className to docs links", () => {
+    expect.hasAssertions()
+    render(
+      <DocsProvider locale="en-US">
+        <span>docs</span>
+      </DocsProvider>,
+    )
+    const styledLink = screen.getByRole("link", { name: "styled-link" })
+    expect(styledLink).toHaveStyle({ paddingInlineStart: "20px" })
+    expect(styledLink).toHaveClass("sidebar-item")
   })
 })

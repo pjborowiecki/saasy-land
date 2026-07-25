@@ -1,0 +1,15 @@
+---
+title: "CI/CD"
+description: "Sugerowane pipeline’y: check, test, deploy."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Suggested gates
+
+1. `bun run check`
+2. `bun run test:coverage` (or `test` on draft PR)
+3. `bun run test:e2e:pr`
+4. `bun run build`
+
+Deploy via Vercel git integration or `deploy:*` scripts with tokens.

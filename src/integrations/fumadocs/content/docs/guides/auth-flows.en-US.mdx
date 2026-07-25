@@ -1,0 +1,12 @@
+---
+title: "Auth flows"
+description: "Sign-up, sign-in, verification, reset, and 2FA UX paths."
+---
+
+## Routes
+
+See `ROUTES` for `SIGN_IN`, `SIGN_UP`, `VERIFY_EMAIL`, `FORGOT_PASSWORD`, `RESET_PASSWORD`, `TWO_FACTOR`, `AUTH_CALLBACK`.
+
+## Post-auth
+
+Proxy maps session role → `/admin` or `/app`. Keep that mapping in proxy + access helpers — not in random buttons.

@@ -1,0 +1,20 @@
+---
+title: "Local debugging"
+description: "Common debugging moves for auth, RSC, and tables."
+---
+
+## Auth
+
+- Confirm cookies on `localhost` vs preview host
+- Hit `/api/auth/...` only through Better Auth paths
+- Check role after seed / first admin bootstrap
+
+## RSC / Cache Components
+
+- Build error mentioning `Date.now` → inspect Suspense fallbacks and table mounts
+- Skeleton importing `next-intl/server` → split server toolbar from client skeleton
+
+## DataTable / nuqs
+
+- Tab not updating server panel → ensure `shallow: false` on provider and shared parsers
+- Empty table → permission + query filters, not only UI
