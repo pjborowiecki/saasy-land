@@ -1,3 +1,5 @@
 {
-  "pages": ["index", "about", "changelog", "roadmap"]
+  "title": "Dokumentacja",
+  "pages": ["index", "project", "getting-started", "architecture", "guides", "features", "integrations", "ui", "tooling", "reference"],
+  "defaultOpen": true
 }

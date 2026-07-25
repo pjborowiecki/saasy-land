@@ -153,6 +153,15 @@
   --typeset-flow: 1.5em;
 }
 
+/*
+ * Docs sidebar: Fumadocs sets nested padding via inline styles. Boost chapter
+ * pages under an open folder so hierarchy is obvious next to the guide rail.
+ * Depth-1 items use calc(5 * var(--spacing)) by default (~1.25rem).
+ */
+#nd-docs-layout aside [class*="before:inset-s-2.5"] > a {
+  padding-inline-start: calc(8 * var(--spacing)) !important;
+}
+
 .typeset-chat {
   --typeset-font-body: var(--font-sans);
   --typeset-font-heading: var(--font-heading);

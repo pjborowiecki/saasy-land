@@ -1,0 +1,18 @@
+---
+title: "Payments & billing"
+description: "Orders, refunds, and Stripe-oriented billing (planned)."
+---
+
+## Status
+
+Admin `/admin/payments` UI uses mock rows today. `PERMISSIONS.order.*` already sketches read/update/refund.
+
+## Planned architecture
+
+- `modules/billing` or `modules/order` use-cases
+- Stripe (or Polar) integration folder
+- Webhooks route handler
+- Customer invoices under `/app`
+- Map Better Auth user ↔ customer id
+
+Implement behind permissions; never expose secret keys to the client.

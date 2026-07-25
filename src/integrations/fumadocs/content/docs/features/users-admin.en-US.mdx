@@ -1,0 +1,20 @@
+---
+title: "Users (admin)"
+description: "Live users table, tabs, impersonation, ban/role/password."
+---
+
+## Routes
+
+`/admin/users` with nuqs `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## Module
+
+`modules/user/use-cases` — list/create/update/delete, ban/unban, set role/password, impersonate, refresh table.
+
+## UI
+
+DataTable under `admin/users/_components/all-users-tab`. Status is **derived** (`getUserStatus`: active / pending / banned), not a DB enum column.
+
+## URL state
+
+`admin/users/_lib/search-params.ts` — shared parsers + `searchParamsCache`.

@@ -1,0 +1,38 @@
+---
+title: "Modules & use-cases"
+description: "How feature modules are structured and invoked."
+---
+
+## Module layout
+
+Typical module (`user`, `product`, `session`, …):
+
+```text
+modules/user/
+  user.types.ts
+  user.zod.ts / user.validations.ts
+  user.schema.ts
+  user.utils.ts
+  user.errors.ts
+  use-cases/
+    list-users.use-case.ts
+    …
+  __test__/
+```
+
+## Use-case pattern
+
+Use-cases are **server actions** built with `authedActionClient` / permission scopes from `PERMISSIONS` in `auth.access.ts`. They:
+
+1. Enforce authz
+2. Call Better Auth admin APIs and/or Drizzle
+3. Return typed results / domain errors
+
+Example domains today: `account`, `user`, `session`, `two-factor`, `verification`, `product`, `category`.
+
+## Calling from UI
+
+- RSC: `await listUsers()` (or equivalent) and render
+- Client: bind actions via safe-action hooks / form actions
+
+Never put SQL in a client component.

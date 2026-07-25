@@ -1,0 +1,15 @@
+---
+title: "File naming"
+description: "Colocation suffixes and folder conventions."
+---
+
+| Pattern        | Meaning                                     |
+| -------------- | ------------------------------------------- |
+| `_components/` | Route-local React components                |
+| `_lib/`        | Route-local helpers, search-params, mappers |
+| `_types/`      | Route-local types                           |
+| `use-cases/`   | Module application services                 |
+| `*.server.ts`  | Server-only integration entry               |
+| `__test__/`    | Colocated tests                             |
+
+Prefer explicit names (`search-params.ts`) over vague `utils.ts` dumps.

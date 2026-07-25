@@ -1,0 +1,25 @@
+---
+title: "Model bezpieczeństwa"
+description: "Authn, authz, sekrety i granice zaufania."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Layers
+
+1. **Edge / proxy** — locale + session gates for `/admin` and `/app`
+2. **Better Auth** — credentials, OAuth, sessions, 2FA, admin plugin
+3. **Permissions** — `auth.access.ts` statements checked in use-cases / safe-action clients
+4. **Env** — secrets only on server; validated via `platform/env`
+5. **RSC boundary** — never pass secrets or full user rows to client islands
+
+## Non-negotiables
+
+- Authenticate **inside** every server action / use-case — do not rely only on layout guards
+- Prefer unguessable IDs; never authorize by email alone
+- Impersonation and ban are admin-only permissioned operations
+- Rate-limit sensitive endpoints (Redis) when you expose public APIs
+
+## Planned hardening
+
+Webhook signature verification (Stripe), org tenancy isolation, Arcjet / bot protection if you enable it.

@@ -1,0 +1,18 @@
+{
+  "title": "Integrations",
+  "pages": [
+    "elysia",
+    "better-auth",
+    "neon-drizzle",
+    "next-intl",
+    "fumadocs",
+    "nuqs",
+    "next-safe-action",
+    "resend",
+    "upstash-redis",
+    "vercel",
+    "tanstack-table",
+    "shadcn"
+  ],
+  "icon": "Plug"
+}

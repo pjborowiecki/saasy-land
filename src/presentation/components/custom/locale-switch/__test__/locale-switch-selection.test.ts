@@ -51,4 +51,10 @@ describe("locale switch display text", () => {
     expect.hasAssertions()
     expect(formatLocaleSwitchDisplayText(undefined, "en-US")).toBe("English")
   })
+
+  it("falls back when selected text is an empty string", () => {
+    expect.hasAssertions()
+    expect(formatLocaleSwitchDisplayText("", "en-US")).toBe("English")
+    expect(formatLocaleSwitchDisplayText("", "pl-PL")).toBe("Polski")
+  })
 })

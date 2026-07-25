@@ -1,0 +1,14 @@
+---
+title: "Core shared kernel"
+description: "Domain errors and shared catalogs in modules/_core."
+---
+
+## Contents
+
+- `errors/` — `DomainError`, `ForbiddenError`, `NotFoundError`, `UnauthorizedError`, `ConflictError`, …
+- `constants/` — locale (and related) catalogs used by i18n and product knobs
+- `utils/` — pure helpers shared across modules
+
+## Why it exists
+
+Cross-cutting **valid values** and **error codes** should not be redefined per feature. App-enabled locales (subset) still live in `i18n.config.ts`; the broader catalog can live in `_core`.

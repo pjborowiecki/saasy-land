@@ -1,0 +1,14 @@
+---
+title: "Roles & permissions"
+description: "RBAC statements, RoleCode, and PERMISSIONS usage."
+---
+
+## Source of truth
+
+`integrations/better-auth/auth.access.ts`
+
+- `RoleCode` / `ROLE_VALUES`
+- `PERMISSIONS` resource actions (`user.list`, `product.create`, …)
+- Better Auth access control statements for admin plugin
+
+Use-cases take permission slices via `authedActionClient(PERMISSIONS.user.list)` (etc.).

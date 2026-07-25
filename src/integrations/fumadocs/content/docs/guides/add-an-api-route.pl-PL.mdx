@@ -1,0 +1,19 @@
+---
+title: "Dodaj trasę API"
+description: "Rozszerz aplikację Elysia pod /api bez wycieku reguł biznesowych."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Steps
+
+1. Open `src/app/(api)/api/[[...route]]/route.ts`
+2. Register a method on the Elysia `app` (keep `prefix: "/api"`)
+3. Delegate to an integration helper or module use-case
+4. Validate input (Zod / Elysia schema) before side effects
+5. Add an integration test under `api/__test__`
+6. Document in Architecture → API layer and Features if user-facing
+
+## Prefer actions when
+
+The caller is your own React UI — use next-safe-action + use-cases instead of inventing REST for yourself.

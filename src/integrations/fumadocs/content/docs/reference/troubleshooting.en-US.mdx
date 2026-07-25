@@ -1,0 +1,12 @@
+---
+title: "Troubleshooting"
+description: "Symptom → fix table for local and deploy issues."
+---
+
+| Symptom                     | Likely fix                                              |
+| --------------------------- | ------------------------------------------------------- |
+| Env parse errors            | Fill `.env.local` per example; check AUTH_SECRET length |
+| OAuth redirect mismatch     | Add localhost + deploy URLs in provider consoles        |
+| Admin 403 / redirect to app | User role not `admin`                                   |
+| Migrate fails               | Use unpooled URL for DDL; check Neon availability       |
+| i18n check fails            | Sync message keys across locales                        |

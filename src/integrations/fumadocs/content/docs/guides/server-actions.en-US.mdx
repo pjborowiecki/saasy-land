@@ -1,0 +1,13 @@
+---
+title: "Server actions"
+description: "Next Safe Action clients, authz, and revalidation."
+---
+
+## Clients
+
+Defined under `integrations/next-safe-action`. Prefer `authedActionClient(permission)` so every mutation checks session + RBAC.
+
+## After success
+
+- `revalidatePath` / `revalidateTag` as needed
+- Return serializable DTOs only

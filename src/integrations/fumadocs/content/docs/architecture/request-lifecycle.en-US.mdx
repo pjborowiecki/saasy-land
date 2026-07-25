@@ -1,0 +1,16 @@
+---
+title: "Request lifecycle"
+description: "From middleware to use-case to streamed UI."
+---
+
+## Happy path (admin page)
+
+1. `proxy.ts` ensures locale + authenticated admin
+2. Layout renders shell (sidebar, header); `children` remain RSC
+3. Page starts data promises (use-cases) and wraps sections in `Suspense`
+4. Use-case checks `PERMISSIONS.*` and loads data
+5. Client islands (DataTable, tabs) hydrate; nuqs updates may re-run RSC with `shallow: false`
+
+## Mutations
+
+Client → server action (safe-action) → use-case → `revalidatePath` / auth API → UI refresh.

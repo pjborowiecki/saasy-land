@@ -1,0 +1,18 @@
+---
+title: "Caching & RSC"
+description: "Cache Components, Suspense, and what not to put in fallbacks."
+---
+
+## Cache Components
+
+The app enables Next.js Cache Components. Avoid non-deterministic APIs (`Date.now`, random) during prerender/static shells.
+
+## Suspense
+
+- Prefer streaming boundaries around slow admin panels
+- Fallbacks must stay **static/dumb** — do not mount TanStack Table or other libraries that touch forbidden time APIs in the fallback path
+- Do not import server-only modules (`getTranslations` from `next-intl/server`) into `"use client"` skeletons
+
+## nuqs + server
+
+Shared parsers + `createSearchParamsCache` keep client tabs and server panels aligned. Adapter defaults live on `NuqsProvider`.

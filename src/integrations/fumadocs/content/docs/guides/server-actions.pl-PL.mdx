@@ -1,0 +1,15 @@
+---
+title: "Akcje serwerowe"
+description: "Klienty Next Safe Action, authz i rewalidacja."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Clients
+
+Defined under `integrations/next-safe-action`. Prefer `authedActionClient(permission)` so every mutation checks session + RBAC.
+
+## After success
+
+- `revalidatePath` / `revalidateTag` as needed
+- Return serializable DTOs only

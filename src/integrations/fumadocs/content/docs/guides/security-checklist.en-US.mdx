@@ -1,0 +1,21 @@
+---
+title: "Security checklist"
+description: "Pre-merge and pre-launch hardening checklist for this starter."
+---
+
+## Every PR that touches auth or data
+
+- [ ] Permission check inside the use-case / action
+- [ ] No secrets in client bundles or RSC props
+- [ ] Zod (or equivalent) validation on inputs
+- [ ] Errors do not leak internal details to the client
+- [ ] Tests cover forbidden / unauthenticated paths
+
+## Before production
+
+- [ ] Rotate `AUTH_SECRET`; confirm length
+- [ ] OAuth redirect URLs locked to real hosts
+- [ ] Neon + Upstash + Resend prod credentials
+- [ ] Admin role assignment process defined
+- [ ] Webhooks (when added) verify signatures
+- [ ] Review impersonation / ban audit needs

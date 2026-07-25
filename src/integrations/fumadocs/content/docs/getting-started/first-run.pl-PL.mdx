@@ -1,0 +1,33 @@
+---
+title: "Pierwsze uruchomienie"
+description: "Migracja bazy i start serwera deweloperskiego."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Database
+
+```bash
+bun run db:migrate
+# prototype-only alternative (not for shared envs):
+# bun run db:push
+```
+
+Inspect schema with `bun run db:studio`.
+
+## Dev server
+
+```bash
+bun run dev
+```
+
+Visit `http://localhost:3000`. Locales are `en-US` and `pl-PL` (see `integrations/next-intl/i18n.config.ts`).
+
+## Create an admin user
+
+1. Sign up via `/auth/sign-up`
+2. Verify email (Resend / logs depending on setup)
+3. Promote the user to `admin` in the DB (or your seed path) — role codes live in `auth.access.ts` as `RoleCode.ADMIN`
+4. Open `/admin`
+
+Auth callback routing: admins → `/admin`, customers → `/app` (`src/proxy.ts` + `ROUTES`).

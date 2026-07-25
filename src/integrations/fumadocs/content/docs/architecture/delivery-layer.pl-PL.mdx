@@ -1,0 +1,28 @@
+---
+title: "Warstwa delivery"
+description: "Grupy App Router, proxy i stałe tras."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Route groups (`app/[locale]`)
+
+| Group       | Role                           |
+| ----------- | ------------------------------ |
+| `(landing)` | Marketing home, legal          |
+| `(auth)`    | Sign-in/up, 2FA, verify, reset |
+| `(app)`     | Authenticated customer area    |
+| `(admin)`   | Admin shell + feature pages    |
+| `(docs)`    | Fumadocs documentation         |
+| `(blog)`    | MDX blog                       |
+
+## `proxy.ts`
+
+- Runs next-intl middleware
+- Gates `/admin` and `/app` on session
+- Redirects auth callback by role (admin vs customer)
+- Rewrites bare `/app` paths with locale
+
+## `routes.ts`
+
+Single map of path strings consumed by proxy, nav, and links. Add new product URLs here first.

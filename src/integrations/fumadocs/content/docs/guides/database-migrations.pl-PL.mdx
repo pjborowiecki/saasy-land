@@ -1,0 +1,15 @@
+---
+title: "Migracje bazy"
+description: "Workflow Drizzle generate/migrate na Neon."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Workflow
+
+1. Edit `platform/db/schema.ts`
+2. `bun run db:generate`
+3. Review SQL under `platform/db/migrations`
+4. `bun run db:migrate`
+
+Use pooled `DATABASE_URL` at runtime; prefer unpooled for DDL when available.

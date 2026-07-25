@@ -1,0 +1,17 @@
+---
+title: "Komunikaty i18n"
+description: "Dodawaj i organizuj katalogi next-intl."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Config
+
+- Enabled locales: `integrations/next-intl/i18n.config.ts`
+- Messages split by area under the next-intl integration content
+
+## Rules
+
+- Use `useTranslations` in client, `getTranslations` in server components only
+- Run `bun run check:i18n` before commit
+- Never import `next-intl/server` into client files
