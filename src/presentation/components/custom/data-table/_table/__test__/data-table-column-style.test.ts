@@ -53,12 +53,15 @@ describe("data table column style", () => {
     })
   })
 
-  it("keeps content columns fluid beside the select gutter", () => {
+  it("applies size and minSize as width for content columns", () => {
     expect.hasAssertions()
+
+    const nameSize = 240
+    const nameMinSize = 180
 
     const { result } = renderHook(() =>
       useReactTable({
-        columns: [createDataTableSelectColumn<Row>(), { accessorKey: "name", header: "Name" }],
+        columns: [createDataTableSelectColumn<Row>(), { accessorKey: "name", header: "Name", minSize: nameMinSize, size: nameSize }],
         data: SELECT_TABLE_DATA,
         enableColumnPinning: true,
         getCoreRowModel: getCoreRowModel(),
@@ -71,11 +74,70 @@ describe("data table column style", () => {
     const nameColumn = result.current.getColumn("name")
 
     expect(nameColumn).toBeDefined()
+    expect(nameColumn?.getSize()).toBe(nameSize)
     expect(columnPinningStyle(nameColumn!)).toMatchObject({
-      minWidth: nameColumn!.getSize(),
+      minWidth: nameMinSize,
+      width: nameSize,
     })
-    expect(columnPinningStyle(nameColumn!)).not.toHaveProperty("width")
     expect(columnPinningStyle(nameColumn!)).not.toHaveProperty("maxWidth")
+  })
+
+  it("falls back minWidth to size when columnDef.minSize is undefined", () => {
+    expect.hasAssertions()
+
+    const nameSize = 200
+
+    const { result } = renderHook(() =>
+      useReactTable({
+        columns: [{ accessorKey: "name", header: "Name", size: nameSize }],
+        data: SELECT_TABLE_DATA,
+        getCoreRowModel: getCoreRowModel(),
+      }),
+    )
+
+    const nameColumn = result.current.getColumn("name")
+
+    expect(nameColumn).toBeDefined()
+    Reflect.deleteProperty(nameColumn!.columnDef, "minSize")
+
+    expect(columnPinningStyle(nameColumn!)).toMatchObject({
+      minWidth: nameSize,
+      width: nameSize,
+    })
+    expect(columnPinningStyle(nameColumn!)).not.toHaveProperty("maxWidth")
+  })
+
+  it("applies maxSize as maxWidth for content columns", () => {
+    expect.hasAssertions()
+
+    const nameSize = 240
+    const nameMinSize = 180
+    const nameMaxSize = 320
+
+    const { result } = renderHook(() =>
+      useReactTable({
+        columns: [
+          {
+            accessorKey: "name",
+            header: "Name",
+            maxSize: nameMaxSize,
+            minSize: nameMinSize,
+            size: nameSize,
+          },
+        ],
+        data: SELECT_TABLE_DATA,
+        getCoreRowModel: getCoreRowModel(),
+      }),
+    )
+
+    const nameColumn = result.current.getColumn("name")
+
+    expect(nameColumn).toBeDefined()
+    expect(columnPinningStyle(nameColumn!)).toMatchObject({
+      maxWidth: nameMaxSize,
+      minWidth: nameMinSize,
+      width: nameSize,
+    })
   })
 
   it("sizes and styles the actions column for a compact pinned gutter", () => {

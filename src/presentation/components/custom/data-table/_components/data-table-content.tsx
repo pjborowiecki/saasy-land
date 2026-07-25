@@ -9,8 +9,8 @@ import { useDataTable } from "~/src/presentation/components/custom/data-table/_c
 import { DataTableRow } from "~/src/presentation/components/custom/data-table/_components/data-table-row"
 
 export function DataTableContent(): ReactNode {
-  const { loading, table } = useDataTable()
-  if (loading === true) {
+  const { loading, pendingRows, table } = useDataTable()
+  if (loading === true || (pendingRows !== undefined && pendingRows > 0)) {
     return undefined
   }
 

@@ -9,19 +9,20 @@ import { toast } from "sonner"
 import { settingsRevokeOtherSessions } from "~/src/modules/session/use-cases/revoke-other-sessions.use-case"
 import { settingsRevokeSession } from "~/src/modules/session/use-cases/revoke-session.use-case"
 
+import type { AuthActiveSession } from "~/src/integrations/better-auth/auth.types"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card } from "~/src/presentation/components/shadcn/card"
 
-import { SettingsSecuritySessionRowClient } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-session-row-client"
-import type { SettingsSessionRow } from "~/src/app/[locale]/(admin)/admin/settings/_lib/settings-session.types"
+import { AdminActiveSessionRowClient } from "~/src/app/[locale]/(admin)/admin/_components/admin-active-session-row-client"
 
 interface SettingsSessionsCardClientProps {
-  readonly securitySessions: readonly SettingsSessionRow[]
+  readonly currentSessionId: string | undefined
+  readonly sessions: readonly AuthActiveSession[]
 }
 
-export function SettingsSessionsCardClient({ securitySessions }: SettingsSessionsCardClientProps): JSX.Element {
+export function SettingsSessionsCardClient({ currentSessionId, sessions }: SettingsSessionsCardClientProps): JSX.Element {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const t = useTranslations("pages.admin.settings")
@@ -76,8 +77,14 @@ export function SettingsSessionsCardClient({ securitySessions }: SettingsSession
       </div>
 
       <div className="divide-y divide-border/40">
-        {securitySessions.map((session) => (
-          <SettingsSecuritySessionRowClient key={session.token} isPending={isPending} onRevoke={handleRevokeSession} session={session} />
+        {sessions.map((session) => (
+          <AdminActiveSessionRowClient
+            key={session.token}
+            currentSessionId={currentSessionId}
+            isPending={isPending}
+            onRevoke={handleRevokeSession}
+            session={session}
+          />
         ))}
       </div>
     </Card>

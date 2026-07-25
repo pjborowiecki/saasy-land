@@ -1,9 +1,10 @@
-/* eslint-disable react-perf/jsx-no-new-array-as-prop -- tab panels receive derived catalog lists */
 import type { JSX } from "react"
+
+import type { Category } from "~/src/modules/category/category.types"
+import type { Product } from "~/src/modules/product/product.types"
 
 import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadcn/tabs"
 
-import type { AdminCategoryRow, AdminProductRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsAllTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-all-tab"
 import { ProductsCategoriesTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-categories-tab"
 import { ProductsCollectionsTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-collections-tab"
@@ -12,9 +13,8 @@ import { ProductsOnetimeTab } from "~/src/app/[locale]/(admin)/admin/products/_c
 import { ProductsSubscriptionsTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-subscriptions-tab"
 
 interface ProductsPageTabsProps {
-  readonly products: readonly AdminProductRow[]
-  readonly categories: readonly AdminCategoryRow[]
-  readonly collections: readonly AdminCategoryRow[]
+  readonly products: readonly Product["select"][]
+  readonly categories: readonly Category["select"][]
   readonly labels: {
     readonly all: string
     readonly categories: string
@@ -26,10 +26,7 @@ interface ProductsPageTabsProps {
   }
 }
 
-export function ProductsPageTabs({ products, categories, collections, labels }: ProductsPageTabsProps): JSX.Element {
-  const oneTimeProducts = products.filter((product) => product.type === "One-time")
-  const subscriptionProducts = products.filter((product) => product.type === "Subscription")
-
+export function ProductsPageTabs({ products, categories, labels }: ProductsPageTabsProps): JSX.Element {
   return (
     <Tabs defaultSelectedKey="all" className="w-full">
       <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
@@ -59,10 +56,10 @@ export function ProductsPageTabs({ products, categories, collections, labels }: 
       </div>
 
       <ProductsAllTab products={products} />
-      <ProductsOnetimeTab products={oneTimeProducts} />
-      <ProductsSubscriptionsTab products={subscriptionProducts} />
+      <ProductsOnetimeTab products={products} />
+      <ProductsSubscriptionsTab products={products} />
       <ProductsCategoriesTab categories={categories} />
-      <ProductsCollectionsTab collections={collections} />
+      <ProductsCollectionsTab categories={categories} />
       <ProductsCoursesTab />
     </Tabs>
   )

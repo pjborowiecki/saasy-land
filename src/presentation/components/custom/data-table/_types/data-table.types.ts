@@ -23,6 +23,17 @@ declare module "@tanstack/react-table" {
   }
 }
 
+/**
+ * Column defs accepted by DataTable / `createColumnHelper` arrays.
+ *
+ * Helper accessors infer a concrete `TValue`. `ColumnDef<TData>` defaults
+ * `TValue` to `unknown`, and under `exactOptionalPropertyTypes` those are not
+ * assignable (contravariant optional `cell` / `header` / `footer` templates).
+ * TanStack’s supported escape hatch is `ColumnDef<TData, any>`.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- TanStack ColumnDef TValue variance requires `any` here
+export type DataTableColumnDef<TData extends RowData> = ColumnDef<TData, any>
+
 /** Renderer for the built-in row actions column cell. */
 export type DataTableRowActionsRenderer<TData extends RowData> = (context: CellContext<TData, unknown>) => ReactNode
 
@@ -48,6 +59,7 @@ export interface DataTableToolbarSearchOptions {
 
 export interface DataTableExportCsvOptions {
   filename?: string
+  /** Tooltip / accessible name for the icon button. Defaults to i18n `toolbar.exportCsv`. */
   label?: string
   /** Override the default file download. Receives the generated CSV string. */
   onExport?: (csv: string) => void
@@ -62,19 +74,35 @@ export interface DataTableExportCsvOptions {
 export interface DataTableToolbarFetchOptions {
   /** Override the "Fetch" label. */
   fetchLabel?: string
-  /** True after at least one successful load. */
+  /** Override the in-flight label (defaults to i18n). */
+  fetchingLabel?: string
+  /**
+   * When `false`, the button shows **Fetch** (lazy / not-yet-loaded tables).
+   * Defaults to `true` (**Refetch**) — omit for SSR / already-loaded data.
+   */
   hasFetched?: boolean
   /**
    * True when filters / query conditions changed since the last fetch.
    * Forces the Fetch label (new query) even when `hasFetched` is true.
    */
   isDirty?: boolean
-  /** Disable the control while a request is in flight. */
+  /**
+   * Controlled in-flight override. When omitted, DataTable tracks this from a
+   * Promise-returning `onFetch` (button spinner + optional `pendingRows`).
+   */
   isFetching?: boolean
   /** Called when the user clicks Fetch / Refetch. */
   onFetch: () => void | Promise<void>
+  /**
+   * Skeleton row count while an async `onFetch` is in flight.
+   * Defaults to DataTable’s built-in count; pass `0` to disable.
+   * Prefer this over toggling top-level `options.pendingRows` yourself.
+   */
+  pendingRows?: number
   /** Override the "Refetch" label. */
   refetchLabel?: string
+  /** Override the in-flight label after a prior fetch (defaults to i18n). */
+  refetchingLabel?: string
 }
 
 /**
@@ -126,6 +154,8 @@ export interface DataTableFeatures<TData extends RowData> {
   /** Row selection checkboxes. Defaults to `true`; pass `false` to hide. */
   enableSelectionColumn?: boolean
   loading?: boolean
+  /** Placeholder skeleton rows (toolbar + header stay visible). */
+  pendingRows?: number
   /** Called when the user changes row density from table settings. */
   onRowDensityChange?: (density: DataTableRowDensity) => void
   paginationPageSizeOptions?: readonly number[]
@@ -162,7 +192,7 @@ export interface DataTableClassNames {
 export interface DataTableProviderProps<TData extends RowData> {
   children?: ReactNode
   classNames?: DataTableClassNames
-  columns: ColumnDef<TData>[]
+  columns: DataTableColumnDef<TData>[]
   data: TData[]
   options?: DataTableOptions<TData>
 }
@@ -172,12 +202,16 @@ export type DataTableProps<TData extends RowData> = Omit<DataTableProviderProps<
 export interface DataTableContextValue {
   classNames?: DataTableClassNames
   emptyMessage?: ReactNode
+  /** True while DataTable is tracking a Promise-returning toolbar fetch. */
+  fetchPending: boolean
   globalFilter: string
   loading?: boolean
+  pendingRows?: number
   pagination: PaginationState
   paginationPageSizeOptions?: readonly number[]
   rowDensity: DataTableRowDensity
   rowSelection: RowSelectionState
+  setFetchPending: (pending: boolean) => void
   setRowDensity: (density: DataTableRowDensity) => void
   showFooter: boolean
   showPagination: boolean

@@ -13,8 +13,8 @@ type HookDefaults = Partial<DateOptions>
 export type DateValue = Date | number | string
 
 interface DateFormatter {
-  format: (args: { value: DateValue } & Partial<DateOptions>) => string
-  formatToParts: (args: { value: DateValue } & Partial<DateOptions>) => Intl.DateTimeFormatPart[]
+  formatDate: (args: { value: DateValue } & Partial<DateOptions>) => string
+  formatDateToParts: (args: { value: DateValue } & Partial<DateOptions>) => Intl.DateTimeFormatPart[]
 }
 
 const formatterCache = new Map<string, Intl.DateTimeFormat>()
@@ -55,11 +55,11 @@ export function useDateFormatter(defaults?: HookDefaults): DateFormatter {
     }
 
     return {
-      format: (args: { value: DateValue } & Partial<DateOptions>) => {
+      formatDate: (args: { value: DateValue } & Partial<DateOptions>) => {
         const { formatter, dateValue } = resolve(args)
         return formatter.format(dateValue)
       },
-      formatToParts: (args: { value: DateValue } & Partial<DateOptions>) => {
+      formatDateToParts: (args: { value: DateValue } & Partial<DateOptions>) => {
         const { formatter, dateValue } = resolve(args)
         return formatter.formatToParts(dateValue)
       },

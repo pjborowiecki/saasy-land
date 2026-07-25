@@ -13,4 +13,7 @@ import { authedActionClient } from "~/src/integrations/next-safe-action/action.c
 
 export const listCategories = authedActionClient(PERMISSIONS.category.read)
   .outputSchema(z.array(categoryZodSchemas.select))
-  .action(() => db.select().from(category).orderBy(desc(category.createdAt)))
+  .action(async () => {
+    const rows = await db.select().from(category).orderBy(desc(category.createdAt))
+    return rows
+  })

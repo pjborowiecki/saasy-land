@@ -34,7 +34,7 @@ const dbMocks = vi.hoisted(() => {
     isAnonymous: false,
     name: "Ada Lovelace",
     role: "admin" as const,
-    timezone: nullableJsonValue,
+    timezone: "UTC",
     twoFactorEnabled: false,
     updatedAt,
   }

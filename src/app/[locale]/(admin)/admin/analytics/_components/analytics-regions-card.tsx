@@ -5,8 +5,8 @@ import { getTranslations } from "next-intl/server"
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card, CardContent } from "~/src/presentation/components/shadcn/card"
 
-import { RegionProgressBar } from "~/src/app/[locale]/(admin)/admin/_components/region-progress-bar"
 import type { AdminAnalyticsRegionRow } from "~/src/app/[locale]/(admin)/admin/_types"
+import { RegionProgressBar } from "~/src/app/[locale]/(admin)/admin/analytics/_components/region-progress-bar"
 
 interface AnalyticsRegionsCardProps {
   readonly regions: readonly AdminAnalyticsRegionRow[]

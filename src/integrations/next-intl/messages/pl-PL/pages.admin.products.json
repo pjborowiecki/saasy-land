@@ -40,7 +40,7 @@
     }
   },
   "pagination": {
-    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> products"
+    "info": "Wyświetlanie {start}–{end} z {total} produktów"
   },
   "onetime": {
     "title": "One-time Purchases",

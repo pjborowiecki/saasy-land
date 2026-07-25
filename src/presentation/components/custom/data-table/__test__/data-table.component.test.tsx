@@ -24,6 +24,11 @@ import {
   SortableMarkupTable,
   sortColumnDescending,
 } from "~/src/presentation/components/custom/data-table/__test__/data-table-test-utils"
+import { DataTableBody } from "~/src/presentation/components/custom/data-table/_components/data-table-body"
+import { DataTableContent } from "~/src/presentation/components/custom/data-table/_components/data-table-content"
+import { DataTableFooter } from "~/src/presentation/components/custom/data-table/_components/data-table-footer"
+import { DataTableHeader } from "~/src/presentation/components/custom/data-table/_components/data-table-header"
+import { DataTableProvider, useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
 import { DATA_TABLE } from "~/src/presentation/components/custom/data-table/_constants/data-table.constants"
 import {
   DATA_TABLE_SELECT_COLUMN_DEF,
@@ -31,7 +36,7 @@ import {
   getDataTableSelectHeaderCheckboxPropsFromContext,
   type DataTableSelectCheckboxProps,
 } from "~/src/presentation/components/custom/data-table/_table/data-table-select-column"
-import { DataTable, useDataTable } from "~/src/presentation/components/custom/data-table/data-table"
+import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
 const enMessages = loadLocaleMessagesFromDir("en-US")
 const plMessages = loadLocaleMessagesFromDir("pl-PL")
@@ -240,7 +245,7 @@ function FirstRowName(): JSX.Element {
 }
 
 function CompoundConsumer(): JSX.Element {
-  const { table } = DataTable.useTable()
+  const { table } = useDataTable()
   return <div data-testid="compound-row-count">{table.getRowModel().rows.length}</div>
 }
 
@@ -262,9 +267,9 @@ function SortableTable({ rows }: { rows: Person[] }): JSX.Element {
   )
 
   return (
-    <DataTable.Provider columns={columns} data={rows} options={options}>
+    <DataTableProvider columns={columns} data={rows} options={options}>
       <FirstRowName />
-    </DataTable.Provider>
+    </DataTableProvider>
   )
 }
 
@@ -281,9 +286,9 @@ describe("data table provider", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={columns} data={data} options={coreRowModelOptions}>
+      <DataTableProvider columns={columns} data={data} options={coreRowModelOptions}>
         <RowCount />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-count")).toHaveTextContent("2")
@@ -293,9 +298,9 @@ describe("data table provider", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={columns} data={data}>
+      <DataTableProvider columns={columns} data={data}>
         <RowCount />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-count")).toHaveTextContent("2")
@@ -305,17 +310,17 @@ describe("data table provider", () => {
     expect.hasAssertions()
 
     const { rerender } = render(
-      <DataTable.Provider columns={columns} data={data}>
+      <DataTableProvider columns={columns} data={data}>
         <RowSelectionEnabled />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-selection-enabled")).toHaveTextContent("true")
 
     rerender(
-      <DataTable.Provider columns={columns} data={data} options={disableRowSelectionOptions}>
+      <DataTableProvider columns={columns} data={data} options={disableRowSelectionOptions}>
         <RowSelectionEnabled />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-selection-enabled")).toHaveTextContent("false")
@@ -333,17 +338,17 @@ describe("data table provider", () => {
     expect.hasAssertions()
 
     const { rerender } = render(
-      <DataTable.Provider columns={columns} data={data}>
+      <DataTableProvider columns={columns} data={data}>
         <RowCount />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-count")).toHaveTextContent("2")
 
     rerender(
-      <DataTable.Provider columns={columns} data={singleRowData}>
+      <DataTableProvider columns={columns} data={singleRowData}>
         <RowCount />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-count")).toHaveTextContent("1")
@@ -353,9 +358,9 @@ describe("data table provider", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={columns} data={data} options={overrideOptions}>
+      <DataTableProvider columns={columns} data={data} options={overrideOptions}>
         <RowCount />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-count")).toHaveTextContent("2")
@@ -365,21 +370,21 @@ describe("data table provider", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={columns} data={data}>
+      <DataTableProvider columns={columns} data={data}>
         <CompoundConsumer />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("compound-row-count")).toHaveTextContent("2")
   })
 
-  it("works via DataTable.Provider directly", () => {
+  it("works via DataTableProvider directly", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={columns} data={data}>
+      <DataTableProvider columns={columns} data={data}>
         <RowCount />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByTestId("row-count")).toHaveTextContent("2")
@@ -425,14 +430,14 @@ describe("data table markup", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={columns} data={data}>
+        <DataTableProvider columns={columns} data={data}>
           <table>
-            <DataTable.Header />
-            <DataTable.Body>
-              <DataTable.Content />
-            </DataTable.Body>
+            <DataTableHeader />
+            <DataTableBody>
+              <DataTableContent />
+            </DataTableBody>
           </table>
-        </DataTable.Provider>
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 
@@ -472,11 +477,11 @@ describe("data table markup", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={footerColumns} data={data} options={footerPinningOptions}>
+      <DataTableProvider columns={footerColumns} data={data} options={footerPinningOptions}>
         <table>
-          <DataTable.Footer />
+          <DataTableFooter />
         </table>
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByRole("rowgroup")).toHaveTextContent("2 users")
@@ -490,14 +495,14 @@ describe("data table markup", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={footerColumns} data={data} options={footerCoreOptions}>
+      <DataTableProvider columns={footerColumns} data={data} options={footerCoreOptions}>
         <table>
-          <DataTable.Footer />
+          <DataTableFooter />
         </table>
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
-    expect(screen.getByText("2 users")).toHaveStyle({ minWidth: "150px" })
+    expect(screen.getByText("2 users")).toHaveStyle({ minWidth: "20px", width: "150px" })
   })
 })
 
@@ -584,11 +589,11 @@ describe("data table columns", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={styledColumns} data={data} options={pinningOptions}>
+        <DataTableProvider columns={styledColumns} data={data} options={pinningOptions}>
           <table>
-            <DataTable.Header />
+            <DataTableHeader />
           </table>
-        </DataTable.Provider>
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 
@@ -605,13 +610,13 @@ describe("data table columns", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={styledColumns} data={data} options={pinningOptions}>
+      <DataTableProvider columns={styledColumns} data={data} options={pinningOptions}>
         <table>
-          <DataTable.Body>
-            <DataTable.Content />
-          </DataTable.Body>
+          <DataTableBody>
+            <DataTableContent />
+          </DataTableBody>
         </table>
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(screen.getByRole("cell", { name: "Alice" })).toHaveClass("text-center", "bg-card")
@@ -654,9 +659,9 @@ describe("data table columns", () => {
     expect.hasAssertions()
 
     render(
-      <DataTable.Provider columns={groupedColumns} data={data} options={coreRowModelOptions}>
+      <DataTableProvider columns={groupedColumns} data={data} options={coreRowModelOptions}>
         <PlaceholderProbe />
-      </DataTable.Provider>,
+      </DataTableProvider>,
     )
 
     expect(Number(screen.getByTestId("header-placeholders").textContent)).toBeGreaterThan(0)
@@ -668,12 +673,12 @@ describe("data table columns", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={groupedColumns} data={data} options={groupedFooterOptions}>
+        <DataTableProvider columns={groupedColumns} data={data} options={groupedFooterOptions}>
           <table>
-            <DataTable.Header />
-            <DataTable.Footer />
+            <DataTableHeader />
+            <DataTableFooter />
           </table>
-        </DataTable.Provider>
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 

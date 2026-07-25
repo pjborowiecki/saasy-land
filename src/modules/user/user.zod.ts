@@ -56,7 +56,7 @@ const updateUser = z
   .object({
     image: z.string().max(USER_IMAGE_MAX_LENGTH).nullable().optional(),
     name: nameSchema.optional(),
-    timezone: z.enum(TIMEZONE_CODES).nullable().optional(),
+    timezone: z.enum(TIMEZONE_CODES).optional(),
     userId: userIdField,
   })
   .refine(({ userId: _userId, ...fields }) => Object.values(fields).some((val) => val !== undefined), {

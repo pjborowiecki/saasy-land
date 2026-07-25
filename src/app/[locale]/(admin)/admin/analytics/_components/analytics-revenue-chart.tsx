@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server"
 
 import { Card } from "~/src/presentation/components/shadcn/card"
 
-import { AnalyticsChartBar, type AnalyticsChartBarData } from "~/src/app/[locale]/(admin)/admin/_components/analytics-chart-bar"
+import { AnalyticsChartBar, type AnalyticsChartBarData } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-chart-bar"
 
 const ANALYTICS_CHART_BARS: AnalyticsChartBarData[] = [
   { height1: "45%", height2: "15%", id: "1", label: "May 1: $2,400" },

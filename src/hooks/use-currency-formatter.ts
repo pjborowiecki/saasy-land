@@ -14,8 +14,8 @@ type HookDefaults = Partial<CurrencyOptions>
 type RequiresCurrency<D> = D extends { currency: string } ? Partial<CurrencyOptions> : Partial<CurrencyOptions> & { currency: string }
 
 interface CurrencyFormatter<D extends HookDefaults> {
-  format: (args: { value: number } & RequiresCurrency<D>) => string
-  formatToParts: (args: { value: number } & RequiresCurrency<D>) => Intl.NumberFormatPart[]
+  formatCurrency: (args: { value: number } & RequiresCurrency<D>) => string
+  formatCurrencyToParts: (args: { value: number } & RequiresCurrency<D>) => Intl.NumberFormatPart[]
 }
 
 const formatterCache = new Map<string, Intl.NumberFormat>()
@@ -59,11 +59,11 @@ export function useCurrencyFormatter<const D extends HookDefaults>(defaults?: D)
     }
 
     return {
-      format: (args: { value: number } & RequiresCurrency<D>) => {
+      formatCurrency: (args: { value: number } & RequiresCurrency<D>) => {
         const { formatter, value } = resolve(args)
         return formatter.format(value)
       },
-      formatToParts: (args: { value: number } & RequiresCurrency<D>) => {
+      formatCurrencyToParts: (args: { value: number } & RequiresCurrency<D>) => {
         const { formatter, value } = resolve(args)
         return formatter.formatToParts(value)
       },

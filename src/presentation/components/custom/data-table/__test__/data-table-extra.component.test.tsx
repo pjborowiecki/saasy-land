@@ -11,6 +11,8 @@ import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.uti
 
 import { DropdownMenuItem } from "~/src/presentation/components/shadcn/dropdown-menu"
 
+import { DataTablePagination } from "~/src/presentation/components/custom/data-table/_components/data-table-pagination"
+import { DataTableProvider, useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
 import { DATA_TABLE } from "~/src/presentation/components/custom/data-table/_constants/data-table.constants"
 import {
   DATA_TABLE_SELECT_COLUMN_DEF,
@@ -18,7 +20,7 @@ import {
   getDataTableSelectHeaderCheckboxPropsFromContext,
   type DataTableSelectCheckboxProps,
 } from "~/src/presentation/components/custom/data-table/_table/data-table-select-column"
-import { DataTable, DataTableRowActionsButton } from "~/src/presentation/components/custom/data-table/data-table"
+import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
 const enMessages = loadLocaleMessagesFromDir("en-US")
 const { TEST_IDS } = DATA_TABLE
@@ -66,9 +68,9 @@ function renderCustomRowActions(_context: CellContext<Person, unknown>): JSX.Ele
 
 function renderDefaultRowActions(_context: CellContext<Person, unknown>): JSX.Element {
   return (
-    <DataTableRowActionsButton>
+    <DataTable.RowActionsButton>
       <DropdownMenuItem>Edit person</DropdownMenuItem>
-    </DataTableRowActionsButton>
+    </DataTable.RowActionsButton>
   )
 }
 
@@ -128,7 +130,7 @@ const thirtyRows: Person[] = Array.from({ length: THIRTY_ROW_COUNT }, (_, index)
 }))
 
 function ActionsPinProbe(): JSX.Element {
-  const { table } = DataTable.useTable()
+  const { table } = useDataTable()
   const actionsColumn = table.getAllLeafColumns().find((column) => column.id === "actions")
 
   return <span data-testid="actions-pin">{String(actionsColumn?.getIsPinned())}</span>
@@ -149,9 +151,9 @@ describe("data table pagination extras", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={columns} data={data} options={hiddenPaginationOptions}>
-          <DataTable.Pagination />
-        </DataTable.Provider>
+        <DataTableProvider columns={columns} data={data} options={hiddenPaginationOptions}>
+          <DataTablePagination />
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 
@@ -163,9 +165,9 @@ describe("data table pagination extras", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider classNames={paginationClassNames} columns={columns} data={paginatedData}>
-          <DataTable.Pagination />
-        </DataTable.Provider>
+        <DataTableProvider classNames={paginationClassNames} columns={columns} data={paginatedData}>
+          <DataTablePagination />
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 
@@ -234,7 +236,7 @@ describe("data table pagination extras", () => {
     const user = userEvent.setup()
 
     function PaginationProbe(): JSX.Element {
-      const { table } = DataTable.useTable()
+      const { table } = useDataTable()
       const handleGoToPageTwo = useCallback(() => {
         table.options.onPaginationChange?.({ pageIndex: PAGE_TWO_INDEX, pageSize: DEFAULT_PAGE_SIZE })
       }, [table])
@@ -248,10 +250,10 @@ describe("data table pagination extras", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={columns} data={paginatedData}>
+        <DataTableProvider columns={columns} data={paginatedData}>
           <PaginationProbe />
-          <DataTable.Pagination />
-        </DataTable.Provider>
+          <DataTablePagination />
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 
@@ -407,9 +409,9 @@ describe("data table system columns", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={columns} data={data} options={defaultRowActionsOptions}>
+        <DataTableProvider columns={columns} data={data} options={defaultRowActionsOptions}>
           <ActionsPinProbe />
-        </DataTable.Provider>
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 
@@ -445,7 +447,7 @@ describe("data table toolbar chrome", () => {
       </NextIntlClientProvider>,
     )
 
-    expect(screen.getByTestId("data-table-toolbar-export-csv")).toHaveTextContent("Export CSV")
+    expect(screen.getByTestId("data-table-toolbar-export-csv")).toHaveAccessibleName("Export CSV")
     expect(screen.getByRole("button", { name: "Add" })).toBeInTheDocument()
     expect(screen.queryByTestId("data-table-toolbar-filters")).not.toBeInTheDocument()
     expect(screen.queryByRole("button", { name: "Role filter" })).not.toBeInTheDocument()
@@ -473,7 +475,7 @@ describe("data table toolbar chrome", () => {
   })
 })
 
-describe("data table toolbar fetch and settings", () => {
+describe("data table toolbar fetch", () => {
   it("shows Fetch then Refetch based on fetch state and dirty filters", async () => {
     expect.hasAssertions()
 
@@ -536,6 +538,62 @@ describe("data table toolbar fetch and settings", () => {
     expect(fetchButton).toHaveTextContent("Fetch")
   })
 
+  it("tracks pending state while an async onFetch promise settles", async () => {
+    expect.hasAssertions()
+
+    const user = userEvent.setup()
+    const { promise: fetchPromise, resolve: resolveFetch } = Promise.withResolvers<void>()
+    const onFetch = vi.fn<() => Promise<void>>(() => fetchPromise)
+    const fetchCallCount = 1
+
+    function AsyncFetchHarness(): JSX.Element {
+      const [hasFetched, setHasFetched] = useState(false)
+
+      const handleFetch = useCallback(async () => {
+        await onFetch()
+        setHasFetched(true)
+      }, [])
+
+      const options = useMemo(
+        () => ({
+          toolbar: {
+            fetch: {
+              hasFetched,
+              onFetch: handleFetch,
+            },
+          },
+        }),
+        [handleFetch, hasFetched],
+      )
+
+      return <DataTable columns={columns} data={data} options={options} />
+    }
+
+    render(
+      <NextIntlClientProvider locale="en-US" messages={enMessages}>
+        <AsyncFetchHarness />
+      </NextIntlClientProvider>,
+    )
+
+    await user.click(screen.getByTestId("data-table-toolbar-fetch"))
+
+    expect(onFetch).toHaveBeenCalledTimes(fetchCallCount)
+
+    // Remounts without TooltipTrigger while pending — re-query after click.
+    const pendingFetchButton = screen.getByTestId("data-table-toolbar-fetch")
+    expect(pendingFetchButton).toBeDisabled()
+    expect(pendingFetchButton).toHaveTextContent("Fetching...")
+
+    resolveFetch()
+    await fetchPromise
+    await vi.waitFor(() => {
+      expect(screen.getByTestId("data-table-toolbar-fetch")).toBeEnabled()
+    })
+    expect(screen.getByTestId("data-table-toolbar-fetch")).toHaveTextContent("Refetch")
+  })
+})
+
+describe("data table toolbar settings and visibility", () => {
   it("changes row density from table settings", async () => {
     expect.hasAssertions()
 

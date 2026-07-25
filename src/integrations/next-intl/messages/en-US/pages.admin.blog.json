@@ -45,6 +45,6 @@
     "actions": "Actions"
   },
   "pagination": {
-    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> posts"
+    "info": "Showing {start} to {end} of {total} posts"
   }
 }

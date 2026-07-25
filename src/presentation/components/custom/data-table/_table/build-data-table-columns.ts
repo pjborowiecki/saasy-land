@@ -1,4 +1,4 @@
-import type { ColumnDef, RowData } from "@tanstack/react-table"
+import type { RowData } from "@tanstack/react-table"
 
 import { DATA_TABLE_SELECT_COLUMN_ID } from "~/src/presentation/components/custom/data-table/_table/data-table-select-column"
 import {
@@ -6,9 +6,12 @@ import {
   createDataTableSelectColumn,
   DATA_TABLE_ACTIONS_COLUMN_ID,
 } from "~/src/presentation/components/custom/data-table/_table/data-table-system-columns"
-import type { DataTableRowActionsRenderer } from "~/src/presentation/components/custom/data-table/_types/data-table.types"
+import type {
+  DataTableColumnDef,
+  DataTableRowActionsRenderer,
+} from "~/src/presentation/components/custom/data-table/_types/data-table.types"
 
-function hasColumnId<TData extends RowData>(columns: ColumnDef<TData>[], columnId: string): boolean {
+function hasColumnId<TData extends RowData>(columns: DataTableColumnDef<TData>[], columnId: string): boolean {
   return columns.some((column) => column.id === columnId)
 }
 
@@ -18,9 +21,9 @@ export interface BuildDataTableColumnsOptions<TData extends RowData> {
 }
 
 export function buildDataTableColumns<TData extends RowData>(
-  columns: ColumnDef<TData>[],
+  columns: DataTableColumnDef<TData>[],
   options?: BuildDataTableColumnsOptions<TData>,
-): ColumnDef<TData>[] {
+): DataTableColumnDef<TData>[] {
   if (options === undefined) {
     return columns
   }

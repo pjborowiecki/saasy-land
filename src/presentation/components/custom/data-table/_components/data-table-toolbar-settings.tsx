@@ -11,6 +11,7 @@ import type { Selection } from "react-aria-components"
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Popover, PopoverHeader, PopoverTitle, PopoverTrigger } from "~/src/presentation/components/shadcn/popover"
 import { ToggleGroup, ToggleGroupItem } from "~/src/presentation/components/shadcn/toggle-group"
+import { Tooltip, TooltipTrigger } from "~/src/presentation/components/shadcn/tooltip"
 
 import { useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
 import { DATA_TABLE } from "~/src/presentation/components/custom/data-table/_constants/data-table.constants"
@@ -48,17 +49,22 @@ export function DataTableToolbarSettings(): JSX.Element {
     [setRowDensity],
   )
 
+  const triggerLabel = t("components.custom.data-table.settings.trigger")
+
   return (
     <PopoverTrigger>
-      <Button
-        aria-label={t("components.custom.data-table.settings.trigger")}
-        className="size-10 shrink-0"
-        data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_SETTINGS}
-        size="icon"
-        variant="outline"
-      >
-        <Settings2 className="size-4 text-muted-foreground" />
-      </Button>
+      <TooltipTrigger>
+        <Button
+          aria-label={triggerLabel}
+          className="size-10 shrink-0"
+          data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_SETTINGS}
+          size="icon"
+          variant="outline"
+        >
+          <Settings2 className="size-4 text-muted-foreground" />
+        </Button>
+        <Tooltip>{triggerLabel}</Tooltip>
+      </TooltipTrigger>
       <Popover className="w-64 gap-3 p-3" offset={6} placement="bottom end">
         <PopoverHeader>
           <PopoverTitle>{t("components.custom.data-table.settings.title")}</PopoverTitle>

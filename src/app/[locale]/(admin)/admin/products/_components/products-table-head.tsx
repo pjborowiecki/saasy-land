@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { AdminTableCheckbox } from "~/src/app/[locale]/(admin)/admin/_components/admin-table-checkbox"
+import { AdminTableCheckbox } from "~/src/app/[locale]/(admin)/admin/products/_components/admin-table-checkbox"
 
 type ProductsTableHeadVariant = "all" | "subscriptions" | "categories" | "collections"
 

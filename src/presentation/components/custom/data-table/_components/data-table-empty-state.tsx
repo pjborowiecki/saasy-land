@@ -18,12 +18,12 @@ export interface DataTableEmptyStateProps extends Omit<ComponentProps<typeof Tab
 
 export function DataTableEmptyState({ children, className, colSpan, ...props }: Readonly<DataTableEmptyStateProps>): ReactNode {
   const t = useTranslations()
-  const { classNames, emptyMessage, loading, table } = useDataTable()
+  const { classNames, emptyMessage, loading, pendingRows, table } = useDataTable()
   const totalRowCount = table.getFilteredRowModel().rows.length
   const columnCount = table.getAllLeafColumns().length
   const content = children ?? emptyMessage ?? t("components.custom.data-table.empty")
 
-  if (loading === true || totalRowCount > 0) {
+  if (loading === true || (pendingRows !== undefined && pendingRows > 0) || totalRowCount > 0) {
     return undefined
   }
 

@@ -37,7 +37,7 @@ describe("use currency formatter component", () => {
 
     const expected = new Intl.NumberFormat("en-US", { currency: "USD", style: "currency" }).format(USD_SAMPLE_AMOUNT)
 
-    expect(result.current.format({ value: USD_SAMPLE_AMOUNT })).toBe(expected)
+    expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe(expected)
   })
 
   it("throws when resolved currency is empty", () => {
@@ -47,7 +47,7 @@ describe("use currency formatter component", () => {
       wrapper: createWrapper("en-US"),
     })
 
-    expect(() => result.current.format({ value: MINIMAL_AMOUNT })).toThrow("formatCurrency requires a currency code")
+    expect(() => result.current.formatCurrency({ value: MINIMAL_AMOUNT })).toThrow("formatCurrency requires a currency code")
   })
 
   it("accepts currency on each call when defaults omit it", () => {
@@ -59,7 +59,7 @@ describe("use currency formatter component", () => {
 
     const expected = new Intl.NumberFormat("en-US", { currency: "EUR", style: "currency" }).format(EUR_SAMPLE_AMOUNT)
 
-    expect(result.current.format({ currency: "EUR", value: EUR_SAMPLE_AMOUNT })).toBe(expected)
+    expect(result.current.formatCurrency({ currency: "EUR", value: EUR_SAMPLE_AMOUNT })).toBe(expected)
   })
 
   it("prefers hook default locale over route locale", () => {
@@ -69,7 +69,7 @@ describe("use currency formatter component", () => {
 
     const expected = new Intl.NumberFormat("de-DE", { currency: "EUR", style: "currency" }).format(LOCALE_COMPARE_AMOUNT)
 
-    expect(result.current.format({ value: LOCALE_COMPARE_AMOUNT })).toBe(expected)
+    expect(result.current.formatCurrency({ value: LOCALE_COMPARE_AMOUNT })).toBe(expected)
   })
 
   it("prefers per-call locale over hook and route locale", () => {
@@ -79,17 +79,17 @@ describe("use currency formatter component", () => {
 
     const expected = new Intl.NumberFormat("fr-FR", { currency: "EUR", style: "currency" }).format(LOCALE_COMPARE_AMOUNT)
 
-    expect(result.current.format({ locale: "fr-FR", value: LOCALE_COMPARE_AMOUNT })).toBe(expected)
+    expect(result.current.formatCurrency({ locale: "fr-FR", value: LOCALE_COMPARE_AMOUNT })).toBe(expected)
   })
 
-  it("formatToParts returns Intl parts for the resolved locale", () => {
+  it("formatCurrencyToParts returns Intl parts for the resolved locale", () => {
     expect.hasAssertions()
 
     const { result } = renderHook(() => useCurrencyFormatter({ currency: "USD" }), {
       wrapper: createWrapper("en-US"),
     })
 
-    const parts = result.current.formatToParts({ value: PARTS_SAMPLE_AMOUNT })
+    const parts = result.current.formatCurrencyToParts({ value: PARTS_SAMPLE_AMOUNT })
 
     expect(parts.some((part) => part.type === "currency")).toBe(true)
     expect(parts.some((part) => part.type === "integer")).toBe(true)
@@ -104,7 +104,7 @@ describe("use currency formatter component", () => {
 
     const expected = new Intl.NumberFormat("pl-PL", { currency: "PLN", style: "currency" }).format(PLN_SAMPLE_AMOUNT)
 
-    expect(result.current.format({ value: PLN_SAMPLE_AMOUNT })).toBe(expected)
+    expect(result.current.formatCurrency({ value: PLN_SAMPLE_AMOUNT })).toBe(expected)
   })
 
   it("formats with multiple default Intl options for stable cache keys", () => {
@@ -120,6 +120,6 @@ describe("use currency formatter component", () => {
       style: "currency",
     }).format(USD_SAMPLE_AMOUNT)
 
-    expect(result.current.format({ value: USD_SAMPLE_AMOUNT })).toBe(expected)
+    expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe(expected)
   })
 })

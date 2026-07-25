@@ -36,6 +36,23 @@ import type {
 const EMPTY_SEARCH = ""
 const DEFAULT_ROW_DENSITY = DATA_TABLE.ROW_DENSITY.DEFAULT
 
+function resolveToolbarFetchPendingRows(
+  toolbar: DataTableFeatures<RowData>["toolbar"],
+  fetchPending: boolean,
+  pendingRows: number | undefined,
+): number | undefined {
+  const controlledFetchPending = toolbar !== false && toolbar !== undefined && toolbar.fetch?.isFetching === true
+  const fetchInFlight = controlledFetchPending || fetchPending
+  const fetchPendingRowCount =
+    toolbar === false || toolbar === undefined ? undefined : (toolbar.fetch?.pendingRows ?? DATA_TABLE.FETCH_PENDING_ROWS)
+
+  if (fetchInFlight && fetchPendingRowCount !== undefined && fetchPendingRowCount > 0) {
+    return fetchPendingRowCount
+  }
+
+  return pendingRows
+}
+
 const DataTableContext = createContext<DataTableContextValue | undefined>(undefined)
 
 export function useDataTable(): DataTableContextValue {
@@ -219,6 +236,7 @@ export function DataTableProvider<TData extends RowData>(props: Readonly<DataTab
     emptyMessage,
     enableSelectionColumn = true,
     loading,
+    pendingRows,
     onRowDensityChange,
     paginationPageSizeOptions,
     rowActions,
@@ -238,9 +256,12 @@ export function DataTableProvider<TData extends RowData>(props: Readonly<DataTab
     resolveGlobalFilterValue(tableOptions.initialState?.globalFilter, EMPTY_SEARCH),
   )
   const [uncontrolledRowDensity, setUncontrolledRowDensity] = useState<DataTableRowDensity>(() => rowDensityOption ?? DEFAULT_ROW_DENSITY)
+  const [fetchPending, setFetchPending] = useState(false)
 
   const isRowDensityControlled = rowDensityOption !== undefined && onRowDensityChange !== undefined
   const rowDensity = isRowDensityControlled ? rowDensityOption : uncontrolledRowDensity
+
+  const resolvedPendingRows = resolveToolbarFetchPendingRows(toolbar, fetchPending, pendingRows)
 
   const setRowDensity = useCallback(
     (density: DataTableRowDensity) => {
@@ -276,10 +297,12 @@ export function DataTableProvider<TData extends RowData>(props: Readonly<DataTab
 
   const contextValue = useMemo((): DataTableContextValue => {
     const value: DataTableContextValue = {
+      fetchPending,
       globalFilter: resolvedGlobalFilter,
       pagination: tableState.pagination,
       rowDensity,
       rowSelection: tableState.rowSelection,
+      setFetchPending,
       setRowDensity,
       showFooter,
       showPagination,
@@ -291,6 +314,7 @@ export function DataTableProvider<TData extends RowData>(props: Readonly<DataTab
     assignOptionalContextField(value, "classNames", classNames)
     assignOptionalContextField(value, "emptyMessage", emptyMessage)
     assignOptionalContextField(value, "loading", loading)
+    assignOptionalContextField(value, "pendingRows", resolvedPendingRows)
     assignOptionalContextField(value, "paginationPageSizeOptions", paginationPageSizeOptions)
     assignOptionalContextField(value, "toolbar", toolbar)
 
@@ -298,9 +322,11 @@ export function DataTableProvider<TData extends RowData>(props: Readonly<DataTab
   }, [
     classNames,
     emptyMessage,
+    fetchPending,
     loading,
     paginationPageSizeOptions,
     resolvedGlobalFilter,
+    resolvedPendingRows,
     rowDensity,
     setRowDensity,
     showFooter,

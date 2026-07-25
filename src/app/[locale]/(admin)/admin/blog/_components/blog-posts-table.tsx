@@ -9,7 +9,6 @@ import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import { PAGINATION_FIRST_PAGE } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
-import { paginationHighlight } from "~/src/app/[locale]/(admin)/admin/_lib/pagination-highlight"
 import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { BlogPostTableRow } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-table-row"
 
@@ -51,9 +50,8 @@ async function BlogPostsTablePagination(): Promise<JSX.Element> {
   return (
     <div className="flex items-center justify-between border-t border-border/40 bg-secondary/10 px-4 py-3">
       <span className="text-xs font-medium text-muted-foreground">
-        {t.rich("pagination.info", {
+        {t("pagination.info", {
           end: 6,
-          highlight: paginationHighlight,
           start: 1,
           total: 6,
         })}

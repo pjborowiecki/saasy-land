@@ -25,6 +25,7 @@ const DATA_TABLE_FEATURE_KEYS = [
   "emptyMessage",
   "enableSelectionColumn",
   "loading",
+  "pendingRows",
   "onRowDensityChange",
   "paginationPageSizeOptions",
   "rowActions",

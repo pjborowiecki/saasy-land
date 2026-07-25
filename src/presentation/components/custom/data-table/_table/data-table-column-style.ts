@@ -50,14 +50,25 @@ function pinnedZIndex(pinned: "left" | "right", role: DataTableColumnStyleRole):
 
 function columnWidthStyle<TData extends RowData>(column: Column<TData>): CSSProperties {
   const size = column.getSize()
+  const { maxSize, minSize } = column.columnDef
+  const resolvedMinWidth = minSize ?? size
 
   // Locked gutters (select / actions): hard-cap so `table-fixed` leftovers never stretch them.
   if (isFixedSizeColumn(column)) {
     return { boxSizing: "border-box", maxWidth: size, minWidth: size, width: size }
   }
 
-  // Flexible content columns absorb remaining width; minWidth keeps paging stable enough.
-  return { minWidth: size }
+  const style: CSSProperties = {
+    boxSizing: "border-box",
+    minWidth: resolvedMinWidth,
+    width: size,
+  }
+
+  if (typeof maxSize === "number" && Number.isFinite(maxSize) && maxSize < Number.MAX_SAFE_INTEGER) {
+    style.maxWidth = maxSize
+  }
+
+  return style
 }
 
 export function columnPinningStyle<TData extends RowData>(column: Column<TData>, role: DataTableColumnStyleRole = "cell"): CSSProperties {

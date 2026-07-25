@@ -21,7 +21,7 @@ export function DataTableRow<TData extends RowData>({ className, row, ...props }
   return (
     <TableRow
       // Distinct from header `bg-muted` so a selected first row doesn’t fuse with the header band.
-      className={cn("data-[state=selected]:bg-secondary/40", classNames?.row, className)}
+      className={cn("border-b border-border/40 data-[state=selected]:bg-secondary/40", classNames?.row, className)}
       data-state={row?.getIsSelected() === true ? "selected" : undefined}
       {...props}
     />
