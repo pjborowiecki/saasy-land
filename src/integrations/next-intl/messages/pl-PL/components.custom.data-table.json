@@ -30,8 +30,10 @@
   "toolbar": {
     "exportCsv": "Eksportuj CSV",
     "fetch": "Pobierz",
-    "filtersToggle": "Pokaż filtry",
+    "fetching": "Pobieranie...",
+    "filtersToggle": "Filtry",
     "refetch": "Odśwież",
+    "refetching": "Odświeżanie...",
     "searchPlaceholder": "Szukaj…"
   }
 }

@@ -1,13 +1,5 @@
 export type StatusColor = "amber" | "emerald" | "rose"
 
-export type ProductStatusColor = "amber" | "emerald" | "neutral" | "rose"
-
-export type ProductIcon = "Book" | "Crown" | "Layers" | "Server" | "Shirt" | "Users" | "Video"
-
-export type ProductTagIcon = "Bookmark" | "Building2" | "Code" | "Folder" | "Star"
-
-export type CategoryIcon = "Archive" | "FolderOpen" | "Puzzle"
-
 export type RoleIcon = "Code" | "Eye" | "HelpCircle" | "Pen" | "Shield"
 
 export type RoleBadgeColor = "default" | "fuchsia"
@@ -15,20 +7,12 @@ export type RoleBadgeColor = "default" | "fuchsia"
 export interface DashboardUserRow {
   avatar?: string
   email: string
-  id: number
+  id: string
   initials?: string
   lastActive: string
   name: string
   role: string
   status: string
-}
-
-export interface DashboardSessionItem {
-  device: string
-  icon: string
-  id: number
-  isCurrent: boolean
-  location: string
 }
 
 export interface AdminUserRow {
@@ -64,38 +48,6 @@ export interface AdminRoleRow {
   type: string
   typeColor: RoleBadgeColor
   usersCount: string
-}
-
-export interface AdminProductTag {
-  color: string
-  icon: ProductTagIcon
-  text: string
-}
-
-export interface AdminProductRow {
-  billingCycle: string
-  description: string
-  icon: ProductIcon
-  iconColor: RoleBadgeColor | "emerald"
-  id: string
-  metrics: string
-  name: string
-  price: string
-  status: string
-  statusColor: ProductStatusColor
-  tags?: AdminProductTag[]
-  type: string
-}
-
-export interface AdminCategoryRow {
-  description: string
-  icon: CategoryIcon
-  id: string
-  items: string
-  lastUpdated: string
-  name: string
-  visibility: string
-  visibilityStatus: "hidden" | "public"
 }
 
 export interface AdminPaymentRow {

@@ -45,6 +45,6 @@
     "actions": "Akcje"
   },
   "pagination": {
-    "info": "Wyświetlanie od <highlight>{start}</highlight> do <highlight>{end}</highlight> z <highlight>{total}</highlight> postów"
+    "info": "Wyświetlanie {start}–{end} z {total} postów"
   }
 }

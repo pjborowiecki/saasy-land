@@ -6,11 +6,13 @@ import { type ComponentProps, type JSX, type ReactNode, useCallback, useEffect, 
 
 import { Download, Filter, Loader2, RefreshCw, Search } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { flushSync } from "react-dom"
 
 import { cn } from "~/src/utils"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Input } from "~/src/presentation/components/shadcn/input"
+import { Tooltip, TooltipTrigger } from "~/src/presentation/components/shadcn/tooltip"
 
 import { useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
 import { DataTableToolbarSettings } from "~/src/presentation/components/custom/data-table/_components/data-table-toolbar-settings"
@@ -178,52 +180,102 @@ function DataTableToolbarExportCsv({ exportCsv }: Readonly<{ exportCsv: true | D
   }, [filename, onExport, table])
 
   return (
-    <Button
-      variant="outline"
-      size="sm"
-      className="h-10 gap-2 whitespace-nowrap"
-      data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_EXPORT_CSV}
-      type="button"
-      onPress={handleExport}
-    >
-      <Download className="size-4 text-muted-foreground" />
-      {label}
-    </Button>
+    <TooltipTrigger>
+      <Button
+        aria-label={label}
+        className="size-10 shrink-0"
+        data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_EXPORT_CSV}
+        size="icon"
+        type="button"
+        variant="outline"
+        onPress={handleExport}
+      >
+        <Download className="size-4 text-muted-foreground" />
+      </Button>
+      <Tooltip>{label}</Tooltip>
+    </TooltipTrigger>
   )
+}
+
+function isThenable(value: unknown): value is PromiseLike<unknown> {
+  return typeof value === "object" && value !== null && "then" in value && typeof value.then === "function"
 }
 
 function DataTableToolbarFetch({ fetch }: Readonly<{ fetch: DataTableToolbarFetchOptions }>): JSX.Element {
   const t = useTranslations()
-  const hasFetched = fetch.hasFetched === true
-  const isDirty = fetch.isDirty === true
+  const { fetchPending, loading, setFetchPending } = useDataTable()
+
+  const {
+    fetchLabel: fetchLabelOverride,
+    fetchingLabel: fetchingLabelOverride,
+    hasFetched = true,
+    isDirty = false,
+    isFetching: fetchIsFetching,
+    onFetch,
+    refetchLabel: refetchLabelOverride,
+    refetchingLabel: refetchingLabelOverride,
+  } = fetch
+
+  const isFetching = fetchIsFetching === true || fetchPending || loading === true
   const showFetchLabel = !hasFetched || isDirty
-  const label = showFetchLabel
-    ? (fetch.fetchLabel ?? t("components.custom.data-table.toolbar.fetch"))
-    : (fetch.refetchLabel ?? t("components.custom.data-table.toolbar.refetch"))
+  const fetchLabel = fetchLabelOverride ?? t("components.custom.data-table.toolbar.fetch")
+  const refetchLabel = refetchLabelOverride ?? t("components.custom.data-table.toolbar.refetch")
+  const fetchingLabel = fetchingLabelOverride ?? t("components.custom.data-table.toolbar.fetching")
+  const refetchingLabel = refetchingLabelOverride ?? t("components.custom.data-table.toolbar.refetching")
+  const idleLabel = showFetchLabel ? fetchLabel : refetchLabel
+  const inFlightLabel = showFetchLabel ? fetchingLabel : refetchingLabel
+  const label = isFetching ? inFlightLabel : idleLabel
 
   const handleFetch = useCallback(() => {
-    void fetch.onFetch()
-  }, [fetch])
+    const result = onFetch()
+    if (!isThenable(result) || fetchIsFetching !== undefined) {
+      return
+    }
 
-  return (
+    flushSync(() => {
+      setFetchPending(true)
+    })
+
+    void (async () => {
+      try {
+        await result
+      } finally {
+        setFetchPending(false)
+      }
+    })()
+  }, [fetchIsFetching, onFetch, setFetchPending])
+
+  const button = (
     <Button
-      variant="outline"
+      variant="secondary"
       size="sm"
-      className={cn("h-10 gap-2 whitespace-nowrap", {
-        "border-primary/40 text-foreground": isDirty,
+      className={cn("h-10 gap-2 whitespace-nowrap", DATA_TABLE.CLASSES.LAYOUT.TOOLBAR_FETCH, {
+        "ring-1 ring-primary/40": isDirty,
       })}
       data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_FETCH}
-      isDisabled={fetch.isFetching === true}
+      isDisabled={isFetching}
       type="button"
       onPress={handleFetch}
     >
-      {fetch.isFetching === true ? (
-        <Loader2 className="size-4 animate-spin text-muted-foreground" />
+      {isFetching ? (
+        <Loader2 className="size-4 shrink-0 animate-spin text-muted-foreground" />
       ) : (
-        <RefreshCw className="size-4 text-muted-foreground" />
+        <RefreshCw className="size-4 shrink-0 text-muted-foreground" />
       )}
       {label}
     </Button>
+  )
+
+  // Disabled buttons are not focusable; wrapping them in TooltipTrigger's Focusable warns.
+  if (isFetching) {
+    return button
+  }
+
+  return (
+    <TooltipTrigger>
+      {button}
+      <Tooltip>{label}</Tooltip>
+    </TooltipTrigger>
   )
 }
 
@@ -240,21 +292,26 @@ function DataTableToolbarFiltersToggle({
     onOpenChange(!open)
   }, [onOpenChange, open])
 
+  const label = t("components.custom.data-table.toolbar.filtersToggle")
+
   return (
-    <Button
-      aria-expanded={open}
-      aria-label={t("components.custom.data-table.toolbar.filtersToggle")}
-      className={cn("size-10 shrink-0", {
-        "bg-secondary text-foreground": open,
-      })}
-      data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_FILTERS_TOGGLE}
-      size="icon"
-      type="button"
-      variant="outline"
-      onPress={handleClick}
-    >
-      <Filter className="size-4 text-muted-foreground" />
-    </Button>
+    <TooltipTrigger>
+      <Button
+        aria-expanded={open}
+        aria-label={label}
+        className={cn("size-10 shrink-0", {
+          "bg-secondary text-foreground": open,
+        })}
+        data-testid={DATA_TABLE.TEST_IDS.TOOLBAR_FILTERS_TOGGLE}
+        size="icon"
+        type="button"
+        variant="outline"
+        onPress={handleClick}
+      >
+        <Filter className="size-4 text-muted-foreground" />
+      </Button>
+      <Tooltip>{label}</Tooltip>
+    </TooltipTrigger>
   )
 }
 

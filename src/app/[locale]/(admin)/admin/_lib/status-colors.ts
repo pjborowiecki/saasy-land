@@ -22,15 +22,19 @@ export function getStatusDotClass(color: AdminStatusColor): string {
   return STATUS_DOT_CLASSES[color]
 }
 
-export type DashboardUserStatus = "Online" | "Idle" | "Offline"
+export type DashboardUserStatus = "Online" | "Idle" | "Offline" | "active" | "pending" | "banned"
 
 export function getDashboardStatusDotClass(status: string): string {
-  if (status === "Online") {
+  if (status === "active" || status === "Active" || status === "Online") {
     return "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"
   }
 
-  if (status === "Idle") {
+  if (status === "pending" || status === "Pending" || status === "Idle") {
     return "bg-amber-500"
+  }
+
+  if (status === "banned" || status === "Banned") {
+    return "bg-rose-500"
   }
 
   return "bg-muted-foreground"

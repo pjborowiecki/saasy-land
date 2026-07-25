@@ -91,14 +91,14 @@ export function DataTablePagination({ className, pageSizeOptions, ...props }: Re
 
       <div className="flex items-center gap-6">
         <Select
-          className="flex items-center gap-2"
+          className="flex flex-row items-center gap-2"
           fieldLabel={pageSizeLabel}
-          fieldLabelClassName="text-xs font-medium"
+          fieldLabelClassName="shrink-0 text-xs font-medium whitespace-nowrap"
           value={String(pageSize)}
           onChange={handlePageSizeChange}
         >
           <SelectTrigger
-            className="h-8 min-w-16 gap-1.5 rounded-lg px-2.5 text-xs"
+            className="h-8 w-auto min-w-16 shrink-0 gap-1.5 rounded-lg px-2.5 text-xs"
             data-testid={DATA_TABLE.TEST_IDS.PAGINATION_PAGE_SIZE}
             size="sm"
           >

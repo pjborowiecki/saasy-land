@@ -69,6 +69,8 @@ Need storage?
 ├─ Strongly-consistent per-entity state → durable-objects/ (DO storage)
 ├─ Secrets management → secrets-store/
 ├─ Streaming ETL to R2 → pipelines/
+├─ Managed Apache Iceberg catalog on R2 → r2-data-catalog/
+├─ Serverless SQL analytics over Iceberg tables → r2-sql/
 └─ Persistent cache (long-term retention) → cache-reserve/
 ```
 
@@ -126,6 +128,7 @@ Need analytics?
 ├─ Custom high-cardinality metrics from Workers → analytics-engine/
 ├─ Client-side (RUM) performance data → web-analytics/
 ├─ Workers Logs and real-time debugging → observability/
+├─ SQL over Iceberg data lake (logs, events) → r2-sql/ (+ pipelines/, r2-data-catalog/)
 └─ Raw logs (Logpush to external tools) → Cloudflare docs
 ```
 

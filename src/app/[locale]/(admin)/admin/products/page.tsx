@@ -4,11 +4,16 @@ import { Suspense, type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
+import type { Category } from "~/src/modules/category/category.types"
+import { listCategories } from "~/src/modules/category/use-cases/list-categories.use-case"
+import type { Product } from "~/src/modules/product/product.types"
+import { listProducts } from "~/src/modules/product/use-cases/list-products.use-case"
+
 import { ProductsPageTabs } from "~/src/app/[locale]/(admin)/admin/products/_components/products-page-tabs"
-import { getAdminCategoryCatalog } from "~/src/app/[locale]/(admin)/admin/products/_lib/categories-data"
-import { getAdminProducts } from "~/src/app/[locale]/(admin)/admin/products/_lib/products-data"
 
 const PRODUCTS_CATALOG_FALLBACK = <div className="mt-6 h-64 animate-pulse rounded-lg border border-border/60 bg-muted/30" />
+const EMPTY_PRODUCTS: readonly Product["select"][] = []
+const EMPTY_CATEGORIES: readonly Category["select"][] = []
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
@@ -63,7 +68,13 @@ async function ProductsCatalog({
     readonly subscriptions: string
   }
 }): Promise<JSX.Element> {
-  const [products, { categories, collections }] = await Promise.all([getAdminProducts(), getAdminCategoryCatalog()])
+  const [productsResult, categoriesResult] = await Promise.all([listProducts(), listCategories()])
 
-  return <ProductsPageTabs categories={categories} collections={collections} labels={labels} products={products} />
+  return (
+    <ProductsPageTabs
+      categories={categoriesResult.data ?? EMPTY_CATEGORIES}
+      labels={labels}
+      products={productsResult.data ?? EMPTY_PRODUCTS}
+    />
+  )
 }

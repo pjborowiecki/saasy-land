@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm"
 import { boolean, index, pgEnum, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
 
-import { TIMEZONE_CODES } from "~/src/modules/_core/constants/timezone"
+import { TIMEZONE_CODES, Timezone } from "~/src/modules/_core/constants/timezone"
 import { account } from "~/src/modules/account/account.schema"
 import { session } from "~/src/modules/session/session.schema"
 import { twoFactor } from "~/src/modules/two-factor/two-factor.schema"
@@ -25,7 +25,7 @@ export const user = pgTable(
     isAnonymous: boolean("is_anonymous").default(false).notNull(),
     name: varchar("name", { length: 32 }).notNull(),
     role: userRoleEnum().default(DEFAULT_ROLE).notNull(),
-    timezone: userTimezoneEnum(),
+    timezone: userTimezoneEnum().default(Timezone.DEFAULT_CODE).notNull(),
     twoFactorEnabled: boolean("two_factor_enabled").default(false).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .defaultNow()

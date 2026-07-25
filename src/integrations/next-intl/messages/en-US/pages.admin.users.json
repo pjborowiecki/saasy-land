@@ -52,9 +52,9 @@
       "all": "Status: All",
       "value": "Status: {status}",
       "options": {
-        "Active": "Active",
-        "Pending": "Pending",
-        "Banned": "Banned"
+        "active": "Active",
+        "pending": "Pending",
+        "banned": "Banned"
       }
     }
   },
@@ -66,15 +66,24 @@
   },
   "table": {
     "empty": "No users found.",
+    "emptyValue": "—",
+    "booleans": {
+      "no": "No",
+      "yes": "Yes"
+    },
     "headers": {
-      "user": "User",
+      "createdAt": "Created At",
+      "emailVerified": "Email verified",
       "role": "Role",
       "status": "Status",
-      "lastActive": "Last Active"
+      "timezone": "Preferred time zone",
+      "twoFactorEnabled": "2FA enabled",
+      "updatedAt": "Updated At",
+      "user": "User"
     }
   },
   "pagination": {
-    "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+    "info": "Showing {start} to {end} of {total} results"
   },
   "invitations": {
     "title": "Invitations",
@@ -99,7 +108,7 @@
       }
     },
     "pagination": {
-      "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+      "info": "Showing {start} to {end} of {total} results"
     }
   },
   "roles": {
@@ -123,7 +132,7 @@
       }
     },
     "pagination": {
-      "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> roles"
+      "info": "Showing {start} to {end} of {total} roles"
     }
   }
 }

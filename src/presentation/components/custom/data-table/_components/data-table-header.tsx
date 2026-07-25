@@ -17,12 +17,12 @@ export function DataTableHeader({ className, ...props }: ComponentProps<typeof T
 
   return (
     <TableHeader
-      className={cn(DATA_TABLE.CLASSES.LAYOUT.HEADER, classNames?.header, className)}
+      className={cn("[&_tr]:border-0", DATA_TABLE.CLASSES.LAYOUT.HEADER, classNames?.header, className)}
       data-testid={DATA_TABLE.TEST_IDS.HEADER}
       {...props}
     >
       {table.getHeaderGroups().map((headerGroup) => (
-        <DataTableRow key={headerGroup.id} className="hover:bg-transparent data-[state=selected]:bg-transparent">
+        <DataTableRow key={headerGroup.id} className="border-0 hover:bg-transparent data-[state=selected]:bg-transparent">
           {headerGroup.headers.map((header) => (
             <DataTableHead key={header.id} header={header} />
           ))}

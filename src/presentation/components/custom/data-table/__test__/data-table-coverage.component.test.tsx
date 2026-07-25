@@ -11,11 +11,12 @@ import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.uti
 
 import type * as ShadcnToggleGroup from "~/src/presentation/components/shadcn/toggle-group"
 
+import { DataTableProvider, useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
 import { DATA_TABLE } from "~/src/presentation/components/custom/data-table/_constants/data-table.constants"
 import { DATA_TABLE_SELECT_COLUMN_ID } from "~/src/presentation/components/custom/data-table/_table/data-table-select-column"
 import { DATA_TABLE_ACTIONS_COLUMN_ID } from "~/src/presentation/components/custom/data-table/_table/data-table-system-columns"
 import type { DataTableOptions, DataTableRowDensity } from "~/src/presentation/components/custom/data-table/_types/data-table.types"
-import { DataTable, useDataTable } from "~/src/presentation/components/custom/data-table/data-table"
+import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
 type RowDensityChangeHandler = NonNullable<ComponentProps<typeof ShadcnToggleGroup.ToggleGroup>["onSelectionChange"]>
 
@@ -295,6 +296,7 @@ describe("data table coverage toolbar", () => {
     )
 
     expect(screen.getByTestId(TEST_IDS.TOOLBAR_FETCH)).toBeDisabled()
+    expect(screen.getByTestId(TEST_IDS.TOOLBAR_FETCH)).toHaveTextContent("Refetching...")
   })
 })
 
@@ -425,9 +427,9 @@ describe("data table coverage filters and columns", () => {
 
     render(
       <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable.Provider columns={columns} data={data} options={toolbarFalseOptions}>
+        <DataTableProvider columns={columns} data={data} options={toolbarFalseOptions}>
           <FunctionalFilterControl />
-        </DataTable.Provider>
+        </DataTableProvider>
       </NextIntlClientProvider>,
     )
 

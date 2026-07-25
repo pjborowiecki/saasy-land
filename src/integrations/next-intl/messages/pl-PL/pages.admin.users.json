@@ -52,9 +52,9 @@
       "all": "Status: Wszystkie",
       "value": "Status: {status}",
       "options": {
-        "Active": "Aktywny",
-        "Pending": "Oczekujący",
-        "Banned": "Zablokowany"
+        "active": "Aktywny",
+        "pending": "Oczekujący",
+        "banned": "Zablokowany"
       }
     }
   },
@@ -66,15 +66,24 @@
   },
   "table": {
     "empty": "Nie znaleziono użytkowników.",
+    "emptyValue": "—",
+    "booleans": {
+      "no": "Nie",
+      "yes": "Tak"
+    },
     "headers": {
-      "user": "Użytkownik",
+      "createdAt": "Data utworzenia",
+      "emailVerified": "E-mail zweryfikowany",
       "role": "Rola",
       "status": "Status",
-      "lastActive": "Ostatnia aktywność"
+      "timezone": "Preferowana strefa czasowa",
+      "twoFactorEnabled": "2FA włączone",
+      "updatedAt": "Data aktualizacji",
+      "user": "Użytkownik"
     }
   },
   "pagination": {
-    "info": "Wyświetlanie <highlight>{start}</highlight>–<highlight>{end}</highlight> z <highlight>{total}</highlight> wyników"
+    "info": "Wyświetlanie {start}–{end} z {total} wyników"
   },
   "invitations": {
     "title": "Zaproszenia",
@@ -99,7 +108,7 @@
       }
     },
     "pagination": {
-      "info": "Wyświetlanie <highlight>{start}</highlight>–<highlight>{end}</highlight> z <highlight>{total}</highlight> wyników"
+      "info": "Wyświetlanie {start}–{end} z {total} wyników"
     }
   },
   "roles": {
@@ -123,7 +132,7 @@
       }
     },
     "pagination": {
-      "info": "Wyświetlanie <highlight>{start}</highlight>–<highlight>{end}</highlight> z <highlight>{total}</highlight> ról"
+      "info": "Wyświetlanie {start}–{end} z {total} ról"
     }
   }
 }

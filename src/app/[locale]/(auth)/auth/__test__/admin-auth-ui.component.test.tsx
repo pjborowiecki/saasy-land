@@ -8,8 +8,8 @@ import { FormProvider, useForm } from "react-hook-form"
 
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
-import { ProductStatusBadge } from "~/src/app/[locale]/(admin)/admin/_components/product-status-badge"
-import { RegionProgressBar } from "~/src/app/[locale]/(admin)/admin/_components/region-progress-bar"
+import { RegionProgressBar } from "~/src/app/[locale]/(admin)/admin/analytics/_components/region-progress-bar"
+import { ProductStatusBadge } from "~/src/app/[locale]/(admin)/admin/products/_components/product-status-badge"
 import { AuthSeparator } from "~/src/app/[locale]/(auth)/auth/_components/auth-separator"
 import { PasswordRequirements } from "~/src/app/[locale]/(auth)/auth/_components/password-requirements"
 
@@ -34,9 +34,9 @@ function PasswordRequirementsHarness({ password }: { readonly password: string }
 describe("product status badge component", () => {
   it("renders the status label with a colored badge", () => {
     expect.hasAssertions()
-    renderWithMessages(<ProductStatusBadge status="Published" statusColor="emerald" />)
+    renderWithMessages(<ProductStatusBadge status="published" />)
 
-    expect(screen.getByText("Published")).toBeInTheDocument()
+    expect(screen.getByText("Active")).toBeInTheDocument()
   })
 })
 

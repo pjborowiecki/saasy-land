@@ -124,8 +124,10 @@ declare const messages: {
         "toolbar": {
           "exportCsv": "Export CSV",
           "fetch": "Fetch",
-          "filtersToggle": "Toggle filters",
+          "fetching": "Fetching...",
+          "filtersToggle": "Filters",
           "refetch": "Refetch",
+          "refetching": "Refetching...",
           "searchPlaceholder": "Search…"
         }
       },
@@ -823,7 +825,7 @@ declare const messages: {
           "actions": "Actions"
         },
         "pagination": {
-          "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> posts"
+          "info": "Showing {start} to {end} of {total} posts"
         }
       },
       "courses": {
@@ -907,30 +909,20 @@ declare const messages: {
           "addProduct": "Add Product"
         },
         "stats": {
-          "revenue": {
-            "title": "Total Revenue (MRR)",
-            "value": "$24,500.00",
-            "trend": "+12.5%"
-          },
           "activeUsers": {
-            "title": "Active Users",
-            "value": "1,248",
-            "trend": "+4.2%"
+            "title": "Registered users"
           },
-          "currentSessions": {
-            "title": "Current Sessions",
-            "value": "42",
-            "badge": "Active Now"
+          "totalProducts": {
+            "title": "Products in catalog"
           },
-          "churnRate": {
-            "title": "Churn Rate",
-            "value": "1.2%",
-            "trend": "-0.8%"
+          "pendingVerification": {
+            "title": "Pending email verification"
           }
         },
         "chart": {
           "title": "Revenue Overview",
           "description": "Monthly recurring revenue over the last 12 months",
+          "placeholder": "Revenue analytics will appear here once billing is connected.",
           "filters": {
             "12m": "12M",
             "30d": "30D",
@@ -955,24 +947,11 @@ declare const messages: {
               "actions": "Actions"
             },
             "pagination": {
-              "showing": "Showing 1 to 3 of 42 entries",
+              "showing": "Showing {from} to {to} of {total} users",
               "previous": "Previous",
-              "next": "Next"
+              "viewAll": "View all users"
             }
           }
-        },
-        "sessions": {
-          "title": "Active Sessions",
-          "revoke": "Revoke",
-          "signoutAll": "Sign out all other sessions",
-          "current": "Current"
-        },
-        "security": {
-          "title": "Security Settings",
-          "mfa": "Two-Factor Auth",
-          "mfaDesc": "Require 2FA for all users",
-          "email": "Email Notifications",
-          "emailDesc": "Daily summary reports"
         }
       },
       "page": {
@@ -1266,7 +1245,7 @@ declare const messages: {
           }
         },
         "pagination": {
-          "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> products"
+          "info": "Showing {start} to {end} of {total} products"
         },
         "onetime": {
           "title": "One-time Purchases",
@@ -1490,9 +1469,9 @@ declare const messages: {
             "all": "Status: All",
             "value": "Status: {status}",
             "options": {
-              "Active": "Active",
-              "Pending": "Pending",
-              "Banned": "Banned"
+              "active": "Active",
+              "pending": "Pending",
+              "banned": "Banned"
             }
           }
         },
@@ -1504,15 +1483,24 @@ declare const messages: {
         },
         "table": {
           "empty": "No users found.",
+          "emptyValue": "—",
+          "booleans": {
+            "no": "No",
+            "yes": "Yes"
+          },
           "headers": {
-            "user": "User",
+            "createdAt": "Created At",
+            "emailVerified": "Email verified",
             "role": "Role",
             "status": "Status",
-            "lastActive": "Last Active"
+            "timezone": "Preferred time zone",
+            "twoFactorEnabled": "2FA enabled",
+            "updatedAt": "Updated At",
+            "user": "User"
           }
         },
         "pagination": {
-          "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+          "info": "Showing {start} to {end} of {total} results"
         },
         "invitations": {
           "title": "Invitations",
@@ -1537,7 +1525,7 @@ declare const messages: {
             }
           },
           "pagination": {
-            "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> results"
+            "info": "Showing {start} to {end} of {total} results"
           }
         },
         "roles": {
@@ -1561,7 +1549,7 @@ declare const messages: {
             }
           },
           "pagination": {
-            "info": "Showing <highlight>{start}</highlight> to <highlight>{end}</highlight> of <highlight>{total}</highlight> roles"
+            "info": "Showing {start} to {end} of {total} roles"
           }
         }
       }

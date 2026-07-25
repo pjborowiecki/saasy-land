@@ -1,15 +1,16 @@
 import type { JSX } from "react"
 
+import type { Product } from "~/src/modules/product/product.types"
+
 import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
-import type { AdminProductRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsTabToolbar } from "~/src/app/[locale]/(admin)/admin/products/_components/products-tab-toolbar"
 import { ProductsTableCard } from "~/src/app/[locale]/(admin)/admin/products/_components/products-table-card"
 import { ProductsTableHead } from "~/src/app/[locale]/(admin)/admin/products/_components/products-table-head"
 import { ProductsTableRow } from "~/src/app/[locale]/(admin)/admin/products/_components/products-table-row"
 
 interface ProductsAllTabProps {
-  readonly products: readonly AdminProductRow[]
+  readonly products: readonly Product["select"][]
 }
 
 export function ProductsAllTab({ products }: ProductsAllTabProps): JSX.Element {

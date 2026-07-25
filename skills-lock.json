@@ -11,7 +11,7 @@
       "source": "cloudflare/skills",
       "sourceType": "github",
       "skillPath": "skills/cloudflare/SKILL.md",
-      "computedHash": "ecc9c0211c605451f7e8b437724f84810fe013d5ca6c653c51d046139d4ecbf7"
+      "computedHash": "a1646a6a2fb7cc683de5bf8357e5d6ae02db6fd0bf771d633c1890318e25bff2"
     },
     "cloudflare-email-service": {
       "source": "cloudflare/skills",
@@ -34,6 +34,12 @@
       "sourceType": "github",
       "skillPath": "skills/durable-objects/SKILL.md",
       "computedHash": "72efa2277fea08f43b393c74abaacc9fa575e20bc63bdc9d46829b8a39352852"
+    },
+    "nuqs": {
+      "source": "pproenca/dot-skills",
+      "sourceType": "github",
+      "skillPath": "skills/.curated/nuqs/SKILL.md",
+      "computedHash": "5811f3b4c6f981aa75647ffb879d6e98429535ff830df219a04f4c9a884658a6"
     },
     "sandbox-sdk": {
       "source": "cloudflare/skills",

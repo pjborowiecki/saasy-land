@@ -1,22 +1,21 @@
 import type { Metadata } from "next"
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
 import { Calendar, PlusCircle } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+import { Link } from "~/src/integrations/next-intl/i18n.navigation"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 
-import { DashboardChart } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-chart"
-import { DashboardSecurityCard } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-security-card"
-import { DashboardSessionsCard } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-sessions-card"
-import { DashboardStatsGrid } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-stats-grid"
-import { DashboardUsersTable } from "~/src/app/[locale]/(admin)/admin/_components/dashboard-users-table"
-import {
-  DASHBOARD_CHART_X_AXIS,
-  DASHBOARD_CHART_Y_AXIS,
-  DASHBOARD_SESSION_ITEMS,
-  DASHBOARD_USER_ROWS,
-} from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
+import { DashboardChart } from "~/src/app/[locale]/(admin)/admin/dashboard/_components/dashboard-chart"
+import { DashboardStatsGrid } from "~/src/app/[locale]/(admin)/admin/dashboard/_components/dashboard-stats-grid"
+import { DashboardStatsGridSkeleton } from "~/src/app/[locale]/(admin)/admin/dashboard/_components/dashboard-stats-grid-skeleton"
+import { DashboardUsersTable } from "~/src/app/[locale]/(admin)/admin/dashboard/_components/dashboard-users-table"
+import { DashboardUsersTableSkeleton } from "~/src/app/[locale]/(admin)/admin/dashboard/_components/dashboard-users-table-skeleton"
+
+const DASHBOARD_STATS_GRID_FALLBACK = <DashboardStatsGridSkeleton />
+const DASHBOARD_USERS_TABLE_FALLBACK = <DashboardUsersTableSkeleton />
 
 export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
   const { locale } = await params
@@ -28,14 +27,9 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function AppPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
+export default async function AdminPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "pages.admin.dashboard" })
-
-  const users = DASHBOARD_USER_ROWS
-  const sessions = DASHBOARD_SESSION_ITEMS
-  const chartYAxis = DASHBOARD_CHART_Y_AXIS
-  const chartXAxis = DASHBOARD_CHART_X_AXIS
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 pb-8 duration-500 fade-in-50">
@@ -45,30 +39,28 @@ export default async function AppPage({ params }: Readonly<PageProps<"/[locale]/
           <p className="text-sm text-muted-foreground">{t("description")}</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="h-9 gap-2">
+          <Button variant="outline" className="h-9 gap-2" isDisabled>
             <Calendar className="size-4 text-muted-foreground" />
             {t("actions.last30Days")}
           </Button>
-          <Button className="h-9 gap-2 shadow-sm">
-            <PlusCircle className="size-4" />
-            {t("actions.addProduct")}
-          </Button>
+          <Link href="/admin/products/create">
+            <Button className="h-9 gap-2 shadow-sm">
+              <PlusCircle className="size-4" />
+              {t("actions.addProduct")}
+            </Button>
+          </Link>
         </div>
       </div>
 
-      <DashboardStatsGrid />
-      <DashboardChart chartXAxis={chartXAxis} chartYAxis={chartYAxis} />
+      <Suspense fallback={DASHBOARD_STATS_GRID_FALLBACK}>
+        <DashboardStatsGrid />
+      </Suspense>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
-          <DashboardUsersTable users={users} />
-        </div>
+      <DashboardChart />
 
-        <div className="space-y-6">
-          <DashboardSessionsCard sessions={sessions} />
-          <DashboardSecurityCard />
-        </div>
-      </div>
+      <Suspense fallback={DASHBOARD_USERS_TABLE_FALLBACK}>
+        <DashboardUsersTable />
+      </Suspense>
     </div>
   )
 }

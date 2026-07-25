@@ -1,15 +1,25 @@
+import type { CategoryIcon } from "~/src/modules/category/category.schema"
+
 import type {
   AdminAnalyticsRegionRow,
   AdminAnalyticsUpgradeRow,
-  AdminCategoryRow,
   AdminInvitationRow,
   AdminPaymentRow,
   AdminRoleRow,
   AdminSecuritySessionRow,
   AdminUserRow,
-  DashboardSessionItem,
-  DashboardUserRow,
 } from "~/src/app/[locale]/(admin)/admin/_types"
+
+interface MockCategoryCatalogRow {
+  description: string
+  icon: CategoryIcon
+  id: string
+  items: string
+  lastUpdated: string
+  name: string
+  visibility: string
+  visibilityStatus: "hidden" | "public"
+}
 
 const ADDITIONAL_ADMIN_USER_COUNT = 25
 const ADDITIONAL_ADMIN_USER_START_ID = 6
@@ -71,57 +81,6 @@ function createAdditionalAdminUserRows(): AdminUserRow[] {
     return row
   })
 }
-
-export const DASHBOARD_CHART_Y_AXIS = ["$30k", "$20k", "$10k", "$0"] as const
-
-export const DASHBOARD_CHART_X_AXIS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
-
-export const DASHBOARD_USER_ROWS: DashboardUserRow[] = [
-  {
-    avatar: "https://i.pravatar.cc/150?u=1",
-    email: "sarah@example.com",
-    id: 1,
-    lastActive: "Just now",
-    name: "Sarah Jenkins",
-    role: "Admin",
-    status: "Online",
-  },
-  {
-    email: "michael@example.com",
-    id: 2,
-    initials: "MR",
-    lastActive: "2 hours ago",
-    name: "Michael Ross",
-    role: "Editor",
-    status: "Offline",
-  },
-  {
-    avatar: "https://i.pravatar.cc/150?u=4",
-    email: "elena@example.com",
-    id: 3,
-    lastActive: "15 mins ago",
-    name: "Elena Smith",
-    role: "Viewer",
-    status: "Idle",
-  },
-]
-
-export const DASHBOARD_SESSION_ITEMS: DashboardSessionItem[] = [
-  {
-    device: "Mac OS • Safari",
-    icon: "laptop",
-    id: 1,
-    isCurrent: true,
-    location: "New York, US • IP: 192.168.1.1",
-  },
-  {
-    device: "iOS • Chrome",
-    icon: "smartphone",
-    id: 2,
-    isCurrent: false,
-    location: "London, UK • 2 hours ago",
-  },
-]
 
 export const ADMIN_USER_ROWS: AdminUserRow[] = [
   {
@@ -282,7 +241,7 @@ export const ADMIN_ROLE_ROWS: AdminRoleRow[] = [
   },
 ]
 
-export const ADMIN_CATEGORY_ROWS: AdminCategoryRow[] = [
+export const ADMIN_CATEGORY_ROWS: MockCategoryCatalogRow[] = [
   {
     description: "Core subscription tiers for standard users",
     icon: "FolderOpen",
@@ -315,7 +274,7 @@ export const ADMIN_CATEGORY_ROWS: AdminCategoryRow[] = [
   },
 ]
 
-export const ADMIN_COLLECTION_ROWS: AdminCategoryRow[] = [
+export const ADMIN_COLLECTION_ROWS: MockCategoryCatalogRow[] = [
   {
     description: "Core subscription tiers for standard users",
     icon: "FolderOpen",

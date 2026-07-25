@@ -13,4 +13,7 @@ import { authedActionClient } from "~/src/integrations/next-safe-action/action.c
 
 export const listUsers = authedActionClient(PERMISSIONS.user.list)
   .outputSchema(z.array(userZodSchemas.select))
-  .action(() => db.select().from(user).where(eq(user.isAnonymous, false)).orderBy(desc(user.createdAt)))
+  .action(async () => {
+    const rows = await db.select().from(user).where(eq(user.isAnonymous, false)).orderBy(desc(user.createdAt))
+    return rows
+  })

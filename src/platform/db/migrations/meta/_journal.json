@@ -106,6 +106,20 @@
       "when": 1784743200000,
       "tag": "20260724140000_catalog_category",
       "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1784999154112,
+      "tag": "20260725170554_brief_wonder_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1784999619641,
+      "tag": "20260725172000_sync_user_timezone_enum",
+      "breakpoints": true
     }
   ]
 }

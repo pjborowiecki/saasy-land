@@ -1,9 +1,8 @@
-import { ADMIN_ANALYTICS_REGION_ROWS, ADMIN_USER_ROWS, DASHBOARD_USER_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
+import { ADMIN_ANALYTICS_REGION_ROWS, ADMIN_USER_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 
 describe("admin mock data", () => {
-  it("exports dashboard and user fixtures", () => {
+  it("exports user and analytics fixtures", () => {
     expect.hasAssertions()
-    expect(DASHBOARD_USER_ROWS.length).toBeGreaterThan(0)
     expect(ADMIN_USER_ROWS.length).toBeGreaterThan(0)
     expect(ADMIN_ANALYTICS_REGION_ROWS.length).toBeGreaterThan(0)
 

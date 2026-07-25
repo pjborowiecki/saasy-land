@@ -1,15 +1,16 @@
 import type { JSX } from "react"
 
+import type { Product } from "~/src/modules/product/product.types"
+
 import { TabsContent } from "~/src/presentation/components/shadcn/tabs"
 
-import type { AdminProductRow } from "~/src/app/[locale]/(admin)/admin/_types"
 import { ProductsTabToolbar } from "~/src/app/[locale]/(admin)/admin/products/_components/products-tab-toolbar"
 import { ProductsTableCard } from "~/src/app/[locale]/(admin)/admin/products/_components/products-table-card"
 import { ProductsTableHead } from "~/src/app/[locale]/(admin)/admin/products/_components/products-table-head"
 import { ProductsTaggedRow } from "~/src/app/[locale]/(admin)/admin/products/_components/products-tagged-row"
 
 interface ProductsSubscriptionsTabProps {
-  readonly products: readonly AdminProductRow[]
+  readonly products: readonly Product["select"][]
 }
 
 export function ProductsSubscriptionsTab({ products }: ProductsSubscriptionsTabProps): JSX.Element {
@@ -20,9 +21,11 @@ export function ProductsSubscriptionsTab({ products }: ProductsSubscriptionsTabP
       <ProductsTableCard end={3} total={3}>
         <ProductsTableHead variant="subscriptions" />
         <tbody className="divide-y divide-border/40">
-          {products.map((product) => (
-            <ProductsTaggedRow key={product.id} product={product} />
-          ))}
+          {products
+            .filter((product) => product.type === "subscription")
+            .map((product) => (
+              <ProductsTaggedRow key={product.id} product={product} />
+            ))}
         </tbody>
       </ProductsTableCard>
     </TabsContent>

@@ -30,8 +30,10 @@
   "toolbar": {
     "exportCsv": "Export CSV",
     "fetch": "Fetch",
-    "filtersToggle": "Toggle filters",
+    "fetching": "Fetching...",
+    "filtersToggle": "Filters",
     "refetch": "Refetch",
+    "refetching": "Refetching...",
     "searchPlaceholder": "Search…"
   }
 }

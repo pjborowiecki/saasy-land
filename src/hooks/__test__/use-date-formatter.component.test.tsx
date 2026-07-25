@@ -37,7 +37,7 @@ describe("use date formatter component", () => {
 
     const expected = new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(SAMPLE_UTC)
 
-    expect(result.current.format({ dateStyle: "medium", value: SAMPLE_UTC })).toBe(expected)
+    expect(result.current.formatDate({ dateStyle: "medium", value: SAMPLE_UTC })).toBe(expected)
   })
 
   it("formats ISO strings and timestamps", () => {
@@ -49,8 +49,8 @@ describe("use date formatter component", () => {
 
     const expected = new Intl.DateTimeFormat("en-US", { dateStyle: "short" }).format(SAMPLE_UTC)
 
-    expect(result.current.format({ value: SAMPLE_UTC.toISOString() })).toBe(expected)
-    expect(result.current.format({ value: SAMPLE_UTC.getTime() })).toBe(expected)
+    expect(result.current.formatDate({ value: SAMPLE_UTC.toISOString() })).toBe(expected)
+    expect(result.current.formatDate({ value: SAMPLE_UTC.getTime() })).toBe(expected)
   })
 
   it("prefers hook default locale over route locale", () => {
@@ -60,7 +60,7 @@ describe("use date formatter component", () => {
 
     const expected = new Intl.DateTimeFormat("de-DE", { dateStyle: "medium" }).format(SAMPLE_UTC)
 
-    expect(result.current.format({ value: SAMPLE_UTC })).toBe(expected)
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe(expected)
   })
 
   it("prefers per-call locale over hook and route locale", () => {
@@ -70,17 +70,17 @@ describe("use date formatter component", () => {
 
     const expected = new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium" }).format(SAMPLE_UTC)
 
-    expect(result.current.format({ locale: "fr-FR", value: SAMPLE_UTC })).toBe(expected)
+    expect(result.current.formatDate({ locale: "fr-FR", value: SAMPLE_UTC })).toBe(expected)
   })
 
-  it("formatToParts returns Intl parts for the resolved locale", () => {
+  it("formatDateToParts returns Intl parts for the resolved locale", () => {
     expect.hasAssertions()
 
     const { result } = renderHook(() => useDateFormatter({ dateStyle: "medium" }), {
       wrapper: createWrapper("en-US"),
     })
 
-    const parts = result.current.formatToParts({ value: SAMPLE_UTC })
+    const parts = result.current.formatDateToParts({ value: SAMPLE_UTC })
 
     expect(parts.some((part) => part.type === "day")).toBe(true)
     expect(parts.some((part) => part.type === "month")).toBe(true)
@@ -96,7 +96,7 @@ describe("use date formatter component", () => {
 
     const expected = new Intl.DateTimeFormat("pl-PL", { dateStyle: "medium" }).format(SAMPLE_UTC)
 
-    expect(result.current.format({ value: SAMPLE_UTC })).toBe(expected)
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe(expected)
   })
 
   it("formats with multiple default Intl options for stable cache keys", () => {
@@ -108,6 +108,6 @@ describe("use date formatter component", () => {
 
     const expected = new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short" }).format(SAMPLE_UTC)
 
-    expect(result.current.format({ value: SAMPLE_UTC })).toBe(expected)
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe(expected)
   })
 })

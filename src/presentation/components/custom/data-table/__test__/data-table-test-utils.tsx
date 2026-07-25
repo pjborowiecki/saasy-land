@@ -15,7 +15,10 @@ import { NextIntlClientProvider } from "next-intl"
 
 import type { Messages } from "~/src/integrations/next-intl/i18n.utils"
 
-import { DataTable, useDataTable } from "~/src/presentation/components/custom/data-table/data-table"
+import { DataTableBody } from "~/src/presentation/components/custom/data-table/_components/data-table-body"
+import { DataTableContent } from "~/src/presentation/components/custom/data-table/_components/data-table-content"
+import { DataTableHeader } from "~/src/presentation/components/custom/data-table/_components/data-table-header"
+import { DataTableProvider, useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
 
 interface Person {
   id: string
@@ -54,14 +57,14 @@ export function SortableMarkupTable({
 
   return (
     <NextIntlClientProvider locale="en-US" messages={messages}>
-      <DataTable.Provider columns={columns} data={data} options={options}>
+      <DataTableProvider columns={columns} data={data} options={options}>
         <table>
-          <DataTable.Header />
-          <DataTable.Body>
-            <DataTable.Content />
-          </DataTable.Body>
+          <DataTableHeader />
+          <DataTableBody>
+            <DataTableContent />
+          </DataTableBody>
         </table>
-      </DataTable.Provider>
+      </DataTableProvider>
     </NextIntlClientProvider>
   )
 }
@@ -89,13 +92,13 @@ export function HierarchicalSelectionTable({
   )
 
   return (
-    <DataTable.Provider columns={columns} data={data} options={options}>
+    <DataTableProvider columns={columns} data={data} options={options}>
       <table>
-        <DataTable.Body>
-          <DataTable.Content />
-        </DataTable.Body>
+        <DataTableBody>
+          <DataTableContent />
+        </DataTableBody>
       </table>
-    </DataTable.Provider>
+    </DataTableProvider>
   )
 }
 
