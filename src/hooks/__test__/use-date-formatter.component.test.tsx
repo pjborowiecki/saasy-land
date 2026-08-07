@@ -20,11 +20,13 @@ const SAMPLE_UTC = new Date(Date.UTC(SAMPLE_YEAR, SAMPLE_MONTH, SAMPLE_DAY, SAMP
 function createWrapper(locale: "en-US" | "pl-PL" = "en-US") {
   const messages = loadLocaleMessagesFromDir(locale)
 
-  return ({ children }: { children: ReactNode }) => (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  )
+  return function Wrapper({ children }: { children: ReactNode }) {
+    return (
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        {children}
+      </NextIntlClientProvider>
+    )
+  }
 }
 
 describe("use date formatter component", () => {

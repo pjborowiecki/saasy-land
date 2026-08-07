@@ -1,8 +1,9 @@
 #!/usr/bin/env bun
 
-import { writeFileSync } from "node:fs"
+import { readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
+import { SERVER_ONLY_NAMESPACES } from "../src/integrations/next-intl/i18n.client-messages"
 import { getLocaleMessagesDir, loadLocaleMessagesFromDir } from "../src/integrations/next-intl/i18n.utils"
 import { I18N } from "~/src/integrations/next-intl/i18n.config"
 
@@ -80,10 +81,138 @@ function checkLocaleParity(): boolean {
   return false
 }
 
+const SOURCE_ROOT = join(import.meta.dirname, "../src")
+const UNIQUE_BINDING = 1
+const CLIENT_DIRECTIVE = '"use client"'
+
+function collectSourceFiles(dir: string, found: string[] = []): string[] {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name)
+
+    if (entry.isDirectory()) {
+      collectSourceFiles(path, found)
+    } else if (path.endsWith(".ts") || path.endsWith(".tsx")) {
+      found.push(path)
+    }
+  }
+
+  return found
+}
+
+/**
+ * The root layout withholds `SERVER_ONLY_NAMESPACES` from the client message payload.
+ * A Client Component that reads a key under one of them would resolve to nothing at
+ * runtime, so fail the build here instead.
+ */
+function checkClientNamespaces(): boolean {
+  const violations: string[] = []
+
+  for (const file of collectSourceFiles(SOURCE_ROOT)) {
+    const source = readFileSync(file, "utf8")
+
+    if (!source.startsWith(CLIENT_DIRECTIVE)) {
+      continue
+    }
+
+    const keys = [
+      ...source.matchAll(/useTranslations\("(?<namespace>[^"]+)"\)/gu),
+      ...source.matchAll(/\bt(?:\.rich)?\("(?<namespace>[^"]+)"/gu),
+      ...source.matchAll(/namespace="(?<namespace>[^"]+)"/gu),
+    ].flatMap((match) => (match.groups?.["namespace"] === undefined ? [] : [match.groups["namespace"]]))
+
+    for (const key of keys) {
+      const excluded = SERVER_ONLY_NAMESPACES.find((namespace) => key === namespace || key.startsWith(`${namespace}.`))
+
+      if (excluded !== undefined) {
+        violations.push(`  ${file.replace(SOURCE_ROOT, "src")}: reads "${key}" from server-only namespace "${excluded}"`)
+      }
+    }
+  }
+
+  if (violations.length === 0) {
+    process.stdout.write(`✅ No Client Component reads a server-only namespace.\n`)
+    return true
+  }
+
+  process.stderr.write("\n❌ Client Component reads a namespace withheld from the client payload.\n\n")
+  process.stderr.write(`${violations.join("\n")}\n\n`)
+  process.stderr.write("Either move the read to a Server Component, or drop the namespace from SERVER_ONLY_NAMESPACES.\n\n")
+  return false
+}
+
+/**
+ * Resolve every literal `t("key")` call back to its namespace and confirm the key exists.
+ *
+ * next-intl's `IntlMessages` augmentation does not make `t()` key-safe, so a typo or a
+ * key that was never added survives typecheck and only fails at runtime with
+ * MISSING_MESSAGE. Dynamic keys (template literals, variables) are skipped.
+ */
+function checkMessageKeys(): boolean {
+  const known = loadLocaleKeys(SOURCE_LOCALE)
+  const problems: string[] = []
+
+  for (const file of collectSourceFiles(SOURCE_ROOT)) {
+    const source = readFileSync(file, "utf8")
+
+    // `const t = useTranslations("ns")` / `const t = await getTranslations("ns")`
+    const namespacesByBinding = new Map<string, Set<string>>()
+
+    for (const match of source.matchAll(/(?:const|let)\s+(?<binding>\w+)\s*=\s*(?:await\s+)?(?:useTranslations|getTranslations)\(\s*"(?<namespace>[^"]+)"\s*\)/gu)) {
+      const { binding, namespace } = match.groups ?? {}
+
+      if (binding !== undefined && namespace !== undefined) {
+        const seen = namespacesByBinding.get(binding) ?? new Set<string>()
+        seen.add(namespace)
+        namespacesByBinding.set(binding, seen)
+      }
+    }
+
+    // A file can bind the same name to different namespaces in sibling components. This
+    // scan has no scope analysis, so resolving those would report the wrong namespace —
+    // skip them rather than emit a false positive.
+    const bindings = new Map<string, string>()
+
+    for (const [binding, namespaces] of namespacesByBinding) {
+      const [only] = [...namespaces]
+
+      if (namespaces.size === UNIQUE_BINDING && only !== undefined) {
+        bindings.set(binding, only)
+      }
+    }
+
+    for (const [binding, namespace] of bindings) {
+      const calls = new RegExp(String.raw`\b${binding}(?:\.rich|\.markup)?\(\s*"(?<key>[^"]+)"`, "gu")
+
+      for (const call of source.matchAll(calls)) {
+        const key = call.groups?.["key"]
+
+        if (key === undefined) {
+          continue
+        }
+
+        const fullKey = `${namespace}.${key}`
+
+        if (!known.has(fullKey)) {
+          problems.push(`  ${file.replace(SOURCE_ROOT, "src")}: "${fullKey}" is not defined in ${SOURCE_LOCALE}`)
+        }
+      }
+    }
+  }
+
+  if (problems.length === 0) {
+    process.stdout.write("\u2705 Every literal message key resolves.\n")
+    return true
+  }
+
+  process.stderr.write("\n\u274c Message keys used in code are missing from the catalog.\n\n")
+  process.stderr.write(`${problems.join("\n")}\n\n`)
+  return false
+}
+
 function run(): void {
   writeMessageTypes()
 
-  if (!checkLocaleParity()) {
+  if (!checkLocaleParity() || !checkClientNamespaces() || !checkMessageKeys()) {
     process.exit(1)
   }
 }

@@ -1,17 +1,17 @@
 import type { Metadata } from "next"
-import type { JSX, ReactNode } from "react"
+import { Suspense, type JSX, type ReactNode } from "react"
 
 import { getTranslations } from "next-intl/server"
 
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
 import { ForgotPasswordForm } from "~/src/app/[locale]/(auth)/auth/forgot-password/_components/forgot-password-form"
 import { APP_NAME } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
 
-export async function generateMetadata({ params }: Readonly<{ params: Promise<{ locale: string }> }>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.auth.forgot-password" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.auth.forgot-password")
 
   return {
     description: t("metadata.description", { name: APP_NAME }),
@@ -25,12 +25,21 @@ const renderSignInLink = (chunks: ReactNode) => (
   </Link>
 )
 
-export default async function ForgotPasswordPage({ params }: Readonly<{ params: Promise<{ locale: string }> }>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.auth.forgot-password" })
+const authPageFallback = <AuthPageFallback />
+
+export default function ForgotPasswordPage(): JSX.Element {
+  return (
+    <Suspense fallback={authPageFallback}>
+      <ForgotPasswordPageContent />
+    </Suspense>
+  )
+}
+
+async function ForgotPasswordPageContent(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.auth.forgot-password")
 
   return (
-    <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">
+    <div className="reveal-elem flex w-full max-w-105 flex-col gap-8">
       <div className="flex flex-col gap-2 text-center">
         <h1 className="text-3xl font-medium tracking-tight text-foreground">{t("form.title")}</h1>
         <p className="text-sm text-muted-foreground">{t("form.description")}</p>

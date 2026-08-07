@@ -1,39 +1,11 @@
 {
-  "actions": {
-    "header": "Actions",
-    "rowButton": "Row actions"
-  },
-  "columnHeader": {
-    "clearSort": "Clear sort",
-    "menu": "Column options",
-    "sortAsc": "Sort ascending",
-    "sortDesc": "Sort descending"
-  },
   "empty": "No results.",
-  "loading": "Loading…",
   "pagination": {
+    "nextPage": "Next page",
+    "pageIndicator": "Page {current} of {total}",
+    "previousPage": "Previous page",
     "rowCount": "{count, plural, =0 {No rows} one {# row} other {# rows}}",
-    "selectedCount": "{selected, plural, one {# selected} other {# selected}}",
-    "rowsPerPage": "Rows per page",
-    "pageIndicator": "Page {current} of {total}"
+    "selectedCount": "{selected, plural, one {# selected} other {# selected}}"
   },
-  "settings": {
-    "trigger": "Table settings",
-    "title": "Table settings",
-    "rowDensity": {
-      "label": "Row size",
-      "compact": "Compact",
-      "default": "Default",
-      "comfortable": "Comfortable"
-    }
-  },
-  "toolbar": {
-    "exportCsv": "Export CSV",
-    "fetch": "Fetch",
-    "fetching": "Fetching...",
-    "filtersToggle": "Filters",
-    "refetch": "Refetch",
-    "refetching": "Refetching...",
-    "searchPlaceholder": "Search…"
-  }
+  "resizeColumn": "Resize column"
 }

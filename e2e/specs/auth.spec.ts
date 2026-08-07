@@ -24,6 +24,24 @@ test.describe("auth", () => {
     await expect(authPage.emailField()).toBeVisible()
   })
 
+  test("completes the sign up form and redirects to verify-email", async ({ authPage, page }) => {
+    await authPage.gotoSignUp()
+
+    const randomSuffix = Math.random().toString(36).substring(7)
+    const email = `test.user.${randomSuffix}@example.com`
+    const password = "StrongPassword123!"
+
+    await authPage.nameField().fill("Test User")
+    await authPage.emailField().fill(email)
+    await authPage.signUpPasswordField().fill(password)
+    await authPage.confirmPasswordField().fill(password)
+
+    await authPage.signUpSubmitButton().click()
+
+    await expect(page).toHaveURL(new RegExp(`\/auth\/verify-email\\?email=${encodeURIComponent(email)}`, "u"))
+    await expect(authPage.verifyEmailResendButton()).toBeVisible()
+  })
+
   test("forgot-password page renders email field", async ({ authPage }) => {
     await authPage.gotoForgotPassword()
 

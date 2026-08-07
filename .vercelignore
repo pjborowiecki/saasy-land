@@ -3,7 +3,7 @@ node_modules/
 .git/
 .cursor/
 .agents/
-opensrc/
+.claude/
 graphify-out/
 .source/
 .vite-hooks/

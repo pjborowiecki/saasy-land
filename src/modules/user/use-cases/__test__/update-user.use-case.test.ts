@@ -1,3 +1,4 @@
+import type * as NextCacheModule from "next/cache"
 import type * as NextHeadersModule from "next/headers"
 
 import { updateUser } from "~/src/modules/user/use-cases/update-user.use-case"
@@ -23,6 +24,16 @@ const getSessionMock = vi.hoisted(() => vi.fn<AuthApi["getSession"]>())
 const adminUpdateUserMock = vi.hoisted(() => vi.fn<AuthApi["adminUpdateUser"]>())
 
 vi.mock(import("server-only"), () => ({}))
+
+vi.mock(
+  import("next/cache"),
+  (): Partial<typeof NextCacheModule> => ({
+    cacheLife: vi.fn<() => void>(),
+    cacheTag: vi.fn<(tag: string) => void>(),
+    revalidateTag: vi.fn<(tag: string, profile: string | { expire?: number }) => undefined>(),
+    updateTag: vi.fn<(tag: string) => undefined>(),
+  }),
+)
 
 vi.mock(
   import("next/headers"),

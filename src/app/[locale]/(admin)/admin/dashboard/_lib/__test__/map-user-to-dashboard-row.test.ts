@@ -1,4 +1,5 @@
-/* eslint-disable unicorn/no-null -- Drizzle nullable columns use null in row fixtures. */
+import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
+
 import type { User } from "~/src/modules/user/user.types"
 
 import { RoleCode } from "~/src/integrations/better-auth/auth.access"
@@ -10,14 +11,14 @@ const UPDATED_AT = new Date("2026-07-21T12:00:00.000Z")
 
 function makeRow(overrides: Partial<User["select"]> = {}): User["select"] {
   return {
-    banExpires: null,
-    banReason: null,
+    banExpires: JSON_NULL,
+    banReason: JSON_NULL,
     banned: false,
     createdAt: UPDATED_AT,
     email: "ada@example.com",
     emailVerified: true,
     id: USER_ID,
-    image: null,
+    image: JSON_NULL,
     isAnonymous: false,
     name: "Ada Lovelace",
     role: RoleCode.CUSTOMER,

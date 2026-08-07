@@ -31,6 +31,7 @@
       "ban": "Zablokuj użytkownika",
       "delete": "Usuń użytkownika",
       "edit": "Edytuj użytkownika",
+      "menu": "Akcje wiersza",
       "resetPassword": "Resetuj hasło",
       "unban": "Odblokuj użytkownika",
       "viewProfile": "Zobacz profil"
@@ -40,6 +41,11 @@
     "placeholder": "Szukaj użytkowników po nazwie, e-mailu lub ID..."
   },
   "filters": {
+    "groups": {
+      "identity": "Tożsamość",
+      "access": "Dostęp",
+      "activity": "Aktywność"
+    },
     "role": {
       "all": "Rola: Wszystkie",
       "value": "Rola: {role}",
@@ -65,12 +71,12 @@
     "security": "Bezpieczeństwo"
   },
   "table": {
-    "empty": "Nie znaleziono użytkowników.",
-    "emptyValue": "—",
     "booleans": {
       "no": "Nie",
       "yes": "Tak"
     },
+    "empty": "Nie znaleziono użytkowników.",
+    "emptyValue": "—",
     "headers": {
       "createdAt": "Data utworzenia",
       "emailVerified": "E-mail zweryfikowany",
@@ -80,7 +86,9 @@
       "twoFactorEnabled": "2FA włączone",
       "updatedAt": "Data aktualizacji",
       "user": "Użytkownik"
-    }
+    },
+    "selectAll": "Zaznacz wszystkie wiersze",
+    "selectRow": "Zaznacz wiersz"
   },
   "pagination": {
     "info": "Wyświetlanie {start}–{end} z {total} wyników"

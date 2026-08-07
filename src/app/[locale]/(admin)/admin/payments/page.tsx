@@ -10,9 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/src/presentation/com
 import { ADMIN_PAYMENT_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 import { PaymentsRefundsTab } from "~/src/app/[locale]/(admin)/admin/payments/_components/payments-refunds-tab"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.payments" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.payments")
 
   return {
     description: t("metadata.description"),
@@ -20,9 +19,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function PaymentsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.payments" })
+export default async function PaymentsPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.payments")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">

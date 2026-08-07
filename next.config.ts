@@ -6,7 +6,10 @@ import createNextIntlPlugin from "next-intl/plugin"
 const nextConfig: NextConfig = {
   cacheComponents: true,
   experimental: {
+    exposeTestingApiInProductionBuild: true,
     optimizePackageImports: ["lucide-react"],
+    turbopackRustReactCompiler: true,
+    useOffline: true,
     useTypeScriptCli: true,
   },
   images: {
@@ -16,6 +19,7 @@ const nextConfig: NextConfig = {
       { hostname: "i.pravatar.cc", pathname: "/**", protocol: "https" },
     ],
   },
+  partialPrefetching: true,
   reactCompiler: true,
   reactStrictMode: true,
   serverExternalPackages: ["better-auth"],

@@ -8,8 +8,7 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
 import { getMDXComponents } from "~/src/integrations/fumadocs/mdx"
 import { resolveDocsRelativeHref } from "~/src/integrations/fumadocs/resolve-docs-href"
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
+import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 
 type MdxAnchorProps = ComponentProps<NonNullable<(typeof defaultMdxComponents)["a"]>>
 type DocsPageModel = NonNullable<ReturnType<typeof source.getPage>>
@@ -28,7 +27,8 @@ function createDocsRelativeLink(page: DocsPageModel) {
 }
 
 export async function generateMetadata({ params }: DocsPageProps): Promise<Metadata> {
-  const { locale, slug } = await params
+  const { slug } = await params
+  const locale = await getRootLocale()
 
   const page = source.getPage(slug, locale)
   if (!page) {
@@ -41,19 +41,20 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
   }
 }
 
-export function generateStaticParams(): { locale: Locale; slug: string[] | undefined }[] {
+// Nested under the root layout's own generateStaticParams, so Next runs this once per
+// locale and the root param is readable here — no locale cross-product needed.
+export async function generateStaticParams(): Promise<{ slug: string[] | undefined }[]> {
   const EMPTY_SLUGS_LENGTH = 0
+  const locale = await getRootLocale()
 
-  return routing.locales.flatMap((locale) =>
-    source.getPages(locale).map((page) => ({
-      locale,
-      slug: page.slugs.length > EMPTY_SLUGS_LENGTH ? page.slugs : undefined,
-    })),
-  )
+  return source.getPages(locale).map((page) => ({
+    slug: page.slugs.length > EMPTY_SLUGS_LENGTH ? page.slugs : undefined,
+  }))
 }
 
-async function DocumentationPageContent({ params }: DocsPageProps): Promise<JSX.Element> {
-  const { locale, slug } = await params
+async function DocumentationPageContent({ params }: Pick<DocsPageProps, "params">): Promise<JSX.Element> {
+  const { slug } = await params
+  const locale = await getRootLocale()
 
   const page = source.getPage(slug, locale)
   if (!page) {
@@ -73,10 +74,10 @@ async function DocumentationPageContent({ params }: DocsPageProps): Promise<JSX.
   )
 }
 
-export default function DocumentationPage(props: DocsPageProps): JSX.Element {
+export default function DocumentationPage({ params }: DocsPageProps): JSX.Element {
   return (
     <Suspense fallback={DOCS_PAGE_FALLBACK}>
-      <DocumentationPageContent {...props} />
+      <DocumentationPageContent params={params} />
     </Suspense>
   )
 }

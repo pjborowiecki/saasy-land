@@ -3,12 +3,9 @@ import { cacheLife } from "next/cache"
 import { getRequestConfig } from "next-intl/server"
 
 import { isLocale } from "~/src/integrations/next-intl/i18n.locale"
+import { tryRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
-import { loadLocaleMessagesFromDir, resolveLocaleFromRootParamsModule, type Messages } from "~/src/integrations/next-intl/i18n.utils"
-
-async function resolveRootLocale(): Promise<string | undefined> {
-  return resolveLocaleFromRootParamsModule(await import("next/root-params"))
-}
+import { loadLocaleMessagesFromDir, type Messages } from "~/src/integrations/next-intl/i18n.utils"
 
 function getLocaleMessages(locale: string): Messages {
   return loadLocaleMessagesFromDir(locale)
@@ -22,8 +19,8 @@ async function getCachedLocaleMessages(locale: string): Promise<Messages> {
 }
 
 export default getRequestConfig(async ({ locale }) => {
-  const rootLocale = await resolveRootLocale()
-  const target = locale ?? rootLocale
+  // Short-circuits before touching root params, which throw outside a route context.
+  const target = locale ?? (await tryRootLocale())
   const resolvedLocale = isLocale(target) ? target : routing.defaultLocale
   const isDevelopment = process.env.NODE_ENV === "development"
   return {

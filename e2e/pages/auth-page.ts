@@ -45,8 +45,20 @@ export class AuthPage extends BasePage {
     return this.page.getByTestId("sign-in-form-submit-button")
   }
 
+  nameField(): Locator {
+    return this.page.getByRole("textbox", { name: /name/iu })
+  }
+
+  signUpPasswordField(): Locator {
+    return this.page.locator("#sign-up-password")
+  }
+
+  confirmPasswordField(): Locator {
+    return this.page.locator("#sign-up-confirmPassword")
+  }
+
   signUpSubmitButton(): Locator {
-    return this.page.getByRole("button", { name: "Continue" })
+    return this.page.locator("#sign-up-form-submit-button")
   }
 
   oauthGitHubButton(): Locator {

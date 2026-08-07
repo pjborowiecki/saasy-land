@@ -34,7 +34,7 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
 
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     defaultValues: { confirmPassword: "", password: "" },
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(resetPasswordSchema),
   })
 

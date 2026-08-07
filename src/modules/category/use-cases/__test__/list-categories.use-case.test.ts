@@ -1,3 +1,4 @@
+import type * as NextCacheModule from "next/cache"
 import type * as NextHeadersModule from "next/headers"
 
 import { listCategories } from "~/src/modules/category/use-cases/list-categories.use-case"
@@ -36,6 +37,16 @@ const dbMocks = vi.hoisted(() => {
 })
 
 vi.mock(import("server-only"), () => ({}))
+
+vi.mock(
+  import("next/cache"),
+  (): Partial<typeof NextCacheModule> => ({
+    cacheLife: vi.fn<() => void>(),
+    cacheTag: vi.fn<(tag: string) => void>(),
+    revalidateTag: vi.fn<(tag: string, profile: string | { expire?: number }) => undefined>(),
+    updateTag: vi.fn<(tag: string) => undefined>(),
+  }),
+)
 
 vi.mock(
   import("next/headers"),

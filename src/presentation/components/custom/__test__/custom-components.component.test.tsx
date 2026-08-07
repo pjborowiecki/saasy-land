@@ -42,7 +42,9 @@ vi.mock(import("next/dynamic"), async (): Promise<Partial<typeof NextDynamic>> =
       void dynamicOptions.loader()
     }
 
-    return () => createElement("div", { "data-testid": "dynamic-stub" })
+    return function DynamicStub() {
+      return createElement("div", { "data-testid": "dynamic-stub" })
+    }
   }
 
   return { default: dynamicDefault }

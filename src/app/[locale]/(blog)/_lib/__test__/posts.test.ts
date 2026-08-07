@@ -5,10 +5,12 @@ describe("is blog index component", () => {
     expect.hasAssertions()
     expect(isBlogIndex()).toBe(true)
   })
+
   it("returns true for empty slug array", () => {
     expect.hasAssertions()
     expect(isBlogIndex([])).toBe(true)
   })
+
   it("returns false when slug has segments", () => {
     expect.hasAssertions()
     expect(isBlogIndex(["hello-world"])).toBe(false)
@@ -19,10 +21,12 @@ describe("summary from frontmatter component", () => {
     expect.hasAssertions()
     expect(summaryFromFrontmatter({ description: "desc", excerpt: "excerpt" })).toBe("excerpt")
   })
+
   it("falls back to description when excerpt is missing", () => {
     expect.hasAssertions()
     expect(summaryFromFrontmatter({ description: "desc" })).toBe("desc")
   })
+
   it("returns undefined when neither field exists", () => {
     expect.hasAssertions()
     expect(summaryFromFrontmatter({})).toBeUndefined()
@@ -33,6 +37,7 @@ describe("is published component", () => {
     expect.hasAssertions()
     expect(isPublished({})).toBe(true)
   })
+
   it("returns false when published is explicitly false", () => {
     expect.hasAssertions()
     expect(isPublished({ published: false })).toBe(false)

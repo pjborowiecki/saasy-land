@@ -23,18 +23,21 @@ function flattenMessageKeys(value: unknown, prefix = ""): string[] {
 
 describe("load locale messages from dir component", () => {
   const messagesDir = getLocaleMessagesDir()
+
   it("loads and nests namespace files for the default locale", () => {
     expect.hasAssertions()
     const messages = loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir)
     expect(messages.pages.landing.hero.startBuilding).toBeTypeOf("string")
     expect(messages.auth.form.placeholders.email).toBeTypeOf("string")
   })
+
   it("returns cached messages for repeated loads", () => {
     expect.hasAssertions()
     const first = loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir)
     const second = loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir)
     expect(second).toBe(first)
   })
+
   it("keeps translation keys in sync across locales", () => {
     expect.hasAssertions()
     const sourceKeys = flattenMessageKeys(loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir))

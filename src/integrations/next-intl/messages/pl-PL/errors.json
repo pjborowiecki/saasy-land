@@ -1,0 +1,17 @@
+{
+  "boundary": {
+    "title": "Coś poszło nie tak",
+    "description": "Nie udało się załadować tej sekcji. Możesz spróbować ponownie bez opuszczania strony.",
+    "retry": "Spróbuj ponownie"
+  },
+  "global": {
+    "title": "Coś poszło nie tak",
+    "description": "W aplikacji wystąpił nieoczekiwany błąd.",
+    "retry": "Odśwież"
+  },
+  "notFound": {
+    "title": "Nie znaleziono strony",
+    "description": "Strona, której szukasz, nie istnieje lub została przeniesiona.",
+    "backHome": "Wróć na stronę główną"
+  }
+}

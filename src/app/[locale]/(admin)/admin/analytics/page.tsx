@@ -10,9 +10,8 @@ import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadc
 import { ADMIN_ANALYTICS_REGION_ROWS, ADMIN_ANALYTICS_UPGRADE_ROWS } from "~/src/app/[locale]/(admin)/admin/_lib/mock-data"
 import { AnalyticsOverviewTab } from "~/src/app/[locale]/(admin)/admin/analytics/_components/analytics-overview-tab"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.analytics" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.analytics")
 
   return {
     description: t("metadata.description"),
@@ -20,9 +19,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function AnalyticsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.analytics" })
+export default async function AnalyticsPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.analytics")
   const regions = ADMIN_ANALYTICS_REGION_ROWS
   const upgrades = ADMIN_ANALYTICS_UPGRADE_ROWS
 

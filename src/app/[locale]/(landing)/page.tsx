@@ -14,9 +14,8 @@ import { PricingSection } from "~/src/app/[locale]/(landing)/_components/section
 import { TechSection } from "~/src/app/[locale]/(landing)/_components/sections/tech-section"
 import { TestimonialsSection } from "~/src/app/[locale]/(landing)/_components/sections/testimonials-section"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.landing" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.landing")
 
   return {
     description: t("metadata.description"),

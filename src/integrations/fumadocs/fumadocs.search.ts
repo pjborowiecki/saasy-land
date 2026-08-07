@@ -1,31 +1,14 @@
-import type { Language } from "@orama/orama"
 import { createFromSource } from "fumadocs-core/search/server"
 
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 
 /**
- * Maps app locales (BCP-47, aligned with next-intl) to Orama {@link Language} ids.
+ * Search API for the docs.
  *
- * Fumadocs builds the search index with `createI18nSearchAPI`. When no `localeMap` is set, it
- * derives Orama options via `getTokenizer(locale)`, which only matches **two-letter** codes from
- * Orama’s stemmer table (e.g. `en` → english). Values like `en-US` or `pl-PL` never match, so Orama
- * receives an invalid `language` string and throws `LANGUAGE_NOT_SUPPORTED`.
- *
- * Supplying `localeMap` on `createFromSource` is therefore the supported way to use BCP-47 locales
- * with the built-in Orama backend — see `Options["localeMap"]` in `fumadocs-core/search/server`.
- *
- * Polish: Orama’s bundled stemmers do not include Polish. The closest available option for
- * inflected Slavic text is `czech` (West Slavic). If results are unsatisfactory, switch to a
- * hosted provider (Algolia, Orama Cloud, etc.) with explicit Polish language support.
+ * No `localeMap` is needed: fumadocs' default `multilingual` tokenizer handles every
+ * locale with zero config. The option that used to map BCP-47 codes onto Orama stemmer
+ * ids is deprecated — supplying it would build a separate database per locale.
  */
-const oramaLocaleMap: Record<Locale, Language> = {
-  "en-US": "english",
-  "pl-PL": "czech",
-}
-
-export const fumadocsSearch = createFromSource(source, {
-  localeMap: oramaLocaleMap,
-})
+export const fumadocsSearch = createFromSource(source)
 
 export const fumadocsSearchGet = fumadocsSearch.GET

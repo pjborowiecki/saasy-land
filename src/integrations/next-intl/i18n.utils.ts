@@ -77,21 +77,6 @@ export function getLocaleMessagesDir(): string {
   return MESSAGES_DIR
 }
 
-export async function resolveLocaleFromRootParamsModule(rootParamsModule: unknown): Promise<string | undefined> {
-  if (typeof rootParamsModule !== "object" || rootParamsModule === null || !("locale" in rootParamsModule)) {
-    return undefined
-  }
-
-  const localeProp = rootParamsModule["locale"]
-
-  if (typeof localeProp === "function") {
-    const resolved: unknown = await localeProp.call(rootParamsModule)
-    return typeof resolved === "string" ? resolved : undefined
-  }
-
-  return undefined
-}
-
 export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES_DIR): Messages {
   const cacheKey = `${messagesDir}:${locale}`
   const isDevelopment = process.env.NODE_ENV === "development"

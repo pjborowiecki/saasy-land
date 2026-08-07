@@ -13,13 +13,8 @@ const BLOG_ADMIN_FALLBACK = (
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
-export async function generateMetadata({
-  params,
-}: Readonly<{
-  params: Promise<{ locale: string }>
-}>) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.blog" })
+export async function generateMetadata() {
+  const t = await getTranslations("pages.admin.blog")
   return {
     title: `${t("title")} | SaaSy Land`,
   }

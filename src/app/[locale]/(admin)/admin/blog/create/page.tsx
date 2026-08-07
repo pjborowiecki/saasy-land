@@ -9,13 +9,8 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 import { CreateBlogPostEditor } from "~/src/app/[locale]/(admin)/admin/blog/create/_components/create-blog-post-editor"
 import { CreateBlogPostSettings } from "~/src/app/[locale]/(admin)/admin/blog/create/_components/create-blog-post-settings"
 
-export async function generateMetadata({
-  params,
-}: Readonly<{
-  params: Promise<{ locale: string }>
-}>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.blog.create" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.blog.create")
 
   return {
     description: t("description"),
@@ -23,13 +18,8 @@ export async function generateMetadata({
   }
 }
 
-export default async function CreateBlogPostPage({
-  params,
-}: Readonly<{
-  params: Promise<{ locale: string }>
-}>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.blog.create" })
+export default async function CreateBlogPostPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.blog.create")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">

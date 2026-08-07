@@ -1,4 +1,4 @@
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
 import { Bell, Search } from "lucide-react"
 
@@ -14,7 +14,9 @@ export function AdminLayoutHeader(): JSX.Element {
     <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border/40 bg-secondary/20 px-4 backdrop-blur-xl md:px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger className="-ml-2" />
-        <AdminBreadcrumbs />
+        <Suspense>
+          <AdminBreadcrumbs />
+        </Suspense>
       </div>
       <div className="flex items-center gap-4">
         <AdminHeaderSearch />

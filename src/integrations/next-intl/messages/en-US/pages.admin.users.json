@@ -31,6 +31,7 @@
       "ban": "Ban user",
       "delete": "Delete user",
       "edit": "Edit user",
+      "menu": "Row actions",
       "resetPassword": "Reset password",
       "unban": "Unban user",
       "viewProfile": "View profile"
@@ -40,6 +41,11 @@
     "placeholder": "Search users by name, email, or ID..."
   },
   "filters": {
+    "groups": {
+      "identity": "Identity",
+      "access": "Access",
+      "activity": "Activity"
+    },
     "role": {
       "all": "Role: All",
       "value": "Role: {role}",
@@ -65,12 +71,12 @@
     "security": "Security"
   },
   "table": {
-    "empty": "No users found.",
-    "emptyValue": "—",
     "booleans": {
       "no": "No",
       "yes": "Yes"
     },
+    "empty": "No users found.",
+    "emptyValue": "—",
     "headers": {
       "createdAt": "Created At",
       "emailVerified": "Email verified",
@@ -80,7 +86,9 @@
       "twoFactorEnabled": "2FA enabled",
       "updatedAt": "Updated At",
       "user": "User"
-    }
+    },
+    "selectAll": "Select all rows",
+    "selectRow": "Select row"
   },
   "pagination": {
     "info": "Showing {start} to {end} of {total} results"

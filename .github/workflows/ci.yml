@@ -6,66 +6,49 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
-  test:
+  verify:
+    name: Format, lint, types, i18n, tests
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    env:
-      # CI-only dummy values to satisfy runtime env validation during `next build`.
-      AUTH_SECRET: "ci_dummy_secret_000000000000000000000000000000000000000000000000000000000000"
-      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/postgres"
-      NEXT_PUBLIC_APP_URL: "http://127.0.0.1:3000"
-      RESEND_API_KEY: "re_ci_dummy_key_for_build_validation_only_000000000000"
-      RESEND_EMAIL_FROM: "onboarding@resend.dev"
-      KV_REST_API_URL: "https://example.upstash.io"
-      KV_REST_API_TOKEN: "ci_dummy_upstash_token"
-      GITHUB_CLIENT_ID: "ci_dummy_github_id"
-      GITHUB_CLIENT_SECRET: "ci_dummy_github_secret"
-      GOOGLE_CLIENT_ID: "ci_dummy_google_id"
-      GOOGLE_CLIENT_SECRET: "ci_dummy_google_secret"
+    timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+        uses: actions/checkout@v5
         with:
-          bun-version: 1.3.14
+          persist-credentials: false
 
-      - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1
-        with:
-          node-version: "22"
-          cache: true
-          run-install: false
-
-      - name: Install dependencies (no lifecycle scripts)
-        run: bun install --ignore-scripts
-
-      - name: Generate Next types
-        run: bun run typegen
+      - name: Setup toolchain
+        uses: ./.github/actions/setup
 
       - name: Format, lint, typecheck, and i18n
         run: bun run check
 
-      - name: Unit, integration, and component tests
-        run: bun run test
-
-      - name: Coverage gate
+      - name: Tests with coverage gate
         run: bun run test:coverage
 
-      - name: Build (for E2E)
-        # Bun can SIGILL in N-API teardown after a successful Next build; accept .next/BUILD_ID.
-        run: bun run build || test -f .next/BUILD_ID
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
+      - name: Upload coverage
+        uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
         with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('bun.lock') }}
+          name: coverage
+          path: coverage/
+          retention-days: 7
+          if-no-files-found: ignore
 
-      - name: Install Playwright browsers
-        run: bunx playwright install --with-deps
-
-      - name: E2E PR suite (Chromium)
-        run: bun run test:e2e:pr
+  e2e:
+    name: Build and E2E
+    # Fork PRs cannot read secrets, and pushes to main are covered by E2E (full).
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: read
+    uses: ./.github/workflows/e2e-reusable.yml
+    with:
+      browser: chromium
+    secrets: inherit

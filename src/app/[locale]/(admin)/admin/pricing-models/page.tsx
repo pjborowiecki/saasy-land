@@ -12,13 +12,8 @@ const MONTHLY_FEATURES = ["allCourses", "discord", "qa"] as const
 const ANNUAL_FEATURES = ["everythingInMonthly", "sourceFiles", "portfolioReview"] as const
 const LIFETIME_FEATURES = ["standaloneCourse", "lifetimeUpdates", "guarantee"] as const
 
-export async function generateMetadata({
-  params,
-}: Readonly<{
-  params: Promise<{ locale: string }>
-}>) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.pricing-models" })
+export async function generateMetadata() {
+  const t = await getTranslations("pages.admin.pricing-models")
   return {
     title: `${t("title")} | SaaSy Land`,
   }

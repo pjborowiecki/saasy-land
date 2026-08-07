@@ -1,12 +1,9 @@
-import { notFound } from "next/navigation"
 import { Suspense, type ReactNode } from "react"
-
-import { hasLocale } from "next-intl"
 
 import { DocsProvider } from "~/src/providers/docs-provider"
 
 import { source } from "~/src/integrations/fumadocs/fumadocs.source"
-import { I18N } from "~/src/integrations/next-intl/i18n.config"
+import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 
 import { GithubInfo } from "~/src/presentation/components/custom/github-info"
 
@@ -22,12 +19,8 @@ const DOCS_LINKS = [
 
 const DOCS_LAYOUT_FALLBACK = <div className="min-h-svh w-full animate-pulse bg-fd-background" />
 
-async function DocumentationLayoutContent({ children, params }: Readonly<LayoutProps<"/[locale]/docs">>): Promise<ReactNode> {
-  const { locale } = await params
-
-  if (!hasLocale(I18N.LOCALES, locale)) {
-    notFound()
-  }
+async function DocumentationLayoutContent({ children }: Readonly<{ children: ReactNode }>): Promise<ReactNode> {
+  const locale = await getRootLocale()
 
   return (
     <DocsProvider locale={locale}>
@@ -38,10 +31,10 @@ async function DocumentationLayoutContent({ children, params }: Readonly<LayoutP
   )
 }
 
-export default function DocumentationLayout({ children, params }: Readonly<LayoutProps<"/[locale]/docs">>): ReactNode {
+export default function DocumentationLayout({ children }: Readonly<LayoutProps<"/[locale]/docs">>): ReactNode {
   return (
     <Suspense fallback={DOCS_LAYOUT_FALLBACK}>
-      <DocumentationLayoutContent params={params}>{children}</DocumentationLayoutContent>
+      <DocumentationLayoutContent>{children}</DocumentationLayoutContent>
     </Suspense>
   )
 }

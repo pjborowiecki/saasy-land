@@ -3,15 +3,14 @@ import type { JSX } from "react"
 import { AlertTriangle, Package, Users } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-import { listProducts } from "~/src/modules/product/use-cases/list-products.use-case"
+import { getProducts } from "~/src/modules/product/use-cases/list-products.use-case"
 import { listUsers } from "~/src/modules/user/use-cases/list-users.use-case"
 
 import { Card, CardContent, CardHeader } from "~/src/presentation/components/shadcn/card"
 
 export async function DashboardStatsGrid(): Promise<JSX.Element> {
-  const [userRowsResult, productsResult, t] = await Promise.all([listUsers(), listProducts(), getTranslations("pages.admin.dashboard")])
-  const userRows = userRowsResult.data ?? []
-  const products = productsResult.data ?? []
+  const [usersResult, products, t] = await Promise.all([listUsers(), getProducts(), getTranslations("pages.admin.dashboard")])
+  const userRows = usersResult.data ?? []
 
   const pendingVerificationCount = userRows.filter((row) => !row.emailVerified && !row.banned).length
 

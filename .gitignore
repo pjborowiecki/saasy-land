@@ -50,9 +50,10 @@ yarn-error.log*
 next-env.d.ts
 
 # AI
-.cursor/
+.agents/
 .claude/
-opensrc/
+.codex/
+.cursor/
 graphify-out/
 
 # misc

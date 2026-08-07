@@ -1,17 +1,17 @@
 import type { Metadata } from "next"
-import type { JSX } from "react"
+import { Suspense, type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
 import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
+import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
 import { TwoFactorForm } from "~/src/app/[locale]/(auth)/auth/two-factor/_components/two-factor-form"
 import { APP_NAME } from "~/src/presentation/branding"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/two-factor">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.auth.two-factor" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.auth.two-factor")
 
   return {
     description: t("metadata.description", { name: APP_NAME }),
@@ -23,12 +23,21 @@ export function generateStaticParams(): { locale: Locale }[] {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-export default async function TwoFactorPage({ params }: Readonly<PageProps<"/[locale]/auth/two-factor">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.auth.two-factor" })
+const authPageFallback = <AuthPageFallback />
+
+export default function TwoFactorPage(): JSX.Element {
+  return (
+    <Suspense fallback={authPageFallback}>
+      <TwoFactorPageContent />
+    </Suspense>
+  )
+}
+
+async function TwoFactorPageContent(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.auth.two-factor")
 
   return (
-    <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">
+    <div className="reveal-elem flex w-full max-w-105 flex-col gap-8">
       <div className="flex flex-col gap-2 text-center">
         <h1 className="text-3xl font-medium tracking-tight text-foreground">{t("form.title")}</h1>
         <p className="text-sm text-muted-foreground">{t("form.description")}</p>

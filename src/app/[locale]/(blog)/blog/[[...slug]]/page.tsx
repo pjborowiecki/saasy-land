@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import type { JSX } from "react"
+import { type JSX, Suspense } from "react"
 
 import { InlineTOC } from "fumadocs-ui/components/inline-toc"
 import { createRelativeLink } from "fumadocs-ui/mdx"
@@ -11,7 +11,7 @@ import { blogSource } from "~/src/integrations/fumadocs/fumadocs.source"
 import { getMDXComponents } from "~/src/integrations/fumadocs/mdx"
 import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
+import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 
 import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
 
@@ -26,10 +26,11 @@ function hasNonEmptyString(value: string | undefined): value is string {
 }
 
 export async function generateMetadata({ params }: BlogSlugPageProps): Promise<Metadata> {
-  const { locale, slug } = await params
+  const { slug } = await params
+  const locale = await getRootLocale()
 
   if (isBlogIndex(slug)) {
-    const t = await getTranslations({ locale, namespace: "pages.blog" })
+    const t = await getTranslations("pages.blog")
     return {
       description: t("metadata.description"),
       title: t("metadata.title"),
@@ -48,22 +49,40 @@ export async function generateMetadata({ params }: BlogSlugPageProps): Promise<M
   }
 }
 
-export function generateStaticParams(): { locale: Locale; slug: string[] | undefined }[] {
-  const indexRoutes = routing.locales.map((locale) => ({ locale, slug: undefined }))
-  const postRoutes = routing.locales.flatMap((locale) =>
-    blogSource
+// Nested under the root layout's own generateStaticParams, so Next runs this once per
+// locale and the root param is readable here — no locale cross-product needed.
+export async function generateStaticParams(): Promise<{ slug: string[] | undefined }[]> {
+  const locale = await getRootLocale()
+
+  return [
+    { slug: undefined },
+    ...blogSource
       .getPages(locale)
       .filter((page) => isPublished(page.data))
-      .map((page) => ({ locale, slug: page.slugs })),
-  )
-  return [...indexRoutes, ...postRoutes]
+      .map((page) => ({ slug: page.slugs })),
+  ]
 }
 
-export default async function BlogPage({ params }: BlogSlugPageProps): Promise<JSX.Element> {
-  const { locale, slug } = await params
+const BLOG_PAGE_FALLBACK = (
+  <div className="mx-auto min-h-[60vh] w-full max-w-[1400px] flex-1 animate-pulse rounded-xl bg-fd-muted/30 px-4 py-8" />
+)
+
+// `slug` is URL data, so it can't live in the shared App Shell — it resolves inside
+// the boundary while the surrounding chrome stays prerendered.
+export default function BlogPage({ params }: BlogSlugPageProps): JSX.Element {
+  return (
+    <Suspense fallback={BLOG_PAGE_FALLBACK}>
+      <BlogPageContent params={params} />
+    </Suspense>
+  )
+}
+
+async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Element> {
+  const { slug } = await params
+  const locale = await getRootLocale()
 
   if (isBlogIndex(slug)) {
-    const t = await getTranslations({ locale, namespace: "pages.blog" })
+    const t = await getTranslations("pages.blog")
     const posts = sortPostsByDateDesc(blogSource.getPages(locale).filter((page) => isPublished(page.data)))
 
     return (
@@ -108,7 +127,7 @@ export default async function BlogPage({ params }: BlogSlugPageProps): Promise<J
   const { data } = page
   const Mdx = data.body
 
-  const t = await getTranslations({ locale, namespace: "pages.blog" })
+  const t = await getTranslations("pages.blog")
 
   const summary = summaryFromFrontmatter(data)
 

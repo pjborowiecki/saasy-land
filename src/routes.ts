@@ -11,6 +11,10 @@ export const ROUTES = {
   ADMIN_SESSIONS: "/admin/sessions",
   ADMIN_SETTINGS: "/admin/settings",
   ADMIN_USERS: "/admin/users",
+  ADMIN_USERS_ALL: "/admin/users/all",
+  ADMIN_USERS_INVITATIONS: "/admin/users/invitations",
+  ADMIN_USERS_ROLES: "/admin/users/roles",
+  ADMIN_USERS_SECURITY: "/admin/users/security",
   API_AUTH: {
     REQUEST_PASSWORD_RESET: "/request-password-reset",
     RESET_PASSWORD: "/reset-password",

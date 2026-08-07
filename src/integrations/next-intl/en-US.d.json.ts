@@ -92,44 +92,63 @@ declare const messages: {
   },
   "components": {
     "custom": {
-      "data-table": {
-        "actions": {
-          "header": "Actions",
-          "rowButton": "Row actions"
+      "data-filter": {
+        "addFilter": "Filter",
+        "searchPlaceholder": "Filter...",
+        "empty": "No filters found",
+        "clearFilters": "Clear all",
+        "noOptions": "No options",
+        "optionsError": "Could not load options",
+        "removeFilter": "Remove filter",
+        "selectedOverflow": "{labels}, … and {count} more",
+        "operatorLabel": "{field} operator",
+        "valueLabel": "{field} value",
+        "boolean": {
+          "true": "Yes",
+          "false": "No"
         },
-        "columnHeader": {
-          "clearSort": "Clear sort",
-          "menu": "Column options",
-          "sortAsc": "Sort ascending",
-          "sortDesc": "Sort descending"
+        "placeholders": {
+          "select": "Select…",
+          "value": "Value…",
+          "searchField": "Search {label}...",
+          "min": "Min",
+          "max": "Max",
+          "to": "to"
         },
-        "empty": "No results.",
-        "loading": "Loading…",
-        "pagination": {
-          "rowCount": "{count, plural, =0 {No rows} one {# row} other {# rows}}",
-          "selectedCount": "{selected, plural, one {# selected} other {# selected}}",
-          "rowsPerPage": "Rows per page",
-          "pageIndicator": "Page {current} of {total}"
-        },
-        "settings": {
-          "trigger": "Table settings",
-          "title": "Table settings",
-          "rowDensity": {
-            "label": "Row size",
-            "compact": "Compact",
-            "default": "Default",
-            "comfortable": "Comfortable"
-          }
-        },
-        "toolbar": {
-          "exportCsv": "Export CSV",
-          "fetch": "Fetch",
-          "fetching": "Fetching...",
-          "filtersToggle": "Filters",
-          "refetch": "Refetch",
-          "refetching": "Refetching...",
-          "searchPlaceholder": "Search…"
+        "operators": {
+          "is": "is",
+          "is_not": "is not",
+          "is_any_of": "is any of",
+          "is_not_any_of": "is not any of",
+          "includes_all": "includes all",
+          "contains": "contains",
+          "not_contains": "does not contain",
+          "starts_with": "starts with",
+          "ends_with": "ends with",
+          "equals": "equals",
+          "not_equals": "not equals",
+          "greater_than": "greater than",
+          "less_than": "less than",
+          "between": "is between",
+          "before": "is before",
+          "after": "is after",
+          "empty": "is empty",
+          "not_empty": "is not empty"
         }
+      },
+      "data-table": {
+        "empty": "No results.",
+        "pagination": {
+          "nextPage": "Next page",
+          "pageIndicator": "Page {current} of {total}",
+          "previousPage": "Previous page",
+          "rowCount": "{count, plural, =0 {No rows} one {# row} other {# rows}}",
+          "selectedCount": "{selected, plural, one {# selected} other {# selected}}"
+        },
+        "resizeColumn": "Resize column"
+      },
+      "offline-banner": {
+        "message": "You are offline. Pending requests will retry once you reconnect."
       },
       "theme-switch": {
         "label": "Choose a theme",
@@ -620,6 +639,23 @@ declare const messages: {
       "body": "Hi {name}, we received a request to change your email address to {newEmail}. Click the button below to confirm this change.",
       "button": "Confirm email change",
       "footer": "If you did not request this change, you can safely ignore this email."
+    }
+  },
+  "errors": {
+    "boundary": {
+      "title": "Something went wrong",
+      "description": "This section failed to load. You can try again without leaving the page.",
+      "retry": "Try again"
+    },
+    "global": {
+      "title": "Something went wrong",
+      "description": "The application ran into an unexpected error.",
+      "retry": "Reload"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist or has been moved.",
+      "backHome": "Back to home"
     }
   },
   "locales": {
@@ -1448,6 +1484,7 @@ declare const messages: {
             "ban": "Ban user",
             "delete": "Delete user",
             "edit": "Edit user",
+            "menu": "Row actions",
             "resetPassword": "Reset password",
             "unban": "Unban user",
             "viewProfile": "View profile"
@@ -1457,6 +1494,11 @@ declare const messages: {
           "placeholder": "Search users by name, email, or ID..."
         },
         "filters": {
+          "groups": {
+            "identity": "Identity",
+            "access": "Access",
+            "activity": "Activity"
+          },
           "role": {
             "all": "Role: All",
             "value": "Role: {role}",
@@ -1482,12 +1524,12 @@ declare const messages: {
           "security": "Security"
         },
         "table": {
-          "empty": "No users found.",
-          "emptyValue": "—",
           "booleans": {
             "no": "No",
             "yes": "Yes"
           },
+          "empty": "No users found.",
+          "emptyValue": "—",
           "headers": {
             "createdAt": "Created At",
             "emailVerified": "Email verified",
@@ -1497,7 +1539,9 @@ declare const messages: {
             "twoFactorEnabled": "2FA enabled",
             "updatedAt": "Updated At",
             "user": "User"
-          }
+          },
+          "selectAll": "Select all rows",
+          "selectRow": "Select row"
         },
         "pagination": {
           "info": "Showing {start} to {end} of {total} results"
