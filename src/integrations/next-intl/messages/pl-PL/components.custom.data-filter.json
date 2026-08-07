@@ -1,0 +1,45 @@
+{
+  "addFilter": "Filtr",
+  "searchPlaceholder": "Filtruj...",
+  "empty": "Nie znaleziono filtrów",
+  "clearFilters": "Wyczyść wszystko",
+  "noOptions": "Brak opcji",
+  "optionsError": "Nie udało się wczytać opcji",
+  "removeFilter": "Usuń filtr",
+  "selectedOverflow": "{labels}, … i {count} więcej",
+
+  "operatorLabel": "Operator: {field}",
+  "valueLabel": "Wartość: {field}",
+  "boolean": {
+    "true": "Tak",
+    "false": "Nie"
+  },
+  "placeholders": {
+    "select": "Wybierz…",
+    "value": "Wartość…",
+    "searchField": "Szukaj {label}...",
+    "min": "Min",
+    "max": "Max",
+    "to": "do"
+  },
+  "operators": {
+    "is": "jest",
+    "is_not": "nie jest",
+    "is_any_of": "jest jednym z",
+    "is_not_any_of": "nie jest jednym z",
+    "includes_all": "zawiera wszystkie",
+    "contains": "zawiera",
+    "not_contains": "nie zawiera",
+    "starts_with": "zaczyna się od",
+    "ends_with": "kończy się na",
+    "equals": "równa się",
+    "not_equals": "nie równa się",
+    "greater_than": "większe niż",
+    "less_than": "mniejsze niż",
+    "between": "jest pomiędzy",
+    "before": "jest przed",
+    "after": "jest po",
+    "empty": "jest puste",
+    "not_empty": "nie jest puste"
+  }
+}

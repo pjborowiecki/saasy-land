@@ -4,12 +4,12 @@ import type { ComponentProps, JSX } from "react"
 
 import { cn } from "~/src/utils"
 
-function Table({ className, containerClassName, ...props }: ComponentProps<"table"> & { containerClassName?: string }): JSX.Element {
-  return (
-    <div data-slot="table-container" className={cn("relative w-full", containerClassName ?? "custom-scrollbar overflow-x-auto")}>
-      <table data-slot="table" className={cn("w-full caption-bottom text-xs", className)} {...props} />
-    </div>
-  )
+function TableContainer({ className, ...props }: ComponentProps<"div">): JSX.Element {
+  return <div data-slot="table-container" className={cn("custom-scrollbar relative w-full overflow-x-auto", className)} {...props} />
+}
+
+function Table({ className, ...props }: ComponentProps<"table">): JSX.Element {
+  return <table data-slot="table" className={cn("w-full caption-bottom text-xs", className)} {...props} />
 }
 
 function TableHeader({ className, ...props }: ComponentProps<"thead">): JSX.Element {
@@ -52,4 +52,4 @@ function TableCaption({ className, ...props }: ComponentProps<"caption">): JSX.E
   return <caption data-slot="table-caption" className={cn("mt-4 text-xs text-muted-foreground", className)} {...props} />
 }
 
-export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow }
+export { Table, TableContainer, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow }

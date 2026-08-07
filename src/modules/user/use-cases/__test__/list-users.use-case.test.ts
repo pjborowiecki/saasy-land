@@ -1,3 +1,4 @@
+import type * as NextCacheModule from "next/cache"
 import type * as NextHeadersModule from "next/headers"
 
 import { listUsers } from "~/src/modules/user/use-cases/list-users.use-case"
@@ -50,6 +51,14 @@ const dbMocks = vi.hoisted(() => {
 vi.mock(import("server-only"), () => ({}))
 
 vi.mock(
+  import("next/cache"),
+  (): Partial<typeof NextCacheModule> => ({
+    cacheLife: vi.fn<() => void>(),
+    cacheTag: vi.fn<(tag: string) => void>(),
+  }),
+)
+
+vi.mock(
   import("next/headers"),
   (): Partial<typeof NextHeadersModule> => ({
     headers: vi.fn<() => Promise<Headers>>(() => Promise.resolve(HEADERS)),
@@ -62,7 +71,7 @@ vi.mock(import("~/src/platform/db/client"), () => ({
 }))
 
 describe("list-users", () => {
-  it("lists registered users for admins", async () => {
+  it("lists users for admins", async () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)

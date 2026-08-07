@@ -6,38 +6,46 @@ import { getTranslations } from "next-intl/server"
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card } from "~/src/presentation/components/shadcn/card"
 import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
-import { Table, TableBody, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
+import { Table, TableContainer, TableBody, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import { PAGINATION_FIRST_PAGE } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { BlogPostTableRow } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-table-row"
+
+function BlogPostsTableHeader({ t }: { readonly t: (key: string) => string }): JSX.Element {
+  return (
+    <TableHeader className="bg-secondary/30">
+      <TableRow>
+        <TableHead className="w-12 px-4 text-center">
+          <Checkbox className="mx-auto" />
+        </TableHead>
+        <TableHead className="w-[35%] font-medium">{t("table.postDetails")}</TableHead>
+        <TableHead className="font-medium">{t("table.status")}</TableHead>
+        <TableHead className="font-medium">{t("table.category")}</TableHead>
+        <TableHead className="font-medium">{t("table.author")}</TableHead>
+        <TableHead className="font-medium">{t("table.date")}</TableHead>
+        <TableHead className="font-medium">{t("table.views")}</TableHead>
+        <TableHead className="w-12 px-4 text-right" />
+      </TableRow>
+    </TableHeader>
+  )
+}
 
 export async function BlogPostsTable(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog")
 
   return (
     <Card className="overflow-hidden border-border/40">
-      <Table>
-        <TableHeader className="bg-secondary/30">
-          <TableRow>
-            <TableHead className="w-12 px-4 text-center">
-              <Checkbox className="mx-auto" />
-            </TableHead>
-            <TableHead className="w-[35%] font-medium">{t("table.postDetails")}</TableHead>
-            <TableHead className="font-medium">{t("table.status")}</TableHead>
-            <TableHead className="font-medium">{t("table.category")}</TableHead>
-            <TableHead className="font-medium">{t("table.author")}</TableHead>
-            <TableHead className="font-medium">{t("table.date")}</TableHead>
-            <TableHead className="font-medium">{t("table.views")}</TableHead>
-            <TableHead className="w-12 px-4 text-right" />
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {DUMMY_POSTS.map((post) => (
-            <BlogPostTableRow key={post.id} post={post} />
-          ))}
-        </TableBody>
-      </Table>
+      <TableContainer>
+        <Table>
+          <BlogPostsTableHeader t={t} />
+          <TableBody>
+            {DUMMY_POSTS.map((post) => (
+              <BlogPostTableRow key={post.id} post={post} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <BlogPostsTablePagination />
     </Card>

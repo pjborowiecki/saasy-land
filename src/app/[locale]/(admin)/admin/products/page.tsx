@@ -1,23 +1,17 @@
-/* eslint-disable react-perf/jsx-no-new-object-as-prop -- RSC page builds i18n label bag once per render */
 import type { Metadata } from "next"
 import { Suspense, type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { Category } from "~/src/modules/category/category.types"
-import { listCategories } from "~/src/modules/category/use-cases/list-categories.use-case"
-import type { Product } from "~/src/modules/product/product.types"
-import { listProducts } from "~/src/modules/product/use-cases/list-products.use-case"
+import { getCategories } from "~/src/modules/category/use-cases/list-categories.use-case"
+import { getProducts } from "~/src/modules/product/use-cases/list-products.use-case"
 
 import { ProductsPageTabs } from "~/src/app/[locale]/(admin)/admin/products/_components/products-page-tabs"
 
 const PRODUCTS_CATALOG_FALLBACK = <div className="mt-6 h-64 animate-pulse rounded-lg border border-border/60 bg-muted/30" />
-const EMPTY_PRODUCTS: readonly Product["select"][] = []
-const EMPTY_CATEGORIES: readonly Category["select"][] = []
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.products" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.products")
 
   return {
     description: t("metadata.description"),
@@ -25,9 +19,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function ProductsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.products" })
+export default async function ProductsPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.products")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">
@@ -39,42 +32,30 @@ export default async function ProductsPage({ params }: Readonly<PageProps<"/[loc
       </div>
 
       <Suspense fallback={PRODUCTS_CATALOG_FALLBACK}>
-        <ProductsCatalog
-          labels={{
-            all: t("tabs.all"),
-            categories: t("tabs.categories"),
-            collections: t("tabs.collections"),
-            courses: t("tabs.courses"),
-            drafts: t("tabs.drafts"),
-            onetime: t("tabs.onetime"),
-            subscriptions: t("tabs.subscriptions"),
-          }}
-        />
+        <ProductsCatalog />
       </Suspense>
     </div>
   )
 }
 
-async function ProductsCatalog({
-  labels,
-}: {
-  readonly labels: {
-    readonly all: string
-    readonly categories: string
-    readonly collections: string
-    readonly courses: string
-    readonly drafts: string
-    readonly onetime: string
-    readonly subscriptions: string
-  }
-}): Promise<JSX.Element> {
-  const [productsResult, categoriesResult] = await Promise.all([listProducts(), listCategories()])
+type ProductsTranslator = Awaited<ReturnType<typeof getTranslations<"pages.admin.products">>>
 
-  return (
-    <ProductsPageTabs
-      categories={categoriesResult.data ?? EMPTY_CATEGORIES}
-      labels={labels}
-      products={productsResult.data ?? EMPTY_PRODUCTS}
-    />
-  )
+function catalogLabels(
+  t: ProductsTranslator,
+): Record<"all" | "categories" | "collections" | "courses" | "drafts" | "onetime" | "subscriptions", string> {
+  return {
+    all: t("tabs.all"),
+    categories: t("tabs.categories"),
+    collections: t("tabs.collections"),
+    courses: t("tabs.courses"),
+    drafts: t("tabs.drafts"),
+    onetime: t("tabs.onetime"),
+    subscriptions: t("tabs.subscriptions"),
+  }
+}
+
+async function ProductsCatalog(): Promise<JSX.Element> {
+  const [t, products, categories] = await Promise.all([getTranslations("pages.admin.products"), getProducts(), getCategories()])
+
+  return <ProductsPageTabs categories={categories} labels={catalogLabels(t)} products={products} />
 }

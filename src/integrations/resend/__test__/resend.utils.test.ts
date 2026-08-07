@@ -4,6 +4,8 @@ import type { CreateEmailResponse } from "resend"
 
 import { env } from "~/src/platform/env"
 
+import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
+
 import type * as ResendConfigModule from "~/src/integrations/resend/resend.config"
 import { sendEmail as deliverEmail, type EmailSendFn } from "~/src/integrations/resend/resend.utils"
 
@@ -32,19 +34,17 @@ const emailOptions = {
   to: "user@example.com",
 } as const
 
-/* eslint-disable unicorn/no-null -- Resend SDK response union uses null */
 function emailSuccess(id: string): CreateEmailResponse {
-  return { data: { id }, error: null, headers: null }
+  return { data: { id }, error: JSON_NULL, headers: JSON_NULL }
 }
 
 function emailFailure(message: string): CreateEmailResponse {
   return {
-    data: null,
-    error: { message, name: "application_error", statusCode: null },
-    headers: null,
+    data: JSON_NULL,
+    error: { message, name: "application_error", statusCode: JSON_NULL },
+    headers: JSON_NULL,
   }
 }
-/* eslint-enable unicorn/no-null */
 
 function createSendMock(): EmailSendFn {
   return vi.fn<EmailSendFn>()

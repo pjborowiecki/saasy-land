@@ -1,0 +1,30 @@
+name: E2E (full)
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "15 3 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: E2E (${{ matrix.browser }})
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    permissions:
+      contents: read
+    uses: ./.github/workflows/e2e-reusable.yml
+    with:
+      browser: ${{ matrix.browser }}
+    secrets: inherit

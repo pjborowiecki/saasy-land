@@ -20,11 +20,13 @@ const MIN_FRACTION_DIGITS = 2
 function createWrapper(locale: "en-US" | "pl-PL" = "en-US") {
   const messages = loadLocaleMessagesFromDir(locale)
 
-  return ({ children }: { children: ReactNode }) => (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  )
+  return function Wrapper({ children }: { children: ReactNode }) {
+    return (
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        {children}
+      </NextIntlClientProvider>
+    )
+  }
 }
 
 describe("use currency formatter component", () => {

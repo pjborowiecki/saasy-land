@@ -1,5 +1,7 @@
 /** @vitest-environment jsdom */
 
+import type * as NextCacheModule from "next/cache"
+import type * as NextHeadersModule from "next/headers"
 import { type JSX, type ReactNode } from "react"
 
 import type { SuccessContext } from "@better-fetch/fetch"
@@ -113,6 +115,8 @@ function setupSignInWithPasswordFormMocks(): void {
   getSessionMock.mockResolvedValue({ data: { user: { role: PERMISSIONS.ROLES.CUSTOMER } } })
 }
 
+const HEADERS = new Headers()
+
 function setupSignUpWithPasswordFormMocks(): void {
   pushMock.mockClear()
   signUpEmailMock.mockClear()
@@ -164,6 +168,47 @@ function GitHubIconMock(): JSX.Element {
 }
 
 vi.mock(import("server-only"), () => ({}))
+
+vi.mock(
+  import("next/headers"),
+  (): Partial<typeof NextHeadersModule> => ({
+    headers: vi.fn<() => Promise<Headers>>(() => Promise.resolve(HEADERS)),
+  }),
+)
+
+vi.mock(
+  import("next/cache"),
+  (): Partial<typeof NextCacheModule> => ({
+    cacheLife: vi.fn<() => void>(),
+    cacheTag: vi.fn<(tag: string) => void>(),
+    revalidateTag: vi.fn<(tag: string, profile: string | { expire?: number }) => undefined>(),
+    updateTag: vi.fn<(tag: string) => undefined>(),
+  }),
+)
+
+// @ts-expect-error Vitest module mock factory is not inferred for module export.
+vi.mock(import("~/src/platform/db/client"), () => ({
+  db: {},
+}))
+
+// @ts-expect-error Vitest module mock factory is not inferred for module export.
+vi.mock(import("~/src/integrations/resend/resend.config"), () => ({
+  resend: {},
+}))
+
+// @ts-expect-error Vitest module mock factory is not inferred for module export.
+vi.mock(import("~/src/integrations/redis/redis.config"), () => ({
+  redis: {},
+}))
+
+// @ts-expect-error Vitest module mock factory is not inferred for module export.
+vi.mock(import("~/src/integrations/better-auth/auth.server"), () => ({
+  auth: {
+    api: {
+      signUpEmail: signUpEmailMock,
+    },
+  },
+}))
 
 vi.mock(import("~/src/hooks/use-confetti"), () => ({
   useConfetti: () => ({ triggerConfetti: triggerConfettiMock }),
@@ -286,12 +331,16 @@ describe("sign up with password form component", () => {
     await user.type(getPasswordInput("sign-up-confirmPassword"), TEST_PASSWORD)
     await user.click(screen.getByRole("button", { name: "Continue" }))
 
+    const expectedBody: unknown = expect.objectContaining({
+      email: TEST_EMAIL,
+      name: TEST_NAME,
+      password: TEST_PASSWORD,
+    })
+
     await waitFor(() => {
       expect(signUpEmailMock).toHaveBeenCalledWith(
         expect.objectContaining({
-          email: TEST_EMAIL,
-          name: TEST_NAME,
-          password: TEST_PASSWORD,
+          body: expectedBody,
         }),
       )
     })

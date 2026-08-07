@@ -10,20 +10,21 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { type SignInFormValues } from "~/src/app/[locale]/(auth)/auth/sign-in/_components/sign-in-with-password-form-fields"
 
-export function SignInSubmitButton(): JSX.Element {
+export function SignInSubmitButton({ isPending = false }: Readonly<{ isPending?: boolean }>): JSX.Element {
   const t = useTranslations("pages.auth.sign-in")
   const form = useFormContext<SignInFormValues>()
+  const isLoading = form.formState.isSubmitting || isPending
 
   return (
     <Button
       aria-label={t("form.submit")}
       className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
       data-testid="sign-in-form-submit-button"
-      isDisabled={form.formState.isSubmitting}
+      isDisabled={isLoading}
       type="submit"
     >
-      {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
-      {form.formState.isSubmitting ? t("form.submitting") : t("form.submit")}
+      {isLoading && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+      {isLoading ? t("form.submitting") : t("form.submit")}
     </Button>
   )
 }

@@ -20,8 +20,8 @@ const DASHBOARD_USER_PREVIEW_LIMIT = 5
 const FIRST_PREVIEW_INDEX = 1
 
 export async function DashboardUsersTable(): Promise<JSX.Element> {
-  const [userRowsResult, t] = await Promise.all([listUsers(), getTranslations("pages.admin.dashboard")])
-  const userRows = userRowsResult.data ?? []
+  const [usersResult, t] = await Promise.all([listUsers(), getTranslations("pages.admin.dashboard")])
+  const userRows = usersResult.data ?? []
   const users = userRows.slice(0, DASHBOARD_USER_PREVIEW_LIMIT).map((row) => mapUserRowToDashboardRow(row))
 
   const totalUserCount = userRows.length

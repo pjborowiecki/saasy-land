@@ -1,3 +1,4 @@
+import type * as NextCacheModule from "next/cache"
 import type * as NextHeadersModule from "next/headers"
 
 import { banUser } from "~/src/modules/user/use-cases/ban-user.use-case"
@@ -20,6 +21,15 @@ const getSessionMock = vi.hoisted(() => vi.fn<AuthApi["getSession"]>())
 const banUserMock = vi.hoisted(() => vi.fn<AuthApi["banUser"]>())
 
 vi.mock(import("server-only"), () => ({}))
+
+vi.mock(
+  import("next/cache"),
+  (): Partial<typeof NextCacheModule> => ({
+    cacheLife: vi.fn<() => void>(),
+    cacheTag: vi.fn<(tag: string) => void>(),
+    updateTag: vi.fn<(tag: string) => undefined>(),
+  }),
+)
 
 vi.mock(
   import("next/headers"),

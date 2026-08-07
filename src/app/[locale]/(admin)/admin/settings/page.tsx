@@ -10,9 +10,8 @@ import { SettingsSecurityTab } from "~/src/app/[locale]/(admin)/admin/settings/_
 
 const SETTINGS_SECURITY_TAB_FALLBACK = <div className="mt-8 h-48 animate-pulse rounded-lg border border-border/40 bg-secondary/30" />
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.settings" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.settings")
 
   return {
     description: t("metadata.description"),
@@ -20,9 +19,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function SettingsPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.settings" })
+export default async function SettingsPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.settings")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">

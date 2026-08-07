@@ -1,6 +1,6 @@
 "use client"
 
-import { type JSX, useCallback } from "react"
+import { type JSX, useCallback, useTransition } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useLocale, useTranslations } from "next-intl"
@@ -23,6 +23,7 @@ import { SignInSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-in/_comp
 import { ROUTES } from "~/src/routes"
 
 export function SignInWithPasswordForm(): JSX.Element {
+  const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const locale = useLocale()
   const t = useTranslations()
@@ -34,32 +35,30 @@ export function SignInWithPasswordForm(): JSX.Element {
   })
 
   const onSubmit = useCallback(
-    async (data: SignInFormValues) => {
-      await signIn.email({
-        email: data.email,
-        fetchOptions: {
-          onError: (ctx) => {
-            const errorKey = authErrorKey(ctx.error)
+    (data: SignInFormValues) => {
+      startTransition(async () => {
+        const res = await signIn.email({
+          email: data.email,
+          password: data.password,
+        })
 
-            if (errorKey === AUTH_ERRORS.EMAIL_NOT_VERIFIED) {
-              toast.error(t(`auth.errors.${errorKey}`))
-              router.push(
-                getPathname({
-                  href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
-                  locale,
-                }),
-              )
-              return
-            }
+        if (res?.error) {
+          const errorKey = authErrorKey(res.error)
+          toast.error(t(`auth.errors.${errorKey}`))
 
-            toast.error(t(`auth.errors.${errorKey}`))
-          },
-          onSuccess: async () => {
-            toast.success(t("pages.auth.sign-in.form.success"))
-            await redirectAfterAuth()
-          },
-        },
-        password: data.password,
+          if (errorKey === AUTH_ERRORS.EMAIL_NOT_VERIFIED) {
+            router.push(
+              getPathname({
+                href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+                locale,
+              }),
+            )
+          }
+          return
+        }
+
+        toast.success(t("pages.auth.sign-in.form.success"))
+        await redirectAfterAuth()
       })
     },
     [locale, redirectAfterAuth, router, t],
@@ -69,7 +68,7 @@ export function SignInWithPasswordForm(): JSX.Element {
     <FormProvider {...form}>
       <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.SIGN_IN}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <SignInFormFields />
-        <SignInSubmitButton />
+        <SignInSubmitButton isPending={isPending} />
       </form>
     </FormProvider>
   )

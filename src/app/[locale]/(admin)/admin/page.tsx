@@ -17,9 +17,8 @@ import { DashboardUsersTableSkeleton } from "~/src/app/[locale]/(admin)/admin/da
 const DASHBOARD_STATS_GRID_FALLBACK = <DashboardStatsGridSkeleton />
 const DASHBOARD_USERS_TABLE_FALLBACK = <DashboardUsersTableSkeleton />
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.dashboard" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.dashboard")
 
   return {
     description: t("description"),
@@ -27,9 +26,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function AdminPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.dashboard" })
+export default async function AdminPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.dashboard")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 pb-8 duration-500 fade-in-50">

@@ -3,9 +3,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/app">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.app" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.app")
 
   return {
     description: t("description"),
@@ -13,9 +12,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function AppPage({ params }: Readonly<PageProps<"/[locale]/app">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.app" })
+export default async function AppPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.app")
 
   return (
     <div className="flex flex-col gap-4 p-8">

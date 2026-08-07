@@ -1,14 +1,14 @@
 "use client"
 
-import { type JSX, useCallback } from "react"
+import { type JSX, useCallback, useTransition } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { signUp } from "~/src/integrations/better-auth/auth.client"
-import { authErrorKey } from "~/src/integrations/better-auth/auth.errors"
+import { signUpWithPassword } from "~/src/modules/account/use-cases/sign-up-with-password.use-case"
+
 import { signUpWithPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
@@ -24,6 +24,7 @@ import { SignUpSubmitButton } from "~/src/app/[locale]/(auth)/auth/sign-up/_comp
 import { ROUTES } from "~/src/routes"
 
 export function SignUpWithPasswordForm(): JSX.Element {
+  const [isPending, startTransition] = useTransition()
   const { triggerConfetti } = useConfetti()
 
   const router = useRouter()
@@ -32,31 +33,29 @@ export function SignUpWithPasswordForm(): JSX.Element {
 
   const form = useForm<SignUpFormValues>({
     defaultValues: { confirmPassword: "", email: "", name: "", password: "" },
-    mode: "onChange",
+    mode: "onBlur",
     resolver: zodResolver(signUpWithPasswordSchema),
   })
 
   const onSubmit = useCallback(
-    async (data: SignUpFormValues) => {
-      await signUp.email({
-        email: data.email,
-        fetchOptions: {
-          onError: (ctx) => {
-            toast.error(t(`auth.errors.${authErrorKey(ctx.error)}`))
-          },
-          onSuccess: () => {
-            triggerConfetti()
-            toast.success(t("pages.auth.sign-up.form.successCheckEmail"))
-            router.push(
-              getPathname({
-                href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
-                locale,
-              }),
-            )
-          },
-        },
-        name: data.name,
-        password: data.password,
+    (data: SignUpFormValues) => {
+      startTransition(async () => {
+        const result = await signUpWithPassword(data)
+
+        if (result?.serverError) {
+          toast.error(result.serverError.message)
+          return
+        }
+
+        triggerConfetti()
+        toast.success(t("pages.auth.sign-up.form.successCheckEmail"))
+
+        router.push(
+          getPathname({
+            href: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+            locale,
+          }),
+        )
       })
     },
     [locale, router, t, triggerConfetti],
@@ -67,7 +66,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
       <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.SIGN_UP}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <SignUpFormFields />
         <PasswordRequirements />
-        <SignUpSubmitButton />
+        <SignUpSubmitButton isPending={isPending} />
       </form>
     </FormProvider>
   )

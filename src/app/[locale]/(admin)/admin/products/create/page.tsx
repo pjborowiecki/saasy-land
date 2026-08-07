@@ -8,9 +8,8 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { CreateProductForm } from "~/src/app/[locale]/(admin)/admin/products/create/_components/create-product-form"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.products.create" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.admin.products.create")
 
   return {
     description: t("sections.general.title"),
@@ -18,9 +17,8 @@ export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]
   }
 }
 
-export default async function CreateProductPage({ params }: Readonly<PageProps<"/[locale]/admin">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.admin.products.create" })
+export default async function CreateProductPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.products.create")
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">

@@ -1,0 +1,86 @@
+name: E2E (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      browser:
+        description: Playwright project to run.
+        required: true
+        type: string
+      suite:
+        description: Playwright test path to run.
+        required: false
+        type: string
+        default: e2e/specs
+    secrets:
+      CI_DATABASE_URL:
+        description: Neon connection string used to migrate, build, and serve the app.
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    name: Build and E2E (${{ inputs.browser }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Require a database for the build
+        env:
+          DATABASE_URL: ${{ secrets.CI_DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::CI_DATABASE_URL is not set. next build executes \"use cache\" functions while prerendering, so it needs a real database. Add a Neon connection string as the CI_DATABASE_URL repository secret."
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Setup toolchain
+        uses: ./.github/actions/setup
+        with:
+          database-url: ${{ secrets.CI_DATABASE_URL }}
+
+      - name: Cache Turbopack build artifacts
+        uses: actions/cache@v5
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-turbopack-${{ hashFiles('bun.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbopack-${{ hashFiles('bun.lock') }}-
+            ${{ runner.os }}-turbopack-
+
+      - name: Apply migrations
+        run: bun run db:migrate
+
+      - name: Build
+        # Bun can SIGILL in N-API teardown after a successful Next build; the prerender
+        # manifest is written before that point, so its presence means the build finished.
+        run: bun run build || test -f .next/prerender-manifest.json
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ inputs.browser }}-${{ hashFiles('bun.lock') }}
+
+      - name: Install Playwright browser
+        run: bunx playwright install --with-deps ${{ inputs.browser }}
+
+      - name: E2E suite
+        run: bunx playwright test ${{ inputs.suite }} --project=${{ inputs.browser }}
+
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report-${{ inputs.browser }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: ignore

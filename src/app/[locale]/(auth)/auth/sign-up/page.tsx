@@ -1,19 +1,19 @@
 import type { Metadata } from "next"
-import type { JSX, ReactNode } from "react"
+import { Suspense, type JSX, type ReactNode } from "react"
 
 import { getTranslations } from "next-intl/server"
 
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
 import { AuthSeparator } from "~/src/app/[locale]/(auth)/auth/_components/auth-separator"
 import { OAuthButtons } from "~/src/app/[locale]/(auth)/auth/_components/oauth-buttons"
 import { SignUpWithPasswordForm } from "~/src/app/[locale]/(auth)/auth/sign-up/_components/sign-up-with-password-form"
 import { APP_NAME } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/auth/sign-up">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.auth.sign-up" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.auth.sign-up")
 
   return {
     description: t("metadata.description", { name: APP_NAME }),
@@ -39,12 +39,21 @@ const renderPrivacyLink = (chunks: ReactNode) => (
   </Link>
 )
 
-export default async function SignUpPage({ params }: Readonly<PageProps<"/[locale]/auth/sign-up">>): Promise<JSX.Element> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.auth.sign-up" })
+const authPageFallback = <AuthPageFallback />
+
+export default function SignUpPage(): JSX.Element {
+  return (
+    <Suspense fallback={authPageFallback}>
+      <SignUpPageContent />
+    </Suspense>
+  )
+}
+
+async function SignUpPageContent(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.auth.sign-up")
 
   return (
-    <div className="reveal-elem flex w-full max-w-[420px] flex-col gap-8">
+    <div className="reveal-elem flex w-full max-w-105 flex-col gap-8">
       <div className="flex flex-col gap-2 text-center">
         <h1 className="text-3xl font-medium tracking-tight text-foreground">{t("form.title")}</h1>
         <p className="text-sm text-muted-foreground">{t("form.description", { name: APP_NAME })}</p>

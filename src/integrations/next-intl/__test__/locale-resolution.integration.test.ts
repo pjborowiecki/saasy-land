@@ -21,6 +21,7 @@ describe("is locale component", () => {
       expect(isLocale(locale)).toBe(true)
     }
   })
+
   it("rejects unknown locales", () => {
     expect.hasAssertions()
     expect(isLocale("de-DE")).toBe(false)
@@ -35,10 +36,12 @@ describe("locale from pathname component", () => {
     expect(localeFromPathname("/pl")).toBe("pl-PL")
     expect(localeFromPathname("/pl/blog")).toBe("pl-PL")
   })
+
   it("defaults auth routes to the default locale", () => {
     expect.hasAssertions()
     expect(localeFromPathname("/auth/sign-in")).toBe(routing.defaultLocale)
   })
+
   it("returns undefined for unprefixed non-auth routes", () => {
     expect.hasAssertions()
     expect(localeFromPathname("/")).toBeUndefined()
@@ -51,6 +54,7 @@ describe("locale from cookie component", () => {
     const cookie = createCookieHeader(I18N.COOKIE_NAME, "pl-PL")
     expect(localeFromCookie(cookie)).toBe("pl-PL")
   })
+
   it("returns undefined for invalid or missing cookie values", () => {
     expect.hasAssertions()
     expect(localeFromCookie()).toBeUndefined()
@@ -62,6 +66,7 @@ describe("localized pathname component", () => {
     expect.hasAssertions()
     expect(localizedPathname("en-US", "/admin")).toBe("/admin")
   })
+
   it("adds the prefix for non-default locales", () => {
     expect.hasAssertions()
     expect(localizedPathname("pl-PL", "/admin")).toBe("/pl/admin")
@@ -73,6 +78,7 @@ describe("redirect pathname component", () => {
     expect(redirectPathname("/en/admin", ROUTES.SIGN_IN)).toBe("/en/auth/sign-in")
     expect(redirectPathname("/admin", ROUTES.SIGN_IN)).toBe(ROUTES.SIGN_IN)
   })
+
   it("localizes redirects for non-default locales", () => {
     expect.hasAssertions()
     expect(redirectPathname("/pl/admin", ROUTES.APP)).toBe("/pl/app")
@@ -84,6 +90,7 @@ describe("resolve locale from request component", () => {
     const cookie = createCookieHeader(I18N.COOKIE_NAME, "pl-PL")
     expect(resolveLocaleFromRequest("/en/admin", cookie)).toBe("en-US")
   })
+
   it("falls back to cookie then default locale", () => {
     expect.hasAssertions()
     const cookie = createCookieHeader(I18N.COOKIE_NAME, "pl-PL")
@@ -99,6 +106,7 @@ describe("resolve locale from auth request component", () => {
     })
     expect(resolveLocaleFromAuthRequest(request, createAuthActionUrl("/en/auth/sign-in"))).toBe("en-US")
   })
+
   it("falls back to cookie locale when callback has no locale", () => {
     expect.hasAssertions()
     const request = new Request(TEST_APP_URL, {
@@ -106,6 +114,7 @@ describe("resolve locale from auth request component", () => {
     })
     expect(resolveLocaleFromAuthRequest(request, createAuthActionUrl("/dashboard"))).toBe("pl-PL")
   })
+
   it("falls back to default locale when no signals exist", () => {
     expect.hasAssertions()
     expect(resolveLocaleFromAuthRequest(undefined, createAuthActionUrl("/dashboard"))).toBe(routing.defaultLocale)

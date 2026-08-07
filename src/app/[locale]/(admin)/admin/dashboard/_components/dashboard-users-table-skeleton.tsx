@@ -5,7 +5,7 @@ import type { JSX } from "react"
 import { useTranslations } from "next-intl"
 
 import { Card, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
+import { Table, TableContainer, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 const SKELETON_ROW_COUNT = 5
 
@@ -33,25 +33,27 @@ export function DashboardUsersTableSkeleton(): JSX.Element {
         <div className="h-8 w-24 animate-pulse rounded-md bg-muted/40" />
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-12" />
-            <TableHead>{t("users.table.columns.user")}</TableHead>
-            <TableHead>{t("users.table.columns.role")}</TableHead>
-            <TableHead>{t("users.table.columns.status")}</TableHead>
-            <TableHead>{t("users.table.columns.lastActive")}</TableHead>
-            <TableHead className="text-right">{t("users.table.columns.actions")}</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => (
-            <TableRow key={index}>
-              <TableCell colSpan={6} className="h-12 animate-pulse bg-muted/40" />
+      <TableContainer>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-12" />
+              <TableHead>{t("users.table.columns.user")}</TableHead>
+              <TableHead>{t("users.table.columns.role")}</TableHead>
+              <TableHead>{t("users.table.columns.status")}</TableHead>
+              <TableHead>{t("users.table.columns.lastActive")}</TableHead>
+              <TableHead className="text-right">{t("users.table.columns.actions")}</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => (
+              <TableRow key={index}>
+                <TableCell colSpan={6} className="h-12 animate-pulse bg-muted/40" />
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <div className="flex items-center justify-between border-t border-border/40 p-4">
         <div className="h-4 w-40 animate-pulse rounded-md bg-muted/40" />

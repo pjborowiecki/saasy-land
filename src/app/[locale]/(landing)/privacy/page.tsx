@@ -1,19 +1,16 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
 import type { JSX } from "react"
 
-import { hasLocale } from "next-intl"
 import { getTranslations } from "next-intl/server"
 
-import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
+import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 import { LegalDocument, LegalSection } from "~/src/app/[locale]/(landing)/_components/legal-document"
 import { APP_NAME } from "~/src/presentation/branding"
 
-export async function generateMetadata({ params }: Readonly<PageProps<"/[locale]/privacy">>): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "pages.legal.privacy" })
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pages.legal.privacy")
 
   return {
     description: t("metadata.description", { name: APP_NAME }),
@@ -25,14 +22,8 @@ export function generateStaticParams(): { locale: Locale }[] {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-export default async function PrivacyPage({ params }: Readonly<PageProps<"/[locale]/privacy">>): Promise<JSX.Element> {
-  const { locale } = await params
-
-  if (!hasLocale(I18N.LOCALES, locale)) {
-    notFound()
-  }
-
-  const t = await getTranslations({ locale, namespace: "pages.legal.privacy" })
+export default async function PrivacyPage(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.legal.privacy")
 
   return (
     <LegalDocument description={t("description", { name: APP_NAME })} lastUpdated={t("lastUpdated")} title={t("title")}>

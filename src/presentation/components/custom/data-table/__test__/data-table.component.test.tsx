@@ -1,751 +1,299 @@
 /** @vitest-environment jsdom */
 
-import { type JSX, useCallback, useMemo, useState } from "react"
+import type { JSX, ReactNode } from "react"
 
-import {
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  type CellContext,
-  type ColumnDef,
-  type HeaderContext,
-  type PaginationState,
-  type SortingState,
-} from "@tanstack/react-table"
-import { render, screen } from "@testing-library/react"
+import { createColumnHelper } from "@tanstack/react-table"
+import { render, renderHook, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { NextIntlClientProvider } from "next-intl"
 
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
-import {
-  HierarchicalSelectionTable,
-  PlaceholderProbe,
-  SortableMarkupTable,
-  sortColumnDescending,
-} from "~/src/presentation/components/custom/data-table/__test__/data-table-test-utils"
-import { DataTableBody } from "~/src/presentation/components/custom/data-table/_components/data-table-body"
-import { DataTableContent } from "~/src/presentation/components/custom/data-table/_components/data-table-content"
-import { DataTableFooter } from "~/src/presentation/components/custom/data-table/_components/data-table-footer"
-import { DataTableHeader } from "~/src/presentation/components/custom/data-table/_components/data-table-header"
-import { DataTableProvider, useDataTable } from "~/src/presentation/components/custom/data-table/_components/data-table-provider"
-import { DATA_TABLE } from "~/src/presentation/components/custom/data-table/_constants/data-table.constants"
-import {
-  DATA_TABLE_SELECT_COLUMN_DEF,
-  getDataTableSelectCellCheckboxPropsFromContext,
-  getDataTableSelectHeaderCheckboxPropsFromContext,
-  type DataTableSelectCheckboxProps,
-} from "~/src/presentation/components/custom/data-table/_table/data-table-select-column"
-import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
+import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 
-const enMessages = loadLocaleMessagesFromDir("en-US")
-const plMessages = loadLocaleMessagesFromDir("pl-PL")
-const { TEST_IDS } = DATA_TABLE
+import { DataTable, useDataTable } from "~/src/presentation/components/custom/data-table/data-table"
+import type { DataTableColumnDef, DataTableFeatures, DataTableOptions } from "~/src/presentation/components/custom/data-table/features"
+import { toggleAllPageRowsSelected, toggleRowSelected } from "~/src/presentation/components/custom/data-table/utils/data-table-selection"
 
 interface Person {
   id: string
   name: string
 }
 
-interface HierarchicalPerson extends Person {
-  subRows?: HierarchicalPerson[]
-}
-
-const columns: ColumnDef<Person>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
+const ROWS: Person[] = [
+  { id: "1", name: "Ada" },
+  { id: "2", name: "Grace" },
+  { id: "3", name: "Alan" },
 ]
 
-const data: Person[] = [
-  { id: "1", name: "Alice" },
-  { id: "2", name: "Bob" },
-]
+const columnHelper = createColumnHelper<DataTableFeatures, Person>()
 
-const singleRowData: Person[] = [data[0]!]
+const COLUMNS: DataTableColumnDef<Person>[] = columnHelper.columns([
+  columnHelper.display({
+    cell: ({ row }) => <Checkbox aria-label="Select row" isSelected={row.getIsSelected()} onChange={toggleRowSelected(row)} />,
+    enableHiding: false,
+    enableSorting: false,
+    header: ({ table }) => (
+      <Checkbox
+        aria-label="Select all rows"
+        isIndeterminate={!table.getIsAllPageRowsSelected() && table.getIsSomePageRowsSelected()}
+        isSelected={table.getIsAllPageRowsSelected()}
+        onChange={toggleAllPageRowsSelected(table)}
+      />
+    ),
+    id: "select",
+  }),
+  columnHelper.accessor("name", { header: "Name", id: "name" }),
+])
 
-const emptyData: Person[] = []
-
-const ONE_BASED_INDEX_OFFSET = DATA_TABLE.PAGINATION.PAGE_INDEX_DISPLAY_OFFSET
-const PAGINATED_ROW_COUNT = 15
-const [DEFAULT_PAGE_SIZE, ALTERNATE_PAGE_SIZE] = DATA_TABLE.PAGINATION.DEFAULT_PAGE_SIZE_OPTIONS
-const alternatePageSizeOptions = [DEFAULT_PAGE_SIZE, ALTERNATE_PAGE_SIZE] as const
-
-const paginatedData: Person[] = Array.from({ length: PAGINATED_ROW_COUNT }, (_, index) => ({
-  id: String(index + ONE_BASED_INDEX_OFFSET),
-  name: `Person ${index + ONE_BASED_INDEX_OFFSET}`,
+const ID_PAD = 2
+const NO_ROWS: Person[] = []
+const SKELETON_ROW_COUNT = 5
+const PAGE_SIZE = 10
+const PAGED_ROW_COUNT = 12
+const PAGED_ROWS: Person[] = Array.from({ length: PAGED_ROW_COUNT }, (_, index) => ({
+  id: String(index),
+  name: `Person ${String(index).padStart(ID_PAD, "0")}`,
 }))
 
-const hierarchicalData: HierarchicalPerson[] = [
-  {
-    id: "1",
-    name: "Alice",
-    subRows: [{ id: "1-1", name: "Child" }],
-  },
-]
+const GROUP_CHILD_COLUMNS = columnHelper.columns([columnHelper.accessor("name", { header: "Name", id: "name" })])
 
-const styledColumns: ColumnDef<Person>[] = [
-  {
-    accessorKey: "name",
-    enableSorting: true,
-    header: "Name",
-    meta: { align: "center" },
-  },
-  {
-    accessorKey: "id",
-    header: "ID",
-    meta: { align: "right" },
-  },
-]
+// A grouped column beside an ungrouped one leaves a placeholder cell in the group row.
+const GROUPED_COLUMNS: DataTableColumnDef<Person>[] = columnHelper.columns([
+  columnHelper.display({ cell: () => <span>row</span>, header: "Id", id: "id" }),
+  columnHelper.group({ columns: GROUP_CHILD_COLUMNS, header: "Details", id: "details" }),
+])
 
-const footerColumns: ColumnDef<Person>[] = [
-  {
-    accessorKey: "name",
-    footer: () => "2 users",
-    header: "Name",
-    meta: { align: "center" },
-  },
-  {
-    accessorKey: "id",
-    footer: "—",
-    header: "ID",
-    meta: { align: "right" },
-  },
-]
-
-const groupedColumns: ColumnDef<Person>[] = [
-  {
-    columns: [
-      {
-        columns: [{ accessorKey: "name", footer: "Name total", header: "Name" }],
-        footer: "Nested total",
-        header: "Nested",
-      },
-    ],
-    footer: "Group total",
-    header: "Group",
-  },
-  { accessorKey: "id", footer: "ID total", header: "ID" },
-]
-
-const pinningOptions = {
-  getCoreRowModel: getCoreRowModel(),
-  initialState: {
-    columnPinning: { left: ["name"], right: ["id"] },
-  },
-}
-
-const coreRowModelOptions = { getCoreRowModel: getCoreRowModel() }
-const emptyMessageOptions = { emptyMessage: "No results." } as const
-const loadingOptions = { loading: true } as const
-const footerPinningOptions = { ...pinningOptions, showFooter: true } as const
-const footerCoreOptions = { ...coreRowModelOptions, showFooter: true } as const
-const groupedFooterOptions = footerCoreOptions
-
-const wrongColumns: ColumnDef<Person>[] = [{ accessorKey: "missing", header: "Missing" }]
-const wrongData: Person[] = [{ id: "9", name: "Wrong" }]
-const overrideOptions = {
-  columns: wrongColumns,
-  data: wrongData,
-  getCoreRowModel: getCoreRowModel(),
-}
-
-const sortableDefaultColumns: ColumnDef<Person>[] = [
-  {
-    accessorKey: "name",
-    enableSorting: true,
-    header: "Name",
-  },
-]
-
-const selectionColumns: ColumnDef<Person>[] = [
-  {
-    ...DATA_TABLE_SELECT_COLUMN_DEF,
-    cell: SelectionTestCell,
-    header: SelectionTestHeader,
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-]
-
-function handleSelectionCheckboxChange(onChange: (isSelected: boolean) => void, event: React.ChangeEvent<HTMLInputElement>): void {
-  onChange(event.currentTarget.checked)
-}
-
-function SelectionTestCheckbox(props: DataTableSelectCheckboxProps): JSX.Element {
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      handleSelectionCheckboxChange(props.onChange, event)
+const SLOT_OPTIONS: DataTableOptions<Person> = {
+  meta: {
+    classNames: {
+      body: "slot-body",
+      container: "slot-container",
+      header: "slot-header",
+      pagination: "slot-pagination",
+      row: "slot-row",
+      table: "slot-table",
     },
-    [props.onChange],
-  )
-
-  return (
-    <input
-      aria-label={props["aria-label"]}
-      checked={props.isSelected}
-      disabled={props.isDisabled === true}
-      onChange={handleChange}
-      type="checkbox"
-    />
-  )
+  },
 }
 
-function SelectionTestHeader(context: HeaderContext<Person, unknown>): JSX.Element {
-  return <SelectionTestCheckbox {...getDataTableSelectHeaderCheckboxPropsFromContext(context)} />
+const EXPECTED_ROW_COUNT = 3
+const SELECTED_AFTER_ONE_CLICK = 1
+const FIRST_ROW_CHECKBOX = 0
+const HEADER_ROW_COUNT = 1
+
+function renderTable(data: Person[] = ROWS): void {
+  const messages = loadLocaleMessagesFromDir("en-US")
+
+  function Wrapper({ children }: { children: ReactNode }): JSX.Element {
+    return (
+      <NextIntlClientProvider locale="en-US" messages={messages}>
+        {children}
+      </NextIntlClientProvider>
+    )
+  }
+
+  render(<DataTable columns={COLUMNS} data={data} />, { wrapper: Wrapper })
 }
 
-function SelectionTestCell(context: CellContext<Person, unknown>): JSX.Element {
-  return <SelectionTestCheckbox {...getDataTableSelectCellCheckboxPropsFromContext(context)} />
-}
+describe("data table component", () => {
+  it("renders a row per record plus the header row", () => {
+    expect.hasAssertions()
+    renderTable()
 
-function PaginatedTable({ pageSizeOptions }: { pageSizeOptions?: readonly number[] }): JSX.Element {
-  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: DEFAULT_PAGE_SIZE })
-  const options = useMemo(() => {
-    const baseOptions = {
-      getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      onPaginationChange: setPagination,
-      state: { pagination },
+    expect(screen.getByRole("columnheader", { name: "Name" })).toBeInTheDocument()
+    expect(screen.getAllByRole("row")).toHaveLength(EXPECTED_ROW_COUNT + HEADER_ROW_COUNT)
+    expect(screen.getByText("Grace")).toBeInTheDocument()
+  })
+
+  it("shows the empty state when there are no rows", () => {
+    expect.hasAssertions()
+    renderTable(NO_ROWS)
+
+    expect(screen.getByText("No results.")).toBeInTheDocument()
+  })
+
+  it("reflects selection on the row checkbox itself, and deselects again", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderTable()
+
+    const rowCheckbox = (): HTMLElement => screen.getAllByRole("checkbox", { name: "Select row" })[FIRST_ROW_CHECKBOX]!
+
+    expect(rowCheckbox()).not.toBeChecked()
+
+    await user.click(rowCheckbox())
+    // The count alone would pass even with a checkbox stuck reporting unselected, which
+    // is what let a stale-memo bug through before.
+    expect(rowCheckbox()).toBeChecked()
+    expect(screen.getByText(`${SELECTED_AFTER_ONE_CLICK} selected`)).toBeInTheDocument()
+
+    await user.click(rowCheckbox())
+    expect(rowCheckbox()).not.toBeChecked()
+    expect(screen.queryByText(`${SELECTED_AFTER_ONE_CLICK} selected`)).not.toBeInTheDocument()
+  })
+
+  it("puts the header checkbox in a mixed state when only some rows are selected", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderTable()
+
+    const selectAll = screen.getByRole("checkbox", { name: "Select all rows" })
+    expect(selectAll).not.toBePartiallyChecked()
+
+    await user.click(screen.getAllByRole("checkbox", { name: "Select row" })[FIRST_ROW_CHECKBOX]!)
+    expect(selectAll).toBePartiallyChecked()
+    expect(selectAll).not.toBeChecked()
+  })
+
+  it("selects and clears every row from the header checkbox", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderTable()
+
+    const selectAll = screen.getByRole("checkbox", { name: "Select all rows" })
+
+    await user.click(selectAll)
+    expect(screen.getByText(`${EXPECTED_ROW_COUNT} selected`)).toBeInTheDocument()
+    for (const checkbox of screen.getAllByRole("checkbox", { name: "Select row" })) {
+      expect(checkbox).toBeChecked()
     }
 
-    if (pageSizeOptions === undefined) {
-      return baseOptions
+    await user.click(selectAll)
+    expect(screen.queryByText(`${EXPECTED_ROW_COUNT} selected`)).not.toBeInTheDocument()
+    for (const checkbox of screen.getAllByRole("checkbox", { name: "Select row" })) {
+      expect(checkbox).not.toBeChecked()
+    }
+  })
+
+  it("sorts by a column header", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderTable()
+
+    await user.click(screen.getByRole("button", { name: /Name/u }))
+
+    const [, firstBodyRow] = screen.getAllByRole("row")
+    expect(within(firstBodyRow!).getByText("Ada")).toBeInTheDocument()
+  })
+
+  it("toggles a column through ascending, descending, and back", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderTable()
+
+    const header = screen.getByRole("button", { name: /Name/u })
+    const firstBodyRow = (): HTMLElement => screen.getAllByRole("row")[HEADER_ROW_COUNT]!
+
+    await user.click(header)
+    expect(within(firstBodyRow()).getByText("Ada")).toBeInTheDocument()
+    expect(screen.getByRole("columnheader", { name: /Name/u })).toHaveAttribute("aria-sort", "ascending")
+
+    await user.click(header)
+    expect(within(firstBodyRow()).getByText("Grace")).toBeInTheDocument()
+    expect(screen.getByRole("columnheader", { name: /Name/u })).toHaveAttribute("aria-sort", "descending")
+  })
+
+  it("pages forward and back once the rows exceed a page", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderTable(PAGED_ROWS)
+
+    expect(screen.getAllByRole("row")).toHaveLength(PAGE_SIZE + HEADER_ROW_COUNT)
+    expect(screen.getByText("Page 1 of 2")).toBeInTheDocument()
+
+    await user.click(screen.getByRole("button", { name: "Next page" }))
+    expect(screen.getByText("Page 2 of 2")).toBeInTheDocument()
+    expect(screen.getAllByRole("row")).toHaveLength(PAGED_ROW_COUNT - PAGE_SIZE + HEADER_ROW_COUNT)
+
+    await user.click(screen.getByRole("button", { name: "Previous page" }))
+    expect(screen.getByText("Page 1 of 2")).toBeInTheDocument()
+  })
+})
+
+describe("data table structure", () => {
+  it("renders placeholder cells for columns outside a header group", () => {
+    expect.hasAssertions()
+
+    const messages = loadLocaleMessagesFromDir("en-US")
+
+    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
+      return (
+        <NextIntlClientProvider locale="en-US" messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      )
     }
 
-    return { ...baseOptions, paginationPageSizeOptions: pageSizeOptions }
-  }, [pageSizeOptions, pagination])
+    render(<DataTable columns={GROUPED_COLUMNS} data={ROWS} />, { wrapper: Wrapper })
 
-  return (
-    <NextIntlClientProvider locale="en-US" messages={enMessages}>
-      <DataTable columns={columns} data={paginatedData} options={options} />
-    </NextIntlClientProvider>
-  )
-}
-
-function RowSelectionEnabled(): JSX.Element {
-  const { table } = useDataTable()
-  return <div data-testid="row-selection-enabled">{String(table.options.enableRowSelection)}</div>
-}
-
-const disableRowSelectionOptions = { enableRowSelection: false } as const
-
-function RowCount(): JSX.Element {
-  const { table } = useDataTable()
-  return <div data-testid="row-count">{table.getRowModel().rows.length}</div>
-}
-
-function FirstRowName(): JSX.Element {
-  const { table } = useDataTable()
-  const [firstRow] = table.getRowModel().rows
-  return <div data-testid="first-row-name">{firstRow ? String(firstRow.getValue("name")) : ""}</div>
-}
-
-function CompoundConsumer(): JSX.Element {
-  const { table } = useDataTable()
-  return <div data-testid="compound-row-count">{table.getRowModel().rows.length}</div>
-}
-
-function OrphanConsumer(): JSX.Element {
-  useDataTable()
-  return <div />
-}
-
-function SortableTable({ rows }: { rows: Person[] }): JSX.Element {
-  const [sorting, setSorting] = useState<SortingState>([{ desc: true, id: "name" }])
-  const options = useMemo(
-    () => ({
-      getCoreRowModel: getCoreRowModel(),
-      getSortedRowModel: getSortedRowModel(),
-      onSortingChange: setSorting,
-      state: { sorting },
-    }),
-    [sorting],
-  )
-
-  return (
-    <DataTableProvider columns={columns} data={rows} options={options}>
-      <FirstRowName />
-    </DataTableProvider>
-  )
-}
-
-function renderDefaultDataTable(): ReturnType<typeof render> {
-  return render(
-    <NextIntlClientProvider locale="en-US" messages={enMessages}>
-      <DataTable columns={columns} data={data} />
-    </NextIntlClientProvider>,
-  )
-}
-
-describe("data table provider", () => {
-  it("provides the TanStack table instance to descendants", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={columns} data={data} options={coreRowModelOptions}>
-        <RowCount />
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByTestId("row-count")).toHaveTextContent("2")
+    expect(screen.getByText("Details")).toBeInTheDocument()
+    expect(screen.getAllByRole("row")).toHaveLength(ROWS.length + HEADER_ROW_COUNT + HEADER_ROW_COUNT)
   })
 
-  it("applies sensible defaults when options are omitted", () => {
+  it("shows skeleton rows instead of the empty state while data is in flight", () => {
     expect.hasAssertions()
 
-    render(
-      <DataTableProvider columns={columns} data={data}>
-        <RowCount />
-      </DataTableProvider>,
-    )
+    const messages = loadLocaleMessagesFromDir("en-US")
 
-    expect(screen.getByTestId("row-count")).toHaveTextContent("2")
+    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
+      return (
+        <NextIntlClientProvider locale="en-US" messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      )
+    }
+
+    render(<DataTable columns={COLUMNS} isLoading />, { wrapper: Wrapper })
+
+    expect(screen.queryByText("No results.")).not.toBeInTheDocument()
+    expect(screen.getAllByRole("row")).toHaveLength(SKELETON_ROW_COUNT + HEADER_ROW_COUNT)
+    expect(screen.queryByText("No results.")).not.toBeInTheDocument()
   })
 
-  it("allows overriding default row selection", () => {
+  it("applies meta classNames overrides to the container, table, and header slots", () => {
     expect.hasAssertions()
 
-    const { rerender } = render(
-      <DataTableProvider columns={columns} data={data}>
-        <RowSelectionEnabled />
-      </DataTableProvider>,
-    )
+    const messages = loadLocaleMessagesFromDir("en-US")
 
-    expect(screen.getByTestId("row-selection-enabled")).toHaveTextContent("true")
+    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
+      return (
+        <NextIntlClientProvider locale="en-US" messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      )
+    }
 
-    rerender(
-      <DataTableProvider columns={columns} data={data} options={disableRowSelectionOptions}>
-        <RowSelectionEnabled />
-      </DataTableProvider>,
-    )
+    const { container } = render(<DataTable columns={COLUMNS} data={ROWS} options={SLOT_OPTIONS} />, { wrapper: Wrapper })
 
-    expect(screen.getByTestId("row-selection-enabled")).toHaveTextContent("false")
+    expect(container.querySelector('[data-slot="table-container"]')).toHaveClass("slot-container")
+    expect(container.querySelector("table")).toHaveClass("slot-table")
+    expect(container.querySelector("thead")).toHaveClass("slot-header")
   })
 
-  it("forwards options to TanStack (sorting)", () => {
+  it("applies meta classNames overrides to the body, row, and pagination slots", () => {
     expect.hasAssertions()
 
-    render(<SortableTable rows={data} />)
+    const messages = loadLocaleMessagesFromDir("en-US")
 
-    expect(screen.getByTestId("first-row-name")).toHaveTextContent("Bob")
+    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
+      return (
+        <NextIntlClientProvider locale="en-US" messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      )
+    }
+
+    const { container } = render(<DataTable columns={COLUMNS} data={ROWS} options={SLOT_OPTIONS} />, { wrapper: Wrapper })
+
+    expect(container.querySelector("tbody")).toHaveClass("slot-body")
+    expect(container.querySelector("tbody tr")).toHaveClass("slot-row")
+    expect(container.querySelector(".slot-pagination")).toBeInTheDocument()
   })
 
-  it("reacts to data prop changes", () => {
+  it("refuses to hand out a table instance outside a DataTable", () => {
     expect.hasAssertions()
 
-    const { rerender } = render(
-      <DataTableProvider columns={columns} data={data}>
-        <RowCount />
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByTestId("row-count")).toHaveTextContent("2")
-
-    rerender(
-      <DataTableProvider columns={columns} data={singleRowData}>
-        <RowCount />
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByTestId("row-count")).toHaveTextContent("1")
-  })
-
-  it("keeps columns and data props authoritative over options", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={columns} data={data} options={overrideOptions}>
-        <RowCount />
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByTestId("row-count")).toHaveTextContent("2")
-  })
-
-  it("exposes useTable on the compound export", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={columns} data={data}>
-        <CompoundConsumer />
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByTestId("compound-row-count")).toHaveTextContent("2")
-  })
-
-  it("works via DataTableProvider directly", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={columns} data={data}>
-        <RowCount />
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByTestId("row-count")).toHaveTextContent("2")
-  })
-
-  it("throws when useDataTable is used outside DataTable", () => {
-    expect.hasAssertions()
-
-    const consoleError = vi.spyOn(console, "error").mockReturnValue()
-
-    expect(() => render(<OrphanConsumer />)).toThrow("useDataTable must be used within a DataTable.")
-
-    consoleError.mockRestore()
-  })
-})
-
-describe("data table markup", () => {
-  it("renders the default layout structure", () => {
-    expect.hasAssertions()
-
-    renderDefaultDataTable()
-
-    expect(screen.getByTestId(TEST_IDS.CONTAINER)).toBeInTheDocument()
-    expect(screen.getByTestId(TEST_IDS.TABLE)).toBeInTheDocument()
-    expect(screen.getByTestId(TEST_IDS.HEADER)).toBeInTheDocument()
-    expect(screen.getByTestId(TEST_IDS.BODY)).toBeInTheDocument()
-    expect(screen.getByTestId(TEST_IDS.PAGINATION)).toBeInTheDocument()
-  })
-
-  it("renders the default layout content", () => {
-    expect.hasAssertions()
-
-    renderDefaultDataTable()
-
-    expect(screen.getByRole("columnheader", { name: "Name" })).toBeInTheDocument()
-    expect(screen.getByRole("cell", { name: "Alice" })).toBeInTheDocument()
-    expect(screen.getByRole("cell", { name: "Bob" })).toBeInTheDocument()
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 1")
-  })
-
-  it("renders header and body markup", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTableProvider columns={columns} data={data}>
-          <table>
-            <DataTableHeader />
-            <DataTableBody>
-              <DataTableContent />
-            </DataTableBody>
-          </table>
-        </DataTableProvider>
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.HEADER)).toBeInTheDocument()
-    expect(screen.getByTestId(TEST_IDS.BODY)).toBeInTheDocument()
-    expect(screen.getByRole("columnheader", { name: "Name" })).toBeInTheDocument()
-    expect(screen.getByRole("cell", { name: "Alice" })).toBeInTheDocument()
-    expect(screen.getByRole("cell", { name: "Bob" })).toBeInTheDocument()
-  })
-
-  it("renders empty state when data is empty", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={columns} data={emptyData} options={emptyMessageOptions} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.EMPTY_STATE)).toHaveTextContent("No results.")
-  })
-
-  it("renders loading state when loading", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={columns} data={data} options={loadingOptions} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.LOADING_STATE)).toBeInTheDocument()
-    expect(screen.queryByTestId(TEST_IDS.EMPTY_STATE)).not.toBeInTheDocument()
-  })
-
-  it("renders footer cells with alignment and pinning", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={footerColumns} data={data} options={footerPinningOptions}>
-        <table>
-          <DataTableFooter />
-        </table>
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByRole("rowgroup")).toHaveTextContent("2 users")
-    expect(screen.getByRole("rowgroup")).toHaveTextContent("—")
-    expect(screen.getByTestId(TEST_IDS.FOOTER)).toBeInTheDocument()
-    expect(screen.getByText("2 users")).toHaveClass("text-center")
-    expect(screen.getByText("—")).toHaveClass("text-right")
-  })
-
-  it("renders footer cells without pinning", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={footerColumns} data={data} options={footerCoreOptions}>
-        <table>
-          <DataTableFooter />
-        </table>
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByText("2 users")).toHaveStyle({ minWidth: "20px", width: "150px" })
-  })
-})
-
-describe("data table pagination", () => {
-  it("renders pagination controls and navigates between pages", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(<PaginatedTable />)
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_ROW_COUNT)).toHaveTextContent("15 rows")
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 2")
-
-    await user.click(screen.getByTestId(TEST_IDS.PAGINATION_NEXT))
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 2 of 2")
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PREVIOUS)).toBeEnabled()
-
-    await user.click(screen.getByTestId(TEST_IDS.PAGINATION_PREVIOUS))
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 2")
-  })
-
-  it("navigates between pages with built-in pagination state", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={columns} data={paginatedData} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 2")
-
-    await user.click(screen.getByTestId(TEST_IDS.PAGINATION_NEXT))
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 2 of 2")
-  })
-
-  it("changes page size from pagination controls", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(<PaginatedTable pageSizeOptions={alternatePageSizeOptions} />)
-
-    await user.click(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_SIZE))
-    await user.click(await screen.findByRole("option", { name: String(ALTERNATE_PAGE_SIZE) }))
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 1")
-  })
-
-  it("uses locale-aware plural rules for row count in English", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={columns} data={singleRowData} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_ROW_COUNT)).toHaveTextContent("1 row")
-  })
-
-  it("uses locale-aware plural rules for row count in Polish", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="pl-PL" messages={plMessages}>
-        <DataTable columns={columns} data={data} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_ROW_COUNT)).toHaveTextContent("2 wiersze")
-  })
-})
-
-describe("data table columns", () => {
-  it("applies column alignment and pinning in header", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTableProvider columns={styledColumns} data={data} options={pinningOptions}>
-          <table>
-            <DataTableHeader />
-          </table>
-        </DataTableProvider>
-      </NextIntlClientProvider>,
-    )
-
-    const nameHeader = screen.getByRole("columnheader", { name: "Name" })
-    const idHeader = screen.getByRole("columnheader", { name: "ID" })
-
-    expect(nameHeader).toHaveClass("text-center", "bg-muted")
-    expect(idHeader).toHaveClass("text-right", "bg-muted")
-    expect(nameHeader).toHaveStyle({ position: "sticky" })
-    expect(idHeader).toHaveStyle({ position: "sticky" })
-  })
-
-  it("applies column alignment and pinning in body cells", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={styledColumns} data={data} options={pinningOptions}>
-        <table>
-          <DataTableBody>
-            <DataTableContent />
-          </DataTableBody>
-        </table>
-      </DataTableProvider>,
-    )
-
-    expect(screen.getByRole("cell", { name: "Alice" })).toHaveClass("text-center", "bg-card")
-    expect(screen.getByRole("cell", { name: "1" })).toHaveClass("text-right", "bg-card")
-  })
-
-  it("toggles sorting when a sortable header is clicked", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(<SortableMarkupTable columns={styledColumns} data={data} messages={enMessages} />)
-
-    expect(screen.getAllByRole("row")[1]).toHaveTextContent("Alice")
-
-    await sortColumnDescending(user)
-
-    expect(screen.getAllByRole("row")[1]).toHaveTextContent("Bob")
-  })
-
-  it("sorts rows with built-in sorting state", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={sortableDefaultColumns} data={data} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getAllByRole("row")[1]).toHaveTextContent("Alice")
-
-    await sortColumnDescending(user)
-
-    expect(screen.getAllByRole("row")[1]).toHaveTextContent("Bob")
-  })
-
-  it("reports grouped header and footer placeholder counts", () => {
-    expect.hasAssertions()
-
-    render(
-      <DataTableProvider columns={groupedColumns} data={data} options={coreRowModelOptions}>
-        <PlaceholderProbe />
-      </DataTableProvider>,
-    )
-
-    expect(Number(screen.getByTestId("header-placeholders").textContent)).toBeGreaterThan(0)
-    expect(Number(screen.getByTestId("footer-placeholders").textContent)).toBeGreaterThan(0)
-  })
-
-  it("renders grouped header and footer labels", () => {
-    expect.hasAssertions()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTableProvider columns={groupedColumns} data={data} options={groupedFooterOptions}>
-          <table>
-            <DataTableHeader />
-            <DataTableFooter />
-          </table>
-        </DataTableProvider>
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByRole("columnheader", { name: "Group" })).toBeInTheDocument()
-    expect(screen.getByRole("columnheader", { name: "Name" })).toBeInTheDocument()
-    expect(screen.getByText("Group total")).toBeInTheDocument()
-    expect(screen.getByText("Name total")).toBeInTheDocument()
-    expect(screen.getByText("ID total")).toBeInTheDocument()
-  })
-})
-
-describe("data table selection", () => {
-  it("selects rows with built-in row selection state", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={selectionColumns} data={data} />
-      </NextIntlClientProvider>,
-    )
-
-    const [aliceCheckbox] = screen.getAllByRole("checkbox", { name: "Select row" })
-
-    expect(aliceCheckbox).not.toBeChecked()
-
-    await user.click(aliceCheckbox!)
-
-    expect(aliceCheckbox).toBeChecked()
-  })
-
-  it("marks selected rows and indents nested sub-rows", () => {
-    expect.hasAssertions()
-
-    render(<HierarchicalSelectionTable columns={columns} data={hierarchicalData} />)
-
-    const [parentRow, childRow] = screen.getAllByRole("row")
-
-    expect(parentRow).toHaveAttribute("data-state", "selected")
-    expect(childRow).not.toHaveAttribute("data-state")
-
-    const childCell = screen.getByRole("cell", { name: "Child" })
-    expect(childCell).toHaveStyle({ paddingLeft: "2rem" })
-  })
-})
-
-describe("data table sorting", () => {
-  it("sorts columns with local TanStack state", async () => {
-    expect.hasAssertions()
-
-    const user = userEvent.setup()
-
-    render(
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        <DataTable columns={sortableDefaultColumns} data={paginatedData} />
-      </NextIntlClientProvider>,
-    )
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 2")
-
-    await user.click(screen.getByTestId(TEST_IDS.PAGINATION_NEXT))
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 2 of 2")
-
-    await sortColumnDescending(user)
-
-    expect(screen.getByTestId(TEST_IDS.PAGINATION_PAGE_INDICATOR)).toHaveTextContent("Page 1 of 2")
+    expect(() => renderHook(() => useDataTable())).toThrow(/inside a <DataTable>/u)
   })
 })

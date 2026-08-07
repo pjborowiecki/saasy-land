@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "bunVersion": "1.x",
   "installCommand": "bunx bun@1.3.14 install",
-  "buildCommand": "bunx bun@1.3.14 --bun next build || test -f .next/BUILD_ID",
+  "buildCommand": "bunx bun@1.3.14 run db:migrate && (bunx bun@1.3.14 --bun next build || test -f .next/BUILD_ID)",
   "regions": ["fra1"]
 }
