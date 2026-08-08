@@ -25,7 +25,6 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
-        "date-fns": "^4.4.0",
         "drizzle-orm": "^0.45.2",
         "drizzle-zod": "^0.8.3",
         "elysia": "^1.4.29",
@@ -79,8 +78,8 @@
     },
   },
   "trustedDependencies": [
-    "sharp",
     "next",
+    "sharp",
   ],
   "overrides": {
     "@sinclair/typebox": "0.34.52",

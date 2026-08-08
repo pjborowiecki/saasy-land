@@ -6,6 +6,16 @@ import { join } from "node:path"
 const GROUPS: Record<string, string> = {
   "TanStack/table": "tanstack/table",
   "mattpocock/skills": "matt-pocock",
+  "vercel-labs/agent-skills": "vercel",
+  "vercel/next.js": "vercel",
+  "resend/resend-skills": "resend",
+  "next-safe-action/skills": "next-safe-action",
+  "better-auth/skills": "better-auth",
+  "neondatabase/ai-rules": "neon",
+  "neondatabase/agent-skills": "neon",
+  "elysiajs/skills": "elysiajs",
+  "upstash/skills": "upstash",
+  "stripe/ai": "stripe",
 }
 
 const AGENTS_DIR = ".agents/skills"
@@ -18,10 +28,6 @@ rmSync(AGENTS_DIR, { force: true, recursive: true })
 rmSync(CLAUDE_DIR, { force: true, recursive: true })
 rmSync("agent", { force: true, recursive: true })
 
-// The skills CLI runs through the exact Bun binary executing this script (no PATH
-// lookup), without a shell, and with PATH pinned to fixed root-owned system
-// directories so no user-writable entry can shadow a binary it spawns (e.g. git).
-// `--bun` keeps the CLI itself on this runtime instead of resolving `node`.
 const FIXED_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
 
 const result = spawnSync(process.execPath, ["x", "--bun", "skills", "experimental_install"], {
@@ -34,25 +40,36 @@ if (result.status !== 0) {
   process.exit(result.status ?? 1)
 }
 
+const staging = join(AGENTS_DIR, ".staging")
+mkdirSync(staging, { recursive: true })
+for (const name of Object.keys(skills)) {
+  if (existsSync(join(AGENTS_DIR, name))) {
+    renameSync(join(AGENTS_DIR, name), join(staging, name))
+  }
+}
+
 let grouped = 0
 for (const [name, entry] of Object.entries(skills)) {
   const group = GROUPS[entry.source ?? ""]
-  const flat = join(AGENTS_DIR, name)
+  const staged = join(staging, name)
 
-  if (group === undefined) {
-    console.warn(`! ${name} (${entry.source ?? "unknown source"}) has no group mapping; leaving it at the top level.`)
-    continue
-  }
-
-  if (!existsSync(flat)) {
+  if (!existsSync(staged)) {
     console.warn(`! ${name} was not restored by the skills CLI; run bunx skills add for it.`)
     continue
   }
 
+  if (group === undefined) {
+    console.warn(`! ${name} (${entry.source ?? "unknown source"}) has no group mapping; leaving it at the top level.`)
+    renameSync(staged, join(AGENTS_DIR, name))
+    continue
+  }
+
   mkdirSync(join(AGENTS_DIR, group), { recursive: true })
-  renameSync(flat, join(AGENTS_DIR, group, name))
+  renameSync(staged, join(AGENTS_DIR, group, name))
   grouped += 1
 }
+
+rmSync(staging, { force: true, recursive: true })
 
 mkdirSync(CLAUDE_DIR, { recursive: true })
 const groupRoots = [...new Set(Object.values(GROUPS).map((group) => group.split("/")[0] ?? group))]
