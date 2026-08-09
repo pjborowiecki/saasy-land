@@ -4,18 +4,21 @@ import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, symlinkSync } 
 import { join } from "node:path"
 
 const GROUPS: Record<string, string> = {
-  "TanStack/table": "tanstack/table",
+  "anthropics/skills": "anthropic",
+  "better-auth/skills": "better-auth",
+  "elysiajs/skills": "elysiajs",
+  "greensock/gsap-skills": "gsap",
   "mattpocock/skills": "matt-pocock",
+  "neondatabase/agent-skills": "neon",
+  "neondatabase/ai-rules": "neon",
+  "next-safe-action/skills": "next-safe-action",
+  "pbakaus/impeccable": "impeccable",
+  "resend/resend-skills": "resend",
+  "stripe/ai": "stripe",
+  "TanStack/table": "tanstack/table",
+  "upstash/skills": "upstash",
   "vercel-labs/agent-skills": "vercel",
   "vercel/next.js": "vercel",
-  "resend/resend-skills": "resend",
-  "next-safe-action/skills": "next-safe-action",
-  "better-auth/skills": "better-auth",
-  "neondatabase/ai-rules": "neon",
-  "neondatabase/agent-skills": "neon",
-  "elysiajs/skills": "elysiajs",
-  "upstash/skills": "upstash",
-  "stripe/ai": "stripe",
 }
 
 const AGENTS_DIR = ".agents/skills"
