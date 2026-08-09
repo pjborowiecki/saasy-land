@@ -12,14 +12,14 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/aggregation/SKILL.md",
-      "computedHash": "08f8c96cc33437144972bf89bc30a2790da7c1333087e7b99a19f49975e37af4"
+      "computedHash": "cc8331508af7e32423b652a86f3e4ba664df91d7f56cd9c663e4a6b8491e9a82"
     },
     "api-not-found": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/api-not-found/SKILL.md",
-      "computedHash": "4add17de0ddb00da5d17cdfe612835d9522732c246a8b7381cfda7f1d62e8661"
+      "computedHash": "98d6dd8fe28cff040bdce698f1ef3b2b2d094b86d997bf106763b850956b416c"
     },
     "ask-matt": {
       "source": "mattpocock/skills",
@@ -39,19 +39,31 @@
       "skillPath": "security/SKILL.md",
       "computedHash": "7a230edf3a24ce18162cb4379f59b6a19b8d24ca04db530609d0f15cede556dc"
     },
+    "canvas-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/canvas-design/SKILL.md",
+      "computedHash": "3fa7ea60170023ad8268bf9fd734ea75dd404279a2ef8ddf5abaa1102ad8e5f4"
+    },
     "cell-selection": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/cell-selection/SKILL.md",
-      "computedHash": "67a7d710f8e027a53dcb4f98abca2851e4a01608ab77d4f5153283d72b029188"
+      "computedHash": "2cd58ae93731c3740d21150742ef43c57e49594480ff2ce3a6b492a3aeed4857"
     },
     "cell-spanning": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/cell-spanning/SKILL.md",
-      "computedHash": "08c993e294989841f4c37990ec28cf66a7f6fd9158eaaa612b17c722e537db55"
+      "computedHash": "0e0156ab6fd7654c08822a5bb5b84d7c6ea2d9297f738fe629bf27b4c66f80cb"
+    },
+    "claude-api": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/claude-api/SKILL.md",
+      "computedHash": "5d603b46ca25b1ecf73b6e610dee5f44015d1df183c025ed18511fa518292d99"
     },
     "claude-handoff": {
       "source": "mattpocock/skills",
@@ -64,7 +76,7 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/client-vs-server/SKILL.md",
-      "computedHash": "977e74d7944060579f29512190555b2ccbb33af438f7f7cfbdba0341cdbbf7ad"
+      "computedHash": "c25dcdb4e413eb304261a819d14d33313dc045210e8b4971e2d720d5b2ace73b"
     },
     "code-review": {
       "source": "mattpocock/skills",
@@ -83,49 +95,49 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-faceting/SKILL.md",
-      "computedHash": "4e5a82ea042baff400bd1c34c47924fc02a190bab3eadbc63f225507b71a693e"
+      "computedHash": "f240eb2453de854904361625f326b7435dba14958bb30d1294e76655aaea7f16"
     },
     "column-filtering": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-filtering/SKILL.md",
-      "computedHash": "f9ec3bd7fb245a9ecfe91c539489ec637c9ddb05d8998706e50154c7f926805e"
+      "computedHash": "107de70a3915b6f1b50341d883bb7b8c8c51852089c910e8f6bdccd19e85e443"
     },
     "column-ordering": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-ordering/SKILL.md",
-      "computedHash": "dc24e855f70fe206dc053890f1ec4cd959e3d3e44fe3e2c40ea1c9a173d2ff78"
+      "computedHash": "61109ec0fc6bcc16943aff772a3d89f56c77760f34ba71135af71c07bda3e77f"
     },
     "column-pinning": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-pinning/SKILL.md",
-      "computedHash": "6f25c3f2727364c6265fc48930a82f030956dbd0468563002ba20fa0664ff25a"
+      "computedHash": "c46d17813f35aa15b1c8a325c15098f71531c8832178029317a9a45443b03380"
     },
     "column-resizing": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-resizing/SKILL.md",
-      "computedHash": "3d3ba444befc846430851f4f7cf29ae7a296a13630ed7f66f7bb6754a212e7c4"
+      "computedHash": "4664395a2d3172895c3778782a43cdfe81773b4f9b7765cd5fca297766479f7f"
     },
     "column-sizing": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-sizing/SKILL.md",
-      "computedHash": "383fd322d7d7722f265800a48caf87473011a7b226e18ae00b14c7ebbaedcedc"
+      "computedHash": "25e64497ad43eaf7238c5575c1addfbb8e9024d31723c7b6e043dc4fd80b959f"
     },
     "column-visibility": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/column-visibility/SKILL.md",
-      "computedHash": "31e6c719fa41d051b8ca041c18f778de679eaffda8e322bd02feec223432c0b6"
+      "computedHash": "5cfb9382eaf9968092b950bb1bc874540732e5d992a2533df9145254e2c4440b"
     },
     "connect-recommend": {
       "source": "stripe/ai",
@@ -138,7 +150,7 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/core/SKILL.md",
-      "computedHash": "f68e75f130d1d58438f189a718f7640dd9376a8004675d422f7d60fc887b4dc5"
+      "computedHash": "6925ee43dac9c07146dcd8bcc418004f44a59e3e3921549b6ab110f9dd43e308"
     },
     "create-auth": {
       "source": "better-auth/skills",
@@ -151,14 +163,14 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/react-table/skills/create-table-hook/SKILL.md",
-      "computedHash": "13a28e2bd980e812f8a652c4337571b75f51370c4fd345b5925eae716d9493d0"
+      "computedHash": "c04ddc45eb397315e44fa3d59733e0c515183e5ff49e7bc2584374cec22e8365"
     },
     "custom-features": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/custom-features/SKILL.md",
-      "computedHash": "13fc74e8433b5fbfe932c65c690c57cd96fb3fc822fd4494797bba2923520ce7"
+      "computedHash": "a508b60044309f9e94ecffd3c2e30dcd071eddb79639709c183708bc80f8b13f"
     },
     "deploy-to-vercel": {
       "source": "vercel-labs/agent-skills",
@@ -201,14 +213,20 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/expanding/SKILL.md",
-      "computedHash": "f61d2e131d2e18169c82252dbcd6785579b908ee0ee4d10defa1ac5e1c20c090"
+      "computedHash": "14154bf04c49957e08971956756667114ef19ce7eb0572b93e1f31201701ac27"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
     },
     "getting-started": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/react-table/skills/getting-started/SKILL.md",
-      "computedHash": "e8e7cdd80d8158c22e85a5487ea4405ac460428187dbf317aca92d237d1da139"
+      "computedHash": "aac56ad48e6acd8dcb113339984e3410555e0f06c2b81d1c2e66a31abf05462d"
     },
     "git-guardrails-claude-code": {
       "source": "mattpocock/skills",
@@ -221,7 +239,7 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/global-filtering/SKILL.md",
-      "computedHash": "eb6b833532244980f31463a104b55429e380613031f5c83619d37936e476de46"
+      "computedHash": "779dbb4a565cb4bcb13e19f83949405fd700bf7cab01221fa06e132cb589f075"
     },
     "grill-me": {
       "source": "mattpocock/skills",
@@ -246,13 +264,61 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/grouping/SKILL.md",
-      "computedHash": "c2d8f284f4e1d529437f8feaa9d20c40b9901aa969683efc3f3cd3947c69e437"
+      "computedHash": "a9877e40e30b45a82b2f0206a506fc54cda812b900db644230652196464707b8"
+    },
+    "gsap-core": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-core/SKILL.md",
+      "computedHash": "c4a01101d9e1aafbf4b49f75d74f9349790d8741981ba0237c990093863035a6"
+    },
+    "gsap-performance": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-performance/SKILL.md",
+      "computedHash": "863842ac2d7aee53fd4f0025c960173d7ad3e658a5715b89b2211fa280213c1f"
+    },
+    "gsap-plugins": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-plugins/SKILL.md",
+      "computedHash": "791bda0e6e460511fe82a78e745db519b88ffaeeab4d04a74879a03ca4f41740"
+    },
+    "gsap-react": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-react/SKILL.md",
+      "computedHash": "7d3b52822681a4158e371f895c58fb7030ecaf33f585a534b7162f9e92c5d893"
+    },
+    "gsap-scrolltrigger": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-scrolltrigger/SKILL.md",
+      "computedHash": "1cdc5647693783cb7a662d84a5de434c88a051ed56b4d33597c9b5782b5973e6"
+    },
+    "gsap-timeline": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-timeline/SKILL.md",
+      "computedHash": "54981c2feec5a9c0d57988aeb32315af32bdeadd261550d5e9db7a7b1f08b487"
+    },
+    "gsap-utils": {
+      "source": "greensock/gsap-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gsap-utils/SKILL.md",
+      "computedHash": "1ab2387f6e694718a4f1b5acf2a4ab16e1b884c3428adf5f6b26d830f00826cf"
     },
     "handoff": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/handoff/SKILL.md",
       "computedHash": "ad03e8d4ea3cbbff66420eb7ba3cc375b5cbe1821a2449b53e863256cf5b5cde"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "b7b08ad093fa20e80813a300c9cda0863a8540c6dd6b43788d0814a165b09baa"
     },
     "implement": {
       "source": "mattpocock/skills",
@@ -330,25 +396,25 @@
       "source": "vercel/next.js",
       "sourceType": "github",
       "skillPath": "skills/next-cache-components-adoption/SKILL.md",
-      "computedHash": "48828a610ff29005390597d6baca6e92016efabe19733144fb3d0e7c7bbb9327"
+      "computedHash": "15dcef9cfce611ba5a9ca467ed0d4eeae8de16fadb91b66df892a5ca63c57829"
     },
     "next-cache-components-optimizer": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
-      "computedHash": "f67b08843bfc4e9cde4ac4bfe8b14aa0d2d9d2694611be077fa333bad2605a65"
+      "computedHash": "aefb01afebac59c0359cfd15214e871d12e5d242867dc486087a4560363ee28c"
     },
     "next-dev-loop": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "skillPath": "skills/next-dev-loop/SKILL.md",
-      "computedHash": "5b567d2e521056db6b8b37c46c6b2b9c72de5192c0daeb351c966d61e0702630"
+      "computedHash": "d6c10996c5c31b32faa269715852006922fa4357d1151403bb3a49dfa121bcfd"
     },
     "next-partial-prefetching-adoption": {
       "source": "vercel/next.js",
       "sourceType": "github",
       "skillPath": "skills/next-partial-prefetching-adoption/SKILL.md",
-      "computedHash": "4ed43c1f766872e8322821b5103176cf08d8cd26409ddd80c95af689d59ae74e"
+      "computedHash": "cfed44cfce68b08b2a7edf3d6f07b230a49dfbf180825ca49a5bbf12b27a558a"
     },
     "organization-best-practices": {
       "source": "better-auth/skills",
@@ -361,7 +427,7 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/pagination/SKILL.md",
-      "computedHash": "248bfe1a59aa8ea65decf51ca34796957d9c8d84e0b28b2664f00ea29d01151d"
+      "computedHash": "bd2c631904bbd57c17e85bff48bdf43debf894943260ebd36a21dad0b9bcc221"
     },
     "prototype": {
       "source": "mattpocock/skills",
@@ -404,14 +470,14 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/row-pinning/SKILL.md",
-      "computedHash": "4f039afcff88fff9e629415090227484b17c7f6b5f88761f1ce9e65f6f588eb5"
+      "computedHash": "9194e989971ab05da9c9941a3fc97f615f748223ee5a79c6c6bbb71a6bbf898b"
     },
     "row-selection": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/row-selection/SKILL.md",
-      "computedHash": "d6d4f9fe838845e967ecc664039ea156bdafee3fe7f097cf248d46cfa1bb0fef"
+      "computedHash": "854f5ea08581dc2267f8d942ea3c6d1258691f2e038e1598fd8b3e656e77d613"
     },
     "safe-action-advanced": {
       "source": "next-safe-action/skills",
@@ -485,12 +551,18 @@
       "skillPath": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
       "computedHash": "bd5cbaa455454c2d6c27a1b734e0d820606da6c482bf3c79ec55fbc3f3e03ef3"
     },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "5ea13a6d9f0d4bb694405d79acd00cadec0d21bb138c4dd10fcf3c500cb835c2"
+    },
     "sorting": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/sorting/SKILL.md",
-      "computedHash": "a470b864da2e429b13e31089bbf248821d6c2ee84f1f59b909b2e16f39635a8b"
+      "computedHash": "181b9ecdbe48331eb9e11e60afcf534940c3955f87d6f270e2d500a034444ebb"
     },
     "stripe-apps": {
       "source": "stripe/ai",
@@ -521,14 +593,14 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/table-features/SKILL.md",
-      "computedHash": "2b5d9e90077f08da3d65015b7c2403c574881d002f18d9e5288990e3e97b615a"
+      "computedHash": "42b8decd8cde8511efcb2e654ae57eb72023209732c7a1cb8f461869f9d5c607"
     },
     "table-state": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/react-table/skills/table-state/SKILL.md",
-      "computedHash": "06619f717116836f46c3107a3c7b691667df7ae8f2846fb36399d2dded07fcaf"
+      "computedHash": "39dd57578d4c52a81185bce2dc8ce11cd7cc6b31449d7b84a32c0a0ce03725ae"
     },
     "tdd": {
       "source": "mattpocock/skills",
@@ -577,7 +649,7 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/table-core/skills/typescript/SKILL.md",
-      "computedHash": "20864a8e296ea864c0811fef35c89fa1a3696a1d6a831d8d10ca48485f3218c0"
+      "computedHash": "f008655f36d39607f0618c823067a267dadf0803a7dd87d65ae988094953d80c"
     },
     "upgrade-stripe": {
       "source": "stripe/ai",
@@ -681,19 +753,25 @@
       "skillPath": "skills/web-design-guidelines/SKILL.md",
       "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
     },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "ad5b1fc52807e9afa4635e59218a026b164dc58b6c3f41b0f7c644dcd6ccf572"
+    },
     "with-tanstack-query": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/react-table/skills/with-tanstack-query/SKILL.md",
-      "computedHash": "5671f93bc7c4a254e74355350f097a045c4c62c5490ca23bee634d046205b979"
+      "computedHash": "fb54385f96d37469dba0ac970e49b322857b19847e54eedb04d0d640f87ebfe7"
     },
     "with-tanstack-virtual": {
       "source": "TanStack/table",
       "ref": "main",
       "sourceType": "github",
       "skillPath": "packages/react-table/skills/with-tanstack-virtual/SKILL.md",
-      "computedHash": "d04d1227bc6abcd09feefb14a64d5123e9870cd27372da1502e2fe29635d9c32"
+      "computedHash": "0a574c7404f69cd3f0715a55801a791fa85e7342aa0125d53af9adc08a8fd656"
     },
     "wizard": {
       "source": "mattpocock/skills",
