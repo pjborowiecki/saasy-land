@@ -14,6 +14,8 @@ import { userZodSchemas } from "~/src/modules/user/user.zod"
 
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "~/src/presentation/components/shadcn/dialog"
 import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
@@ -33,6 +35,7 @@ export function UserResetPasswordDialog({
   readonly userName: string
 }): JSX.Element {
   const t = useTranslations("pages.admin.users")
+  const actionError = useActionError()
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
 
@@ -45,8 +48,10 @@ export function UserResetPasswordDialog({
   const handleSubmit = form.handleSubmit((data) => {
     startTransition(async () => {
       const result = await setUserPassword({ newPassword: data.newPassword, userId })
-      if (result.serverError !== undefined) {
-        toast.error(result.serverError.message ?? t("actions.feedback.error"))
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
       toast.success(t("actions.feedback.resetPasswordSuccess"))

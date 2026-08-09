@@ -2,32 +2,29 @@ import { type NextRequest, NextResponse } from "next/server"
 
 import createMiddleware from "next-intl/middleware"
 
-import { hasAdminPanelAccess } from "~/src/integrations/better-auth/auth.access"
+import { hasPermission } from "~/src/integrations/better-auth/auth.access"
 import { auth } from "~/src/integrations/better-auth/auth.server"
-import { I18N } from "~/src/integrations/next-intl/i18n.config"
-import { localizedPathname, redirectPathname, resolveLocaleFromRequest } from "~/src/integrations/next-intl/i18n.locale"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
+import { redirectPathname } from "~/src/integrations/next-intl/i18n.locale"
+import { localePathPrefixes, routing } from "~/src/integrations/next-intl/i18n.routing"
 
 import { ROUTES } from "~/src/routes"
 
 const intlMiddleware = createMiddleware(routing)
 
-const LOCALE_PREFIX = String.raw`(?:\/[a-zA-Z]{2}(?:-[a-zA-Z]{2})?)?`
+const LOCALE_PREFIX = `(?:${Object.values(localePathPrefixes).join("|")})?`
 const AUTH_CALLBACK = new RegExp(String.raw`^${LOCALE_PREFIX}\/auth\/callback\/?$`, "u")
 const APP_ROUTE = new RegExp(String.raw`^${LOCALE_PREFIX}\/app(?:\/|$)`, "u")
 const ADMIN_ROUTE = new RegExp(String.raw`^${LOCALE_PREFIX}\/admin(?:\/|$)`, "u")
-const BARE_APP_PATH = /^\/(?:dashboard|app)(?:\/|$)/u
 
 function redirectTo(req: NextRequest, path: string) {
   const { pathname } = req.nextUrl
-  const cookieHeader = req.cookies.get(I18N.COOKIE_NAME)?.value
+  const target = redirectPathname(pathname, path, req.headers.get("cookie"))
 
-  return NextResponse.redirect(new URL(redirectPathname(pathname, path, cookieHeader), req.url))
+  return NextResponse.redirect(new URL(target, req.url))
 }
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
-  const cookieHeader = req.cookies.get(I18N.COOKIE_NAME)?.value
 
   const isAuthCallback = AUTH_CALLBACK.test(pathname)
   const isProtectedApp = APP_ROUTE.test(pathname) || ADMIN_ROUTE.test(pathname)
@@ -39,7 +36,7 @@ export async function proxy(req: NextRequest) {
       return redirectTo(req, ROUTES.SIGN_IN)
     }
 
-    const isAdmin = hasAdminPanelAccess(session.user.role)
+    const isAdmin = hasPermission(session.user.role, { admin: ["access"] })
 
     if (isAuthCallback) {
       return redirectTo(req, isAdmin ? ROUTES.ADMIN : ROUTES.APP)
@@ -48,13 +45,6 @@ export async function proxy(req: NextRequest) {
     if (ADMIN_ROUTE.test(pathname) && !isAdmin) {
       return redirectTo(req, ROUTES.APP)
     }
-  }
-
-  if (BARE_APP_PATH.test(pathname)) {
-    const locale = resolveLocaleFromRequest(pathname, cookieHeader)
-    req.nextUrl.pathname = localizedPathname(locale, pathname)
-
-    return NextResponse.rewrite(req.nextUrl)
   }
 
   return intlMiddleware(req)

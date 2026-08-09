@@ -7,12 +7,12 @@ description: "Składanie providerów klienckich (motyw, nuqs, docs, i18n)."
 
 ## Registry (`src/providers`)
 
-| Provider                | Role                                                                         |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| `theme-provider`        | Next themes / class strategy                                                 |
-| `nuqs-provider`         | `NuqsAdapter` + admin default options (`shallow: false`, `history: push`, …) |
-| `translations-provider` | next-intl client                                                             |
-| `docs-provider`         | Fumadocs UI wiring                                                           |
-| `tooltip-provider`      | Shared tooltip scope                                                         |
+| Provider                | Role                                                                                         |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| `theme-provider`        | Next themes / class strategy                                                                 |
+| `app-router-provider`   | Binds react-aria link components to the Next router (soft navigation, locale-prefixed hrefs) |
+| `translations-provider` | next-intl client                                                                             |
+| `docs-provider`         | Fumadocs UI wiring                                                                           |
+| `tooltip-provider`      | Shared tooltip scope                                                                         |
 
-Admin layout wraps the shell with `NuqsProvider` so URL state triggers server refreshes consistently.
+URL state (tabs, filters) flows through `searchParams` read in Suspense-wrapped server components.

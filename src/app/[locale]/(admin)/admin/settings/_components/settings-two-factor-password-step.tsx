@@ -13,6 +13,8 @@ import { parseTwoFactorEnableData } from "~/src/modules/two-factor/two-factor.ut
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { enableTwoFactor } from "~/src/modules/two-factor/use-cases/enable-two-factor.use-case"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
 import { Input } from "~/src/presentation/components/shadcn/input"
@@ -28,6 +30,7 @@ interface SettingsTwoFactorPasswordStepProps {
 
 export function SettingsTwoFactorPasswordStep({ onEnabled }: Readonly<SettingsTwoFactorPasswordStepProps>): JSX.Element {
   const t = useTranslations("pages.admin.settings")
+  const actionError = useActionError()
   const [isPending, startTransition] = useTransition()
 
   const passwordForm = useForm<z.infer<typeof enableTwoFactorSchema>>({
@@ -40,8 +43,10 @@ export function SettingsTwoFactorPasswordStep({ onEnabled }: Readonly<SettingsTw
       startTransition(async () => {
         const result = await enableTwoFactor({ password: data.password })
 
-        if (result.serverError) {
-          toast.error(result.serverError.message)
+        const error = actionError(result)
+
+        if (error) {
+          toast.error(error)
           return
         }
 
@@ -55,7 +60,7 @@ export function SettingsTwoFactorPasswordStep({ onEnabled }: Readonly<SettingsTw
         onEnabled(enableData.totpURI, enableData.backupCodes)
       })
     },
-    [onEnabled, t],
+    [actionError, onEnabled, t],
   )
 
   return (

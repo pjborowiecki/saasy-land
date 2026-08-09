@@ -22,6 +22,14 @@ describe("auth error key component", () => {
     }
   })
 
+  it("maps codes carried on an api error body", () => {
+    expect.hasAssertions()
+    expect(authErrorKey({ body: { code: "INVALID_PASSWORD" } })).toBe(AUTH_ERRORS.INVALID_PASSWORD)
+    expect(authErrorKey({ body: { code: "USER_ALREADY_EXISTS" } })).toBe(AUTH_ERRORS.USER_ALREADY_EXISTS)
+    expect(authErrorKey({ body: {} })).toBe(AUTH_ERRORS.UNKNOWN_ERROR)
+    expect(authErrorKey({ body: { code: 500 } })).toBe(AUTH_ERRORS.UNKNOWN_ERROR)
+  })
+
   it("returns unknown for missing code", () => {
     expect.hasAssertions()
     expect(authErrorKey("invalid")).toBe(AUTH_ERRORS.UNKNOWN_ERROR)

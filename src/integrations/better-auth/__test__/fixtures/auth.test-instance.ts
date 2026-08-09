@@ -1,10 +1,10 @@
-import { adminClient, anonymousClient, multiSessionClient, twoFactorClient } from "better-auth/client/plugins"
-import { admin, anonymous, multiSession, twoFactor } from "better-auth/plugins"
+import { adminClient, multiSessionClient, twoFactorClient } from "better-auth/client/plugins"
+import { admin, multiSession, twoFactor } from "better-auth/plugins"
 import { getTestInstance } from "better-auth/test"
 
 import { TEST_APP_URL } from "~/src/platform/testing/lib/test-request"
 
-import { ac, ADMIN_PANEL_ROLES, PERMISSIONS, ROLES_CONFIG } from "~/src/integrations/better-auth/auth.access"
+import { ac, DEFAULT_ROLE_CODE, ROLE_CODES, ROLES } from "~/src/integrations/better-auth/auth.access"
 
 import { APP_NAME } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
@@ -70,7 +70,6 @@ interface AuthTestUserRecord {
 
 interface AdminAuthApiExtension {
   setRole: (input: { body: { role: string; userId: string }; headers: Headers }) => Promise<unknown>
-  signInAnonymous: () => Promise<{ token: string; user: { isAnonymous: boolean } }>
   userHasPermission: (input: {
     body: { permissions: Record<string, string[]>; role: string }
     headers: Headers
@@ -80,14 +79,7 @@ interface AdminAuthApiExtension {
 type ExtendedAuthApi = AuthTestContext["auth"]["api"] & AdminAuthApiExtension
 
 function hasAdminAuthApiExtension(api: AuthTestContext["auth"]["api"]): api is ExtendedAuthApi {
-  return (
-    "setRole" in api &&
-    typeof api.setRole === "function" &&
-    "signInAnonymous" in api &&
-    typeof api.signInAnonymous === "function" &&
-    "userHasPermission" in api &&
-    typeof api.userHasPermission === "function"
-  )
+  return "setRole" in api && typeof api.setRole === "function" && "userHasPermission" in api && typeof api.userHasPermission === "function"
 }
 
 function isAuthTestUserRecord(record: unknown): record is AuthTestUserRecord {
@@ -145,7 +137,7 @@ export function readSignUpRole(user: Record<string, unknown>): string {
     return role
   }
 
-  return PERMISSIONS.DEFAULT_ROLE
+  return DEFAULT_ROLE_CODE
 }
 
 export async function findAuthTestUser(context: AuthTestContext, email: string): Promise<AuthTestUserRecord> {
@@ -169,7 +161,7 @@ export async function getSessionUserRole(context: AuthTestContext, headers: Head
     return role
   }
 
-  return PERMISSIONS.DEFAULT_ROLE
+  return DEFAULT_ROLE_CODE
 }
 
 export async function requireSessionUserId(context: AuthTestContext, headers: Headers): Promise<string> {
@@ -205,7 +197,7 @@ export async function signUpVerifyAndSignIn(
 export async function promoteUserToAdmin(context: AuthTestContext, userId: string): Promise<void> {
   await context.db.update({
     model: "user",
-    update: { role: PERMISSIONS.ROLES.ADMIN },
+    update: { role: ROLE_CODES.ADMIN },
     where: [{ field: "id", value: userId }],
   })
 }
@@ -278,11 +270,10 @@ export function createAuthTestInstance(options?: CreateAuthTestInstanceOptions) 
       plugins: [
         admin({
           ac,
-          adminRoles: [...ADMIN_PANEL_ROLES],
-          defaultRole: PERMISSIONS.DEFAULT_ROLE,
-          roles: ROLES_CONFIG,
+          adminRoles: [ROLE_CODES.ADMIN],
+          defaultRole: DEFAULT_ROLE_CODE,
+          roles: ROLES,
         }),
-        anonymous(),
         multiSession({ maximumSessions: MAX_CONCURRENT_SESSIONS }),
         twoFactor({ issuer: APP_NAME }),
       ],
@@ -330,7 +321,7 @@ export function createAuthTestInstance(options?: CreateAuthTestInstanceOptions) 
     },
     {
       clientOptions: {
-        plugins: [adminClient({ ac, roles: ROLES_CONFIG }), anonymousClient(), multiSessionClient(), twoFactorClient()],
+        plugins: [adminClient({ ac, roles: ROLES }), multiSessionClient(), twoFactorClient()],
       },
       disableTestUser: true,
       testWith: "sqlite",

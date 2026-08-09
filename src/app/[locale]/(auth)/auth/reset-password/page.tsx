@@ -3,9 +3,7 @@ import { type JSX, Suspense } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
 
 import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
 import { ResetPasswordForm } from "~/src/app/[locale]/(auth)/auth/reset-password/_components/reset-password-form"
@@ -21,10 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export function generateStaticParams(): { locale: Locale }[] {
-  return routing.locales.map((locale) => ({ locale }))
-}
-
 const authPageFallback = <AuthPageFallback />
 
 export default function ResetPasswordPage({ searchParams }: Readonly<PageProps<"/[locale]/auth/reset-password">>): JSX.Element {
@@ -38,8 +32,7 @@ export default function ResetPasswordPage({ searchParams }: Readonly<PageProps<"
 async function ResetPasswordPageContent({
   searchParams,
 }: Pick<PageProps<"/[locale]/auth/reset-password">, "searchParams">): Promise<JSX.Element> {
-  const t = await getTranslations("pages.auth.reset-password")
-  const { error, token } = await searchParams
+  const [t, { error, token }] = await Promise.all([getTranslations("pages.auth.reset-password"), searchParams])
 
   return (
     <div className="reveal-elem flex w-full max-w-105 flex-col gap-8">

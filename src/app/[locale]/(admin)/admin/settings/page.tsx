@@ -8,7 +8,13 @@ import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadc
 import { SettingsGeneralTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-general-tab"
 import { SettingsSecurityTab } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-security-tab"
 
-const SETTINGS_SECURITY_TAB_FALLBACK = <div className="mt-8 h-48 animate-pulse rounded-lg border border-border/40 bg-secondary/30" />
+const SETTINGS_SECURITY_TAB_FALLBACK = (
+  <div className="mt-8 space-y-6">
+    <div className="h-40 animate-pulse rounded-lg border border-border/40 bg-secondary/30" />
+    <div className="h-40 animate-pulse rounded-lg border border-border/40 bg-secondary/30" />
+    <div className="h-48 animate-pulse rounded-lg border border-border/40 bg-secondary/30" />
+  </div>
+)
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("pages.admin.settings")

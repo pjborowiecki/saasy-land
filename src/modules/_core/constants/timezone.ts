@@ -1,5 +1,4 @@
 import type { CountryCode } from "~/src/modules/_core/constants/country"
-import { ValidationError } from "~/src/modules/_core/errors/validation.error"
 import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
 
 export interface IsoTimeZone {
@@ -209,50 +208,6 @@ export const TIMEZONES = [
 
 export type TimezoneCode = (typeof TIMEZONES)[number]["iana"]
 
-const TIMEZONE_BY_IANA = new Map<string, (typeof TIMEZONES)[number]>(TIMEZONES.map((timezone) => [timezone.iana, timezone]))
-
-function isTimezoneCode(value: string): value is TimezoneCode {
-  return TIMEZONE_BY_IANA.has(value)
-}
-
 export const TIMEZONE_CODES = nonEmptyTuple(TIMEZONES.map((timezone) => timezone.iana))
 
-export class Timezone {
-  static readonly DEFAULT_CODE: TimezoneCode = "UTC"
-
-  readonly iana: TimezoneCode
-  readonly country: CountryCode | undefined
-  readonly latitude: number
-  readonly longitude: number
-
-  private constructor(meta: (typeof TIMEZONES)[number]) {
-    this.iana = meta.iana
-    this.country = meta.country
-    this.latitude = meta.latitude
-    this.longitude = meta.longitude
-  }
-
-  static create(value: string): Timezone {
-    const normalized = value.trim()
-    if (!isTimezoneCode(normalized)) {
-      throw new ValidationError(`Unsupported timezone: ${value}`)
-    }
-    return new Timezone(TIMEZONE_BY_IANA.get(normalized)!)
-  }
-
-  static default(): Timezone {
-    return Timezone.create(Timezone.DEFAULT_CODE)
-  }
-
-  equals(other: Timezone): boolean {
-    return this.iana === other.iana
-  }
-
-  get messageKey(): `timezones.${TimezoneCode}` {
-    return `timezones.${this.iana}`
-  }
-
-  toString(): string {
-    return this.iana
-  }
-}
+export const DEFAULT_TIMEZONE_CODE: TimezoneCode = "UTC"

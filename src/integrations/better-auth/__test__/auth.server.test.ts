@@ -166,12 +166,12 @@ describe("auth secondaryStorage", () => {
     expect(redisSetMock).not.toHaveBeenCalled()
   })
 
-  it("set no-ops when ttl is omitted", async () => {
+  it("set stores value without expiry when ttl is omitted", async () => {
     expect.hasAssertions()
     resetRedisMocks()
     await getSecondaryStorage().set("session:key", "value")
     expect(redisDelMock).not.toHaveBeenCalled()
-    expect(redisSetMock).not.toHaveBeenCalled()
+    expect(redisSetMock).toHaveBeenCalledWith("session:key", "value", undefined)
   })
 
   it("increment skips expiry when count is not initial", async () => {

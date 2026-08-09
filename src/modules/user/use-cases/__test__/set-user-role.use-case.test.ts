@@ -7,7 +7,7 @@ import {
   createAuthSessionFixture,
   createAuthUserMutationResult,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -46,11 +46,11 @@ describe("set-user-role", () => {
     setRoleMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "setRole").mockImplementation(setRoleMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }))
-    const mutationResult = createAuthUserMutationResult({ role: RoleCode.CUSTOMER, userId: TARGET_USER_ID })
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
+    const mutationResult = createAuthUserMutationResult({ role: ROLE_CODES.CUSTOMER, userId: TARGET_USER_ID })
     setRoleMock.mockResolvedValue(mutationResult)
 
-    await expect(setUserRole({ role: RoleCode.CUSTOMER, userId: TARGET_USER_ID })).resolves.toMatchObject({
+    await expect(setUserRole({ role: ROLE_CODES.CUSTOMER, userId: TARGET_USER_ID })).resolves.toMatchObject({
       data: mutationResult,
     })
   })

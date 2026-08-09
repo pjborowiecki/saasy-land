@@ -15,26 +15,25 @@ modules/user/
   user.zod.ts / user.validations.ts
   user.schema.ts
   user.utils.ts
-  user.errors.ts
   use-cases/
-    list-users.use-case.ts
+    get-users.use-case.ts
     …
   __test__/
 ```
 
 ## Use-case pattern
 
-Use-cases are **server actions** built with `authedActionClient` / permission scopes from `PERMISSIONS` in `auth.access.ts`. They:
+Mutations are **server actions** built from the single `actionClient` with `.use(withAuth(permission?))`; reads are plain server functions (e.g. `getUsers`) that check `getCurrentSession()` + `hasPermission` inline — failing with `unauthorized()` / `forbidden()` (authInterrupts) — and keep their query in a `"use cache"` core. They:
 
 1. Enforce authz
 2. Call Better Auth admin APIs and/or Drizzle
-3. Return typed results / domain errors
+3. Return typed results; throw `AppError` for expected failures
 
 Example domains today: `account`, `user`, `session`, `two-factor`, `verification`, `product`, `category`.
 
 ## Calling from UI
 
-- RSC: `await listUsers()` (or equivalent) and render
-- Client: bind actions via safe-action hooks / form actions
+- RSC: `await getUsers()` (or equivalent) and render
+- Client: call the exported actions directly; translate failures with `useActionError()`
 
 Never put SQL in a client component.

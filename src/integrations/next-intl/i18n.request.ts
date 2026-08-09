@@ -7,14 +7,13 @@ import { tryRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 import { routing } from "~/src/integrations/next-intl/i18n.routing"
 import { loadLocaleMessagesFromDir, type Messages } from "~/src/integrations/next-intl/i18n.utils"
 
-function getLocaleMessages(locale: string): Messages {
-  return loadLocaleMessagesFromDir(locale)
-}
-
 async function getCachedLocaleMessages(locale: string): Promise<Messages> {
   "use cache"
   cacheLife("max")
+
+  // `"use cache"` requires an async function; the message load itself is synchronous.
   await Promise.resolve()
+
   return loadLocaleMessagesFromDir(locale)
 }
 
@@ -25,6 +24,6 @@ export default getRequestConfig(async ({ locale }) => {
   const isDevelopment = process.env.NODE_ENV === "development"
   return {
     locale: resolvedLocale,
-    messages: isDevelopment ? getLocaleMessages(resolvedLocale) : await getCachedLocaleMessages(resolvedLocale),
+    messages: isDevelopment ? loadLocaleMessagesFromDir(resolvedLocale) : await getCachedLocaleMessages(resolvedLocale),
   }
 })

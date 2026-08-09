@@ -24,7 +24,7 @@ export function createNullableStringNull(): string | null {
   return readJsonNull()
 }
 
-function createFixtureUserCore(overrides: { role?: string }): Omit<SessionResult["user"], "id" | "isAnonymous"> {
+function createFixtureUserCore(overrides: { role?: string }): Omit<SessionResult["user"], "id"> {
   return {
     banned: false,
     createdAt: FIXTURE_DATE,
@@ -58,7 +58,6 @@ export function createAuthSessionFixture(
     user: {
       ...createFixtureUserCore(overrides),
       id: userId,
-      isAnonymous: false,
     },
   }
 }

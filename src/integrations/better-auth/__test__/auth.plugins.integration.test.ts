@@ -1,27 +1,14 @@
 import {
   createAuthTestInstance,
   createTestUserPayload,
-  getExtendedAuthApi,
   requireSessionUserId,
   signUpVerifyAndSignIn,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.test-instance"
 
 const authContext = await createAuthTestInstance()
-const authApi = getExtendedAuthApi(authContext)
 
 const SINGLE_SESSION_COUNT = 1
 const MULTIPLE_SESSIONS_THRESHOLD = 1
-
-describe("auth anonymous users", () => {
-  it("creates an anonymous session", async () => {
-    expect.hasAssertions()
-
-    const result = await authApi.signInAnonymous()
-
-    expect(result.user["isAnonymous"]).toBe(true)
-    expect(result.token).toBeDefined()
-  })
-})
 
 describe("auth multi-session", () => {
   it("lists active sessions for a signed-in user", async () => {

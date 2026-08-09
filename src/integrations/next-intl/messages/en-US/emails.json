@@ -1,7 +1,4 @@
 {
-  "test": {
-    "title": "Test"
-  },
   "resetPassword": {
     "subject": "Reset your password",
     "preview": "Reset your password for SaaSy Land",

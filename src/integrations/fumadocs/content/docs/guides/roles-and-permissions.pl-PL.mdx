@@ -1,6 +1,6 @@
 ---
 title: "Role i uprawnienia"
-description: "RBAC, RoleCode i używanie PERMISSIONS."
+description: "RBAC, ROLE_CODES i sprawdzanie uprawnień."
 ---
 
 > Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
@@ -9,8 +9,9 @@ description: "RBAC, RoleCode i używanie PERMISSIONS."
 
 `integrations/better-auth/auth.access.ts`
 
-- `RoleCode` / `ROLE_VALUES`
-- `PERMISSIONS` resource actions (`user.list`, `product.create`, …)
-- Better Auth access control statements for admin plugin
+- `ROLE_CODES` / `ROLE_VALUES` / `DEFAULT_ROLE_CODE`
+- `APP_STATEMENTS` resource actions, composed with the Better Auth admin defaults into `ROLES`
+- `Permission` type + `hasPermission(role, permission)` — pure and fail-closed
+- The `admin: ["access"]` statement gates the admin console (checked in `proxy.ts`)
 
-Use-cases take permission slices via `authedActionClient(PERMISSIONS.user.list)` (etc.).
+Mutations attach checks at the definition site via `actionClient.use(withAuth({ user: ["ban"] }))`; RSC reads call `hasPermission` after `getCurrentSession()`.

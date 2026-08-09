@@ -1,19 +1,10 @@
-import {
-  ADMIN_PANEL_ROLES,
-  DEFAULT_ROLE,
-  hasAdminPanelAccess,
-  hasPermission,
-  PERMISSIONS,
-  ROLES_CONFIG,
-  ROLE_VALUES,
-  RoleCode,
-} from "~/src/integrations/better-auth/auth.access"
+import { DEFAULT_ROLE_CODE, hasPermission, ROLE_CODES, ROLE_VALUES, ROLES } from "~/src/integrations/better-auth/auth.access"
 
 describe("auth roles", () => {
   it("exposes a single catalog of role codes", () => {
     expect.hasAssertions()
-    expect(ROLE_VALUES).toStrictEqual([RoleCode.ADMIN, RoleCode.CUSTOMER])
-    expect(DEFAULT_ROLE).toBe(RoleCode.CUSTOMER)
+    expect(ROLE_VALUES).toStrictEqual([ROLE_CODES.ADMIN, ROLE_CODES.CUSTOMER])
+    expect(DEFAULT_ROLE_CODE).toBe(ROLE_CODES.CUSTOMER)
   })
 })
 
@@ -21,81 +12,67 @@ describe("role permission config", () => {
   it("grants admins full app resource access", () => {
     expect.hasAssertions()
 
-    const adminConfig = ROLES_CONFIG.admin
-    const readOrder = adminConfig.authorize({ order: ["read"] })
+    const adminConfig = ROLES.admin
     const refundOrder = adminConfig.authorize({ order: ["refund"] })
     const createCategory = adminConfig.authorize({ category: ["create"] })
     const publishProduct = adminConfig.authorize({ product: ["publish"] })
     const manageSettings = adminConfig.authorize({ settings: ["manage"] })
+    const adminConsole = adminConfig.authorize({ admin: ["access"] })
 
-    expect(readOrder.success).toBe(true)
     expect(refundOrder.success).toBe(true)
     expect(createCategory.success).toBe(true)
     expect(publishProduct.success).toBe(true)
     expect(manageSettings.success).toBe(true)
+    expect(adminConsole.success).toBe(true)
+  })
+
+  it("grants admins the default user and session management statements", () => {
+    expect.hasAssertions()
+
+    const adminConfig = ROLES.admin
+
+    expect(adminConfig.authorize({ user: ["list"] }).success).toBe(true)
+    expect(adminConfig.authorize({ user: ["ban"] }).success).toBe(true)
+    expect(adminConfig.authorize({ session: ["revoke"] }).success).toBe(true)
   })
 
   it("denies customers app resource access", () => {
     expect.hasAssertions()
 
-    const customerConfig = ROLES_CONFIG.customer
+    const customerConfig = ROLES.customer
     const readOrder = customerConfig.authorize({ order: ["read"] })
     const createCategory = customerConfig.authorize({ category: ["create"] })
     const createProduct = customerConfig.authorize({ product: ["create"] })
     const manageSettings = customerConfig.authorize({ settings: ["manage"] })
+    const adminConsole = customerConfig.authorize({ admin: ["access"] })
 
     expect(readOrder.success).toBe(false)
     expect(createCategory.success).toBe(false)
     expect(createProduct.success).toBe(false)
     expect(manageSettings.success).toBe(false)
-  })
-
-  it("re-exports role catalog constants", () => {
-    expect.hasAssertions()
-    expect(PERMISSIONS.ROLES).toBe(RoleCode)
-    expect(PERMISSIONS.ROLE_VALUES).toStrictEqual(ROLE_VALUES)
-    expect(PERMISSIONS.DEFAULT_ROLE).toBe(DEFAULT_ROLE)
-  })
-
-  it("defines admin panel roles", () => {
-    expect.hasAssertions()
-    expect(ADMIN_PANEL_ROLES).toStrictEqual([RoleCode.ADMIN])
+    expect(adminConsole.success).toBe(false)
   })
 })
 
 describe("has permission", () => {
-  it("returns true when any assigned role grants the permission", () => {
+  it("returns true when the role grants the permission", () => {
     expect.hasAssertions()
-    expect(hasPermission(`customer,${PERMISSIONS.ROLES.ADMIN}`, PERMISSIONS.user.list)).toBe(true)
-    expect(hasPermission(PERMISSIONS.ROLES.ADMIN, PERMISSIONS.product.create)).toBe(true)
+    expect(hasPermission(ROLE_CODES.ADMIN, { product: ["create"] })).toBe(true)
+    expect(hasPermission(ROLE_CODES.ADMIN, { user: ["list"] })).toBe(true)
   })
 
-  it("returns false when no assigned role grants the permission", () => {
+  it("returns false when the role does not grant the permission", () => {
     expect.hasAssertions()
-    expect(hasPermission(PERMISSIONS.ROLES.CUSTOMER, PERMISSIONS.user.list)).toBe(false)
-    expect(hasPermission(PERMISSIONS.ROLES.CUSTOMER, PERMISSIONS.product.create)).toBe(false)
-    expect(hasPermission(PERMISSIONS.ROLES.CUSTOMER, PERMISSIONS.settings.manage)).toBe(false)
-    expect(hasPermission("", PERMISSIONS.product.create)).toBe(false)
-    expect(hasPermission(undefined, PERMISSIONS.product.create)).toBe(false)
+    expect(hasPermission(ROLE_CODES.CUSTOMER, { user: ["list"] })).toBe(false)
+    expect(hasPermission(ROLE_CODES.CUSTOMER, { product: ["create"] })).toBe(false)
+    expect(hasPermission(ROLE_CODES.CUSTOMER, { settings: ["manage"] })).toBe(false)
+    expect(hasPermission("", { product: ["create"] })).toBe(false)
+    expect(hasPermission(undefined, { product: ["create"] })).toBe(false)
   })
 
-  it("returns false for unknown roles", () => {
+  it("fails closed for unknown or composite role strings", () => {
     expect.hasAssertions()
-    expect(hasPermission("unknown-role", PERMISSIONS.product.create)).toBe(false)
-  })
-})
-
-describe("has admin panel access", () => {
-  it("returns true when the user can list users", () => {
-    expect.hasAssertions()
-    expect(hasAdminPanelAccess(`customer,${PERMISSIONS.ROLES.ADMIN}`)).toBe(true)
-    expect(hasAdminPanelAccess(PERMISSIONS.ROLES.ADMIN)).toBe(true)
-  })
-
-  it("returns false for customers without staff permissions", () => {
-    expect.hasAssertions()
-    expect(hasAdminPanelAccess(PERMISSIONS.ROLES.CUSTOMER)).toBe(false)
-    expect(hasAdminPanelAccess("")).toBe(false)
-    expect(hasAdminPanelAccess()).toBe(false)
+    expect(hasPermission("unknown-role", { product: ["create"] })).toBe(false)
+    expect(hasPermission(`customer,${ROLE_CODES.ADMIN}`, { product: ["create"] })).toBe(false)
   })
 })

@@ -25,8 +25,10 @@ export function localeFromPathname(pathname: string): Locale | undefined {
   return pathname.startsWith("/auth/") || pathname === "/auth" ? routing.defaultLocale : undefined
 }
 
+const LOCALE_COOKIE_PATTERN = new RegExp(String.raw`(?:^|;\s*)${I18N.COOKIE_NAME}=([^;]+)`, "u")
+
 export function localeFromCookie(cookieHeader?: string | null): Locale | undefined {
-  const [, value] = cookieHeader?.match(new RegExp(String.raw`(?:^|;\s*)${I18N.COOKIE_NAME}=([^;]+)`, "u")) ?? []
+  const [, value] = cookieHeader?.match(LOCALE_COOKIE_PATTERN) ?? []
 
   return isLocale(value) ? value : undefined
 }
@@ -75,10 +77,10 @@ export function redirectPathname(sourcePathname: string, targetPath: string, coo
     return localized
   }
 
-  for (const prefix of Object.values(localePathPrefixes)) {
-    if (prefix !== undefined && prefix.length > 0 && (sourcePathname === prefix || sourcePathname.startsWith(`${prefix}/`))) {
-      return `${prefix}${targetPath}`
-    }
+  const defaultPrefix = localePathPrefixes[routing.defaultLocale]
+
+  if (defaultPrefix?.length && (sourcePathname === defaultPrefix || sourcePathname.startsWith(`${defaultPrefix}/`))) {
+    return `${defaultPrefix}${targetPath}`
   }
 
   return localized
@@ -89,17 +91,5 @@ export function resolveLocaleFromRequest(pathname: string, cookieHeader?: string
 }
 
 export function resolveLocaleFromAuthRequest(request: Request | undefined, actionUrl: string): Locale {
-  const fromAction = localeFromActionUrl(actionUrl)
-
-  if (fromAction) {
-    return fromAction
-  }
-
-  const fromCookie = localeFromCookie(request?.headers.get("cookie"))
-
-  if (fromCookie) {
-    return fromCookie
-  }
-
-  return routing.defaultLocale
+  return localeFromActionUrl(actionUrl) ?? localeFromCookie(request?.headers.get("cookie")) ?? routing.defaultLocale
 }

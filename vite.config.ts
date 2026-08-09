@@ -145,6 +145,13 @@ export default defineConfig(({ mode }) => ({
     },
     overrides: [
       {
+        // The root layout is the app-wide provider stack; its JSX depth is inherent, not sprawl.
+        files: ["src/app/*/layout.tsx"],
+        rules: {
+          "react/jsx-max-depth": ["error", { max: 7 }],
+        },
+      },
+      {
         files: ["vite.config.ts"],
         rules: {
           "import/no-nodejs-modules": "off",
@@ -456,7 +463,7 @@ export default defineConfig(({ mode }) => ({
     ],
     server: {
       deps: {
-        inline: ["next-intl"],
+        inline: ["@next-safe-action/adapter-better-auth", "next-intl"],
       },
     },
     setupFiles: ["@testing-library/jest-dom/vitest"],

@@ -1,11 +1,22 @@
-"use server"
+import "server-only"
 
-import { userZodSchemas } from "~/src/modules/user/user.zod"
+import { headers } from "next/headers"
+import { forbidden, unauthorized } from "next/navigation"
 
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
+import { hasPermission } from "~/src/integrations/better-auth/auth.access"
 import { auth } from "~/src/integrations/better-auth/auth.server"
-import { authedActionClient } from "~/src/integrations/next-safe-action/action.client"
+import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
-export const getUser = authedActionClient(PERMISSIONS.user.get)
-  .inputSchema(userZodSchemas.getUser)
-  .action(({ ctx, parsedInput }) => auth.api.getUser({ headers: ctx.requestHeaders, query: { id: parsedInput.userId } }))
+export async function getUser(userId: string) {
+  const session = await getCurrentSession()
+
+  if (!session) {
+    unauthorized()
+  }
+
+  if (!hasPermission(session?.user.role, { user: ["get"] })) {
+    forbidden()
+  }
+
+  return auth.api.getUser({ headers: await headers(), query: { id: userId } })
+}

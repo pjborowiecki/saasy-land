@@ -79,7 +79,12 @@
       "backupCodesDescription": "Save these backup codes in a secure place. Each code can be used once if you lose access to your authenticator.",
       "done": "Done",
       "setupError": "Could not start two-factor setup. Please try again.",
-      "enabledSuccess": "Two-factor authentication is now enabled."
+      "enabledSuccess": "Two-factor authentication is now enabled.",
+      "disable": "Disable 2FA",
+      "disableDialogTitle": "Disable two-factor authentication",
+      "disableDialogDescription": "Confirm your password to turn off two-factor authentication.",
+      "disableConfirm": "Disable",
+      "disabledSuccess": "Two-factor authentication is now disabled."
     },
     "sessions": {
       "title": "Active Sessions",

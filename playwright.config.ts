@@ -30,9 +30,12 @@ export default defineConfig({
     video: isCI ? "retain-on-failure" : "off",
   },
   webServer: {
-    command: isCI ? "bun run start" : "bun run dev -- --port 3000",
+    // instant() verdicts require a production build with the testing API exposed — dev servers
+    // neither prefetch nor lock reliably, so they cannot produce a valid RED or GREEN.
+    command: isCI ? "bun run start" : "bun run build && bun run start",
+    env: { EXPOSE_TESTING_API: "1" },
     reuseExistingServer: !isCI,
-    timeout: 120_000,
+    timeout: 600_000,
     url: appUrl,
   },
   workers: isCI ? CI_WORKERS : LOCAL_WORKERS,

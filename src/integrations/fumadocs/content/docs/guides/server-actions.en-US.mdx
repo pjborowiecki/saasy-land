@@ -5,9 +5,17 @@ description: "Next Safe Action clients, authz, and revalidation."
 
 ## Clients
 
-Defined under `integrations/next-safe-action`. Prefer `authedActionClient(permission)` so every mutation checks session + RBAC.
+One `actionClient` in `integrations/next-safe-action/action.client.ts`. Attach auth explicitly per mutation: `actionClient.use(withAuth(permission?))` — the Better Auth adapter puts the typed session on `ctx.auth`; pass a `Permission` for RBAC, omit it for self-service flows. RSC reads are plain guarded functions, not actions.
+
+## Rate limiting
+
+Better Auth's limiter only sees HTTP traffic through its handler, so actions that call `auth.api.*` in-process attach `withRateLimit(kind, RATE_LIMITS.…)` explicitly (IP-keyed fixed window on Upstash).
+
+## Errors
+
+`handleServerError` maps `AppError` and Better Auth `APIError` to `{ code, message }`; client components translate results with `useActionError()`.
 
 ## After success
 
-- `revalidatePath` / `revalidateTag` as needed
+- `updateTag` / `revalidateTag` as needed
 - Return serializable DTOs only

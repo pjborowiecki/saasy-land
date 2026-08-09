@@ -27,8 +27,7 @@ function createDocsRelativeLink(page: DocsPageModel) {
 }
 
 export async function generateMetadata({ params }: DocsPageProps): Promise<Metadata> {
-  const { slug } = await params
-  const locale = await getRootLocale()
+  const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
 
   const page = source.getPage(slug, locale)
   if (!page) {
@@ -53,8 +52,7 @@ export async function generateStaticParams(): Promise<{ slug: string[] | undefin
 }
 
 async function DocumentationPageContent({ params }: Pick<DocsPageProps, "params">): Promise<JSX.Element> {
-  const { slug } = await params
-  const locale = await getRootLocale()
+  const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
 
   const page = source.getPage(slug, locale)
   if (!page) {

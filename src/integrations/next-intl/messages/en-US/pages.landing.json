@@ -204,9 +204,6 @@
       "button": "Send Message"
     }
   },
-  "footer": {
-    "copyright": "© {year}"
-  },
   "components": {
     "navigation": {
       "items": {

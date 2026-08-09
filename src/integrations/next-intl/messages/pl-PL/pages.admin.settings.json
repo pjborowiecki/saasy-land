@@ -79,7 +79,12 @@
       "backupCodesDescription": "Zapisz te kody zapasowe w bezpiecznym miejscu. Każdy kod można użyć raz, gdy utracisz dostęp do authenticatora.",
       "done": "Gotowe",
       "setupError": "Nie udało się rozpocząć konfiguracji 2FA. Spróbuj ponownie.",
-      "enabledSuccess": "Uwierzytelnianie dwuskładnikowe zostało włączone."
+      "enabledSuccess": "Uwierzytelnianie dwuskładnikowe zostało włączone.",
+      "disable": "Wyłącz 2FA",
+      "disableDialogTitle": "Wyłącz uwierzytelnianie dwuskładnikowe",
+      "disableDialogDescription": "Potwierdź hasło, aby wyłączyć uwierzytelnianie dwuskładnikowe.",
+      "disableConfirm": "Wyłącz",
+      "disabledSuccess": "Uwierzytelnianie dwuskładnikowe zostało wyłączone."
     },
     "sessions": {
       "title": "Active Sessions",

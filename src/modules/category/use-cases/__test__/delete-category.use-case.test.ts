@@ -3,7 +3,7 @@ import type * as NextHeadersModule from "next/headers"
 import { deleteCategory } from "~/src/modules/category/use-cases/delete-category.use-case"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -49,7 +49,7 @@ describe("delete-category", () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
 
     await expect(deleteCategory({ categoryId: CATEGORY_ID })).resolves.toMatchObject({
       data: { id: CATEGORY_ID },
@@ -64,7 +64,7 @@ describe("delete-category", () => {
     getSessionMock.mockReset()
     dbMocks.mockEmptyDeleteOnce()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
 
     await expect(deleteCategory({ categoryId: CATEGORY_ID })).resolves.toMatchObject({
       serverError: { code: "NOT_FOUND" },
@@ -75,7 +75,7 @@ describe("delete-category", () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: USER_ID }))
 
     await expect(deleteCategory({ categoryId: CATEGORY_ID })).resolves.toMatchObject({
       serverError: { code: "FORBIDDEN" },

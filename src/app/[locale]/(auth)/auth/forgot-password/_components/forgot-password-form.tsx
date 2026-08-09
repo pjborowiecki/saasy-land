@@ -16,6 +16,8 @@ import { verificationZodSchemas } from "~/src/modules/verification/verification.
 
 import { getPathname } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
@@ -30,6 +32,7 @@ export function ForgotPasswordForm(): JSX.Element {
 
   const locale = useLocale()
   const t = useTranslations()
+  const actionError = useActionError()
 
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     defaultValues: { email: "" },
@@ -48,15 +51,17 @@ export function ForgotPasswordForm(): JSX.Element {
         redirectTo,
       })
 
-      if (result.serverError) {
-        toast.error(t("pages.auth.forgot-password.form.error"))
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
 
       setSubmitted(true)
       toast.success(t("pages.auth.forgot-password.form.success"))
     },
-    [locale, t],
+    [actionError, locale, t],
   )
 
   return (

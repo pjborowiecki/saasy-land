@@ -12,6 +12,8 @@ import type z from "zod/v4"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { verifyBackupCode } from "~/src/modules/two-factor/use-cases/verify-backup-code.use-case"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
 import { Input } from "~/src/presentation/components/shadcn/input"
@@ -28,6 +30,7 @@ interface TwoFactorBackupFormProps {
 
 export function TwoFactorBackupForm({ onToggleMode }: Readonly<TwoFactorBackupFormProps>): JSX.Element {
   const t = useTranslations()
+  const actionError = useActionError()
   const [isPending, startTransition] = useTransition()
   const redirectAfterVerification = useTwoFactorRedirect()
 
@@ -41,15 +44,17 @@ export function TwoFactorBackupForm({ onToggleMode }: Readonly<TwoFactorBackupFo
       startTransition(async () => {
         const result = await verifyBackupCode(data)
 
-        if (result.serverError) {
-          toast.error(t("auth.errors.unexpectedError"))
+        const error = actionError(result)
+
+        if (error) {
+          toast.error(error)
           return
         }
 
         await redirectAfterVerification()
       })
     },
-    [redirectAfterVerification, t],
+    [actionError, redirectAfterVerification],
   )
 
   return (

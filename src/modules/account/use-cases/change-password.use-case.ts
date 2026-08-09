@@ -2,11 +2,12 @@
 
 import { accountZodSchemas } from "~/src/modules/account/account.zod"
 
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
 import { auth } from "~/src/integrations/better-auth/auth.server"
-import { authedActionClient } from "~/src/integrations/next-safe-action/action.client"
+import { actionClient, RATE_LIMITS, withAuth, withRateLimit } from "~/src/integrations/next-safe-action/action.client"
 
-export const settingsChangePassword = authedActionClient(PERMISSIONS.settings.manage)
+export const settingsChangePassword = actionClient
+  .use(withRateLimit("change-password", RATE_LIMITS.SENSITIVE))
+  .use(withAuth())
   .inputSchema(accountZodSchemas.changePassword)
   .action(({ ctx, parsedInput }) =>
     auth.api.changePassword({

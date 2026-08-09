@@ -12,6 +12,8 @@ import { settingsRevokeSession } from "~/src/modules/session/use-cases/revoke-se
 import type { AuthActiveSession } from "~/src/integrations/better-auth/auth.types"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card } from "~/src/presentation/components/shadcn/card"
 
@@ -26,14 +28,17 @@ export function SettingsSessionsCardClient({ currentSessionId, sessions }: Setti
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const t = useTranslations("pages.admin.settings")
+  const actionError = useActionError()
 
   const handleRevokeSession = useCallback(
     (token: string) => {
       startTransition(async () => {
         const result = await settingsRevokeSession({ token })
 
-        if (result.serverError) {
-          toast.error(result.serverError.message)
+        const error = actionError(result)
+
+        if (error) {
+          toast.error(error)
           return
         }
 
@@ -41,22 +46,24 @@ export function SettingsSessionsCardClient({ currentSessionId, sessions }: Setti
         router.refresh()
       })
     },
-    [router, t],
+    [actionError, router, t],
   )
 
   const handleRevokeOtherSessions = useCallback(() => {
     startTransition(async () => {
       const result = await settingsRevokeOtherSessions()
 
-      if (result.serverError) {
-        toast.error(result.serverError.message)
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
 
       toast.success(t("security.sessions.feedback.logoutAllSuccess"))
       router.refresh()
     })
-  }, [router, t])
+  }, [actionError, router, t])
 
   return (
     <Card className="overflow-hidden">

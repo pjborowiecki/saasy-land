@@ -4,5 +4,6 @@
   "confirm": "Confirm",
   "cancel": "Cancel",
   "loading": "Loading...",
-  "noDataToDisplay": "No data to display"
+  "noDataToDisplay": "No data to display",
+  "copyright": "© {year}"
 }

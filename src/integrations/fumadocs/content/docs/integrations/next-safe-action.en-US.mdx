@@ -3,4 +3,4 @@ title: "Next Safe Action"
 description: "Typed server actions with auth middleware."
 ---
 
-Action clients in `integrations/next-safe-action`. All mutating use-cases should flow through them.
+A single `actionClient` plus `withAuth(permission?)` in `integrations/next-safe-action`. All mutations flow through it; RSC reads stay plain server functions.

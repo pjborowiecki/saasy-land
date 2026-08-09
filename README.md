@@ -116,16 +116,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Essential scripts
 
-| Script                                             | Purpose                                 |
-| -------------------------------------------------- | --------------------------------------- |
-| `bun run dev`                                      | Next.js dev server                      |
-| `bun run build` / `start`                          | Production build / serve                |
-| `bun run check`                                    | i18n check + lint/format/type via Vite+ |
-| `bun run test`                                     | Vitest (all projects)                   |
-| `bun run test:coverage`                            | Coverage (global 100% thresholds)       |
-| `bun run test:e2e:smoke`                           | Playwright smoke                        |
-| `bun run db:generate` / `db:migrate` / `db:studio` | Drizzle workflow                        |
-| `bun run deploy:preview` / `deploy:prod`           | Vercel deploy                           |
+| Script                                                                 | Purpose                                                                                                |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `bun run dev`                                                          | Next.js dev server                                                                                     |
+| `bun run build` / `start`                                              | Production build / serve                                                                               |
+| `bun run check`                                                        | i18n check + lint/format/type via Vite+                                                                |
+| `bun run test`                                                         | Vitest (all projects)                                                                                  |
+| `bun run test:coverage`                                                | Coverage (global 100% thresholds)                                                                      |
+| `bun run test:e2e:smoke`                                               | Playwright smoke                                                                                       |
+| `bun run db:generate` / `db:migrate` / `db:studio`                     | Drizzle workflow (dev, `.env.local`)                                                                   |
+| `bun run db:migrate:preview` / `db:studio:preview` (and `:production`) | Explicit-target Drizzle against `.env.preview.local` / `.env.production.local` (fill via `env:pull:*`) |
+| `bun run deploy:preview` / `deploy:prod`                               | Vercel deploy                                                                                          |
 
 See in-app **Documentation → Tooling → Scripts** (`/docs/tooling/scripts`) for the full script map.
 

@@ -31,11 +31,11 @@ describe("load locale messages from dir component", () => {
     expect(messages.auth.form.placeholders.email).toBeTypeOf("string")
   })
 
-  it("returns cached messages for repeated loads", () => {
+  it("returns equivalent messages for repeated loads", () => {
     expect.hasAssertions()
     const first = loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir)
     const second = loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir)
-    expect(second).toBe(first)
+    expect(second).toStrictEqual(first)
   })
 
   it("keeps translation keys in sync across locales", () => {

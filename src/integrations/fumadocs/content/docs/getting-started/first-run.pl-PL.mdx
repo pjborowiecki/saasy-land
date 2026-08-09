@@ -13,7 +13,7 @@ bun run db:migrate
 # bun run db:push
 ```
 
-Inspect schema with `bun run db:studio`.
+Inspect schema with `bun run db:studio`. For preview or production, run the matching `bun run env:pull:preview|production` once, then `db:studio:preview|production` / `db:migrate:preview|production` — the target is always explicit in the command.
 
 ## Dev server
 
@@ -27,7 +27,7 @@ Visit `http://localhost:3000`. Locales are `en-US` and `pl-PL` (see `integration
 
 1. Sign up via `/auth/sign-up`
 2. Verify email (Resend / logs depending on setup)
-3. Promote the user to `admin` in the DB (or your seed path) — role codes live in `auth.access.ts` as `RoleCode.ADMIN`
+3. Promote the user to `admin` in the DB (or your seed path) — role codes live in `auth.access.ts` as `ROLE_CODES.ADMIN`
 4. Open `/admin`
 
 Auth callback routing: admins → `/admin`, customers → `/app` (`src/proxy.ts` + `ROUTES`).

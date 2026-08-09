@@ -1,4 +1,3 @@
-import { ValidationError } from "~/src/modules/_core/errors/validation.error"
 import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
 
 export interface IsoCurrency {
@@ -168,47 +167,9 @@ export const CURRENCIES = {
 export type CurrencyCode = keyof typeof CURRENCIES
 
 function isCurrencyCode(value: string): value is CurrencyCode {
-  return Object.hasOwn(CURRENCIES, value)
+  return value in CURRENCIES
 }
 
-export const CURRENCY_CODES = nonEmptyTuple(Object.keys(CURRENCIES).filter((code): code is CurrencyCode => isCurrencyCode(code)))
+export const CURRENCY_CODES = nonEmptyTuple(Object.keys(CURRENCIES).filter((code) => isCurrencyCode(code)))
 
 export const DEFAULT_CURRENCY_CODE: CurrencyCode = "USD"
-
-export class Currency {
-  static readonly DEFAULT_CODE: CurrencyCode = DEFAULT_CURRENCY_CODE
-
-  readonly code: CurrencyCode
-  readonly numeric: string
-  readonly exponent: number
-
-  private constructor(code: CurrencyCode, meta: IsoCurrency) {
-    this.code = code
-    this.numeric = meta.numeric
-    this.exponent = meta.exponent
-  }
-
-  static create(code: string): Currency {
-    const normalized = code.trim().toUpperCase()
-    if (!isCurrencyCode(normalized)) {
-      throw new ValidationError(`Unsupported currency: ${code}`)
-    }
-    return new Currency(normalized, CURRENCIES[normalized])
-  }
-
-  static default(): Currency {
-    return Currency.create(Currency.DEFAULT_CODE)
-  }
-
-  get messageKey(): `currencies.${CurrencyCode}` {
-    return `currencies.${this.code}`
-  }
-
-  equals(other: Currency): boolean {
-    return this.code === other.code
-  }
-
-  toString(): string {
-    return this.code
-  }
-}

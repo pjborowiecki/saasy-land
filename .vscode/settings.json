@@ -1,16 +1,26 @@
 {
-  "i18n-ally.localesPaths": ["./src/integrations/next-intl/messages"],
-  "i18n-ally.sourceLanguage": "en-US",
-  "i18n-ally.displayLanguage": "en-US",
-  "i18n-ally.keystyle": "nested",
-  "i18n-ally.dirStructure": "dir",
-  "i18n-ally.namespace": true,
-  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
-  "i18n-ally.enabledFrameworks": ["next-intl"],
-  "i18n-ally.annotations": true,
   "biome.enabled": false,
   "biome.requireConfiguration": true,
+    "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
   "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "i18n-ally.annotations": true,
+  "i18n-ally.dirStructure": "dir",
+  "i18n-ally.displayLanguage": "en-US",
+  "i18n-ally.enabledFrameworks": ["next-intl", "general"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.localesPaths": ["./src/integrations/next-intl/messages"],
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
+  "i18n-ally.sourceLanguage": "en-US",
+  "npm.scriptRunner": "bun",
+  "oxc.fmt.configPath": "./vite.config.ts",
+  "oxc.path.oxfmt": "./node_modules/vite-plus/bin/oxfmt",
+  "oxc.path.oxlint": "./node_modules/vite-plus/bin/oxlint",
+  "oxc.typeAware": true,
   "[javascript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
@@ -23,14 +33,4 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "oxc.path.oxfmt": "./node_modules/vite-plus/bin/oxfmt",
-  "oxc.path.oxlint": "./node_modules/vite-plus/bin/oxlint",
-  "oxc.fmt.configPath": "./vite.config.ts",
-  "oxc.lint.configPath": "./vite.config.ts",
-  "oxc.typeAware": true,
-  "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "explicit"
-  }
 }

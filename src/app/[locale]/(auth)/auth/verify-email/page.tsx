@@ -3,9 +3,6 @@ import { type JSX, Suspense } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
-
 import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
 import { VerifyEmailPanel } from "~/src/app/[locale]/(auth)/auth/verify-email/_components/verify-email-panel"
 import { APP_NAME } from "~/src/presentation/branding"
@@ -17,10 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("metadata.description", { name: APP_NAME }),
     title: t("metadata.title"),
   }
-}
-
-export function generateStaticParams(): { locale: Locale }[] {
-  return routing.locales.map((locale) => ({ locale }))
 }
 
 const authPageFallback = <AuthPageFallback />
@@ -36,8 +29,7 @@ export default function VerifyEmailPage({ searchParams }: Readonly<PageProps<"/[
 async function VerifyEmailPageContent({
   searchParams,
 }: Pick<PageProps<"/[locale]/auth/verify-email">, "searchParams">): Promise<JSX.Element> {
-  const t = await getTranslations("pages.auth.verify-email")
-  const resolvedSearchParams = await searchParams
+  const [t, resolvedSearchParams] = await Promise.all([getTranslations("pages.auth.verify-email"), searchParams])
   const token = typeof resolvedSearchParams["token"] === "string" ? resolvedSearchParams["token"] : undefined
   const email = typeof resolvedSearchParams["email"] === "string" ? resolvedSearchParams["email"] : undefined
 

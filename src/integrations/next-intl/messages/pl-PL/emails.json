@@ -1,7 +1,4 @@
 {
-  "test": {
-    "title": "Test"
-  },
   "resetPassword": {
     "subject": "Zresetuj hasło",
     "preview": "Zresetuj hasło w SaaSy Land",

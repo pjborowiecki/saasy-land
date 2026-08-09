@@ -57,6 +57,17 @@ export function SignInWithPasswordForm(): JSX.Element {
           return
         }
 
+        const signInData: unknown = res?.data
+
+        if (
+          typeof signInData === "object" &&
+          signInData !== null &&
+          "twoFactorRedirect" in signInData &&
+          signInData.twoFactorRedirect === true
+        ) {
+          return
+        }
+
         toast.success(t("pages.auth.sign-in.form.success"))
         await redirectAfterAuth()
       })

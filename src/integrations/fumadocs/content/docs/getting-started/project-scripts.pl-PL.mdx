@@ -17,12 +17,15 @@ description: "Skrypty Bun: dev, jakość, DB, testy, deploy."
 
 ## Data
 
-| Command               | What it does                  |
-| --------------------- | ----------------------------- |
-| `bun run db:generate` | Drizzle migration from schema |
-| `bun run db:migrate`  | Apply migrations              |
-| `bun run db:push`     | Push schema (prototyping)     |
-| `bun run db:studio`   | Drizzle Studio                |
+| Command                                      | What it does                                                  |
+| -------------------------------------------- | ------------------------------------------------------------- |
+| `bun run db:generate`                        | Drizzle migration from schema                                 |
+| `bun run db:migrate`                         | Apply migrations                                              |
+| `bun run db:push`                            | Push schema (prototyping)                                     |
+| `bun run db:studio`                          | Drizzle Studio                                                |
+| `bun run db:studio:preview` / `:production`  | Studio against `.env.preview.local` / `.env.production.local` |
+| `bun run db:migrate:preview` / `:production` | Migrate a specific environment (deliberate, explicit target)  |
+| `bun run env:pull:preview` / `:production`   | Pull the full Vercel env into the matching `.env.*.local`     |
 
 ## Tests
 

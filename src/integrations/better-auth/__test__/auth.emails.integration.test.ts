@@ -1,16 +1,24 @@
+import { env } from "~/src/platform/env"
+
+import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 import { createTestRequestUrl, TEST_APP_URL } from "~/src/platform/testing/lib/test-request"
 
 import { authEmailHandlers } from "~/src/integrations/better-auth/auth.emails"
 
-type SendEmailResult = { error: string; success: false } | { id: string; success: true }
+interface ResendSendResult {
+  data: { id: string } | null
+  error: { message: string; name: string; statusCode: number | null } | null
+  headers: null
+}
 
 const CALL_COUNT = 1
-const sendEmailMock = vi.hoisted(() => vi.fn<(input: unknown) => Promise<SendEmailResult>>())
+const resendSendMock = vi.hoisted(() => vi.fn<(payload: unknown, options?: unknown) => Promise<ResendSendResult>>())
 
 vi.mock(import("server-only"), () => ({}))
 
-vi.mock(import("~/src/integrations/resend/resend.utils"), () => ({
-  sendEmail: sendEmailMock,
+// @ts-expect-error Vitest module mock factory is not inferred for resend.config exports.
+vi.mock(import("~/src/integrations/resend/resend.config"), () => ({
+  resend: { emails: { send: resendSendMock } },
 }))
 
 const payload = {
@@ -19,63 +27,60 @@ const payload = {
   user: { email: "user@example.com", name: "User" },
 }
 
-function mockSuccessfulSendEmail(): void {
-  sendEmailMock.mockReset()
-  sendEmailMock.mockResolvedValue({ id: "email_1", success: true })
+function mockSuccessfulSend(): void {
+  resendSendMock.mockReset()
+  resendSendMock.mockResolvedValue({ data: { id: "email_1" }, error: JSON_NULL, headers: JSON_NULL })
 }
 
-function mockFailedSendEmail(): void {
-  sendEmailMock.mockReset()
-  sendEmailMock.mockResolvedValue({ error: "failed", success: false })
+function mockFailedSend(): void {
+  resendSendMock.mockReset()
+  resendSendMock.mockResolvedValue({
+    data: JSON_NULL,
+    error: { message: "failed", name: "application_error", statusCode: JSON_NULL },
+    headers: JSON_NULL,
+  })
 }
 
 describe("auth email handlers", () => {
-  it("sendResetPasswordEmail sends localized email", async () => {
+  it("sendResetPasswordEmail sends localized email with an idempotency key", async () => {
     expect.hasAssertions()
-    mockSuccessfulSendEmail()
+    mockSuccessfulSend()
 
     await authEmailHandlers.sendResetPasswordEmail(payload, new Request(TEST_APP_URL))
-    expect(sendEmailMock).toHaveBeenCalledTimes(CALL_COUNT)
+    expect(resendSendMock).toHaveBeenCalledTimes(CALL_COUNT)
+    expect(resendSendMock).toHaveBeenCalledWith(expect.objectContaining({ from: env.RESEND_EMAIL_FROM, to: payload.user.email }), {
+      idempotencyKey: `reset-password/${payload.token}`,
+    })
   })
 
-  it("sendVerificationEmail sends localized email", async () => {
+  it("sendVerificationEmail sends localized email with an idempotency key", async () => {
     expect.hasAssertions()
-    mockSuccessfulSendEmail()
+    mockSuccessfulSend()
 
     await authEmailHandlers.sendVerificationEmail(payload)
-    expect(sendEmailMock).toHaveBeenCalledTimes(CALL_COUNT)
+    expect(resendSendMock).toHaveBeenCalledTimes(CALL_COUNT)
+    expect(resendSendMock).toHaveBeenCalledWith(expect.objectContaining({ from: env.RESEND_EMAIL_FROM, to: payload.user.email }), {
+      idempotencyKey: `verify-email/${payload.token}`,
+    })
   })
 
-  it("sendChangeEmailConfirmationEmail sends localized email", async () => {
+  it("sendChangeEmailConfirmationEmail sends localized email with an idempotency key", async () => {
     expect.hasAssertions()
-    mockSuccessfulSendEmail()
+    mockSuccessfulSend()
 
     await authEmailHandlers.sendChangeEmailConfirmationEmail({ ...payload, newEmail: "new@example.com" })
-    expect(sendEmailMock).toHaveBeenCalledTimes(CALL_COUNT)
+    expect(resendSendMock).toHaveBeenCalledTimes(CALL_COUNT)
+    expect(resendSendMock).toHaveBeenCalledWith(expect.objectContaining({ from: env.RESEND_EMAIL_FROM, to: payload.user.email }), {
+      idempotencyKey: `change-email-confirmation/${payload.token}`,
+    })
   })
 
-  it("throws when sendEmail fails for reset password", async () => {
+  it("throws when resend reports an error for any handler", async () => {
     expect.hasAssertions()
-    mockFailedSendEmail()
-    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {})
+    mockFailedSend()
 
     await expect(authEmailHandlers.sendResetPasswordEmail(payload)).rejects.toThrow("failed")
-    expect(consoleError).toHaveBeenCalledWith(
-      "[Auth] Failed to send resetPassword email",
-      expect.objectContaining({ email: payload.user.email, error: "failed" }),
-    )
-
-    consoleError.mockRestore()
-  })
-
-  it("throws when sendEmail fails for verification and change-email handlers", async () => {
-    expect.hasAssertions()
-    mockFailedSendEmail()
-    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {})
-
     await expect(authEmailHandlers.sendVerificationEmail(payload)).rejects.toThrow("failed")
     await expect(authEmailHandlers.sendChangeEmailConfirmationEmail({ ...payload, newEmail: "new@example.com" })).rejects.toThrow("failed")
-
-    consoleError.mockRestore()
   })
 })

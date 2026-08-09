@@ -1,10 +1,8 @@
 import type { CountryCode } from "~/src/modules/_core/constants/country"
-import { ValidationError } from "~/src/modules/_core/errors/validation.error"
-import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
 
 export type TextDirection = "ltr" | "rtl"
 
-export interface AppLocale {
+interface AppLocale {
   readonly code: string
   readonly languageAlpha2: string
   readonly languageAlpha3: string
@@ -72,54 +70,8 @@ export const LOCALES = [
 
 export type LocaleCode = (typeof LOCALES)[number]["code"]
 
-const LOCALE_BY_CODE = new Map<string, (typeof LOCALES)[number]>(LOCALES.map((locale) => [locale.code, locale]))
+export const LOCALE_CODES: ReadonlySet<string> = new Set(LOCALES.map((locale) => locale.code))
+export const LOCALE_DIRECTIONS: ReadonlyMap<string, TextDirection> = new Map(LOCALES.map((locale) => [locale.code, locale.dir]))
 
-function isLocaleCode(value: string): value is LocaleCode {
-  return LOCALE_BY_CODE.has(value)
-}
-
-export const LOCALE_CODES = nonEmptyTuple(LOCALES.map((locale) => locale.code))
-
-export class Locale {
-  static readonly DEFAULT_CODE: LocaleCode = "en-US"
-
-  readonly code: LocaleCode
-  readonly languageAlpha2: string
-  readonly languageAlpha3: string
-  readonly regionAlpha2: CountryCode
-  readonly regionAlpha3: string
-  readonly dir: TextDirection
-
-  private constructor(meta: (typeof LOCALES)[number]) {
-    this.code = meta.code
-    this.languageAlpha2 = meta.languageAlpha2
-    this.languageAlpha3 = meta.languageAlpha3
-    this.regionAlpha2 = meta.regionAlpha2
-    this.regionAlpha3 = meta.regionAlpha3
-    this.dir = meta.dir
-  }
-
-  static create(code: string): Locale {
-    const normalized = code.trim()
-    if (!isLocaleCode(normalized)) {
-      throw new ValidationError(`Unsupported locale: ${code}`)
-    }
-    return new Locale(LOCALE_BY_CODE.get(normalized)!)
-  }
-
-  static default(): Locale {
-    return Locale.create(Locale.DEFAULT_CODE)
-  }
-
-  get messageKey(): `locales.${LocaleCode}` {
-    return `locales.${this.code}`
-  }
-
-  equals(other: Locale): boolean {
-    return this.code === other.code
-  }
-
-  toString(): string {
-    return this.code
-  }
-}
+export const isLocaleCode = (value: string): value is LocaleCode => LOCALE_CODES.has(value)
+export const getLocaleDirection = (locale: string): TextDirection => LOCALE_DIRECTIONS.get(locale) ?? "ltr"

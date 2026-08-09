@@ -3,7 +3,7 @@ import type * as NextHeadersModule from "next/headers"
 import { createProduct } from "~/src/modules/product/use-cases/create-product.use-case"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -64,7 +64,7 @@ describe("create-product", () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
 
     await expect(
       createProduct({
@@ -84,7 +84,7 @@ describe("create-product", () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: USER_ID }))
 
     await expect(
       createProduct({

@@ -14,6 +14,8 @@ import { verificationZodSchemas } from "~/src/modules/verification/verification.
 
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
@@ -31,6 +33,7 @@ interface ResetPasswordFormProps {
 export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): JSX.Element {
   const router = useRouter()
   const t = useTranslations()
+  const actionError = useActionError()
 
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     defaultValues: { confirmPassword: "", password: "" },
@@ -46,15 +49,17 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
         token,
       })
 
-      if (result.serverError) {
-        toast.error(result.serverError.message)
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
 
       toast.success(t("pages.auth.reset-password.form.success"))
       router.push(ROUTES.SIGN_IN)
     },
-    [router, t, token],
+    [actionError, router, t, token],
   )
 
   return (

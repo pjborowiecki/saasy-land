@@ -7,7 +7,6 @@ import { render, screen } from "@testing-library/react"
 
 import { Background, backgroundGridPatternClassName } from "~/src/presentation/components/custom/background"
 import { GithubInfo } from "~/src/presentation/components/custom/github-info"
-import { HtmlLang } from "~/src/presentation/components/custom/html-lang"
 import { Github, Google, Icons } from "~/src/presentation/components/custom/icons"
 import {
   Blockquote,
@@ -85,25 +84,6 @@ describe("github info component", () => {
     expect.hasAssertions()
     render(<GithubInfo owner="acme" repo="app" />)
     expect(screen.getByRole("link")).toHaveAttribute("href", "https://github.com/acme/app")
-  })
-})
-
-describe("html lang component", () => {
-  it("sets documentElement.lang on mount", () => {
-    expect.hasAssertions()
-    document.documentElement.lang = "en"
-    render(<HtmlLang locale="pl-PL" />)
-    expect(document.documentElement.lang).toBe("pl-PL")
-  })
-
-  it("updates documentElement.lang when locale changes", () => {
-    expect.hasAssertions()
-    document.documentElement.lang = "en"
-    const view = render(<HtmlLang locale="en-US" />)
-    expect(document.documentElement.lang).toBe("en-US")
-
-    view.rerender(<HtmlLang locale="pl-PL" />)
-    expect(document.documentElement.lang).toBe("pl-PL")
   })
 })
 

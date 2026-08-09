@@ -51,15 +51,15 @@ Use `bun run test`, not `bun test` (see `scripts/bun-test-guard/`).
 
 Route-local `_components` under `src/app/**` are **correct and acceptable**. They do not break Clean Architecture when the dependency rule holds.
 
-| Location                                                      | Role                                                                                                                                                                           |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `src/app/**`                                                  | Delivery / routing. Thin pages + **route-private** UI in `_components` (Next: `_` = not a route).                                                                              |
-| `src/presentation/components`, `providers`, `styles`, `utils` | **Shared** UI kit and app-wide providers only — not use cases, not server actions.                                                                                             |
-| `src/modules/*/application`                                   | Commands, queries, handlers (CQRS-lite).                                                                                                                                       |
-| `src/modules/*/infrastructure`                                | Persistence, email, auth adapters — concrete tech.                                                                                                                             |
-| `src/modules/*/domain`                                        | Aggregates, VOs, domain errors — no React, no Next.                                                                                                                            |
-| `src/modules/shared-kernel`                                   | Cross-context codes/types (`Currency`, `Timezone`, `Locale`, `Result`, …). See its README.                                                                                     |
-| Colocated app knobs                                           | Locales → next-intl; routes → `src/routes.ts`; post-auth paths → `src/post-auth.ts`; theme/branding/utils → presentation; roles → `RoleCode`; route fixtures → segment `_lib`. |
+| Location                                                      | Role                                                                                                                                                                             |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/app/**`                                                  | Delivery / routing. Thin pages + **route-private** UI in `_components` (Next: `_` = not a route).                                                                                |
+| `src/presentation/components`, `providers`, `styles`, `utils` | **Shared** UI kit and app-wide providers only — not use cases, not server actions.                                                                                               |
+| `src/modules/*/application`                                   | Commands, queries, handlers (CQRS-lite).                                                                                                                                         |
+| `src/modules/*/infrastructure`                                | Persistence, email, auth adapters — concrete tech.                                                                                                                               |
+| `src/modules/*/domain`                                        | Aggregates, VOs, domain errors — no React, no Next.                                                                                                                              |
+| `src/modules/shared-kernel`                                   | Cross-context codes/types (`Currency`, `Timezone`, `Locale`, `Result`, …). See its README.                                                                                       |
+| Colocated app knobs                                           | Locales → next-intl; routes → `src/routes.ts`; post-auth paths → `src/post-auth.ts`; theme/branding/utils → presentation; roles → `ROLE_CODES`; route fixtures → segment `_lib`. |
 
 Rules of thumb:
 

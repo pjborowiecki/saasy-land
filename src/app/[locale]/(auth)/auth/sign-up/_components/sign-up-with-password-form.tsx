@@ -7,11 +7,14 @@ import { useLocale, useTranslations } from "next-intl"
 import { FormProvider, useForm } from "react-hook-form"
 import { toast } from "sonner"
 
+import { env } from "~/src/platform/env"
+
 import { signUpWithPassword } from "~/src/modules/account/use-cases/sign-up-with-password.use-case"
 
 import { signUpWithPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
 import { useConfetti } from "~/src/hooks/use-confetti"
 
 import { PasswordRequirements } from "~/src/app/[locale]/(auth)/auth/_components/password-requirements"
@@ -30,6 +33,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
   const router = useRouter()
   const locale = useLocale()
   const t = useTranslations()
+  const actionError = useActionError()
 
   const form = useForm<SignUpFormValues>({
     defaultValues: { confirmPassword: "", email: "", name: "", password: "" },
@@ -40,10 +44,13 @@ export function SignUpWithPasswordForm(): JSX.Element {
   const onSubmit = useCallback(
     (data: SignUpFormValues) => {
       startTransition(async () => {
-        const result = await signUpWithPassword(data)
+        const callbackURL = `${env.NEXT_PUBLIC_APP_URL}${getPathname({ href: ROUTES.APP, locale })}`
+        const result = await signUpWithPassword({ ...data, callbackURL })
 
-        if (result?.serverError) {
-          toast.error(result.serverError.message)
+        const error = actionError(result)
+
+        if (error) {
+          toast.error(error)
           return
         }
 
@@ -58,7 +65,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
         )
       })
     },
-    [locale, router, t, triggerConfetti],
+    [actionError, locale, router, t, triggerConfetti],
   )
 
   return (

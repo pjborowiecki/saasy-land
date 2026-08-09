@@ -1,8 +1,6 @@
 import type { CurrencyCode } from "~/src/modules/_core/constants/currency"
-import { ValidationError } from "~/src/modules/_core/errors/validation.error"
-import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
 
-export interface IsoCountry {
+interface IsoCountry {
   readonly alpha2: string
   readonly alpha3: string
   readonly numeric: string
@@ -261,51 +259,3 @@ export const COUNTRIES = [
 ] as const satisfies readonly IsoCountry[]
 
 export type CountryCode = (typeof COUNTRIES)[number]["alpha2"]
-
-const COUNTRY_BY_ALPHA2 = new Map<string, (typeof COUNTRIES)[number]>(COUNTRIES.map((country) => [country.alpha2, country]))
-
-function isCountryCode(value: string): value is CountryCode {
-  return COUNTRY_BY_ALPHA2.has(value)
-}
-
-export const COUNTRY_CODES = nonEmptyTuple(COUNTRIES.map((country) => country.alpha2))
-
-export class Country {
-  static readonly DEFAULT_CODE: CountryCode = "US"
-
-  readonly alpha2: CountryCode
-  readonly alpha3: string
-  readonly numeric: string
-  readonly currency: CurrencyCode
-
-  private constructor(meta: (typeof COUNTRIES)[number]) {
-    this.alpha2 = meta.alpha2
-    this.alpha3 = meta.alpha3
-    this.numeric = meta.numeric
-    this.currency = meta.currency
-  }
-
-  static create(code: string): Country {
-    const normalized = code.trim().toUpperCase()
-    if (!isCountryCode(normalized)) {
-      throw new ValidationError(`Unsupported country: ${code}`)
-    }
-    return new Country(COUNTRY_BY_ALPHA2.get(normalized)!)
-  }
-
-  static default(): Country {
-    return Country.create(Country.DEFAULT_CODE)
-  }
-
-  get messageKey(): `countries.${CountryCode}` {
-    return `countries.${this.alpha2}`
-  }
-
-  equals(other: Country): boolean {
-    return this.alpha2 === other.alpha2
-  }
-
-  toString(): string {
-    return this.alpha2
-  }
-}

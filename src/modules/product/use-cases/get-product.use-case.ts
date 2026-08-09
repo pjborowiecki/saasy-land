@@ -1,28 +1,34 @@
-"use server"
+import "server-only"
+
+import { forbidden, notFound, unauthorized } from "next/navigation"
 
 import { eq } from "drizzle-orm"
 
 import { db } from "~/src/platform/db/client"
 
-import { DomainError } from "~/src/modules/_core/errors/domain-error"
-import { PRODUCT_ERROR_MESSAGE } from "~/src/modules/product/product.errors"
 import { product } from "~/src/modules/product/product.schema"
-import { productZodSchemas } from "~/src/modules/product/product.zod"
 
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
-import { authedActionClient } from "~/src/integrations/next-safe-action/action.client"
+import { hasPermission } from "~/src/integrations/better-auth/auth.access"
+import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
 const SINGLE_ROW_LIMIT = 1
 
-export const getProduct = authedActionClient(PERMISSIONS.product.read)
-  .inputSchema(productZodSchemas.getProduct)
-  .outputSchema(productZodSchemas.select)
-  .action(async ({ parsedInput }) => {
-    const [row] = await db.select().from(product).where(eq(product.id, parsedInput.productId)).limit(SINGLE_ROW_LIMIT)
+export async function getProduct(productId: string) {
+  const session = await getCurrentSession()
 
-    if (row === undefined) {
-      throw new DomainError("NOT_FOUND", PRODUCT_ERROR_MESSAGE.notFound)
-    }
+  if (!session) {
+    unauthorized()
+  }
 
-    return row
-  })
+  if (!hasPermission(session?.user.role, { product: ["read"] })) {
+    forbidden()
+  }
+
+  const [row] = await db.select().from(product).where(eq(product.id, productId)).limit(SINGLE_ROW_LIMIT)
+
+  if (row === undefined) {
+    notFound()
+  }
+
+  return row
+}

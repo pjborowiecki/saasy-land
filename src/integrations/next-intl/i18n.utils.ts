@@ -17,7 +17,7 @@ export function resolveMessagesDir(dirname: unknown = import.meta.dirname): stri
 }
 
 const MESSAGES_DIR = resolveMessagesDir()
-const localeMessagesCache = new Map<string, Messages>()
+const LAST_SEGMENT_OFFSET = 1
 
 function isPlainObject(value: unknown): value is MessageTree {
   return value !== null && typeof value === "object" && !Array.isArray(value)
@@ -41,15 +41,6 @@ function parseMessageTree(parsed: unknown, sourceLabel: string): MessageTree {
   return parsed
 }
 
-function nestMessageFile(filename: string, content: MessageTree): MessageTree {
-  const segments = filename
-    .replace(/\.json$/u, "")
-    .split(".")
-    .filter((segment) => segment.length > 0)
-
-  return segments.reduceRight<MessageTree>((nested, segment) => ({ [segment]: nested }), content)
-}
-
 function deepMergeMessages(target: MessageTree, source: MessageTree): MessageTree {
   const merged: MessageTree = { ...target }
 
@@ -59,6 +50,31 @@ function deepMergeMessages(target: MessageTree, source: MessageTree): MessageTre
   }
 
   return merged
+}
+
+/** Mutating insert: walks the dotted-filename path once instead of cloning the whole tree per file. */
+function insertMessageFile(tree: MessageTree, filename: string, content: MessageTree): void {
+  const segments = filename
+    .replace(/\.json$/u, "")
+    .split(".")
+    .filter((segment) => segment.length > 0)
+  let node = tree
+  for (const [index, segment] of segments.entries()) {
+    const existing = node[segment]
+
+    if (index === segments.length - LAST_SEGMENT_OFFSET) {
+      node[segment] = isPlainObject(existing) ? deepMergeMessages(existing, content) : content
+      return
+    }
+
+    if (isPlainObject(existing)) {
+      node = existing
+    } else {
+      const branch: MessageTree = {}
+      node[segment] = branch
+      node = branch
+    }
+  }
 }
 
 function isLocaleMessages(value: MessageTree): value is Messages {
@@ -77,34 +93,24 @@ export function getLocaleMessagesDir(): string {
   return MESSAGES_DIR
 }
 
+/**
+ * Reads and merges every namespace file for a locale. Request-path callers get memoization from
+ * the `"use cache"` wrapper in `i18n.request.ts`; out-of-request callers (email templates) pay
+ * one fresh read per send, which keeps edited messages hot in development.
+ */
 export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES_DIR): Messages {
-  const cacheKey = `${messagesDir}:${locale}`
-  const isDevelopment = process.env.NODE_ENV === "development"
-  const cached = isDevelopment ? undefined : localeMessagesCache.get(cacheKey)
-
-  if (cached !== undefined) {
-    return cached
-  }
-
   const localeDir = join(messagesDir, locale)
   const files = readdirSync(localeDir)
     .filter((file) => file.endsWith(".json"))
     .toSorted((a, b) => a.localeCompare(b))
 
-  let messages: MessageTree = {}
+  const messages: MessageTree = {}
 
   for (const file of files) {
     const filePath = join(localeDir, file)
-    const content = parseMessageTree(JSON.parse(readFileSync(filePath, "utf8")), filePath)
-    const nested = nestMessageFile(file, content)
-    messages = deepMergeMessages(messages, nested)
+    const parsed: unknown = JSON.parse(readFileSync(filePath, "utf8"))
+    insertMessageFile(messages, file, parseMessageTree(parsed, filePath))
   }
 
-  const resolvedMessages = assertLocaleMessages(messages, locale)
-
-  if (!isDevelopment) {
-    localeMessagesCache.set(cacheKey, resolvedMessages)
-  }
-
-  return resolvedMessages
+  return assertLocaleMessages(messages, locale)
 }

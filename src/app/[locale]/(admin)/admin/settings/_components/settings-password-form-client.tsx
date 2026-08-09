@@ -15,6 +15,8 @@ import { settingsChangePassword } from "~/src/modules/account/use-cases/change-p
 import { getPasswordRuleState } from "~/src/integrations/better-auth/auth.constraints"
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
@@ -31,6 +33,7 @@ export function SettingsPasswordFormClient(): JSX.Element {
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
   const t = useTranslations("pages.admin.settings")
+  const actionError = useActionError()
 
   const form = useForm<ChangePasswordForm>({
     defaultValues: { confirmNewPassword: "", currentPassword: "", newPassword: "" },
@@ -47,8 +50,10 @@ export function SettingsPasswordFormClient(): JSX.Element {
           newPassword: data.newPassword,
         })
 
-        if (result.serverError) {
-          toast.error(result.serverError.message)
+        const error = actionError(result)
+
+        if (error) {
+          toast.error(error)
           return
         }
 
@@ -57,7 +62,7 @@ export function SettingsPasswordFormClient(): JSX.Element {
         router.refresh()
       })
     },
-    [form, router, t],
+    [actionError, form, router, t],
   )
 
   return (

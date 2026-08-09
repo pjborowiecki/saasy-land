@@ -2,8 +2,11 @@ import type * as NextHeadersModule from "next/headers"
 
 import { settingsRevokeOtherSessions } from "~/src/modules/session/use-cases/revoke-other-sessions.use-case"
 
-import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import {
+  createAuthSessionFixture,
+  createMissingAuthSessionResult,
+} from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -31,20 +34,20 @@ describe("revoke-other-sessions", () => {
     revokeOtherSessionsMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "revokeOtherSessions").mockImplementation(revokeOtherSessionsMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
     revokeOtherSessionsMock.mockResolvedValue({ status: true })
 
     await expect(settingsRevokeOtherSessions()).resolves.toMatchObject({ data: { status: true } })
   })
 
-  it("returns a domain error when the caller lacks settings access", async () => {
+  it("returns a domain error when the caller is signed out", async () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createMissingAuthSessionResult())
 
     await expect(settingsRevokeOtherSessions()).resolves.toMatchObject({
-      serverError: { code: "FORBIDDEN" },
+      serverError: { code: "UNAUTHORIZED" },
     })
   })
 })

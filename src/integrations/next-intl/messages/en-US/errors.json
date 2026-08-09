@@ -13,5 +13,25 @@
     "title": "Page not found",
     "description": "The page you are looking for does not exist or has been moved.",
     "backHome": "Back to home"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Authentication failed. Please try again.",
+    "CONFLICT": "This already exists.",
+    "FORBIDDEN": "You don't have permission to do this.",
+    "INTERNAL_ERROR": "Something went wrong. Please try again.",
+    "NOT_FOUND": "Not found.",
+    "TOO_MANY_REQUESTS": "Too many attempts. Please try again shortly.",
+    "UNAUTHORIZED": "You must be signed in to continue.",
+    "VALIDATION": "Please check the form and try again."
+  },
+  "unauthorized": {
+    "title": "Sign in required",
+    "description": "Your session has ended or you are not signed in. Sign in to continue.",
+    "signIn": "Sign in"
+  },
+  "forbidden": {
+    "title": "Access denied",
+    "description": "Your account does not have permission to view this page.",
+    "backToApp": "Back to the app"
   }
 }
