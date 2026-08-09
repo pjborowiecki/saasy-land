@@ -13,6 +13,6 @@ The app enables Next.js Cache Components. Avoid non-deterministic APIs (`Date.no
 - Fallbacks must stay **static/dumb** — do not mount TanStack Table or other libraries that touch forbidden time APIs in the fallback path
 - Do not import server-only modules (`getTranslations` from `next-intl/server`) into `"use client"` skeletons
 
-## nuqs + server
+## URL state + server
 
-Shared parsers + `createSearchParamsCache` keep client tabs and server panels aligned. Adapter defaults live on `NuqsProvider`.
+Tabs and filters live in `searchParams`; pages resolve them inside a Suspense boundary and render only the active panel.

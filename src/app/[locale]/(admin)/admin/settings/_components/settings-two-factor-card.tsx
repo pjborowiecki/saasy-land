@@ -3,21 +3,30 @@
 import { type JSX, useCallback, useState } from "react"
 
 import { useTranslations } from "next-intl"
+import { toast } from "sonner"
+
+import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
 import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "~/src/presentation/components/shadcn/dialog"
 
 import { SettingsTwoFactorConfirmStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-confirm-step"
+import { SettingsTwoFactorDisableStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-disable-step"
 import { SettingsTwoFactorPasswordStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-password-step"
 import { SettingsTwoFactorVerifyStep } from "~/src/app/[locale]/(admin)/admin/settings/_components/settings-two-factor-verify-step"
 
-type EnableStep = "confirm" | "password" | "verify"
+type DialogStep = "confirm" | "disable" | "password" | "verify"
 
-export function SettingsTwoFactorCard(): JSX.Element {
+interface SettingsTwoFactorCardProps {
+  readonly twoFactorEnabled: boolean
+}
+
+export function SettingsTwoFactorCard({ twoFactorEnabled }: Readonly<SettingsTwoFactorCardProps>): JSX.Element {
   const t = useTranslations("pages.admin.settings")
+  const router = useRouter()
   const [open, setOpen] = useState(false)
-  const [step, setStep] = useState<EnableStep>("password")
+  const [step, setStep] = useState<DialogStep>("password")
   const [totpUri, setTotpUri] = useState<string>("")
   const [backupCodes, setBackupCodes] = useState<readonly string[]>([])
 
@@ -38,8 +47,9 @@ export function SettingsTwoFactorCard(): JSX.Element {
   )
 
   const handleEnableOpen = useCallback(() => {
+    setStep(twoFactorEnabled ? "disable" : "password")
     setOpen(true)
-  }, [])
+  }, [twoFactorEnabled])
 
   const handleEnabled = useCallback((nextTotpUri: string, codes: readonly string[]) => {
     setTotpUri(nextTotpUri)
@@ -53,7 +63,14 @@ export function SettingsTwoFactorCard(): JSX.Element {
 
   const handleDone = useCallback(() => {
     handleOpenChange(false)
-  }, [handleOpenChange])
+    router.refresh()
+  }, [handleOpenChange, router])
+
+  const handleDisabled = useCallback(() => {
+    handleOpenChange(false)
+    toast.success(t("security.twoFactor.disabledSuccess"))
+    router.refresh()
+  }, [handleOpenChange, router, t])
 
   return (
     <>
@@ -69,7 +86,7 @@ export function SettingsTwoFactorCard(): JSX.Element {
               <p className="mt-1 text-xs text-muted-foreground">{t("security.twoFactor.appDescription")}</p>
             </div>
             <Button className="h-8 shrink-0 px-4 text-xs" onPress={handleEnableOpen} size="sm" variant="outline">
-              {t("security.twoFactor.enable")}
+              {twoFactorEnabled ? t("security.twoFactor.disable") : t("security.twoFactor.enable")}
             </Button>
           </div>
         </CardContent>
@@ -77,13 +94,16 @@ export function SettingsTwoFactorCard(): JSX.Element {
 
       <Dialog className="max-w-md" isOpen={open} onOpenChange={handleOpenChange}>
         <DialogHeader>
-          <DialogTitle>{t("security.twoFactor.dialogTitle")}</DialogTitle>
-          <DialogDescription>{t("security.twoFactor.dialogDescription")}</DialogDescription>
+          <DialogTitle>{step === "disable" ? t("security.twoFactor.disableDialogTitle") : t("security.twoFactor.dialogTitle")}</DialogTitle>
+          <DialogDescription>
+            {step === "disable" ? t("security.twoFactor.disableDialogDescription") : t("security.twoFactor.dialogDescription")}
+          </DialogDescription>
         </DialogHeader>
 
         {step === "password" ? <SettingsTwoFactorPasswordStep onEnabled={handleEnabled} /> : undefined}
         {step === "verify" ? <SettingsTwoFactorVerifyStep onVerified={handleVerified} totpUri={totpUri} /> : undefined}
         {step === "confirm" ? <SettingsTwoFactorConfirmStep backupCodes={backupCodes} onDone={handleDone} /> : undefined}
+        {step === "disable" ? <SettingsTwoFactorDisableStep onDisabled={handleDisabled} /> : undefined}
       </Dialog>
     </>
   )

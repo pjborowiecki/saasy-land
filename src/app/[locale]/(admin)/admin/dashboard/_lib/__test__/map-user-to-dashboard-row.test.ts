@@ -2,7 +2,7 @@ import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 
 import type { User } from "~/src/modules/user/user.types"
 
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 
 import { mapUserRowToDashboardRow } from "~/src/app/[locale]/(admin)/admin/dashboard/_lib/map-user-to-dashboard-row"
 
@@ -19,9 +19,8 @@ function makeRow(overrides: Partial<User["select"]> = {}): User["select"] {
     emailVerified: true,
     id: USER_ID,
     image: JSON_NULL,
-    isAnonymous: false,
     name: "Ada Lovelace",
-    role: RoleCode.CUSTOMER,
+    role: ROLE_CODES.CUSTOMER,
     timezone: "UTC",
     twoFactorEnabled: false,
     updatedAt: UPDATED_AT,
@@ -38,7 +37,7 @@ describe("map user row to dashboard row", () => {
       id: USER_ID,
       lastActive: "2026-07-21",
       name: "Ada Lovelace",
-      role: RoleCode.CUSTOMER,
+      role: ROLE_CODES.CUSTOMER,
       status: "active",
     })
     expect(mapUserRowToDashboardRow(makeRow()).initials).toBe("AL")

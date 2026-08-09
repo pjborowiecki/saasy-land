@@ -34,13 +34,28 @@ export type AuthErrorMessageKey = (typeof AUTH_ERRORS)[AuthErrorCode]
 
 const AUTH_ERROR_BY_CODE: Record<string, AuthErrorMessageKey> = AUTH_ERRORS
 
-export function authErrorKey(error: unknown): AuthErrorMessageKey {
-  if (typeof error !== "object" || error === null || !("code" in error)) {
-    return AUTH_ERRORS.UNKNOWN_ERROR
+function readErrorCode(value: unknown): string | undefined {
+  if (typeof value !== "object" || value === null || !("code" in value)) {
+    return undefined
   }
 
-  const { code } = error
-  if (typeof code !== "string") {
+  const { code } = value
+  return typeof code === "string" ? code : undefined
+}
+
+function readErrorBody(value: unknown): unknown {
+  if (typeof value !== "object" || value === null || !("body" in value)) {
+    return undefined
+  }
+
+  return value.body
+}
+
+/** Maps a Better Auth error — client result or thrown `APIError` (code on `body`) — to its i18n key. */
+export function authErrorKey(error: unknown): AuthErrorMessageKey {
+  const code = readErrorCode(error) ?? readErrorCode(readErrorBody(error))
+
+  if (code === undefined) {
     return AUTH_ERRORS.UNKNOWN_ERROR
   }
 

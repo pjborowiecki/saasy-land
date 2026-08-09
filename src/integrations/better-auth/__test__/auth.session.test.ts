@@ -40,7 +40,6 @@ function createSession(): SessionResult {
       email: "test@example.com",
       emailVerified: true,
       id: FIXTURE_USER_ID,
-      isAnonymous: false,
       name: "Test User",
       role: "user",
       twoFactorEnabled: false,

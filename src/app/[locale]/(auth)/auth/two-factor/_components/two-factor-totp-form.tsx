@@ -12,6 +12,8 @@ import type z from "zod/v4"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { verifyTotp } from "~/src/modules/two-factor/use-cases/verify-totp.use-case"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { AuthOtpField } from "~/src/app/[locale]/(auth)/auth/_components/auth-otp-field"
@@ -28,6 +30,7 @@ interface TwoFactorTotpFormProps {
 
 export function TwoFactorTotpForm({ onToggleMode }: Readonly<TwoFactorTotpFormProps>): JSX.Element {
   const t = useTranslations()
+  const actionError = useActionError()
   const [isPending, startTransition] = useTransition()
   const redirectAfterVerification = useTwoFactorRedirect()
 
@@ -41,15 +44,17 @@ export function TwoFactorTotpForm({ onToggleMode }: Readonly<TwoFactorTotpFormPr
       startTransition(async () => {
         const result = await verifyTotp(data)
 
-        if (result.serverError) {
-          toast.error(t("auth.errors.unexpectedError"))
+        const error = actionError(result)
+
+        if (error) {
+          toast.error(error)
           return
         }
 
         await redirectAfterVerification()
       })
     },
-    [redirectAfterVerification, t],
+    [actionError, redirectAfterVerification],
   )
 
   return (

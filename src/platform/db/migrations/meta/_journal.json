@@ -120,6 +120,13 @@
       "when": 1784999619641,
       "tag": "20260725172000_sync_user_timezone_enum",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1786297208337,
+      "tag": "20260809174008_stiff_nitro",
+      "breakpoints": true
     }
   ]
 }

@@ -11,56 +11,57 @@ import { ProductsCollectionsTab } from "~/src/app/[locale]/(admin)/admin/product
 import { ProductsCoursesTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-courses-tab"
 import { ProductsOnetimeTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-onetime-tab"
 import { ProductsSubscriptionsTab } from "~/src/app/[locale]/(admin)/admin/products/_components/products-subscriptions-tab"
+import { PRODUCT_TABS, type ProductTab } from "~/src/app/[locale]/(admin)/admin/products/_lib/product-tabs"
+import { ROUTES } from "~/src/routes"
 
 interface ProductsPageTabsProps {
+  readonly activeTab: ProductTab
   readonly products: readonly Product["select"][]
   readonly categories: readonly Category["select"][]
-  readonly labels: {
-    readonly all: string
-    readonly categories: string
-    readonly collections: string
-    readonly courses: string
-    readonly drafts: string
-    readonly onetime: string
-    readonly subscriptions: string
+  readonly labels: Readonly<Record<ProductTab, string>>
+}
+
+function ActivePanel({ activeTab, categories, products }: Omit<ProductsPageTabsProps, "labels">): JSX.Element | undefined {
+  switch (activeTab) {
+    case "all":
+    case "drafts": {
+      return <ProductsAllTab products={products} />
+    }
+    case "onetime": {
+      return <ProductsOnetimeTab products={products} />
+    }
+    case "subscriptions": {
+      return <ProductsSubscriptionsTab products={products} />
+    }
+    case "categories": {
+      return <ProductsCategoriesTab categories={categories} />
+    }
+    case "collections": {
+      return <ProductsCollectionsTab categories={categories} />
+    }
+    case "courses": {
+      return <ProductsCoursesTab />
+    }
+    default: {
+      return undefined
+    }
   }
 }
 
-export function ProductsPageTabs({ products, categories, labels }: ProductsPageTabsProps): JSX.Element {
+export function ProductsPageTabs({ activeTab, products, categories, labels }: ProductsPageTabsProps): JSX.Element {
   return (
-    <Tabs defaultSelectedKey="all" className="w-full">
+    <Tabs selectedKey={activeTab === "drafts" ? "all" : activeTab} className="w-full">
       <div className="flex flex-col gap-4 border-b border-border sm:flex-row sm:items-center sm:justify-between">
         <TabsList variant="line" className="no-scrollbar flex-1 justify-start gap-6 overflow-x-auto">
-          <TabsTrigger id="all" className="flex-none px-0 text-sm">
-            {labels.all}
-          </TabsTrigger>
-          <TabsTrigger id="onetime" className="flex-none px-0 text-sm">
-            {labels.onetime}
-          </TabsTrigger>
-          <TabsTrigger id="subscriptions" className="flex-none px-0 text-sm">
-            {labels.subscriptions}
-          </TabsTrigger>
-          <TabsTrigger id="categories" className="flex-none px-0 text-sm">
-            {labels.categories}
-          </TabsTrigger>
-          <TabsTrigger id="collections" className="flex-none px-0 text-sm">
-            {labels.collections}
-          </TabsTrigger>
-          <TabsTrigger id="drafts" className="flex-none px-0 text-sm">
-            {labels.drafts}
-          </TabsTrigger>
-          <TabsTrigger id="courses" className="flex-none px-0 text-sm">
-            {labels.courses}
-          </TabsTrigger>
+          {PRODUCT_TABS.map((tab) => (
+            <TabsTrigger key={tab} id={tab} href={`${ROUTES.ADMIN_PRODUCTS}?tab=${tab}`} className="flex-none px-0 text-sm">
+              {labels[tab]}
+            </TabsTrigger>
+          ))}
         </TabsList>
       </div>
 
-      <ProductsAllTab products={products} />
-      <ProductsOnetimeTab products={products} />
-      <ProductsSubscriptionsTab products={products} />
-      <ProductsCategoriesTab categories={categories} />
-      <ProductsCollectionsTab categories={categories} />
-      <ProductsCoursesTab />
+      <ActivePanel activeTab={activeTab} categories={categories} products={products} />
     </Tabs>
   )
 }

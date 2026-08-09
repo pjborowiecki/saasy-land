@@ -14,6 +14,8 @@ import type { User } from "~/src/modules/user/user.types"
 
 import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -55,6 +57,7 @@ export function UserRowActions({ row }: Readonly<CellContext<DataTableFeatures, 
 
   const router = useRouter()
   const t = useTranslations("pages.admin.users")
+  const actionError = useActionError()
 
   const user = row.original
 
@@ -69,27 +72,31 @@ export function UserRowActions({ row }: Readonly<CellContext<DataTableFeatures, 
   const handleBanToggle = useCallback(() => {
     startTransition(async () => {
       const result = user.banned ? await unbanUser({ userId: user.id }) : await banUser({ userId: user.id })
-      if (result.serverError !== undefined) {
-        toast.error(result.serverError.message ?? t("actions.feedback.error"))
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
       toast.success(user.banned ? t("actions.feedback.unbanSuccess") : t("actions.feedback.banSuccess"))
       router.refresh()
     })
-  }, [router, t, user.banned, user.id])
+  }, [actionError, router, t, user.banned, user.id])
 
   const handleDelete = useCallback(() => {
     startTransition(async () => {
       const result = await deleteUser({ userId: user.id })
-      if (result.serverError !== undefined) {
-        toast.error(result.serverError.message ?? t("actions.feedback.error"))
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
       toast.success(t("actions.feedback.deleteSuccess"))
       setDeleteOpen(false)
       router.refresh()
     })
-  }, [router, t, user.id])
+  }, [actionError, router, t, user.id])
 
   return (
     <>

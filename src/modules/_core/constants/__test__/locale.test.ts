@@ -1,29 +1,24 @@
-import { Locale } from "~/src/modules/_core/constants/locale"
-import { ValidationError } from "~/src/modules/_core/errors/validation.error"
+import { getLocaleDirection, isLocaleCode, LOCALE_CODES, LOCALES } from "~/src/modules/_core/constants/locale"
 
-describe("locale value object", () => {
-  it("creates a locale from a valid code", () => {
+describe("locale catalog", () => {
+  it("keeps locale codes unique and BCP 47 shaped", () => {
     expect.hasAssertions()
-    const locale = Locale.create("en-US")
-    expect(locale.code).toBe("en-US")
-    expect(locale.dir).toBe("ltr")
-    expect(locale.messageKey).toBe("locales.en-US")
+    expect(LOCALE_CODES.size).toBe(LOCALES.length)
+    for (const locale of LOCALES) {
+      expect(locale.code).toMatch(/^[a-z]{2}-[A-Z]{2}$/u)
+    }
   })
 
-  it("rejects unknown locale codes", () => {
+  it("recognizes known and rejects unknown codes", () => {
     expect.hasAssertions()
-    expect(() => Locale.create("xx-XX")).toThrow(ValidationError)
+    expect(isLocaleCode("en-US")).toBe(true)
+    expect(isLocaleCode("xx-XX")).toBe(false)
   })
 
-  it("exposes the default locale", () => {
+  it("resolves text direction with an ltr fallback", () => {
     expect.hasAssertions()
-    expect(Locale.DEFAULT_CODE).toBe("en-US")
-    expect(Locale.default().equals(Locale.create("en-US"))).toBe(true)
-  })
-
-  it("stringifies to the locale code", () => {
-    expect.hasAssertions()
-    expect(Locale.create("pl-PL").toString()).toBe("pl-PL")
-    expect(Locale.create("en-US").equals(Locale.create("pl-PL"))).toBe(false)
+    expect(getLocaleDirection("ar-SA")).toBe("rtl")
+    expect(getLocaleDirection("en-US")).toBe("ltr")
+    expect(getLocaleDirection("xx-XX")).toBe("ltr")
   })
 })

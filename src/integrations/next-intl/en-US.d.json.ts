@@ -88,54 +88,11 @@ declare const messages: {
     "confirm": "Confirm",
     "cancel": "Cancel",
     "loading": "Loading...",
-    "noDataToDisplay": "No data to display"
+    "noDataToDisplay": "No data to display",
+    "copyright": "© {year}"
   },
   "components": {
     "custom": {
-      "data-filter": {
-        "addFilter": "Filter",
-        "searchPlaceholder": "Filter...",
-        "empty": "No filters found",
-        "clearFilters": "Clear all",
-        "noOptions": "No options",
-        "optionsError": "Could not load options",
-        "removeFilter": "Remove filter",
-        "selectedOverflow": "{labels}, … and {count} more",
-        "operatorLabel": "{field} operator",
-        "valueLabel": "{field} value",
-        "boolean": {
-          "true": "Yes",
-          "false": "No"
-        },
-        "placeholders": {
-          "select": "Select…",
-          "value": "Value…",
-          "searchField": "Search {label}...",
-          "min": "Min",
-          "max": "Max",
-          "to": "to"
-        },
-        "operators": {
-          "is": "is",
-          "is_not": "is not",
-          "is_any_of": "is any of",
-          "is_not_any_of": "is not any of",
-          "includes_all": "includes all",
-          "contains": "contains",
-          "not_contains": "does not contain",
-          "starts_with": "starts with",
-          "ends_with": "ends with",
-          "equals": "equals",
-          "not_equals": "not equals",
-          "greater_than": "greater than",
-          "less_than": "less than",
-          "between": "is between",
-          "before": "is before",
-          "after": "is after",
-          "empty": "is empty",
-          "not_empty": "is not empty"
-        }
-      },
       "data-table": {
         "empty": "No results.",
         "pagination": {
@@ -613,9 +570,6 @@ declare const messages: {
     "ZWG": "Zimbabwean Gold"
   },
   "emails": {
-    "test": {
-      "title": "Test"
-    },
     "resetPassword": {
       "subject": "Reset your password",
       "preview": "Reset your password for SaaSy Land",
@@ -656,6 +610,26 @@ declare const messages: {
       "title": "Page not found",
       "description": "The page you are looking for does not exist or has been moved.",
       "backHome": "Back to home"
+    },
+    "action": {
+      "AUTH_API_ERROR": "Authentication failed. Please try again.",
+      "CONFLICT": "This already exists.",
+      "FORBIDDEN": "You don't have permission to do this.",
+      "INTERNAL_ERROR": "Something went wrong. Please try again.",
+      "NOT_FOUND": "Not found.",
+      "TOO_MANY_REQUESTS": "Too many attempts. Please try again shortly.",
+      "UNAUTHORIZED": "You must be signed in to continue.",
+      "VALIDATION": "Please check the form and try again."
+    },
+    "unauthorized": {
+      "title": "Sign in required",
+      "description": "Your session has ended or you are not signed in. Sign in to continue.",
+      "signIn": "Sign in"
+    },
+    "forbidden": {
+      "title": "Access denied",
+      "description": "Your account does not have permission to view this page.",
+      "backToApp": "Back to the app"
     }
   },
   "locales": {
@@ -1406,7 +1380,12 @@ declare const messages: {
             "backupCodesDescription": "Save these backup codes in a secure place. Each code can be used once if you lose access to your authenticator.",
             "done": "Done",
             "setupError": "Could not start two-factor setup. Please try again.",
-            "enabledSuccess": "Two-factor authentication is now enabled."
+            "enabledSuccess": "Two-factor authentication is now enabled.",
+            "disable": "Disable 2FA",
+            "disableDialogTitle": "Disable two-factor authentication",
+            "disableDialogDescription": "Confirm your password to turn off two-factor authentication.",
+            "disableConfirm": "Disable",
+            "disabledSuccess": "Two-factor authentication is now disabled."
           },
           "sessions": {
             "title": "Active Sessions",
@@ -1944,9 +1923,6 @@ declare const messages: {
           "button": "Send Message"
         }
       },
-      "footer": {
-        "copyright": "© {year}"
-      },
       "components": {
         "navigation": {
           "items": {
@@ -2231,9 +2207,6 @@ declare const messages: {
     "UTC": "UTC"
   },
   "user": {
-    "errors": {
-      "notFound": "User not found."
-    },
     "validations": {
       "atLeastOneFieldRequired": "At least one field is required."
     }

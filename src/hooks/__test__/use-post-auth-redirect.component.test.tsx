@@ -5,7 +5,7 @@ import { type ReactNode } from "react"
 import { act, renderHook } from "@testing-library/react"
 import { NextIntlClientProvider } from "next-intl"
 
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type * as AuthClient from "~/src/integrations/better-auth/auth.client"
 import type * as I18nNavigation from "~/src/integrations/next-intl/i18n.navigation"
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
@@ -63,7 +63,7 @@ describe("use post auth redirect component", () => {
     expect.hasAssertions()
     pushMock.mockClear()
     getSessionMock.mockClear()
-    getSessionMock.mockResolvedValue({ data: { user: { role: PERMISSIONS.ROLES.CUSTOMER } } })
+    getSessionMock.mockResolvedValue({ data: { user: { role: ROLE_CODES.CUSTOMER } } })
 
     const { result } = renderPostAuthRedirectHook()
 
@@ -79,7 +79,7 @@ describe("use post auth redirect component", () => {
     expect.hasAssertions()
     pushMock.mockClear()
     getSessionMock.mockClear()
-    getSessionMock.mockResolvedValue({ data: { user: { role: PERMISSIONS.ROLES.ADMIN } } })
+    getSessionMock.mockResolvedValue({ data: { user: { role: ROLE_CODES.ADMIN } } })
 
     const { result } = renderPostAuthRedirectHook()
 

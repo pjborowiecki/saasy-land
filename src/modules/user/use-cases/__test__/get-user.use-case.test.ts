@@ -4,9 +4,10 @@ import { getUser } from "~/src/modules/user/use-cases/get-user.use-case"
 
 import {
   createAuthSessionFixture,
+  createMissingAuthSessionResult,
   createAuthUserMutationResult,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -35,25 +36,32 @@ describe("get-user", () => {
     getUserMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "getUser").mockImplementation(getUserMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
     const userResult = createAuthUserMutationResult({ userId: TARGET_USER_ID }).user
     getUserMock.mockResolvedValue(userResult)
 
-    await expect(getUser({ userId: TARGET_USER_ID })).resolves.toMatchObject({ data: userResult })
+    await expect(getUser(TARGET_USER_ID)).resolves.toMatchObject(userResult)
     expect(getUserMock).toHaveBeenCalledWith({
       headers: HEADERS,
       query: { id: TARGET_USER_ID },
     })
   })
 
-  it("returns a domain error when the caller is not an admin", async () => {
+  it("rejects when the caller is not an admin", async () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: ADMIN_USER_ID }))
 
-    await expect(getUser({ userId: TARGET_USER_ID })).resolves.toMatchObject({
-      serverError: { code: "FORBIDDEN" },
-    })
+    await expect(getUser(TARGET_USER_ID)).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;403" })
+  })
+
+  it("rejects when the caller is signed out", async () => {
+    expect.hasAssertions()
+    getSessionMock.mockReset()
+    vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
+    getSessionMock.mockResolvedValue(createMissingAuthSessionResult())
+
+    await expect(getUser(TARGET_USER_ID)).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;401" })
   })
 })

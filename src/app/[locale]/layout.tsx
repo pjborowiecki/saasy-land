@@ -8,6 +8,7 @@ import { getMessages } from "next-intl/server"
 
 import { env } from "~/src/platform/env"
 
+import { AppRouterProvider } from "~/src/providers/app-router-provider"
 import { ThemeProvider } from "~/src/providers/theme-provider"
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
@@ -65,14 +66,16 @@ export default async function RootLayout({ children }: Readonly<LayoutProps<"/[l
     >
       <body suppressHydrationWarning className="flex min-h-full flex-col">
         <TranslationsProvider locale={locale} messages={messages}>
-          <ThemeProvider>
-            <TooltipProvider>
-              <OfflineBanner />
-              {children}
-              <Toaster />
-              <VercelObservability />
-            </TooltipProvider>
-          </ThemeProvider>
+          <AppRouterProvider>
+            <ThemeProvider>
+              <TooltipProvider>
+                <OfflineBanner />
+                {children}
+                <Toaster />
+                <VercelObservability />
+              </TooltipProvider>
+            </ThemeProvider>
+          </AppRouterProvider>
         </TranslationsProvider>
       </body>
     </html>

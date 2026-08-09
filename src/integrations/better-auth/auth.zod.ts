@@ -53,6 +53,7 @@ const emailFormSchema = z.object({
 
 export const signUpWithPasswordSchema = withMatchingPasswords(
   passwordConfirmationSchema.extend({
+    callbackURL: z.url().optional(),
     email: emailSchema,
     name: nameSchema,
   }),

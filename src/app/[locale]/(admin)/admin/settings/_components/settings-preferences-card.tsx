@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { Timezone, type TimezoneCode } from "~/src/modules/_core/constants/timezone"
+import { DEFAULT_TIMEZONE_CODE, type TimezoneCode } from "~/src/modules/_core/constants/timezone"
 
 import { I18N } from "~/src/integrations/next-intl/i18n.config"
 
@@ -36,9 +36,11 @@ export async function SettingsPreferencesCard(): Promise<JSX.Element> {
 }
 
 async function SettingsPreferencesSelects(): Promise<JSX.Element> {
-  const t = await getTranslations("pages.admin.settings")
-  const tLocales = await getTranslations("locales")
-  const tTimezones = await getTranslations("timezones")
+  const [t, tLocales, tTimezones] = await Promise.all([
+    getTranslations("pages.admin.settings"),
+    getTranslations("locales"),
+    getTranslations("timezones"),
+  ])
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -57,7 +59,7 @@ async function SettingsPreferencesSelects(): Promise<JSX.Element> {
         </Select>
       </div>
       <div className="space-y-1.5">
-        <Select fieldLabel={t("preferences.timezone")} fieldLabelClassName="text-xs" defaultValue={Timezone.DEFAULT_CODE}>
+        <Select fieldLabel={t("preferences.timezone")} fieldLabelClassName="text-xs" defaultValue={DEFAULT_TIMEZONE_CODE}>
           <SelectTrigger className="w-full">
             <SelectValue />
           </SelectTrigger>

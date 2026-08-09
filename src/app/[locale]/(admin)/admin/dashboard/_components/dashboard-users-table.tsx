@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { listUsers } from "~/src/modules/user/use-cases/list-users.use-case"
+import { getUsers } from "~/src/modules/user/use-cases/get-users.use-case"
 
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
@@ -20,8 +20,7 @@ const DASHBOARD_USER_PREVIEW_LIMIT = 5
 const FIRST_PREVIEW_INDEX = 1
 
 export async function DashboardUsersTable(): Promise<JSX.Element> {
-  const [usersResult, t] = await Promise.all([listUsers(), getTranslations("pages.admin.dashboard")])
-  const userRows = usersResult.data ?? []
+  const [userRows, t] = await Promise.all([getUsers(), getTranslations("pages.admin.dashboard")])
   const users = userRows.slice(0, DASHBOARD_USER_PREVIEW_LIMIT).map((row) => mapUserRowToDashboardRow(row))
 
   const totalUserCount = userRows.length

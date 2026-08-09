@@ -6,7 +6,7 @@ import {
   createAuthSessionFixture,
   createMissingAuthSessionResult,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -35,7 +35,7 @@ describe("stop-impersonating-user", () => {
     stopImpersonatingMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "stopImpersonating").mockImplementation(stopImpersonatingMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
     const stopResult = {
       session: {
         createdAt: FIXTURE_DATE,
@@ -45,7 +45,7 @@ describe("stop-impersonating-user", () => {
         updatedAt: FIXTURE_DATE,
         userId: ADMIN_USER_ID,
       },
-      user: createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }).user,
+      user: createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }).user,
     }
     stopImpersonatingMock.mockResolvedValue(stopResult)
 

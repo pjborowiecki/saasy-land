@@ -1,99 +1,53 @@
 import "server-only"
 
-import { createTranslator } from "next-intl"
+import type { JSX } from "react"
 
-import { ChangeEmailConfirmationEmail as changeEmailConfirmationEmailTemplate } from "~/src/integrations/better-auth/email-templates/change-email-confirmation.email-template"
-import { ResetPasswordEmail as resetPasswordEmailTemplate } from "~/src/integrations/better-auth/email-templates/reset-password.email-template"
-import { VerifyEmail as verifyEmailTemplate } from "~/src/integrations/better-auth/email-templates/verify-email.email-template"
+import { type Locale } from "~/src/integrations/next-intl/i18n.config"
 import { resolveLocaleFromAuthRequest } from "~/src/integrations/next-intl/i18n.locale"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 import { sendEmail } from "~/src/integrations/resend/resend.utils"
 
-interface BetterAuthEmailPayload {
+import {
+  ChangeEmailConfirmationEmail as changeEmailConfirmationEmail,
+  changeEmailConfirmationSubject,
+} from "~/src/presentation/emails/change-email-confirmation.email-template"
+import { ResetPasswordEmail as resetPasswordEmail, resetPasswordSubject } from "~/src/presentation/emails/reset-password.email-template"
+import { VerifyEmail as verifyEmail, verifyEmailSubject } from "~/src/presentation/emails/verify-email.email-template"
+
+interface AuthEmailPayload {
   readonly token: string
   readonly url: string
   readonly user: { readonly email: string; readonly name: string }
 }
 
-interface ChangeEmailConfirmationPayload extends BetterAuthEmailPayload {
-  readonly newEmail: string
-}
+/** Adapts a localized template to Better Auth's `(payload, request)` email callback contract. */
+function createAuthEmailHandler<Payload extends AuthEmailPayload>(
+  kind: string,
+  subject: (locale: Locale) => string,
+  render: (payload: Readonly<Payload>, locale: Locale) => JSX.Element,
+) {
+  return async (payload: Readonly<Payload>, request?: Request): Promise<void> => {
+    const locale = resolveLocaleFromAuthRequest(request, payload.url)
 
-async function sendResetPasswordEmail(payload: Readonly<BetterAuthEmailPayload>, request?: Request): Promise<void> {
-  const locale = resolveLocaleFromAuthRequest(request, payload.url)
-  const messages = loadLocaleMessagesFromDir(locale)
-  const t = createTranslator({ locale, messages, namespace: "emails.resetPassword" })
-  const react = resetPasswordEmailTemplate({
-    locale,
-    name: payload.user.name,
-    resetPasswordUrl: payload.url,
-  })
-  const result = await sendEmail({
-    react,
-    subject: t("subject"),
-    to: payload.user.email,
-  })
-
-  if (!result.success) {
-    console.error("[Auth] Failed to send resetPassword email", {
-      email: payload.user.email,
-      error: result.error,
+    await sendEmail({
+      idempotencyKey: `${kind}/${payload.token}`,
+      react: render(payload, locale),
+      subject: subject(locale),
+      to: payload.user.email,
     })
-    throw new Error(result.error)
-  }
-}
-
-async function sendVerificationEmail(payload: Readonly<BetterAuthEmailPayload>, request?: Request): Promise<void> {
-  const locale = resolveLocaleFromAuthRequest(request, payload.url)
-  const messages = loadLocaleMessagesFromDir(locale)
-  const t = createTranslator({ locale, messages, namespace: "emails.verifyEmail" })
-  const react = verifyEmailTemplate({
-    locale,
-    name: payload.user.name,
-    verifyUrl: payload.url,
-  })
-  const result = await sendEmail({
-    react,
-    subject: t("subject"),
-    to: payload.user.email,
-  })
-
-  if (!result.success) {
-    console.error("[Auth] Failed to send verifyEmail email", {
-      email: payload.user.email,
-      error: result.error,
-    })
-    throw new Error(result.error)
-  }
-}
-
-async function sendChangeEmailConfirmationEmail(payload: Readonly<ChangeEmailConfirmationPayload>, request?: Request): Promise<void> {
-  const locale = resolveLocaleFromAuthRequest(request, payload.url)
-  const messages = loadLocaleMessagesFromDir(locale)
-  const t = createTranslator({ locale, messages, namespace: "emails.changeEmailConfirmation" })
-  const react = changeEmailConfirmationEmailTemplate({
-    confirmUrl: payload.url,
-    locale,
-    name: payload.user.name,
-    newEmail: payload.newEmail,
-  })
-  const result = await sendEmail({
-    react,
-    subject: t("subject"),
-    to: payload.user.email,
-  })
-
-  if (!result.success) {
-    console.error("[Auth] Failed to send changeEmailConfirmation email", {
-      email: payload.user.email,
-      error: result.error,
-    })
-    throw new Error(result.error)
   }
 }
 
 export const authEmailHandlers = {
-  sendChangeEmailConfirmationEmail,
-  sendResetPasswordEmail,
-  sendVerificationEmail,
+  sendChangeEmailConfirmationEmail: createAuthEmailHandler(
+    "change-email-confirmation",
+    changeEmailConfirmationSubject,
+    (payload: Readonly<AuthEmailPayload & { readonly newEmail: string }>, locale) =>
+      changeEmailConfirmationEmail({ confirmUrl: payload.url, locale, name: payload.user.name, newEmail: payload.newEmail }),
+  ),
+  sendResetPasswordEmail: createAuthEmailHandler("reset-password", resetPasswordSubject, (payload: Readonly<AuthEmailPayload>, locale) =>
+    resetPasswordEmail({ locale, name: payload.user.name, resetPasswordUrl: payload.url }),
+  ),
+  sendVerificationEmail: createAuthEmailHandler("verify-email", verifyEmailSubject, (payload: Readonly<AuthEmailPayload>, locale) =>
+    verifyEmail({ locale, name: payload.user.name, verifyUrl: payload.url }),
+  ),
 }

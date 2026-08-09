@@ -4,7 +4,7 @@ import type * as NextHeadersModule from "next/headers"
 import { deleteUser } from "~/src/modules/user/use-cases/delete-user.use-case"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -43,7 +43,7 @@ describe("delete-user", () => {
     removeUserMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "removeUser").mockImplementation(removeUserMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
     removeUserMock.mockResolvedValue({ success: true })
 
     await expect(deleteUser({ userId: TARGET_USER_ID })).resolves.toMatchObject({ data: { success: true } })

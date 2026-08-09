@@ -7,10 +7,10 @@ import { db } from "~/src/platform/db/client"
 import { category } from "~/src/modules/category/category.schema"
 import { categoryZodSchemas } from "~/src/modules/category/category.zod"
 
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
-import { authedActionClient } from "~/src/integrations/next-safe-action/action.client"
+import { actionClient, withAuth } from "~/src/integrations/next-safe-action/action.client"
 
-export const createCategory = authedActionClient(PERMISSIONS.category.create)
+export const createCategory = actionClient
+  .use(withAuth({ category: ["create"] }))
   .inputSchema(categoryZodSchemas.createCategory)
   .outputSchema(categoryZodSchemas.select)
   .action(async ({ parsedInput }) => {

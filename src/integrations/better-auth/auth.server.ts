@@ -5,7 +5,9 @@ import { IP_HEADER_NAME } from "@vercel/functions/headers"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { nextCookies } from "better-auth/next-js"
-import { admin, anonymous, multiSession, twoFactor } from "better-auth/plugins"
+import { admin } from "better-auth/plugins/admin"
+import { multiSession } from "better-auth/plugins/multi-session"
+import { twoFactor } from "better-auth/plugins/two-factor"
 import { randomUUIDv7 } from "bun"
 
 import { env } from "~/src/platform/env"
@@ -13,7 +15,8 @@ import { env } from "~/src/platform/env"
 import { db } from "~/src/platform/db/client"
 import * as schema from "~/src/platform/db/schema"
 
-import { ac, ADMIN_PANEL_ROLES, PERMISSIONS, ROLES_CONFIG } from "~/src/integrations/better-auth/auth.access"
+import { ac, DEFAULT_ROLE_CODE, ROLE_CODES, ROLES } from "~/src/integrations/better-auth/auth.access"
+import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from "~/src/integrations/better-auth/auth.constraints"
 import { authEmailHandlers } from "~/src/integrations/better-auth/auth.emails"
 import { redis } from "~/src/integrations/redis/redis.config"
 
@@ -23,6 +26,7 @@ import { ROUTES } from "~/src/routes"
 const INITIAL_COUNTER_VALUE = 1
 const MIN_TTL_SECONDS = 0
 
+const MAX_SENSITIVE_ATTEMPTS = 3
 const MAX_SIGNUP_ATTEMPTS = 3
 const MAX_SIGNIN_ATTEMPTS = 5
 const MAX_FORGET_PASSWORD_ATTEMPTS = 3
@@ -38,7 +42,10 @@ const TRUSTED_AUTH_PROVIDERS = ["github", "google"]
 const TRUSTED_IP_HEADERS = [IP_HEADER_NAME, "x-forwarded-for"]
 
 export const auth = betterAuth({
-  account: { accountLinking: { enabled: true, trustedProviders: TRUSTED_AUTH_PROVIDERS } },
+  account: {
+    accountLinking: { enabled: true, trustedProviders: TRUSTED_AUTH_PROVIDERS },
+    encryptOAuthTokens: true,
+  },
   advanced: {
     backgroundTasks: { handler: waitUntil },
     database: { generateId: () => randomUUIDv7() },
@@ -47,7 +54,14 @@ export const auth = betterAuth({
   appName: APP_NAME,
   baseURL: env.NEXT_PUBLIC_APP_URL,
   database: drizzleAdapter(db, { provider: "pg", schema }),
-  emailAndPassword: { enabled: true, requireEmailVerification: true, sendResetPassword: authEmailHandlers.sendResetPasswordEmail },
+  emailAndPassword: {
+    enabled: true,
+    maxPasswordLength: PASSWORD_MAX_LENGTH,
+    minPasswordLength: PASSWORD_MIN_LENGTH,
+    requireEmailVerification: true,
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: authEmailHandlers.sendResetPasswordEmail,
+  },
   emailVerification: {
     autoSignInAfterVerification: true,
     sendOnSignUp: true,
@@ -57,17 +71,25 @@ export const auth = betterAuth({
   plugins: [
     admin({
       ac,
-      adminRoles: [...ADMIN_PANEL_ROLES],
-      defaultRole: PERMISSIONS.DEFAULT_ROLE,
-      roles: ROLES_CONFIG,
+      adminRoles: [ROLE_CODES.ADMIN],
+      defaultRole: DEFAULT_ROLE_CODE,
+      roles: ROLES,
     }),
-    anonymous(),
     multiSession({ maximumSessions: MAX_CONCURRENT_SESSIONS }),
     twoFactor({ issuer: APP_NAME }),
     nextCookies(),
   ],
   rateLimit: {
     customRules: {
+      [ROUTES.API_AUTH.CHANGE_EMAIL]: {
+        max: MAX_SENSITIVE_ATTEMPTS,
+        window: RATE_LIMIT_WINDOW_IN_SECONDS,
+      },
+      [ROUTES.API_AUTH.CHANGE_PASSWORD]: {
+        max: MAX_SENSITIVE_ATTEMPTS,
+        window: RATE_LIMIT_WINDOW_IN_SECONDS,
+      },
+      [ROUTES.API_AUTH.GET_SESSION]: false,
       [ROUTES.API_AUTH.REQUEST_PASSWORD_RESET]: {
         max: MAX_FORGET_PASSWORD_ATTEMPTS,
         window: RATE_LIMIT_WINDOW_IN_SECONDS,
@@ -76,12 +98,24 @@ export const auth = betterAuth({
         max: MAX_RESET_PASSWORD_ATTEMPTS,
         window: RATE_LIMIT_WINDOW_IN_SECONDS,
       },
+      [ROUTES.API_AUTH.SEND_VERIFICATION_EMAIL]: {
+        max: MAX_SENSITIVE_ATTEMPTS,
+        window: RATE_LIMIT_WINDOW_IN_SECONDS,
+      },
       [ROUTES.API_AUTH.SIGN_IN_EMAIL]: {
+        max: MAX_SIGNIN_ATTEMPTS,
+        window: RATE_LIMIT_WINDOW_IN_SECONDS,
+      },
+      [ROUTES.API_AUTH.SIGN_IN_SOCIAL]: {
         max: MAX_SIGNIN_ATTEMPTS,
         window: RATE_LIMIT_WINDOW_IN_SECONDS,
       },
       [ROUTES.API_AUTH.SIGN_UP_EMAIL]: {
         max: MAX_SIGNUP_ATTEMPTS,
+        window: RATE_LIMIT_WINDOW_IN_SECONDS,
+      },
+      [ROUTES.API_AUTH.TWO_FACTOR]: {
+        max: MAX_SENSITIVE_ATTEMPTS,
         window: RATE_LIMIT_WINDOW_IN_SECONDS,
       },
     },
@@ -104,13 +138,11 @@ export const auth = betterAuth({
       return count
     },
     set: async (key, value, ttl) => {
-      if (ttl === undefined || ttl <= MIN_TTL_SECONDS) {
-        if (ttl !== undefined && ttl <= MIN_TTL_SECONDS) {
-          await redis.del(key)
-        }
+      if (ttl !== undefined && ttl <= MIN_TTL_SECONDS) {
+        await redis.del(key)
         return
       }
-      await redis.set(key, value, { ex: ttl })
+      await redis.set(key, value, ttl === undefined ? undefined : { ex: ttl })
     },
   },
   secret: env.AUTH_SECRET,

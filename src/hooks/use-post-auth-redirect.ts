@@ -4,7 +4,7 @@ import { useCallback } from "react"
 
 import { useLocale } from "next-intl"
 
-import { hasAdminPanelAccess } from "~/src/integrations/better-auth/auth.access"
+import { hasPermission } from "~/src/integrations/better-auth/auth.access"
 import { getSession } from "~/src/integrations/better-auth/auth.client"
 import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
@@ -16,7 +16,7 @@ export function usePostAuthRedirect(): () => Promise<void> {
 
   return useCallback(async () => {
     const { data: session } = await getSession()
-    const href = hasAdminPanelAccess(session?.user.role) ? ROUTES.ADMIN : ROUTES.APP
+    const href = hasPermission(session?.user.role, { admin: ["access"] }) ? ROUTES.ADMIN : ROUTES.APP
 
     router.push(getPathname({ href, locale }))
   }, [locale, router])

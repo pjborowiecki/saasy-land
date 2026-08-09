@@ -6,7 +6,8 @@ import createNextIntlPlugin from "next-intl/plugin"
 const nextConfig: NextConfig = {
   cacheComponents: true,
   experimental: {
-    exposeTestingApiInProductionBuild: true,
+    authInterrupts: true,
+    exposeTestingApiInProductionBuild: process.env["VERCEL_ENV"] === "preview" || process.env["EXPOSE_TESTING_API"] === "1",
     optimizePackageImports: ["lucide-react"],
     turbopackRustReactCompiler: true,
     useOffline: true,

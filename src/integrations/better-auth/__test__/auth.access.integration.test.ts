@@ -8,7 +8,7 @@ import {
   requireSessionUserId,
   signUpVerifyAndSignIn,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.test-instance"
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
+import { DEFAULT_ROLE_CODE, ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 
 const authContext = await createAuthTestInstance()
 const authApi = getExtendedAuthApi(authContext)
@@ -18,7 +18,7 @@ describe("auth.access integration", () => {
     expect.hasAssertions()
     const { headers } = await signUpVerifyAndSignIn(authContext)
 
-    await expect(getSessionUserRole(authContext, headers)).resolves.toBe(PERMISSIONS.DEFAULT_ROLE)
+    await expect(getSessionUserRole(authContext, headers)).resolves.toBe(DEFAULT_ROLE_CODE)
   })
 
   it("allows admins to manage products through Better Auth permission checks", async () => {
@@ -31,7 +31,7 @@ describe("auth.access integration", () => {
     const permission = await authApi.userHasPermission({
       body: {
         permissions: { product: ["create"] },
-        role: PERMISSIONS.ROLES.ADMIN,
+        role: ROLE_CODES.ADMIN,
       },
       headers,
     })
@@ -47,7 +47,7 @@ describe("auth.access integration", () => {
     const permission = await authApi.userHasPermission({
       body: {
         permissions: { product: ["create"] },
-        role: PERMISSIONS.ROLES.CUSTOMER,
+        role: ROLE_CODES.CUSTOMER,
       },
       headers,
     })
@@ -70,7 +70,7 @@ describe("auth.access integration", () => {
 
     await authApi.setRole({
       body: {
-        role: PERMISSIONS.ROLES.ADMIN,
+        role: ROLE_CODES.ADMIN,
         userId: target.id,
       },
       headers: adminSession.headers,
@@ -78,6 +78,6 @@ describe("auth.access integration", () => {
 
     const updated = await findAuthTestUser(authContext, targetUser.email)
 
-    expect(updated.role).toBe(PERMISSIONS.ROLES.ADMIN)
+    expect(updated.role).toBe(ROLE_CODES.ADMIN)
   })
 })

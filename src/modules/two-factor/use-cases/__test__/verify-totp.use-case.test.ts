@@ -15,6 +15,17 @@ const verifyTotpMock = vi.hoisted(() => vi.fn<AuthApi["verifyTOTP"]>())
 
 vi.mock(import("server-only"), () => ({}))
 
+const redisMocks = vi.hoisted(() => {
+  const FIRST_COUNT = 1
+  return {
+    expire: vi.fn<() => Promise<number>>(() => Promise.resolve(FIRST_COUNT)),
+    incr: vi.fn<() => Promise<number>>(() => Promise.resolve(FIRST_COUNT)),
+  }
+})
+
+// @ts-expect-error Vitest module mock factory is not inferred for the redis client export.
+vi.mock(import("~/src/integrations/redis/redis.config"), () => ({ redis: redisMocks }))
+
 vi.mock(
   import("next/headers"),
   (): Partial<typeof NextHeadersModule> => ({

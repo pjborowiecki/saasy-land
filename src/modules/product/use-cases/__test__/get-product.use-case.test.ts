@@ -2,8 +2,11 @@ import type * as NextHeadersModule from "next/headers"
 
 import { getProduct } from "~/src/modules/product/use-cases/get-product.use-case"
 
-import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import {
+  createAuthSessionFixture,
+  createMissingAuthSessionResult,
+} from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -70,36 +73,39 @@ describe("get-product", () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
 
-    await expect(getProduct({ productId: PRODUCT_ID })).resolves.toMatchObject({
-      data: dbMocks.dbRow,
-    })
+    await expect(getProduct(PRODUCT_ID)).resolves.toStrictEqual(dbMocks.dbRow)
 
     expect(dbMocks.selectMock).toHaveBeenCalledTimes(SINGLE_CALL)
     expect(getSessionMock).toHaveBeenCalledTimes(SINGLE_CALL)
   })
 
-  it("returns not found when the product does not exist", async () => {
+  it("rejects with not-found when the product does not exist", async () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     dbMocks.mockEmptySelectOnce()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
 
-    await expect(getProduct({ productId: PRODUCT_ID })).resolves.toMatchObject({
-      serverError: { code: "NOT_FOUND" },
-    })
+    await expect(getProduct(PRODUCT_ID)).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;404" })
   })
 
-  it("returns a domain error when the caller is not an admin", async () => {
+  it("rejects when the caller is not an admin", async () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: USER_ID }))
 
-    await expect(getProduct({ productId: PRODUCT_ID })).resolves.toMatchObject({
-      serverError: { code: "FORBIDDEN" },
-    })
+    await expect(getProduct(PRODUCT_ID)).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;403" })
+  })
+
+  it("rejects when the caller is signed out", async () => {
+    expect.hasAssertions()
+    getSessionMock.mockReset()
+    vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
+    getSessionMock.mockResolvedValue(createMissingAuthSessionResult())
+
+    await expect(getProduct(PRODUCT_ID)).rejects.toMatchObject({ digest: "NEXT_HTTP_ERROR_FALLBACK;401" })
   })
 })

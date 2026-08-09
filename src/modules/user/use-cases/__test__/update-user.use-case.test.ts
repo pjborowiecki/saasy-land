@@ -8,7 +8,7 @@ import {
   createAuthUserMutationResult,
   createNullableStringNull,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -47,7 +47,7 @@ function mockAdminSession(): void {
   adminUpdateUserMock.mockReset()
   vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
   vi.spyOn(authServer.auth.api, "adminUpdateUser").mockImplementation(adminUpdateUserMock)
-  getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }))
+  getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
 }
 
 describe("update-user", () => {
@@ -109,7 +109,7 @@ describe("update-user", () => {
     adminUpdateUserMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "adminUpdateUser").mockImplementation(adminUpdateUserMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: ADMIN_USER_ID }))
 
     await expect(updateUser({ name: "Updated Name", userId: TARGET_USER_ID })).resolves.toMatchObject({
       serverError: { code: "FORBIDDEN" },

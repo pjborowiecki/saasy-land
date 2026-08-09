@@ -6,7 +6,7 @@ import {
   readSignUpRole,
   STRONG_TEST_PASSWORD,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.test-instance"
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
+import { DEFAULT_ROLE_CODE } from "~/src/integrations/better-auth/auth.access"
 
 const authContext = await createAuthTestInstance()
 
@@ -18,7 +18,7 @@ describe("auth email and password credentials", () => {
     const result = await authContext.auth.api.signUpEmail({ body: user })
 
     expect(result.user.email).toBe(user.email)
-    expect(readSignUpRole(result.user)).toBe(PERMISSIONS.DEFAULT_ROLE)
+    expect(readSignUpRole(result.user)).toBe(DEFAULT_ROLE_CODE)
     expect(authContext.emailCapture.verification.some((entry) => entry.user.email === user.email)).toBe(true)
   })
 

@@ -3,7 +3,7 @@ import type * as NextHeadersModule from "next/headers"
 import { settingsSignOutUser } from "~/src/modules/account/use-cases/sign-out-user.use-case"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -31,7 +31,7 @@ describe("sign-out-user", () => {
     signOutMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "signOut").mockImplementation(signOutMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: USER_ID }))
     signOutMock.mockResolvedValue({ success: true })
 
     await expect(settingsSignOutUser()).resolves.toMatchObject({ data: { success: true } })

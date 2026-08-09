@@ -15,7 +15,7 @@ import type * as SignOutUseCase from "~/src/modules/account/use-cases/sign-out-u
 import type * as RequestPasswordResetUseCase from "~/src/modules/verification/use-cases/request-password-reset.use-case"
 import type * as ResetPasswordUseCase from "~/src/modules/verification/use-cases/reset-password.use-case"
 
-import { PERMISSIONS } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type * as AuthClient from "~/src/integrations/better-auth/auth.client"
 import type * as I18nNavigation from "~/src/integrations/next-intl/i18n.navigation"
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
@@ -112,7 +112,7 @@ function setupSignInWithPasswordFormMocks(): void {
   signInEmailMock.mockImplementation(async ({ fetchOptions }) => {
     await invokeFetchOnSuccess(fetchOptions)
   })
-  getSessionMock.mockResolvedValue({ data: { user: { role: PERMISSIONS.ROLES.CUSTOMER } } })
+  getSessionMock.mockResolvedValue({ data: { user: { role: ROLE_CODES.CUSTOMER } } })
 }
 
 const HEADERS = new Headers()
@@ -127,7 +127,7 @@ function setupSignUpWithPasswordFormMocks(): void {
   signUpEmailMock.mockImplementation(async ({ fetchOptions }) => {
     await invokeFetchOnSuccess(fetchOptions)
   })
-  getSessionMock.mockResolvedValue({ data: { user: { role: PERMISSIONS.ROLES.CUSTOMER } } })
+  getSessionMock.mockResolvedValue({ data: { user: { role: ROLE_CODES.CUSTOMER } } })
 }
 
 function setupForgotPasswordFormMocks(): void {
@@ -196,9 +196,17 @@ vi.mock(import("~/src/integrations/resend/resend.config"), () => ({
   resend: {},
 }))
 
+const redisMocks = vi.hoisted(() => {
+  const FIRST_COUNT = 1
+  return {
+    expire: vi.fn<() => Promise<number>>(() => Promise.resolve(FIRST_COUNT)),
+    incr: vi.fn<() => Promise<number>>(() => Promise.resolve(FIRST_COUNT)),
+  }
+})
+
 // @ts-expect-error Vitest module mock factory is not inferred for module export.
 vi.mock(import("~/src/integrations/redis/redis.config"), () => ({
-  redis: {},
+  redis: redisMocks,
 }))
 
 // @ts-expect-error Vitest module mock factory is not inferred for module export.

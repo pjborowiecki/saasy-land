@@ -7,9 +7,7 @@ import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadc
 import { BlogAdminStats } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-admin-stats"
 import { BlogPostsPanel } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-posts-panel"
 
-const BLOG_ADMIN_FALLBACK = (
-  <div className="flex h-64 w-full items-center justify-center text-sm text-muted-foreground">Loading content...</div>
-)
+const BLOG_POSTS_FALLBACK = <div className="mt-6 h-64 w-full animate-pulse rounded-lg border border-border/60 bg-muted/30" />
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
@@ -20,18 +18,8 @@ export async function generateMetadata() {
   }
 }
 
-export default function BlogAdminPage({ searchParams }: { searchParams: SearchParams }): JSX.Element {
-  return (
-    <Suspense fallback={BLOG_ADMIN_FALLBACK}>
-      <BlogAdminContent searchParams={searchParams} />
-    </Suspense>
-  )
-}
-
-async function BlogAdminContent({ searchParams }: { searchParams: SearchParams }): Promise<JSX.Element> {
+export default async function BlogAdminPage({ searchParams }: { searchParams: SearchParams }): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog")
-  const resolvedParams = await searchParams
-  const view = resolvedParams["view"] === "table" ? "table" : "grid"
 
   return (
     <div className="flex w-full animate-in flex-col space-y-8 pb-8 duration-500 fade-in-50">
@@ -62,8 +50,17 @@ async function BlogAdminContent({ searchParams }: { searchParams: SearchParams }
           </TabsList>
         </div>
 
-        <BlogPostsPanel view={view} />
+        <Suspense fallback={BLOG_POSTS_FALLBACK}>
+          <BlogPostsView searchParams={searchParams} />
+        </Suspense>
       </Tabs>
     </div>
   )
+}
+
+async function BlogPostsView({ searchParams }: { searchParams: SearchParams }): Promise<JSX.Element> {
+  const resolvedParams = await searchParams
+  const view = resolvedParams["view"] === "table" ? "table" : "grid"
+
+  return <BlogPostsPanel view={view} />
 }

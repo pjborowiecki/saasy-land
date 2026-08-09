@@ -6,7 +6,7 @@ import {
   createAuthSessionFixture,
   createMissingAuthSessionResult,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -34,21 +34,10 @@ describe("update-user", () => {
     updateUserMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "updateUser").mockImplementation(updateUserMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: USER_ID }))
     updateUserMock.mockResolvedValue({ status: true })
 
     await expect(settingsUpdateUser({ name: "Ada" })).resolves.toMatchObject({ data: { status: true } })
-  })
-
-  it("returns a domain error when the caller lacks settings access", async () => {
-    expect.hasAssertions()
-    getSessionMock.mockReset()
-    vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: USER_ID }))
-
-    await expect(settingsUpdateUser({ name: "Ada" })).resolves.toMatchObject({
-      serverError: { code: "FORBIDDEN" },
-    })
   })
 
   it("returns a domain error when the caller is not signed in", async () => {

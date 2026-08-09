@@ -3,7 +3,7 @@ import type * as NextHeadersModule from "next/headers"
 import { revokeUserSession } from "~/src/modules/session/use-cases/revoke-user-session.use-case"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RoleCode } from "~/src/integrations/better-auth/auth.access"
+import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
 
@@ -32,7 +32,7 @@ describe("revoke-user-session", () => {
     revokeUserSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
     vi.spyOn(authServer.auth.api, "revokeUserSession").mockImplementation(revokeUserSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.ADMIN, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
     const revokeResult = { success: true }
     revokeUserSessionMock.mockResolvedValue(revokeResult)
 
@@ -47,7 +47,7 @@ describe("revoke-user-session", () => {
     expect.hasAssertions()
     getSessionMock.mockReset()
     vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: RoleCode.CUSTOMER, userId: ADMIN_USER_ID }))
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER, userId: ADMIN_USER_ID }))
 
     await expect(revokeUserSession({ sessionToken: SESSION_TOKEN })).resolves.toMatchObject({
       serverError: { code: "FORBIDDEN" },

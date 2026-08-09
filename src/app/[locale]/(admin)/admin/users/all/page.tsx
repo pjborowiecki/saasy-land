@@ -3,7 +3,7 @@ import { type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { listUsers } from "~/src/modules/user/use-cases/list-users.use-case"
+import { getUsers } from "~/src/modules/user/use-cases/get-users.use-case"
 
 import { SectionErrorBoundary } from "~/src/presentation/components/custom/section-error-boundary"
 
@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function AllUsersPage(): JSX.Element {
-  const usersPromise = listUsers()
+  const usersPromise = getUsers()
 
   return (
     <div className="flex min-h-0 w-full flex-1 flex-col gap-4">

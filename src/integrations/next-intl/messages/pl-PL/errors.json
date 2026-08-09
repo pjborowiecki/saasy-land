@@ -13,5 +13,25 @@
     "title": "Nie znaleziono strony",
     "description": "Strona, której szukasz, nie istnieje lub została przeniesiona.",
     "backHome": "Wróć na stronę główną"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Uwierzytelnianie nie powiodło się. Spróbuj ponownie.",
+    "CONFLICT": "Taki element już istnieje.",
+    "FORBIDDEN": "Nie masz uprawnień do wykonania tej operacji.",
+    "INTERNAL_ERROR": "Coś poszło nie tak. Spróbuj ponownie.",
+    "NOT_FOUND": "Nie znaleziono.",
+    "TOO_MANY_REQUESTS": "Zbyt wiele prób. Spróbuj ponownie za chwilę.",
+    "UNAUTHORIZED": "Musisz być zalogowany, aby kontynuować.",
+    "VALIDATION": "Sprawdź formularz i spróbuj ponownie."
+  },
+  "unauthorized": {
+    "title": "Wymagane logowanie",
+    "description": "Twoja sesja wygasła lub nie jesteś zalogowany. Zaloguj się, aby kontynuować.",
+    "signIn": "Zaloguj się"
+  },
+  "forbidden": {
+    "title": "Brak dostępu",
+    "description": "Twoje konto nie ma uprawnień do wyświetlenia tej strony.",
+    "backToApp": "Wróć do aplikacji"
   }
 }

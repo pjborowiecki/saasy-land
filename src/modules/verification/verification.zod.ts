@@ -34,6 +34,7 @@ const resetPassword = resetPasswordForm.extend({
 })
 
 const sendVerificationEmail = z.object({
+  callbackURL: redirectToField,
   email: emailSchema,
 })
 

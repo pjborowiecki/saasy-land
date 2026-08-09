@@ -1,29 +1,27 @@
-import { Country } from "~/src/modules/_core/constants/country"
-import { ValidationError } from "~/src/modules/_core/errors/validation.error"
+import { COUNTRIES, type CountryCode } from "~/src/modules/_core/constants/country"
+import { CURRENCIES } from "~/src/modules/_core/constants/currency"
 
-describe("country value object", () => {
-  it("creates a country from a valid code", () => {
+describe("country catalog", () => {
+  it("keeps alpha-2 codes unique and uppercase", () => {
     expect.hasAssertions()
-    const country = Country.create("us")
-    expect(country.alpha2).toBe("US")
-    expect(country.currency).toBe("USD")
-    expect(country.messageKey).toBe("countries.US")
+    const codes = COUNTRIES.map((country) => country.alpha2)
+    expect(new Set(codes).size).toBe(COUNTRIES.length)
+    for (const code of codes) {
+      expect(code).toMatch(/^[A-Z]{2}$/u)
+    }
   })
 
-  it("rejects unknown country codes", () => {
+  it("references only currencies that exist in the currency catalog", () => {
     expect.hasAssertions()
-    expect(() => Country.create("XX")).toThrow(ValidationError)
+    for (const country of COUNTRIES) {
+      expect(CURRENCIES).toHaveProperty(country.currency)
+    }
   })
 
-  it("exposes the default country", () => {
+  it("contains the United States with its ISO identifiers", () => {
     expect.hasAssertions()
-    expect(Country.DEFAULT_CODE).toBe("US")
-    expect(Country.default().equals(Country.create("US"))).toBe(true)
-  })
-
-  it("stringifies to the alpha-2 code", () => {
-    expect.hasAssertions()
-    expect(Country.create("PL").toString()).toBe("PL")
-    expect(Country.create("US").equals(Country.create("PL"))).toBe(false)
+    const us: CountryCode = "US"
+    const entry = COUNTRIES.find((country) => country.alpha2 === us)
+    expect(entry).toMatchObject({ alpha3: "USA", currency: "USD", numeric: "840" })
   })
 })

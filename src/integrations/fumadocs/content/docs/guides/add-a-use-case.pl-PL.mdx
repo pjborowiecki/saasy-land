@@ -8,12 +8,12 @@ description: "Utwórz akcję serwerową z uprawnieniami w module."
 ## Steps
 
 1. Add `modules/<domain>/use-cases/<verb>-<noun>.use-case.ts`
-2. Use `authedActionClient(PERMISSIONS…)` from next-safe-action wiring
+2. Build mutations with `actionClient.use(withAuth({ resource: ["action"] }))`; reads are plain guarded functions
 3. Validate input with module Zod schemas
-4. Call auth/DB; map failures to domain errors
+4. Call auth/DB; throw `AppError` for expected failures
 5. Add `__test__` covering happy path + forbidden
 6. Export and call from the page/action UI
 
 ## Naming
 
-`list-users.use-case.ts`, `ban-user.use-case.ts` — verb-first, kebab-case.
+`get-users.use-case.ts`, `ban-user.use-case.ts` — verb-first, kebab-case.

@@ -2,14 +2,17 @@
 
 import { type ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
 
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { toast } from "sonner"
+
+import { env } from "~/src/platform/env"
 
 import { sendVerificationEmail } from "~/src/modules/verification/use-cases/send-verification-email.use-case"
 import { verifyEmail } from "~/src/modules/verification/use-cases/verify-email.use-case"
 
-import { useRouter } from "~/src/integrations/next-intl/i18n.navigation"
+import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { useActionError } from "~/src/hooks/use-action-error"
 import { usePostAuthRedirect } from "~/src/hooks/use-post-auth-redirect"
 
 import { ROUTES } from "~/src/routes"
@@ -34,6 +37,8 @@ interface UseVerifyEmailPanelResult {
 export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPanelOptions>): UseVerifyEmailPanelResult {
   const router = useRouter()
   const t = useTranslations("pages.auth.verify-email")
+  const locale = useLocale()
+  const actionError = useActionError()
   const redirectAfterAuth = usePostAuthRedirect()
   const [status, setStatus] = useState<VerifyEmailStatus>(token === undefined ? "pending" : "verifying")
   const [resendEmail, setResendEmail] = useState(email ?? "")
@@ -50,9 +55,11 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
     void (async () => {
       const result = await verifyEmail({ token })
 
-      if (result.serverError) {
+      const error = actionError(result)
+
+      if (error) {
         setStatus("error")
-        toast.error(result.serverError.message)
+        toast.error(error)
         return
       }
 
@@ -60,7 +67,7 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
       toast.success(t("form.success"))
       await redirectAfterAuth()
     })()
-  }, [redirectAfterAuth, t, token])
+  }, [actionError, redirectAfterAuth, t, token])
 
   const handleResend = useCallback(async () => {
     if (resendEmail.length === 0) {
@@ -68,15 +75,18 @@ export function useVerifyEmailPanel({ email, token }: Readonly<UseVerifyEmailPan
       return
     }
 
-    const result = await sendVerificationEmail({ email: resendEmail })
+    const callbackURL = `${env.NEXT_PUBLIC_APP_URL}${getPathname({ href: ROUTES.APP, locale })}`
+    const result = await sendVerificationEmail({ callbackURL, email: resendEmail })
 
-    if (result.serverError) {
-      toast.error(result.serverError.message)
+    const error = actionError(result)
+
+    if (error) {
+      toast.error(error)
       return
     }
 
     toast.success(t("form.resendSuccess"))
-  }, [resendEmail, t])
+  }, [actionError, locale, resendEmail, t])
 
   const handleContinue = useCallback(() => {
     void redirectAfterAuth()

@@ -8,6 +8,8 @@ import { toast } from "sonner"
 import { createOtpSlotIndices, extractTotpSecret } from "~/src/modules/two-factor/two-factor.utils"
 import { verifyTotp } from "~/src/modules/two-factor/use-cases/verify-totp.use-case"
 
+import { useActionError } from "~/src/hooks/use-action-error"
+
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/presentation/components/shadcn/input-otp"
@@ -23,6 +25,7 @@ interface SettingsTwoFactorVerifyStepProps {
 
 export function SettingsTwoFactorVerifyStep({ onVerified, totpUri }: Readonly<SettingsTwoFactorVerifyStepProps>): JSX.Element {
   const t = useTranslations("pages.admin.settings")
+  const actionError = useActionError()
   const [isPending, startTransition] = useTransition()
   const [verificationCode, setVerificationCode] = useState("")
 
@@ -34,15 +37,17 @@ export function SettingsTwoFactorVerifyStep({ onVerified, totpUri }: Readonly<Se
     startTransition(async () => {
       const result = await verifyTotp({ code: verificationCode })
 
-      if (result.serverError) {
-        toast.error(result.serverError.message)
+      const error = actionError(result)
+
+      if (error) {
+        toast.error(error)
         return
       }
 
       onVerified()
       toast.success(t("security.twoFactor.enabledSuccess"))
     })
-  }, [onVerified, t, verificationCode])
+  }, [actionError, onVerified, t, verificationCode])
 
   const handleVerifyClick = useCallback(() => {
     onVerifySetup()

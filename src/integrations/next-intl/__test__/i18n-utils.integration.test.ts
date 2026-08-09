@@ -36,7 +36,7 @@ describe("load locale messages from dir component", () => {
     expect(() => loadLocaleMessagesFromDir("en-US", NESTED_INVALID_FIXTURE)).toThrow(/Invalid merged messages/u)
   })
 
-  it("merges nested message files and uses cache", () => {
+  it("merges nested message files deterministically", () => {
     expect.hasAssertions()
 
     const firstLoad = loadLocaleMessagesFromDir("en-US", MERGE_FIXTURE)
@@ -51,7 +51,7 @@ describe("load locale messages from dir component", () => {
     expect(getLocaleMessagesDir()).toContain("messages")
   })
 
-  it("skips the in-memory cache while NODE_ENV is development", () => {
+  it("loads fresh messages in development", () => {
     expect.hasAssertions()
     vi.stubEnv("NODE_ENV", "development")
 

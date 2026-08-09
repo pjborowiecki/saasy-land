@@ -4,6 +4,7 @@ import { SidebarInset, SidebarProvider } from "~/src/presentation/components/sha
 
 import { Background } from "~/src/presentation/components/custom/background"
 
+import { AdminAccessGate } from "~/src/app/[locale]/(admin)/admin/_components/admin-access-gate"
 import { AdminLayoutHeader } from "~/src/app/[locale]/(admin)/admin/_components/admin-layout-header"
 import { AdminSidebar } from "~/src/app/[locale]/(admin)/admin/_components/admin-sidebar"
 import { UserWidget } from "~/src/app/[locale]/(admin)/admin/_components/user-widget"
@@ -13,6 +14,10 @@ const SIDEBAR_USER_WIDGET_FALLBACK = <div className="h-10 animate-pulse rounded-
 export default function AdminLayout({ children }: Readonly<LayoutProps<"/[locale]/admin">>): JSX.Element {
   return (
     <SidebarProvider className="h-svh overflow-hidden">
+      <Suspense>
+        <AdminAccessGate />
+      </Suspense>
+
       <AdminSidebar>
         <Suspense fallback={SIDEBAR_USER_WIDGET_FALLBACK}>
           <UserWidget />

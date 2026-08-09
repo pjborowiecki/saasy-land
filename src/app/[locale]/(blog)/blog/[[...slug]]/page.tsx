@@ -26,8 +26,7 @@ function hasNonEmptyString(value: string | undefined): value is string {
 }
 
 export async function generateMetadata({ params }: BlogSlugPageProps): Promise<Metadata> {
-  const { slug } = await params
-  const locale = await getRootLocale()
+  const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
 
   if (isBlogIndex(slug)) {
     const t = await getTranslations("pages.blog")
@@ -78,8 +77,7 @@ export default function BlogPage({ params }: BlogSlugPageProps): JSX.Element {
 }
 
 async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Element> {
-  const { slug } = await params
-  const locale = await getRootLocale()
+  const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
 
   if (isBlogIndex(slug)) {
     const t = await getTranslations("pages.blog")

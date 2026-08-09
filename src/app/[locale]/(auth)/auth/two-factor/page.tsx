@@ -3,9 +3,6 @@ import { Suspense, type JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
-import { routing } from "~/src/integrations/next-intl/i18n.routing"
-
 import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
 import { TwoFactorForm } from "~/src/app/[locale]/(auth)/auth/two-factor/_components/two-factor-form"
 import { APP_NAME } from "~/src/presentation/branding"
@@ -17,10 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("metadata.description", { name: APP_NAME }),
     title: t("metadata.title"),
   }
-}
-
-export function generateStaticParams(): { locale: Locale }[] {
-  return routing.locales.map((locale) => ({ locale }))
 }
 
 const authPageFallback = <AuthPageFallback />

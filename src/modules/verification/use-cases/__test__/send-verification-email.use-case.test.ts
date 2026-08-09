@@ -13,6 +13,17 @@ const sendVerificationEmailMock = vi.hoisted(() => vi.fn<AuthApi["sendVerificati
 
 vi.mock(import("server-only"), () => ({}))
 
+const redisMocks = vi.hoisted(() => {
+  const FIRST_COUNT = 1
+  return {
+    expire: vi.fn<() => Promise<number>>(() => Promise.resolve(FIRST_COUNT)),
+    incr: vi.fn<() => Promise<number>>(() => Promise.resolve(FIRST_COUNT)),
+  }
+})
+
+// @ts-expect-error Vitest module mock factory is not inferred for the redis client export.
+vi.mock(import("~/src/integrations/redis/redis.config"), () => ({ redis: redisMocks }))
+
 vi.mock(
   import("next/headers"),
   (): Partial<typeof NextHeadersModule> => ({
@@ -27,7 +38,12 @@ describe("send-verification-email", () => {
     sendVerificationEmailMock.mockResolvedValue({ status: true })
     vi.spyOn(authServer.auth.api, "sendVerificationEmail").mockImplementation(sendVerificationEmailMock)
 
-    await expect(sendVerificationEmail({ email: "ada@example.com" })).resolves.toMatchObject({ data: { status: true } })
-    expect(sendVerificationEmailMock).toHaveBeenCalledWith({ body: { email: "ada@example.com" }, headers: HEADERS })
+    await expect(sendVerificationEmail({ callbackURL: "https://example.com/en/app", email: "ada@example.com" })).resolves.toMatchObject({
+      data: { status: true },
+    })
+    expect(sendVerificationEmailMock).toHaveBeenCalledWith({
+      body: { callbackURL: "https://example.com/en/app", email: "ada@example.com" },
+      headers: HEADERS,
+    })
   })
 })
