@@ -7,7 +7,7 @@ const GROUPS: Record<string, string> = {
   "anthropics/skills": "anthropic",
   "better-auth/skills": "better-auth",
   "elysiajs/skills": "elysiajs",
-  "greensock/gsap-skills": "gsap",
+  "Leonxlnx/taste-skill": "taste",
   "mattpocock/skills": "matt-pocock",
   "neondatabase/agent-skills": "neon",
   "neondatabase/ai-rules": "neon",

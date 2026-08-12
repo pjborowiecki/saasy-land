@@ -13,7 +13,7 @@ export function hasPostViews(views: string | undefined): views is string {
 
 export function getGridMetaTextClass(status: BlogPostStatus): string {
   if (status === "scheduled") {
-    return "text-blue-500"
+    return "text-muted-foreground"
   }
 
   return "text-muted-foreground"

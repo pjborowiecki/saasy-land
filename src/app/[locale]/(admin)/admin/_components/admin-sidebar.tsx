@@ -16,6 +16,14 @@ interface AdminSidebarProps {
   readonly children: ReactNode
 }
 
+/**
+ * Four groups, twelve destinations, one hairline.
+ *
+ * Group labels are set in the monospace micro-label, the same role the marketing site uses for
+ * column headings, and they are the only uppercase text in the console. They carry a lot of
+ * structure for very little ink, which is what lets the rail stay at 16rem without the rows
+ * feeling crowded.
+ */
 export function AdminSidebar({ children }: AdminSidebarProps): JSX.Element {
   const t = useTranslations("pages.admin.sidebar")
   const pathname = usePathname()
@@ -23,21 +31,19 @@ export function AdminSidebar({ children }: AdminSidebarProps): JSX.Element {
   return (
     <Sidebar>
       <AdminSidebarHeader />
-      <SidebarContent className="gap-6 pt-4">
+      <SidebarContent className="custom-scrollbar gap-5 px-2 pt-4">
         {SIDEBAR_CONFIG.map((group) => (
-          <SidebarGroup key={group.titleKey}>
-            <div className="mb-2 px-3 text-xs font-medium tracking-wider text-muted-foreground uppercase">
-              {t(`groups.${group.titleKey}`)}
-            </div>
-            <SidebarMenu>
+          <SidebarGroup className="p-0" key={group.titleKey}>
+            <div className="mb-1.5 px-2 font-mono text-label text-muted-foreground uppercase">{t(`groups.${group.titleKey}`)}</div>
+            <SidebarMenu className="gap-0.5">
               {group.items.map((item) => (
-                <AdminSidebarNavItem key={item.titleKey} item={item} pathname={pathname} />
+                <AdminSidebarNavItem item={item} key={item.titleKey} pathname={pathname} />
               ))}
             </SidebarMenu>
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarFooter className="pb-2 md:pb-3">{children}</SidebarFooter>
+      <SidebarFooter className="border-t border-sidebar-border p-2">{children}</SidebarFooter>
     </Sidebar>
   )
 }

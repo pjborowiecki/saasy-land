@@ -5,7 +5,13 @@ import { getTranslations } from "next-intl/server"
 
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
+import { cn } from "~/src/utils"
+
+import { buttonVariants } from "~/src/presentation/components/shadcn/_lib/button-variants"
+
 import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
+import { AuthPageShell } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-shell"
+import { AUTH_PRIMARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { ResetPasswordForm } from "~/src/app/[locale]/(auth)/auth/reset-password/_components/reset-password-form"
 import { APP_NAME } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
@@ -29,34 +35,34 @@ export default function ResetPasswordPage({ searchParams }: Readonly<PageProps<"
   )
 }
 
+/** A dead link is a dead end: state the fault, then give the one control that fixes it. */
+function ResetPasswordInvalidToken({ message, requestLabel }: Readonly<{ message: string; requestLabel: string }>): JSX.Element {
+  return (
+    <>
+      <p className="text-body text-pretty text-destructive">{message}</p>
+      <Link className={cn(buttonVariants(), AUTH_PRIMARY_BUTTON_CLASS)} href={ROUTES.FORGOT_PASSWORD}>
+        {requestLabel}
+      </Link>
+    </>
+  )
+}
+
 async function ResetPasswordPageContent({
   searchParams,
 }: Pick<PageProps<"/[locale]/auth/reset-password">, "searchParams">): Promise<JSX.Element> {
   const [t, { error, token }] = await Promise.all([getTranslations("pages.auth.reset-password"), searchParams])
+  const resetToken = error === undefined && typeof token === "string" ? token : undefined
 
   return (
-    <div className="reveal-elem flex w-full max-w-105 flex-col gap-8">
-      <div className="flex flex-col gap-2 text-center">
-        <h1 className="text-3xl font-medium tracking-tight text-foreground">{t("form.title")}</h1>
-        <p className="text-sm text-muted-foreground">{t("form.description")}</p>
-      </div>
-
-      <div className="relative flex flex-col gap-6 overflow-hidden rounded-xl border border-white/8 bg-white/2 p-8 shadow-2xl backdrop-blur-2xl md:p-10">
-        <div className="pointer-events-none absolute -top-12 -right-32 z-0 h-64 w-64 rounded-full bg-fuchsia-500/15 blur-[80px]" />
-        {error === undefined && typeof token === "string" ? (
-          <ResetPasswordForm token={token} />
-        ) : (
-          <div className="flex flex-col gap-4 text-center">
-            <p className="text-sm text-muted-foreground">{typeof error === "string" ? error : t("form.invalidToken")}</p>
-            <Link
-              href={ROUTES.FORGOT_PASSWORD}
-              className="inline-flex h-11 items-center justify-center rounded-lg bg-foreground px-4 text-sm text-background transition-all hover:bg-foreground/80"
-            >
-              {t("form.requestNewLink")}
-            </Link>
-          </div>
-        )}
-      </div>
-    </div>
+    <AuthPageShell description={t("form.description")} title={t("form.title")}>
+      {resetToken === undefined ? (
+        <ResetPasswordInvalidToken
+          message={typeof error === "string" ? error : t("form.invalidToken")}
+          requestLabel={t("form.requestNewLink")}
+        />
+      ) : (
+        <ResetPasswordForm token={resetToken} />
+      )}
+    </AuthPageShell>
   )
 }

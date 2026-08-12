@@ -2,28 +2,28 @@
 
 import type { JSX } from "react"
 
-import { useTranslations } from "next-intl"
+import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
-import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "~/src/presentation/components/shadcn/sidebar"
+import { SidebarHeader } from "~/src/presentation/components/shadcn/sidebar"
 
+import { Wordmark } from "~/src/presentation/components/custom/wordmark"
+
+/**
+ * The same mark the marketing site uses, at the same size, in the same place. An admin that
+ * introduces its own logo treatment reads as a different product, and this one is the product.
+ *
+ * `h-14`, matched to the content header across the divide, so the two chrome bars form one
+ * unbroken line across the top of the console.
+ */
 export function AdminSidebarHeader(): JSX.Element {
-  const t = useTranslations("pages.admin.sidebar")
-
   return (
-    <SidebarHeader className="h-16 justify-center border-b border-border/40 py-0">
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton size="lg">
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <span className="font-bold">{t("logo")}</span>
-            </div>
-            <div className="flex flex-col gap-0.5 leading-none">
-              <span className="font-semibold">{t("title")}</span>
-              <span className="text-xs">{t("version")}</span>
-            </div>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
+    <SidebarHeader className="h-14 justify-center border-b border-sidebar-border px-3 py-0">
+      <Link
+        className="flex h-9 items-center rounded-md px-2 transition-colors duration-200 ease-exp hover:bg-sidebar-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        href="/admin"
+      >
+        <Wordmark />
+      </Link>
     </SidebarHeader>
   )
 }

@@ -41,6 +41,14 @@ declare const messages: {
       },
       "showPassword": "Show password"
     },
+    "gate": {
+      "headline": "Get back to the part only you can build.",
+      "assurances": {
+        "coverage": "100% test coverage, enforced in CI",
+        "ownership": "Yours outright, no vendor lock-in",
+        "pricing": "$0 per MAU, forever"
+      }
+    },
     "layout": {
       "backToHome": "Back to Home"
     },
@@ -66,6 +74,8 @@ declare const messages: {
       "atLeastOneSpecialCharacter": "At least one special character",
       "atLeastOneUppercase": "At least one uppercase letter",
       "requirementsListLabel": "Password requirements",
+      "requirementMet": "Met",
+      "requirementNotMet": "Not met yet",
       "twoFactorCodeRequired": "Authentication code is required.",
       "twoFactorCodeLength": "Authentication code must be {length} digits.",
       "backupCodeRequired": "Backup code is required.",
@@ -570,6 +580,22 @@ declare const messages: {
     "ZWG": "Zimbabwean Gold"
   },
   "emails": {
+    "buildLog": {
+      "confirmation": {
+        "subject": "You are on the build log",
+        "preview": "One email when a module ships or the stack moves.",
+        "heading": "You are on the build log",
+        "body": "Thanks for subscribing. You get one email when a module ships or the stack moves, and nothing else. No drip sequence, no launch countdowns.",
+        "button": "Unsubscribe",
+        "footer": "Leaving costs one click. You can also write to {contactEmail} at any time."
+      },
+      "notification": {
+        "subject": "New build log subscriber",
+        "preview": "Someone subscribed to the build log.",
+        "heading": "New build log subscriber",
+        "body": "{email} subscribed to the build log from the {locale} landing page."
+      }
+    },
     "resetPassword": {
       "subject": "Reset your password",
       "preview": "Reset your password for SaaSy Land",
@@ -736,6 +762,7 @@ declare const messages: {
         "chart": {
           "title": "Revenue Overview",
           "description": "Daily revenue generated over the last 30 days.",
+          "placeholder": "Illustrative series. Real revenue appears here once billing is connected.",
           "legend": {
             "new": "New Subscriptions",
             "renewals": "Renewals"
@@ -817,7 +844,7 @@ declare const messages: {
         "meta": {
           "readTime": "{minutes} min read",
           "publishedOn": "{date}",
-          "lastEdited": "Last edited {time} ago",
+          "lastEdited": "Last edited {time}",
           "publishesTomorrow": "Publishes tomorrow"
         },
         "labels": {
@@ -832,7 +859,10 @@ declare const messages: {
           "author": "Author",
           "date": "Date",
           "views": "Views",
-          "actions": "Actions"
+          "actions": "Actions",
+          "selectRow": "Select row",
+          "emptyValue": "Not set",
+          "rowActions": "Row actions"
         },
         "pagination": {
           "info": "Showing {start} to {end} of {total} posts"
@@ -932,7 +962,7 @@ declare const messages: {
         "chart": {
           "title": "Revenue Overview",
           "description": "Monthly recurring revenue over the last 12 months",
-          "placeholder": "Revenue analytics will appear here once billing is connected.",
+          "placeholder": "Illustrative series. Real revenue appears here once billing is connected.",
           "filters": {
             "12m": "12M",
             "30d": "30D",
@@ -956,6 +986,15 @@ declare const messages: {
               "lastActive": "Last Active",
               "actions": "Actions"
             },
+            "status": {
+              "active": "Active",
+              "banned": "Banned",
+              "pending": "Pending"
+            },
+            "rowActions": {
+              "edit": "Edit user",
+              "delete": "Delete user"
+            },
             "pagination": {
               "showing": "Showing {from} to {to} of {total} users",
               "previous": "Previous",
@@ -968,9 +1007,17 @@ declare const messages: {
         "metadata": {
           "description": "Signed-in app area."
         },
-        "welcome": "App — {name}"
+        "welcome": "App: {name}"
       },
       "components": {
+        "breadcrumbs": {
+          "home": "Home"
+        },
+        "header": {
+          "notifications": "Notifications",
+          "searchPlaceholder": "Search the console",
+          "searchEmpty": "No matching section."
+        },
         "userWidget": {
           "settings": "Settings",
           "signedInAs": "Signed in as <user>{name}</user>"
@@ -978,15 +1025,15 @@ declare const messages: {
         "signOutButton": {
           "signOut": "Sign Out",
           "signingOut": "Signing out...",
-          "success": "See you later!"
+          "success": "See you later"
         }
       },
       "landing-page": {
         "title": "Landing Page Editor",
-        "description": "Design and customize your landing page visually.",
+        "description": "Compose the page section by section, then publish when it reads right.",
         "actions": {
           "preview": "Preview",
-          "saveChanges": "Save Changes",
+          "saveChanges": "Save changes",
           "publish": "Publish"
         },
         "sidebar": {
@@ -1003,35 +1050,57 @@ declare const messages: {
           }
         },
         "canvas": {
-          "newRelease": "New v2.0 Release",
-          "supercharge": "Supercharge Your ",
-          "growth": "SaaS Growth",
-          "description": "The all-in-one platform to manage your customers, billing, and content. Build faster, convert better.",
-          "getStarted": "Get Started Free",
-          "bookDemo": "Book a Demo",
-          "addSectionHere": "Add Section Here",
-          "featuresHeading": "Powerful Features",
-          "featuresSubheading": "Everything you need to scale your business.",
-          "feature1": "Analytics",
-          "feature2": "Security",
-          "feature3": "Team Sync"
+          "label": "Canvas",
+          "viewport": {
+            "desktop": "Desktop width",
+            "tablet": "Tablet width",
+            "mobile": "Mobile width"
+          },
+          "sectionActions": {
+            "edit": "Edit section",
+            "duplicate": "Duplicate section",
+            "delete": "Delete section"
+          },
+          "badge": "Built for warehouse teams",
+          "headingLead": "Track every pallet from",
+          "headingAccent": "dock to shelf",
+          "description": "Barcode scanning, cycle counts and reorder alerts in one place. Works offline on the floor and syncs when the shift is back on wifi.",
+          "getStarted": "Start free trial",
+          "bookDemo": "Book a demo",
+          "addSectionHere": "Add section here",
+          "featuresHeading": "What is included",
+          "featuresSubheading": "Three tools your floor team uses on every shift.",
+          "feature1": "Barcode scanning",
+          "feature2": "Cycle counts",
+          "feature3": "Reorder alerts"
         },
         "properties": {
           "title": "Section Properties",
           "description": "Customize the selected element",
           "layout": "Alignment",
+          "alignLeft": "Align left",
+          "alignCenter": "Align center",
+          "alignRight": "Align right",
           "spacing": "Spacing",
-          "paddingTop": "Padding Top",
-          "paddingBot": "Padding Bot",
+          "paddingTop": "Padding top",
+          "paddingBot": "Padding bottom",
+          "unit": "px",
           "background": "Background Style",
+          "backgroundOptions": {
+            "page": "Page surface",
+            "panel": "Panel surface",
+            "raised": "Raised surface",
+            "image": "Upload an image"
+          },
           "content": "Content",
-          "generateAI": "Generate AI",
+          "generateAI": "Generate with AI",
           "badgeText": "Badge Text",
           "heading": "Heading",
           "subheading": "Subheading",
           "buttonActions": "Actions",
           "primaryButton": "Primary Button",
           "secondaryButton": "Secondary Button",
+          "buttonEnabled": "Button is shown",
           "label": "Label"
         }
       },
@@ -1078,7 +1147,8 @@ declare const messages: {
             "item": "Original Item",
             "reason": "Reason",
             "date": "Date",
-            "status": "Status"
+            "status": "Status",
+            "rowActions": "Row actions"
           },
           "pagination": {
             "showing": "Showing 1 to 4 of 24 results",
@@ -1087,7 +1157,8 @@ declare const messages: {
             "page1": "1",
             "page2": "2",
             "ellipsis": "..."
-          }
+          },
+          "filter": "Filter refunds"
         }
       },
       "pricing-models": {
@@ -1177,7 +1248,8 @@ declare const messages: {
               },
               "price": {
                 "label": "Price",
-                "placeholder": "0.00"
+                "placeholder": "0.00",
+                "currencySymbol": "$"
               },
               "period": {
                 "label": "Billing Period",
@@ -1205,11 +1277,19 @@ declare const messages: {
               "title": "Organization",
               "category": {
                 "label": "Category",
-                "placeholder": "Select category..."
+                "placeholder": "Select category...",
+                "options": {
+                  "addons": "Add-ons",
+                  "saas": "SaaS plans"
+                }
               },
               "collection": {
                 "label": "Collection",
-                "placeholder": "Add to collection..."
+                "placeholder": "Add to collection...",
+                "options": {
+                  "core": "Core subscription",
+                  "legacy": "Legacy"
+                }
               }
             }
           }
@@ -1252,10 +1332,32 @@ declare const messages: {
             "pricing": "Pricing",
             "status": "Status",
             "metrics": "Metrics"
+          },
+          "actionsColumn": "Row actions",
+          "emptyValue": "n/a",
+          "rowActions": "Row actions",
+          "selectAll": "Select all rows",
+          "selectRow": "Select row",
+          "statusLabels": {
+            "archived": "Archived",
+            "draft": "Draft",
+            "published": "Active"
+          },
+          "typeLabels": {
+            "course": "Course",
+            "one_time": "One-time",
+            "subscription": "Subscription"
+          },
+          "visibilityLabels": {
+            "hidden": "Hidden",
+            "public": "Public"
           }
         },
         "pagination": {
-          "info": "Showing {start} to {end} of {total} products"
+          "info": "Showing {start} to {end} of {total} products",
+          "goToPage": "Go to page {page}",
+          "nextPage": "Next page",
+          "previousPage": "Previous page"
         },
         "onetime": {
           "title": "One-time Purchases",
@@ -1296,6 +1398,13 @@ declare const messages: {
               "items": "Items",
               "lastUpdated": "Last Updated"
             }
+          }
+        },
+        "courses": {
+          "empty": {
+            "title": "No courses yet",
+            "description": "Courses you publish appear here with their lessons, pricing and enrolment counts. Create the first one to get started.",
+            "action": "Create course"
           }
         }
       },
@@ -1404,7 +1513,6 @@ declare const messages: {
       },
       "sidebar": {
         "title": "SaaSy Land",
-        "version": "v2.0.0",
         "groups": {
           "overview": "Overview",
           "offerings": "Offerings",
@@ -1425,7 +1533,6 @@ declare const messages: {
           "blog": "Blog",
           "landingPage": "Landing Page"
         },
-        "logo": "SL",
         "badges": {
           "activeSessionsBadge": "3"
         }
@@ -1508,7 +1615,7 @@ declare const messages: {
             "yes": "Yes"
           },
           "empty": "No users found.",
-          "emptyValue": "—",
+          "emptyValue": "n/a",
           "headers": {
             "createdAt": "Created At",
             "emailVerified": "Email verified",
@@ -1520,10 +1627,14 @@ declare const messages: {
             "user": "User"
           },
           "selectAll": "Select all rows",
-          "selectRow": "Select row"
+          "selectRow": "Select row",
+          "actionsColumn": "Row actions"
         },
         "pagination": {
-          "info": "Showing {start} to {end} of {total} results"
+          "info": "Showing {start} to {end} of {total} results",
+          "goToPage": "Go to page {page}",
+          "nextPage": "Next page",
+          "previousPage": "Previous page"
         },
         "invitations": {
           "title": "Invitations",
@@ -1569,10 +1680,19 @@ declare const messages: {
               "description": "Description",
               "type": "Type",
               "users": "Users"
-            }
+            },
+            "usersCount": "{count, plural, one {# user} other {# users}}"
           },
           "pagination": {
             "info": "Showing {start} to {end} of {total} roles"
+          }
+        },
+        "security": {
+          "title": "Security",
+          "empty": {
+            "title": "No security events recorded",
+            "description": "Sign-in attempts, session revocations and role changes appear here once your workspace starts logging them. Turn on the audit log to begin collecting events.",
+            "action": "Enable audit log"
           }
         }
       }
@@ -1719,221 +1839,488 @@ declare const messages: {
     },
     "landing": {
       "metadata": {
-        "description": "Professional full-stack starter for building SaaS applications."
+        "description": "One command scaffolds a production-grade Next.js SaaS: auth on your own database, Stripe billing, an admin and 100% enforced test coverage. From $249, once."
       },
-      "welcome": "Welcome to the {name} page!",
       "hero": {
-        "badge": "424 Stars on GitHub",
-        "titlePart1": "Fast-Track Your Business Launch with ",
-        "titlePart2": "SaaSy Land",
-        "description": "Your shortcut to startup success. The ultimate, modern, open-source Next.js template, with everything you need set up and ready to use.",
-        "startBuilding": "Start Building",
-        "viewRecipes": "Explore Pro Recipes"
-      },
-      "techMarquee": {
-        "nextjs": "Next.js",
-        "neon": "Neon",
-        "stripe": "Stripe",
-        "resend": "Resend",
-        "drizzle": "Drizzle ORM",
-        "tailwind": "Tailwind",
-        "shadcn": "ShadCN/UI",
-        "elysia": "Elysia",
-        "zod": "Zod"
-      },
-      "benefits": {
-        "titlePart1": "Why Should ",
-        "titlePart2": "You Care?",
-        "description": "Your competitors are already using SaaSy Land and similar products, gaining time and competitive advantage. Don't get left behind!",
-        "cards": {
-          "timeSaver": {
-            "badge": "Incredible Time Saver",
-            "title": "Get a Head Start on Your Competitors",
-            "description": "Since everything is professionally configured and up to standards, you save a tremendous amount of time and effort, which you can now spend focusing on what really matters: your core business offering.",
-            "imageAlt": "Time saver growth chart illustration"
-          },
-          "modernTech": {
-            "badge": "Latest and Greatest",
-            "title": "Take Advantage of Modern Technologies",
-            "description": "We are constantly updating our templates to take advantage of the latest and greatest technologies, so you can be sure your website is always fast.",
-            "imageAlt": "Modern technology stack illustration"
-          },
-          "quality": {
-            "badge": "High Quality Implementation",
-            "title": "Know Everything Works As Expected",
-            "description": "We spent countless hours researching, exploring docs and testing the best way to implement features. We have done the hard work so you don't have to.",
-            "imageAlt": "Quality code illustration"
-          },
-          "flexibility": {
-            "badge": "Flexibility and Support",
-            "title": "Easily Customize Every Single Detail",
-            "description": "With the help of our detailed documentation, you can now easily customize every single detail of the template. Should you need any help, we are a message away.",
-            "imageAlt": "Flexible design shapes illustration"
-          }
-        },
-        "stats": {
-          "visits": "162.9k",
-          "visitsLabel": "Last 7 Days Website Visits",
-          "increase": "22% increase from Last Week"
+        "title": "Bypass 100+ hours of boilerplate hell in one command.",
+        "description": "Don't spend weeks wiring auth, Stripe, email and an admin. Answer five questions and the CLI writes exactly that core — typed, tested, and yours to change. Then build the part that is actually your product.",
+        "ctaPrimary": "Start building",
+        "ctaSecondary": "See what ships",
+        "surface": {
+          "copied": "Copied",
+          "copy": "Copy the install command",
+          "imageAlt": "The SaaSyLand admin dashboard: revenue, active users and new signups along the top, a revenue chart below them, and the latest users table underneath"
         }
       },
-      "features": {
-        "titlePart1": "Discover Our ",
-        "titlePart2": "Wholesome Features",
-        "description": "Everything you need out of the box. No fluff, just the essentials built right.",
-        "list": {
-          "auth": {
-            "title": "Authentication",
-            "description": "Secure login, registration, and social OAuth providers already configured via Better Auth."
+      "proof": {
+        "facts": {
+          "components": {
+            "label": "UI components",
+            "note": "In your repository, not behind a package boundary.",
+            "value": "56"
           },
-          "db": {
-            "title": "Database ORM",
-            "description": "Fully typed database operations with Drizzle. Seamless integrations with PostgreSQL."
+          "coverage": {
+            "label": "Test coverage",
+            "note": "Enforced as a CI gate, not reported in a screenshot.",
+            "value": "100%"
           },
-          "stripe": {
-            "title": "Stripe Payments",
-            "description": "Handle subscriptions, one-time payments, and robust webhook listeners right out of the box."
+          "locales": {
+            "label": "Locales ready",
+            "note": "With 156 currencies and 195 timezones configured.",
+            "value": "54"
+          },
+          "mau": {
+            "label": "Cost per user",
+            "note": "Your database, your users, forever.",
+            "value": "$0"
+          },
+          "tests": {
+            "label": "Test files",
+            "note": "Plus 5 Playwright suites in Chromium and WebKit.",
+            "value": "140"
+          }
+        }
+      },
+      "manifesto": {
+        "p1": "Every SaaS starts with the same three months.",
+        "p2": "None of it is your product.",
+        "p3": "A quarter of your year, spent on problems that are already solved.",
+        "p4": "Don't build it again."
+      },
+      "cli": {
+        "title": "Pick your stack. Run one command.",
+        "lead": "The CLI is not a template you download and then fight. It asks what you are building and writes only that, so the same tool scaffolds a single-tenant side project and a multi-tenant platform without either one carrying the other's code.",
+        "copy": "Copy the command",
+        "copied": "Copied",
+        "run": {
+          "green": "tests already green",
+          "modules": "modules wired"
+        },
+        "choices": {
+          "framework": {
+            "label": "Framework",
+            "options": {
+              "next": "Next.js",
+              "tanstack": "TanStack Start"
+            }
+          },
+          "tenancy": {
+            "label": "Tenancy",
+            "options": {
+              "multi": "Multi-tenant",
+              "single": "Single tenant"
+            }
+          },
+          "billing": {
+            "label": "Billing",
+            "options": {
+              "stripe": "Stripe",
+              "none": "None"
+            }
+          },
+          "content": {
+            "label": "Content",
+            "options": {
+              "mdx": "MDX blog and docs",
+              "none": "None"
+            }
           },
           "email": {
-            "title": "Email Templates",
-            "description": "Beautifully crafted React Email templates sent flawlessly via modern APIs."
+            "label": "Email",
+            "options": {
+              "resend": "Resend",
+              "none": "None"
+            }
+          }
+        },
+        "choicesLabel": "Change an answer and the command changes with it. Copy it when it says what you are building.",
+        "reuse": "Run it again for the next project. The answers change; the CLI, the tests and the lifetime updates do not."
+      },
+      "line": {
+        "title": "The line",
+        "description": "Four stations between an empty folder and a company. Every one of them already runs, and every one of them is work you are not doing.",
+        "stations": {
+          "auth": {
+            "title": "Own your data. Protect your margins.",
+            "body": "Better Auth runs on your own database instead of per-user pricing that scales against you. Your user table, your sessions, your margins. The bill at 50,000 monthly actives is the same as the bill at 50, and it is zero either way.",
+            "spec": "$0 per MAU, forever"
           },
-          "seo": {
-            "title": "SEO Optimized",
-            "description": "Dynamic meta tags, Open Graph imagery, and sitemap generation correctly structured."
-          },
-          "ui": {
-            "title": "UI Components",
-            "description": "A massive library of accessible, beautifully designed Base UI and Tailwind components."
+          "tests": {
+            "title": "Know it works before you merge.",
+            "body": "Not vibe-coded on a weekend. 140 test files and 5 Playwright suites run on every pull request, and the coverage gate fails the build before anything broken can merge. Deploy on a Friday and actually take the weekend.",
+            "spec": "100% test coverage"
           },
           "i18n": {
-            "title": "Internationalization",
-            "description": "Professional i18n setup supporting multiple languages and localized routing out of the box."
+            "title": "Sell in 54 locales without a rewrite.",
+            "body": "Locale routing, translations, timezones and currency formatting are native to the codebase, not bolted on. A 54-locale catalog with 195 timezones and 156 currencies is configured before you write a line, and a parity check fails the build the moment a translation goes missing.",
+            "spec": "54 locales, 156 currencies"
           },
-          "typeSafety": {
-            "title": "Full Type-Safety",
-            "description": "End-to-end strict TypeScript configuration to catch bugs early and improve developer experience."
-          },
-          "quality": {
-            "title": "Quality Implementation",
-            "description": "Clean architecture and modular code designed to be scaled, maintained, and extended easily."
-          },
-          "performance": {
-            "title": "Maximum Performance",
-            "description": "Utilizing Partial Prerendering (PPR) and edge caching for blazingly fast load times."
-          },
-          "vercel": {
-            "title": "Vercel & Bun Ready",
-            "description": "Optimized for serverless edge deployment using Vercel and the blazingly fast Bun runtime."
-          },
-          "blog": {
-            "title": "MDX Blog & Docs",
-            "description": "A built-in markdown engine to write beautifully formatted blogs and comprehensive documentation."
+          "edge": {
+            "title": "Your architecture, not someone else's.",
+            "body": "The CLI asks what you are building and scaffolds that, instead of handing you one opinionated shape to fight. Bun and Elysia underneath: instant HMR and strict types while you work, a runtime built for the edge once you ship.",
+            "spec": "Bun + Elysia, edge-native"
           }
         }
       },
-      "testimonials": {
-        "titlePart1": "Loved by ",
-        "titlePart2": "Builders"
+      "stack": {
+        "title": "The line runs on"
+      },
+      "quality": {
+        "title": "Quality control",
+        "lead": "If it merges, it works.",
+        "body": "Every unit, integration and end-to-end path is covered before it merges. 140 test files, 5 Playwright suites in real Chromium and WebKit, and a coverage gate that runs on every pull request and every push to main.",
+        "consequence": "Which is what makes an agent safe to run here. It can write as fast as it likes; nothing it breaks reaches main, and you find out at the pull request instead of in production.",
+        "cta": "See what it costs",
+        "terminalTitle": "saasyland: test run",
+        "specs": {
+          "vitest": "vitest: 100% thresholds, enforced on every run",
+          "playwright": "playwright: chromium and webkit, real browsers",
+          "typescript": "tsc --strict: zero errors, zero any"
+        }
+      },
+      "manifest": {
+        "title": "What is in the box",
+        "lead": "Everything below is in the repository you clone. No add-ons, no paid modules, no second checkout. All of it typed, tested and readable enough that you or your agent can work in it on day one.",
+        "items": {
+          "auth": {
+            "label": "Authentication",
+            "body": "Better Auth with email and password, OAuth, email verification, password reset, two-factor and admin impersonation, running on your database."
+          },
+          "data": {
+            "label": "Database",
+            "body": "Drizzle ORM against Neon Postgres, typed end to end, with generate, migrate, push and studio scripts already wired to local, preview and production."
+          },
+          "billing": {
+            "label": "Billing",
+            "body": "Stripe checkout, customer portal and webhooks, with products and pricing models managed from the admin instead of hardcoded in the app."
+          },
+          "email": {
+            "label": "Email",
+            "body": "React Email templates delivered through Resend, with the authentication flows already sending real mail on day one."
+          },
+          "admin": {
+            "label": "Admin console",
+            "body": "Ten sections built and styled: dashboard, users, products, payments, analytics, blog, courses, pricing models, page designer and settings."
+          },
+          "ui": {
+            "label": "Interface",
+            "body": "Fifty-six components on Tailwind and shadcn/ui, sitting in your repository rather than behind a package boundary you cannot edit."
+          },
+          "i18n": {
+            "label": "Internationalization",
+            "body": "Locale routing over a 54-locale catalog, 195 timezones, 156 currencies and 248 countries, plus a parity check that fails the build on a missing translation."
+          },
+          "content": {
+            "label": "Content",
+            "body": "An MDX blog and a documentation site on Fumadocs, both editable from the admin, both indexed and localized like the rest of the app."
+          },
+          "tests": {
+            "label": "Tests",
+            "body": "140 unit and integration test files, 5 Playwright suites, and 100% statement, branch, function and line coverage enforced as a gate in CI."
+          },
+          "tooling": {
+            "label": "Tooling",
+            "body": "Bun, Elysia, strict TypeScript, Zod schemas, rate limiting on Redis, and a formatter, linter and type check that all run before anything merges."
+          }
+        }
+      },
+      "studio": {
+        "title": "Ship the marketing, not just the app",
+        "description": "The two things a starter kit almost never includes: the tools to sell the product once it exists, and the engineer who built the codebase explaining why every decision went the way it did.",
+        "builder": {
+          "title": "A page designer, in the box.",
+          "body": "Landing pages, pricing pages and a blog your marketing team can edit visually, inside your own admin, rendering your own components. No Framer subscription, no Webflow, no hand-off.",
+          "imageAlt": "The page designer inside the admin: a section library on the left, a live canvas with the hero section selected, and a properties panel for alignment, spacing and content on the right",
+          "spec": "8 section types, your own components"
+        },
+        "masterclass": {
+          "title": "Watch it get built, end to end.",
+          "body": "A professional developer building this exact production SaaS from an empty folder. By the end you are not maintaining someone else's codebase, you are maintaining one you watched get made.",
+          "label": "Masterclass, included with the code",
+          "topics": {
+            "architecture": {
+              "title": "Architecture and module boundaries",
+              "body": "Why the code splits into modules, use cases and a presentation layer, where the seams are, and how to add a feature without reaching across them."
+            },
+            "auth": {
+              "title": "Authentication and session security",
+              "body": "Better Auth against your own database: sessions, two-factor, OAuth, admin impersonation, and the edge cases most starter kits quietly skip."
+            },
+            "billing": {
+              "title": "Billing, webhooks and pricing models",
+              "body": "Stripe checkout, the customer portal, and webhooks that stay idempotent when the same event arrives twice."
+            },
+            "testing": {
+              "title": "Test strategy and the coverage gate",
+              "body": "What to unit test, what to drive through a real browser, and how the coverage gate is wired so a broken branch cannot merge."
+            },
+            "i18n": {
+              "title": "Internationalization end to end",
+              "body": "Locale routing, message catalogs, timezone and currency formatting, and the parity check that fails the build on one missing key."
+            },
+            "deployment": {
+              "title": "Deployment, migrations and rollback",
+              "body": "Shipping to the edge, running migrations against Neon without downtime, and what to do the day you have to roll one back."
+            }
+          }
+        }
+      },
+      "record": {
+        "ariaLabel": "The record",
+        "title": "Check every claim",
+        "lead": "No testimonials, because there is nothing to verify in a quote. Every number on this page is generated by the repository you are buying, and here is where to find it.",
+        "columns": {
+          "claim": "Claim",
+          "evidence": "Where to check it"
+        },
+        "items": {
+          "coverage": {
+            "claim": "100% test coverage",
+            "evidence": "coverage/coverage-summary.json, generated by bun run test:coverage"
+          },
+          "gate": {
+            "claim": "Enforced, not reported",
+            "evidence": ".github/workflows/ci.yml, on every pull request and push to main"
+          },
+          "suites": {
+            "claim": "Real browsers, not jsdom",
+            "evidence": "e2e/specs, 5 Playwright suites on chromium and webkit"
+          },
+          "locales": {
+            "claim": "54 locales, 156 currencies",
+            "evidence": "src/integrations/next-intl/messages, checked by bun run check:i18n"
+          },
+          "auth": {
+            "claim": "$0 per MAU, forever",
+            "evidence": "src/integrations/better-auth, your database, no metered vendor"
+          },
+          "author": {
+            "claim": "Built by a professional developer",
+            "evidence": "Every commit is signed and public in the repository history"
+          }
+        }
+      },
+      "compare": {
+        "title": "The rest of the market",
+        "description": "Three ways to start a SaaS, and what each one leaves you owing.",
+        "options": {
+          "free": {
+            "title": "Free CLI scaffolds",
+            "body": "A real foundation and nothing else. Auth, billing, i18n, tests and a marketing site are all still yours to build, and they are the three months."
+          },
+          "weekend": {
+            "title": "Weekend boilerplates",
+            "body": "Fast to your first $100. Then the third-party APIs start charging rent on your revenue, and the untested glue code starts failing at 2 a.m."
+          },
+          "heavyweights": {
+            "title": "Premium heavyweights",
+            "body": "Serious capability at a serious price. No coverage gate, no page designer, and no one explaining the architecture you just bought."
+          }
+        },
+        "columns": {
+          "market": "The market",
+          "saasyland": "SaaSyLand"
+        },
+        "dimensions": {
+          "model": {
+            "label": "What you pay",
+            "market": "One time, then the vendors bill you",
+            "ours": "$249 once, then nobody does"
+          },
+          "coverage": {
+            "label": "Test coverage",
+            "market": "Tests exist. No gate.",
+            "ours": "100%, enforced in CI"
+          },
+          "designer": {
+            "label": "Page designer",
+            "market": "A separate subscription",
+            "ours": "In the box"
+          },
+          "mau": {
+            "label": "Auth pricing",
+            "market": "Metered, if the auth is hosted",
+            "ours": "$0 per MAU, always"
+          },
+          "course": {
+            "label": "Masterclass",
+            "market": "Usually a separate purchase",
+            "ours": "Same checkout"
+          },
+          "license": {
+            "label": "Client projects",
+            "market": "Depends on the tier",
+            "ours": "Unlimited, one license"
+          }
+        },
+        "close": "A template gets you a folder. This gets you a codebase with the tests already green, the types already strict and every vendor decision already made in your favour. One payment, and nothing here bills you again.",
+        "notFor": {
+          "title": "Who this is not for",
+          "body": "If you want something free to learn on, clone a template and enjoy it. If you want someone else to run your auth and bill you per user for the privilege, buy that instead. This is for people who intend to own the codebase, read all of it, and still be running it in three years."
+        },
+        "cta": "See what it costs"
       },
       "pricing": {
-        "titlePart1": "Simple, transparent ",
-        "titlePart2": "pricing",
-        "description": "Everything you need to launch faster, at a fraction of the cost of developing it from scratch.",
-        "monthly": "Monthly",
-        "yearly": "Yearly",
-        "save20": "Save 20%",
-        "starter": {
-          "title": "Starter",
-          "description": "Perfect for side projects and early startups testing the waters.",
-          "priceMonthly": "$0",
-          "priceYearly": "$0",
-          "period": "/mo",
-          "button": "Get started for free!",
-          "features": {
-            "f1": "Complete Next.js 14 Source Code",
-            "f2": "Database & Auth Setup",
-            "f3": "Basic UI Components",
-            "f4": "Advanced Stripe Integration",
-            "f5": "Priority Support"
-          }
+        "title": "Buy it once",
+        "description": "One payment, lifetime core updates, no per-user fees. The same economics this codebase is built to give your own customers.",
+        "note": "One-time payment in USD.",
+        "mostPopular": "Most popular",
+        "ledger": {
+          "lead": "You are not buying code. You are buying back the calendar.",
+          "body": "At $80 an hour, a conservative rate for anyone reading this, $249 is about three hours of your time. The work it replaces is not three hours. It is auth with two-factor and OAuth, a typed data layer, billing with webhooks, transactional email, ten admin sections, a 54-locale i18n layer and a test suite that actually gates the build. Every one of those is a solved problem you would solve again, and not one of them is the reason anybody will pay you."
         },
-        "pro": {
-          "badge": "Most Popular",
-          "title": "Pro Builder",
-          "description": "Everything you need to build and scale your SaaS to millions.",
-          "priceMonthly": "$9.99",
-          "priceYearly": "$7.99",
-          "period": "/mo",
-          "button": "Unlock PRO Features",
-          "features": {
-            "f1": "Everything in Starter",
-            "f2": "Advanced Stripe Integration (Webhooks)",
-            "f3": "Email Templates via Resend",
-            "f4": "Admin Dashboard Components",
-            "f5": "6 Months Priority Support"
-          }
-        },
-        "lifetime": {
-          "title": "Lifetime Access",
-          "description": "Pay once and get lifetime access to all future updates and releases.",
-          "priceMonthly": "$67",
-          "priceYearly": "$67",
-          "period": "/one-time",
-          "button": "Gain Lifetime Access!",
-          "features": {
-            "f1": "Everything in Pro Builder",
-            "f2": "Lifetime Core Updates",
-            "f3": "Exclusive Discord Community",
-            "f4": "Early Access to New Features",
-            "f5": "Lifetime Priority Support"
+        "assurance": "Read the documentation and the coverage report before you pay. Every number on this page is generated by the repository you are buying, so you can check the goods first and hold us to what you find.",
+        "tiers": {
+          "codebase": {
+            "name": "Codebase",
+            "price": "$249",
+            "period": "one-time",
+            "tagline": "The full source, ready to run.",
+            "whoFor": "For the founder who ships alone and reads every line.",
+            "cta": "Get the codebase, $249",
+            "features": {
+              "f1": "Full source code and CLI scaffolding",
+              "f2": "All standard templates and modules",
+              "f3": "Better Auth, Stripe and Resend wired in",
+              "f4": "The complete 100% test suite",
+              "f5": "Lifetime core updates"
+            }
+          },
+          "masterclass": {
+            "name": "Masterclass",
+            "price": "$399",
+            "period": "one-time",
+            "tagline": "The source, and the reasoning behind it.",
+            "whoFor": "For the engineer who wants the reasoning, not just the result.",
+            "cta": "Get the masterclass, $399",
+            "features": {
+              "f1": "Everything in Codebase",
+              "f2": "Full video masterclass, from empty folder to production",
+              "f3": "Architecture and design deep-dives",
+              "f4": "Testing and deployment playbooks",
+              "f5": "Early access to new modules"
+            }
+          },
+          "agency": {
+            "name": "Agency",
+            "price": "$899",
+            "period": "one-time",
+            "tagline": "The source, for every client you bill.",
+            "whoFor": "For the shop that bills clients for what it builds.",
+            "cta": "Get the license, $899",
+            "features": {
+              "f1": "Everything in Masterclass",
+              "f2": "Unlimited commercial client license",
+              "f3": "Private Discord with priority support",
+              "f4": "Figma design files for the page designer",
+              "f5": "Team seats for the masterclass"
+            }
           }
         }
       },
       "faq": {
-        "titlePart1": "Frequently Asked ",
-        "titlePart2": "Questions",
-        "q1": "What is SaaSy Land?",
-        "a1": "SaaSy Land is a modern, open sourced collection starter templates for Next.js 14 full-stack projects. Built with Tailwind CSS, ShadCn, Next-Auth and several databases. Branches contain stand-alone set ups, including for serverless databases like PostgreSQL with Neon and MySQL with PlanetScale, Drizzle ORM, Prisma ORM v.5, but also MongoDB and Supabase.",
-        "q2": "What is included?",
-        "a2": "Several configuration options are available. Depending on which repo branch you clone and decide to use, you will have a full-stack project with advanced authentication (e.g., email verification, password reset, magic link sign in, OAuth social sign in with Google and Github), synchronized with a database of your choosing. On top of that, you will have a fully functional landing page, which is extremely easy to customize, Markdown and MDX-powered blog, documentation pages, Stripe payments integration, and more.",
-        "q3": "Why would I want to use SaaSy Land?",
-        "a3": "Since everything is professionally pre-configured and up to the latest standards, you save a tremendous amount of time and effort, which you can now spend focusing on what really matters - building your own, unique product. And it's completely free!",
-        "q4": "Is it easy to use? How do I get started?",
-        "a4": "SaaSy Land is extremely easy to use. You can get started by cloning a GitHub repo and following the documentation.",
-        "q5": "Can I get help and support?",
-        "a5": "Feel free to email us with any questions, or start a discussion on GitHub. While we are always happy to help, please keep in mind that this is a free product, which we develop out of passion in our free time and hence, we cannot guarantee any response times.",
-        "q6": "Is the product actively maintained?",
-        "a6": "SaaSy Land is currently under active development. We are working on adding new features and improving the existing ones. We are also working on improving the documentation and adding more examples. Stay tuned! You may also consider signing up for our newsletter to get notified about new major releases. We will not spam you, we promise!"
-      },
-      "newsletter": {
-        "title": "Sign Up to Our Newsletter",
-        "description": "Stay in the loop with updates on new features, boilerplate releases, and startup growth tips directly to your inbox.",
-        "placeholder": "Enter your email address",
-        "button": "Subscribe"
-      },
-      "contact": {
-        "title": "Let's Get in Touch",
-        "description": "Feel free to email us with any questions you might have. While we are always happy to help, please keep in mind that this is a free product and we cannot guarantee any response times. We would also love to know your feedback!",
-        "location": "Kraków, Poland",
-        "form": {
-          "firstName": "Name",
-          "email": "Email Address",
-          "message": "How can we help?",
-          "button": "Send Message"
+        "title": "Questions from the floor",
+        "lead": "The questions buyers actually ask, answered in full. If yours is not here, send it over.",
+        "contact": "Ask the engineer who built it",
+        "contactNote": "hello@saasyland.com. One person reads it.",
+        "items": {
+          "q1": {
+            "question": "What exactly do I get?",
+            "answer": "The full source of a production SaaS: Next.js, React, Bun, Elysia, Better Auth, Drizzle with Neon Postgres, Stripe, Resend and next-intl. You also get CLI scaffolding, the complete test suite, the visual page designer and documentation. The Masterclass and Agency tiers add the video course, commercial licensing and the Figma files."
+          },
+          "q2": {
+            "question": "Why Better Auth instead of Clerk or Auth0?",
+            "answer": "Ownership. Hosted auth charges you per monthly active user, which means your costs scale exactly when your revenue should. Better Auth lives in your codebase and your database. Your users are rows you own, not line items on someone else's invoice."
+          },
+          "q3": {
+            "question": "Is it really 100% test coverage?",
+            "answer": "Yes. Statements, branches, functions and lines under Vitest, plus Playwright end-to-end suites running in real Chromium and WebKit. Coverage is enforced as a CI gate on every pull request, not reported as a screenshot. The coverage summary is generated by the repository you are buying."
+          },
+          "q4": {
+            "question": "How do I know it is what this page says it is?",
+            "answer": "Check it before you pay. The documentation is public, the coverage report is generated by the repository, and the CI workflow that enforces it is in the repository. Because this is source code, access cannot be returned once it is granted, so there is no refund window. That is exactly why everything is inspectable up front."
+          },
+          "q5": {
+            "question": "Why not just have an AI agent build this?",
+            "answer": "It will, and the result will look right. What it will not tell you is which of the auth edge cases it skipped, which webhook is not idempotent, or that the i18n parity check it never wrote would have caught the missing key. Generated code is the cheap part now. The expensive part is the gate that proves it is correct, and that is what this repository is: point an agent at it and it inherits 140 test files, strict types and a build that fails when it is wrong."
+          },
+          "q6": {
+            "question": "Do I need the Masterclass tier?",
+            "answer": "Codebase gives you the machine. Masterclass gives you the engineer who built it: every architecture decision, every test strategy, every deployment, on video. Most buyers take the Masterclass, because the code is the cheap part. Understanding it is what you are actually short of."
+          },
+          "q7": {
+            "question": "Is any of this a subscription?",
+            "answer": "No. You pay once. Lifetime core updates are included, the code sits in your repository, and there is no seat count, no monthly active user meter and no renewal date."
+          },
+          "q8": {
+            "question": "What does “lifetime updates” cover?",
+            "answer": "Every update to the core codebase, including framework upgrades, new modules and security patches, for as long as SaaSyLand exists. You buy once and the machine keeps getting better."
+          },
+          "q9": {
+            "question": "Can I use it for client work?",
+            "answer": "Codebase and Masterclass cover unlimited products you own. Building for clients is what the Agency tier is for: one license, unlimited client projects."
+          },
+          "q10": {
+            "question": "Why trust a starter kit built by one engineer?",
+            "answer": "Because the claims are checkable. The coverage report is generated by the repository, the CI workflow that enforces it is in the repository, and the person who wrote it builds production software for a living. Read the documentation before you pay and hold this page to it."
+          },
+          "q11": {
+            "question": "Do I need to know Bun and Elysia?",
+            "answer": "No. If you know Next.js and TypeScript you can read every file on day one. Bun is a faster runtime and package manager that takes the commands you already type, and Elysia is a typed HTTP layer that hands you plain handlers. The masterclass covers both from first principles."
+          }
         }
+      },
+      "gate": {
+        "title": "Start at month three",
+        "description": "Auth, billing, email, the admin and the tests are done. What is left is the part nobody can build for you, and it is the part you have not started.",
+        "price": "$249",
+        "terms": "one time, lifetime updates",
+        "assurance": "Pay once, clone the repository, run the CLI. No subscription, no per-user fees, and no vendor to migrate off in year two.",
+        "ctaPrimary": "Start building",
+        "ctaSecondary": "Read the docs"
       },
       "components": {
         "navigation": {
           "items": {
-            "about": "About",
-            "features": "Features",
+            "line": "The Line",
+            "quality": "Quality",
+            "studio": "Studio",
             "pricing": "Pricing",
             "faq": "FAQ",
-            "docs": "Docs",
-            "blog": "Blog"
+            "blog": "Blog",
+            "docs": "Docs"
           },
-          "getStarted": "Get Started"
+          "getStarted": "Start building",
+          "openMenu": "Open menu",
+          "closeMenu": "Close menu",
+          "ariaLabel": "Primary"
+        },
+        "footer": {
+          "tagline": "The production-grade starter kit you own outright.",
+          "product": "Product",
+          "legal": "Legal",
+          "language": "Language",
+          "rights": "All rights reserved.",
+          "buildLog": {
+            "title": "The build log",
+            "body": "One email when a module ships or the stack moves. No drip sequence and no launch countdowns.",
+            "label": "Email address",
+            "placeholder": "you@company.com",
+            "button": "Subscribe",
+            "note": "Unsubscribe in one click.",
+            "success": "You are on the list.",
+            "error": "That did not send. Try again, or email hello@saasyland.com."
+          },
+          "links": {
+            "line": "The Line",
+            "pricing": "Pricing",
+            "faq": "FAQ",
+            "docs": "Documentation",
+            "blog": "Blog",
+            "github": "GitHub",
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Service"
+          }
         }
       }
     },

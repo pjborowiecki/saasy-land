@@ -72,19 +72,16 @@ export function AdminActiveSessionRowClient({
   }, [onRevoke, session.token])
 
   return (
-    <div className="group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-secondary/20">
+    <div className="group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-muted/40">
       <div className="flex items-center gap-4">
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border/50 bg-secondary text-muted-foreground shadow-inner">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-secondary text-muted-foreground shadow-inner">
           {isMobile ? <Smartphone className="size-5" /> : <Laptop className="size-5" />}
         </div>
         <div>
           <div className="mb-0.5 flex items-center gap-2">
             <p className="text-sm font-medium text-foreground">{deviceLabel}</p>
             {isCurrent ? (
-              <Badge
-                variant="outline"
-                className="border-emerald-500/20 bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-500"
-              >
+              <Badge variant="outline" className="px-0 text-xs font-medium text-ring">
                 {t("security.sessions.currentBadge")}
               </Badge>
             ) : undefined}

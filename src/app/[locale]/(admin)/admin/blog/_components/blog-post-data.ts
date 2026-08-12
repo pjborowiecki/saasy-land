@@ -3,7 +3,6 @@ import type { BlogPostStatus } from "~/src/app/[locale]/(admin)/admin/_lib/statu
 export interface DummyPost {
   author: { initials: string; name: string }
   category: string
-  categoryColor: string
   date: string
   description: string
   id: string
@@ -15,9 +14,8 @@ export interface DummyPost {
 
 export const DUMMY_POSTS: DummyPost[] = [
   {
-    author: { initials: "JD", name: "John Doe" },
+    author: { initials: "MK", name: "Marta Kowalczyk" },
     category: "Engineering",
-    categoryColor: "indigo",
     date: "Oct 24",
     description:
       "An in-depth technical dive into how our engineering team transitioned from a monolithic setup to a distributed architecture.",
@@ -28,9 +26,8 @@ export const DUMMY_POSTS: DummyPost[] = [
     views: "12.4k",
   },
   {
-    author: { initials: "SM", name: "Sarah Miller" },
+    author: { initials: "DO", name: "Dele Okonkwo" },
     category: "Product Update",
-    categoryColor: "emerald",
     date: "2h ago",
     description:
       "We've completely overhauled our reporting tools to give you deeper insights into your customer behavior and revenue metrics.",
@@ -41,9 +38,8 @@ export const DUMMY_POSTS: DummyPost[] = [
     views: undefined,
   },
   {
-    author: { initials: "AL", name: "Alex Lee" },
+    author: { initials: "HN", name: "Hana Nakamura" },
     category: "Design",
-    categoryColor: "rose",
     date: "Oct 18",
     description: "Building a cohesive visual language that scales across web, mobile, and internal administrative tools.",
     id: "post-3",
@@ -53,9 +49,8 @@ export const DUMMY_POSTS: DummyPost[] = [
     views: "8.1k",
   },
   {
-    author: { initials: "JD", name: "John Doe" },
+    author: { initials: "MK", name: "Marta Kowalczyk" },
     category: "Company News",
-    categoryColor: "blue",
     date: "Tomorrow",
     description: "We are thrilled to announce a $25M investment led by top tier venture firms to accelerate our growth.",
     id: "post-4",
@@ -65,9 +60,8 @@ export const DUMMY_POSTS: DummyPost[] = [
     views: undefined,
   },
   {
-    author: { initials: "TW", name: "Tom Wilson" },
+    author: { initials: "RS", name: "Rafael Santos" },
     category: "Tutorial",
-    categoryColor: "fuchsia",
     date: "Oct 12",
     description: "Learn how to build resilient webhook systems that handle millions of events securely.",
     id: "post-5",
@@ -77,9 +71,8 @@ export const DUMMY_POSTS: DummyPost[] = [
     views: "5.6k",
   },
   {
-    author: { initials: "SM", name: "Sarah Miller" },
+    author: { initials: "DO", name: "Dele Okonkwo" },
     category: "Marketing",
-    categoryColor: "amber",
     date: "Oct 05",
     description: "Proven retention tactics used by the fastest-growing SaaS companies.",
     id: "post-6",

@@ -1,9 +1,9 @@
 {
   "title": "Landing Page Editor",
-  "description": "Design and customize your landing page visually.",
+  "description": "Compose the page section by section, then publish when it reads right.",
   "actions": {
     "preview": "Preview",
-    "saveChanges": "Save Changes",
+    "saveChanges": "Save changes",
     "publish": "Publish"
   },
   "sidebar": {
@@ -20,35 +20,57 @@
     }
   },
   "canvas": {
-    "newRelease": "New v2.0 Release",
-    "supercharge": "Supercharge Your ",
-    "growth": "SaaS Growth",
-    "description": "The all-in-one platform to manage your customers, billing, and content. Build faster, convert better.",
-    "getStarted": "Get Started Free",
-    "bookDemo": "Book a Demo",
-    "addSectionHere": "Add Section Here",
-    "featuresHeading": "Powerful Features",
-    "featuresSubheading": "Everything you need to scale your business.",
-    "feature1": "Analytics",
-    "feature2": "Security",
-    "feature3": "Team Sync"
+    "label": "Canvas",
+    "viewport": {
+      "desktop": "Desktop width",
+      "tablet": "Tablet width",
+      "mobile": "Mobile width"
+    },
+    "sectionActions": {
+      "edit": "Edit section",
+      "duplicate": "Duplicate section",
+      "delete": "Delete section"
+    },
+    "badge": "Built for warehouse teams",
+    "headingLead": "Track every pallet from",
+    "headingAccent": "dock to shelf",
+    "description": "Barcode scanning, cycle counts and reorder alerts in one place. Works offline on the floor and syncs when the shift is back on wifi.",
+    "getStarted": "Start free trial",
+    "bookDemo": "Book a demo",
+    "addSectionHere": "Add section here",
+    "featuresHeading": "What is included",
+    "featuresSubheading": "Three tools your floor team uses on every shift.",
+    "feature1": "Barcode scanning",
+    "feature2": "Cycle counts",
+    "feature3": "Reorder alerts"
   },
   "properties": {
     "title": "Section Properties",
     "description": "Customize the selected element",
     "layout": "Alignment",
+    "alignLeft": "Align left",
+    "alignCenter": "Align center",
+    "alignRight": "Align right",
     "spacing": "Spacing",
-    "paddingTop": "Padding Top",
-    "paddingBot": "Padding Bot",
+    "paddingTop": "Padding top",
+    "paddingBot": "Padding bottom",
+    "unit": "px",
     "background": "Background Style",
+    "backgroundOptions": {
+      "page": "Page surface",
+      "panel": "Panel surface",
+      "raised": "Raised surface",
+      "image": "Upload an image"
+    },
     "content": "Content",
-    "generateAI": "Generate AI",
+    "generateAI": "Generate with AI",
     "badgeText": "Badge Text",
     "heading": "Heading",
     "subheading": "Subheading",
     "buttonActions": "Actions",
     "primaryButton": "Primary Button",
     "secondaryButton": "Secondary Button",
+    "buttonEnabled": "Button is shown",
     "label": "Label"
   }
 }

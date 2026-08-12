@@ -1,31 +1,45 @@
 import type { JSX } from "react"
 
 import { Copy, Pen, Trash2 } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 import { cn } from "~/src/utils"
 
-import { Button } from "~/src/presentation/components/shadcn/button"
+const ICON_STROKE_WIDTH = 1.5
+
+const ACTION_BUTTON_BASE =
+  "flex size-9 items-center justify-center rounded-none bg-background transition-[color,background-color] duration-200 ease-exp outline-none focus-visible:relative focus-visible:z-10 focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none"
 
 interface LandingPageSectionActionsProps {
   readonly className?: string
 }
 
-export function LandingPageSectionActions({ className }: LandingPageSectionActionsProps): JSX.Element {
+export async function LandingPageSectionActions({ className }: LandingPageSectionActionsProps): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.landing-page")
+
   return (
-    <div className={cn("absolute top-3 right-3 z-10 flex gap-1", className)}>
-      <Button size="icon" variant="secondary" className="size-8 hover:bg-secondary/80">
-        <Pen className="size-4" />
-      </Button>
-      <Button size="icon" variant="secondary" className="size-8 hover:bg-secondary/80">
-        <Copy className="size-4" />
-      </Button>
-      <Button
-        size="icon"
-        variant="destructive"
-        className="size-8 bg-destructive/20 text-destructive hover:bg-destructive/30 hover:text-destructive"
+    <div className={cn("absolute top-3 right-3 z-10 flex divide-x divide-border border border-border", className)}>
+      <button
+        aria-label={t("canvas.sectionActions.edit")}
+        className={cn(ACTION_BUTTON_BASE, "text-muted-foreground hover:text-foreground")}
+        type="button"
       >
-        <Trash2 className="size-4" />
-      </Button>
+        <Pen aria-hidden className="size-4" strokeWidth={ICON_STROKE_WIDTH} />
+      </button>
+      <button
+        aria-label={t("canvas.sectionActions.duplicate")}
+        className={cn(ACTION_BUTTON_BASE, "text-muted-foreground hover:text-foreground")}
+        type="button"
+      >
+        <Copy aria-hidden className="size-4" strokeWidth={ICON_STROKE_WIDTH} />
+      </button>
+      <button
+        aria-label={t("canvas.sectionActions.delete")}
+        className={cn(ACTION_BUTTON_BASE, "text-muted-foreground hover:text-destructive")}
+        type="button"
+      >
+        <Trash2 aria-hidden className="size-4" strokeWidth={ICON_STROKE_WIDTH} />
+      </button>
     </div>
   )
 }

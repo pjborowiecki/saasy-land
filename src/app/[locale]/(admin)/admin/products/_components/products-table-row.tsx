@@ -31,7 +31,7 @@ function formatBillingCycleSuffix(billingCycle: string | null): string {
 
 export function ProductsTableRow({ product }: ProductsTableRowProps): JSX.Element {
   return (
-    <tr className="group transition-colors hover:bg-secondary/20">
+    <tr className="group transition-colors hover:bg-muted/40">
       <td className="p-4 text-center">
         <AdminTableCheckbox />
       </td>

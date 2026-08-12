@@ -2,7 +2,6 @@
 
 import type { JSX } from "react"
 
-import { ChevronRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { Link, usePathname } from "~/src/integrations/next-intl/i18n.navigation"
@@ -26,9 +25,28 @@ const routeMappings: Record<string, { group: string; link: string }> = {
   users: { group: "administration", link: "userManagement" },
 }
 
+const TRAIL_CLASSNAME = "hidden min-w-0 items-center gap-1.5 text-body-sm text-muted-foreground sm:flex"
+
+const LINK_CLASSNAME =
+  "rounded-sm transition-colors duration-200 ease-exp hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+
+/**
+ * A slash, not a chevron. The trail is a path, the visitor already reads paths with slashes all
+ * day, and a 14px chevron between every crumb is three extra glyphs of chrome for no extra
+ * meaning.
+ */
+function Divider(): JSX.Element {
+  return (
+    <span aria-hidden className="text-muted-foreground/40 select-none">
+      /
+    </span>
+  )
+}
+
 export function AdminBreadcrumbs(): JSX.Element | undefined {
   const pathname = usePathname()
   const t = useTranslations("pages.admin.sidebar")
+  const tBreadcrumbs = useTranslations("pages.admin.components.breadcrumbs")
 
   const pathParts = pathname.split("/").filter(Boolean)
   if (pathParts.length === EMPTY_PATH_PARTS_LENGTH || pathParts[ADMIN_PATH_INDEX] !== "admin") {
@@ -37,15 +55,11 @@ export function AdminBreadcrumbs(): JSX.Element | undefined {
 
   if (pathParts.length === MIN_ADMIN_PATH_PARTS) {
     return (
-      <div className="hidden items-center gap-2 text-sm font-medium text-muted-foreground sm:flex">
-        <Link href="/admin" className="transition-colors hover:text-foreground">
-          Home
-        </Link>
-        <ChevronRight className="size-3.5" />
-        <span className="cursor-default">{t("groups.overview")}</span>
-        <ChevronRight className="size-3.5" />
-        <span className="text-foreground">{t("links.dashboard")}</span>
-      </div>
+      <nav aria-label={tBreadcrumbs("home")} className={TRAIL_CLASSNAME}>
+        <span>{tBreadcrumbs("home")}</span>
+        <Divider />
+        <span className="font-medium text-foreground">{t("links.dashboard")}</span>
+      </nav>
     )
   }
 
@@ -53,32 +67,30 @@ export function AdminBreadcrumbs(): JSX.Element | undefined {
   const mapping = currentPath === undefined ? undefined : routeMappings[currentPath]
 
   return (
-    <div className="hidden items-center gap-2 text-sm font-medium text-muted-foreground sm:flex">
-      <Link href="/admin" className="transition-colors hover:text-foreground">
-        Home
+    <nav aria-label={tBreadcrumbs("home")} className={TRAIL_CLASSNAME}>
+      <Link className={LINK_CLASSNAME} href="/admin">
+        {tBreadcrumbs("home")}
       </Link>
 
       {mapping === undefined ? undefined : (
         <>
-          <ChevronRight className="size-3.5" />
-          <span className="cursor-default">{t(`groups.${mapping.group}`)}</span>
-          <ChevronRight className="size-3.5" />
+          <Divider />
           {action === undefined ? (
-            <span className="text-foreground">{t(`links.${mapping.link}`)}</span>
+            <span className="truncate font-medium text-foreground">{t(`links.${mapping.link}`)}</span>
           ) : (
-            <Link href={`/admin/${currentPath}`} className="transition-colors hover:text-foreground">
+            <Link className={LINK_CLASSNAME} href={`/admin/${currentPath}`}>
               {t(`links.${mapping.link}`)}
             </Link>
           )}
 
           {action === undefined ? undefined : (
             <>
-              <ChevronRight className="size-3.5" />
-              <span className="text-foreground capitalize">{action}</span>
+              <Divider />
+              <span className="truncate font-medium text-foreground capitalize">{action}</span>
             </>
           )}
         </>
       )}
-    </div>
+    </nav>
   )
 }

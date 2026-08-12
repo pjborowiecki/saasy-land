@@ -2,13 +2,42 @@
 
 import type { JSX } from "react"
 
-import { BadgeCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFormContext, useWatch } from "react-hook-form"
 
 import { getPasswordRuleState, PASSWORD_MIN_LENGTH } from "~/src/integrations/better-auth/auth.constraints"
 
 import { cn } from "~/src/utils"
+
+/**
+ * The checklist is built from the system's own marks: the spec-chip square, which takes
+ * the accent once the rule is satisfied and sits muted until then, with the label
+ * stepping up to the foreground alongside it. Colour is never the only cue, so each row
+ * also carries its state as text for assistive technology.
+ */
+interface PasswordRuleProps {
+  readonly label: string
+  readonly satisfied: boolean
+  readonly stateLabel: string
+}
+
+function PasswordRule({ label, satisfied, stateLabel }: Readonly<PasswordRuleProps>): JSX.Element {
+  return (
+    <li className="flex items-start gap-2.5">
+      <span
+        aria-hidden
+        className={cn(
+          "mt-2 size-1.25 shrink-0 rounded-xs transition-colors duration-200 ease-exp",
+          satisfied ? "bg-ring" : "bg-muted-foreground/40",
+        )}
+      />
+      <span className={cn("text-body-sm transition-colors duration-200 ease-exp", satisfied ? "text-foreground" : "text-muted-foreground")}>
+        {label}
+      </span>
+      <span className="sr-only">{stateLabel}</span>
+    </li>
+  )
+}
 
 interface PasswordRequirementsProps {
   readonly fieldName?: string
@@ -20,20 +49,22 @@ export function PasswordRequirements({ fieldName = "password" }: PasswordRequire
   const password = useWatch({ control, name: fieldName }) ?? ""
   const { isMinLength, hasUppercase, hasSpecialChar } = getPasswordRuleState(password)
 
+  const metLabel = t("requirementMet")
+  const unmetLabel = t("requirementNotMet")
+
   return (
-    <ul className="flex list-none flex-col gap-1.5 py-2 text-xs text-muted-foreground" aria-label={t("requirementsListLabel")}>
-      <li className="flex items-center gap-2">
-        <BadgeCheck aria-hidden="true" className={cn("size-4", isMinLength ? "text-primary" : "text-destructive-foreground")} />
-        <span>{t("atLeastMinCharactersLong", { min: PASSWORD_MIN_LENGTH })}</span>
-      </li>
-      <li className="flex items-center gap-2">
-        <BadgeCheck aria-hidden="true" className={cn("size-4", hasSpecialChar ? "text-primary" : "text-destructive-foreground")} />
-        <span>{t("atLeastOneSpecialCharacter")}</span>
-      </li>
-      <li className="flex items-center gap-2">
-        <BadgeCheck aria-hidden="true" className={cn("size-4", hasUppercase ? "text-primary" : "text-destructive-foreground")} />
-        <span>{t("atLeastOneUppercase")}</span>
-      </li>
+    <ul aria-label={t("requirementsListLabel")} className="flex list-none flex-col gap-2">
+      <PasswordRule
+        label={t("atLeastMinCharactersLong", { min: PASSWORD_MIN_LENGTH })}
+        satisfied={isMinLength}
+        stateLabel={isMinLength ? metLabel : unmetLabel}
+      />
+      <PasswordRule
+        label={t("atLeastOneSpecialCharacter")}
+        satisfied={hasSpecialChar}
+        stateLabel={hasSpecialChar ? metLabel : unmetLabel}
+      />
+      <PasswordRule label={t("atLeastOneUppercase")} satisfied={hasUppercase} stateLabel={hasUppercase ? metLabel : unmetLabel} />
     </ul>
   )
 }

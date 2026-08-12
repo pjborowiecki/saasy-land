@@ -14,7 +14,7 @@ import { BlogPostTableRow } from "~/src/app/[locale]/(admin)/admin/blog/_compone
 
 function BlogPostsTableHeader({ t }: { readonly t: (key: string) => string }): JSX.Element {
   return (
-    <TableHeader className="bg-secondary/30">
+    <TableHeader className="bg-muted/40">
       <TableRow>
         <TableHead className="w-12 px-4 text-center">
           <Checkbox className="mx-auto" />
@@ -35,7 +35,7 @@ export async function BlogPostsTable(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog")
 
   return (
-    <Card className="overflow-hidden border-border/40">
+    <Card className="overflow-hidden border-border">
       <TableContainer>
         <Table>
           <BlogPostsTableHeader t={t} />
@@ -56,7 +56,7 @@ async function BlogPostsTablePagination(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog")
 
   return (
-    <div className="flex items-center justify-between border-t border-border/40 bg-secondary/10 px-4 py-3">
+    <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-3">
       <span className="text-xs font-medium text-muted-foreground">
         {t("pagination.info", {
           end: 6,

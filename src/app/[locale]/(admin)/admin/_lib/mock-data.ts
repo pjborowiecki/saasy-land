@@ -144,7 +144,7 @@ export const ADMIN_INVITATION_ROWS: AdminInvitationRow[] = [
   {
     email: "alex.chen@example.com",
     id: "i1",
-    invitedBy: "John Doe",
+    invitedBy: "Marta Kowalczyk",
     role: "Administrator",
     sentDate: "2 hours ago",
     status: "Pending",
@@ -153,7 +153,7 @@ export const ADMIN_INVITATION_ROWS: AdminInvitationRow[] = [
   {
     email: "m.roberts@startup.io",
     id: "i2",
-    invitedBy: "John Doe",
+    invitedBy: "Marta Kowalczyk",
     role: "Viewer",
     sentDate: "Yesterday",
     status: "Pending",
@@ -171,7 +171,7 @@ export const ADMIN_INVITATION_ROWS: AdminInvitationRow[] = [
   {
     email: "j.miller@example.com",
     id: "i4",
-    invitedBy: "John Doe",
+    invitedBy: "Marta Kowalczyk",
     role: "Subscriber",
     sentDate: "Oct 20, 2023",
     status: "Pending",
@@ -180,7 +180,7 @@ export const ADMIN_INVITATION_ROWS: AdminInvitationRow[] = [
   {
     email: "s.taylor@designco.com",
     id: "i5",
-    invitedBy: "John Doe",
+    invitedBy: "Marta Kowalczyk",
     role: "Editor",
     sentDate: "Sep 28, 2023",
     status: "Expired",

@@ -23,7 +23,7 @@ export async function SettingsPreferencesCard(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.settings")
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="border-b border-border/40 p-5">
+      <CardHeader className="border-b border-border p-5">
         <CardTitle className="mb-1 text-base font-medium text-foreground">{t("preferences.title")}</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">{t("preferences.description")}</CardDescription>
       </CardHeader>

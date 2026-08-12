@@ -7,7 +7,7 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 export async function PaymentsRefundsTablePagination(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.payments")
   return (
-    <div className="flex items-center justify-between border-t border-border/40 px-5 py-3 text-xs text-muted-foreground">
+    <div className="flex items-center justify-between border-t border-border px-5 py-3 text-xs text-muted-foreground">
       <span>{t("table.pagination.showing")}</span>
       <div className="flex items-center gap-1">
         <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs" isDisabled>

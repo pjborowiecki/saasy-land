@@ -1,62 +1,63 @@
 {
   "metadata": {
-    "title": "Analytics | SaaSy Land",
-    "description": "Monitor your SaaS performance, revenue, and user engagement."
+    "title": "Analityka | SaaSy Land",
+    "description": "Śledź wyniki produktu, przychody i zaangażowanie użytkowników."
   },
-  "title": "Analytics Overview",
-  "description": "Monitor your SaaS performance, revenue, and user engagement.",
+  "title": "Przegląd analityki",
+  "description": "Śledź wyniki produktu, przychody i zaangażowanie użytkowników.",
   "actions": {
-    "datePicker": "Last 30 Days"
+    "datePicker": "Ostatnie 30 dni"
   },
   "tabs": {
-    "overview": "Overview",
-    "revenue": "Revenue",
-    "audience": "Audience",
-    "retention": "Retention",
-    "reports": "Reports"
+    "overview": "Przegląd",
+    "revenue": "Przychody",
+    "audience": "Odbiorcy",
+    "retention": "Retencja",
+    "reports": "Raporty"
   },
   "kpi": {
     "mrr": {
-      "title": "Total MRR",
-      "value": "$124,500",
-      "trend": "14.2%",
-      "trendLabel": "vs last month"
+      "title": "Łączny MRR",
+      "value": "124 500 USD",
+      "trend": "14,2%",
+      "trendLabel": "wobec zeszłego miesiąca"
     },
     "activeUsers": {
-      "title": "Active Users",
-      "value": "45,231",
-      "trend": "5.4%",
-      "trendLabel": "vs last month"
+      "title": "Aktywni użytkownicy",
+      "value": "45 231",
+      "trend": "5,4%",
+      "trendLabel": "wobec zeszłego miesiąca"
     },
     "churn": {
-      "title": "Churn Rate",
-      "value": "1.2%",
-      "trend": "0.4%",
-      "trendLabel": "vs last month"
+      "title": "Wskaźnik rezygnacji",
+      "value": "1,2%",
+      "trend": "0,4%",
+      "trendLabel": "wobec zeszłego miesiąca"
     },
     "arpu": {
-      "title": "Avg. Revenue Per User",
-      "value": "$42.50",
-      "trend": "2.1%",
-      "trendLabel": "vs last month"
+      "title": "Średni przychód na użytkownika",
+      "value": "42,50 USD",
+      "trend": "2,1%",
+      "trendLabel": "wobec zeszłego miesiąca"
     }
   },
   "chart": {
-    "title": "Revenue Overview",
-    "description": "Daily revenue generated over the last 30 days.",
+    "title": "Przegląd przychodów",
+    "description": "Dzienny przychód z ostatnich 30 dni.",
+    "placeholder": "Dane poglądowe. Rzeczywiste przychody pojawią się po podłączeniu płatności.",
     "legend": {
-      "new": "New Subscriptions",
-      "renewals": "Renewals"
+      "new": "Nowe subskrypcje",
+      "renewals": "Odnowienia"
     },
     "tooltip": "{date}: {value}",
-    "activeTooltip": "Today: {value}"
+    "activeTooltip": "Dziś: {value}"
   },
   "regions": {
-    "title": "Top Regions",
-    "viewAll": "View All"
+    "title": "Najlepsze regiony",
+    "viewAll": "Zobacz wszystkie"
   },
   "upgrades": {
-    "title": "Recent Upgrades",
-    "viewAll": "View All"
+    "title": "Ostatnie zmiany planu",
+    "viewAll": "Zobacz wszystkie"
   }
 }

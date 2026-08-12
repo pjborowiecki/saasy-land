@@ -14,8 +14,8 @@ interface AnalyticsUpgradesCardProps {
 export async function AnalyticsUpgradesCard({ upgrades }: AnalyticsUpgradesCardProps): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.analytics")
   return (
-    <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-      <div className="flex items-center justify-between border-b border-border/40 p-5">
+    <Card className="group relative overflow-hidden border-border transition-colors hover:border-border">
+      <div className="flex items-center justify-between border-b border-border p-5">
         <h2 className="text-base font-medium text-foreground">{t("upgrades.title")}</h2>
         <Button
           variant="ghost"
@@ -25,7 +25,7 @@ export async function AnalyticsUpgradesCard({ upgrades }: AnalyticsUpgradesCardP
           {t("upgrades.viewAll")}
         </Button>
       </div>
-      <div className="divide-y divide-border/40">
+      <div className="divide-y divide-border">
         {upgrades.map((upgrade) => (
           <AnalyticsUpgradeRow key={upgrade.name} upgrade={upgrade} />
         ))}
@@ -36,7 +36,7 @@ export async function AnalyticsUpgradesCard({ upgrades }: AnalyticsUpgradesCardP
 
 function AnalyticsUpgradeRow({ upgrade }: { readonly upgrade: AdminAnalyticsUpgradeRow }): JSX.Element {
   return (
-    <div className="flex items-center justify-between p-4 transition-colors hover:bg-secondary/20">
+    <div className="flex items-center justify-between p-4 transition-colors hover:bg-muted/40">
       <div className="flex items-center gap-3">
         <div
           className={`flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr text-xs font-medium text-white ${upgrade.colors}`}

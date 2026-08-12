@@ -10,7 +10,7 @@ import { OAuthButton } from "~/src/app/[locale]/(auth)/auth/_components/oauth-bu
 
 export function OAuthButtons({ className, ...rest }: Readonly<ComponentPropsWithoutRef<"div">>): JSX.Element {
   return (
-    <div className={cn("flex flex-col gap-2", className)} {...rest}>
+    <div className={cn("flex flex-col gap-3", className)} {...rest}>
       <OAuthButton provider="google" Icon={Icons.Google} />
       <OAuthButton provider="github" Icon={Icons.Github} />
     </div>

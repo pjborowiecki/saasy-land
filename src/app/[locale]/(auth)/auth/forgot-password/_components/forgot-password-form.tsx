@@ -23,6 +23,7 @@ import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
 import { AuthTextField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { AUTH_FIELD_GROUP_CLASS, AUTH_PRIMARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { ROUTES } from "~/src/routes"
 
 const forgotPasswordSchema = verificationZodSchemas.forgotPassword
@@ -66,8 +67,8 @@ export function ForgotPasswordForm(): JSX.Element {
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.FORGOT_PASSWORD}-form`} onSubmit={form.handleSubmit(onSubmit)}>
-        <FieldGroup className="flex flex-col gap-6">
+      <form className="flex flex-col gap-6" id={`${AUTH_FORM_IDS.FORGOT_PASSWORD}-form`} onSubmit={form.handleSubmit(onSubmit)}>
+        <FieldGroup className={AUTH_FIELD_GROUP_CLASS}>
           <AuthTextField
             disabled={submitted}
             formId={AUTH_FORM_IDS.FORGOT_PASSWORD}
@@ -78,12 +79,12 @@ export function ForgotPasswordForm(): JSX.Element {
 
         <Button
           aria-label={t("pages.auth.forgot-password.form.submit")}
-          className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
+          className={AUTH_PRIMARY_BUTTON_CLASS}
           data-testid="forgot-password-form-submit-button"
           isDisabled={form.formState.isSubmitting || submitted}
           type="submit"
         >
-          {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+          {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />}
           {form.formState.isSubmitting ? t("pages.auth.forgot-password.form.submitting") : t("pages.auth.forgot-password.form.submit")}
         </Button>
       </form>

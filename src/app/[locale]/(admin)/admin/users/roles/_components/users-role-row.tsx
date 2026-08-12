@@ -16,13 +16,13 @@ interface AdminUsersRoleRowProps {
 
 export function AdminUsersRoleRow({ role }: AdminUsersRoleRowProps): JSX.Element {
   return (
-    <tr className="group transition-colors hover:bg-secondary/20">
+    <tr className="group transition-colors hover:bg-muted/40">
       <td className="p-4">
         <span className="text-sm font-medium text-foreground">{role.name}</span>
       </td>
       <td className="max-w-sm truncate p-4 text-sm text-muted-foreground">{role.description}</td>
       <td className="p-4">
-        <Badge variant="outline" className={`px-2 py-1 text-xs font-medium ${getRoleTypeBadgeClass(role.typeColor)}`}>
+        <Badge variant="outline" className={`px-2 py-1 text-xs font-medium ${getRoleTypeBadgeClass()}`}>
           {role.type}
         </Badge>
       </td>

@@ -33,7 +33,7 @@ export default async function AdminPage(): Promise<JSX.Element> {
     <div className="flex w-full animate-in flex-col space-y-8 pb-8 duration-500 fade-in-50">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("title")}</h1>
+          <h1 className="text-statement font-semibold text-foreground">{t("title")}</h1>
           <p className="text-sm text-muted-foreground">{t("description")}</p>
         </div>
         <div className="flex items-center gap-3">

@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "You are on the build log",
+    "preview": "One email when a module ships or the stack moves.",
+    "heading": "You are on the build log",
+    "body": "Thanks for subscribing. You get one email when a module ships or the stack moves, and nothing else. No drip sequence, no launch countdowns.",
+    "button": "Unsubscribe",
+    "footer": "Leaving costs one click. You can also write to {contactEmail} at any time."
+  },
+  "notification": {
+    "subject": "New build log subscriber",
+    "preview": "Someone subscribed to the build log.",
+    "heading": "New build log subscriber",
+    "body": "{email} subscribed to the build log from the {locale} landing page."
+  }
+}

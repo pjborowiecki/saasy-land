@@ -22,6 +22,7 @@ import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 import { AuthPasswordField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { PasswordRequirements } from "~/src/app/[locale]/(auth)/auth/_components/password-requirements"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { AUTH_FIELD_GROUP_CLASS, AUTH_PRIMARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { ROUTES } from "~/src/routes"
 
 const resetPasswordSchema = verificationZodSchemas.resetPasswordForm
@@ -64,8 +65,8 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.RESET_PASSWORD}-form`} onSubmit={form.handleSubmit(onSubmit)}>
-        <FieldGroup className="flex flex-col gap-4">
+      <form className="flex flex-col gap-6" id={`${AUTH_FORM_IDS.RESET_PASSWORD}-form`} onSubmit={form.handleSubmit(onSubmit)}>
+        <FieldGroup className={AUTH_FIELD_GROUP_CLASS}>
           <AuthPasswordField formId={AUTH_FORM_IDS.RESET_PASSWORD} label={t("pages.auth.reset-password.form.password")} name="password" />
           <AuthPasswordField
             formId={AUTH_FORM_IDS.RESET_PASSWORD}
@@ -78,12 +79,12 @@ export function ResetPasswordForm({ token }: Readonly<ResetPasswordFormProps>): 
 
         <Button
           aria-label={t("pages.auth.reset-password.form.submit")}
-          className="h-11 gap-2 bg-foreground text-sm text-background transition-all hover:bg-foreground/80"
+          className={AUTH_PRIMARY_BUTTON_CLASS}
           data-testid="reset-password-form-submit-button"
           isDisabled={form.formState.isSubmitting}
           type="submit"
         >
-          {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+          {form.formState.isSubmitting && <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />}
           {form.formState.isSubmitting ? t("pages.auth.reset-password.form.submitting") : t("pages.auth.reset-password.form.submit")}
         </Button>
       </form>

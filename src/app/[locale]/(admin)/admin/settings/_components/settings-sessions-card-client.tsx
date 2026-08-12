@@ -67,7 +67,7 @@ export function SettingsSessionsCardClient({ currentSessionId, sessions }: Setti
 
   return (
     <Card className="overflow-hidden">
-      <div className="flex flex-col justify-between gap-4 border-b border-border/40 p-5 sm:flex-row sm:items-center">
+      <div className="flex flex-col justify-between gap-4 border-b border-border p-5 sm:flex-row sm:items-center">
         <div>
           <h2 className="mb-1 text-base font-medium text-foreground">{t("security.sessions.title")}</h2>
           <p className="text-xs text-muted-foreground">{t("security.sessions.description")}</p>
@@ -83,7 +83,7 @@ export function SettingsSessionsCardClient({ currentSessionId, sessions }: Setti
         </Button>
       </div>
 
-      <div className="divide-y divide-border/40">
+      <div className="divide-y divide-border">
         {sessions.map((session) => (
           <AdminActiveSessionRowClient
             key={session.token}

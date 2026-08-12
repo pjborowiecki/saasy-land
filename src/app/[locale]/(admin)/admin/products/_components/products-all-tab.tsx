@@ -20,7 +20,7 @@ export function ProductsAllTab({ products }: ProductsAllTabProps): JSX.Element {
 
       <ProductsTableCard end={4} total={4}>
         <ProductsTableHead variant="all" />
-        <tbody className="divide-y divide-border/40">
+        <tbody className="divide-y divide-border">
           {products.map((product) => (
             <ProductsTableRow key={product.id} product={product} />
           ))}

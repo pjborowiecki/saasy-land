@@ -29,9 +29,7 @@ export async function BlogPostTableRow({ post }: BlogPostTableRowProps): Promise
         <Checkbox className="mx-auto" />
       </TableCell>
       <TableCell className="py-4">
-        <div
-          className={`cursor-pointer truncate font-medium text-foreground transition-colors hover:text-${post.categoryColor}-500 max-w-[300px]`}
-        >
+        <div className="max-w-75 cursor-pointer truncate font-medium text-foreground transition-colors duration-200 ease-exp hover:text-muted-foreground">
           {post.title}
         </div>
         <div className="mt-1 text-xs text-muted-foreground">
@@ -39,18 +37,16 @@ export async function BlogPostTableRow({ post }: BlogPostTableRowProps): Promise
         </div>
       </TableCell>
       <TableCell className="py-4">
-        <Badge variant="secondary" className="flex w-fit items-center gap-1.5 border-border/50">
-          <div className={`size-1.5 rounded-full ${getBlogPostStatusDotClass(post.status)}`} />
+        <Badge
+          className="flex w-fit items-center gap-1.5 rounded-md border-border bg-muted px-2 py-0.5 text-[0.6875rem] font-medium"
+          variant="secondary"
+        >
+          <span aria-hidden className={`size-1.5 rounded-full ${getBlogPostStatusDotClass(post.status)}`} />
           {t(`badges.${post.status}`)}
         </Badge>
       </TableCell>
       <TableCell className="py-4">
-        <Badge
-          variant="secondary"
-          className={`bg-${post.categoryColor}-500/10 text-${post.categoryColor}-500 border-transparent hover:bg-${post.categoryColor}-500/20`}
-        >
-          {post.category}
-        </Badge>
+        <span className="font-mono text-label text-muted-foreground uppercase">{post.category}</span>
       </TableCell>
       <TableCell className="py-4">
         <BlogPostTableAuthor post={post} />
@@ -63,7 +59,7 @@ export async function BlogPostTableRow({ post }: BlogPostTableRowProps): Promise
         <Button
           variant="ghost"
           size="icon"
-          className="size-8 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 hover:bg-secondary hover:text-foreground focus:opacity-100"
+          className="size-8 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 hover:bg-muted hover:text-foreground focus:opacity-100"
         >
           <MoreHorizontal className="size-4" />
         </Button>
@@ -75,10 +71,13 @@ export async function BlogPostTableRow({ post }: BlogPostTableRowProps): Promise
 function BlogPostTableAuthor({ post }: BlogPostTableRowProps): JSX.Element {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="flex size-6 items-center justify-center rounded-full border border-border/50 bg-secondary text-[10px] font-medium text-foreground">
+      <span
+        aria-hidden
+        className="flex size-6 items-center justify-center rounded-md bg-muted text-[0.625rem] font-semibold text-foreground"
+      >
         {post.author.initials}
-      </div>
-      <span className="text-sm font-medium text-foreground">{post.author.name}</span>
+      </span>
+      <span className="text-foreground">{post.author.name}</span>
     </div>
   )
 }

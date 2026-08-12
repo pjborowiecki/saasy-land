@@ -14,10 +14,16 @@ import { cn } from "~/src/utils"
 
 import { Button, type ButtonProps } from "~/src/presentation/components/shadcn/button"
 
+import { AUTH_SECONDARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { ROUTES } from "~/src/routes"
 
-const OAUTH_BUTTON_STYLES =
-  "h-11 w-full gap-2 rounded-xl border-white/10 bg-white/5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] backdrop-blur-md hover:bg-white/10"
+/*
+ * Hairline, never a fill: the one filled surface on each page belongs to the submit.
+ * The marks keep their own brand colours because Google and GitHub are identity, not
+ * decoration, and they lead the label from the left edge so both buttons align on one
+ * vertical.
+ */
+const OAUTH_BUTTON_STYLES = "justify-start px-4"
 
 interface OAuthButtonProps extends Omit<ButtonProps, "children" | "type" | "variant"> {
   provider: keyof typeof auth.options.socialProviders
@@ -53,10 +59,10 @@ export function OAuthButton({ provider, Icon, className, ...rest }: Readonly<OAu
       onPress={handleSignIn}
       id={`oauth-button-${provider}`}
       aria-label={tAuth(`oauth.${provider}`)}
-      className={cn(OAUTH_BUTTON_STYLES, className)}
+      className={cn(AUTH_SECONDARY_BUTTON_CLASS, OAUTH_BUTTON_STYLES, className)}
       {...rest}
     >
-      {isPending ? <Loader2 className="size-4 animate-spin" /> : <Icon className="size-4" />}
+      {isPending ? <Loader2 aria-hidden className="size-4 animate-spin" strokeWidth={1.5} /> : <Icon className="size-4" />}
       {tAuth(`oauth.${provider}`)}
     </Button>
   )

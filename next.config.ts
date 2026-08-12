@@ -5,6 +5,7 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  distDir: process.env["NEXT_DIST_DIR"] ?? ".next",
   experimental: {
     authInterrupts: true,
     exposeTestingApiInProductionBuild: process.env["VERCEL_ENV"] === "preview" || process.env["EXPOSE_TESTING_API"] === "1",
@@ -25,6 +26,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   serverExternalPackages: ["better-auth"],
   typedRoutes: true,
+  typescript: { ignoreBuildErrors: process.env["NEXT_DIST_DIR"] !== undefined },
 }
 
 const withNextIntl = createNextIntlPlugin({

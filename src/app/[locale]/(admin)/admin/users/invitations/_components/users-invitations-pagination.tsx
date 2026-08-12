@@ -10,7 +10,7 @@ import { PAGINATION_FIRST_PAGE, PAGINATION_PAGES } from "~/src/app/[locale]/(adm
 export function UsersInvitationsPagination(): JSX.Element {
   const t = useTranslations("pages.admin.users")
   return (
-    <div className="flex items-center justify-between border-t border-border/40 bg-secondary/10 px-4 py-3">
+    <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-3">
       <span className="text-xs font-medium text-muted-foreground">
         {t("invitations.pagination.info", {
           end: 5,

@@ -1,30 +1,44 @@
 import type { JSX } from "react"
 
-import { AlignCenter, AlignLeft, AlignRight } from "lucide-react"
+import { AlignCenter, AlignLeft, AlignRight, type LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+
+import { cn } from "~/src/utils"
+
+const ICON_STROKE_WIDTH = 1.5
+
+const ALIGN_BUTTON_BASE =
+  "flex h-9 flex-1 items-center justify-center rounded-none transition-[color,background-color] duration-200 ease-exp outline-none focus-visible:relative focus-visible:z-10 focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none"
+
+interface AlignButtonProps {
+  readonly icon: LucideIcon
+  readonly isActive: boolean
+  readonly label: string
+}
+
+function AlignButton({ icon: Icon, isActive, label }: AlignButtonProps): JSX.Element {
+  return (
+    <button
+      aria-label={label}
+      aria-pressed={isActive}
+      className={cn(ALIGN_BUTTON_BASE, isActive ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground")}
+      type="button"
+    >
+      <Icon aria-hidden className="size-4" strokeWidth={ICON_STROKE_WIDTH} />
+    </button>
+  )
+}
 
 export async function LandingPagePropertiesLayoutSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.landing-page")
 
   return (
-    <div className="space-y-3">
-      <h4 className="text-xs font-medium tracking-wider text-muted-foreground uppercase">{t("properties.layout")}</h4>
-      <div className="grid grid-cols-3 gap-2 rounded-lg border border-border/40 bg-secondary/20 p-1">
-        <button
-          type="button"
-          className="flex justify-center rounded border border-transparent p-2 text-muted-foreground transition-colors hover:bg-secondary/40"
-        >
-          <AlignLeft className="size-4.5" />
-        </button>
-        <button type="button" className="flex justify-center rounded bg-secondary p-2 text-foreground shadow-sm">
-          <AlignCenter className="size-4.5" />
-        </button>
-        <button
-          type="button"
-          className="flex justify-center rounded border border-transparent p-2 text-muted-foreground transition-colors hover:bg-secondary/40"
-        >
-          <AlignRight className="size-4.5" />
-        </button>
+    <div className="px-4 py-5">
+      <h3 className="font-mono text-label text-muted-foreground uppercase">{t("properties.layout")}</h3>
+      <div className="mt-3 flex divide-x divide-border rounded-lg border border-border">
+        <AlignButton icon={AlignLeft} isActive={false} label={t("properties.alignLeft")} />
+        <AlignButton icon={AlignCenter} isActive label={t("properties.alignCenter")} />
+        <AlignButton icon={AlignRight} isActive={false} label={t("properties.alignRight")} />
       </div>
     </div>
   )

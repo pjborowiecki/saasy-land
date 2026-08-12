@@ -12,7 +12,7 @@ import { resolveProductTab } from "~/src/app/[locale]/(admin)/admin/products/_li
 const PRODUCTS_CATALOG_FALLBACK = (
   <div className="w-full space-y-6">
     <div className="h-9 w-full max-w-md animate-pulse rounded-md border-b border-border bg-muted/20" />
-    <div className="h-64 animate-pulse rounded-lg border border-border/60 bg-muted/30" />
+    <div className="h-64 animate-pulse rounded-lg border border-border bg-muted/30" />
   </div>
 )
 
@@ -32,7 +32,7 @@ export default async function ProductsPage({ searchParams }: PageProps<"/[locale
     <div className="flex w-full animate-in flex-col space-y-8 duration-500 fade-in-50">
       <div className="flex flex-col gap-4">
         <div>
-          <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("title")}</h1>
+          <h1 className="text-statement font-semibold text-foreground">{t("title")}</h1>
           <p className="text-sm text-muted-foreground">{t("description")}</p>
         </div>
       </div>

@@ -15,6 +15,8 @@
   "atLeastOneSpecialCharacter": "Co najmniej jeden znak specjalny",
   "atLeastOneUppercase": "Co najmniej jedna wielka litera",
   "requirementsListLabel": "Wymagania dotyczące hasła",
+  "requirementMet": "Spełnione",
+  "requirementNotMet": "Jeszcze niespełnione",
   "twoFactorCodeRequired": "Kod uwierzytelniający jest wymagany.",
   "twoFactorCodeLength": "Kod uwierzytelniający musi mieć {length} cyfr.",
   "backupCodeRequired": "Kod zapasowy jest wymagany.",

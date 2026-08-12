@@ -8,36 +8,42 @@ import { DashboardChartSvg } from "~/src/app/[locale]/(admin)/admin/dashboard/_c
 const CHART_Y_AXIS_LABELS = ["$30k", "$20k", "$10k", "$0"] as const
 const CHART_X_AXIS_LABELS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
 
+const GRIDLINE_COUNT = 4
+
 interface DashboardChartProps {
   readonly chartXAxis?: readonly string[]
   readonly chartYAxis?: readonly string[]
 }
 
+/**
+ * Axis labels are monospace and tabular, because they are measurements. Gridlines are the
+ * hairline token at a single weight, not two weights of grey, and there is no gradient wash
+ * over the plot: the series is the only thing in the card carrying colour, which is what makes
+ * a single accent line readable at a glance.
+ */
 export function DashboardChart({ chartXAxis = CHART_X_AXIS_LABELS, chartYAxis = CHART_Y_AXIS_LABELS }: DashboardChartProps): JSX.Element {
   return (
-    <Card className="group relative overflow-hidden border-border/80 p-5 transition-colors hover:border-border/40">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
+    <Card className="gap-0 p-5">
       <DashboardChartHeader />
 
-      <div className="relative h-[280px] w-full">
-        <div className="absolute top-0 bottom-6 left-0 flex flex-col justify-between text-xs font-medium text-muted-foreground">
+      <div className="relative mt-7 h-70 w-full">
+        <div className="absolute top-0 bottom-6 left-0 flex flex-col justify-between font-mono text-[0.6875rem] text-muted-foreground tabular-nums">
           {chartYAxis.map((label) => (
             <span key={label}>{label}</span>
           ))}
         </div>
 
-        <div className="absolute top-2 right-0 bottom-8 left-10 flex flex-col justify-between">
-          <div className="h-px w-full bg-border/40" />
-          <div className="h-px w-full bg-border/40" />
-          <div className="h-px w-full bg-border/40" />
-          <div className="h-px w-full bg-border/40" />
+        <div className="absolute top-2 right-0 bottom-8 left-11 flex flex-col justify-between">
+          {Array.from({ length: GRIDLINE_COUNT }, (_, index) => (
+            <div className="h-px w-full bg-border" key={index} />
+          ))}
         </div>
 
-        <div className="absolute top-2 right-0 bottom-8 left-10">
+        <div className="absolute top-2 right-0 bottom-8 left-11">
           <DashboardChartSvg />
         </div>
 
-        <div className="absolute right-0 bottom-0 left-10 flex justify-between text-xs font-medium text-muted-foreground">
+        <div className="absolute right-0 bottom-0 left-11 flex justify-between font-mono text-[0.6875rem] text-muted-foreground">
           {chartXAxis.map((label) => (
             <span key={label}>{label}</span>
           ))}

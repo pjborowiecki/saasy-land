@@ -1,43 +1,16 @@
 import type { JSX } from "react"
 
-import { Star } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { LandingPageSectionActions } from "~/src/app/[locale]/(admin)/admin/landing-page/_components/landing-page-section-actions"
 
-export async function LandingPageHeroSection(): Promise<JSX.Element> {
-  const t = await getTranslations("pages.admin.landing-page")
-
-  return (
-    <div className="group relative overflow-hidden rounded-xl border border-border/10 bg-card p-12 text-center shadow-sm ring-2 ring-fuchsia-500">
-      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-fuchsia-500/5 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-fuchsia-500 px-3 py-1 text-[10px] font-bold tracking-wider text-white uppercase shadow-lg">
-        {t("sidebar.sections.hero")}
-      </div>
-      <LandingPageSectionActions />
-      <div className="relative z-10 mx-auto max-w-2xl">
-        <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-fuchsia-500/20 bg-fuchsia-500/10 px-3 py-1 text-xs font-medium text-fuchsia-500">
-          <Star className="size-3.5" />
-          {t("canvas.newRelease")}
-        </span>
-        <h1 className="mb-6 text-4xl leading-tight font-semibold tracking-tight text-foreground md:text-5xl">
-          {t("canvas.supercharge")}
-          <span className="bg-linear-to-r from-fuchsia-500 to-purple-500 bg-clip-text text-transparent">{t("canvas.growth")}</span>
-        </h1>
-        <p className="mb-8 text-lg leading-relaxed text-muted-foreground">{t("canvas.description")}</p>
-        <LandingPageHeroActions />
-      </div>
-    </div>
-  )
-}
-
 async function LandingPageHeroActions(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.landing-page")
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
       <Button size="lg" className="h-12 px-8">
         {t("canvas.getStarted")}
       </Button>
@@ -45,5 +18,33 @@ async function LandingPageHeroActions(): Promise<JSX.Element> {
         {t("canvas.bookDemo")}
       </Button>
     </div>
+  )
+}
+
+/**
+ * The selected section on the canvas. Selection is a state, so it is drawn in the accent: a 1px
+ * hairline in `--ring` plus a high-contrast chip, never a glow or a raised card.
+ */
+export async function LandingPageHeroSection(): Promise<JSX.Element> {
+  const t = await getTranslations("pages.admin.landing-page")
+
+  return (
+    <section aria-label={t("sidebar.sections.hero")} className="group relative border border-ring bg-card px-6 py-14 sm:px-12">
+      <span className="absolute -top-px -left-px bg-foreground px-2 py-1 font-mono text-label text-background uppercase">
+        {t("sidebar.sections.hero")}
+      </span>
+      <LandingPageSectionActions />
+
+      <div className="mx-auto max-w-2xl text-center">
+        <span className="inline-flex items-center border border-border bg-background px-2.5 py-1 text-body-sm font-medium text-muted-foreground">
+          {t("canvas.badge")}
+        </span>
+        <p className="mt-6 text-4xl leading-tight font-semibold tracking-tight text-balance text-foreground md:text-5xl">
+          {t("canvas.headingLead")} <span className="text-ring">{t("canvas.headingAccent")}</span>
+        </p>
+        <p className="mt-6 text-lg leading-relaxed text-pretty text-muted-foreground">{t("canvas.description")}</p>
+        <LandingPageHeroActions />
+      </div>
+    </section>
   )
 }

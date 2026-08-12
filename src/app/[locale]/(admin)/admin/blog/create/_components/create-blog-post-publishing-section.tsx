@@ -12,13 +12,13 @@ export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog.create")
 
   return (
-    <Card className="border-border/40 p-5 sm:p-6">
+    <Card className="border-border p-5 sm:p-6">
       <h3 className="mb-4 text-sm font-medium text-foreground">{t("settings.publishing")}</h3>
       <div className="space-y-4">
         <div className="space-y-1.5">
           <Select
             fieldLabel={t("settings.status")}
-            fieldLabelClassName="text-xs tracking-wider text-muted-foreground uppercase"
+            fieldLabelClassName="font-mono text-label text-muted-foreground uppercase"
             defaultValue="draft"
           >
             <SelectTrigger className="w-full bg-card">
@@ -34,7 +34,7 @@ export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
         <div className="space-y-1.5">
           <Select
             fieldLabel={t("settings.category")}
-            fieldLabelClassName="text-xs tracking-wider text-muted-foreground uppercase"
+            fieldLabelClassName="font-mono text-label text-muted-foreground uppercase"
             placeholder={t("settings.categorySelect")}
           >
             <SelectTrigger className="w-full bg-card">
@@ -48,13 +48,13 @@ export async function CreateBlogPostPublishingSection(): Promise<JSX.Element> {
           </Select>
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="tags" className="text-xs tracking-wider text-muted-foreground uppercase">
+          <Label htmlFor="tags" className="font-mono text-label text-muted-foreground uppercase">
             {t("settings.tags")}
           </Label>
           <Input id="tags" placeholder={t("settings.tagsPlaceholder")} className="bg-card" />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="excerpt" className="text-xs tracking-wider text-muted-foreground uppercase">
+          <Label htmlFor="excerpt" className="font-mono text-label text-muted-foreground uppercase">
             {t("settings.excerpt")}
           </Label>
           <Textarea

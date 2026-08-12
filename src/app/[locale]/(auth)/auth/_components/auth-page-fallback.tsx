@@ -1,13 +1,27 @@
 import type { JSX } from "react"
 
+import { cn } from "~/src/utils"
+
+/**
+ * The Suspense placeholder holds the exact shape of the column it replaces, so nothing
+ * shifts when the page arrives.
+ */
+function SkeletonBar({ className }: Readonly<{ className: string }>): JSX.Element {
+  return <span className={cn("block animate-pulse rounded-sm bg-muted motion-reduce:animate-none", className)} />
+}
+
 export function AuthPageFallback(): JSX.Element {
   return (
-    <div className="flex w-full max-w-105 flex-col gap-8">
-      <div className="flex flex-col items-center gap-2">
-        <div className="h-9 w-48 animate-pulse rounded-lg bg-muted" />
-        <div className="h-4 w-72 animate-pulse rounded bg-muted" />
+    <div aria-hidden className="flex w-full max-w-105 flex-col">
+      <SkeletonBar className="h-12 w-2/3" />
+      <SkeletonBar className="mt-4 h-4 w-full" />
+
+      <div className="mt-10 flex flex-col gap-6">
+        <SkeletonBar className="h-11 w-full" />
+        <SkeletonBar className="h-11 w-full" />
+        <SkeletonBar className="h-11 w-full" />
+        <SkeletonBar className="h-12 w-full" />
       </div>
-      <div className="h-80 animate-pulse rounded-2xl border border-border/40 bg-muted/30" />
     </div>
   )
 }

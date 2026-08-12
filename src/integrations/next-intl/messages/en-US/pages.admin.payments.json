@@ -41,7 +41,8 @@
       "item": "Original Item",
       "reason": "Reason",
       "date": "Date",
-      "status": "Status"
+      "status": "Status",
+      "rowActions": "Row actions"
     },
     "pagination": {
       "showing": "Showing 1 to 4 of 24 results",
@@ -50,6 +51,7 @@
       "page1": "1",
       "page2": "2",
       "ellipsis": "..."
-    }
+    },
+    "filter": "Filter refunds"
   }
 }

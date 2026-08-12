@@ -15,6 +15,8 @@
   "atLeastOneSpecialCharacter": "At least one special character",
   "atLeastOneUppercase": "At least one uppercase letter",
   "requirementsListLabel": "Password requirements",
+  "requirementMet": "Met",
+  "requirementNotMet": "Not met yet",
   "twoFactorCodeRequired": "Authentication code is required.",
   "twoFactorCodeLength": "Authentication code must be {length} digits.",
   "backupCodeRequired": "Backup code is required.",

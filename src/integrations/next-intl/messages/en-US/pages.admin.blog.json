@@ -27,7 +27,7 @@
   "meta": {
     "readTime": "{minutes} min read",
     "publishedOn": "{date}",
-    "lastEdited": "Last edited {time} ago",
+    "lastEdited": "Last edited {time}",
     "publishesTomorrow": "Publishes tomorrow"
   },
   "labels": {
@@ -42,7 +42,10 @@
     "author": "Author",
     "date": "Date",
     "views": "Views",
-    "actions": "Actions"
+    "actions": "Actions",
+    "selectRow": "Select row",
+    "emptyValue": "Not set",
+    "rowActions": "Row actions"
   },
   "pagination": {
     "info": "Showing {start} to {end} of {total} posts"

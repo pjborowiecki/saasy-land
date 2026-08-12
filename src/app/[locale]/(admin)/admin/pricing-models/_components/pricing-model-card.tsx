@@ -39,12 +39,20 @@ export async function PricingModelCard({
 }: PricingModelCardProps): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.pricing-models")
   return (
-    <Card className={`group relative flex h-full flex-col ${cardClassName ?? ""}`}>
-      {popularBadge && <Badge className="absolute -top-3 left-6 px-3 py-1 text-xs font-medium">{t("tags.mostPopular")}</Badge>}
+    // The Card clips its children (`overflow-hidden`, so images meet its radius), which sliced
+    // the top half off a badge hung on `-top-3`. The marker now sits inside the card as a band
+    // across the head of the column, which also means the three cards stay the same height.
+    <Card className={`group relative flex h-full flex-col gap-0 py-0 ${cardClassName ?? ""}`}>
+      {popularBadge ? (
+        <p className="flex items-center gap-2 border-b border-border bg-muted/50 px-5 py-2 font-mono text-label text-foreground uppercase sm:px-6">
+          <span aria-hidden className="size-1.25 rounded-xs bg-ring" />
+          {t("tags.mostPopular")}
+        </p>
+      ) : undefined}
       <CardContent className="flex h-full flex-col p-5 sm:p-6">
         <div className="mb-4 flex items-start justify-between">
           <div>
-            <Badge variant="secondary" className={`mb-3 gap-1.5 text-xs font-medium ${popularBadge ? "mt-1" : ""}`}>
+            <Badge variant="secondary" className="mb-3 gap-1.5 text-xs font-medium">
               <TagIcon className="size-3" />
               {t(tagKey)}
             </Badge>
@@ -56,28 +64,28 @@ export async function PricingModelCard({
         </div>
 
         <div className="mb-6">
-          <div className="flex items-end gap-1">
-            <span className="text-3xl font-medium tracking-tight text-foreground">{t(`models.${modelKey}.price`)}</span>
-            <span className="mb-1 text-sm text-muted-foreground">{t(`models.${modelKey}.interval`)}</span>
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-price text-foreground tabular-nums">{t(`models.${modelKey}.price`)}</span>
+            <span className="font-mono text-spec text-muted-foreground">{t(`models.${modelKey}.interval`)}</span>
           </div>
-          <p className={`mt-2 text-sm ${descriptionClassName ?? "text-muted-foreground"}`}>{t(`models.${modelKey}.description`)}</p>
+          <p className={`mt-2 text-body-sm ${descriptionClassName ?? "text-muted-foreground"}`}>{t(`models.${modelKey}.description`)}</p>
         </div>
 
-        <div className="mb-6 h-px w-full bg-border/40" />
+        <div className="mb-6 h-px w-full bg-border" />
 
         <div className="flex-1">
-          <p className="mb-4 text-xs font-medium tracking-wider text-muted-foreground uppercase">{t("labels.includedAccess")}</p>
+          <p className="mb-4 font-mono text-label text-muted-foreground uppercase">{t("labels.includedAccess")}</p>
           <ul className="space-y-3">
             {featureKeys.map((featureKey) => (
               <li key={featureKey} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-ring" strokeWidth={1.75} />
                 <span className="text-sm text-muted-foreground">{t(`features.${featureKey}`)}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="mt-8 flex items-center justify-between border-t border-border/40 pt-5">
+        <div className="mt-8 flex items-center justify-between border-t border-border pt-5">
           <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
             <FooterIcon className="size-4" />
             {footerLabelKey === "labels.activeUsers" && activeUserCount !== undefined

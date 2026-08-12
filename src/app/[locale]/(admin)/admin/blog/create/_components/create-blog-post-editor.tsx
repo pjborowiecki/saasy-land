@@ -20,7 +20,7 @@ export async function CreateBlogPostEditor(): Promise<JSX.Element> {
         <Input
           id="title"
           placeholder={t("editor.titlePlaceholder")}
-          className="h-12 border-border/40 bg-card px-4 text-lg font-medium shadow-sm"
+          className="h-12 border-border bg-card px-4 text-lg font-medium shadow-sm"
         />
       </div>
 
@@ -29,15 +29,15 @@ export async function CreateBlogPostEditor(): Promise<JSX.Element> {
           {t("editor.slug")}
         </Label>
         <div className="flex shadow-sm">
-          <span className="inline-flex items-center rounded-l-md border border-r-0 border-border/40 bg-secondary/30 px-4 text-muted-foreground sm:text-sm">
+          <span className="inline-flex items-center rounded-l-md border border-r-0 border-border bg-muted/40 px-4 text-muted-foreground sm:text-sm">
             saasyland.com/blog/
           </span>
-          <Input id="slug" placeholder={t("editor.slugPlaceholder")} className="rounded-l-none border-border/40 bg-card" />
+          <Input id="slug" placeholder={t("editor.slugPlaceholder")} className="rounded-l-none border-border bg-card" />
         </div>
       </div>
 
-      <Card className="flex h-[500px] flex-col overflow-hidden border-border/40 bg-card">
-        <div className="flex flex-wrap items-center gap-1 border-b border-border/40 bg-secondary/20 p-2">
+      <Card className="flex h-[500px] flex-col overflow-hidden border-border bg-card">
+        <div className="flex flex-wrap items-center gap-1 border-b border-border bg-muted/40 p-2">
           <Button variant="ghost" size="icon" className="size-8 text-muted-foreground hover:text-foreground">
             <Bold className="size-4" />
           </Button>

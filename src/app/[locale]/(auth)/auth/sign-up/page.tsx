@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { AuthPageFallback } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-fallback"
+import { AuthPageShell } from "~/src/app/[locale]/(auth)/auth/_components/auth-page-shell"
 import { AuthSeparator } from "~/src/app/[locale]/(auth)/auth/_components/auth-separator"
 import { OAuthButtons } from "~/src/app/[locale]/(auth)/auth/_components/oauth-buttons"
 import { SignUpWithPasswordForm } from "~/src/app/[locale]/(auth)/auth/sign-up/_components/sign-up-with-password-form"
@@ -21,20 +22,25 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+const CROSS_LINK_CLASS =
+  "font-medium text-foreground underline-offset-4 transition-colors duration-200 ease-exp hover:text-muted-foreground"
+
+const LEGAL_LINK_CLASS = "text-foreground underline underline-offset-4 transition-colors duration-200 ease-exp hover:text-muted-foreground"
+
 const renderSignInLink = (chunks: ReactNode) => (
-  <Link href={ROUTES.SIGN_IN} className="font-medium text-foreground transition-colors hover:text-primary">
+  <Link className={CROSS_LINK_CLASS} href={ROUTES.SIGN_IN}>
     {chunks}
   </Link>
 )
 
 const renderTermsLink = (chunks: ReactNode) => (
-  <Link href={ROUTES.TERMS} className="text-foreground transition-colors hover:underline">
+  <Link className={LEGAL_LINK_CLASS} href={ROUTES.TERMS}>
     {chunks}
   </Link>
 )
 
 const renderPrivacyLink = (chunks: ReactNode) => (
-  <Link href={ROUTES.PRIVACY} className="text-foreground transition-colors hover:underline">
+  <Link className={LEGAL_LINK_CLASS} href={ROUTES.PRIVACY}>
     {chunks}
   </Link>
 )
@@ -53,36 +59,18 @@ async function SignUpPageContent(): Promise<JSX.Element> {
   const t = await getTranslations("pages.auth.sign-up")
 
   return (
-    <div className="reveal-elem flex w-full max-w-105 flex-col gap-8">
-      <div className="flex flex-col gap-2 text-center">
-        <h1 className="text-3xl font-medium tracking-tight text-foreground">{t("form.title")}</h1>
-        <p className="text-sm text-muted-foreground">{t("form.description", { name: APP_NAME })}</p>
-      </div>
+    <AuthPageShell
+      description={t("form.description", { name: APP_NAME })}
+      footer={t.rich("form.hasAccount", { signin: renderSignInLink })}
+      title={t("form.title")}
+    >
+      <OAuthButtons />
+      <AuthSeparator label={t("form.or")} />
+      <SignUpWithPasswordForm />
 
-      <div className="relative flex flex-col gap-6 overflow-hidden rounded-2xl border border-white/8 bg-white/2 p-8 shadow-2xl backdrop-blur-2xl md:p-10">
-        <div className="pointer-events-none absolute -top-12 -right-12 z-0 h-64 w-64 rounded-full bg-fuchsia-500/15 blur-[60px]" />
-
-        <div className="relative flex flex-col gap-6">
-          <OAuthButtons />
-          <AuthSeparator label={t("form.or")} />
-          <SignUpWithPasswordForm />
-
-          <p className="text-center text-sm leading-relaxed text-balance text-muted-foreground underline-offset-4">
-            {t.rich("form.termsAndPrivacy", {
-              privacy: renderPrivacyLink,
-              terms: renderTermsLink,
-            })}
-          </p>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-6 text-center">
-        <p className="text-sm text-muted-foreground">
-          {t.rich("form.hasAccount", {
-            signin: renderSignInLink,
-          })}
-        </p>
-      </div>
-    </div>
+      <p className="text-body-sm text-pretty text-muted-foreground">
+        {t.rich("form.termsAndPrivacy", { privacy: renderPrivacyLink, terms: renderTermsLink })}
+      </p>
+    </AuthPageShell>
   )
 }

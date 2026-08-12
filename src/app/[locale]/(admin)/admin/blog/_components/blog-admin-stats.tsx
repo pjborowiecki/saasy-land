@@ -15,8 +15,8 @@ export async function BlogAdminStats(): Promise<JSX.Element> {
             <span className="text-xs font-medium text-muted-foreground">{t("stats.totalViews")}</span>
             <Eye className="size-4 text-muted-foreground" />
           </div>
-          <div className="text-2xl font-medium tracking-tight text-foreground">45.2k</div>
-          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-emerald-500">
+          <div className="text-headline-support text-foreground tabular-nums">45.2k</div>
+          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ring">
             <TrendingUp className="size-3" />
             <span>+12.5%</span>
           </div>
@@ -28,8 +28,8 @@ export async function BlogAdminStats(): Promise<JSX.Element> {
             <span className="text-xs font-medium text-muted-foreground">{t("stats.subscribers")}</span>
             <Users className="size-4 text-muted-foreground" />
           </div>
-          <div className="text-2xl font-medium tracking-tight text-foreground">8,409</div>
-          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-emerald-500">
+          <div className="text-headline-support text-foreground tabular-nums">8,409</div>
+          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ring">
             <TrendingUp className="size-3" />
             <span>+4.2%</span>
           </div>
@@ -41,7 +41,7 @@ export async function BlogAdminStats(): Promise<JSX.Element> {
             <span className="text-xs font-medium text-muted-foreground">{t("stats.publishedPosts")}</span>
             <Calendar className="size-4 text-muted-foreground" />
           </div>
-          <div className="text-2xl font-medium tracking-tight text-foreground">142</div>
+          <div className="text-headline-support text-foreground tabular-nums">142</div>
           <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
             <span>{t("stats.draftsPending", { count: 12 })}</span>
           </div>

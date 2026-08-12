@@ -25,6 +25,9 @@ import {
   TableWrap,
 } from "~/src/presentation/components/custom/typography"
 import { VercelObservability } from "~/src/presentation/components/custom/vercel-observability"
+import { Wordmark, WordmarkGlyph } from "~/src/presentation/components/custom/wordmark"
+
+import { APP_NAME } from "~/src/presentation/branding"
 
 const DYNAMIC_STUB_COUNT = 2
 
@@ -50,17 +53,40 @@ vi.mock(import("next/dynamic"), async (): Promise<Partial<typeof NextDynamic>> =
 })
 
 describe("background helper", () => {
-  it("renders grid and glow by default", () => {
+  it("renders grid and signal by default", () => {
     expect.hasAssertions()
     const { container } = render(<Background className="test-grid" />)
     expect(container.querySelector(".test-grid")).toHaveClass(backgroundGridPatternClassName)
-    expect(container.querySelector(String.raw`.bg-primary\/10`)).toBeInTheDocument()
+    // The wash is the accent token, not a tint of primary: primary is monochrome in this palette.
+    expect(container.querySelector(".field-signal")).toBeInTheDocument()
   })
 
-  it("can hide glow", () => {
+  it("can hide the signal", () => {
     expect.hasAssertions()
     const { container } = render(<Background glow={false} />)
-    expect(container.querySelector(String.raw`.bg-primary\/10`)).not.toBeInTheDocument()
+    expect(container.querySelector(".field-signal")).not.toBeInTheDocument()
+  })
+})
+
+describe("wordmark", () => {
+  it("renders the mark beside the product name", () => {
+    expect.hasAssertions()
+    const { container } = render(<Wordmark className="test-wordmark" />)
+    expect(container.querySelector(".test-wordmark")).toBeInTheDocument()
+    expect(screen.getByText(APP_NAME)).toBeInTheDocument()
+    expect(container.querySelector("svg")).toBeInTheDocument()
+  })
+
+  it("renders the mark alone when the name would be redundant", () => {
+    expect.hasAssertions()
+    render(<Wordmark glyphOnly />)
+    expect(screen.queryByText(APP_NAME)).not.toBeInTheDocument()
+  })
+
+  it("exposes the glyph on its own for tight chrome", () => {
+    expect.hasAssertions()
+    const { container } = render(<WordmarkGlyph className="test-glyph" />)
+    expect(container.querySelector(".test-glyph")).toBeInTheDocument()
   })
 })
 

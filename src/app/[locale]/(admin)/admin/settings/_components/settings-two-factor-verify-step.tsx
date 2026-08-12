@@ -56,7 +56,7 @@ export function SettingsTwoFactorVerifyStep({ onVerified, totpUri }: Readonly<Se
   return (
     <div className="flex flex-col gap-4">
       <p className="text-sm text-muted-foreground">{t("security.twoFactor.scanInstructions")}</p>
-      <code className="block overflow-x-auto rounded-md bg-secondary/40 p-3 text-xs text-foreground">{extractTotpSecret(totpUri)}</code>
+      <code className="block overflow-x-auto rounded-md bg-muted/60 p-3 text-xs text-foreground">{extractTotpSecret(totpUri)}</code>
 
       <Field>
         <FieldLabel htmlFor={`${AUTH_FORM_IDS.TWO_FACTOR}-setup-code`}>{t("security.twoFactor.verificationCode")}</FieldLabel>

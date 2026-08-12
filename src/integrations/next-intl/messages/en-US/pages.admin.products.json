@@ -37,10 +37,32 @@
       "pricing": "Pricing",
       "status": "Status",
       "metrics": "Metrics"
+    },
+    "actionsColumn": "Row actions",
+    "emptyValue": "n/a",
+    "rowActions": "Row actions",
+    "selectAll": "Select all rows",
+    "selectRow": "Select row",
+    "statusLabels": {
+      "archived": "Archived",
+      "draft": "Draft",
+      "published": "Active"
+    },
+    "typeLabels": {
+      "course": "Course",
+      "one_time": "One-time",
+      "subscription": "Subscription"
+    },
+    "visibilityLabels": {
+      "hidden": "Hidden",
+      "public": "Public"
     }
   },
   "pagination": {
-    "info": "Showing {start} to {end} of {total} products"
+    "info": "Showing {start} to {end} of {total} products",
+    "goToPage": "Go to page {page}",
+    "nextPage": "Next page",
+    "previousPage": "Previous page"
   },
   "onetime": {
     "title": "One-time Purchases",
@@ -81,6 +103,13 @@
         "items": "Items",
         "lastUpdated": "Last Updated"
       }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "No courses yet",
+      "description": "Courses you publish appear here with their lessons, pricing and enrolment counts. Create the first one to get started.",
+      "action": "Create course"
     }
   }
 }

@@ -32,8 +32,8 @@ const ANALYTICS_Y_AXIS_LABELS = ["$4k", "$3k", "$2k", "$1k", "$0"] as const
 export async function AnalyticsRevenueChart(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.analytics")
   return (
-    <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-      <div className="flex flex-col gap-4 border-b border-border/40 p-5 sm:flex-row sm:items-center sm:justify-between lg:p-6">
+    <Card className="group relative overflow-hidden border-border transition-colors hover:border-border">
+      <div className="flex flex-col gap-4 border-b border-border p-5 sm:flex-row sm:items-center sm:justify-between lg:p-6">
         <div>
           <h2 className="text-base font-medium text-foreground">{t("chart.title")}</h2>
           <p className="mt-1 text-xs text-muted-foreground">{t("chart.description")}</p>
@@ -53,7 +53,7 @@ export async function AnalyticsRevenueChart(): Promise<JSX.Element> {
       <div className="relative flex h-72 flex-col p-6">
         <div className="pointer-events-none absolute inset-y-6 right-6 left-6 z-0 flex flex-col justify-between">
           {ANALYTICS_Y_AXIS_LABELS.map((label) => (
-            <div key={label} className="flex w-full items-center justify-start border-t border-border/20">
+            <div key={label} className="flex w-full items-center justify-start border-t border-border">
               <span className="-mt-2 bg-card pr-2 text-xs text-muted-foreground">{label}</span>
             </div>
           ))}

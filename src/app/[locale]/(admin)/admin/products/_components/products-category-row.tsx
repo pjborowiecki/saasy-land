@@ -38,7 +38,7 @@ export function ProductsCategoryRow({ category }: ProductsCategoryRowProps): JSX
   const isPublic = category.visibility === "public"
 
   return (
-    <tr className="group transition-colors hover:bg-secondary/20">
+    <tr className="group transition-colors hover:bg-muted/40">
       <td className="p-4 pt-5 align-top">
         <AdminTableCheckbox />
       </td>

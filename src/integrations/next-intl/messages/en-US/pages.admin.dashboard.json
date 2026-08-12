@@ -19,7 +19,7 @@
   "chart": {
     "title": "Revenue Overview",
     "description": "Monthly recurring revenue over the last 12 months",
-    "placeholder": "Revenue analytics will appear here once billing is connected.",
+    "placeholder": "Illustrative series. Real revenue appears here once billing is connected.",
     "filters": {
       "12m": "12M",
       "30d": "30D",
@@ -42,6 +42,15 @@
         "status": "Status",
         "lastActive": "Last Active",
         "actions": "Actions"
+      },
+      "status": {
+        "active": "Active",
+        "banned": "Banned",
+        "pending": "Pending"
+      },
+      "rowActions": {
+        "edit": "Edit user",
+        "delete": "Delete user"
       },
       "pagination": {
         "showing": "Showing {from} to {to} of {total} users",

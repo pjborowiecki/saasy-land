@@ -24,7 +24,7 @@ export async function PaymentsRefundStatCard({
         <Icon className="size-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-medium tracking-tight">{t(`stats.${statKey}.value`)}</div>
+        <div className="text-headline-support text-foreground tabular-nums">{t(`stats.${statKey}.value`)}</div>
         <PaymentsRefundStatTrend statKey={statKey} trendIcon={TrendIcon} />
       </CardContent>
     </Card>
@@ -49,7 +49,7 @@ async function PaymentsRefundStatTrend({
   }
 
   return (
-    <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-emerald-500 dark:text-emerald-400">
+    <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ring">
       {TrendIcon !== undefined && <TrendIcon className="size-3.5" />}
       <span>{t(`stats.${statKey}.trend`)}</span>
       <span className="ml-1 text-muted-foreground">{t("stats.vsLastMonth")}</span>

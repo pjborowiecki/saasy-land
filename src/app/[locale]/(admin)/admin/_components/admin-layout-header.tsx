@@ -1,45 +1,31 @@
 import { Suspense, type JSX } from "react"
 
-import { Bell, Search } from "lucide-react"
-
-import { Button } from "~/src/presentation/components/shadcn/button"
-import { Input } from "~/src/presentation/components/shadcn/input"
-import { Kbd, KbdGroup } from "~/src/presentation/components/shadcn/kbd"
 import { SidebarTrigger } from "~/src/presentation/components/shadcn/sidebar"
 
 import { AdminBreadcrumbs } from "~/src/app/[locale]/(admin)/admin/_components/admin-breadcrumbs"
+import { AdminCommandPalette } from "~/src/app/[locale]/(admin)/admin/_components/admin-command-palette"
 
+/**
+ * `h-14`, matched to the sidebar header, so the two bars read as one line across the console.
+ *
+ * Two controls and a trail. The notification bell is gone: there is no notification system in
+ * this codebase, so the bell was a button that opened nothing, and a console with a dead control
+ * in its chrome cannot be trusted about the controls that are alive. Theme selection lives in
+ * Settings, where the rest of the preferences are, rather than as a third icon up here.
+ */
 export function AdminLayoutHeader(): JSX.Element {
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border/40 bg-secondary/20 px-4 backdrop-blur-xl md:px-6">
-      <div className="flex items-center gap-4">
-        <SidebarTrigger className="-ml-2" />
+    <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border bg-background/80 px-3 backdrop-blur-xl md:px-5">
+      <div className="flex min-w-0 items-center gap-2">
+        <SidebarTrigger className="-ml-1 text-muted-foreground" />
+        <span aria-hidden className="hidden h-4 w-px bg-border sm:block" />
         <Suspense>
           <AdminBreadcrumbs />
         </Suspense>
       </div>
-      <div className="flex items-center gap-4">
-        <AdminHeaderSearch />
-        <Button variant="ghost" size="icon" className="text-muted-foreground" aria-label="Notifications">
-          <Bell className="size-5" />
-        </Button>
+      <div className="flex shrink-0 items-center gap-2">
+        <AdminCommandPalette />
       </div>
     </header>
-  )
-}
-
-function AdminHeaderSearch(): JSX.Element {
-  return (
-    <div className="group relative hidden sm:block">
-      <Search className="absolute top-1/2 left-3 size-[18px] -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-foreground" />
-      <Input
-        placeholder="Search global..."
-        className="h-9 w-64 border-border/40 bg-secondary/20 pr-4 pl-10 text-sm text-foreground transition-all placeholder:text-muted-foreground focus:border-border/80 focus:bg-secondary/40"
-      />
-      <KbdGroup className="absolute top-1/2 right-2 hidden -translate-y-1/2 lg:inline-flex">
-        <Kbd>⌘</Kbd>
-        <Kbd>K</Kbd>
-      </KbdGroup>
-    </div>
   )
 }
