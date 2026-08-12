@@ -1,36 +1,34 @@
 import type { JSX } from "react"
 
-import { ArrowDown, ArrowUp } from "lucide-react"
+import { ArrowDown, ArrowUp, type LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { Input } from "~/src/presentation/components/shadcn/input"
 import { Label } from "~/src/presentation/components/shadcn/label"
 
-function PaddingTopField({ label }: { readonly label: string }): JSX.Element {
-  return (
-    <div className="space-y-1.5">
-      <Label className="flex items-center gap-1 text-[10px] text-muted-foreground">
-        <ArrowUp className="size-3" />
-        {label}
-      </Label>
-      <div className="relative">
-        <Input type="number" defaultValue="120" className="pr-8 text-sm" />
-        <span className="absolute top-1/2 right-3 -translate-y-1/2 text-xs text-muted-foreground">px</span>
-      </div>
-    </div>
-  )
+const ICON_STROKE_WIDTH = 1.5
+
+const DEFAULT_SECTION_PADDING = "120"
+
+interface PaddingFieldProps {
+  readonly icon: LucideIcon
+  readonly id: string
+  readonly label: string
+  readonly unit: string
 }
 
-function PaddingBottomField({ label }: { readonly label: string }): JSX.Element {
+function PaddingField({ icon: Icon, id, label, unit }: PaddingFieldProps): JSX.Element {
   return (
-    <div className="space-y-1.5">
-      <Label className="flex items-center gap-1 text-[10px] text-muted-foreground">
-        <ArrowDown className="size-3" />
+    <div className="space-y-2">
+      <Label htmlFor={id} className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+        <Icon aria-hidden className="size-3.5 shrink-0" strokeWidth={ICON_STROKE_WIDTH} />
         {label}
       </Label>
       <div className="relative">
-        <Input type="number" defaultValue="120" className="pr-8 text-sm" />
-        <span className="absolute top-1/2 right-3 -translate-y-1/2 text-xs text-muted-foreground">px</span>
+        <Input id={id} type="number" defaultValue={DEFAULT_SECTION_PADDING} className="pr-9 text-sm tabular-nums" />
+        <span aria-hidden className="absolute top-1/2 right-3 -translate-y-1/2 font-mono text-spec text-muted-foreground">
+          {unit}
+        </span>
       </div>
     </div>
   )
@@ -40,11 +38,11 @@ export async function LandingPagePropertiesSpacingSection(): Promise<JSX.Element
   const t = await getTranslations("pages.admin.landing-page")
 
   return (
-    <div className="space-y-3">
-      <h4 className="text-xs font-medium tracking-wider text-muted-foreground uppercase">{t("properties.spacing")}</h4>
-      <div className="grid grid-cols-2 gap-3">
-        <PaddingTopField label={t("properties.paddingTop")} />
-        <PaddingBottomField label={t("properties.paddingBot")} />
+    <div className="px-4 py-5">
+      <h3 className="font-mono text-label text-muted-foreground uppercase">{t("properties.spacing")}</h3>
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <PaddingField icon={ArrowUp} id="section-padding-top" label={t("properties.paddingTop")} unit={t("properties.unit")} />
+        <PaddingField icon={ArrowDown} id="section-padding-bottom" label={t("properties.paddingBot")} unit={t("properties.unit")} />
       </div>
     </div>
   )

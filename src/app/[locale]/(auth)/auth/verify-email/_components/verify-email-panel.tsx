@@ -6,7 +6,15 @@ import { Loader2 } from "lucide-react"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
+import {
+  AUTH_INPUT_CLASS,
+  AUTH_LABEL_CLASS,
+  AUTH_PRIMARY_BUTTON_CLASS,
+  AUTH_SECONDARY_BUTTON_CLASS,
+} from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { useVerifyEmailPanel, type VerifyEmailStatus } from "~/src/app/[locale]/(auth)/auth/verify-email/_components/use-verify-email-panel"
+
+const STATUS_COPY_CLASS = "text-body text-pretty text-muted-foreground"
 
 interface VerifyEmailPanelProps {
   readonly email?: string
@@ -15,9 +23,9 @@ interface VerifyEmailPanelProps {
 
 function VerifyEmailVerifyingView({ label }: Readonly<{ label: string }>): JSX.Element {
   return (
-    <div className="flex flex-col items-center gap-4 py-6 text-center" data-testid="verify-email-verifying">
-      <Loader2 aria-hidden="true" className="size-8 animate-spin text-muted-foreground" />
-      <p className="text-sm text-muted-foreground">{label}</p>
+    <div className="flex items-center gap-3" data-testid="verify-email-verifying">
+      <Loader2 aria-hidden="true" className="size-4 shrink-0 animate-spin text-ring" strokeWidth={1.5} />
+      <p className={STATUS_COPY_CLASS}>{label}</p>
     </div>
   )
 }
@@ -28,12 +36,12 @@ function VerifyEmailSuccessView({
   successLabel,
 }: Readonly<{ continueLabel: string; onContinue: () => void; successLabel: string }>): JSX.Element {
   return (
-    <div className="flex flex-col gap-4 text-center">
-      <p className="text-sm text-muted-foreground">{successLabel}</p>
-      <Button className="h-11 bg-foreground text-background hover:bg-foreground/80" onPress={onContinue} type="button">
+    <>
+      <p className={STATUS_COPY_CLASS}>{successLabel}</p>
+      <Button className={AUTH_PRIMARY_BUTTON_CLASS} onPress={onContinue} type="button">
         {continueLabel}
       </Button>
-    </div>
+    </>
   )
 }
 
@@ -43,12 +51,12 @@ function VerifyEmailErrorView({
   resendLabel,
 }: Readonly<{ invalidTokenLabel: string; onResend: () => void; resendLabel: string }>): JSX.Element {
   return (
-    <div className="flex flex-col gap-4 text-center">
-      <p className="text-sm text-muted-foreground">{invalidTokenLabel}</p>
-      <Button className="h-11 bg-foreground text-background hover:bg-foreground/80" onPress={onResend} type="button">
+    <>
+      <p className="text-body text-pretty text-destructive">{invalidTokenLabel}</p>
+      <Button className={AUTH_PRIMARY_BUTTON_CLASS} onPress={onResend} type="button">
         {resendLabel}
       </Button>
-    </div>
+    </>
   )
 }
 
@@ -75,31 +83,21 @@ function VerifyEmailPendingView({
 }>): JSX.Element {
   return (
     <div className="flex flex-col gap-6" data-testid="verify-email-pending">
-      <p className="text-center text-sm text-muted-foreground">{pendingDescription}</p>
+      <p className={STATUS_COPY_CLASS}>{pendingDescription}</p>
 
-      <label className="flex flex-col gap-2 text-sm">
-        <span className="text-muted-foreground">{emailLabel}</span>
-        <input
-          className="h-11 rounded-xl border border-white/10 bg-transparent px-4 text-sm text-foreground shadow-inner outline-none focus-visible:border-primary/50 focus-visible:ring-1 focus-visible:ring-primary/50"
-          onChange={onEmailChange}
-          placeholder={emailPlaceholder}
-          type="email"
-          value={email}
-        />
+      <label className="flex flex-col gap-2">
+        <span className={AUTH_LABEL_CLASS}>{emailLabel}</span>
+        <input className={AUTH_INPUT_CLASS} onChange={onEmailChange} placeholder={emailPlaceholder} type="email" value={email} />
       </label>
 
-      <Button
-        className="h-11 bg-foreground text-background hover:bg-foreground/80"
-        data-testid="verify-email-resend-button"
-        onPress={onResend}
-        type="button"
-      >
-        {resendLabel}
-      </Button>
-
-      <Button className="h-11" onPress={onBackToSignIn} type="button" variant="outline">
-        {backToSignInLabel}
-      </Button>
+      <div className="flex flex-col gap-3">
+        <Button className={AUTH_PRIMARY_BUTTON_CLASS} data-testid="verify-email-resend-button" onPress={onResend} type="button">
+          {resendLabel}
+        </Button>
+        <Button className={AUTH_SECONDARY_BUTTON_CLASS} onPress={onBackToSignIn} type="button" variant="outline">
+          {backToSignInLabel}
+        </Button>
+      </div>
     </div>
   )
 }

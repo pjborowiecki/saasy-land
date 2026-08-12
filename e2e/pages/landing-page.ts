@@ -13,11 +13,14 @@ export class LandingPage extends BasePage {
   }
 
   heroGetStartedLink(): Locator {
-    return this.page.getByRole("link", { name: /start building/iu })
+    // The gate finale repeats the primary CTA; scope to the hero section.
+    return this.page.locator("#floor").getByRole("link", { name: /start building/iu })
   }
 
   navigationGetStartedLink(): Locator {
-    return this.page.getByRole("link", { name: "Get Started" })
+    // The masthead, hero and gate all carry the same primary CTA label ("Start Building",
+    // one label per intent); scope to the banner so this resolves to exactly one link.
+    return this.page.getByRole("banner").getByRole("link", { name: /start building/iu })
   }
 
   navigation(): Locator {

@@ -26,7 +26,7 @@ export async function BlogPostsPanel({ view }: BlogPostsPanelProps): Promise<JSX
             <FolderOpen className="size-4 text-muted-foreground" />
             {t("actions.categories")}
           </Button>
-          <div className="flex items-center gap-1 rounded-md border border-border/40 bg-secondary/30 p-1">
+          <div className="flex items-center gap-1 rounded-md border border-border bg-muted/40 p-1">
             <Link
               href="/admin/blog?view=grid"
               className={`flex h-7 w-7 items-center justify-center rounded-sm transition-colors ${

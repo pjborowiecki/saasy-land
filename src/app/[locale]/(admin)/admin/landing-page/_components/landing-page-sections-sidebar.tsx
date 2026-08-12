@@ -3,6 +3,8 @@ import type { JSX } from "react"
 import { Grid3X3, HelpCircle, ImageIcon, Mail, MonitorPlay, Tags, UsersRound, Video, type LucideIcon } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+const ICON_STROKE_WIDTH = 1.5
+
 const LANDING_SECTIONS: {
   icon: LucideIcon
   key: "contact" | "faq" | "features" | "gallery" | "hero" | "pricing" | "testimonials" | "video"
@@ -19,24 +21,28 @@ const LANDING_SECTIONS: {
 
 export async function LandingPageSectionsSidebar(): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.landing-page")
+
   return (
-    <div className="flex h-full w-full shrink-0 flex-col lg:w-64">
-      <div className="custom-scrollbar flex-1 overflow-y-auto rounded-xl border border-border/40 bg-card p-4">
-        <h3 className="mb-4 text-sm font-medium text-foreground">{t("sidebar.addSection")}</h3>
-        <div className="space-y-2">
-          {LANDING_SECTIONS.map(({ icon: Icon, key }) => (
-            <div
-              key={key}
-              className="group flex cursor-grab items-center gap-3 rounded-lg border border-border/40 bg-secondary/20 p-3 transition-colors hover:bg-secondary/40"
-            >
-              <Icon className="size-4.5 text-muted-foreground transition-colors group-hover:text-foreground" />
-              <span className="text-sm text-muted-foreground transition-colors group-hover:text-foreground">
+    <div className="flex w-full shrink-0 flex-col lg:h-full lg:w-64">
+      <h2 className="shrink-0 border-b border-border px-4 py-4 font-mono text-label text-muted-foreground uppercase">
+        {t("sidebar.addSection")}
+      </h2>
+      <ul className="custom-scrollbar min-h-0 flex-1 divide-y divide-border overflow-y-auto">
+        {LANDING_SECTIONS.map(({ icon: Icon, key }) => (
+          <li key={key}>
+            <div className="group flex h-11 cursor-grab items-center gap-3 px-4 transition-[color,background-color] duration-200 ease-exp hover:bg-muted/50 motion-reduce:transition-none">
+              <Icon
+                aria-hidden
+                className="size-4 shrink-0 text-muted-foreground transition-colors duration-200 ease-exp group-hover:text-foreground motion-reduce:transition-none"
+                strokeWidth={ICON_STROKE_WIDTH}
+              />
+              <span className="truncate text-body-sm font-medium text-muted-foreground transition-colors duration-200 ease-exp group-hover:text-foreground motion-reduce:transition-none">
                 {t(`sidebar.sections.${key}`)}
               </span>
             </div>
-          ))}
-        </div>
-      </div>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

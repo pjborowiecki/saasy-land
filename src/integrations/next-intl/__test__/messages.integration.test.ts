@@ -27,7 +27,7 @@ describe("load locale messages from dir component", () => {
   it("loads and nests namespace files for the default locale", () => {
     expect.hasAssertions()
     const messages = loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE, messagesDir)
-    expect(messages.pages.landing.hero.startBuilding).toBeTypeOf("string")
+    expect(messages.pages.landing.hero.ctaPrimary).toBeTypeOf("string")
     expect(messages.auth.form.placeholders.email).toBeTypeOf("string")
   })
 

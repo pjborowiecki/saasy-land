@@ -54,7 +54,7 @@ export async function CreateCourseCurriculum(): Promise<JSX.Element> {
         </div>
 
         <div className="space-y-2 pl-8">
-          <div className="group flex cursor-pointer items-center gap-3 rounded-xl border border-border/40 bg-secondary/5 p-3 transition-colors hover:border-border/80">
+          <div className="group flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-muted/30 p-3 transition-colors hover:border-border">
             <div className="cursor-move text-muted-foreground opacity-0 transition-all group-hover:text-foreground group-hover:opacity-100">
               <GripVertical className="size-4" />
             </div>
@@ -74,7 +74,7 @@ export async function CreateCourseCurriculum(): Promise<JSX.Element> {
             </Button>
           </div>
 
-          <div className="group flex cursor-pointer items-center gap-3 rounded-xl border border-border/40 bg-secondary/5 p-3 transition-colors hover:border-border/80">
+          <div className="group flex cursor-pointer items-center gap-3 rounded-xl border border-border bg-muted/30 p-3 transition-colors hover:border-border">
             <div className="cursor-move text-muted-foreground opacity-0 transition-all group-hover:text-foreground group-hover:opacity-100">
               <GripVertical className="size-4" />
             </div>
@@ -96,7 +96,7 @@ export async function CreateCourseCurriculum(): Promise<JSX.Element> {
 
           <Button
             variant="outline"
-            className="mt-2 w-full justify-center gap-2 border-dashed border-transparent bg-secondary/5 hover:border-border/40 hover:bg-secondary/10"
+            className="mt-2 w-full justify-center gap-2 border-dashed border-transparent bg-muted/30 hover:border-border hover:bg-muted/40"
           >
             <PlusCircle className="size-4" />
             {t("sections.curriculum.addLesson")}
@@ -126,7 +126,7 @@ export async function CreateCourseCurriculum(): Promise<JSX.Element> {
         </div>
       </div>
 
-      <Button variant="outline" className="mt-4 w-full justify-center gap-2 border-dashed bg-secondary/5">
+      <Button variant="outline" className="mt-4 w-full justify-center gap-2 border-dashed bg-muted/30">
         <Plus className="size-4" />
         {t("sections.curriculum.addSection")}
       </Button>

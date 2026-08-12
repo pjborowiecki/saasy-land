@@ -6,20 +6,24 @@ import { Eye, EyeOff } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useController, useFormContext, type FieldPath, type FieldValues } from "react-hook-form"
 
+import { cn } from "~/src/utils"
+
 import { Field, FieldContent, FieldLabel } from "~/src/presentation/components/shadcn/field"
 import { Input } from "~/src/presentation/components/shadcn/input"
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "~/src/presentation/components/shadcn/input-group"
 
 import { AuthFieldError } from "~/src/app/[locale]/(auth)/auth/_components/auth-field-error"
 import { type AuthFormId } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import {
+  AUTH_FIELD_CONTENT_CLASS,
+  AUTH_INPUT_CLASS,
+  AUTH_INPUT_GROUP_CLASS,
+  AUTH_LABEL_CLASS,
+} from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 
-const AUTH_TEXT_INPUT_CLASS =
-  "h-11 w-full rounded-xl border border-white/10 bg-transparent px-4 text-sm text-foreground shadow-inner transition-all placeholder:text-muted-foreground focus-visible:border-primary/50 focus-visible:ring-1 focus-visible:ring-primary/50 focus-visible:outline-none"
-
-const AUTH_PASSWORD_GROUP_CLASS =
-  "h-11 rounded-xl border border-white/10 bg-transparent shadow-inner transition-all focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50"
-
-const AUTH_PASSWORD_INPUT_CLASS = "px-4 text-sm text-foreground placeholder:text-muted-foreground"
+/** The reveal toggle fills the field's height so its hit box clears the touch floor. */
+const PASSWORD_TOGGLE_CLASS =
+  "size-11 rounded-none rounded-r-lg text-muted-foreground transition-[background-color,color] duration-200 ease-exp hover:bg-muted hover:text-foreground"
 
 const TEXT_FIELD_CONFIG = {
   email: { autoComplete: "email", placeholder: "placeholders.email", type: "email" },
@@ -30,6 +34,10 @@ type TextFieldName = keyof typeof TEXT_FIELD_CONFIG
 
 function authFieldId(formId: AuthFormId, name: string): string {
   return `${formId}-${name}`
+}
+
+function authErrorId(fieldId: string): string {
+  return `${fieldId}-error`
 }
 
 interface AuthTextFieldProps<T extends FieldValues> {
@@ -53,24 +61,27 @@ export function AuthTextField<T extends FieldValues>({
   const { field, fieldState } = useController({ control: form.control, name })
 
   const config = TEXT_FIELD_CONFIG[name]
+  const fieldId = authFieldId(formId, name)
+  const errorId = authErrorId(fieldId)
 
   return (
     <Field>
-      <FieldLabel className={labelClassName} htmlFor={authFieldId(formId, name)}>
+      <FieldLabel className={cn(AUTH_LABEL_CLASS, labelClassName)} htmlFor={fieldId}>
         {label}
       </FieldLabel>
-      <FieldContent>
+      <FieldContent className={AUTH_FIELD_CONTENT_CLASS}>
         <Input
           {...field}
+          aria-describedby={fieldState.error === undefined ? undefined : errorId}
           aria-invalid={fieldState.invalid}
           autoComplete={config.autoComplete}
-          className={AUTH_TEXT_INPUT_CLASS}
+          className={AUTH_INPUT_CLASS}
           disabled={disabled || form.formState.isSubmitting}
-          id={authFieldId(formId, name)}
+          id={fieldId}
           placeholder={t(config.placeholder)}
           type={config.type}
         />
-        <AuthFieldError message={fieldState.error?.message} />
+        <AuthFieldError id={errorId} message={fieldState.error?.message} />
       </FieldContent>
     </Field>
   )
@@ -104,37 +115,45 @@ export function AuthPasswordField<T extends FieldValues>({
     setVisible((current) => !current)
   }, [])
 
+  const fieldId = authFieldId(formId, name)
+  const errorId = authErrorId(fieldId)
+
   return (
     <Field>
-      <FieldLabel className={labelClassName} htmlFor={authFieldId(formId, name)}>
+      <FieldLabel className={cn(AUTH_LABEL_CLASS, labelClassName)} htmlFor={fieldId}>
         {label}
       </FieldLabel>
-      <FieldContent>
-        <InputGroup className={AUTH_PASSWORD_GROUP_CLASS}>
+      <FieldContent className={AUTH_FIELD_CONTENT_CLASS}>
+        <InputGroup className={AUTH_INPUT_GROUP_CLASS}>
           <InputGroupInput
             {...field}
+            aria-describedby={fieldState.error === undefined ? undefined : errorId}
             aria-invalid={fieldState.invalid}
             autoComplete={autoComplete}
-            className={AUTH_PASSWORD_INPUT_CLASS}
+            className="px-3 text-base text-foreground placeholder:text-muted-foreground md:text-sm"
             disabled={disabled || form.formState.isSubmitting}
-            id={authFieldId(formId, name)}
+            id={fieldId}
             placeholder={t("placeholderPassword")}
             type={visible ? "text" : "password"}
           />
-          <InputGroupAddon align="inline-end" className="pr-1.5">
+          <InputGroupAddon align="inline-end" className="pr-0">
             <InputGroupButton
               aria-label={visible ? t("hidePassword") : t("showPassword")}
-              className="text-muted-foreground hover:bg-white/5 hover:text-foreground"
+              className={PASSWORD_TOGGLE_CLASS}
               onClick={toggleVisible}
               size="icon-sm"
               type="button"
               variant="ghost"
             >
-              {visible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              {visible ? (
+                <EyeOff aria-hidden className="size-4" strokeWidth={1.5} />
+              ) : (
+                <Eye aria-hidden className="size-4" strokeWidth={1.5} />
+              )}
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
-        <AuthFieldError message={fieldState.error?.message} />
+        <AuthFieldError id={errorId} message={fieldState.error?.message} />
       </FieldContent>
     </Field>
   )

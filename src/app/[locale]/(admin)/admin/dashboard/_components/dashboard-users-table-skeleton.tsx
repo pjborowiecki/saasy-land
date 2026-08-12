@@ -1,67 +1,33 @@
-"use client"
-
 import type { JSX } from "react"
-
-import { useTranslations } from "next-intl"
-
-import { Card, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
-import { Table, TableContainer, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 const SKELETON_ROW_COUNT = 5
 
+/** Header band, toolbar band, five rows, footer band: the same four bands the table renders. */
 export function DashboardUsersTableSkeleton(): JSX.Element {
-  const t = useTranslations("pages.admin.dashboard")
-
   return (
-    <Card className="group relative flex flex-col overflow-hidden border-border/80 transition-colors hover:border-border/40">
-      <CardHeader className="flex flex-row items-center justify-between border-b border-border/40 p-5">
-        <div>
-          <CardTitle className="mb-1 text-base font-medium text-foreground">{t("users.title")}</CardTitle>
-          <p className="text-xs text-muted-foreground">{t("users.description")}</p>
-        </div>
-      </CardHeader>
-
-      <div
-        aria-hidden
-        className="flex flex-col justify-between gap-4 border-b border-border/40 bg-secondary/20 p-4 sm:flex-row sm:items-center"
-      >
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-48 animate-pulse rounded-md bg-muted/40" />
-          <div className="h-8 w-20 animate-pulse rounded-md bg-muted/40" />
-          <div className="h-8 w-20 animate-pulse rounded-md bg-muted/40" />
-        </div>
-        <div className="h-8 w-24 animate-pulse rounded-md bg-muted/40" />
+    <div aria-busy className="flex flex-col overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10">
+      <div className="border-b border-border px-5 py-4">
+        <div className="h-4 w-40 animate-pulse rounded-sm bg-muted" />
+        <div className="mt-2 h-3 w-64 animate-pulse rounded-sm bg-muted" />
       </div>
-
-      <TableContainer>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-12" />
-              <TableHead>{t("users.table.columns.user")}</TableHead>
-              <TableHead>{t("users.table.columns.role")}</TableHead>
-              <TableHead>{t("users.table.columns.status")}</TableHead>
-              <TableHead>{t("users.table.columns.lastActive")}</TableHead>
-              <TableHead className="text-right">{t("users.table.columns.actions")}</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => (
-              <TableRow key={index}>
-                <TableCell colSpan={6} className="h-12 animate-pulse bg-muted/40" />
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <div className="flex items-center justify-between border-t border-border/40 p-4">
-        <div className="h-4 w-40 animate-pulse rounded-md bg-muted/40" />
-        <div className="flex gap-2">
-          <div className="h-7 w-16 animate-pulse rounded-md bg-muted/40" />
-          <div className="h-7 w-24 animate-pulse rounded-md bg-muted/40" />
-        </div>
+      <div className="border-b border-border px-4 py-3">
+        <div className="h-8 w-48 animate-pulse rounded-lg bg-muted" />
       </div>
-    </Card>
+      <div className="divide-y divide-border">
+        {Array.from({ length: SKELETON_ROW_COUNT }, (_, index) => (
+          <div className="flex items-center gap-3 px-3 py-3" key={index}>
+            <div className="size-8 shrink-0 animate-pulse rounded-md bg-muted" />
+            <div className="min-w-0 flex-1">
+              <div className="h-3 w-40 animate-pulse rounded-sm bg-muted" />
+              <div className="mt-1.5 h-2.5 w-56 animate-pulse rounded-sm bg-muted" />
+            </div>
+            <div className="hidden h-5 w-16 animate-pulse rounded-md bg-muted sm:block" />
+          </div>
+        ))}
+      </div>
+      <div className="border-t border-border px-5 py-3">
+        <div className="h-3 w-32 animate-pulse rounded-sm bg-muted" />
+      </div>
+    </div>
   )
 }

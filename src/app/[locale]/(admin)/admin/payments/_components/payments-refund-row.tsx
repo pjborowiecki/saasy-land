@@ -38,7 +38,7 @@ export function PaymentsRefundRow({ row }: PaymentsRefundRowProps): JSX.Element 
 function PaymentsRefundCustomerCell({ row }: PaymentsRefundRowProps): JSX.Element {
   return (
     <div className="flex items-center gap-3">
-      <div className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border/50 bg-secondary text-xs font-medium text-foreground">
+      <div className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border bg-secondary text-xs font-medium text-foreground">
         {row.initials}
       </div>
       <div className="flex flex-col">

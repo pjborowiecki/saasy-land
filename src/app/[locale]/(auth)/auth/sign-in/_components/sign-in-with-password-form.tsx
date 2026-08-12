@@ -77,7 +77,7 @@ export function SignInWithPasswordForm(): JSX.Element {
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.SIGN_IN}-form`} onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-6" id={`${AUTH_FORM_IDS.SIGN_IN}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <SignInFormFields />
         <SignInSubmitButton isPending={isPending} />
       </form>

@@ -28,7 +28,7 @@ export async function PaymentsRefundsTab({ paymentRows }: PaymentsRefundsTabProp
       </div>
 
       <Card className="overflow-hidden">
-        <div className="flex items-center justify-between border-b border-border/40 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <h2 className="text-base font-medium text-foreground">{t("table.title")}</h2>
           <Button variant="ghost" size="icon" className="size-8 text-muted-foreground">
             <Filter className="size-4" />

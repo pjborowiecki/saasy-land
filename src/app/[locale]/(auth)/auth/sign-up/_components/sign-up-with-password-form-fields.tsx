@@ -11,6 +11,7 @@ import { FieldGroup } from "~/src/presentation/components/shadcn/field"
 
 import { AuthPasswordField, AuthTextField } from "~/src/app/[locale]/(auth)/auth/_components/auth-form-fields"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { AUTH_FIELD_GROUP_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 
 export type SignUpFormValues = z.infer<typeof signUpWithPasswordSchema>
 
@@ -18,7 +19,7 @@ export function SignUpFormFields(): JSX.Element {
   const t = useTranslations("pages.auth.sign-up")
 
   return (
-    <FieldGroup className="flex flex-col gap-4">
+    <FieldGroup className={AUTH_FIELD_GROUP_CLASS}>
       <AuthTextField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.name")} name="name" />
       <AuthTextField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.email")} name="email" />
       <AuthPasswordField<SignUpFormValues> formId={AUTH_FORM_IDS.SIGN_UP} label={t("form.password")} name="password" />

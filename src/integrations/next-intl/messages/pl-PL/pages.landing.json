@@ -1,220 +1,487 @@
 {
   "metadata": {
-    "description": "Profesjonalny starter dla aplikacji typu SaaS."
+    "description": "Jedno polecenie tworzy produkcyjny stos Next.js: auth na Twojej bazie, płatności Stripe, panel admina i 100% pokrycia testami wymuszane w CI. Od $249, raz."
   },
-  "welcome": "Witaj na stronie {name}!",
   "hero": {
-    "badge": "Najlepszy Boilerplate Next.js 14",
-    "titlePart1": "Przyspiesz Start Swojego Biznesu z ",
-    "titlePart2": "SaaSy Land",
-    "description": "Twój skrót do sukcesu startupu. Najlepszy, nowoczesny, open-source'owy szablon Next.js, ze wszystkim czego potrzebujesz, skonfigurowanym i gotowym do użycia.",
-    "startBuilding": "Zacznij Budować (Za Darmo)",
-    "viewRecipes": "Poznaj Pro Recepty"
-  },
-  "techMarquee": {
-    "nextjs": "Next.js",
-    "neon": "Neon",
-    "stripe": "Stripe",
-    "resend": "Resend",
-    "drizzle": "Drizzle ORM",
-    "tailwind": "Tailwind CSS",
-    "shadcn": "ShadCN/UI",
-    "elysia": "Elysia",
-    "zod": "Zod"
-  },
-  "benefits": {
-    "titlePart1": "Dlaczego ",
-    "titlePart2": "Warto?",
-    "description": "Twoja konkurencja już używa SaaSy Land i podobnych produktów, zyskując czas i przewagę. Nie zostań w tyle!",
-    "cards": {
-      "timeSaver": {
-        "badge": "Niesamowita Oszczędność Czasu",
-        "title": "Zdobądź Przewagę Nad Konkurencją",
-        "description": "Ponieważ wszystko jest profesjonalnie skonfigurowane i zgodne ze standardami, oszczędzasz ogromną ilość czasu i wysiłku, które możesz teraz przeznaczyć na to, co naprawdę ważne: rozwój Twojego biznesu.",
-        "imageAlt": "Ilustracja wykresu wzrostu oszczędności czasu"
-      },
-      "modernTech": {
-        "badge": "Najnowsze i Najlepsze",
-        "title": "Wykorzystaj Nowoczesne Technologie",
-        "description": "Stale aktualizujemy nasze szablony, aby korzystać z najnowszych i najlepszych technologii, dzięki czemu masz pewność, że Twoja strona jest zawsze szybka.",
-        "imageAlt": "Ilustracja nowoczesnego stosu technologicznego"
-      },
-      "quality": {
-        "badge": "Wysoka Jakość Wdrożenia",
-        "title": "Miej Pewność, że Wszystko Działa",
-        "description": "Spędziliśmy niezliczone godziny na badaniach, czytaniu dokumentacji i testowaniu najlepszych sposobów implementacji funkcji. Wykonaliśmy ciężką pracę, abyś Ty nie musiał.",
-        "imageAlt": "Ilustracja wysokiej jakości kodu"
-      },
-      "flexibility": {
-        "badge": "Elastyczność i Wsparcie",
-        "title": "Łatwo Dostosuj Każdy Detal",
-        "description": "Dzięki naszej szczegółowej dokumentacji możesz teraz łatwo dostosować każdy pojedynczy detal szablonu. Jeśli będziesz potrzebować pomocy, jesteśmy na wyciągnięcie ręki.",
-        "imageAlt": "Ilustracja elastycznych kształtów projektowych"
-      }
-    },
-    "stats": {
-      "visits": "162.9k",
-      "visitsLabel": "Wizyt na Stronie (Ostatnie 7 Dni)",
-      "increase": "Wzrost o 22% względem zeszłego tygodnia"
+    "title": "Omiń 100+ godzin piekła boilerplate'u jednym poleceniem.",
+    "description": "Nie trać tygodni na podpinanie auth, Stripe'a, poczty i panelu admina. Odpowiedz na pięć pytań, a CLI napisze dokładnie taki rdzeń — otypowany, przetestowany i twój do zmiany. Resztę czasu poświęć na to, co naprawdę jest Twoim produktem.",
+    "ctaPrimary": "Zacznij budować",
+    "ctaSecondary": "Zobacz, co dostajesz",
+    "surface": {
+      "copied": "Skopiowano",
+      "copy": "Skopiuj polecenie instalacji",
+      "imageAlt": "Panel administracyjny SaaSyLand: przychód, aktywni użytkownicy i nowe rejestracje na górze, pod nimi wykres przychodu, a niżej tabela najnowszych użytkowników"
     }
   },
-  "features": {
-    "titlePart1": "Odkryj Nasze ",
-    "titlePart2": "Znakomite Funkcje",
-    "description": "Wszystko czego potrzebujesz wprost z pudełka. Bez zbędnych dodatków, tylko najważniejsze elementy zbudowane jak należy.",
-    "list": {
-      "auth": {
-        "title": "Uwierzytelnianie",
-        "description": "Bezpieczne logowanie, rejestracja i dostawcy OAuth już skonfigurowani."
+  "proof": {
+    "facts": {
+      "components": {
+        "label": "Komponentów UI",
+        "note": "W Twoim repozytorium, nie za granicą paczki.",
+        "value": "56"
       },
-      "db": {
-        "title": "Baza Danych ORM",
-        "description": "W pełni typowane operacje na bazie danych z Drizzle. Płynna integracja z PostgreSQL."
+      "coverage": {
+        "label": "Pokrycie testami",
+        "note": "Wymuszone bramką w CI, nie raportowane zrzutem ekranu.",
+        "value": "100%"
       },
-      "stripe": {
-        "title": "Płatności Stripe",
-        "description": "Obsługa subskrypcji, jednorazowych płatności i solidnych webhooków wprost z pudełka."
+      "locales": {
+        "label": "Gotowych języków",
+        "note": "Ze 156 walutami i 195 strefami czasowymi.",
+        "value": "54"
+      },
+      "mau": {
+        "label": "Koszt użytkownika",
+        "note": "Twoja baza, Twoi użytkownicy, na zawsze.",
+        "value": "$0"
+      },
+      "tests": {
+        "label": "Plików testowych",
+        "note": "Plus 5 zestawów Playwright w Chromium i WebKit.",
+        "value": "140"
+      }
+    }
+  },
+  "manifesto": {
+    "p1": "Każdy SaaS zaczyna się od tych samych trzech miesięcy.",
+    "p2": "Nic z tego nie jest Twoim produktem.",
+    "p3": "Kwartał Twojego roku na problemy, które są już rozwiązane.",
+    "p4": "Nie buduj tego drugi raz."
+  },
+  "cli": {
+    "title": "Wybierz swój stos. Uruchom jedno polecenie.",
+    "lead": "To CLI nie jest szablonem, który pobierasz, a potem z nim walczysz. Pyta, co budujesz, i zapisuje wyłącznie to, więc to samo narzędzie tworzy jednonajemcowy projekt poboczny i wielonajemcową platformę, a żaden z nich nie niesie kodu tego drugiego.",
+    "copy": "Skopiuj polecenie",
+    "copied": "Skopiowano",
+    "run": {
+      "green": "testy już zielone",
+      "modules": "modułów gotowych"
+    },
+    "choices": {
+      "framework": {
+        "label": "Framework",
+        "options": {
+          "next": "Next.js",
+          "tanstack": "TanStack Start"
+        }
+      },
+      "tenancy": {
+        "label": "Najemcy",
+        "options": {
+          "multi": "Wielu najemców",
+          "single": "Jeden najemca"
+        }
+      },
+      "billing": {
+        "label": "Płatności",
+        "options": {
+          "stripe": "Stripe",
+          "none": "Brak"
+        }
+      },
+      "content": {
+        "label": "Treści",
+        "options": {
+          "mdx": "Blog MDX i dokumentacja",
+          "none": "Brak"
+        }
       },
       "email": {
-        "title": "Szablony E-mail",
-        "description": "Pięknie zaprojektowane szablony React Email wysyłane bezbłędnie przez nowoczesne API."
+        "label": "Poczta",
+        "options": {
+          "resend": "Resend",
+          "none": "Brak"
+        }
+      }
+    },
+    "choicesLabel": "Zmień odpowiedź, a polecenie zmieni się razem z nią. Skopiuj je, gdy opisuje to, co budujesz.",
+    "reuse": "Uruchom je ponownie przy kolejnym projekcie. Odpowiedzi się zmieniają; CLI, testy i dożywotnie aktualizacje nie."
+  },
+  "line": {
+    "title": "Linia",
+    "description": "Cztery stanowiska między pustym folderem a firmą. Każde już działa i każde to praca, której nie musisz wykonywać.",
+    "stations": {
+      "auth": {
+        "title": "Trzymaj dane u siebie. Chroń marże.",
+        "body": "Better Auth działa na Twojej własnej bazie danych, zamiast cennika za użytkownika, który skaluje się przeciwko Tobie. Twoja tabela użytkowników, Twoje sesje, Twoje marże. Rachunek przy 50 000 aktywnych miesięcznie jest taki sam jak przy 50, a w obu przypadkach wynosi zero.",
+        "spec": "0 USD za MAU, na zawsze"
       },
-      "seo": {
-        "title": "Optymalizacja SEO",
-        "description": "Dynamiczne metatagi, grafiki Open Graph i poprawnie ustrukturyzowana mapa strony."
-      },
-      "ui": {
-        "title": "Komponenty UI",
-        "description": "Ogromna biblioteka dostępnych, pięknie zaprojektowanych komponentów Base UI i Tailwind."
+      "tests": {
+        "title": "Wiedz, że działa, zanim zrobisz merge.",
+        "body": "To nie jest kod sklejony w weekend. 140 plików testowych i 5 zestawów Playwright uruchamia się przy każdym pull requeście, a bramka pokrycia zatrzymuje build, zanim cokolwiek zepsutego trafi do merge'a. Wdrażaj w piątek i naprawdę odpocznij w weekend.",
+        "spec": "100% pokrycia testami"
       },
       "i18n": {
-        "title": "Internacjonalizacja",
-        "description": "Profesjonalna konfiguracja i18n z obsługą wielu języków i zlokalizowanym routingiem od zaraz."
+        "title": "Sprzedawaj w 54 lokalizacjach bez przepisywania.",
+        "body": "Routing językowy, tłumaczenia, strefy czasowe i formatowanie walut są natywną częścią kodu, nie doklejką. Katalog 54 języków z 195 strefami czasowymi i 156 walutami jest skonfigurowany, zanim napiszesz pierwszą linijkę, a kontrola spójności zatrzymuje build w chwili, gdy zniknie jakieś tłumaczenie.",
+        "spec": "54 języki, 156 walut"
       },
-      "typeSafety": {
-        "title": "Pełne Typowanie",
-        "description": "Restrykcyjna konfiguracja TypeScript end-to-end, wychwytująca błędy wcześnie i poprawiająca DX."
-      },
-      "quality": {
-        "title": "Najwyższa Jakość",
-        "description": "Czysta architektura i modułowy kod zaprojektowany do łatwego skalowania i utrzymania."
-      },
-      "performance": {
-        "title": "Maksymalna Wydajność",
-        "description": "Wykorzystanie Partial Prerendering (PPR) oraz pamięci podręcznej edge dla błyskawicznego ładowania."
-      },
-      "vercel": {
-        "title": "Gotowe na Vercel i Bun",
-        "description": "Zoptymalizowane pod kątem bezserwerowego wdrażania na Vercel oraz błyskawicznego środowiska Bun."
-      },
-      "blog": {
-        "title": "Blog i Dokumentacja MDX",
-        "description": "Wbudowany silnik markdown do pisania pięknie sformatowanych blogów i obszernej dokumentacji."
+      "edge": {
+        "title": "Twoja architektura, nie cudza.",
+        "body": "CLI pyta, co budujesz, i generuje właśnie to, zamiast wciskać Ci jeden narzucony kształt do zwalczania. Pod spodem Bun i Elysia: natychmiastowy HMR i ścisłe typy podczas pracy, runtime stworzony na edge po wdrożeniu.",
+        "spec": "Bun + Elysia, edge-native"
       }
     }
   },
-  "testimonials": {
-    "titlePart1": "Uwielbiany przez ",
-    "titlePart2": "Twórców"
+  "stack": {
+    "title": "Linia pracuje na"
+  },
+  "quality": {
+    "title": "Kontrola jakości",
+    "lead": "Jeśli przeszło merge, działa.",
+    "body": "Każda ścieżka jednostkowa, integracyjna i end-to-end jest pokryta testami przed scaleniem. 140 plików testowych, 5 zestawów Playwright w prawdziwym Chromium i WebKit oraz bramka pokrycia, która uruchamia się przy każdym pull requeście i każdym pushu do main.",
+    "consequence": "I właśnie to sprawia, że agent może tu bezpiecznie pracować. Może pisać tak szybko, jak chce; nic, co zepsuje, nie trafi na main, a dowiesz się o tym przy pull requeście, nie na produkcji.",
+    "cta": "Zobacz, ile to kosztuje",
+    "terminalTitle": "saasyland: uruchomienie testów",
+    "specs": {
+      "vitest": "vitest: progi 100%, wymuszane przy każdym uruchomieniu",
+      "playwright": "playwright: chromium i webkit, prawdziwe przeglądarki",
+      "typescript": "tsc --strict: zero błędów, zero any"
+    }
+  },
+  "manifest": {
+    "title": "Co jest w zestawie",
+    "lead": "Wszystko poniżej jest w repozytorium, które klonujesz. Bez dodatków, bez płatnych modułów, bez drugiego koszyka. Całość otypowana, przetestowana i czytelna na tyle, że Ty albo Twój agent możecie w niej pracować pierwszego dnia.",
+    "items": {
+      "auth": {
+        "label": "Uwierzytelnianie",
+        "body": "Better Auth z logowaniem e-mailem i hasłem, OAuth, weryfikacją adresu, resetem hasła, uwierzytelnianiem dwuskładnikowym i impersonacją z panelu, działający na Twojej bazie danych."
+      },
+      "data": {
+        "label": "Baza danych",
+        "body": "Drizzle ORM na Neon Postgres, otypowany od końca do końca, ze skryptami generate, migrate, push i studio podpiętymi do środowiska lokalnego, preview i produkcyjnego."
+      },
+      "billing": {
+        "label": "Płatności",
+        "body": "Stripe checkout, portal klienta i webhooki, z produktami i modelami cenowymi zarządzanymi z panelu, a nie zaszytymi w kodzie aplikacji."
+      },
+      "email": {
+        "label": "E-mail",
+        "body": "Szablony React Email dostarczane przez Resend, a ścieżki uwierzytelniania wysyłają prawdziwe wiadomości od pierwszego dnia."
+      },
+      "admin": {
+        "label": "Panel administracyjny",
+        "body": "Dziesięć gotowych i ostylowanych sekcji: pulpit, użytkownicy, produkty, płatności, analityka, blog, kursy, modele cenowe, kreator stron i ustawienia."
+      },
+      "ui": {
+        "label": "Interfejs",
+        "body": "Pięćdziesiąt sześć komponentów na Tailwind i shadcn/ui, w Twoim repozytorium, a nie za granicą paczki, której nie możesz edytować."
+      },
+      "i18n": {
+        "label": "Internacjonalizacja",
+        "body": "Routing językowy na katalogu 54 języków, 195 stref czasowych, 156 walut i 248 krajów, plus kontrola spójności, która zatrzymuje build przy brakującym tłumaczeniu."
+      },
+      "content": {
+        "label": "Treści",
+        "body": "Blog w MDX i dokumentacja na Fumadocs, oba edytowalne z panelu, oba indeksowane i tłumaczone jak reszta aplikacji."
+      },
+      "tests": {
+        "label": "Testy",
+        "body": "140 plików testów jednostkowych i integracyjnych, 5 zestawów Playwright oraz 100% pokrycia instrukcji, gałęzi, funkcji i linii, wymuszane bramką w CI."
+      },
+      "tooling": {
+        "label": "Narzędzia",
+        "body": "Bun, Elysia, ścisły TypeScript, schematy Zod, limitowanie zapytań na Redis oraz formatter, linter i sprawdzanie typów, które uruchamiają się, zanim cokolwiek trafi do merge'a."
+      }
+    }
+  },
+  "studio": {
+    "title": "Wysyłaj marketing, nie tylko aplikację",
+    "description": "Dwie rzeczy, których starter kity prawie nigdy nie mają: narzędzia do sprzedaży gotowego produktu i inżynier, który zbudował ten kod, tłumaczący, dlaczego każda decyzja zapadła tak, a nie inaczej.",
+    "builder": {
+      "title": "Kreator stron w zestawie.",
+      "body": "Strony docelowe, cenniki i blog, które Twój marketing edytuje wizualnie, we własnym panelu administracyjnym, na Twoich własnych komponentach. Bez subskrypcji Framera, bez Webflow, bez przekazywania plików.",
+      "imageAlt": "Kreator stron w panelu administracyjnym: biblioteka sekcji po lewej, obszar roboczy z podglądem na żywo i zaznaczoną sekcją hero, a po prawej panel właściwości do wyrównania, odstępów i treści",
+      "spec": "8 typów sekcji, Twoje własne komponenty"
+    },
+    "masterclass": {
+      "title": "Zobacz, jak powstaje od początku do końca.",
+      "body": "Zawodowy programista buduje dokładnie ten produkcyjny SaaS od pustego folderu. Na końcu nie utrzymujesz cudzego kodu, tylko taki, którego powstawanie widziałeś.",
+      "label": "Masterclass, w zestawie z kodem",
+      "topics": {
+        "architecture": {
+          "title": "Architektura i granice modułów",
+          "body": "Dlaczego kod dzieli się na moduły, przypadki użycia i warstwę prezentacji, gdzie przebiegają granice i jak dodać funkcję, nie przekraczając ich."
+        },
+        "auth": {
+          "title": "Uwierzytelnianie i bezpieczeństwo sesji",
+          "body": "Better Auth na Twojej własnej bazie: sesje, dwuskładnikowe logowanie, OAuth, podszywanie się administratora i przypadki brzegowe, które większość szablonów pomija."
+        },
+        "billing": {
+          "title": "Płatności, webhooki i modele cenowe",
+          "body": "Stripe checkout, portal klienta i webhooki, które pozostają idempotentne, gdy to samo zdarzenie przyjdzie dwa razy."
+        },
+        "testing": {
+          "title": "Strategia testów i bramka pokrycia",
+          "body": "Co testować jednostkowo, co przeprowadzić przez prawdziwą przeglądarkę i jak podłączona jest bramka pokrycia, żeby zepsuta gałąź nie mogła trafić do main."
+        },
+        "i18n": {
+          "title": "Internacjonalizacja od początku do końca",
+          "body": "Routing językowy, katalogi tłumaczeń, formatowanie stref czasowych i walut oraz kontrola parzystości, która wywala build przy jednym brakującym kluczu."
+        },
+        "deployment": {
+          "title": "Wdrożenia, migracje i wycofywanie zmian",
+          "body": "Wdrożenie na edge, migracje na Neonie bez przestoju i co zrobić w dniu, w którym trzeba je wycofać."
+        }
+      }
+    }
+  },
+  "record": {
+    "ariaLabel": "Rejestr",
+    "title": "Sprawdź każdą deklarację",
+    "lead": "Żadnych opinii klientów, bo w cytacie nie ma czego zweryfikować. Każda liczba na tej stronie pochodzi z repozytorium, które kupujesz, a poniżej jest miejsce, w którym ją znajdziesz.",
+    "columns": {
+      "claim": "Deklaracja",
+      "evidence": "Gdzie to sprawdzić"
+    },
+    "items": {
+      "coverage": {
+        "claim": "100% pokrycia testami",
+        "evidence": "coverage/coverage-summary.json, generowany przez bun run test:coverage"
+      },
+      "gate": {
+        "claim": "Wymuszane, nie raportowane",
+        "evidence": ".github/workflows/ci.yml, przy każdym pull requeście i pushu do main"
+      },
+      "suites": {
+        "claim": "Prawdziwe przeglądarki, nie jsdom",
+        "evidence": "e2e/specs, 5 zestawów Playwright na chromium i webkit"
+      },
+      "locales": {
+        "claim": "54 języki, 156 walut",
+        "evidence": "src/integrations/next-intl/messages, sprawdzane przez bun run check:i18n"
+      },
+      "auth": {
+        "claim": "0 USD za MAU, na zawsze",
+        "evidence": "src/integrations/better-auth, Twoja baza danych, żadnego dostawcy z licznikiem"
+      },
+      "author": {
+        "claim": "Zbudowane przez zawodowego programistę",
+        "evidence": "Każdy commit jest podpisany i publiczny w historii repozytorium"
+      }
+    }
+  },
+  "compare": {
+    "title": "Reszta rynku",
+    "description": "Trzy sposoby na start SaaS-a i to, co każdy z nich zostawia Ci do spłacenia.",
+    "options": {
+      "free": {
+        "title": "Darmowe scaffoldy CLI",
+        "body": "Prawdziwy fundament i nic poza tym. Auth, płatności, i18n, testy i strona sprzedażowa nadal są na Twojej głowie, a to właśnie te trzy miesiące."
+      },
+      "weekend": {
+        "title": "Weekendowe boilerplaty",
+        "body": "Szybko do pierwszych 100 dolarów. Potem zewnętrzne API zaczynają pobierać czynsz od Twoich przychodów, a nieprzetestowany kod zaczyna się sypać o drugiej w nocy."
+      },
+      "heavyweights": {
+        "title": "Drogie kombajny",
+        "body": "Poważne możliwości w poważnej cenie. Bez bramki pokrycia testami, bez kreatora stron i bez nikogo, kto wytłumaczy Ci architekturę, którą właśnie kupiłeś."
+      }
+    },
+    "columns": {
+      "market": "Rynek",
+      "saasyland": "SaaSyLand"
+    },
+    "dimensions": {
+      "model": {
+        "label": "Co płacisz",
+        "market": "Jednorazowo, potem płacisz dostawcom",
+        "ours": "$249 raz, potem nikomu"
+      },
+      "coverage": {
+        "label": "Pokrycie testami",
+        "market": "Testy są. Bramki nie ma.",
+        "ours": "100%, wymuszane w CI"
+      },
+      "designer": {
+        "label": "Kreator stron",
+        "market": "Osobna subskrypcja",
+        "ours": "W zestawie"
+      },
+      "mau": {
+        "label": "Cennik auth",
+        "market": "Licznik, jeśli auth jest hostowane",
+        "ours": "0 USD za MAU, zawsze"
+      },
+      "course": {
+        "label": "Masterclass",
+        "market": "Zwykle osobny zakup",
+        "ours": "Ten sam koszyk"
+      },
+      "license": {
+        "label": "Projekty klienckie",
+        "market": "Zależy od pakietu",
+        "ours": "Bez limitu, jedna licencja"
+      }
+    },
+    "close": "Szablon daje Ci folder. To daje Ci kod, w którym testy są już zielone, typy już ścisłe, a każda decyzja o dostawcy już podjęta na Twoją korzyść. Jedna płatność i nic tu nie wystawi Ci kolejnego rachunku.",
+    "notFor": {
+      "title": "Dla kogo to nie jest",
+      "body": "Jeśli szukasz czegoś darmowego do nauki, sklonuj szablon i baw się dobrze. Jeśli wolisz, żeby ktoś inny prowadził Twoje auth i liczył Ci za to za każdego użytkownika, kup właśnie to. To jest dla ludzi, którzy zamierzają być właścicielami kodu, przeczytać go w całości i wciąż go używać za trzy lata."
+    },
+    "cta": "Zobacz, ile to kosztuje"
   },
   "pricing": {
-    "titlePart1": "Prosty, przejrzysty ",
-    "titlePart2": "cennik",
-    "description": "Wszystko, czego potrzebujesz, aby szybciej wejść na rynek, za ułamek kosztów tworzenia od podstaw.",
-    "monthly": "Miesięcznie",
-    "yearly": "Rocznie",
-    "save20": "Oszczędź 20%",
-    "starter": {
-      "title": "Starter",
-      "description": "Idealny dla projektów pobocznych i wczesnych startupów badających rynek.",
-      "priceMonthly": "$0",
-      "priceYearly": "$0",
-      "period": "/miesiąc",
-      "button": "Rozpocznij za darmo!",
-      "features": {
-        "f1": "Pełny kod źródłowy Next.js 14",
-        "f2": "Baza danych i Autoryzacja",
-        "f3": "Podstawowe komponenty UI",
-        "f4": "Zaawansowana integracja Stripe",
-        "f5": "Priorytetowe wsparcie"
-      }
+    "title": "Kup raz",
+    "description": "Jedna płatność, aktualizacje rdzenia na zawsze, bez opłat za użytkownika. Ta sama ekonomia, którą ten kod pozwala zaoferować Twoim własnym klientom.",
+    "note": "Płatność jednorazowa w USD.",
+    "mostPopular": "Najpopularniejszy",
+    "ledger": {
+      "lead": "Nie kupujesz kodu. Odkupujesz kalendarz.",
+      "body": "Przy 80 dolarach za godzinę, co jest ostrożną stawką dla każdego, kto to czyta, $249 to około trzech godzin Twojego czasu. Praca, którą to zastępuje, nie trwa trzech godzin. To auth z dwuskładnikowym logowaniem i OAuth, otypowana warstwa danych, płatności z webhookami, maile transakcyjne, dziesięć sekcji panelu, warstwa i18n z 54 lokalizacjami i zestaw testów, który naprawdę blokuje build. Każde z tych zadań jest już rozwiązane i rozwiązywałbyś je od nowa, a żadne z nich nie jest powodem, dla którego ktokolwiek Ci zapłaci."
     },
-    "pro": {
-      "badge": "Najpopularniejszy",
-      "title": "Pro Builder",
-      "description": "Wszystko, czego potrzebujesz, aby zbudować i skalować swój SaaS do milionów.",
-      "priceMonthly": "$9.99",
-      "priceYearly": "$7.99",
-      "period": "/miesiąc",
-      "button": "Odblokuj funkcje PRO",
-      "features": {
-        "f1": "Wszystko z planu Starter",
-        "f2": "Zaawansowana integracja Stripe (Webhooki)",
-        "f3": "Szablony E-mail przez Resend",
-        "f4": "Komponenty Panelu Administratora",
-        "f5": "6 Miesięcy Priorytetowego Wsparcia"
-      }
-    },
-    "lifetime": {
-      "title": "Dożywotni Dostęp",
-      "description": "Zapłać raz i uzyskaj dożywotni dostęp do wszystkich przyszłych aktualizacji.",
-      "priceMonthly": "$67",
-      "priceYearly": "$67",
-      "period": "/jednorazowo",
-      "button": "Zdobądź Dożywotni Dostęp!",
-      "features": {
-        "f1": "Wszystko w Pakiecie Pro",
-        "f2": "Dożywotnie Aktualizacje",
-        "f3": "Ekskluzywna Społeczność Discord",
-        "f4": "Wczesny Dostęp do Nowości",
-        "f5": "Dożywotnie Wsparcie Priorytetowe"
+    "assurance": "Przeczytaj dokumentację i raport pokrycia testami, zanim zapłacisz. Każda liczba na tej stronie pochodzi z repozytorium, które kupujesz, więc możesz sprawdzić towar wcześniej i rozliczyć nas z tego, co znajdziesz.",
+    "tiers": {
+      "codebase": {
+        "name": "Codebase",
+        "price": "$249",
+        "period": "jednorazowo",
+        "tagline": "Pełny kod źródłowy, gotowy do uruchomienia.",
+        "whoFor": "Dla foundera, który wdraża sam i czyta każdą linijkę.",
+        "cta": "Kup Codebase, $249",
+        "features": {
+          "f1": "Pełny kod źródłowy i scaffolding CLI",
+          "f2": "Wszystkie standardowe szablony i moduły",
+          "f3": "Better Auth, Stripe i Resend podłączone",
+          "f4": "Kompletny zestaw testów ze 100% pokryciem",
+          "f5": "Aktualizacje rdzenia na zawsze"
+        }
+      },
+      "masterclass": {
+        "name": "Masterclass",
+        "price": "$399",
+        "period": "jednorazowo",
+        "tagline": "Kod i rozumowanie, które za nim stoi.",
+        "whoFor": "Dla inżyniera, który chce rozumowania, nie tylko rezultatu.",
+        "cta": "Kup Masterclass, $399",
+        "features": {
+          "f1": "Wszystko z Codebase",
+          "f2": "Pełny wideokurs: od pustego folderu do produkcji",
+          "f3": "Pogłębione omówienia architektury i projektu",
+          "f4": "Podręczniki testowania i wdrażania",
+          "f5": "Wcześniejszy dostęp do nowych modułów"
+        }
+      },
+      "agency": {
+        "name": "Agency",
+        "price": "$899",
+        "period": "jednorazowo",
+        "tagline": "Kod dla każdego klienta, któremu wystawiasz fakturę.",
+        "whoFor": "Dla software house'u, który fakturuje klientów za to, co buduje.",
+        "cta": "Kup licencję, $899",
+        "features": {
+          "f1": "Wszystko z Masterclass",
+          "f2": "Nielimitowana licencja na projekty klienckie",
+          "f3": "Prywatny Discord z priorytetowym wsparciem",
+          "f4": "Pliki Figma kreatora stron",
+          "f5": "Stanowiska zespołowe w masterclassie"
+        }
       }
     }
   },
   "faq": {
-    "titlePart1": "Często Zadawane ",
-    "titlePart2": "Pytania",
-    "q1": "Czym jest SaaSy Land?",
-    "a1": "SaaSy Land to nowoczesna kolekcja szablonów startowych open source dla pełnostosowych projektów w Next.js 14. Zbudowana przy użyciu Tailwind CSS, ShadCn, Next-Auth oraz wielu różnych baz danych. Poszczególne gałęzie (branches) zawierają kompletne środowiska, w tym bazy bezserwerowe takie jak PostgreSQL z Neon czy MySQL z PlanetScale, Drizzle ORM, Prisma ORM v.5, ale także MongoDB i Supabase.",
-    "q2": "Co wchodzi w skład pakietu?",
-    "a2": "Dostępnych jest wiele opcji konfiguracyjnych. W zależności od tego, którą gałąź sklonujesz i wybierzesz, otrzymasz projekt full-stack z zaawansowaną autoryzacją (np. weryfikacja e-mail, resetowanie hasła, logowanie linkiem (magic link), logowanie przez Google i Github), zsynchronizowany z wybraną przez Ciebie bazą danych. Dodatkowo otrzymasz w pełni funkcjonalny, łatwy do dostosowania landing page, blog oparty o Markdown i MDX, strony z dokumentacją, integrację płatności Stripe i wiele więcej.",
-    "q3": "Dlaczego warto używać SaaSy Land?",
-    "a3": "Ponieważ wszystko jest profesjonalnie skonfigurowane zgodnie z najnowszymi standardami, oszczędzasz mnóstwo czasu i wysiłku, który możesz teraz przeznaczyć na to, co naprawdę ważne - budowanie własnego, unikalnego produktu. I to wszystko całkowicie za darmo!",
-    "q4": "Czy to łatwe w użyciu? Jak zacząć?",
-    "a4": "SaaSy Land jest bardzo prosty w obsłudze. Możesz zacząć, klonując repozytorium z GitHuba i podążając za instrukcjami w dokumentacji.",
-    "q5": "Czy mogę liczyć na pomoc i wsparcie?",
-    "a5": "Śmiało napisz do nas e-mail z jakimikolwiek pytaniami lub rozpocznij dyskusję na GitHubie. Chociaż zawsze chętnie pomagamy, pamiętaj, że jest to darmowy produkt, który rozwijamy z pasji w wolnym czasie, więc nie możemy zagwarantować czasu odpowiedzi.",
-    "q6": "Czy projekt jest wciąż rozwijany?",
-    "a6": "SaaSy Land jest obecnie aktywnie rozwijany. Pracujemy nad dodawaniem nowych funkcji i ulepszaniem istniejących. Poprawiamy również dokumentację i dodajemy kolejne przykłady. Bądź z nami! Rozważ też zapisanie się do newslettera, aby otrzymywać powiadomienia o nowych, dużych wydaniach. Obiecujemy, że nie będziemy wysyłać spamu!"
-  },
-  "newsletter": {
-    "title": "Zapisz się do Newslettera",
-    "description": "Bądź na bieżąco z aktualizacjami, nowymi funkcjami i wskazówkami dotyczącymi rozwoju startupów, prosto na Twoją skrzynkę.",
-    "placeholder": "Wpisz swój adres e-mail",
-    "button": "Subskrybuj"
-  },
-  "contact": {
-    "title": "Bądźmy w kontakcie",
-    "description": "Śmiało napisz do nas z jakimikolwiek pytaniami. Chociaż zawsze chętnie pomagamy, pamiętaj, że jest to darmowy produkt i nie możemy zagwarantować czasu odpowiedzi. Będzie nam również miło poznać Twoją opinię!",
-    "location": "Kraków, Polska",
-    "form": {
-      "firstName": "Imię",
-      "email": "Adres E-mail",
-      "message": "W czym możemy pomóc?",
-      "button": "Wyślij Wiadomość"
+    "title": "Pytania z hali",
+    "lead": "Pytania, które kupujący zadają naprawdę, z pełnymi odpowiedziami. Jeśli Twojego tu nie ma, wyślij je.",
+    "contact": "Zapytaj inżyniera, który to zbudował",
+    "contactNote": "hello@saasyland.com. Czyta to jedna osoba.",
+    "items": {
+      "q1": {
+        "question": "Co dokładnie dostaję?",
+        "answer": "Pełny kod źródłowy produkcyjnego SaaS-a: Next.js, React, Bun, Elysia, Better Auth, Drizzle z Neon Postgres, Stripe, Resend i next-intl. Do tego scaffolding CLI, kompletny zestaw testów, wizualny kreator stron i dokumentacja. Pakiety Masterclass i Agency dodają wideokurs, licencję komercyjną i pliki Figma."
+      },
+      "q2": {
+        "question": "Dlaczego Better Auth zamiast Clerka albo Auth0?",
+        "answer": "Własność. Hostowane auth pobiera opłatę za każdego aktywnego użytkownika, więc Twoje koszty rosną dokładnie wtedy, gdy powinny rosnąć przychody. Better Auth żyje w Twoim kodzie i Twojej bazie. Użytkownicy to wiersze, które należą do Ciebie, a nie pozycje na cudzej fakturze."
+      },
+      "q3": {
+        "question": "Czy to naprawdę 100% pokrycia testami?",
+        "answer": "Tak. Instrukcje, gałęzie, funkcje i linie w Vitest, plus zestawy end-to-end w Playwright uruchamiane w prawdziwym Chromium i WebKit. Pokrycie jest wymuszane jako bramka w CI przy każdym pull requeście, a nie raportowane na screenshocie. Podsumowanie pokrycia generuje repozytorium, które kupujesz."
+      },
+      "q4": {
+        "question": "Skąd mam wiedzieć, że to naprawdę działa tak, jak tu napisano?",
+        "answer": "Sprawdź to przed zakupem. Dokumentacja jest publiczna, raport pokrycia testami generuje samo repozytorium, a workflow CI, który to wymusza, też jest w repozytorium. Ponieważ kupujesz kod źródłowy, dostępu nie da się cofnąć po jego przyznaniu, więc nie ma okresu na zwrot. Właśnie dlatego wszystko można sprawdzić wcześniej."
+      },
+      "q5": {
+        "question": "Dlaczego nie kazać tego po prostu zbudować agentowi AI?",
+        "answer": "Zbuduje, i będzie to wyglądać poprawnie. Nie powie Ci natomiast, który przypadek brzegowy w auth pominął, który webhook nie jest idempotentny ani że test parzystości tłumaczeń, którego nie napisał, wyłapałby brakujący klucz. Wygenerowany kod jest dziś tanią częścią. Drogą częścią jest bramka, która dowodzi, że kod jest poprawny, i tym właśnie jest to repozytorium: skieruj na nie agenta, a odziedziczy 140 plików testów, ścisłe typy i build, który pada, gdy coś jest nie tak."
+      },
+      "q6": {
+        "question": "Czy potrzebuję pakietu Masterclass?",
+        "answer": "Codebase daje Ci maszynę. Masterclass daje Ci inżyniera, który ją zbudował: każdą decyzję architektoniczną, każdą strategię testów, każde wdrożenie, na wideo. Większość kupujących wybiera Masterclass, bo kod jest tanią częścią. Tym, czego naprawdę brakuje, jest jego zrozumienie."
+      },
+      "q7": {
+        "question": "Czy cokolwiek tutaj jest subskrypcją?",
+        "answer": "Nie. Płacisz raz. Aktualizacje rdzenia na zawsze są wliczone, kod leży w Twoim repozytorium, a nie ma tu liczby stanowisk, licznika aktywnych użytkowników ani daty odnowienia."
+      },
+      "q8": {
+        "question": "Co obejmują „aktualizacje na zawsze”?",
+        "answer": "Każdą aktualizację rdzenia, w tym podbicia frameworków, nowe moduły i poprawki bezpieczeństwa, tak długo, jak istnieje SaaSyLand. Kupujesz raz, a maszyna wciąż staje się lepsza."
+      },
+      "q9": {
+        "question": "Czy mogę używać go w projektach dla klientów?",
+        "answer": "Codebase i Masterclass obejmują nielimitowane produkty, których jesteś właścicielem. Do pracy dla klientów służy pakiet Agency: jedna licencja, nielimitowane projekty klienckie."
+      },
+      "q10": {
+        "question": "Dlaczego mam zaufać starterowi zbudowanemu przez jednego inżyniera?",
+        "answer": "Bo deklaracje da się sprawdzić. Raport pokrycia generuje repozytorium, workflow CI, który go wymusza, jest w repozytorium, a osoba, która to napisała, zawodowo buduje oprogramowanie produkcyjne. Przeczytaj dokumentację, zanim zapłacisz, i rozlicz tę stronę z każdego zdania."
+      },
+      "q11": {
+        "question": "Czy muszę znać Bun i Elysię?",
+        "answer": "Nie. Jeśli znasz Next.js i TypeScript, przeczytasz każdy plik pierwszego dnia. Bun to szybszy runtime i menedżer pakietów, który przyjmuje komendy, jakie już wpisujesz, a Elysia to otypowana warstwa HTTP oddająca Ci zwykłe handlery. Masterclass omawia oba od podstaw."
+      }
     }
+  },
+  "gate": {
+    "title": "Zacznij od trzeciego miesiąca",
+    "description": "Auth, płatności, maile, panel i testy są gotowe. Zostaje ta część, której nikt nie zbuduje za Ciebie, i właśnie jej jeszcze nie zacząłeś.",
+    "price": "$249",
+    "terms": "jednorazowo, aktualizacje na zawsze",
+    "assurance": "Zapłać raz, sklonuj repozytorium, uruchom CLI. Bez subskrypcji, bez opłat za użytkownika i bez dostawcy, od którego trzeba się migrować w drugim roku.",
+    "ctaPrimary": "Zacznij budować",
+    "ctaSecondary": "Czytaj dokumentację"
   },
   "components": {
     "navigation": {
       "items": {
-        "about": "O nas",
-        "features": "Funkcje",
+        "line": "Linia",
+        "quality": "Jakość",
+        "studio": "Studio",
+        "pricing": "Cennik",
+        "faq": "FAQ",
+        "blog": "Blog",
+        "docs": "Dokumentacja"
+      },
+      "getStarted": "Zacznij budować",
+      "openMenu": "Otwórz menu",
+      "closeMenu": "Zamknij menu",
+      "ariaLabel": "Główna"
+    },
+    "footer": {
+      "tagline": "Starter kit klasy produkcyjnej, który jest w pełni Twój.",
+      "product": "Produkt",
+      "legal": "Prawne",
+      "language": "Język",
+      "rights": "Wszelkie prawa zastrzeżone.",
+      "buildLog": {
+        "title": "Dziennik budowy",
+        "body": "Jeden e-mail, gdy pojawia się nowy moduł albo zmienia się stos. Bez sekwencji marketingowych i bez odliczania do premiery.",
+        "label": "Adres e-mail",
+        "placeholder": "ty@firma.com",
+        "button": "Zapisz się",
+        "note": "Wypisujesz się jednym kliknięciem.",
+        "success": "Jesteś na liście.",
+        "error": "Nie udało się wysłać. Spróbuj ponownie albo napisz na hello@saasyland.com."
+      },
+      "links": {
+        "line": "Linia",
         "pricing": "Cennik",
         "faq": "FAQ",
         "docs": "Dokumentacja",
-        "blog": "Blog"
-      },
-      "getStarted": "Rozpocznij"
+        "blog": "Blog",
+        "github": "GitHub",
+        "privacy": "Polityka prywatności",
+        "terms": "Regulamin"
+      }
     }
   }
 }

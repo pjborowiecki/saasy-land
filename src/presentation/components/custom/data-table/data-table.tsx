@@ -156,11 +156,11 @@ function ResizeHandle<TData extends RowData>({ header }: Readonly<{ header: Data
 
 function SortIcon({ sorted }: Readonly<{ sorted: SortDirection }>): JSX.Element {
   if (sorted === "asc") {
-    return <ArrowUp aria-hidden className="size-3.5 shrink-0 text-primary" />
+    return <ArrowUp aria-hidden className="size-3.5 shrink-0 text-ring" />
   }
 
   if (sorted === "desc") {
-    return <ArrowDown aria-hidden className="size-3.5 shrink-0 text-primary" />
+    return <ArrowDown aria-hidden className="size-3.5 shrink-0 text-ring" />
   }
 
   return <ChevronsUpDown aria-hidden className="size-3.5 shrink-0 text-muted-foreground/60" />
@@ -195,7 +195,7 @@ function HeaderCell<TData extends RowData>({ header }: Readonly<{ header: DataTa
       <button
         type="button"
         onClick={column.getToggleSortingHandler()}
-        className="flex cursor-pointer items-center gap-1.5 text-left hover:text-primary"
+        className="flex cursor-pointer items-center gap-1.5 text-left transition-colors duration-200 ease-exp hover:text-foreground"
       >
         <table.FlexRender header={header} />
         <SortIcon sorted={sorted} />

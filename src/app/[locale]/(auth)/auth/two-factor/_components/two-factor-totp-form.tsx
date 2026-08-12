@@ -18,6 +18,7 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { AuthOtpField } from "~/src/app/[locale]/(auth)/auth/_components/auth-otp-field"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
+import { AUTH_PRIMARY_BUTTON_CLASS, AUTH_SECONDARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { useTwoFactorRedirect } from "~/src/app/[locale]/(auth)/auth/two-factor/_components/use-two-factor-redirect"
 
 const verifyTotpInputSchema = twoFactorZodSchemas.verifyTotp
@@ -68,18 +69,20 @@ export function TwoFactorTotpForm({ onToggleMode }: Readonly<TwoFactorTotpFormPr
         />
 
         <Button
-          className="h-11 gap-2 bg-foreground text-background hover:bg-foreground/80"
+          className={AUTH_PRIMARY_BUTTON_CLASS}
           data-testid="two-factor-form-submit-button"
           isDisabled={isPending || totpFormMethods.formState.isSubmitting}
           type="submit"
         >
-          {(isPending || totpFormMethods.formState.isSubmitting) && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
+          {(isPending || totpFormMethods.formState.isSubmitting) && (
+            <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />
+          )}
           {isPending || totpFormMethods.formState.isSubmitting
             ? t("pages.auth.two-factor.form.submitting")
             : t("pages.auth.two-factor.form.submit")}
         </Button>
 
-        <Button className="h-11" onPress={onToggleMode} type="button" variant="outline">
+        <Button className={AUTH_SECONDARY_BUTTON_CLASS} onPress={onToggleMode} type="button" variant="outline">
           {t("pages.auth.two-factor.form.useBackupCode")}
         </Button>
       </form>

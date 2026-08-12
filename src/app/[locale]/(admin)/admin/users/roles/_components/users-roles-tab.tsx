@@ -19,7 +19,7 @@ export function UsersRolesTab(): JSX.Element {
     <div className="mt-0 space-y-8 outline-none">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("roles.title")}</h1>
+          <h1 className="text-statement font-semibold text-foreground">{t("roles.title")}</h1>
           <p className="text-sm text-muted-foreground">{t("roles.description")}</p>
         </div>
 
@@ -50,7 +50,7 @@ export function UsersRolesTab(): JSX.Element {
         <div className="custom-scrollbar overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <UsersRolesTableHead />
-            <tbody className="divide-y divide-border/40">
+            <tbody className="divide-y divide-border">
               {roles.map((role) => (
                 <AdminUsersRoleRow key={role.id} role={role} />
               ))}

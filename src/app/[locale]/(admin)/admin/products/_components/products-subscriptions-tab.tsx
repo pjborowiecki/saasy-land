@@ -20,7 +20,7 @@ export function ProductsSubscriptionsTab({ products }: ProductsSubscriptionsTabP
 
       <ProductsTableCard end={3} total={3}>
         <ProductsTableHead variant="subscriptions" />
-        <tbody className="divide-y divide-border/40">
+        <tbody className="divide-y divide-border">
           {products
             .filter((product) => product.type === "subscription")
             .map((product) => (

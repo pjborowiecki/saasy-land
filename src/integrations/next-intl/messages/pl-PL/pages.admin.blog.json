@@ -27,7 +27,7 @@
   "meta": {
     "readTime": "{minutes} min czytania",
     "publishedOn": "{date}",
-    "lastEdited": "Ostatnio edytowano {time} temu",
+    "lastEdited": "Ostatnio edytowano {time}",
     "publishesTomorrow": "Publikacja jutro"
   },
   "labels": {
@@ -42,7 +42,10 @@
     "author": "Autor",
     "date": "Data",
     "views": "Wyświetlenia",
-    "actions": "Akcje"
+    "actions": "Akcje",
+    "selectRow": "Zaznacz wiersz",
+    "emptyValue": "Brak",
+    "rowActions": "Akcje wiersza"
   },
   "pagination": {
     "info": "Wyświetlanie {start}–{end} z {total} postów"

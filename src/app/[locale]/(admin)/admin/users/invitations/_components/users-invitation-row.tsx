@@ -16,7 +16,7 @@ interface AdminUsersInvitationRowProps {
 
 export function AdminUsersInvitationRow({ invite }: AdminUsersInvitationRowProps): JSX.Element {
   return (
-    <tr className="group transition-colors hover:bg-secondary/20">
+    <tr className="group transition-colors hover:bg-muted/40">
       <td className="p-4">
         <p className="text-sm font-medium text-foreground">{invite.email}</p>
       </td>

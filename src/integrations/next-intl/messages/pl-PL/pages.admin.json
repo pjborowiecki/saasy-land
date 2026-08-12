@@ -3,9 +3,17 @@
     "metadata": {
       "description": "Strefa aplikacji po zalogowaniu."
     },
-    "welcome": "Aplikacja — {name}"
+    "welcome": "Aplikacja: {name}"
   },
   "components": {
+    "breadcrumbs": {
+      "home": "Start"
+    },
+    "header": {
+      "notifications": "Powiadomienia",
+      "searchPlaceholder": "Szukaj w konsoli",
+      "searchEmpty": "Brak pasującej sekcji."
+    },
     "userWidget": {
       "settings": "Ustawienia",
       "signedInAs": "Zalogowano jako <user>{name}</user>"
@@ -13,7 +21,7 @@
     "signOutButton": {
       "signOut": "Wyloguj",
       "signingOut": "Wylogowywanie...",
-      "success": "Do zobaczenia!"
+      "success": "Do zobaczenia"
     }
   }
 }

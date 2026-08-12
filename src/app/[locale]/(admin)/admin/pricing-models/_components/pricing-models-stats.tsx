@@ -11,7 +11,7 @@ export async function PricingModelsStats(): Promise<JSX.Element> {
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       <Card>
         <CardContent className="flex items-center gap-4 p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg border border-border/50 bg-secondary/50 text-foreground">
+          <div className="flex size-10 items-center justify-center rounded-lg border border-border bg-muted/60 text-foreground">
             <Wallet className="size-5" />
           </div>
           <div>
@@ -22,7 +22,7 @@ export async function PricingModelsStats(): Promise<JSX.Element> {
       </Card>
       <Card>
         <CardContent className="flex items-center gap-4 p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg border border-border/50 bg-secondary/50 text-foreground">
+          <div className="flex size-10 items-center justify-center rounded-lg border border-border bg-muted/60 text-foreground">
             <Users className="size-5" />
           </div>
           <div>
@@ -33,7 +33,7 @@ export async function PricingModelsStats(): Promise<JSX.Element> {
       </Card>
       <Card>
         <CardContent className="flex items-center gap-4 p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg border border-border/50 bg-secondary/50 text-foreground">
+          <div className="flex size-10 items-center justify-center rounded-lg border border-border bg-muted/60 text-foreground">
             <Tag className="size-5" />
           </div>
           <div>

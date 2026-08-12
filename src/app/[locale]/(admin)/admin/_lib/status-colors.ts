@@ -1,17 +1,40 @@
+/*
+ * STATUS COLOUR — three meanings, and nothing decorative.
+ *
+ * This file used to hand out emerald, amber, rose, fuchsia and blue, which put five hues on a
+ * console whose palette has one. Worse, the hue was carrying identity rather than meaning: a
+ * fuchsia badge for "role type" and a blue one for "scheduled" say nothing a reader can decode.
+ *
+ * There are now exactly three states a colour is allowed to express, and every one of them is
+ * something the operator has to act on:
+ *
+ *   positive   the accent (`--ring`). Live, verified, published, public. The same cyan the
+ *              marketing site spends on verified facts, which is deliberate: in both surfaces
+ *              it means "this is true right now".
+ *   attention  a desaturated amber. Waiting on somebody. Not an error.
+ *   negative   `--destructive`. Banned, failed, refunded.
+ *
+ * Everything else is `neutral`, which is the hairline and the muted foreground, because most
+ * states are not worth a colour.
+ *
+ * Badges are hairline pills with a low-alpha wash, never a saturated fill: a filled badge on a
+ * dark console is a light source, and a table of them reads as a christmas tree.
+ */
+
 export type AdminStatusColor = "emerald" | "amber" | "rose" | "neutral"
 
 const STATUS_BADGE_CLASSES: Record<AdminStatusColor, string> = {
-  amber: "border-amber-500/20 bg-amber-500/10 text-amber-500",
-  emerald: "border-emerald-500/20 bg-emerald-500/10 text-emerald-500",
-  neutral: "border-border/50 bg-secondary/50 text-muted-foreground",
-  rose: "border-rose-500/20 bg-rose-500/10 text-rose-500",
+  amber: "border-amber-500/25 bg-amber-500/10 text-amber-600 dark:text-amber-400",
+  emerald: "border-ring/30 bg-ring/10 text-ring",
+  neutral: "border-border bg-muted text-muted-foreground",
+  rose: "border-destructive/25 bg-destructive/10 text-destructive",
 }
 
 const STATUS_DOT_CLASSES: Record<AdminStatusColor, string> = {
   amber: "bg-amber-500",
-  emerald: "bg-emerald-500",
-  neutral: "bg-muted-foreground",
-  rose: "bg-rose-500",
+  emerald: "bg-ring",
+  neutral: "bg-muted-foreground/60",
+  rose: "bg-destructive",
 }
 
 export function getStatusBadgeClass(color: AdminStatusColor): string {
@@ -24,84 +47,73 @@ export function getStatusDotClass(color: AdminStatusColor): string {
 
 export type DashboardUserStatus = "Online" | "Idle" | "Offline" | "active" | "pending" | "banned"
 
+/** No glow. A 2px dot with a blur behind it is a LED, and this is a status, not a device. */
 export function getDashboardStatusDotClass(status: string): string {
   if (status === "active" || status === "Active" || status === "Online") {
-    return "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"
+    return STATUS_DOT_CLASSES.emerald
   }
 
   if (status === "pending" || status === "Pending" || status === "Idle") {
-    return "bg-amber-500"
+    return STATUS_DOT_CLASSES.amber
   }
 
   if (status === "banned" || status === "Banned") {
-    return "bg-rose-500"
+    return STATUS_DOT_CLASSES.rose
   }
 
-  return "bg-muted-foreground"
+  return STATUS_DOT_CLASSES.neutral
 }
 
 export type BlogPostStatus = "published" | "draft" | "scheduled"
 
 export function getBlogPostStatusDotClass(status: BlogPostStatus): string {
   if (status === "published") {
-    return "bg-emerald-500"
+    return STATUS_DOT_CLASSES.emerald
   }
 
-  if (status === "draft") {
-    return "bg-amber-500"
+  if (status === "scheduled") {
+    return STATUS_DOT_CLASSES.amber
   }
 
-  return "bg-blue-500"
+  return STATUS_DOT_CLASSES.neutral
 }
 
-export function getRoleTypeBadgeClass(typeColor: "default" | "fuchsia"): string {
-  if (typeColor === "fuchsia") {
-    return "border-fuchsia-500/20 bg-fuchsia-500/10 text-fuchsia-500"
+export function getBlogPostStatusBadgeClass(status: BlogPostStatus): string {
+  if (status === "published") {
+    return STATUS_BADGE_CLASSES.emerald
   }
 
-  return "border-border/50 bg-secondary/50 text-muted-foreground"
+  if (status === "scheduled") {
+    return STATUS_BADGE_CLASSES.amber
+  }
+
+  return STATUS_BADGE_CLASSES.neutral
 }
 
-export function getRoleIconClass(iconColor: "default" | "fuchsia"): string {
-  if (iconColor === "fuchsia") {
-    return "text-fuchsia-500"
-  }
+/**
+ * Role and tag colours are gone. A role is not a state, so it gets the neutral badge and the
+ * reader gets to spend their attention on the states that are.
+ */
+export function getRoleTypeBadgeClass(): string {
+  return STATUS_BADGE_CLASSES.neutral
+}
 
+export function getRoleIconClass(): string {
+  return "text-muted-foreground"
+}
+
+export function getTagBadgeClass(): string {
+  return STATUS_BADGE_CLASSES.neutral
+}
+
+export function getProductIconClass(): string {
   return "text-muted-foreground"
 }
 
 export function getVisibilityBadgeClass(visibilityStatus: "public" | "hidden"): string {
-  if (visibilityStatus === "public") {
-    return "border-emerald-500/20 bg-emerald-500/10 text-emerald-500"
-  }
-
-  return "border-muted/50 bg-secondary/50 text-muted-foreground"
+  return visibilityStatus === "public" ? STATUS_BADGE_CLASSES.emerald : STATUS_BADGE_CLASSES.neutral
 }
 
-export function getTagBadgeClass(color: string): string {
-  if (color === "fuchsia") {
-    return "border-fuchsia-500/20 bg-fuchsia-500/10 text-fuchsia-500"
-  }
-
-  if (color === "blue") {
-    return "border-blue-500/20 bg-blue-500/10 text-blue-500"
-  }
-
-  if (color === "emerald") {
-    return "border-emerald-500/20 bg-emerald-500/10 text-emerald-500"
-  }
-
-  return "border-border/50 bg-secondary/50 text-muted-foreground"
-}
-
-export function getProductIconClass(iconColor: "default" | "fuchsia" | "emerald"): string {
-  if (iconColor === "fuchsia") {
-    return "border-fuchsia-500/20 bg-fuchsia-500/10 text-fuchsia-500"
-  }
-
-  if (iconColor === "emerald") {
-    return "border-emerald-500/20 bg-emerald-500/10 text-emerald-500"
-  }
-
-  return "text-muted-foreground"
+export function getVisibilityMarkClass(visibilityStatus: "public" | "hidden"): string {
+  return visibilityStatus === "public" ? STATUS_DOT_CLASSES.emerald : STATUS_DOT_CLASSES.neutral
 }

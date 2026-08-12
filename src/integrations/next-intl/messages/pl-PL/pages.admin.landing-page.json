@@ -1,54 +1,76 @@
 {
-  "title": "Edytor Landing Page",
-  "description": "Zaprojektuj i dostosuj swój landing page wizualnie.",
+  "title": "Edytor landing page",
+  "description": "Złóż stronę sekcja po sekcji, a potem opublikuj, gdy będzie się dobrze czytać.",
   "actions": {
     "preview": "Podgląd",
-    "saveChanges": "Zapisz Zmiany",
+    "saveChanges": "Zapisz zmiany",
     "publish": "Opublikuj"
   },
   "sidebar": {
-    "addSection": "Dodaj Sekcję",
+    "addSection": "Dodaj sekcję",
     "sections": {
-      "hero": "Sekcja Główna",
-      "features": "Siatka Funkcji",
-      "video": "Prezentacja Wideo",
+      "hero": "Sekcja główna",
+      "features": "Siatka funkcji",
+      "video": "Prezentacja wideo",
       "testimonials": "Referencje",
-      "pricing": "Tabela Cen",
-      "gallery": "Galeria Zdjęć",
+      "pricing": "Tabela cen",
+      "gallery": "Galeria zdjęć",
       "faq": "Akordeon FAQ",
-      "contact": "Formularz Kontaktowy"
+      "contact": "Formularz kontaktowy"
     }
   },
   "canvas": {
-    "newRelease": "Nowe Wydanie v2.0",
-    "supercharge": "Przyspiesz Twój ",
-    "growth": "Wzrost SaaS",
-    "description": "Wszystko-w-jednym platforma do zarządzania klientami, płatnościami i treścią. Buduj szybciej, konwertuj lepiej.",
-    "getStarted": "Rozpocznij za Darmo",
-    "bookDemo": "Umów Demo",
-    "addSectionHere": "Dodaj Sekcję Tutaj",
-    "featuresHeading": "Potężne Funkcje",
-    "featuresSubheading": "Wszystko czego potrzebujesz do skalowania biznesu.",
-    "feature1": "Analityka",
-    "feature2": "Bezpieczeństwo",
-    "feature3": "Synchronizacja"
+    "label": "Kanwa",
+    "viewport": {
+      "desktop": "Szerokość desktopu",
+      "tablet": "Szerokość tabletu",
+      "mobile": "Szerokość telefonu"
+    },
+    "sectionActions": {
+      "edit": "Edytuj sekcję",
+      "duplicate": "Duplikuj sekcję",
+      "delete": "Usuń sekcję"
+    },
+    "badge": "Dla zespołów magazynowych",
+    "headingLead": "Śledź każdą paletę od",
+    "headingAccent": "doku po regał",
+    "description": "Skanowanie kodów, inwentaryzacje cykliczne i alerty o brakach w jednym miejscu. Działa offline na hali i synchronizuje się, gdy zmiana wróci w zasięg wifi.",
+    "getStarted": "Zacznij okres próbny",
+    "bookDemo": "Umów demo",
+    "addSectionHere": "Dodaj sekcję tutaj",
+    "featuresHeading": "Co zawiera",
+    "featuresSubheading": "Trzy narzędzia, z których zespół hali korzysta na każdej zmianie.",
+    "feature1": "Skanowanie kodów",
+    "feature2": "Inwentaryzacja cykliczna",
+    "feature3": "Alerty o brakach"
   },
   "properties": {
-    "title": "Właściwości Sekcji",
+    "title": "Właściwości sekcji",
     "description": "Dostosuj wybrany element",
     "layout": "Wyrównanie",
+    "alignLeft": "Wyrównaj do lewej",
+    "alignCenter": "Wyśrodkuj",
+    "alignRight": "Wyrównaj do prawej",
     "spacing": "Odstępy",
-    "paddingTop": "Odstęp Górny",
-    "paddingBot": "Odstęp Dolny",
-    "background": "Styl Tła",
+    "paddingTop": "Odstęp górny",
+    "paddingBot": "Odstęp dolny",
+    "unit": "px",
+    "background": "Styl tła",
+    "backgroundOptions": {
+      "page": "Tło strony",
+      "panel": "Tło panelu",
+      "raised": "Tło wyniesione",
+      "image": "Wgraj obraz"
+    },
     "content": "Treść",
-    "generateAI": "Generuj AI",
-    "badgeText": "Tekst Plakietki",
+    "generateAI": "Generuj z AI",
+    "badgeText": "Tekst plakietki",
     "heading": "Nagłówek",
     "subheading": "Podtytuł",
     "buttonActions": "Akcje",
-    "primaryButton": "Główny Przycisk",
-    "secondaryButton": "Dodatkowy Przycisk",
+    "primaryButton": "Przycisk główny",
+    "secondaryButton": "Przycisk dodatkowy",
+    "buttonEnabled": "Przycisk jest widoczny",
     "label": "Etykieta"
   }
 }

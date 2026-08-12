@@ -26,7 +26,8 @@
       },
       "price": {
         "label": "Price",
-        "placeholder": "0.00"
+        "placeholder": "0.00",
+        "currencySymbol": "$"
       },
       "period": {
         "label": "Billing Period",
@@ -54,11 +55,19 @@
       "title": "Organization",
       "category": {
         "label": "Category",
-        "placeholder": "Select category..."
+        "placeholder": "Select category...",
+        "options": {
+          "addons": "Add-ons",
+          "saas": "SaaS plans"
+        }
       },
       "collection": {
         "label": "Collection",
-        "placeholder": "Add to collection..."
+        "placeholder": "Add to collection...",
+        "options": {
+          "core": "Core subscription",
+          "legacy": "Legacy"
+        }
       }
     }
   }

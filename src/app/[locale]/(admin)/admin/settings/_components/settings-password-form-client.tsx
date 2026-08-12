@@ -67,7 +67,7 @@ export function SettingsPasswordFormClient(): JSX.Element {
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="border-b border-border/40 p-5">
+      <CardHeader className="border-b border-border p-5">
         <CardTitle className="mb-1 text-base font-medium text-foreground">{t("security.password.title")}</CardTitle>
         <CardDescription className="text-xs text-muted-foreground">{t("security.password.description")}</CardDescription>
       </CardHeader>
@@ -79,7 +79,7 @@ export function SettingsPasswordFormClient(): JSX.Element {
               <SettingsPasswordRequirementsPanel password={newPassword} t={t} />
             </div>
           </CardContent>
-          <div className="flex justify-end border-t border-border/40 bg-secondary/20 p-4">
+          <div className="flex justify-end border-t border-border bg-muted/40 p-4">
             <Button type="submit" size="sm" className="h-8 px-4 text-xs shadow-sm" isDisabled={isPending}>
               {isPending ? <Loader2 className="size-4 animate-spin" /> : t("security.password.update")}
             </Button>
@@ -134,7 +134,7 @@ function SettingsPasswordRequirementsPanel({
   const requirements = getPasswordRuleState(password)
 
   return (
-    <div className="rounded-lg border border-border/40 bg-secondary/30 p-5">
+    <div className="rounded-lg border border-border bg-muted/40 p-5">
       <h3 className="mb-4 text-xs font-medium text-foreground">{t("security.password.requirements.title")}</h3>
       <ul className="space-y-3 text-xs text-muted-foreground">
         <SettingsPasswordRequirement met={requirements.isMinLength} text={t("security.password.requirements.length")} />
@@ -150,7 +150,7 @@ function SettingsPasswordRequirement({ met, text }: { readonly met: boolean; rea
 
   return (
     <li className="flex items-start gap-2.5">
-      <Icon className={`mt-0.5 size-4 shrink-0 ${met ? "text-emerald-500" : "text-muted-foreground"}`} />
+      <Icon className={`mt-0.5 size-4 shrink-0 ${met ? "text-ring" : "text-muted-foreground"}`} />
       <Label className="text-xs font-normal text-muted-foreground">{text}</Label>
     </li>
   )

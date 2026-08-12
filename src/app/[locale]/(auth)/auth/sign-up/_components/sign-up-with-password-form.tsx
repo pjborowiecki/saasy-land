@@ -70,7 +70,7 @@ export function SignUpWithPasswordForm(): JSX.Element {
 
   return (
     <FormProvider {...form}>
-      <form className="flex flex-col gap-4" id={`${AUTH_FORM_IDS.SIGN_UP}-form`} onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex flex-col gap-6" id={`${AUTH_FORM_IDS.SIGN_UP}-form`} onSubmit={form.handleSubmit(onSubmit)}>
         <SignUpFormFields />
         <PasswordRequirements />
         <SignUpSubmitButton isPending={isPending} />

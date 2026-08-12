@@ -3,9 +3,17 @@
     "metadata": {
       "description": "Signed-in app area."
     },
-    "welcome": "App — {name}"
+    "welcome": "App: {name}"
   },
   "components": {
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "header": {
+      "notifications": "Notifications",
+      "searchPlaceholder": "Search the console",
+      "searchEmpty": "No matching section."
+    },
     "userWidget": {
       "settings": "Settings",
       "signedInAs": "Signed in as <user>{name}</user>"
@@ -13,7 +21,7 @@
     "signOutButton": {
       "signOut": "Sign Out",
       "signingOut": "Signing out...",
-      "success": "See you later!"
+      "success": "See you later"
     }
   }
 }

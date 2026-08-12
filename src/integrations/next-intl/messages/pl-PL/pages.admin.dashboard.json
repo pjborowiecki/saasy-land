@@ -1,6 +1,6 @@
 {
   "title": "Przegląd",
-  "description": "Witaj ponownie — oto co dzieje się dziś.",
+  "description": "Witaj ponownie. Oto co dzieje się dziś.",
   "actions": {
     "last30Days": "Ostatnie 30 dni",
     "addProduct": "Dodaj produkt"
@@ -19,7 +19,7 @@
   "chart": {
     "title": "Przegląd przychodów",
     "description": "Miesięczny przychód powtarzalny z ostatnich 12 miesięcy",
-    "placeholder": "Analityka przychodów pojawi się po podłączeniu płatności.",
+    "placeholder": "Dane poglądowe. Rzeczywiste przychody pojawią się po podłączeniu płatności.",
     "filters": {
       "12m": "12M",
       "30d": "30D",
@@ -43,8 +43,17 @@
         "lastActive": "Ostatnia aktywność",
         "actions": "Akcje"
       },
+      "status": {
+        "active": "Aktywny",
+        "banned": "Zablokowany",
+        "pending": "Oczekuje"
+      },
+      "rowActions": {
+        "edit": "Edytuj użytkownika",
+        "delete": "Usuń użytkownika"
+      },
       "pagination": {
-        "showing": "Wyświetlanie {from}–{to} z {total} użytkowników",
+        "showing": "Wyświetlanie {from} do {to} z {total} użytkowników",
         "previous": "Wstecz",
         "viewAll": "Wszyscy użytkownicy"
       }

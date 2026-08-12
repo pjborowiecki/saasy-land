@@ -20,7 +20,7 @@ export function ProductsCollectionsTab({ categories }: ProductsCollectionsTabPro
 
       <ProductsTableCard end={3} total={3}>
         <ProductsTableHead variant="collections" />
-        <tbody className="divide-y divide-border/40">
+        <tbody className="divide-y divide-border">
           {categories
             .filter((category) => category.kind === "collection")
             .map((category) => (

@@ -76,7 +76,7 @@
       "yes": "Tak"
     },
     "empty": "Nie znaleziono użytkowników.",
-    "emptyValue": "—",
+    "emptyValue": "n/d",
     "headers": {
       "createdAt": "Data utworzenia",
       "emailVerified": "E-mail zweryfikowany",
@@ -88,10 +88,14 @@
       "user": "Użytkownik"
     },
     "selectAll": "Zaznacz wszystkie wiersze",
-    "selectRow": "Zaznacz wiersz"
+    "selectRow": "Zaznacz wiersz",
+    "actionsColumn": "Akcje wiersza"
   },
   "pagination": {
-    "info": "Wyświetlanie {start}–{end} z {total} wyników"
+    "info": "Wyświetlanie {start} do {end} z {total} wyników",
+    "goToPage": "Przejdź do strony {page}",
+    "nextPage": "Następna strona",
+    "previousPage": "Poprzednia strona"
   },
   "invitations": {
     "title": "Zaproszenia",
@@ -116,7 +120,7 @@
       }
     },
     "pagination": {
-      "info": "Wyświetlanie {start}–{end} z {total} wyników"
+      "info": "Wyświetlanie {start} do {end} z {total} wyników"
     }
   },
   "roles": {
@@ -137,10 +141,19 @@
         "description": "Opis",
         "type": "Typ",
         "users": "Użytkownicy"
-      }
+      },
+      "usersCount": "{count, plural, one {# użytkownik} few {# użytkowników} many {# użytkowników} other {# użytkownika}}"
     },
     "pagination": {
-      "info": "Wyświetlanie {start}–{end} z {total} ról"
+      "info": "Wyświetlanie {start} do {end} z {total} ról"
+    }
+  },
+  "security": {
+    "title": "Bezpieczeństwo",
+    "empty": {
+      "title": "Brak zapisanych zdarzeń bezpieczeństwa",
+      "description": "Próby logowania, unieważnienia sesji i zmiany ról pojawią się tutaj, gdy przestrzeń robocza zacznie je rejestrować. Włącz dziennik audytu, aby rozpocząć zbieranie zdarzeń.",
+      "action": "Włącz dziennik audytu"
     }
   }
 }

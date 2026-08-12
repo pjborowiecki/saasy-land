@@ -1,27 +1,25 @@
 {
   "title": "SaaSy Land",
-  "version": "v2.0.0",
   "groups": {
-    "overview": "Overview",
-    "offerings": "Offerings",
-    "administration": "Administration",
+    "overview": "Przegląd",
+    "offerings": "Oferta",
+    "administration": "Administracja",
     "content": "Treść"
   },
   "links": {
-    "dashboard": "Dashboard",
-    "analytics": "Analytics",
-    "products": "Products",
+    "dashboard": "Panel",
+    "analytics": "Analityka",
+    "products": "Produkty",
     "courses": "Kursy",
-    "pricingModels": "Pricing Models",
-    "contentAccess": "Content & Access",
-    "userManagement": "User Management",
-    "activeSessions": "Active Sessions",
-    "payments": "Payments & Billing",
-    "settings": "Settings",
+    "pricingModels": "Modele cenowe",
+    "contentAccess": "Treść i dostęp",
+    "userManagement": "Użytkownicy",
+    "activeSessions": "Aktywne sesje",
+    "payments": "Płatności i rozliczenia",
+    "settings": "Ustawienia",
     "blog": "Blog",
-    "landingPage": "Landing Page"
+    "landingPage": "Landing page"
   },
-  "logo": "SL",
   "badges": {
     "activeSessionsBadge": "3"
   }

@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger } from "~/src/presentation/components/shadc
 import { BlogAdminStats } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-admin-stats"
 import { BlogPostsPanel } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-posts-panel"
 
-const BLOG_POSTS_FALLBACK = <div className="mt-6 h-64 w-full animate-pulse rounded-lg border border-border/60 bg-muted/30" />
+const BLOG_POSTS_FALLBACK = <div className="mt-6 h-64 w-full animate-pulse rounded-lg border border-border bg-muted/30" />
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
@@ -25,7 +25,7 @@ export default async function BlogAdminPage({ searchParams }: { searchParams: Se
     <div className="flex w-full animate-in flex-col space-y-8 pb-8 duration-500 fade-in-50">
       <div className="flex flex-col gap-4">
         <div>
-          <h1 className="mb-1 text-2xl font-medium tracking-tight text-foreground">{t("title")}</h1>
+          <h1 className="text-statement font-semibold text-foreground">{t("title")}</h1>
           <p className="text-sm text-muted-foreground">{t("description")}</p>
         </div>
       </div>

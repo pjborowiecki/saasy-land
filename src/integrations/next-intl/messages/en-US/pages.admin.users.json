@@ -76,7 +76,7 @@
       "yes": "Yes"
     },
     "empty": "No users found.",
-    "emptyValue": "—",
+    "emptyValue": "n/a",
     "headers": {
       "createdAt": "Created At",
       "emailVerified": "Email verified",
@@ -88,10 +88,14 @@
       "user": "User"
     },
     "selectAll": "Select all rows",
-    "selectRow": "Select row"
+    "selectRow": "Select row",
+    "actionsColumn": "Row actions"
   },
   "pagination": {
-    "info": "Showing {start} to {end} of {total} results"
+    "info": "Showing {start} to {end} of {total} results",
+    "goToPage": "Go to page {page}",
+    "nextPage": "Next page",
+    "previousPage": "Previous page"
   },
   "invitations": {
     "title": "Invitations",
@@ -137,10 +141,19 @@
         "description": "Description",
         "type": "Type",
         "users": "Users"
-      }
+      },
+      "usersCount": "{count, plural, one {# user} other {# users}}"
     },
     "pagination": {
       "info": "Showing {start} to {end} of {total} roles"
+    }
+  },
+  "security": {
+    "title": "Security",
+    "empty": {
+      "title": "No security events recorded",
+      "description": "Sign-in attempts, session revocations and role changes appear here once your workspace starts logging them. Turn on the audit log to begin collecting events.",
+      "action": "Enable audit log"
     }
   }
 }

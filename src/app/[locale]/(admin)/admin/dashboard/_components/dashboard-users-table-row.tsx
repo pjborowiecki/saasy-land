@@ -46,9 +46,9 @@ export function DashboardUsersTableRow({ row }: DashboardUsersTableRowProps): JS
 function DashboardUsersTableUserCell({ row }: DashboardUsersTableRowProps): JSX.Element {
   return (
     <div className="flex items-center gap-3">
-      <Avatar className="size-8 border border-border/50">
+      <Avatar className="size-8 rounded-md border border-border">
         <AvatarImage src={row.avatar} alt={row.name} />
-        <AvatarFallback className="bg-primary/10 text-xs font-medium text-primary">
+        <AvatarFallback className="rounded-md bg-muted text-[0.6875rem] font-semibold text-foreground">
           {row.initials ?? row.name.slice(AVATAR_INITIALS_START, AVATAR_INITIALS_LENGTH).toUpperCase()}
         </AvatarFallback>
       </Avatar>

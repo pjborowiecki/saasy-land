@@ -20,7 +20,7 @@ export function ProductsOnetimeTab({ products }: ProductsOnetimeTabProps): JSX.E
 
       <ProductsTableCard end={3} total={3}>
         <ProductsTableHead variant="all" />
-        <tbody className="divide-y divide-border/40">
+        <tbody className="divide-y divide-border">
           {products
             .filter((product) => product.type === "one_time")
             .map((product) => (

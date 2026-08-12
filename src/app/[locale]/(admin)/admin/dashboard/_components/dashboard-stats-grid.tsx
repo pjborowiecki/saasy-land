@@ -1,58 +1,41 @@
 import type { JSX } from "react"
 
-import { AlertTriangle, Package, Users } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { getProducts } from "~/src/modules/product/use-cases/get-products.use-case"
 import { getUsers } from "~/src/modules/user/use-cases/get-users.use-case"
 
-import { Card, CardContent, CardHeader } from "~/src/presentation/components/shadcn/card"
-
+/**
+ * One plate, three readings, hairlines between them.
+ *
+ * Three separate cards, each with its own border, its own icon in its own bordered tile and its
+ * own gradient wash that faded on hover, made three objects out of one instrument panel. The
+ * icons in particular were doing nothing: a person, a box and a warning triangle repeated the
+ * label directly underneath them in a less precise form.
+ *
+ * The figures are `tabular-nums`, so the columns stay in place while the numbers change, and the
+ * labels are set in the monospace micro-label, the same role the marketing site's measured facts
+ * use. A number and its unit look the same in both places, which is the point.
+ */
 export async function DashboardStatsGrid(): Promise<JSX.Element> {
   const [userRows, products, t] = await Promise.all([getUsers(), getProducts(), getTranslations("pages.admin.dashboard")])
 
   const pendingVerificationCount = userRows.filter((row) => !row.emailVerified && !row.banned).length
 
+  const stats = [
+    { key: "activeUsers", value: userRows.length },
+    { key: "totalProducts", value: products.length },
+    { key: "pendingVerification", value: pendingVerificationCount },
+  ] as const
+
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
-            <Users className="size-4 text-muted-foreground" />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-1 text-sm font-medium text-muted-foreground">{t("stats.activeUsers.title")}</p>
-          <h3 className="text-2xl font-medium tracking-tight text-foreground">{userRows.length}</h3>
-        </CardContent>
-      </Card>
-
-      <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
-            <Package className="size-4 text-muted-foreground" />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-1 text-sm font-medium text-muted-foreground">{t("stats.totalProducts.title")}</p>
-          <h3 className="text-2xl font-medium tracking-tight text-foreground">{products.length}</h3>
-        </CardContent>
-      </Card>
-
-      <Card className="group relative overflow-hidden border-border/80 transition-colors hover:border-border/40">
-        <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-secondary/50 to-transparent opacity-100 transition-opacity group-hover:opacity-0" />
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <div className="flex size-8 items-center justify-center rounded-lg border border-border/50 bg-secondary">
-            <AlertTriangle className="size-4 text-muted-foreground" />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="mb-1 text-sm font-medium text-muted-foreground">{t("stats.pendingVerification.title")}</p>
-          <h3 className="text-2xl font-medium tracking-tight text-foreground">{pendingVerificationCount}</h3>
-        </CardContent>
-      </Card>
-    </div>
+    <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-border ring-1 ring-foreground/10 sm:grid-cols-3">
+      {stats.map((stat) => (
+        <div className="bg-card px-5 py-5" key={stat.key}>
+          <dt className="font-mono text-label text-muted-foreground uppercase">{t(`stats.${stat.key}.title`)}</dt>
+          <dd className="mt-3 text-headline-support text-foreground tabular-nums">{stat.value}</dd>
+        </div>
+      ))}
+    </dl>
   )
 }

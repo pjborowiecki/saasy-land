@@ -28,12 +28,20 @@ test.describe("instant navigation", () => {
     )
   })
 
-  test("landing to sign-in is instant on a client navigation", async ({ page }) => {
+  /*
+   * The pricing tier buttons, not the masthead CTA.
+   *
+   * Every "Start building" on the landing (masthead, hero, closing screen) is an in-page anchor
+   * to `#pricing`: the page deliberately routes every visitor through the tiers rather than
+   * dropping them straight into sign-up. The three tier buttons are the page's only real
+   * commercial exit, so they are the client navigation worth asserting is instant.
+   */
+  test("landing to sign-up is instant on a client navigation", async ({ page }) => {
     await page.goto("/")
 
     await instant(page, async () => {
-      await page.getByRole("link", { name: "Get Started" }).first().click()
-      await page.waitForURL((url) => url.pathname.endsWith("/auth/sign-up") || url.pathname.endsWith("/auth/sign-in"))
+      await page.locator("#pricing").getByRole("link", { name: /get the codebase/iu }).click()
+      await page.waitForURL((url) => url.pathname.endsWith("/auth/sign-up"))
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
     })
   })

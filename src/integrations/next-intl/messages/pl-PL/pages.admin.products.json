@@ -37,10 +37,32 @@
       "pricing": "Pricing",
       "status": "Status",
       "metrics": "Metrics"
+    },
+    "actionsColumn": "Akcje wiersza",
+    "emptyValue": "n/d",
+    "rowActions": "Akcje wiersza",
+    "selectAll": "Zaznacz wszystkie wiersze",
+    "selectRow": "Zaznacz wiersz",
+    "statusLabels": {
+      "archived": "Zarchiwizowany",
+      "draft": "Szkic",
+      "published": "Aktywny"
+    },
+    "typeLabels": {
+      "course": "Kurs",
+      "one_time": "Jednorazowy",
+      "subscription": "Subskrypcja"
+    },
+    "visibilityLabels": {
+      "hidden": "Ukryta",
+      "public": "Publiczna"
     }
   },
   "pagination": {
-    "info": "Wyświetlanie {start}–{end} z {total} produktów"
+    "info": "Wyświetlanie {start} do {end} z {total} produktów",
+    "goToPage": "Przejdź do strony {page}",
+    "nextPage": "Następna strona",
+    "previousPage": "Poprzednia strona"
   },
   "onetime": {
     "title": "One-time Purchases",
@@ -81,6 +103,13 @@
         "items": "Items",
         "lastUpdated": "Last Updated"
       }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Nie ma jeszcze kursów",
+      "description": "Opublikowane kursy pojawią się tutaj wraz z lekcjami, cenami i liczbą zapisów. Utwórz pierwszy, aby zacząć.",
+      "action": "Utwórz kurs"
     }
   }
 }

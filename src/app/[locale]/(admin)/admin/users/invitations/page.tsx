@@ -64,7 +64,7 @@ export default async function InvitationsPage(): Promise<JSX.Element> {
         <div className="custom-scrollbar overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <UsersInvitationsTableHead />
-            <tbody className="divide-y divide-border/40">
+            <tbody className="divide-y divide-border">
               {invitations.map((invite) => (
                 <AdminUsersInvitationRow key={invite.id} invite={invite} />
               ))}

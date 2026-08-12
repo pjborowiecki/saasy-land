@@ -20,35 +20,42 @@ import type { DataTableFeatures } from "~/src/presentation/components/custom/dat
 import { EMPTY_STRING_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import { getStatusBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
 import { isUserRole, userListStatusColor } from "~/src/app/[locale]/(admin)/admin/users/all/_components/user-display"
-import { avatarGradientClassForId, initialsFromName } from "~/src/app/[locale]/(admin)/admin/users/all/_utils"
+import { initialsFromName } from "~/src/app/[locale]/(admin)/admin/users/all/_utils"
 
+/**
+ * The initials tile used to be a rounded circle filled with a per-user gradient picked by
+ * hashing the id: five saturated two-stop gradients, so a table of seven users showed teal,
+ * blue, pink, amber and cyan at once on a console whose palette has a single hue. The colour
+ * carried no information either, since the hash is of an opaque id.
+ *
+ * It is now the same squircle-with-initials the sidebar uses for the signed-in account, in the
+ * neutral. Identity comes from the two letters, which is what identity is.
+ */
 export function UserCell({ row }: Readonly<CellContext<DataTableFeatures, User["select"], User["select"]["name"]>>): JSX.Element {
-  const { banned, email, id, image, name } = row.original
+  const { banned, email, image, name } = row.original
 
   return (
     <div className="flex items-center gap-3">
       {typeof image === "string" && image.length > EMPTY_STRING_LENGTH ? (
         <Image
           alt={name}
-          className={cn("size-9 shrink-0 rounded-full border border-border/50", {
-            "opacity-60 grayscale": banned,
-          })}
-          height={36}
+          className={cn("size-8 shrink-0 rounded-md border border-border object-cover", { "opacity-50 grayscale": banned })}
+          height={32}
           src={image}
-          width={36}
+          width={32}
         />
       ) : (
         <div
           className={cn(
-            "flex size-9 shrink-0 items-center justify-center rounded-full bg-linear-to-tr text-sm font-medium text-white",
-            avatarGradientClassForId(id),
+            "flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-[0.6875rem] font-semibold",
+            banned ? "text-muted-foreground" : "text-foreground",
           )}
         >
           {initialsFromName(name)}
         </div>
       )}
-      <div>
-        <p className={cn("text-sm font-medium", banned ? "text-muted-foreground" : "text-foreground")}>{name}</p>
+      <div className="min-w-0">
+        <p className={cn("font-medium", banned ? "text-muted-foreground line-through" : "text-foreground")}>{name}</p>
         <p className="text-xs text-muted-foreground">{email}</p>
       </div>
     </div>
@@ -59,7 +66,7 @@ export function RoleCell({ getValue }: Readonly<CellContext<DataTableFeatures, U
   const t = useTranslations("pages.admin.users")
   const role = getValue()
 
-  return <span className="text-sm text-muted-foreground">{isUserRole(role) ? t(`filters.role.options.${role}`) : role}</span>
+  return <span className="text-muted-foreground">{isUserRole(role) ? t(`filters.role.options.${role}`) : role}</span>
 }
 
 export function StatusCell({ getValue, row }: Readonly<CellContext<DataTableFeatures, User["select"], UserStatus>>): JSX.Element {
@@ -67,7 +74,10 @@ export function StatusCell({ getValue, row }: Readonly<CellContext<DataTableFeat
   const status = getValue()
 
   return (
-    <Badge variant="outline" className={cn("px-2 py-1 text-xs font-medium", getStatusBadgeClass(userListStatusColor(row.original)))}>
+    <Badge
+      variant="outline"
+      className={cn("gap-1.5 rounded-md px-2 py-0.5 text-[0.6875rem] font-medium", getStatusBadgeClass(userListStatusColor(row.original)))}
+    >
       {t(`filters.status.options.${status}`)}
     </Badge>
   )
@@ -77,13 +87,13 @@ export function BooleanCell({ getValue }: Readonly<CellContext<DataTableFeatures
   const t = useTranslations("pages.admin.users")
   const value = getValue()
 
-  return <span className="text-sm text-muted-foreground">{value ? t("table.booleans.yes") : t("table.booleans.no")}</span>
+  return <span className="text-muted-foreground">{value ? t("table.booleans.yes") : t("table.booleans.no")}</span>
 }
 
 export function TimezoneCell({
   getValue,
 }: Readonly<CellContext<DataTableFeatures, User["select"], User["select"]["timezone"]>>): JSX.Element {
-  return <span className="text-sm text-muted-foreground">{getValue()}</span>
+  return <span className="text-muted-foreground">{getValue()}</span>
 }
 
 export function DateCell({ getValue, row }: Readonly<CellContext<DataTableFeatures, User["select"], Date>>): JSX.Element {

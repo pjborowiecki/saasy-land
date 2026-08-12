@@ -8,6 +8,7 @@ import { useFormContext } from "react-hook-form"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
+import { AUTH_PRIMARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
 import { type SignUpFormValues } from "~/src/app/[locale]/(auth)/auth/sign-up/_components/sign-up-with-password-form-fields"
 
 export function SignUpSubmitButton({ isPending = false }: Readonly<{ isPending?: boolean }>): JSX.Element {
@@ -18,12 +19,12 @@ export function SignUpSubmitButton({ isPending = false }: Readonly<{ isPending?:
   return (
     <Button
       aria-label={t("form.submit")}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-foreground px-8 text-sm font-medium text-background shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-all hover:bg-foreground/90 hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]"
+      className={AUTH_PRIMARY_BUTTON_CLASS}
       isDisabled={isLoading}
       id="sign-up-form-submit-button"
       type="submit"
     >
-      {isLoading && <Loader2 aria-hidden="true" className="mr-2 size-4 animate-spin" />}
+      {isLoading && <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />}
       {isLoading ? t("form.submitting") : t("form.submit")}
     </Button>
   )
