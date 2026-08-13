@@ -76,6 +76,8 @@
         "label": "Płatności",
         "options": {
           "stripe": "Stripe",
+          "polar": "Polar",
+          "lemonsqueezy": "Lemon Squeezy",
           "none": "Brak"
         }
       },
@@ -186,8 +188,8 @@
     }
   },
   "studio": {
-    "title": "Wysyłaj marketing, nie tylko aplikację",
-    "description": "Dwie rzeczy, których starter kity prawie nigdy nie mają: narzędzia do sprzedaży gotowego produktu i inżynier, który zbudował ten kod, tłumaczący, dlaczego każda decyzja zapadła tak, a nie inaczej.",
+    "title": "Wszystko, czego nie daje szablon startowy.",
+    "description": "Konkretnie dwie rzeczy. Strona marketingowa, którą Twój zespół edytuje bez drugiej subskrypcji, i osoba, która napisała ten kod, tłumacząca każdą podjętą decyzję — łącznie z tymi, które dziś podjęłaby inaczej.",
     "builder": {
       "title": "Kreator stron w zestawie.",
       "body": "Strony docelowe, cenniki i blog, które Twój marketing edytuje wizualnie, we własnym panelu administracyjnym, na Twoich własnych komponentach. Bez subskrypcji Framera, bez Webflow, bez przekazywania plików.",
@@ -195,33 +197,36 @@
       "spec": "8 typów sekcji, Twoje własne komponenty"
     },
     "masterclass": {
-      "title": "Zobacz, jak powstaje od początku do końca.",
-      "body": "Zawodowy programista buduje dokładnie ten produkcyjny SaaS od pustego folderu. Na końcu nie utrzymujesz cudzego kodu, tylko taki, którego powstawanie widziałeś.",
-      "label": "Masterclass, w zestawie z kodem",
-      "topics": {
-        "architecture": {
-          "title": "Architektura i granice modułów",
-          "body": "Dlaczego kod dzieli się na moduły, przypadki użycia i warstwę prezentacji, gdzie przebiegają granice i jak dodać funkcję, nie przekraczając ich."
+      "title": "Zobacz, jak powstaje — od początku do końca.",
+      "body": "Dwa kursy, oba w pakiecie Masterclass. Jeden prowadzi Cię przez kod, który otrzymujesz, żebyś wiedział, gdzie jest co. Drugi buduje cały produkt od nowa, od pustego folderu, razem z CLI — żeby nic w nim nie było czarną skrzynką.",
+      "previewLabel": "Darmowy fragment",
+      "previewTitle": "Lekcja 01 — Granica modułu, zanim powstanie pierwsza funkcja",
+      "previewNote": "Obejrzyj pierwszą lekcję, zanim zdecydujesz. Bez konta, bez maila.",
+      "lockedLabel": "W pakiecie Masterclass",
+      "tracks": {
+        "walkthrough": {
+          "label": "Przewodnik",
+          "note": "Jak działa kod, który dostajesz — podsystem po podsystemie.",
+          "lessons": {
+            "l1": "Architektura i granice modułów",
+            "l2": "Uwierzytelnianie i bezpieczeństwo sesji",
+            "l3": "Płatności, webhooki i modele cenowe",
+            "l4": "Strategia testów i bramka pokrycia",
+            "l5": "Internacjonalizacja od początku do końca",
+            "l6": "Wdrożenia, migracje i wycofywanie zmian"
+          }
         },
-        "auth": {
-          "title": "Uwierzytelnianie i bezpieczeństwo sesji",
-          "body": "Better Auth na Twojej własnej bazie: sesje, dwuskładnikowe logowanie, OAuth, podszywanie się administratora i przypadki brzegowe, które większość szablonów pomija."
-        },
-        "billing": {
-          "title": "Płatności, webhooki i modele cenowe",
-          "body": "Stripe checkout, portal klienta i webhooki, które pozostają idempotentne, gdy to samo zdarzenie przyjdzie dwa razy."
-        },
-        "testing": {
-          "title": "Strategia testów i bramka pokrycia",
-          "body": "Co testować jednostkowo, co przeprowadzić przez prawdziwą przeglądarkę i jak podłączona jest bramka pokrycia, żeby zepsuta gałąź nie mogła trafić do main."
-        },
-        "i18n": {
-          "title": "Internacjonalizacja od początku do końca",
-          "body": "Routing językowy, katalogi tłumaczeń, formatowanie stref czasowych i walut oraz kontrola parzystości, która wywala build przy jednym brakującym kluczu."
-        },
-        "deployment": {
-          "title": "Wdrożenia, migracje i wycofywanie zmian",
-          "body": "Wdrożenie na edge, migracje na Neonie bez przestoju i co zrobić w dniu, w którym trzeba je wycofać."
+        "build": {
+          "label": "Budowa",
+          "note": "Ten sam produkt jeszcze raz, od pustego folderu, po kolei.",
+          "lessons": {
+            "l1": "CLI: pytania, szablony i to, co zapisuje init",
+            "l2": "Pierwszy moduł i granica, której nie wolno przekroczyć",
+            "l3": "Auth na własnej bazie, łącznie z przypadkami brzegowymi",
+            "l4": "Webhook, który nie może obciążyć dwa razy",
+            "l5": "Panel admina i tabela danych pod nim",
+            "l6": "Bramka pokrycia, potem wdrożenie, migracja, rollback"
+          }
         }
       }
     }

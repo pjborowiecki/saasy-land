@@ -1,6 +1,7 @@
 import type { JSX } from "react"
 
 import { Footer } from "~/src/app/[locale]/(landing)/_components/footer"
+import { MotionProvider } from "~/src/app/[locale]/(landing)/_components/motion-provider"
 import { Navigation } from "~/src/app/[locale]/(landing)/_components/navigation"
 import { PageFrame } from "~/src/app/[locale]/(landing)/_components/page-frame"
 
@@ -20,8 +21,13 @@ import { PageFrame } from "~/src/app/[locale]/(landing)/_components/page-frame"
  * STRUCTURE: `PageFrame` draws the content measure as two fixed vertical hairlines; every
  * section draws a full-bleed `border-t` across them. Thirteen sections, one drawing.
  *
- * MOTION: subtractive. One entrance (`Reveal`), one hero timeline, one marquee. Everything
- * else is a 200ms state change on a real interaction. No pins, no scrubbing, no parallax.
+ * MOTION: reactive, not decorative. One entrance (`Reveal`), one hero timeline, one marquee,
+ * and beyond that the page moves only because somebody moved it. Motion for React is loaded
+ * lazily, after first paint, and is spent on state the visitor changes — the run panel reflowing
+ * when a capability is switched off, a count travelling rather than cutting. Still no pins, no
+ * scrubbing, no parallax: scroll-driven spectacle is the house style of every template this page
+ * exists to not resemble. If the scrollbar is the only thing that can trigger it, it does not
+ * ship. Everything obeys `prefers-reduced-motion` through `MotionConfig`.
  *
  * COMMITTED DARK: the route group renders inside `.dark` and never switches. The light `:root`
  * ramp belongs to the app, the admin and the docs.
@@ -30,9 +36,11 @@ export default function LandingPageLayout({ children }: Readonly<LayoutProps<"/[
   return (
     <div className="dark relative isolate min-h-svh bg-background text-foreground">
       <PageFrame />
-      <Navigation />
-      <main className="relative z-10">{children}</main>
-      <Footer />
+      <MotionProvider>
+        <Navigation />
+        <main className="relative z-10">{children}</main>
+        <Footer />
+      </MotionProvider>
     </div>
   )
 }

@@ -76,6 +76,8 @@
         "label": "Billing",
         "options": {
           "stripe": "Stripe",
+          "polar": "Polar",
+          "lemonsqueezy": "Lemon Squeezy",
           "none": "None"
         }
       },
@@ -186,8 +188,8 @@
     }
   },
   "studio": {
-    "title": "Ship the marketing, not just the app",
-    "description": "The two things a starter kit almost never includes: the tools to sell the product once it exists, and the engineer who built the codebase explaining why every decision went the way it did.",
+    "title": "Everything a starter kit leaves out.",
+    "description": "Two things, specifically. A marketing site your own team can edit without a second subscription, and the person who wrote the code explaining every decision in it — including the ones they would make differently now.",
     "builder": {
       "title": "A page designer, in the box.",
       "body": "Landing pages, pricing pages and a blog your marketing team can edit visually, inside your own admin, rendering your own components. No Framer subscription, no Webflow, no hand-off.",
@@ -196,32 +198,35 @@
     },
     "masterclass": {
       "title": "Watch it get built, end to end.",
-      "body": "A professional developer building this exact production SaaS from an empty folder. By the end you are not maintaining someone else's codebase, you are maintaining one you watched get made.",
-      "label": "Masterclass, included with the code",
-      "topics": {
-        "architecture": {
-          "title": "Architecture and module boundaries",
-          "body": "Why the code splits into modules, use cases and a presentation layer, where the seams are, and how to add a feature without reaching across them."
+      "body": "Two courses, both included with the Masterclass tier. One walks the codebase you receive so you know where everything is. The other builds the whole product again from an empty folder, the CLI included, so nothing in it is a black box.",
+      "previewLabel": "Free preview",
+      "previewTitle": "Lesson 01 — The module boundary, before any feature",
+      "previewNote": "Watch the first lesson before you decide. No account, no email.",
+      "lockedLabel": "Included with Masterclass",
+      "tracks": {
+        "walkthrough": {
+          "label": "The walkthrough",
+          "note": "How the code you receive works, subsystem by subsystem.",
+          "lessons": {
+            "l1": "Architecture and module boundaries",
+            "l2": "Authentication and session security",
+            "l3": "Billing, webhooks and pricing models",
+            "l4": "Test strategy and the coverage gate",
+            "l5": "Internationalization end to end",
+            "l6": "Deployment, migrations and rollback"
+          }
         },
-        "auth": {
-          "title": "Authentication and session security",
-          "body": "Better Auth against your own database: sessions, two-factor, OAuth, admin impersonation, and the edge cases most starter kits quietly skip."
-        },
-        "billing": {
-          "title": "Billing, webhooks and pricing models",
-          "body": "Stripe checkout, the customer portal, and webhooks that stay idempotent when the same event arrives twice."
-        },
-        "testing": {
-          "title": "Test strategy and the coverage gate",
-          "body": "What to unit test, what to drive through a real browser, and how the coverage gate is wired so a broken branch cannot merge."
-        },
-        "i18n": {
-          "title": "Internationalization end to end",
-          "body": "Locale routing, message catalogs, timezone and currency formatting, and the parity check that fails the build on one missing key."
-        },
-        "deployment": {
-          "title": "Deployment, migrations and rollback",
-          "body": "Shipping to the edge, running migrations against Neon without downtime, and what to do the day you have to roll one back."
+        "build": {
+          "label": "The build",
+          "note": "The same product again, from an empty folder, in order.",
+          "lessons": {
+            "l1": "The CLI: prompts, templates and what init writes",
+            "l2": "The first module, and the boundary it must not cross",
+            "l3": "Auth on your own database, including the edge cases",
+            "l4": "The webhook that must not charge twice",
+            "l5": "The admin, and the data table behind it",
+            "l6": "The coverage gate, then deploy, migrate, roll back"
+          }
         }
       }
     }

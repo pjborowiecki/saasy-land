@@ -13,6 +13,7 @@ const GROUPS: Record<string, string> = {
   "neondatabase/ai-rules": "neon",
   "next-safe-action/skills": "next-safe-action",
   "pbakaus/impeccable": "impeccable",
+  "remotion": "remotion",
   "resend/resend-skills": "resend",
   "stripe/ai": "stripe",
   "TanStack/table": "tanstack/table",

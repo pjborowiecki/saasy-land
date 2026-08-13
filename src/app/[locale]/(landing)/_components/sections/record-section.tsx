@@ -4,21 +4,22 @@ import { Check } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { ConceptLoop } from "~/src/app/[locale]/(landing)/_components/concept-loop"
+import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/hover-highlight"
 import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 
 const RECORD_ITEMS = ["coverage", "gate", "suites", "locales", "auth", "author"] as const
 
 const LEDGER_DELAY_MS = 100
 
-function RecordRow({ claim, evidence }: Readonly<{ claim: string; evidence: string }>): JSX.Element {
+function RecordRow({ claim, evidence, id }: Readonly<{ claim: string; evidence: string; id: string }>): JSX.Element {
   return (
-    <div className="grid gap-x-10 py-5 md:grid-cols-[1fr_1.5fr] md:items-baseline">
+    <HighlightItem contentClassName="grid gap-x-10 px-4 py-5 md:grid-cols-[1fr_1.5fr] md:items-baseline" id={id}>
       <dt className="flex items-baseline gap-2.5 text-body-sm font-medium text-foreground">
         <Check aria-hidden className="size-3.5 shrink-0 translate-y-0.5 text-ring" strokeWidth={2.25} />
         {claim}
       </dt>
       <dd className="mt-1.5 ml-6 font-mono text-spec wrap-break-word text-muted-foreground md:mt-0 md:ml-0">{evidence}</dd>
-    </div>
+    </HighlightItem>
   )
 }
 
@@ -51,11 +52,11 @@ export async function RecordSection(): Promise<JSX.Element> {
             <p className="hidden font-mono text-label text-muted-foreground uppercase md:block">{t("columns.evidence")}</p>
           </div>
 
-          <dl className="divide-y divide-border">
+          <HighlightGroup className="-mx-4 divide-y divide-border" element="dl" name="record-highlight">
             {RECORD_ITEMS.map((item) => (
-              <RecordRow claim={t(`items.${item}.claim`)} evidence={t(`items.${item}.evidence`)} key={item} />
+              <RecordRow claim={t(`items.${item}.claim`)} evidence={t(`items.${item}.evidence`)} id={item} key={item} />
             ))}
-          </dl>
+          </HighlightGroup>
 
           {/*
            * The list says where to look; the loop shows the looking. It sits under the receipt

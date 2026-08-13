@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server"
 
 import { cn } from "~/src/utils"
 
+import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/hover-highlight"
 import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 import { ROUTES } from "~/src/routes"
 
@@ -54,11 +55,13 @@ function TierBand({ isFeatured, mostPopular }: Readonly<{ isFeatured: boolean; m
 
 function TierColumn({ mostPopular, tier }: Readonly<{ mostPopular: string; tier: Tier }>): JSX.Element {
   return (
-    <div
+    <HighlightItem
       className={cn(
-        "flex flex-col border-border not-last:border-b md:not-last:border-r md:not-last:border-b-0",
+        "border-border not-last:border-b md:not-last:border-r md:not-last:border-b-0",
         tier.isFeatured ? "bg-card" : "bg-background",
       )}
+      contentClassName="flex h-full flex-col"
+      id={tier.id}
     >
       <TierBand isFeatured={tier.isFeatured} mostPopular={mostPopular} />
 
@@ -94,7 +97,7 @@ function TierColumn({ mostPopular, tier }: Readonly<{ mostPopular: string; tier:
           </a>
         </div>
       </div>
-    </div>
+    </HighlightItem>
   )
 }
 
@@ -142,11 +145,11 @@ export async function PricingSection(): Promise<JSX.Element> {
         </Reveal>
 
         <Reveal className="mt-14 md:mt-20" delay={GRID_DELAY_MS}>
-          <div className="grid overflow-hidden rounded-xl border border-border md:grid-cols-3">
+          <HighlightGroup className="grid overflow-hidden rounded-xl border border-border md:grid-cols-3" name="pricing-highlight">
             {tiers.map((tier) => (
               <TierColumn key={tier.id} mostPopular={t("mostPopular")} tier={tier} />
             ))}
-          </div>
+          </HighlightGroup>
 
           <p className="mt-8 flex max-w-3xl items-start gap-3">
             <Check aria-hidden className="mt-0.5 size-3.5 shrink-0 text-ring" strokeWidth={2.25} />

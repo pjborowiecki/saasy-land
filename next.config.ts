@@ -8,11 +8,17 @@ const nextConfig: NextConfig = {
   distDir: process.env["NEXT_DIST_DIR"] ?? ".next",
   experimental: {
     authInterrupts: true,
-    exposeTestingApiInProductionBuild: process.env["VERCEL_ENV"] === "preview" || process.env["EXPOSE_TESTING_API"] === "1",
+    exposeTestingApiInProductionBuild: process.env["EXPOSE_TESTING_API"] === "1",
     optimizePackageImports: ["lucide-react"],
     turbopackRustReactCompiler: true,
     useOffline: true,
     useTypeScriptCli: true,
+  },
+  headers() {
+    if (process.env["VERCEL_ENV"] !== "preview") {
+      return Promise.resolve([])
+    }
+    return Promise.resolve([{ headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }], source: "/:path*" }])
   },
   images: {
     remotePatterns: [
