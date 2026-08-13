@@ -1,21 +1,18 @@
 "use client"
 
-import { type CSSProperties, type JSX, type ReactNode, createContext, use, useCallback, useEffect, useMemo, useState } from "react"
+import { type JSX, type ReactNode, createContext, use, useCallback, useEffect, useMemo, useState } from "react"
 
-import { Check, Copy } from "lucide-react"
+import { AnimatePresence, animate, useMotionValue, useTransform } from "motion/react"
+import * as m from "motion/react-m"
 
 import { cn } from "~/src/utils"
 
 import { CLI_CHOICES, CLI_MODULES, NONE } from "~/src/app/[locale]/(landing)/_components/cli-choices"
+import { CopyButton } from "~/src/app/[locale]/(landing)/_components/copy-button"
 import { INSTALL_COMMAND } from "~/src/app/[locale]/(landing)/_components/install-command"
-
-/** Long enough to register as an acknowledgement, short enough not to look stuck. */
-const CONFIRMATION_MS = 2000
+import { EXP, EXP_FAST, PRESS, TAP } from "~/src/app/[locale]/(landing)/_components/motion-tokens"
 
 const FIRST = 0
-
-/** Close enough together to read as one wave, far enough apart to read as ten things landing. */
-const STAGGER_MS = 45
 
 interface ConfiguratorState {
   readonly select: (choiceId: string, optionId: string) => void
@@ -59,7 +56,7 @@ export function CliChoiceOption({ choiceId, label, optionId }: CliChoiceOptionPr
   }, [choiceId, optionId, select])
 
   return (
-    <button
+    <m.button
       aria-pressed={isTaken}
       className={cn(
         "inline-flex cursor-pointer items-center gap-2.5 rounded-md border px-3 py-1.5 text-body-sm transition-colors duration-200 ease-exp focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
@@ -68,7 +65,9 @@ export function CliChoiceOption({ choiceId, label, optionId }: CliChoiceOptionPr
           : "border-border text-muted-foreground hover:border-muted-foreground/30 hover:text-foreground",
       )}
       onClick={handleClick}
+      transition={PRESS}
       type="button"
+      whileTap={TAP}
     >
       <span
         aria-hidden
@@ -78,7 +77,7 @@ export function CliChoiceOption({ choiceId, label, optionId }: CliChoiceOptionPr
         )}
       />
       {label}
-    </button>
+    </m.button>
   )
 }
 
@@ -104,32 +103,34 @@ export function CliChoiceRow({ children, label }: CliChoiceRowProps): JSX.Elemen
   )
 }
 
-interface RunModuleProps {
-  readonly index: number
-  readonly name: string
+/** Travel, not distance. Eight pixels reads as "arrived from the left" without being a slide. */
+const ROW_ENTER = { opacity: 0, x: -8 }
+const ROW_SETTLED = { opacity: 1, x: 0 }
+
+interface RunCountProps {
+  readonly value: number
 }
 
 /**
- * One module, landing.
+ * The module count, counted rather than swapped.
  *
- * The stagger is the whole effect: ten rows appearing together is a re-render, ten rows arriving in
- * sequence is a program doing work. The delay is inline because it is per-row data rather than a
- * style, and it is memoised for the same reason `Reveal` memoises its own.
+ * A figure that cuts from 10 to 8 is a re-render; a figure that travels through 9 is the tool
+ * doing something. The value lives in a motion value and never in React state, so the digits
+ * update outside the render cycle — a `setState` per frame would re-render this whole half of
+ * the exhibit sixty times a second to move one glyph.
  */
-function RunModule({ index, name }: RunModuleProps): JSX.Element {
-  const style = useMemo<CSSProperties>(() => ({ animationDelay: `${String(index * STAGGER_MS)}ms` }), [index])
+function RunCount({ value }: RunCountProps): JSX.Element {
+  const count = useMotionValue(value)
+  const rounded = useTransform(count, (current) => String(Math.round(current)))
 
-  return (
-    <li
-      className="flex animate-in items-center gap-3 duration-300 ease-exp fill-mode-both fade-in slide-in-from-left-1 motion-reduce:animate-none"
-      style={style}
-    >
-      <span aria-hidden className="text-ring">
-        ✓
-      </span>
-      {name}
-    </li>
-  )
+  useEffect(() => {
+    const controls = animate(count, value, EXP)
+    return () => {
+      controls.stop()
+    }
+  }, [count, value])
+
+  return <m.span className="font-mono tabular-nums">{rounded}</m.span>
 }
 
 interface CliRunProps {
@@ -160,18 +161,41 @@ function CliRun({ greenLabel, moduleLabel }: CliRunProps): JSX.Element {
   return (
     <div className="w-full px-5 py-7 md:px-7 md:py-8">
       {/* `w-fit`: two columns of eight-character words stretched across the cell read as two
-          unrelated lists. Hugged together they read as one printed block, which is what they are. */}
-      <ul className="grid w-fit grid-cols-2 gap-x-14 gap-y-3.5 font-mono text-spec text-muted-foreground" key={modules.join(" ")}>
-        {modules.map((name, index) => (
-          <RunModule index={index} key={name} name={name} />
-        ))}
+          unrelated lists. Hugged together they read as one printed block, which is what they are.
+          No `key` on the list any more — re-keying it would remount the rows and throw away the
+          layout animation that is the whole point. */}
+      <ul className="grid w-fit grid-cols-2 gap-x-14 gap-y-3.5 font-mono text-spec text-muted-foreground">
+        {/* `popLayout` takes the leaving row out of flow immediately, so the rows below it start
+            travelling while it is still fading rather than after. `initial={false}` because the
+            card already arrives under `Reveal`; animating both would be two entrances. */}
+        <AnimatePresence initial={false} mode="popLayout">
+          {modules.map((name) => (
+            // Inline, not extracted. `popLayout` attaches a ref to its direct child to measure it
+            // and take it out of flow; a plain wrapper component swallows that ref and the pop
+            // silently degrades to a fade followed by a jump.
+            <m.li
+              animate={ROW_SETTLED}
+              className="flex items-center gap-3"
+              exit={ROW_ENTER}
+              initial={ROW_ENTER}
+              key={name}
+              layout
+              transition={EXP}
+            >
+              <span aria-hidden className="text-ring">
+                ✓
+              </span>
+              {name}
+            </m.li>
+          ))}
+        </AnimatePresence>
       </ul>
-      <p className="mt-7 flex items-center gap-3 border-t border-border pt-6 text-body-sm text-foreground">
+      <m.p className="mt-7 flex items-center gap-3 border-t border-border pt-6 text-body-sm text-foreground" layout transition={EXP_FAST}>
         <span aria-hidden className="size-1.25 shrink-0 rounded-xs bg-ring" />
         <span>
-          <span className="font-mono tabular-nums">{modules.length}</span> {moduleLabel} · {greenLabel}
+          <RunCount value={modules.length} /> {moduleLabel} · {greenLabel}
         </span>
-      </p>
+      </m.p>
     </div>
   )
 }
@@ -208,44 +232,15 @@ export function CliConfigurator({
   const [taken, setTaken] = useState<Record<string, string>>(() =>
     Object.fromEntries(CLI_CHOICES.map((choice) => [choice.id, choice.options[FIRST].id])),
   )
-  const [hasCopied, setHasCopied] = useState(false)
 
   const command = useMemo(() => {
     const flags = CLI_CHOICES.map((choice) => choice.options.find((option) => option.id === taken[choice.id])?.flag ?? "")
     return [INSTALL_COMMAND, ...flags.filter((flag) => flag.length > 0)].join(" ")
   }, [taken])
 
-  useEffect(() => {
-    if (!hasCopied) {
-      return
-    }
-    const timeoutId = globalThis.setTimeout(() => {
-      setHasCopied(false)
-    }, CONFIRMATION_MS)
-    return () => {
-      globalThis.clearTimeout(timeoutId)
-    }
-  }, [hasCopied])
-
   const select = useCallback((choiceId: string, optionId: string): void => {
     setTaken((current) => ({ ...current, [choiceId]: optionId }))
-    // A tick still showing beside a command that has since changed is worse than no confirmation
-    // at all, so answering retires it.
-    setHasCopied(false)
   }, [])
-
-  const handleCopy = useCallback((): void => {
-    const copy = async (): Promise<void> => {
-      try {
-        await navigator.clipboard?.writeText(command)
-        setHasCopied(true)
-      } catch {
-        // `writeText` rejects on an insecure origin or a denied permission, and the command is
-        // visible and selectable next to the button, so the failure is silent.
-      }
-    }
-    void copy()
-  }, [command])
 
   const state = useMemo<ConfiguratorState>(() => ({ select, taken }), [select, taken])
 
@@ -262,29 +257,13 @@ export function CliConfigurator({
             </span>
             {command}
           </code>
-          <button
-            aria-label={hasCopied ? copiedLabel : copyLabel}
-            className="relative inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors duration-200 ease-exp hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-            onClick={handleCopy}
-            type="button"
-          >
-            <Check
-              aria-hidden
-              className={cn(
-                "absolute size-3.5 text-ring transition-opacity duration-200 ease-exp",
-                hasCopied ? "opacity-100" : "opacity-0",
-              )}
-              strokeWidth={2}
-            />
-            <Copy
-              aria-hidden
-              className={cn("size-3.5 transition-opacity duration-200 ease-exp", hasCopied ? "opacity-0" : "opacity-100")}
-              strokeWidth={1.75}
-            />
-          </button>
+          <CopyButton copiedLabel={copiedLabel} copyLabel={copyLabel} value={command} />
         </div>
 
-        <div className="grid divide-y divide-border lg:grid-cols-2 lg:divide-x lg:divide-y-0">
+        {/* Not an even split. The matrix has to hold a question with four answers on one line, and
+            the run is a short column of eight-character words — an even split starved the half
+            that had content and padded the half that did not. */}
+        <div className="grid divide-y divide-border lg:grid-cols-[1.4fr_1fr] lg:divide-x lg:divide-y-0">
           <dl className="divide-y divide-border">{children}</dl>
 
           {/* Centred, because the run is shorter than the matrix and gets shorter still as

@@ -35,8 +35,16 @@ export const CLI_CHOICES = [
   },
   {
     id: "billing",
+    /**
+     * The one question with more than two answers, because it is the one where the answer is not
+     * obvious. Stripe is the processor; Polar and Lemon Squeezy are merchants of record, which
+     * means they carry EU VAT and US sales tax for you. That is a business decision a founder
+     * makes once and cannot easily undo, so the scaffold should not make it for them.
+     */
     options: [
       { flag: "--billing stripe", id: "stripe" },
+      { flag: "--billing polar", id: "polar" },
+      { flag: "--billing lemonsqueezy", id: "lemonsqueezy" },
       { flag: "--no-billing", id: "none" },
     ],
   },

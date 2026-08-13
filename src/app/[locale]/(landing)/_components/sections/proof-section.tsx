@@ -2,6 +2,8 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
+import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/hover-highlight"
+
 /**
  * The five numbers the rest of the page has to earn.
  *
@@ -21,19 +23,24 @@ export async function ProofSection(): Promise<JSX.Element> {
   return (
     <section className="relative border-t border-border">
       <div className="mx-auto w-full max-w-7xl">
-        <dl className="grid grid-cols-2 gap-px bg-border md:grid-cols-5">
+        <HighlightGroup className="grid grid-cols-2 gap-px bg-border md:grid-cols-5" element="dl" name="proof-highlight">
           {FACT_KEYS.map((key) => (
             // Five facts in a two-column grid leaves a hole, and the hole shows the hairline
             // ground the gaps are painted on. The last cell spans the row instead.
-            <div className="bg-background px-6 py-8 last:col-span-2 md:px-8 md:py-10 md:last:col-span-1" key={key}>
+            <HighlightItem
+              className="bg-background last:col-span-2 md:last:col-span-1"
+              contentClassName="px-6 py-8 md:px-8 md:py-10"
+              id={key}
+              key={key}
+            >
               <dt className="font-mono text-label text-muted-foreground uppercase">{t(`facts.${key}.label`)}</dt>
               <dd className="mt-3 text-[1.75rem] leading-none font-semibold tracking-[-0.035em] text-foreground tabular-nums">
                 {t(`facts.${key}.value`)}
               </dd>
               <dd className="mt-2 text-body-sm text-pretty text-muted-foreground">{t(`facts.${key}.note`)}</dd>
-            </div>
+            </HighlightItem>
           ))}
-        </dl>
+        </HighlightGroup>
       </div>
     </section>
   )

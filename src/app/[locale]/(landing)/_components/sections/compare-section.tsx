@@ -3,6 +3,7 @@ import type { JSX } from "react"
 import { ArrowRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/hover-highlight"
 import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 
 const OPTIONS = ["free", "weekend", "heavyweights"] as const
@@ -12,6 +13,7 @@ const DIMENSIONS = ["model", "coverage", "designer", "mau", "course", "license"]
 const TABLE_DELAY_MS = 100
 
 interface CompareRowProps {
+  readonly id: string
   readonly label: string
   readonly market: string
   readonly marketLabel: string
@@ -26,9 +28,9 @@ interface CompareRowProps {
  * sit on one line and the labels are the column headers instead. Nothing is hidden at any width,
  * which is the whole reason this is a grid and not a table with a horizontal scrollbar.
  */
-function CompareRow({ label, market, marketLabel, ours, oursLabel }: CompareRowProps): JSX.Element {
+function CompareRow({ id, label, market, marketLabel, ours, oursLabel }: CompareRowProps): JSX.Element {
   return (
-    <div className="grid gap-y-2 py-5 md:grid-cols-[1.1fr_1fr_1fr] md:items-baseline md:gap-x-0 md:py-0">
+    <HighlightItem contentClassName="grid gap-y-2 px-4 py-5 md:grid-cols-[1.1fr_1fr_1fr] md:items-baseline md:gap-x-0 md:py-0" id={id}>
       <dt className="text-body-sm font-medium text-foreground md:py-4 md:pr-6">{label}</dt>
       <dd className="text-body-sm text-pretty text-muted-foreground md:py-4 md:pr-6">
         <span className="mr-2 font-mono text-label text-muted-foreground/70 uppercase md:hidden">{marketLabel}</span>
@@ -38,16 +40,16 @@ function CompareRow({ label, market, marketLabel, ours, oursLabel }: CompareRowP
         <span className="mr-2 font-mono text-label text-muted-foreground uppercase md:hidden">{oursLabel}</span>
         {ours}
       </dd>
-    </div>
+    </HighlightItem>
   )
 }
 
-function CompareOption({ body, title }: Readonly<{ body: string; title: string }>): JSX.Element {
+function CompareOption({ body, id, title }: Readonly<{ body: string; id: string; title: string }>): JSX.Element {
   return (
-    <div className="grid gap-x-10 py-6 md:grid-cols-[15rem_1fr] md:items-baseline">
+    <HighlightItem contentClassName="grid gap-x-10 px-4 py-6 md:grid-cols-[15rem_1fr] md:items-baseline" id={id}>
       <dt className="text-title text-foreground">{title}</dt>
       <dd className="mt-2 max-w-[62ch] text-body text-pretty text-muted-foreground md:mt-0">{body}</dd>
-    </div>
+    </HighlightItem>
   )
 }
 
@@ -75,11 +77,11 @@ export async function CompareSection(): Promise<JSX.Element> {
         </Reveal>
 
         <Reveal className="mt-14 md:mt-20" delay={TABLE_DELAY_MS}>
-          <dl className="divide-y divide-border border-y border-border">
+          <HighlightGroup className="-mx-4 divide-y divide-border border-y border-border" element="dl" name="compare-options-highlight">
             {OPTIONS.map((option) => (
-              <CompareOption body={t(`options.${option}.body`)} key={option} title={t(`options.${option}.title`)} />
+              <CompareOption body={t(`options.${option}.body`)} id={option} key={option} title={t(`options.${option}.title`)} />
             ))}
-          </dl>
+          </HighlightGroup>
 
           {/*
            * A responsive grid, not a scrolling table.
@@ -93,15 +95,18 @@ export async function CompareSection(): Promise<JSX.Element> {
            * The winning column is marked by fill, never by a badge, a scale-up or a glow.
            */}
           <div className="mt-14 border-y border-border md:mt-16">
-            <div className="hidden border-b border-border md:grid md:grid-cols-[1.1fr_1fr_1fr]">
+            {/* Bled and padded by the same 4, so the header tracks stay aligned with the rows now that
+                the rows bleed for their hover ground. */}
+            <div className="-mx-4 hidden border-b border-border px-4 md:grid md:grid-cols-[1.1fr_1fr_1fr]">
               <span />
               <span className="py-3 font-mono text-label text-muted-foreground uppercase">{t("columns.market")}</span>
               <span className="bg-card px-5 py-3 font-mono text-label text-foreground uppercase">{t("columns.saasyland")}</span>
             </div>
 
-            <dl className="divide-y divide-border">
+            <HighlightGroup className="-mx-4 divide-y divide-border" element="dl" name="compare-rows-highlight">
               {DIMENSIONS.map((dimension) => (
                 <CompareRow
+                  id={dimension}
                   key={dimension}
                   label={t(`dimensions.${dimension}.label`)}
                   market={t(`dimensions.${dimension}.market`)}
@@ -110,7 +115,7 @@ export async function CompareSection(): Promise<JSX.Element> {
                   oursLabel={t("columns.saasyland")}
                 />
               ))}
-            </dl>
+            </HighlightGroup>
           </div>
 
           <div className="mt-14 grid gap-x-16 gap-y-10 md:mt-16 md:grid-cols-2 md:items-start">

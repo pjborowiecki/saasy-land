@@ -1,8 +1,13 @@
 "use client"
 
-import { type JSX, type ReactNode, useEffect, useRef, useState } from "react"
+import { type JSX, type ReactNode, useEffect, useMemo, useRef, useState } from "react"
+
+import { useScroll, useSpring } from "motion/react"
+import * as m from "motion/react-m"
 
 import { cn } from "~/src/utils"
+
+import { PROGRESS_SPRING } from "~/src/app/[locale]/(landing)/_components/motion-tokens"
 
 /**
  * The bar is transparent over the hero and materialises once the page has moved.
@@ -17,6 +22,9 @@ import { cn } from "~/src/utils"
 export function NavShell({ children }: Readonly<{ children: ReactNode }>): JSX.Element {
   const sentinelRef = useRef<HTMLDivElement>(null)
   const [hasScrolled, setHasScrolled] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, PROGRESS_SPRING)
+  const progressStyle = useMemo(() => ({ scaleX: progress }), [progress])
 
   useEffect(() => {
     const sentinel = sentinelRef.current
@@ -46,6 +54,17 @@ export function NavShell({ children }: Readonly<{ children: ReactNode }>): JSX.E
         )}
       >
         {children}
+        {/*
+         * How far through the page you are, as a hairline.
+         *
+         * The bar already materialises on scroll, but a 72%-opacity dark panel over a dark page
+         * behind dark content is a change nobody can see. This is the same event, told in the one
+         * colour the design contract reserves for state and progress.
+         *
+         * `scaleX` on a motion value, so it runs on the compositor and never re-renders this
+         * component. Bound straight to the transform, there is no scroll handler and no state.
+         */}
+        <m.div aria-hidden className="pointer-events-none absolute inset-x-0 -bottom-px h-px origin-left bg-ring" style={progressStyle} />
       </header>
     </>
   )

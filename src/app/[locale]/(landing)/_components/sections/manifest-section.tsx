@@ -2,6 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
+import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/hover-highlight"
 import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 
 /** The ten parts, in assembly order: the door first, then what it opens onto, then the proof. */
@@ -44,22 +45,21 @@ export async function ManifestSection(): Promise<JSX.Element> {
            * and padding the rows back in keeps the rule and the highlight identical to each other
            * while giving the copy room, and the labels stay on the measure the heading is set to.
            */}
-          <dl className="-mx-4 divide-y divide-border border-y border-border md:-mx-6">
+          <HighlightGroup className="-mx-4 divide-y divide-border border-y border-border md:-mx-6" element="dl" name="manifest-highlight">
             {MANIFEST_ITEMS.map((item) => (
-              <div className="group relative grid gap-x-10 px-4 py-6 md:grid-cols-[15rem_1fr] md:items-baseline md:px-6 md:py-7" key={item}>
-                {/* Exactly the row, and therefore exactly the rules above and below it.
-                    Square-edged for the same reason: the rules it sits between are square. */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 -z-10 bg-muted/0 transition-colors duration-400 ease-exp group-hover:bg-muted/45"
-                />
+              <HighlightItem
+                className="group"
+                contentClassName="grid gap-x-10 px-4 py-6 md:grid-cols-[15rem_1fr] md:items-baseline md:px-6 md:py-7"
+                id={item}
+                key={item}
+              >
                 <dt className="text-title text-foreground">{t(`items.${item}.label`)}</dt>
                 <dd className="mt-2 max-w-[62ch] text-body text-pretty text-muted-foreground transition-colors duration-400 ease-exp group-hover:text-foreground md:mt-0">
                   {t(`items.${item}.body`)}
                 </dd>
-              </div>
+              </HighlightItem>
             ))}
-          </dl>
+          </HighlightGroup>
         </Reveal>
       </div>
     </section>
