@@ -1,21 +1,5 @@
-import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
+import { isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
 
-describe("is blog index component", () => {
-  it("returns true for undefined slug", () => {
-    expect.hasAssertions()
-    expect(isBlogIndex()).toBe(true)
-  })
-
-  it("returns true for empty slug array", () => {
-    expect.hasAssertions()
-    expect(isBlogIndex([])).toBe(true)
-  })
-
-  it("returns false when slug has segments", () => {
-    expect.hasAssertions()
-    expect(isBlogIndex(["hello-world"])).toBe(false)
-  })
-})
 describe("summary from frontmatter component", () => {
   it("prefers excerpt over description", () => {
     expect.hasAssertions()

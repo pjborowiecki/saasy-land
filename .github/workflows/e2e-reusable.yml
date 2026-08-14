@@ -60,9 +60,6 @@ jobs:
       - name: Build
         # Bun can SIGILL in N-API teardown after a successful Next build; the prerender
         # manifest is written before that point, so its presence means the build finished.
-        # EXPOSE_TESTING_API keeps instant() e2e verdicts valid on this measured build.
-        env:
-          EXPOSE_TESTING_API: "1"
         run: bun run build || test -f .next/prerender-manifest.json
 
       - name: Cache Playwright browsers

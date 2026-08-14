@@ -336,9 +336,36 @@
   box-shadow: none;
 }
 
+/*
+ * ...and one box model. Fumadocs already owns this figure end to end: it pads the scroll
+ * viewport (`py-3.5`), pads each line through `.shiki .line`, and sizes the text at 13px.
+ * `.typeset pre` then lands on the same element and adds its own padding, its own
+ * `margin-block-start` and another `0.875em` of font scaling on top.
+ *
+ * All three stack. The margin is the loud one — 19.5px of dead space trapped *inside* the
+ * viewport, above the first line, which is what made the block top-heavy and twice the
+ * height of the code in it. The font scaling compounds the other way, shrinking a 13px
+ * snippet to 11.375px.
+ *
+ * So `.typeset` is the interloper on this box: hand every one of those properties back to
+ * Fumadocs, then set the two gutters that remain. The right gutter stays wide because the
+ * copy button is parked in that corner and long lines scroll under it.
+ */
 .typeset figure.shiki pre {
   background-color: transparent;
   border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+}
+
+.typeset figure.shiki .fd-scroll-container {
+  padding-block: 0.5rem;
+}
+
+.typeset figure.shiki .line {
+  --padding-left: 0.875rem;
+  --padding-right: 2rem;
 }
 
 /*

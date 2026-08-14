@@ -56,7 +56,6 @@
         "zod": "^4.4.3",
       },
       "devDependencies": {
-        "@next/playwright": "^16.3.0",
         "@playwright/test": "^1.62.1",
         "@tailwindcss/postcss": "^4.3.3",
         "@testing-library/jest-dom": "^7.0.0",
@@ -415,8 +414,6 @@
     "@next-safe-action/adapter-better-auth": ["@next-safe-action/adapter-better-auth@0.1.6", "", { "peerDependencies": { "better-auth": ">= 1.5.0", "next": ">= 15.1.0", "next-safe-action": ">= 8.4.0" } }, "sha512-fvfUR+tUO1Gl+Qki5KfPCbqBP8Oolj/Iim0pntVMezcChz3ygJybbTNdcmHvcxgJTbGAQjYaW+PrWpp5FqjJOA=="],
 
     "@next/env": ["@next/env@16.3.0", "", {}, "sha512-o9r1S0BNiNreHP9Vs+Qnqd9kviDkJh8xIACY7UFZSmiGbbQRzPBBosvHzAU4TULHOIuOj/18RSsyz2qrREmIFw=="],
-
-    "@next/playwright": ["@next/playwright@16.3.0", "", { "peerDependencies": { "@playwright/test": ">=1.0.0" }, "optionalPeers": ["@playwright/test"] }, "sha512-lYFQDfksErmwifriLvnuhywiTqKtC7faxbLQSO2cmsrfVJsXA0L3cV1IqsXu7lhA8bFOOAxyvNBTtYyzKdKDew=="],
 
     "@next/swc-darwin-arm64": ["@next/swc-darwin-arm64@16.3.0", "", { "os": "darwin", "cpu": "arm64" }, "sha512-55hpqq18bEVAlxedlTt3tFqZmKg2nUXT1kn1G/BGEy0R13h3LwtwHPVzzjG6P4LLeOHE32PFDQUVaJEWvBEZBw=="],
 

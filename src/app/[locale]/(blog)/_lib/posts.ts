@@ -1,7 +1,3 @@
-export function isBlogIndex(slug?: string[]): boolean {
-  return slug === undefined || slug.length === 0
-}
-
 export function summaryFromFrontmatter(data: { excerpt?: string | undefined; description?: string | undefined }): string | undefined {
   return data.excerpt ?? data.description
 }
