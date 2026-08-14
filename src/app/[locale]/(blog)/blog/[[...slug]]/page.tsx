@@ -14,6 +14,7 @@ import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 
 import { PostLedger, PostRow } from "~/src/app/[locale]/(blog)/_components/post-ledger"
+import { PostToc, PostTocItem } from "~/src/app/[locale]/(blog)/_components/post-toc"
 import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
 
 const EMPTY_TAGS_LENGTH = 0
@@ -163,14 +164,25 @@ async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Eleme
             <Image alt="" className="object-cover" fill priority sizes="(max-width: 48rem) 100vw, 64rem" src={data.image} />
           </div>
         ) : undefined}
-
-        {/* 68ch, not the full 1400px measure. Long-form prose set edge to edge is unreadable, and
-            the craft floor puts the body measure at 65-75ch. */}
-        <div className="typeset typeset-docs mt-12 max-w-[68ch] min-w-0">
-          <div className="not-typeset mb-10">
-            <InlineTOC items={data.toc} />
+        {/* Prose stays at 68ch — the craft floor's 65-75ch measure — and the column that leaves
+            over carries the contents rail rather than nothing. */}
+        <div className="mt-12 grid gap-x-16 lg:grid-cols-[minmax(0,68ch)_1fr]">
+          <div className="typeset typeset-docs min-w-0">
+            {/* The accordion is the small-screen fallback only: below `lg` there is no room for a
+                rail, and a reader on a phone still wants the outline. */}
+            <div className="not-typeset mb-10 lg:hidden">
+              <InlineTOC items={data.toc} />
+            </div>
+            <Mdx components={getMDXComponents({ a: createRelativeLink(blogSource, page) })} />
           </div>
-          <Mdx components={getMDXComponents({ a: createRelativeLink(blogSource, page) })} />
+
+          <PostToc label={t("post.contents")}>
+            {data.toc.map((item) => (
+              <PostTocItem depth={item.depth} href={item.url} key={item.url}>
+                {item.title}
+              </PostTocItem>
+            ))}
+          </PostToc>
         </div>
       </div>
     </article>
