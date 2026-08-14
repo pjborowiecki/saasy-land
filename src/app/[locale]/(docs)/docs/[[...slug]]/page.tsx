@@ -40,18 +40,13 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
   }
 }
 
-// Nested under the root layout's own generateStaticParams, so Next runs this once per
-// locale and the root param is readable here — no locale cross-product needed.
-export async function generateStaticParams(): Promise<{ slug: string[] | undefined }[]> {
-  const EMPTY_SLUGS_LENGTH = 0
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   const locale = await getRootLocale()
 
-  return source.getPages(locale).map((page) => ({
-    slug: page.slugs.length > EMPTY_SLUGS_LENGTH ? page.slugs : undefined,
-  }))
+  return source.getPages(locale).map((page) => ({ slug: page.slugs }))
 }
 
-async function DocumentationPageContent({ params }: Pick<DocsPageProps, "params">): Promise<JSX.Element> {
+async function DocumentationPageContent({ params }: Readonly<Pick<DocsPageProps, "params">>): Promise<JSX.Element> {
   const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
 
   const page = source.getPage(slug, locale)
@@ -72,6 +67,14 @@ async function DocumentationPageContent({ params }: Pick<DocsPageProps, "params"
   )
 }
 
+/**
+ * The page is split so the `params` read has a boundary above it.
+ *
+ * `params` is URL data. Awaited in the default export, the whole route waits on it and Next warns
+ * that navigation to it can never be instant; behind a boundary, the shell paints immediately and
+ * the content streams in. The build passes either way — this only shows up in `next dev` and in
+ * how the route actually feels, which is why it is easy to delete by mistake. It was.
+ */
 export default function DocumentationPage({ params }: DocsPageProps): JSX.Element {
   return (
     <Suspense fallback={DOCS_PAGE_FALLBACK}>

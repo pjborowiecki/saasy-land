@@ -48,13 +48,11 @@ export async function generateMetadata({ params }: BlogSlugPageProps): Promise<M
   }
 }
 
-// Nested under the root layout's own generateStaticParams, so Next runs this once per
-// locale and the root param is readable here — no locale cross-product needed.
-export async function generateStaticParams(): Promise<{ slug: string[] | undefined }[]> {
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   const locale = await getRootLocale()
 
   return [
-    { slug: undefined },
+    { slug: [] },
     ...blogSource
       .getPages(locale)
       .filter((page) => isPublished(page.data))
@@ -66,8 +64,6 @@ const BLOG_PAGE_FALLBACK = (
   <div className="mx-auto min-h-[60vh] w-full max-w-[1400px] flex-1 animate-pulse rounded-xl bg-fd-muted/30 px-4 py-8" />
 )
 
-// `slug` is URL data, so it can't live in the shared App Shell — it resolves inside
-// the boundary while the surrounding chrome stays prerendered.
 export default function BlogPage({ params }: BlogSlugPageProps): JSX.Element {
   return (
     <Suspense fallback={BLOG_PAGE_FALLBACK}>
