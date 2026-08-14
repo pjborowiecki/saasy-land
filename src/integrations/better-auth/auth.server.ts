@@ -8,7 +8,7 @@ import { nextCookies } from "better-auth/next-js"
 import { admin } from "better-auth/plugins/admin"
 import { multiSession } from "better-auth/plugins/multi-session"
 import { twoFactor } from "better-auth/plugins/two-factor"
-import { randomUUIDv7 } from "bun"
+import { uuidv7 } from "uuidv7"
 
 import { env } from "~/src/platform/env"
 
@@ -48,7 +48,7 @@ export const auth = betterAuth({
   },
   advanced: {
     backgroundTasks: { handler: waitUntil },
-    database: { generateId: () => randomUUIDv7() },
+    database: { generateId: () => uuidv7() },
     ipAddress: { ipAddressHeaders: [...TRUSTED_IP_HEADERS] },
   },
   appName: APP_NAME,

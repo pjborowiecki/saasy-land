@@ -1,6 +1,6 @@
 "use server"
 
-import { randomUUIDv7 } from "bun"
+import { uuidv7 } from "uuidv7"
 
 import { db } from "~/src/platform/db/client"
 
@@ -19,7 +19,7 @@ export const createCategory = actionClient
       .values({
         description: parsedInput.description ?? "",
         icon: parsedInput.icon ?? "FolderOpen",
-        id: randomUUIDv7(),
+        id: uuidv7(),
         kind: parsedInput.kind,
         name: parsedInput.name,
         visibility: parsedInput.visibility ?? "public",

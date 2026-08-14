@@ -1,6 +1,6 @@
 "use server"
 
-import { randomUUIDv7 } from "bun"
+import { uuidv7 } from "uuidv7"
 
 import { db } from "~/src/platform/db/client"
 
@@ -21,7 +21,7 @@ export const createProduct = actionClient
         billingCycle: parsedInput.billingCycle,
         currency: parsedInput.currency ?? DEFAULT_CURRENCY_CODE,
         description: parsedInput.description ?? "",
-        id: randomUUIDv7(),
+        id: uuidv7(),
         name: parsedInput.name,
         priceCents: parsedInput.priceCents,
         status: parsedInput.status ?? "draft",

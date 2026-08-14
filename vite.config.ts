@@ -367,9 +367,9 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@wrksz/themes/client": resolve(projectRoot, "src/platform/testing/mocks/wrksz-themes.ts"),
       "@wrksz/themes/next": resolve(projectRoot, "src/platform/testing/mocks/wrksz-themes.ts"),
-      bun: resolve(projectRoot, "src/platform/testing/mocks/bun.ts"),
       "next/font/google": resolve(projectRoot, "src/platform/testing/mocks/next-font-google.ts"),
       "next/navigation": resolve(projectRoot, "src/platform/testing/mocks/next-navigation.ts"),
+      uuidv7: resolve(projectRoot, "src/platform/testing/mocks/uuidv7.ts"),
     },
     coverage: {
       clean: true,
