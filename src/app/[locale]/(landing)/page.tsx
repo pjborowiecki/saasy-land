@@ -26,24 +26,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-/*
- * The order is the argument.
- *
- * Show the product, count what is in it, name what it runs on. State the problem in four
- * sentences, then answer it in the only order that works: first how you get a project at all (the
- * CLI and its five questions), then what already runs inside it (the line). Spend the middle
- * proving those claims, hand over the receipt (Record), and only then ask for money (Compare,
- * Pricing), because this page's whole position is that its numbers can be checked before anyone
- * pays.
- *
- * Sections are not individually Suspense-wrapped: they all read the same static message bundle,
- * so streaming them separately buys nothing and would grow the document under anyone who started
- * scrolling immediately.
- *
- * No two adjacent sections share a layout family: hero, stat band, marquee, statement, choice
- * matrix, lattice, split-with-terminal, ledger, media cards, receipt, table, priced frame, sticky
- * FAQ, closer.
- */
 export default function LandingPage(): JSX.Element {
   return (
     <>

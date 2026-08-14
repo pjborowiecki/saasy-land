@@ -13,29 +13,21 @@ import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 
-import { PostLedger, PostRow } from "~/src/app/[locale]/(blog)/_components/post-ledger"
-import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
+import { PostToc, PostTocItem } from "~/src/app/[locale]/(blog)/_components/post-toc"
+import { isPublished, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
 
 const EMPTY_TAGS_LENGTH = 0
 
-type BlogSlugPageProps = Readonly<{
-  params: Promise<{ locale: Locale; slug?: string[] }>
+type BlogPostPageProps = Readonly<{
+  params: Promise<{ locale: Locale; slug: string[] }>
 }>
 
 function hasNonEmptyString(value: string | undefined): value is string {
   return value !== undefined && value.length > EMPTY_TAGS_LENGTH
 }
 
-export async function generateMetadata({ params }: BlogSlugPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
-
-  if (isBlogIndex(slug)) {
-    const t = await getTranslations("pages.blog")
-    return {
-      description: t("metadata.description"),
-      title: t("metadata.title"),
-    }
-  }
 
   const page = blogSource.getPage(slug, locale)
   if (!page) {
@@ -52,66 +44,26 @@ export async function generateMetadata({ params }: BlogSlugPageProps): Promise<M
 export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   const locale = await getRootLocale()
 
-  return [
-    { slug: [] },
-    ...blogSource
-      .getPages(locale)
-      .filter((page) => isPublished(page.data))
-      .map((page) => ({ slug: page.slugs })),
-  ]
+  return blogSource
+    .getPages(locale)
+    .filter((page) => isPublished(page.data))
+    .map((page) => ({ slug: page.slugs }))
 }
 
-const BLOG_PAGE_FALLBACK = (
+const BLOG_POST_FALLBACK = (
   <div className="mx-auto min-h-[60vh] w-full max-w-[1400px] flex-1 animate-pulse rounded-xl bg-fd-muted/30 px-4 py-8" />
 )
 
-export default function BlogPage({ params }: BlogSlugPageProps): JSX.Element {
+export default function BlogPostPage({ params }: BlogPostPageProps): JSX.Element {
   return (
-    <Suspense fallback={BLOG_PAGE_FALLBACK}>
-      <BlogPageContent params={params} />
+    <Suspense fallback={BLOG_POST_FALLBACK}>
+      <BlogPostContent params={params} />
     </Suspense>
   )
 }
 
-async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Element> {
+async function BlogPostContent({ params }: BlogPostPageProps): Promise<JSX.Element> {
   const [{ slug }, locale] = await Promise.all([params, getRootLocale()])
-
-  if (isBlogIndex(slug)) {
-    const t = await getTranslations("pages.blog")
-    const posts = sortPostsByDateDesc(blogSource.getPages(locale).filter((page) => isPublished(page.data)))
-
-    const formatDate = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric" })
-
-    return (
-      <section className="relative">
-        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32">
-          <h1 className="max-w-[16ch] text-headline-peak text-balance text-foreground">{t("index.title")}</h1>
-          <p className="mt-5 max-w-2xl text-lead text-pretty text-muted-foreground">{t("index.description")}</p>
-
-          <div className="mt-14 md:mt-20">
-            {posts.length === 0 ? (
-              <p className="border-y border-border py-10 text-body text-muted-foreground">{t("index.empty")}</p>
-            ) : (
-              <PostLedger>
-                {posts.map((post) => (
-                  <PostRow
-                    date={formatDate.format(new Date(post.data.date))}
-                    key={post.url}
-                    summary={summaryFromFrontmatter(post.data)}
-                    tags={
-                      post.data.tags !== undefined && post.data.tags.length > EMPTY_TAGS_LENGTH ? post.data.tags.join(" · ") : undefined
-                    }
-                    title={post.data.title}
-                    url={post.url}
-                  />
-                ))}
-              </PostLedger>
-            )}
-          </div>
-        </div>
-      </section>
-    )
-  }
 
   const page = blogSource.getPage(slug, locale)
   if (!page) {
@@ -145,8 +97,6 @@ async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Eleme
         <h1 className="mt-8 max-w-[20ch] text-headline-peak text-balance text-foreground">{data.title}</h1>
         {hasNonEmptyString(summary) ? <p className="mt-5 max-w-2xl text-lead text-pretty text-muted-foreground">{summary}</p> : undefined}
 
-        {/* The byline is a spec line, in the same idiom the landing page uses for measured facts:
-            monospace, tabular, one accent square. It is metadata, not decoration. */}
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-4 font-mono text-spec text-muted-foreground">
           <span className="flex items-center gap-2.5">
             <span aria-hidden className="size-1.25 shrink-0 rounded-xs bg-ring" />
@@ -163,14 +113,21 @@ async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Eleme
             <Image alt="" className="object-cover" fill priority sizes="(max-width: 48rem) 100vw, 64rem" src={data.image} />
           </div>
         ) : undefined}
-
-        {/* 68ch, not the full 1400px measure. Long-form prose set edge to edge is unreadable, and
-            the craft floor puts the body measure at 65-75ch. */}
-        <div className="typeset typeset-docs mt-12 max-w-[68ch] min-w-0">
-          <div className="not-typeset mb-10">
-            <InlineTOC items={data.toc} />
+        <div className="mt-12 grid gap-x-16 lg:grid-cols-[minmax(0,68ch)_1fr]">
+          <div className="typeset typeset-docs min-w-0">
+            <div className="not-typeset mb-10 lg:hidden">
+              <InlineTOC items={data.toc} />
+            </div>
+            <Mdx components={getMDXComponents({ a: createRelativeLink(blogSource, page) })} />
           </div>
-          <Mdx components={getMDXComponents({ a: createRelativeLink(blogSource, page) })} />
+
+          <PostToc label={t("post.contents")}>
+            {data.toc.map((item) => (
+              <PostTocItem depth={item.depth} href={item.url} key={item.url}>
+                {item.title}
+              </PostTocItem>
+            ))}
+          </PostToc>
         </div>
       </div>
     </article>

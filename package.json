@@ -119,12 +119,12 @@
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
+    "uuidv7": "^1.2.1",
     "vaul": "^1.1.2",
     "vercel": "^58.8.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@next/playwright": "^16.3.0",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/jest-dom": "^7.0.0",
