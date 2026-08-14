@@ -9,9 +9,9 @@ import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.uti
 
 import { OfflineBanner } from "~/src/presentation/components/custom/offline-banner"
 
-const useOffline = vi.hoisted(() => vi.fn<() => boolean>())
-
-vi.mock(import("next/offline"), () => ({ useOffline }))
+function setNavigatorOnline(value: boolean): void {
+  Object.defineProperty(globalThis.navigator, "onLine", { configurable: true, value })
+}
 
 function renderBanner(): void {
   const messages = loadLocaleMessagesFromDir("en-US")
@@ -30,7 +30,7 @@ function renderBanner(): void {
 describe("offline banner component", () => {
   it("renders nothing while the connection is up", () => {
     expect.hasAssertions()
-    useOffline.mockReturnValue(false)
+    setNavigatorOnline(true)
 
     renderBanner()
 
@@ -39,7 +39,7 @@ describe("offline banner component", () => {
 
   it("explains the wait once the connection drops", () => {
     expect.hasAssertions()
-    useOffline.mockReturnValue(true)
+    setNavigatorOnline(false)
 
     renderBanner()
 

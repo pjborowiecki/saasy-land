@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
     exposeTestingApiInProductionBuild: process.env["EXPOSE_TESTING_API"] === "1",
     optimizePackageImports: ["lucide-react"],
     turbopackRustReactCompiler: true,
-    useOffline: true,
     useTypeScriptCli: true,
   },
   headers() {
