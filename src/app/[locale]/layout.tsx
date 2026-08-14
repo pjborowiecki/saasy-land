@@ -65,25 +65,11 @@ export default async function RootLayout({ children }: Readonly<LayoutProps<"/[l
     <html
       lang={locale}
       className={cn(geistSans.variable, geistMono.variable, "h-full bg-background text-foreground antialiased")}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body suppressHydrationWarning className="flex min-h-full flex-col">
         <TranslationsProvider locale={locale} messages={messages}>
-          {/*
-           * `AppRouterProvider` reads the URL, so it cannot be part of the prerendered shell.
-           *
-           * It renders react-aria's `RouterProvider`, whose `navigate` comes from next-intl's
-           * `useRouter()` — and that calls `usePathname()` internally to keep the locale cookie in
-           * step. Under Cache Components a Client Component reading URL data must sit inside a
-           * `<Suspense>`, or Next cannot complete a static shell and bails the route out of
-           * prerendering entirely.
-           *
-           * This is invisible almost everywhere: where a pathname is known at build time the
-           * prerender succeeds regardless. It only bites a render that is genuinely dynamic — a
-           * cold ISR miss on Vercel — which is why every local build passed while /docs returned
-           * 500 in production. Verified from the minified stack: chunk frame `102:21269` is this
-           * component.
-           */}
           <Suspense fallback={ROOT_SHELL_FALLBACK}>
             <AppRouterProvider>
               <ThemeProvider>

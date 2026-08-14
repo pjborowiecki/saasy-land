@@ -5,13 +5,11 @@ import createNextIntlPlugin from "next-intl/plugin"
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-  distDir: process.env["NEXT_DIST_DIR"] ?? ".next",
   experimental: {
     authInterrupts: true,
     exposeTestingApiInProductionBuild: process.env["EXPOSE_TESTING_API"] === "1",
     optimizePackageImports: ["lucide-react"],
     turbopackRustReactCompiler: true,
-    useOffline: true,
     useTypeScriptCli: true,
   },
   headers() {
@@ -32,7 +30,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   serverExternalPackages: ["better-auth"],
   typedRoutes: true,
-  typescript: { ignoreBuildErrors: process.env["NEXT_DIST_DIR"] !== undefined },
 }
 
 const withNextIntl = createNextIntlPlugin({

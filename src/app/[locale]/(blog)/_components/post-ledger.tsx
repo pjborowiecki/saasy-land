@@ -29,7 +29,20 @@ export function PostRow({ date, summary, tags, title, url }: PostRowProps): JSX.
     >
       <p className="font-mono text-spec text-muted-foreground tabular-nums">{date}</p>
       <div className="min-w-0">
-        <h2 className="text-title text-balance text-foreground">{title}</h2>
+        <h2 className="text-title text-balance text-foreground">
+          {/*
+           * The whole row is one target through the link's own ::after, stretched over the nearest
+           * positioned ancestor — the row box. The anchor wraps the real title text, so the link has
+           * content for assistive tech, search and reader mode; nothing on this row is an empty
+           * element whose only job is geometry.
+           */}
+          <Link
+            className="after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            href={url}
+          >
+            {title}
+          </Link>
+        </h2>
         {summary === undefined ? undefined : (
           <p className="mt-2 max-w-[68ch] text-body text-pretty text-muted-foreground transition-colors duration-400 ease-exp group-hover:text-foreground">
             {summary}
@@ -37,11 +50,6 @@ export function PostRow({ date, summary, tags, title, url }: PostRowProps): JSX.
         )}
         {tags === undefined ? undefined : <p className="mt-4 font-mono text-label text-muted-foreground/70 uppercase">{tags}</p>}
       </div>
-      <Link
-        aria-label={title}
-        className="absolute inset-0 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
-        href={url}
-      />
     </HighlightItem>
   )
 }
