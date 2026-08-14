@@ -2,6 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "bunVersion": "1.x",
   "installCommand": "bun install",
-  "buildCommand": "bun run db:migrate && bun --bun next build",
+  "buildCommand": "curl -fsSL https://bun.sh/install | BUN_INSTALL=/tmp/bun bash -s 'bun-v1.4.0' && bun run db:migrate && /tmp/bun/bin/bun --bun next build",
   "regions": ["fra1"]
 }
