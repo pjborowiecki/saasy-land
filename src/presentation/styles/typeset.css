@@ -1,4 +1,13 @@
 /*
+ * Tokens are read raw (`--foreground`), never through Tailwind's `@theme inline` aliases
+ * (`--color-foreground`).
+ *
+ * `@theme inline` declares `--color-foreground: var(--foreground)` on `:root`. A custom property
+ * that references another resolves at the element it is *declared* on, so inside `.dark` the alias
+ * still yields the light value. Prose set that way is near-black text on a near-black ground —
+ * which is exactly how the blog rendered once it moved onto the dark surface.
+ */
+/*
  * shadcn/typeset
  * https://ui.shadcn.com/docs/typeset.
  */
@@ -19,7 +28,7 @@
     font-family: var(--typeset-font-body);
     font-size: calc(var(--typeset-size) * 1.125);
     line-height: var(--typeset-leading);
-    color: var(--color-foreground, currentColor);
+    color: var(--foreground, currentColor);
     overflow-wrap: break-word;
     margin-trim: block-start;
 
@@ -27,8 +36,8 @@
       font-size: var(--typeset-size);
     }
 
-    --typeset-muted: var(--color-muted-foreground, color-mix(in oklab, currentColor 60%, transparent));
-    --typeset-rule: var(--color-border, color-mix(in oklab, currentColor 20%, transparent));
+    --typeset-muted: var(--muted-foreground, color-mix(in oklab, currentColor 60%, transparent));
+    --typeset-rule: var(--border, color-mix(in oklab, currentColor 20%, transparent));
   }
 
   .typeset *:not(:where(.not-typeset, [data-not-typeset], .not-typeset *, [data-not-typeset] *)) {
@@ -40,7 +49,7 @@
 
     /* Headings. */
     &:where(h1, h2, h3, h4, h5, h6) {
-      color: var(--color-foreground, currentColor);
+      color: var(--foreground, currentColor);
       font-family: var(--typeset-font-heading);
       font-weight: 600;
       margin-block-end: 0;
@@ -105,7 +114,7 @@
       text-decoration-color: currentColor;
     }
     &:where(a:focus-visible) {
-      outline: 2px solid var(--color-ring, currentColor);
+      outline: 2px solid var(--ring, currentColor);
       outline-offset: 2px;
       border-radius: 0.125em;
     }
@@ -205,7 +214,7 @@
     &:where(li.task-list-item > input[type="checkbox"]) {
       margin-inline-end: 0.5em;
       vertical-align: -0.1em;
-      accent-color: var(--color-primary, currentColor);
+      accent-color: var(--primary, currentColor);
     }
 
     /* Disclosures. */
@@ -253,7 +262,7 @@
 
     /* Inline code. */
     &:where(:not(pre) > code) {
-      background-color: var(--color-muted, color-mix(in oklab, currentColor 8%, transparent));
+      background-color: var(--muted, color-mix(in oklab, currentColor 8%, transparent));
       font-family: var(--typeset-font-mono);
       font-size: 0.85em;
       border-radius: min(calc(var(--radius, 0.5em) * 0.6), 0.35em);
@@ -262,7 +271,7 @@
 
     /* Code blocks. */
     &:where(pre) {
-      background-color: var(--color-muted, color-mix(in oklab, currentColor 8%, transparent));
+      background-color: var(--muted, color-mix(in oklab, currentColor 8%, transparent));
       font-family: var(--typeset-font-mono);
       font-size: 0.875em;
       line-height: 1.5;

@@ -13,6 +13,7 @@ import type { Locale } from "~/src/integrations/next-intl/i18n.config"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 
+import { PostLedger, PostRow } from "~/src/app/[locale]/(blog)/_components/post-ledger"
 import { isBlogIndex, isPublished, sortPostsByDateDesc, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
 
 const EMPTY_TAGS_LENGTH = 0
@@ -48,13 +49,11 @@ export async function generateMetadata({ params }: BlogSlugPageProps): Promise<M
   }
 }
 
-// Nested under the root layout's own generateStaticParams, so Next runs this once per
-// locale and the root param is readable here — no locale cross-product needed.
-export async function generateStaticParams(): Promise<{ slug: string[] | undefined }[]> {
+export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   const locale = await getRootLocale()
 
   return [
-    { slug: undefined },
+    { slug: [] },
     ...blogSource
       .getPages(locale)
       .filter((page) => isPublished(page.data))
@@ -66,8 +65,6 @@ const BLOG_PAGE_FALLBACK = (
   <div className="mx-auto min-h-[60vh] w-full max-w-[1400px] flex-1 animate-pulse rounded-xl bg-fd-muted/30 px-4 py-8" />
 )
 
-// `slug` is URL data, so it can't live in the shared App Shell — it resolves inside
-// the boundary while the surrounding chrome stays prerendered.
 export default function BlogPage({ params }: BlogSlugPageProps): JSX.Element {
   return (
     <Suspense fallback={BLOG_PAGE_FALLBACK}>
@@ -83,33 +80,36 @@ async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Eleme
     const t = await getTranslations("pages.blog")
     const posts = sortPostsByDateDesc(blogSource.getPages(locale).filter((page) => isPublished(page.data)))
 
+    const formatDate = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric" })
+
     return (
-      <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-8">
-        <h1 className="mb-8 text-4xl font-bold">{t("index.title")}</h1>
-        <p className="mb-8 text-fd-muted-foreground">{t("index.description")}</p>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => {
-            const summary = summaryFromFrontmatter(post.data)
-            return (
-              <Link
-                key={post.url}
-                className="block overflow-hidden rounded-lg border border-fd-border bg-fd-secondary shadow-md transition-colors hover:border-fd-primary/40"
-                href={post.url}
-              >
-                {hasNonEmptyString(post.data.image) ? (
-                  <div className="relative aspect-[2.4/1] w-full overflow-hidden border-b border-fd-border bg-fd-muted">
-                    <Image alt="" className="object-cover" fill sizes="(max-width: 48rem) 100vw, 24rem" src={post.data.image} />
-                  </div>
-                ) : undefined}
-                <div className="p-6">
-                  <h2 className="mb-2 text-xl font-semibold">{post.data.title}</h2>
-                  {hasNonEmptyString(summary) ? <p className="text-fd-muted-foreground">{summary}</p> : undefined}
-                </div>
-              </Link>
-            )
-          })}
+      <section className="relative">
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32">
+          <h1 className="max-w-[16ch] text-headline-peak text-balance text-foreground">{t("index.title")}</h1>
+          <p className="mt-5 max-w-2xl text-lead text-pretty text-muted-foreground">{t("index.description")}</p>
+
+          <div className="mt-14 md:mt-20">
+            {posts.length === 0 ? (
+              <p className="border-y border-border py-10 text-body text-muted-foreground">{t("index.empty")}</p>
+            ) : (
+              <PostLedger>
+                {posts.map((post) => (
+                  <PostRow
+                    date={formatDate.format(new Date(post.data.date))}
+                    key={post.url}
+                    summary={summaryFromFrontmatter(post.data)}
+                    tags={
+                      post.data.tags !== undefined && post.data.tags.length > EMPTY_TAGS_LENGTH ? post.data.tags.join(" · ") : undefined
+                    }
+                    title={post.data.title}
+                    url={post.url}
+                  />
+                ))}
+              </PostLedger>
+            )}
+          </div>
         </div>
-      </main>
+      </section>
     )
   }
 
@@ -129,52 +129,50 @@ async function BlogPageContent({ params }: BlogSlugPageProps): Promise<JSX.Eleme
 
   const summary = summaryFromFrontmatter(data)
 
+  const published = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric" }).format(new Date(data.date))
+
   return (
-    <>
-      <div className="mx-auto w-full max-w-[1400px] rounded-xl border px-4 py-12 md:px-8">
-        {hasNonEmptyString(data.image) ? (
-          <div className="relative mb-6 aspect-[2.4/1] w-full overflow-hidden rounded-lg border border-fd-border bg-fd-muted">
-            <Image alt="" className="object-cover" fill priority sizes="(max-width: 48rem) 100vw, 48rem" src={data.image} />
-          </div>
-        ) : undefined}
-        <h1 className="mb-2 text-3xl font-bold">{data.title}</h1>
-        {hasNonEmptyString(summary) ? <p className="mb-4 text-fd-muted-foreground">{summary}</p> : undefined}
-        {data.tags !== undefined && data.tags.length > EMPTY_TAGS_LENGTH ? (
-          <ul className="mb-4 flex flex-wrap gap-2">
-            {data.tags.map((tag) => (
-              <li className="rounded-md bg-fd-secondary px-2 py-0.5 text-xs font-medium text-fd-secondary-foreground" key={tag}>
-                {tag}
-              </li>
-            ))}
-          </ul>
-        ) : undefined}
-        <Link className="text-fd-muted-foreground hover:text-fd-foreground" href="/blog">
+    <article className="relative">
+      <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10 md:py-28">
+        <Link
+          className="inline-flex items-center gap-2 font-mono text-label text-muted-foreground uppercase transition-colors duration-200 ease-exp hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          href="/blog"
+        >
+          <span aria-hidden>&larr;</span>
           {t("post.backToBlog")}
         </Link>
-      </div>
-      <article className="mx-auto flex w-full max-w-[1400px] flex-col px-4 py-8">
-        <div className="typeset typeset-docs min-w-0">
-          <div className="not-typeset">
+
+        <h1 className="mt-8 max-w-[20ch] text-headline-peak text-balance text-foreground">{data.title}</h1>
+        {hasNonEmptyString(summary) ? <p className="mt-5 max-w-2xl text-lead text-pretty text-muted-foreground">{summary}</p> : undefined}
+
+        {/* The byline is a spec line, in the same idiom the landing page uses for measured facts:
+            monospace, tabular, one accent square. It is metadata, not decoration. */}
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-y border-border py-4 font-mono text-spec text-muted-foreground">
+          <span className="flex items-center gap-2.5">
+            <span aria-hidden className="size-1.25 shrink-0 rounded-xs bg-ring" />
+            <span className="tabular-nums">{published}</span>
+          </span>
+          {hasNonEmptyString(data.authorName) ? <span>{data.authorName}</span> : undefined}
+          {data.tags !== undefined && data.tags.length > EMPTY_TAGS_LENGTH ? (
+            <span className="uppercase">{data.tags.join(" · ")}</span>
+          ) : undefined}
+        </div>
+
+        {hasNonEmptyString(data.image) ? (
+          <div className="relative mt-10 aspect-[2.4/1] w-full overflow-hidden rounded-xl border border-border bg-card">
+            <Image alt="" className="object-cover" fill priority sizes="(max-width: 48rem) 100vw, 64rem" src={data.image} />
+          </div>
+        ) : undefined}
+
+        {/* 68ch, not the full 1400px measure. Long-form prose set edge to edge is unreadable, and
+            the craft floor puts the body measure at 65-75ch. */}
+        <div className="typeset typeset-docs mt-12 max-w-[68ch] min-w-0">
+          <div className="not-typeset mb-10">
             <InlineTOC items={data.toc} />
           </div>
           <Mdx components={getMDXComponents({ a: createRelativeLink(blogSource, page) })} />
         </div>
-        <div className="mt-8 flex flex-col gap-4 text-sm">
-          <div className="flex flex-wrap items-center gap-3">
-            {hasNonEmptyString(data.authorImage) ? (
-              <Image alt="" className="rounded-full border border-fd-border" height={36} src={data.authorImage} width={36} />
-            ) : undefined}
-            <div>
-              <p className="mb-1 text-fd-muted-foreground">{t("post.writtenBy")}</p>
-              <p className="font-medium">{data.authorName}</p>
-            </div>
-          </div>
-          <div>
-            <p className="mb-1 text-fd-muted-foreground">{t("post.dateLabel")}</p>
-            <p className="font-medium">{new Date(data.date).toLocaleDateString(locale)}</p>
-          </div>
-        </div>
-      </article>
-    </>
+      </div>
+    </article>
   )
 }

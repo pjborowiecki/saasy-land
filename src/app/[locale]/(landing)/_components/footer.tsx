@@ -139,17 +139,17 @@ export async function Footer(): Promise<JSX.Element> {
 
           <LinkColumn heading={t("product")}>
             <li>
-              <a className={FOOTER_LINK_CLASSNAME} href="#line">
+              <a className={FOOTER_LINK_CLASSNAME} href="/#line">
                 {t("links.line")}
               </a>
             </li>
             <li>
-              <a className={FOOTER_LINK_CLASSNAME} href="#pricing">
+              <a className={FOOTER_LINK_CLASSNAME} href="/#pricing">
                 {t("links.pricing")}
               </a>
             </li>
             <li>
-              <a className={FOOTER_LINK_CLASSNAME} href="#faq">
+              <a className={FOOTER_LINK_CLASSNAME} href="/#faq">
                 {t("links.faq")}
               </a>
             </li>

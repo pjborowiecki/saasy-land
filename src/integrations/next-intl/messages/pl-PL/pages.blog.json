@@ -1,19 +1,23 @@
 {
   "metadata": {
     "title": "Blog",
-    "description": "Notatki i aktualizacje z SaaSy Land."
+    "description": "Co się zmieniło w SaaSy Land, dlaczego i jakim kosztem."
   },
   "nav": {
     "docs": "Dokumentacja",
-    "blog": "Blog"
+    "blog": "Blog",
+    "home": "Strona główna",
+    "getStarted": "Zacznij budować"
   },
   "index": {
-    "title": "Blog",
-    "description": "Wpisy Markdown kompilowane przez Fumadocs MDX."
+    "title": "Notatki z budowy.",
+    "description": "Co się zmieniło, dlaczego i jakim kosztem. Pisane w trakcie budowania tego, co ta strona sprzedaje — więc każdy wpis dotyczy kodu, który już działa, a nie takiego, który mógłby powstać.",
+    "empty": "Nic jeszcze nie opublikowano."
   },
   "post": {
-    "backToBlog": "Wróć do bloga",
+    "backToBlog": "Wszystkie wpisy",
     "writtenBy": "Autor",
-    "dateLabel": "Data"
+    "dateLabel": "Opublikowano",
+    "contents": "Spis treści"
   }
 }

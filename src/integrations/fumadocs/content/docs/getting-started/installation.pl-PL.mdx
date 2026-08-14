@@ -13,7 +13,7 @@ cd saasyland.com
 bun install
 ```
 
-`postinstall` runs project wiring (including Fumadocs/MDX generation and DB migrate when env is present). Prefer a filled `.env.local` before relying on migrate-from-postinstall locally — or run `bun run db:migrate` explicitly after env setup.
+Nie ma kroku `postinstall`. Źródła MDX (`.source/`) generuje wtyczka `createMDX` podczas `next dev` i `next build`, a migracje bazy uruchamiasz sam poleceniem `bun run db:migrate` po uzupełnieniu `.env.local`.
 
 ## Verify tooling
 

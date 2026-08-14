@@ -1821,20 +1821,24 @@ declare const messages: {
     "blog": {
       "metadata": {
         "title": "Blog",
-        "description": "Notes and updates from SaaSy Land."
+        "description": "What changed in SaaSy Land, why, and what it cost."
       },
       "nav": {
         "docs": "Docs",
-        "blog": "Blog"
+        "blog": "Blog",
+        "home": "Home",
+        "getStarted": "Start building"
       },
       "index": {
-        "title": "Blog",
-        "description": "Markdown posts compiled with Fumadocs MDX."
+        "title": "Notes from the build.",
+        "description": "What changed, why it changed, and what it cost. Written while building the thing this site sells — so every post is about code that shipped, not code that might.",
+        "empty": "Nothing published yet."
       },
       "post": {
-        "backToBlog": "Back to blog",
+        "backToBlog": "All posts",
         "writtenBy": "Written by",
-        "dateLabel": "Published"
+        "dateLabel": "Published",
+        "contents": "Contents"
       }
     },
     "landing": {
