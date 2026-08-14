@@ -325,6 +325,23 @@
 }
 
 /*
+ * Code blocks: one surface, one elevation.
+ *
+ * Fumadocs ships the figure with a border, a `shadow-sm` and `bg-fd-card`, then paints the `pre`
+ * inside it a different shade with its own radius. On a dark ground that reads as a panel inside a
+ * panel with a halo around it — nested cards plus a ghost card, two things the craft floor names
+ * outright. The hairline is the elevation; the figure is the surface; the `pre` is just text.
+ */
+.typeset figure.shiki {
+  box-shadow: none;
+}
+
+.typeset figure.shiki pre {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/*
  * Docs sidebar: Fumadocs sets nested padding via inline styles. Boost chapter
  * pages under an open folder so hierarchy is obvious next to the guide rail.
  * Depth-1 items use calc(5 * var(--spacing)) by default (~1.25rem).
