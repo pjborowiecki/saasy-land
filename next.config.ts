@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   experimental: {
     authInterrupts: true,
+    exposeTestingApiInProductionBuild: process.env["EXPOSE_TESTING_API"] === "1",
     optimizePackageImports: ["lucide-react"],
     turbopackRustReactCompiler: true,
     useTypeScriptCli: true,

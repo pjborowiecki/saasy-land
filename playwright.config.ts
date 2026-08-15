@@ -30,9 +30,10 @@ export default defineConfig({
     video: isCI ? "retain-on-failure" : "off",
   },
   webServer: {
-    // A production build, not a dev server: dev neither prefetches nor locks reliably, so the
-    // specs would be asserting against behaviour the deployed app does not have.
+    // instant() verdicts require a production build with the testing API exposed — dev servers
+    // neither prefetch nor lock reliably, so they cannot produce a valid RED or GREEN.
     command: isCI ? "bun run start" : "bun run build && bun run start",
+    env: { EXPOSE_TESTING_API: "1" },
     reuseExistingServer: !isCI,
     timeout: 600_000,
     url: appUrl,
