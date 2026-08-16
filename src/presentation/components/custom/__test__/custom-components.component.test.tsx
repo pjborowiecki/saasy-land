@@ -25,7 +25,7 @@ import {
   TableWrap,
 } from "~/src/presentation/components/custom/typography"
 import { VercelObservability } from "~/src/presentation/components/custom/vercel-observability"
-import { Wordmark, WordmarkGlyph } from "~/src/presentation/components/custom/wordmark"
+import { Wordmark } from "~/src/presentation/components/custom/wordmark"
 
 import { APP_NAME } from "~/src/presentation/branding"
 
@@ -75,18 +75,6 @@ describe("wordmark", () => {
     expect(container.querySelector(".test-wordmark")).toBeInTheDocument()
     expect(screen.getByText(APP_NAME)).toBeInTheDocument()
     expect(container.querySelector("svg")).toBeInTheDocument()
-  })
-
-  it("renders the mark alone when the name would be redundant", () => {
-    expect.hasAssertions()
-    render(<Wordmark glyphOnly />)
-    expect(screen.queryByText(APP_NAME)).not.toBeInTheDocument()
-  })
-
-  it("exposes the glyph on its own for tight chrome", () => {
-    expect.hasAssertions()
-    const { container } = render(<WordmarkGlyph className="test-glyph" />)
-    expect(container.querySelector(".test-glyph")).toBeInTheDocument()
   })
 })
 

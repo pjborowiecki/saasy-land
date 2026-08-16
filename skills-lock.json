@@ -123,7 +123,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/in-progress/claude-handoff/SKILL.md",
-      "computedHash": "e329481fa7f9d19c91dae3db1bf1799aeaf41d2c5298c8fc737ee4500b0e50c6"
+      "computedHash": "d2c126116bfc2136d65f45444a7095c1aa60f3c82f96c6a747cf7ed102d2d3fc"
     },
     "client-vs-server": {
       "source": "TanStack/table",
@@ -142,7 +142,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/code-review/SKILL.md",
-      "computedHash": "1d5e7242a98674635be79ab310cdda0e555d36a9903d2526ebf4263d0b7997ca"
+      "computedHash": "f3b4a7f337455dc365ba8e3923930b067a362c9662779137170ea700cb4328cb"
     },
     "codebase-design": {
       "source": "mattpocock/skills",
@@ -639,6 +639,24 @@
       "skillPath": "skills/paywalls/SKILL.md",
       "computedHash": "1f0b8d15770d2e7737b818408dc5877b2eadc4cab072cdfb3529349ab059815f"
     },
+    "polar-integration": {
+      "source": "polarsource/skills",
+      "sourceType": "github",
+      "skillPath": "skills/polar-integration/SKILL.md",
+      "computedHash": "fe8f63acfb963229ea806c07c0f22c7cd8ab61a944f3a00841d8022c18dd0190"
+    },
+    "polar-migration": {
+      "source": "polarsource/skills",
+      "sourceType": "github",
+      "skillPath": "skills/polar-migration/SKILL.md",
+      "computedHash": "b237ecd5865f59a722aac42bed5e1385d962e44eab910d994fba3078a2a62b29"
+    },
+    "polar-testing": {
+      "source": "polarsource/skills",
+      "sourceType": "github",
+      "skillPath": "skills/polar-testing/SKILL.md",
+      "computedHash": "0dfd63b62cff3fbd1091ebb0bfb853f2cf9a14f86888b6a31e557a59ac620ede"
+    },
     "popups": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -893,6 +911,12 @@
       "skillPath": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
       "computedHash": "f9c2b933dda18eea572e96f6ebbcd5b30e0d1bfdc074af53cc99728dc5f0bdac"
     },
+    "setup-polar": {
+      "source": "polarsource/skills",
+      "sourceType": "github",
+      "skillPath": "skills/setup-polar/SKILL.md",
+      "computedHash": "01b8e785b33d34a70e3c17fcaa094dd4ea16f0834140b1b518685d570fbca655"
+    },
     "setup-pre-commit": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -903,7 +927,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
-      "computedHash": "bd5cbaa455454c2d6c27a1b734e0d820606da6c482bf3c79ec55fbc3f3e03ef3"
+      "computedHash": "19dabd17a305fd99857b3eaad12b044fb951bdf58152d515630d1585f80d24fa"
     },
     "signup": {
       "source": "coreyhaines31/marketingskills",
@@ -984,7 +1008,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/tdd/SKILL.md",
-      "computedHash": "614ac2e45fb0ec02f6ce422d26bd9aa4e33aa4867323f5a3a5c0c20b96f78ff4"
+      "computedHash": "3ba0443442024d075ea30205faa586511d526534f7cbfcb9e6bfacbbeacec739"
     },
     "teach": {
       "source": "mattpocock/skills",
@@ -1002,19 +1026,19 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/to-spec/SKILL.md",
-      "computedHash": "7e07d4cfabd1a4f61627ebe2705601784fae7b9aca7e13af3e201ace75738200"
+      "computedHash": "e0d6ed875f646b788ea710714ca92b138adad59e18a12a2c045244b9364ca259"
     },
     "to-tickets": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/to-tickets/SKILL.md",
-      "computedHash": "0349eee265e7005e667b4543de849672106c46d545e998f37d3319300bb07751"
+      "computedHash": "6d018d31ba390aeaf14ae65e7b3bb5bd693b03d635762e535a71446715780743"
     },
     "triage": {
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/triage/SKILL.md",
-      "computedHash": "1bc5349f0b61e19a6df61496b5a03d88cd69595dd303353f87945997a9e4a884"
+      "computedHash": "ad1b4d93e5995ffbc0f143fc716c8c3afb45cd13c8a1fd027a43852eb59544c7"
     },
     "two-factor-authentication-best-practices": {
       "source": "better-auth/skills",
@@ -1129,7 +1153,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/engineering/wayfinder/SKILL.md",
-      "computedHash": "f343ecf46157cb645a5494644418308ad95391e9fc696faa47ae5a412bf5f6e4"
+      "computedHash": "8f610a50e8e8044571d918088160a9657e23f1268080728bf92009db48f6c22f"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",

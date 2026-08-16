@@ -6,7 +6,7 @@ import type { BlogPost } from "~/src/integrations/fumadocs/fumadocs.source"
 import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { readingTimeMinutes, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
-import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/hover-highlight"
+import { HighlightGroup, HighlightItem } from "~/src/app/[locale]/(landing)/_components/shared/hover-highlight"
 
 interface PostRowProps {
   readonly post: BlogPost

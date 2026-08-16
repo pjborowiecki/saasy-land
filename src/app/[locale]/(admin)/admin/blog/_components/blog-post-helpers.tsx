@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server"
 
 import { EMPTY_PATH_PARTS_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import type { BlogPostStatus } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
-import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
+import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_lib/blog-post-data"
 
 export function hasPostViews(views: string | undefined): views is string {
   return views !== undefined && views.length > EMPTY_PATH_PARTS_LENGTH

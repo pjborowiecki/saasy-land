@@ -2,7 +2,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { CopyButton } from "~/src/app/[locale]/(landing)/_components/copy-button"
+import { CopyButton } from "~/src/app/[locale]/(landing)/_components/shared/copy-button"
 
 const CONTROL_CLASSNAME =
   "inline-flex h-7 shrink-0 cursor-pointer items-center justify-center rounded-md px-1.5 text-muted-foreground transition-colors duration-200 ease-exp hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"

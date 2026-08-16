@@ -624,22 +624,6 @@
     }
   },
   "components": {
-    "navigation": {
-      "items": {
-        "blog": "Blog",
-        "docs": "Docs",
-        "faq": "FAQ",
-        "foundation": "Foundation",
-        "pricing": "Pricing",
-        "quality": "Quality",
-        "toolkit": "Toolkit"
-      },
-      "getStarted": "Start building",
-      "openMenu": "Open menu",
-      "closeMenu": "Close menu",
-      "ariaLabel": "Primary",
-      "signIn": "Sign in"
-    },
     "footer": {
       "tagline": "The production-grade starter kit you own outright.",
       "product": "Product",
@@ -648,13 +632,7 @@
       "rights": "All rights reserved.",
       "buildLog": {
         "title": "The build log",
-        "body": "One email when a module ships or the stack moves. No drip sequence and no launch countdowns.",
-        "label": "Email address",
-        "placeholder": "you@company.com",
-        "button": "Subscribe",
-        "note": "Unsubscribe in one click.",
-        "success": "You are on the list.",
-        "error": "That did not send. Try again, or email hello@saasyland.com."
+        "body": "Occasional notes on what gets built here, sent when there is something worth sending. No fixed schedule and no launch countdowns."
       },
       "links": {
         "blog": "Blog",

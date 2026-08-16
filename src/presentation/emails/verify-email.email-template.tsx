@@ -6,15 +6,10 @@ import { Body, Button, Container, Head, Heading, Html, pixelBasedPreset, Preview
 import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
 import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
 
-const NAMESPACE = "emails.verifyEmail"
 const TAILWIND_CONFIG = { presets: [pixelBasedPreset] }
 
-function translator(locale: Locale) {
-  return createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: NAMESPACE })
-}
-
 export function verifyEmailSubject(locale: Locale): string {
-  return translator(locale)("subject")
+  return createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.verifyEmail" })("subject")
 }
 
 interface VerifyEmailProps {
@@ -24,7 +19,7 @@ interface VerifyEmailProps {
 }
 
 export function VerifyEmail({ locale, name, verifyUrl }: Readonly<VerifyEmailProps>): JSX.Element {
-  const t = translator(locale)
+  const t = createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.verifyEmail" })
 
   return (
     <Html lang={locale}>

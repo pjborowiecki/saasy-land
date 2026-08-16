@@ -9,12 +9,12 @@ import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 import { TableCell, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import { getBlogPostStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
-import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import {
   getGridMetaTextClass,
   hasPostViews,
   renderTableDateCell,
 } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-helpers"
+import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_lib/blog-post-data"
 
 interface BlogPostTableRowProps {
   readonly post: DummyPost

@@ -99,7 +99,7 @@ declare const messages: {
     "cancel": "Cancel",
     "loading": "Loading...",
     "noDataToDisplay": "No data to display",
-    "copyright": "© {year}"
+    "copyright": "© {years}"
   },
   "components": {
     "custom": {
@@ -124,6 +124,22 @@ declare const messages: {
         "dark": "Dark",
         "system": "System"
       }
+    },
+    "navigation": {
+      "ariaLabel": "Primary",
+      "closeMenu": "Close menu",
+      "getStarted": "Start building",
+      "items": {
+        "blog": "Blog",
+        "docs": "Docs",
+        "faq": "FAQ",
+        "foundation": "Foundation",
+        "pricing": "Pricing",
+        "quality": "Quality",
+        "toolkit": "Toolkit"
+      },
+      "openMenu": "Open menu",
+      "signIn": "Sign in"
     },
     "shadcn": {
       "breadcrumb": {
@@ -580,22 +596,6 @@ declare const messages: {
     "ZWG": "Zimbabwean Gold"
   },
   "emails": {
-    "buildLog": {
-      "confirmation": {
-        "subject": "You are on the build log",
-        "preview": "One email when a module ships or the stack moves.",
-        "heading": "You are on the build log",
-        "body": "Thanks for subscribing. You get one email when a module ships or the stack moves, and nothing else. No drip sequence, no launch countdowns.",
-        "button": "Unsubscribe",
-        "footer": "Leaving costs one click. You can also write to {contactEmail} at any time."
-      },
-      "notification": {
-        "subject": "New build log subscriber",
-        "preview": "Someone subscribed to the build log.",
-        "heading": "New build log subscriber",
-        "body": "{email} subscribed to the build log from the {locale} landing page."
-      }
-    },
     "resetPassword": {
       "subject": "Reset your password",
       "preview": "Reset your password for SaaSy Land",
@@ -619,6 +619,22 @@ declare const messages: {
       "body": "Hi {name}, we received a request to change your email address to {newEmail}. Click the button below to confirm this change.",
       "button": "Confirm email change",
       "footer": "If you did not request this change, you can safely ignore this email."
+    },
+    "newsletter": {
+      "confirmation": {
+        "subject": "One click and you are in",
+        "preview": "Confirm the address and the build log is yours.",
+        "heading": "One click and you are in",
+        "body": "Someone entered this address on saasyland.com. Confirm it and you get the build log: what shipped, the decisions behind it, and the things that did not work. If you did not sign up, just delete this and we will not write again.",
+        "button": "Count me in",
+        "footer": "The link works once and expires in 24 hours. If anything looks off, write to us:"
+      },
+      "notification": {
+        "subject": "New newsletter subscriber",
+        "preview": "Someone confirmed a newsletter subscription.",
+        "heading": "New newsletter subscriber",
+        "body": "{email} confirmed a subscription from the {locale} landing page."
+      }
     }
   },
   "errors": {
@@ -713,6 +729,12 @@ declare const messages: {
     "zh-CN": "Chinese (China mainland)",
     "zh-HK": "Chinese (Hong Kong)",
     "zh-TW": "Chinese (Taiwan)"
+  },
+  "newsletter-subscriber": {
+    "validations": {
+      "emailRequired": "Email address is required.",
+      "tokenInvalid": "That unsubscribe link is not valid."
+    }
   },
   "pages": {
     "admin": {
@@ -2475,22 +2497,6 @@ declare const messages: {
         }
       },
       "components": {
-        "navigation": {
-          "items": {
-            "blog": "Blog",
-            "docs": "Docs",
-            "faq": "FAQ",
-            "foundation": "Foundation",
-            "pricing": "Pricing",
-            "quality": "Quality",
-            "toolkit": "Toolkit"
-          },
-          "getStarted": "Start building",
-          "openMenu": "Open menu",
-          "closeMenu": "Close menu",
-          "ariaLabel": "Primary",
-          "signIn": "Sign in"
-        },
         "footer": {
           "tagline": "The production-grade starter kit you own outright.",
           "product": "Product",
@@ -2499,13 +2505,7 @@ declare const messages: {
           "rights": "All rights reserved.",
           "buildLog": {
             "title": "The build log",
-            "body": "One email when a module ships or the stack moves. No drip sequence and no launch countdowns.",
-            "label": "Email address",
-            "placeholder": "you@company.com",
-            "button": "Subscribe",
-            "note": "Unsubscribe in one click.",
-            "success": "You are on the list.",
-            "error": "That did not send. Try again, or email hello@saasyland.com."
+            "body": "Occasional notes on what gets built here, sent when there is something worth sending. No fixed schedule and no launch countdowns."
           },
           "links": {
             "blog": "Blog",
@@ -2567,6 +2567,40 @@ declare const messages: {
             "body": "We may update these terms from time to time. Continued use of {name} after changes take effect constitutes acceptance of the revised terms."
           }
         }
+      }
+    },
+    "newsletter": {
+      "form": {
+        "alreadySubscribed": "You are already in. Nothing to do.",
+        "button": "Subscribe",
+        "confirmationSent": "Success! Now check your inbox and confirm the address.",
+        "error": "That did not send. Try again, or email hello@saasyland.com.",
+        "label": "Email address",
+        "placeholder": "you@company.com",
+        "submitting": "Subscribing..."
+      },
+      "confirm": {
+        "title": "Confirm your subscription",
+        "description": "Confirm your subscription to the SaaSy Land build log.",
+        "confirmed": {
+          "title": "You are in.",
+          "body": "The address is confirmed. From here you get the build log: what shipped, the decisions behind it, and the things that did not work.",
+          "note": "Every email has an unsubscribe link. One click and you are off the list.",
+          "action": "See what is being built"
+        },
+        "expired": {
+          "title": "That link is spent.",
+          "body": "Confirmation links last 24 hours and work once. This one has expired or has already been used, so the address is not confirmed yet.",
+          "note": "Sign up again from the footer and a fresh link lands in your inbox in about a minute.",
+          "action": "Back to the site"
+        }
+      },
+      "unsubscribe": {
+        "title": "You are off the list.",
+        "description": "Unsubscribe from the SaaSy Land build log.",
+        "body": "That address will not get another build log email. No confirmation needed and nothing else to click.",
+        "note": "Transactional email about an account or a purchase is separate and still arrives, because that is mail you asked for by buying something.",
+        "resubscribe": "Changed your mind? Sign up again from the footer"
       }
     },
     "premium": {
