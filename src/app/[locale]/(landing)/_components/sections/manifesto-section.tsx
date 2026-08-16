@@ -1,13 +1,14 @@
 import type { JSX } from "react"
 
+import { ArrowRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
+import { Accent } from "~/src/app/[locale]/(landing)/_components/accent"
 import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 
 /** Each line lands a beat after the one above it. Four lines, three hundred and sixty ms total. */
 const LINE_STEP_MS = 120
 const SECOND_LINE_DELAY_MS = 240
-const THIRD_LINE_DELAY_MS = 360
 
 /**
  * The argument, in four sentences and nothing else.
@@ -23,20 +24,27 @@ export async function ManifestoSection(): Promise<JSX.Element> {
   return (
     <section className="relative border-t border-border" id="manifesto">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-28">
-        <div className="max-w-2xl">
-          <Reveal variant="quiet">
-            <p className="text-statement text-pretty text-muted-foreground">{t("p1")}</p>
-          </Reveal>
-          <Reveal variant="quiet" delay={LINE_STEP_MS}>
-            <p className="mt-4 text-statement text-pretty text-muted-foreground">{t("p2")}</p>
-          </Reveal>
-          <Reveal variant="quiet" delay={SECOND_LINE_DELAY_MS}>
-            <p className="mt-4 text-statement text-pretty text-muted-foreground">{t("p3")}</p>
-          </Reveal>
-          <Reveal variant="block" delay={THIRD_LINE_DELAY_MS}>
-            <p className="mt-10 text-display-gate text-balance text-foreground">{t("p4")}</p>
-          </Reveal>
-        </div>
+        <Reveal variant="quiet">
+          <p className="max-w-[24ch] text-headline-peak text-balance text-foreground">{t("p1")}</p>
+        </Reveal>
+        <Reveal variant="quiet" delay={LINE_STEP_MS}>
+          <p className="mt-8 max-w-[43.5rem] text-statement text-pretty text-muted-foreground">{t("p2")}</p>
+        </Reveal>
+        <Reveal variant="block" delay={SECOND_LINE_DELAY_MS}>
+          <div className="mt-12 flex">
+            <a
+              className="group inline-flex items-center gap-4 text-display-gate text-foreground focus-visible:outline-2 focus-visible:outline-offset-6 focus-visible:outline-ring"
+              href="#pricing"
+            >
+              <Accent id="manifesto">{t("p3")}</Accent>
+              <ArrowRight
+                aria-hidden
+                className="size-[0.62em] shrink-0 text-ring transition-transform duration-200 ease-exp group-hover:translate-x-1.5 motion-reduce:transition-none"
+                strokeWidth={2.5}
+              />
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

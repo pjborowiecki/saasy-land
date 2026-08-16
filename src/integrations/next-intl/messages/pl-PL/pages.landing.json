@@ -3,73 +3,110 @@
     "description": "Jedno polecenie tworzy produkcyjny stos Next.js: auth na Twojej bazie, płatności Stripe, panel admina i 100% pokrycia testami wymuszane w CI. Od $249, raz."
   },
   "hero": {
-    "title": "Omiń 100+ godzin piekła boilerplate'u jednym poleceniem.",
-    "description": "Nie trać tygodni na podpinanie auth, Stripe'a, poczty i panelu admina. Odpowiedz na pięć pytań, a CLI napisze dokładnie taki rdzeń — otypowany, przetestowany i twój do zmiany. Resztę czasu poświęć na to, co naprawdę jest Twoim produktem.",
+    "title": "<accent>300+ godzin przewagi</accent> na starcie dla tych, którzy dbają o jakość.",
+    "description": "Jedna komenda tworzy skalowalny <strong>pełen starter kit</strong> edge-native z auth, płatnościami i wizualnym kreatorem stron. Ścisłe granice domen i bramka 100% pokrycia testami sprawiają, że Twoje agenty AI mogą szybko dowozić funkcje bez psucia architektury. Fundament jest rozwiązany – zbuduj swój wymarzony produkt.",
     "ctaPrimary": "Zacznij budować",
     "ctaSecondary": "Zobacz, co dostajesz",
     "surface": {
       "copied": "Skopiowano",
       "copy": "Skopiuj polecenie instalacji",
-      "imageAlt": "Panel administracyjny SaaSyLand: przychód, aktywni użytkownicy i nowe rejestracje na górze, pod nimi wykres przychodu, a niżej tabela najnowszych użytkowników"
+      "imageAlt": "Panel administracyjny SaaSyLand: przychód, aktywni użytkownicy i nowe rejestracje na górze, pod nimi wykres przychodu, a niżej tabela najnowszych użytkowników",
+      "runner": "Menedżer pakietów"
     }
   },
   "proof": {
     "facts": {
+      "admin": {
+        "label": "Sekcje panelu",
+        "value": "13",
+        "note": "Użytkownicy, płatności, analityka, blog i page designer."
+      },
       "components": {
-        "label": "Komponentów UI",
-        "note": "W Twoim repozytorium, nie za granicą paczki.",
-        "value": "56"
+        "label": "Komponenty UI",
+        "value": "56",
+        "note": "W Twoim repo, do edycji. Bez granicy pakietu."
       },
       "coverage": {
         "label": "Pokrycie testami",
-        "note": "Wymuszone bramką w CI, nie raportowane zrzutem ekranu.",
-        "value": "100%"
+        "value": "100%",
+        "note": "Egzekwowane jako bramka CI, a nie zrzut ekranu na pokaz."
       },
       "locales": {
-        "label": "Gotowych języków",
-        "note": "Ze 156 walutami i 195 strefami czasowymi.",
-        "value": "54"
+        "label": "Rynki globalne",
+        "value": "156",
+        "note": "Gotowe waluty i 195 stref czasowych. Nowy język to plik z tłumaczeniami, a nie przepisywanie aplikacji."
       },
       "mau": {
-        "label": "Koszt użytkownika",
-        "note": "Twoja baza, Twoi użytkownicy, na zawsze.",
-        "value": "$0"
+        "label": "Podatek od auth",
+        "value": "$0",
+        "note": "Twoja baza, Twoi użytkownicy, Twoje marże. Na zawsze."
+      },
+      "stars": {
+        "label": "Gwiazdki GitHub",
+        "value": "435",
+        "note": "Na publicznym kodzie tej właśnie strony. Oceń rzemiosło, zanim kupisz."
+      },
+      "tables": {
+        "label": "Tabele danych",
+        "value": "TanStack v9",
+        "note": "Sortowanie, paginacja, zmiana szerokości i zaznaczanie, gotowe."
       },
       "tests": {
-        "label": "Plików testowych",
-        "note": "Plus 5 zestawów Playwright w Chromium i WebKit.",
-        "value": "140"
+        "label": "Pliki testów",
+        "value": "141",
+        "note": "Jednostkowe, integracyjne i 5 zestawów Playwright w prawdziwych przeglądarkach."
+      },
+      "types": {
+        "label": "Bezpieczeństwo typów",
+        "value": "Ścisłe",
+        "note": "Zero any, sprawdzane indeksy, jeden błąd blokuje merge."
+      },
+      "upkeep": {
+        "label": "Rdzeń stacku",
+        "value": "React 19",
+        "note": "Aktualne wersje główne w całym stacku, przy obu frameworkach. Co tydzień."
       }
     }
   },
   "manifesto": {
-    "p1": "Każdy SaaS zaczyna się od tych samych trzech miesięcy.",
-    "p2": "Nic z tego nie jest Twoim produktem.",
-    "p3": "Kwartał Twojego roku na problemy, które są już rozwiązane.",
-    "p4": "Nie buduj tego drugi raz."
+    "p1": "Umiesz to zbudować. Po prostu nie powinieneś musieć.",
+    "p2": "Każdy SaaS wymaga tej samej hydrauliki: auth, płatności, multi‑tenancy, panel admina. Te pierwsze 300+ godzin nie są tym, co czyni Twój produkt wartościowym. Ta praca jest już napisana i przetestowana. Zostaje ta część, którą tylko Ty możesz zbudować.",
+    "p3": "Zacznij od trzechsetnej godziny"
   },
   "cli": {
     "title": "Wybierz swój stos. Uruchom jedno polecenie.",
-    "lead": "To CLI nie jest szablonem, który pobierasz, a potem z nim walczysz. Pyta, co budujesz, i zapisuje wyłącznie to, więc to samo narzędzie tworzy jednonajemcowy projekt poboczny i wielonajemcową platformę, a żaden z nich nie niesie kodu tego drugiego.",
+    "lead": "Większość starterów wysyła od razu każdą możliwą kombinację i zostawia Cię z usuwaniem tego, o co nie prosiłeś. Ten zadaje dwanaście pytań i pisze wyłącznie odpowiedzi, więc projekt jednonajemcowy nigdy nie niesie kodu wielonajemcowego, a w repozytorium nie ma ani linii martwej od pierwszego dnia.",
     "copy": "Skopiuj polecenie",
     "copied": "Skopiowano",
     "run": {
-      "green": "testy już zielone",
-      "modules": "modułów gotowych"
+      "green": "wszystkie testy zielone",
+      "modules": "modułów gotowych",
+      "label": "Wynik"
     },
     "choices": {
-      "framework": {
-        "label": "Framework",
+      "architecture": {
+        "label": "Architektura",
         "options": {
-          "next": "Next.js",
-          "tanstack": "TanStack Start"
+          "monolith": "Monolit",
+          "split": "Osobne API",
+          "microservices": "Mikroserwisy"
         }
       },
-      "tenancy": {
-        "label": "Najemcy",
+      "api": {
+        "label": "API",
         "options": {
-          "multi": "Wielu najemców",
-          "single": "Jeden najemca"
+          "hono": "Hono",
+          "elysia": "Elysia"
+        },
+        "unavailable": {
+          "elysia": "Elysia celuje w Bun. Wdróż na Vercel albo hostuj u siebie, albo wybierz Hono."
+        }
+      },
+      "auth": {
+        "label": "Uwierzytelnianie",
+        "options": {
+          "better-auth": "Better Auth",
+          "none": "Brak"
         }
       },
       "billing": {
@@ -88,20 +125,112 @@
           "none": "Brak"
         }
       },
+      "database": {
+        "label": "Baza danych",
+        "options": {
+          "postgres": "Postgres",
+          "sqlite": "SQLite"
+        },
+        "unavailable": {
+          "sqlite": "SQLite wymaga trwałego systemu plików albo bindingu D1. Wybierz Cloudflare lub własny serwer."
+        }
+      },
+      "deployment": {
+        "label": "Wdrożenie",
+        "options": {
+          "vercel": "Vercel",
+          "cloudflare": "Cloudflare",
+          "self": "Własny serwer"
+        }
+      },
+      "runtime": {
+        "label": "Środowisko",
+        "options": {
+          "node": "Node",
+          "bun": "Bun"
+        },
+        "unavailable": {
+          "bun": "Cloudflare uruchamia Workers, nie Bun. Wdróż na Vercel albo hostuj u siebie."
+        }
+      },
       "email": {
-        "label": "Poczta",
+        "label": "E-mail",
         "options": {
           "resend": "Resend",
+          "plunk": "Plunk",
           "none": "Brak"
+        }
+      },
+      "framework": {
+        "label": "Framework",
+        "options": {
+          "next": "Next.js",
+          "tanstack": "TanStack Start",
+          "react-router": "React Router"
+        }
+      },
+      "orm": {
+        "label": "ORM",
+        "options": {
+          "drizzle": "Drizzle",
+          "prisma": "Prisma"
+        }
+      },
+      "provider": {
+        "label": "Dostawca",
+        "options": {
+          "neon": "Neon",
+          "supabase": "Supabase",
+          "self-postgres": "Własny",
+          "d1": "Cloudflare D1",
+          "turso": "Turso",
+          "file": "Plik lokalny"
+        },
+        "unavailable": {
+          "d1": "D1 to binding Cloudflare. Wybierz wdrożenie na Cloudflare.",
+          "file": "Plik lokalny potrzebuje dysku, który przetrwa wdrożenie. Hostuj u siebie, żeby go użyć."
+        }
+      },
+      "tenancy": {
+        "label": "Najemcy",
+        "options": {
+          "multi": "Wielu najemców",
+          "single": "Jeden najemca"
+        }
+      },
+      "extras": {
+        "label": "Funkcje",
+        "options": {
+          "commerce": "Sklep z przykładowymi produktami",
+          "courses": "Kurs w subskrypcji",
+          "page-builder": "Wizualny kreator stron",
+          "post-editor": "Wizualny edytor wpisów"
+        },
+        "unavailable": {
+          "commerce": "Sklep potrzebuje czym pobierać płatności. Najpierw wybierz operatora.",
+          "courses": "Kurs w subskrypcji potrzebuje czym pobierać płatności. Najpierw wybierz operatora.",
+          "post-editor": "Bez treści MDX nie ma czego edytować. Najpierw włącz treści."
         }
       }
     },
-    "choicesLabel": "Zmień odpowiedź, a polecenie zmieni się razem z nią. Skopiuj je, gdy opisuje to, co budujesz.",
-    "reuse": "Uruchom je ponownie przy kolejnym projekcie. Odpowiedzi się zmieniają; CLI, testy i dożywotnie aktualizacje nie."
+    "choicesLabel": "Każda odpowiedź przepisuje flagi. Skopiuj komendę, gdy odpowiada Twojej architekturze.",
+    "reuse": {
+      "title": "Drugi projekt nie kosztuje Cię nic.",
+      "body": "Uruchom CLI ponownie z innymi odpowiedziami. Zmienia się stack. Pozostaje zestaw testów, czysta architektura i <accent>dożywotnie aktualizacje</accent>, za które już zapłaciłeś."
+    },
+    "runner": "Menedżer pakietów",
+    "groups": {
+      "platform": "Platforma",
+      "data": "Dane",
+      "product": "Produkt",
+      "extras": "Dodatki"
+    },
+    "commandLabel": "Twoja komenda",
+    "nextLabel": "Potem"
   },
   "line": {
-    "title": "Linia",
-    "description": "Cztery stanowiska między pustym folderem a firmą. Każde już działa i każde to praca, której nie musisz wykonywać.",
+    "title": "Solidny fundament",
+    "description": "Cztery rzeczy, których każdy SaaS potrzebuje pierwszego dnia. Każda z nich już działa i każda to praca, której nie wykonujesz.",
     "stations": {
       "auth": {
         "title": "Trzymaj dane u siebie. Chroń marże.",
@@ -110,7 +239,7 @@
       },
       "tests": {
         "title": "Wiedz, że działa, zanim zrobisz merge.",
-        "body": "To nie jest kod sklejony w weekend. 140 plików testowych i 5 zestawów Playwright uruchamia się przy każdym pull requeście, a bramka pokrycia zatrzymuje build, zanim cokolwiek zepsutego trafi do merge'a. Wdrażaj w piątek i naprawdę odpocznij w weekend.",
+        "body": "To nie jest kod sklejony w weekend. 141 plików testowych i 5 zestawów Playwright uruchamia się przy każdym pull requeście, a bramka pokrycia zatrzymuje build, zanim cokolwiek zepsutego trafi do merge'a. Wdrażaj w piątek i naprawdę odpocznij w weekend.",
         "spec": "100% pokrycia testami"
       },
       "i18n": {
@@ -126,12 +255,12 @@
     }
   },
   "stack": {
-    "title": "Linia pracuje na"
+    "title": "Zbudowane na"
   },
   "quality": {
     "title": "Kontrola jakości",
     "lead": "Jeśli przeszło merge, działa.",
-    "body": "Każda ścieżka jednostkowa, integracyjna i end-to-end jest pokryta testami przed scaleniem. 140 plików testowych, 5 zestawów Playwright w prawdziwym Chromium i WebKit oraz bramka pokrycia, która uruchamia się przy każdym pull requeście i każdym pushu do main.",
+    "body": "Każda ścieżka jednostkowa, integracyjna i end-to-end jest pokryta testami przed scaleniem. 141 plików testowych, 5 zestawów Playwright w prawdziwym Chromium i WebKit oraz bramka pokrycia, która uruchamia się przy każdym pull requeście i każdym pushu do main.",
     "consequence": "I właśnie to sprawia, że agent może tu bezpiecznie pracować. Może pisać tak szybko, jak chce; nic, co zepsuje, nie trafi na main, a dowiesz się o tym przy pull requeście, nie na produkcji.",
     "cta": "Zobacz, ile to kosztuje",
     "terminalTitle": "saasyland: uruchomienie testów",
@@ -140,6 +269,12 @@
       "playwright": "playwright: chromium i webkit, prawdziwe przeglądarki",
       "typescript": "tsc --strict: zero błędów, zero any"
     }
+  },
+  "rally": {
+    "title": "Nikomu nigdy nie zapłacono za ekran logowania.",
+    "body": "Auth, płatności, maile, panel i testy to te trzy miesiące, których nie odzyskasz, i żadna z tych rzeczy nie jest powodem, dla którego klient wybiera właśnie Ciebie. Są napisane, przetestowane i na zielono. Zacznij od części, która naprawdę jest Twoja.",
+    "ctaPrimary": "Zacznij budować",
+    "ctaSecondary": "Zobacz cenę"
   },
   "manifest": {
     "title": "Co jest w zestawie",
@@ -179,7 +314,7 @@
       },
       "tests": {
         "label": "Testy",
-        "body": "140 plików testów jednostkowych i integracyjnych, 5 zestawów Playwright oraz 100% pokrycia instrukcji, gałęzi, funkcji i linii, wymuszane bramką w CI."
+        "body": "141 plików testów jednostkowych i integracyjnych, 5 zestawów Playwright oraz 100% pokrycia instrukcji, gałęzi, funkcji i linii, wymuszane bramką w CI."
       },
       "tooling": {
         "label": "Narzędzia",
@@ -198,11 +333,11 @@
     },
     "masterclass": {
       "title": "Zobacz, jak powstaje — od początku do końca.",
-      "body": "Dwa kursy, oba w pakiecie Masterclass. Jeden prowadzi Cię przez kod, który otrzymujesz, żebyś wiedział, gdzie jest co. Drugi buduje cały produkt od nowa, od pustego folderu, razem z CLI — żeby nic w nim nie było czarną skrzynką.",
+      "body": "Dwa kursy, oba w pakiecie Komplet. Jeden prowadzi Cię przez kod, który otrzymujesz, żebyś wiedział, gdzie jest co. Drugi buduje cały produkt od nowa, od pustego folderu, razem z CLI — żeby nic w nim nie było czarną skrzynką.",
       "previewLabel": "Darmowy fragment",
       "previewTitle": "Lekcja 01 — Granica modułu, zanim powstanie pierwsza funkcja",
       "previewNote": "Obejrzyj pierwszą lekcję, zanim zdecydujesz. Bez konta, bez maila.",
-      "lockedLabel": "W pakiecie Masterclass",
+      "lockedLabel": "W pakiecie Komplet",
       "tracks": {
         "walkthrough": {
           "label": "Przewodnik",
@@ -266,6 +401,29 @@
       }
     }
   },
+  "cases": {
+    "title": "Prawdziwe produkty, nie opinie.",
+    "description": "Na tej stronie nie ma cytatów od klientów, bo cytat nie dowodzi niczego, co dałoby się sprawdzić. To są działające produkty zbudowane na CLI z tej strony, wraz z modułami, których używają, i linkiem, żeby zobaczyć na własne oczy.",
+    "statusLive": "Działa",
+    "statusSoon": "Startuje razem z premierą",
+    "modulesLabel": "Moduły",
+    "items": {
+      "reactprojects": {
+        "name": "reactprojects.com",
+        "kind": "Platforma kursowa",
+        "body": "Platforma z kursem Reacta: 6 zaawansowanych projektów i ponad 60 godzin wideo, sprzedawane jednorazowo, bez subskrypcji. Wygenerowana przez CLI, a potem rozbudowana: auth, checkout, warstwa treści i panel pochodzą z modułów z tej strony.",
+        "modules": "auth · płatności · treści · panel · maile"
+      },
+      "marte": {
+        "name": "marte-bizuteria.pl",
+        "kind": "Sklep jubilerski, Polska",
+        "body": "Prawdziwy sklep sprzedający prawdziwą biżuterię polskim klientom. Używa modułu commerce z usuniętymi produktami przykładowymi, panelu do stanów i zamówień oraz warstwy i18n do polskich tekstów i formatowania złotówek. Nic w nim nie jest demem.",
+        "modules": "commerce · panel · i18n · maile · treści"
+      }
+    },
+    "invite": "Wydałeś na tym coś swojego? Wyślij adres, a trafi na tę listę.",
+    "inviteCta": "Pokaż swój produkt"
+  },
   "compare": {
     "title": "Reszta rynku",
     "description": "Trzy sposoby na start SaaS-a i to, co każdy z nich zostawia Ci do spłacenia.",
@@ -309,7 +467,7 @@
         "ours": "0 USD za MAU, zawsze"
       },
       "course": {
-        "label": "Masterclass",
+        "label": "Komplet",
         "market": "Zwykle osobny zakup",
         "ours": "Ten sam koszyk"
       },
@@ -329,70 +487,85 @@
   "pricing": {
     "title": "Kup raz",
     "description": "Jedna płatność, aktualizacje rdzenia na zawsze, bez opłat za użytkownika. Ta sama ekonomia, którą ten kod pozwala zaoferować Twoim własnym klientom.",
-    "note": "Płatność jednorazowa w USD.",
     "mostPopular": "Najpopularniejszy",
     "ledger": {
       "lead": "Nie kupujesz kodu. Odkupujesz kalendarz.",
-      "body": "Przy 80 dolarach za godzinę, co jest ostrożną stawką dla każdego, kto to czyta, $249 to około trzech godzin Twojego czasu. Praca, którą to zastępuje, nie trwa trzech godzin. To auth z dwuskładnikowym logowaniem i OAuth, otypowana warstwa danych, płatności z webhookami, maile transakcyjne, dziesięć sekcji panelu, warstwa i18n z 54 lokalizacjami i zestaw testów, który naprawdę blokuje build. Każde z tych zadań jest już rozwiązane i rozwiązywałbyś je od nowa, a żadne z nich nie jest powodem, dla którego ktokolwiek Ci zapłaci."
+      "body": "Przelicz to na własne godziny. Przy 150 dolarach za godzinę 249 dolarów to niecałe dwie godziny Twojego czasu. Praca, którą to zastępuje, nie trwa dwóch godzin. To auth z dwuskładnikowym logowaniem i OAuth, otypowana warstwa danych, płatności z webhookami, maile transakcyjne, dziesięć sekcji panelu, warstwa i18n na 54 lokalizacje i zestaw testów, który naprawdę bramkuje build. Każda z tych rzeczy to rozwiązany problem, który rozwiązałbyś ponownie, i żadna z nich nie jest powodem, dla którego ktokolwiek Ci zapłaci."
     },
     "assurance": "Przeczytaj dokumentację i raport pokrycia testami, zanim zapłacisz. Każda liczba na tej stronie pochodzi z repozytorium, które kupujesz, więc możesz sprawdzić towar wcześniej i rozliczyć nas z tego, co znajdziesz.",
     "tiers": {
-      "codebase": {
-        "name": "Codebase",
-        "price": "$249",
+      "core": {
+        "name": "Podstawa",
+        "price": "249 USD",
         "period": "jednorazowo",
-        "tagline": "Pełny kod źródłowy, gotowy do uruchomienia.",
-        "whoFor": "Dla foundera, który wdraża sam i czyta każdą linijkę.",
-        "cta": "Kup Codebase, $249",
+        "tagline": "CLI, źródła i testy.",
+        "whoFor": "Dla założyciela, który wydaje sam i czyta każdą linię.",
+        "cta": "Wybierz Podstawę",
         "features": {
-          "f1": "Pełny kod źródłowy i scaffolding CLI",
-          "f2": "Wszystkie standardowe szablony i moduły",
-          "f3": "Better Auth, Stripe i Resend podłączone",
-          "f4": "Kompletny zestaw testów ze 100% pokryciem",
-          "f5": "Aktualizacje rdzenia na zawsze"
+          "f1": "Pełny kod źródłowy i generator CLI",
+          "f2": "Każdy moduł, który CLI potrafi napisać",
+          "f3": "Better Auth, Stripe i Resend już podpięte",
+          "f4": "Komplet testów i ich bramka 100%",
+          "f5": "Nieograniczone projekty, licencja komercyjna",
+          "f6": "Dożywotnie aktualizacje rdzenia"
         }
       },
-      "masterclass": {
-        "name": "Masterclass",
-        "price": "$399",
+      "complete": {
+        "name": "Komplet",
+        "price": "399 USD",
         "period": "jednorazowo",
-        "tagline": "Kod i rozumowanie, które za nim stoi.",
-        "whoFor": "Dla inżyniera, który chce rozumowania, nie tylko rezultatu.",
-        "cta": "Kup Masterclass, $399",
+        "tagline": "Źródła i wszystko, co je tłumaczy.",
+        "whoFor": "Dla inżyniera, który chce uzasadnienia, a nie tylko wyniku.",
+        "cta": "Wybierz Komplet",
         "features": {
-          "f1": "Wszystko z Codebase",
-          "f2": "Pełny wideokurs: od pustego folderu do produkcji",
-          "f3": "Pogłębione omówienia architektury i projektu",
-          "f4": "Podręczniki testowania i wdrażania",
-          "f5": "Wcześniejszy dostęp do nowych modułów"
+          "f1": "Wszystko z pakietu Podstawa",
+          "f2": "Kurs wideo: od pustego folderu do produkcji",
+          "f3": "Pełny przewodnik po kodzie, moduł po module",
+          "f4": "Dożywotni dostęp do reactprojects.com za darmo",
+          "f5": "6+ zaawansowanych projektów w Reakcie, 60+ godzin wideo",
+          "f6": "Wsparcie priorytetowe, odpowiedź w jeden dzień roboczy"
         }
       },
       "agency": {
-        "name": "Agency",
-        "price": "$899",
+        "name": "Agencja",
+        "price": "899 USD",
         "period": "jednorazowo",
-        "tagline": "Kod dla każdego klienta, któremu wystawiasz fakturę.",
-        "whoFor": "Dla software house'u, który fakturuje klientów za to, co buduje.",
-        "cta": "Kup licencję, $899",
+        "tagline": "Źródła, dla każdego klienta, któremu wystawiasz fakturę.",
+        "whoFor": "Dla firmy, która rozlicza klientów z tego, co buduje.",
+        "cta": "Wybierz Agencję",
         "features": {
-          "f1": "Wszystko z Masterclass",
-          "f2": "Nielimitowana licencja na projekty klienckie",
-          "f3": "Prywatny Discord z priorytetowym wsparciem",
-          "f4": "Pliki Figma kreatora stron",
-          "f5": "Stanowiska zespołowe w masterclassie"
+          "f1": "Wszystko z pakietu Komplet",
+          "f2": "Nieograniczone projekty klienckie, gotowe pod white label",
+          "f3": "Miejsca dla zespołu w kursie i na reactprojects.com",
+          "f4": "Prywatny kanał na Discordzie, bezpośredni kontakt z autorem",
+          "f5": "Jedna 60-minutowa konsultacja architektoniczna w cenie",
+          "f6": "Pliki Figma do kreatora stron"
         }
       }
+    },
+    "consulting": {
+      "label": "Konsultacje",
+      "title": "Inżynier jest do złapania.",
+      "body": "Przegląd architektury, pytanie o skalowanie, migracja, której wolisz nie zepsuć, albo godzina spaceru po Twoim własnym repozytorium. Sześćdziesiąt minut, jeden na jeden, z osobą, która napisała i utrzymuje tę bazę kodu. W pakiecie Agencja raz w cenie.",
+      "price": "149 USD",
+      "period": "za godzinę",
+      "cta": "Umów rozmowę"
     }
   },
+  "notes": {
+    "title": "Argumenty, publicznie.",
+    "description": "Techniczne porównania z alternatywami, napisane tak, jak pisze się recenzję kodu. Każde twierdzenie o konkurencie linkuje do jego własnej dokumentacji, a każda liczba o tym produkcie pochodzi z zestawu testów, a nie z pliku marketingowego.",
+    "cta": "Wszystkie wpisy"
+  },
   "faq": {
-    "title": "Pytania z hali",
+    "title": "Konkretne odpowiedzi",
     "lead": "Pytania, które kupujący zadają naprawdę, z pełnymi odpowiedziami. Jeśli Twojego tu nie ma, wyślij je.",
     "contact": "Zapytaj inżyniera, który to zbudował",
     "contactNote": "hello@saasyland.com. Czyta to jedna osoba.",
     "items": {
       "q1": {
         "question": "Co dokładnie dostaję?",
-        "answer": "Pełny kod źródłowy produkcyjnego SaaS-a: Next.js, React, Bun, Elysia, Better Auth, Drizzle z Neon Postgres, Stripe, Resend i next-intl. Do tego scaffolding CLI, kompletny zestaw testów, wizualny kreator stron i dokumentacja. Pakiety Masterclass i Agency dodają wideokurs, licencję komercyjną i pliki Figma."
+        "answer": "Pełny kod źródłowy produkcyjnego SaaS-a: Next.js, React, Bun, Elysia, Better Auth, Drizzle z Neon Postgres, Stripe, Resend i next-intl. Do tego scaffolding CLI, kompletny zestaw testów, wizualny kreator stron i dokumentacja. Pakiety Complete i Agency dodają wideokurs, licencję komercyjną i pliki Figma."
       },
       "q2": {
         "question": "Dlaczego Better Auth zamiast Clerka albo Auth0?",
@@ -408,11 +581,11 @@
       },
       "q5": {
         "question": "Dlaczego nie kazać tego po prostu zbudować agentowi AI?",
-        "answer": "Zbuduje, i będzie to wyglądać poprawnie. Nie powie Ci natomiast, który przypadek brzegowy w auth pominął, który webhook nie jest idempotentny ani że test parzystości tłumaczeń, którego nie napisał, wyłapałby brakujący klucz. Wygenerowany kod jest dziś tanią częścią. Drogą częścią jest bramka, która dowodzi, że kod jest poprawny, i tym właśnie jest to repozytorium: skieruj na nie agenta, a odziedziczy 140 plików testów, ścisłe typy i build, który pada, gdy coś jest nie tak."
+        "answer": "Zbuduje, i będzie to wyglądać poprawnie. Nie powie Ci natomiast, który przypadek brzegowy w auth pominął, który webhook nie jest idempotentny ani że test parzystości tłumaczeń, którego nie napisał, wyłapałby brakujący klucz. Wygenerowany kod jest dziś tanią częścią. Drogą częścią jest bramka, która dowodzi, że kod jest poprawny, i tym właśnie jest to repozytorium: skieruj na nie agenta, a odziedziczy 141 plików testów, ścisłe typy i build, który pada, gdy coś jest nie tak."
       },
       "q6": {
-        "question": "Czy potrzebuję pakietu Masterclass?",
-        "answer": "Codebase daje Ci maszynę. Masterclass daje Ci inżyniera, który ją zbudował: każdą decyzję architektoniczną, każdą strategię testów, każde wdrożenie, na wideo. Większość kupujących wybiera Masterclass, bo kod jest tanią częścią. Tym, czego naprawdę brakuje, jest jego zrozumienie."
+        "question": "Czy potrzebuję pakietu Komplet?",
+        "answer": "Podstawa daje Ci maszynę. Komplet dokłada uzasadnienie i wsparcie wokół niej: pełny kurs wideo od pustego folderu do produkcji, przewodnik po każdym module, odpowiedzi priorytetowe w jeden dzień roboczy i dożywotni dostęp do reactprojects.com za darmo. Większość kupujących wybiera Komplet, bo kod jest tanią częścią."
       },
       "q7": {
         "question": "Czy cokolwiek tutaj jest subskrypcją?",
@@ -424,7 +597,7 @@
       },
       "q9": {
         "question": "Czy mogę używać go w projektach dla klientów?",
-        "answer": "Codebase i Masterclass obejmują nielimitowane produkty, których jesteś właścicielem. Do pracy dla klientów służy pakiet Agency: jedna licencja, nielimitowane projekty klienckie."
+        "answer": "Podstawa i Komplet obejmują nielimitowane produkty, których jesteś właścicielem. Do pracy dla klientów służy pakiet Agencja: jedna licencja, nielimitowane projekty klienckie."
       },
       "q10": {
         "question": "Dlaczego mam zaufać starterowi zbudowanemu przez jednego inżyniera?",
@@ -432,34 +605,40 @@
       },
       "q11": {
         "question": "Czy muszę znać Bun i Elysię?",
-        "answer": "Nie. Jeśli znasz Next.js i TypeScript, przeczytasz każdy plik pierwszego dnia. Bun to szybszy runtime i menedżer pakietów, który przyjmuje komendy, jakie już wpisujesz, a Elysia to otypowana warstwa HTTP oddająca Ci zwykłe handlery. Masterclass omawia oba od podstaw."
+        "answer": "Nie. Jeśli znasz Next.js i TypeScript, przeczytasz każdy plik pierwszego dnia. Bun to szybszy runtime i menedżer pakietów, który przyjmuje komendy, jakie już wpisujesz, a Elysia to otypowana warstwa HTTP oddająca Ci zwykłe handlery. Complete omawia oba od podstaw."
       }
     }
   },
   "gate": {
-    "title": "Zacznij od trzeciego miesiąca",
+    "title": "Zacznij w godzinie trzysetnej",
     "description": "Auth, płatności, maile, panel i testy są gotowe. Zostaje ta część, której nikt nie zbuduje za Ciebie, i właśnie jej jeszcze nie zacząłeś.",
     "price": "$249",
     "terms": "jednorazowo, aktualizacje na zawsze",
-    "assurance": "Zapłać raz, sklonuj repozytorium, uruchom CLI. Bez subskrypcji, bez opłat za użytkownika i bez dostawcy, od którego trzeba się migrować w drugim roku.",
+    "assurance": "Zapłać raz, uruchom CLI, miej każdą linię na własność. Bez subskrypcji, bez opłat od użytkownika i bez dostawcy, z którego trzeba się migrować w drugim roku.",
     "ctaPrimary": "Zacznij budować",
-    "ctaSecondary": "Czytaj dokumentację"
+    "ctaSecondary": "Czytaj dokumentację",
+    "badges": {
+      "projects": "Nieograniczone projekty",
+      "license": "Licencja komercyjna",
+      "fees": "Bez opłat od użytkownika"
+    }
   },
   "components": {
     "navigation": {
       "items": {
-        "line": "Linia",
-        "quality": "Jakość",
-        "studio": "Studio",
-        "pricing": "Cennik",
-        "faq": "FAQ",
         "blog": "Blog",
-        "docs": "Dokumentacja"
+        "docs": "Dokumentacja",
+        "faq": "FAQ",
+        "foundation": "Fundament",
+        "pricing": "Cennik",
+        "quality": "Jakość",
+        "toolkit": "Narzędzia"
       },
       "getStarted": "Zacznij budować",
       "openMenu": "Otwórz menu",
       "closeMenu": "Zamknij menu",
-      "ariaLabel": "Główna"
+      "ariaLabel": "Główna",
+      "signIn": "Zaloguj się"
     },
     "footer": {
       "tagline": "Starter kit klasy produkcyjnej, który jest w pełni Twój.",
@@ -478,14 +657,15 @@
         "error": "Nie udało się wysłać. Spróbuj ponownie albo napisz na hello@saasyland.com."
       },
       "links": {
-        "line": "Linia",
-        "pricing": "Cennik",
-        "faq": "FAQ",
-        "docs": "Dokumentacja",
         "blog": "Blog",
+        "docs": "Dokumentacja",
+        "faq": "FAQ",
+        "foundation": "Fundament",
         "github": "GitHub",
+        "pricing": "Cennik",
         "privacy": "Polityka prywatności",
-        "terms": "Regulamin"
+        "terms": "Regulamin",
+        "signIn": "Zaloguj się"
       }
     }
   }

@@ -5,7 +5,7 @@ import { type JSX, useEffect, useState } from "react"
 import { cn } from "~/src/utils"
 
 /** The anchored sections, in page order. */
-const ANCHOR_ITEMS = ["line", "quality", "studio", "pricing", "faq"] as const
+const ANCHOR_ITEMS = ["foundation", "quality", "toolkit", "pricing", "faq"] as const
 
 type AnchorItem = (typeof ANCHOR_ITEMS)[number]
 
@@ -53,10 +53,10 @@ export function NavLinks({
 }: NavLinksProps): JSX.Element {
   const labels: Record<AnchorItem, string> = {
     faq: faqLabel,
-    line: lineLabel,
+    foundation: lineLabel,
     pricing: pricingLabel,
     quality: qualityLabel,
-    studio: studioLabel,
+    toolkit: studioLabel,
   }
 
   const [activeHash, setActiveHash] = useState<AnchorItem | undefined>()

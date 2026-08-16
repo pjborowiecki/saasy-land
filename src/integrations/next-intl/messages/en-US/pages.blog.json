@@ -18,6 +18,14 @@
     "backToBlog": "All posts",
     "writtenBy": "Written by",
     "dateLabel": "Published",
-    "contents": "Contents"
+    "contents": "Contents",
+    "readingTime": "{minutes} min read",
+    "share": {
+      "label": "Share",
+      "x": "Share on X",
+      "linkedin": "Share on LinkedIn",
+      "copy": "Copy link",
+      "copied": "Link copied"
+    }
   }
 }

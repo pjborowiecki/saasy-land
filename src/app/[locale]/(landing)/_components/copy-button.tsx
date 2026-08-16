@@ -1,10 +1,12 @@
 "use client"
 
-import { type JSX, useCallback, useEffect, useState } from "react"
+import { type JSX, type ReactNode, useCallback, useEffect, useState } from "react"
 
 import { Copy } from "lucide-react"
 import { AnimatePresence } from "motion/react"
 import * as m from "motion/react-m"
+
+import { cn } from "~/src/utils"
 
 import { DRAW, PRESS, SWAP, TAP } from "~/src/app/[locale]/(landing)/_components/motion-tokens"
 
@@ -53,6 +55,22 @@ function CheckGlyph(): JSX.Element {
     >
       <m.path animate={PATH_DRAWN} d="M4 12l5 5L20 6" initial={PATH_UNDRAWN} transition={DRAW} />
     </svg>
+  )
+}
+
+/** The label slot, so the copied and uncopied states differ by their contents and nothing else. */
+function Swap({ children, className }: Readonly<{ children: ReactNode; className?: string }>): JSX.Element {
+  return (
+    <m.span
+      animate={SWAP_SHOWN}
+      className={cn("flex items-center", className)}
+      exit={SWAP_HIDDEN}
+      initial={SWAP_HIDDEN}
+      layout="position"
+      transition={SWAP}
+    >
+      {children}
+    </m.span>
   )
 }
 
@@ -114,32 +132,19 @@ export function CopyButton({ copiedLabel, copyLabel, value }: CopyButtonProps): 
       type="button"
       whileTap={TAP}
     >
+      {/* Two `&&`s rather than one ternary: the branches are the same element with different
+          contents, and `AnimatePresence` reads a keyed swap the same way either way. */}
       <AnimatePresence initial={false} mode="popLayout">
-        {hasCopied ? (
-          <m.span
-            animate={SWAP_SHOWN}
-            className="flex items-center gap-1.5 text-body-sm font-medium text-ring"
-            exit={SWAP_HIDDEN}
-            initial={SWAP_HIDDEN}
-            key="copied"
-            layout="position"
-            transition={SWAP}
-          >
+        {hasCopied && (
+          <Swap className="gap-1.5 text-body-sm font-medium text-ring" key="copied">
             <CheckGlyph />
             {copiedLabel}
-          </m.span>
-        ) : (
-          <m.span
-            animate={SWAP_SHOWN}
-            className="flex items-center"
-            exit={SWAP_HIDDEN}
-            initial={SWAP_HIDDEN}
-            key="copy"
-            layout="position"
-            transition={SWAP}
-          >
+          </Swap>
+        )}
+        {!hasCopied && (
+          <Swap key="copy">
             <Copy aria-hidden className="size-3.5" strokeWidth={COPY_STROKE} />
-          </m.span>
+          </Swap>
         )}
       </AnimatePresence>
     </m.button>

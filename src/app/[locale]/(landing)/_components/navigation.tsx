@@ -9,6 +9,7 @@ import { Wordmark } from "~/src/presentation/components/custom/wordmark"
 import { MobileMenu } from "~/src/app/[locale]/(landing)/_components/mobile-menu"
 import { NavLinks } from "~/src/app/[locale]/(landing)/_components/nav-links"
 import { NavShell } from "~/src/app/[locale]/(landing)/_components/nav-shell"
+import { ROUTES } from "~/src/routes"
 
 /**
  * The bar's action is quiet on purpose.
@@ -21,6 +22,17 @@ import { NavShell } from "~/src/app/[locale]/(landing)/_components/nav-shell"
  * `h-9` and a 44px-tall tap target on the mobile toggle: this control is on screen for the whole
  * scroll and it is the only navigation a phone has.
  */
+/**
+ * Sign in is quieter than everything beside it, and it has to exist.
+ *
+ * Every action on this page points at buying, so a visitor who has already bought had nowhere to
+ * go: the bar sent them to `#pricing` and the footer offered them the same tiers again. Plain
+ * text rather than a second button, because returning customers are looking for this and new
+ * ones should not be offered a login before they have a reason to have one.
+ */
+const NAV_SIGN_IN_CLASSNAME =
+  "hidden shrink-0 rounded-md px-1 text-body-sm font-medium whitespace-nowrap text-muted-foreground transition-colors duration-200 ease-exp hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring sm:inline-flex"
+
 const NAV_CTA_CLASSNAME =
   "hidden h-9 shrink-0 items-center rounded-lg border border-border sm:inline-flex bg-card/60 px-3.5 text-body-sm font-medium whitespace-nowrap text-foreground transition-[color,border-color,background-color] duration-200 ease-exp hover:border-border hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring active:translate-y-px"
 
@@ -41,23 +53,28 @@ export async function Navigation(): Promise<JSX.Element> {
             docsHref="/docs"
             docsLabel={t("items.docs")}
             faqLabel={t("items.faq")}
-            lineLabel={t("items.line")}
+            lineLabel={t("items.foundation")}
             pricingLabel={t("items.pricing")}
             qualityLabel={t("items.quality")}
-            studioLabel={t("items.studio")}
+            studioLabel={t("items.toolkit")}
           />
+          <Link className={NAV_SIGN_IN_CLASSNAME} href={ROUTES.SIGN_IN}>
+            {t("signIn")}
+          </Link>
           <a className={NAV_CTA_CLASSNAME} href="#pricing">
             {t("getStarted")}
           </a>
           <MobileMenu
             closeLabel={t("closeMenu")}
+            signInHref={ROUTES.SIGN_IN}
+            signInLabel={t("signIn")}
             docsLabel={t("items.docs")}
             faqLabel={t("items.faq")}
-            lineLabel={t("items.line")}
+            lineLabel={t("items.foundation")}
             openLabel={t("openMenu")}
             pricingLabel={t("items.pricing")}
             qualityLabel={t("items.quality")}
-            studioLabel={t("items.studio")}
+            studioLabel={t("items.toolkit")}
           />
         </div>
       </nav>

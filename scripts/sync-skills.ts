@@ -6,6 +6,7 @@ import { join } from "node:path"
 const GROUPS: Record<string, string> = {
   "anthropics/skills": "anthropic",
   "better-auth/skills": "better-auth",
+  "coreyhaines31/marketingskills": "coreyhaines31",
   "elysiajs/skills": "elysiajs",
   "Leonxlnx/taste-skill": "taste",
   "mattpocock/skills": "matt-pocock",
@@ -13,7 +14,7 @@ const GROUPS: Record<string, string> = {
   "neondatabase/ai-rules": "neon",
   "next-safe-action/skills": "next-safe-action",
   "pbakaus/impeccable": "impeccable",
-  "remotion": "remotion",
+  "remotion-dev/skills": "remotion",
   "resend/resend-skills": "resend",
   "stripe/ai": "stripe",
   "TanStack/table": "tanstack/table",
@@ -53,6 +54,8 @@ for (const name of Object.keys(skills)) {
 }
 
 let grouped = 0
+const roots = new Set<string>() 
+const ungrouped: string[] = []
 for (const [name, entry] of Object.entries(skills)) {
   const group = GROUPS[entry.source ?? ""]
   const staged = join(staging, name)
@@ -65,20 +68,28 @@ for (const [name, entry] of Object.entries(skills)) {
   if (group === undefined) {
     console.warn(`! ${name} (${entry.source ?? "unknown source"}) has no group mapping; leaving it at the top level.`)
     renameSync(staged, join(AGENTS_DIR, name))
+    ungrouped.push(entry.source ?? "unknown source")
     continue
   }
 
   mkdirSync(join(AGENTS_DIR, group), { recursive: true })
   renameSync(staged, join(AGENTS_DIR, group, name))
+  roots.add(group.split("/")[0] ?? group)
   grouped += 1
 }
 
 rmSync(staging, { force: true, recursive: true })
 
 mkdirSync(CLAUDE_DIR, { recursive: true })
-const groupRoots = [...new Set(Object.values(GROUPS).map((group) => group.split("/")[0] ?? group))]
+const groupRoots = [...roots].sort((a, b) => a.localeCompare(b))
 for (const root of groupRoots) {
   symlinkSync(`../../${AGENTS_DIR}/${root}`, join(CLAUDE_DIR, root))
 }
 
 console.log(`\n✓ Restored ${Object.keys(skills).length} skills, grouped ${grouped}, linked ${groupRoots.join(", ")} into ${CLAUDE_DIR}.`)
+
+if (ungrouped.length > 0) {
+  const sources = [...new Set(ungrouped)].sort((a, b) => a.localeCompare(b)).join(", ")
+  console.error(`\n✗ ${ungrouped.length} skills stayed at the top level. Add these sources to GROUPS: ${sources}`)
+  process.exit(1)
+}

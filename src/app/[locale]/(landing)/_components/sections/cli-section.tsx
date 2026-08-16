@@ -1,12 +1,58 @@
-import type { JSX } from "react"
+import type { JSX, ReactNode } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { CLI_CHOICES } from "~/src/app/[locale]/(landing)/_components/cli-choices"
-import { CliChoiceOption, CliChoiceRow, CliConfigurator } from "~/src/app/[locale]/(landing)/_components/cli-configurator"
+import { CLI_CHOICES, CLI_EXTRAS, CLI_GROUPS } from "~/src/app/[locale]/(landing)/_components/cli-choices"
+import {
+  CliChoiceOption,
+  CliChoiceRow,
+  CliConfigurator,
+  CliExtraOption,
+  CliGroupHeading,
+} from "~/src/app/[locale]/(landing)/_components/cli-configurator"
 import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 
 const FRAME_DELAY_MS = 100
+
+const EXTRAS_GROUP = "extras"
+
+/** One band of questions. Its own component so the matrix's nesting does not stack on the frame's. */
+async function CliGroup({ group }: Readonly<{ group: string }>): Promise<JSX.Element> {
+  const t = await getTranslations("pages.landing.cli")
+
+  return (
+    <>
+      <CliGroupHeading label={t(`groups.${group}`)} />
+      {CLI_CHOICES.filter((choice) => choice.group === group).map((choice) => (
+        <CliChoiceRow choiceId={choice.id} key={choice.id} label={t(`choices.${choice.id}.label`)}>
+          {choice.options.map((option) => (
+            <CliChoiceOption
+              choiceId={choice.id}
+              key={option.id}
+              label={t(`choices.${choice.id}.options.${option.id}`)}
+              optionId={option.id}
+              unavailableReason={"unavailableWhen" in option ? t(`choices.${choice.id}.unavailable.${option.id}`) : undefined}
+            />
+          ))}
+        </CliChoiceRow>
+      ))}
+      {group === EXTRAS_GROUP && (
+        <CliChoiceRow choiceId={group} label={t("choices.extras.label")}>
+          {CLI_EXTRAS.map((extra) => (
+            <CliExtraOption
+              extraId={extra.id}
+              key={extra.id}
+              label={t(`choices.extras.options.${extra.id}`)}
+              unavailableReason={"unavailableWhen" in extra ? t(`choices.extras.unavailable.${extra.id}`) : undefined}
+            />
+          ))}
+        </CliChoiceRow>
+      )}
+    </>
+  )
+}
+
+const REUSE_TAGS = { accent: (chunks: ReactNode) => <strong className="font-medium text-foreground">{chunks}</strong> }
 
 /**
  * THE CLI.
@@ -41,30 +87,25 @@ export async function CliSection(): Promise<JSX.Element> {
 
         <Reveal className="mt-14 md:mt-20" delay={FRAME_DELAY_MS}>
           <CliConfigurator
+            commandLabel={t("commandLabel")}
             copiedLabel={t("copied")}
             copyLabel={t("copy")}
             footnote={t("choicesLabel")}
             greenLabel={t("run.green")}
             moduleLabel={t("run.modules")}
+            nextLabel={t("nextLabel")}
+            outputLabel={t("run.label")}
+            runnerLabel={t("runner")}
           >
-            {CLI_CHOICES.map((choice) => (
-              <CliChoiceRow key={choice.id} label={t(`choices.${choice.id}.label`)}>
-                {choice.options.map((option) => (
-                  <CliChoiceOption
-                    choiceId={choice.id}
-                    key={option.id}
-                    label={t(`choices.${choice.id}.options.${option.id}`)}
-                    optionId={option.id}
-                  />
-                ))}
-              </CliChoiceRow>
+            {CLI_GROUPS.map((group) => (
+              <CliGroup group={group} key={group} />
             ))}
           </CliConfigurator>
         </Reveal>
 
-        <Reveal className="mt-8 flex max-w-3xl items-start gap-3" delay={FRAME_DELAY_MS} variant="quiet">
-          <span aria-hidden className="mt-2 size-1.25 shrink-0 rounded-xs bg-ring" />
-          <span className="text-body-sm text-pretty text-muted-foreground">{t("reuse")}</span>
+        <Reveal className="mt-14 md:mt-16" delay={FRAME_DELAY_MS} variant="quiet">
+          <h3 className="max-w-[34ch] text-headline-support text-balance text-foreground">{t("reuse.title")}</h3>
+          <p className="mt-5 max-w-2xl text-lead text-pretty text-muted-foreground">{t.rich("reuse.body", REUSE_TAGS)}</p>
         </Reveal>
       </div>
     </section>

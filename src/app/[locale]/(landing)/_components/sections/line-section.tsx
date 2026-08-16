@@ -36,7 +36,7 @@ export async function LineSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.landing.line")
 
   return (
-    <section className="relative border-t border-border" id="line">
+    <section className="relative border-t border-border" id="foundation">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32">
         <Reveal variant="heading">
           <h2 className="max-w-[16ch] text-headline-peak text-balance text-foreground">{t("title")}</h2>

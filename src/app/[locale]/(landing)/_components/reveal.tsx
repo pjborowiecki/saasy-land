@@ -111,15 +111,55 @@ interface RevealProps {
  */
 export function Reveal({ children, className, delay = 0, variant = "block" }: RevealProps): JSX.Element {
   const elementRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-  const [hasSettled, setHasSettled] = useState(false)
+
+  /*
+   * Visible first, hidden second, and only ever by JavaScript.
+   *
+   * Starting hidden meant the server sent markup that painted as nothing: the words were in the
+   * HTML, but the block held `opacity-0` until the bundle downloaded, React hydrated and an
+   * observer fired. On a cold load that is seconds of blank page under a heading, and if the
+   * script never arrives the section is invisible forever. No entrance is worth that.
+   *
+   * So the resting state is the server's answer, and the client only takes it away from blocks it
+   * can prove are still below the fold, which are by definition blocks nobody is looking at. A
+   * block already on screen at mount is where it belongs; hiding it to animate it back would be a
+   * flash rather than an entrance.
+   */
+  const [isVisible, setIsVisible] = useState(true)
+  const [hasSettled, setHasSettled] = useState(true)
+
+  /**
+   * Whether transitions are allowed yet.
+   *
+   * The hide has to be instant or it is a fade-out: the block is painted, hydration decides it is
+   * below the fold, and the visitor watches 700ms of the page removing content it had already
+   * shown them. So the first commit carries `transition-none`, the hidden state lands inside it,
+   * and only the frame after that turns the transition back on for the entrance it was for.
+   */
+  const [isArmed, setIsArmed] = useState(false)
 
   useEffect(() => {
     const element = elementRef.current
     if (!element) {
       return
     }
-    return observe(element, setIsVisible)
+    // Already on screen: it is where it belongs, and there is nothing to enter from.
+    if (element.getBoundingClientRect().top < globalThis.innerHeight) {
+      return
+    }
+
+    setIsVisible(false)
+    setHasSettled(false)
+
+    const frame = globalThis.requestAnimationFrame(() => {
+      setIsArmed(true)
+    })
+    const unobserve = observe(element, setIsVisible)
+
+    return () => {
+      globalThis.cancelAnimationFrame(frame)
+      unobserve()
+    }
   }, [])
 
   const delayStyle: CSSProperties | undefined = useMemo(() => (delay > 0 ? { transitionDelay: `${delay}ms` } : undefined), [delay])
@@ -150,8 +190,7 @@ export function Reveal({ children, className, delay = 0, variant = "block" }: Re
       style={delayStyle}
       onTransitionEnd={handleTransitionEnd}
       className={cn(
-        "transition-[opacity,transform] ease-exp",
-        DURATION_CLASSNAME[variant],
+        isArmed ? cn("transition-[opacity,transform] ease-exp", DURATION_CLASSNAME[variant]) : "transition-none",
         // will-change is a promise the compositor keeps paying for, so it is made only for the
         // one entrance and dropped the moment it finishes. There are dozens of these on the page
         // and most are viewports below the fold, so promising from first render would reserve a

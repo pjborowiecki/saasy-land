@@ -1,0 +1,347 @@
+---
+title: "Better-T-Stack vs a Paid SaaS Starter Kit: The Honest Line Items"
+description: "Better-T-Stack is free, MIT licensed and the best TypeScript scaffolder available. Its own README says what it is: bare-bones scaffolds with zero bloat. Here is the itemised work that sits between that and a SaaS you can charge for."
+excerpt: "A free CLI scaffolds a stack. A paid starter kit scaffolds a product. Those are different jobs, and confusing them is the most expensive mistake in this category. This is the bill, line by line, with an honest recommendation to use the free one."
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+featured: true
+updated: 2026-08-15
+image: /images/blog/better-t-stack-vs-saas-starter-kit.webp
+tags:
+  - comparison
+  - boilerplate
+  - architecture
+  - typescript
+faq:
+  - question: Is Better-T-Stack free?
+    answer: >-
+      Yes. It is MIT licensed and its README commits to "free and open source: forever." At the time
+      of writing it has 5,636 GitHub stars and roughly 2,476 npm downloads a week. Nothing in this
+      article argues that you should not use it, and for a large share of readers it is the correct
+      choice.
+  - question: What does Better-T-Stack actually scaffold?
+    answer: >-
+      A stack. Frontend from React, Next.js, Nuxt, Svelte, Solid, Astro or React Native; backend from
+      Hono, Express, Fastify, Elysia or Convex; tRPC or oRPC; Bun, Node or Cloudflare Workers;
+      SQLite, Postgres, MySQL or MongoDB; Drizzle, Prisma or Mongoose; optionally Better Auth or
+      Clerk. It wires those together correctly and type-safely, which is a real and difficult job.
+  - question: What does Better-T-Stack not include?
+    answer: >-
+      Billing, transactional email, an admin panel, roles and permissions, multi-tenancy,
+      internationalization, a component library and a test suite. This is by design rather than
+      oversight: the project's stated philosophy is "minimal templates: bare-bones scaffolds with
+      zero bloat," and its only shipped examples are a Todo app and an AI chat.
+  - question: Is a paid SaaS boilerplate worth it when a free CLI exists?
+    answer: >-
+      Only if the work it removes is work you would otherwise do. If you enjoy building auth flows,
+      or your product does not need billing, or you already have an internal library for all of it,
+      the free CLI is strictly better. If you would be rebuilding organizations, roles, webhooks and
+      an admin for the third time, a few hundred dollars against 200 or more hours is not a close
+      call.
+  - question: How long does it take to add billing to a scaffolded project?
+    answer: >-
+      Checkout takes an afternoon. Billing takes 25 to 40 hours, because checkout is the easy tenth:
+      the rest is proration, upgrades, downgrades, dunning, invoice history, idempotent webhook
+      handling and the reconciliation job that catches the webhook you never received. Getting the
+      first payment is not the same as being able to bill reliably.
+  - question: Can I use Better-T-Stack and a paid starter kit together?
+    answer: >-
+      Not usefully in the same project, since both generate the foundation and you only get one
+      foundation. They fit different projects. Many developers use a free scaffolder for prototypes
+      and internal tools and a paid foundation for the product that has to make money, which is a
+      sensible allocation rather than a contradiction.
+  - question: Does Better-T-Stack include authentication?
+    answer: >-
+      Optionally, as a wiring step: it can set up Better Auth or Clerk. That gets you sign in and
+      sign out correctly configured. It does not get you organizations, invitations, seat counting,
+      role-gated actions, enforced two-factor, impersonation for support or session revocation, all
+      of which are separate features on top of the library.
+  - question: Which is better for AI coding agents?
+    answer: >-
+      Both are good starting points, for different reasons. A minimal scaffold gives an agent a
+      small context and nothing to be confused by. A larger foundation with enforced boundaries
+      gives it working examples and a build that fails when it drifts. The worst option is the one
+      neither offers: a large codebase whose rules exist only in a readme.
+  - question: How many hours does a paid starter kit actually save?
+    answer: >-
+      For a multi-tenant SaaS with billing, roles and an admin, the itemised range in this article is
+      280 to 465 hours of competent work. For a single-user tool with one Stripe checkout, it is
+      closer to 20. The honest number depends entirely on what you are building, which is why the
+      table is itemised rather than totalled for you.
+  - question: Should I just build it myself?
+    answer: >-
+      Build it yourself when the plumbing is what you want to learn, when your product is strange
+      enough that a starter's assumptions would fight you, or when your time genuinely has no
+      opportunity cost. Buy when you have already built it once and remember exactly how long the
+      boring three quarters took.
+---
+
+<Callout title="What this article is">
+
+An honest comparison between a free tool and a paid one, written by the person who sells the paid one. It covers:
+
+1. What Better-T-Stack is, quoted from its own README rather than characterised.
+2. The difference between scaffolding a stack and scaffolding a product.
+3. The itemised bill: what you build after the scaffolder finishes, with hour estimates and reasoning.
+4. The part that is not hours, which is the reason this category exists at all.
+5. When Better-T-Stack is the right answer, stated first and meant sincerely.
+
+</Callout>
+
+_Last updated 15 August 2026. Every claim about Better-T-Stack is taken from its README, its site and public GitHub and npm data, all linked at the bottom._
+
+## Start here: it is very good and you should probably use it
+
+[Better-T-Stack](https://better-t-stack.dev/) is a CLI for scaffolding end-to-end type-safe TypeScript projects. It is MIT licensed, its README promises "free and open source: forever," it has **5,636 GitHub stars** and it is pulled roughly **2,476 times a week** from npm.
+
+The option matrix is the best in the ecosystem, and it is not close:
+
+| Layer          | What it offers                                                                                                                   |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend       | React with TanStack Router, React Router or TanStack Start, Next.js, Nuxt, Svelte, Solid, Astro, React Native, or none           |
+| Backend        | Hono, Express, Fastify, Elysia, self-hosted fullstack, Convex, or none                                                           |
+| API            | tRPC, oRPC, or none                                                                                                              |
+| Runtime        | Bun, Node.js, Cloudflare Workers                                                                                                 |
+| Database       | SQLite, PostgreSQL, MySQL, MongoDB, or none                                                                                      |
+| ORM            | Drizzle, Prisma, Mongoose, or none                                                                                               |
+| Auth           | Better Auth or Clerk, optional                                                                                                   |
+| Database setup | Turso, Neon, Supabase, Prisma Postgres, MongoDB Atlas, Cloudflare D1, Docker                                                     |
+| Addons         | Turborepo, Nx, PWA, Tauri, Electrobun, Biome, Lefthook, Husky, Starlight, Fumadocs, Ultracite, Oxlint, MCP, OpenTUI, WXT, Skills |
+| Examples       | Todo, AI                                                                                                                         |
+
+Getting that many combinations to produce a project that actually type-checks and runs is genuinely hard engineering. It also ships as a Claude Code plugin with an MCP server, so an agent can plan and generate a valid stack rather than hand-rolling boilerplate, which is a thoughtful piece of work.
+
+**If you are building a prototype, an internal tool, a portfolio project, a non-SaaS app, or anything where you want to learn the plumbing, stop reading and run `bun create better-t-stack@latest`.** It is free, it is excellent, and nothing below argues against it.
+
+The rest of this is for one specific reader: the person who is trying to decide whether the free CLI is enough for a SaaS they intend to charge money for.
+
+## A stack is not a product
+
+Better-T-Stack's README states its philosophy in four lines, and the second one is the whole comparison:
+
+> Roll your own stack: you pick only the parts you need, nothing extra.
+> **Minimal templates: bare-bones scaffolds with zero bloat.**
+> Latest dependencies: always use current, stable versions by default.
+> Free and open source: forever.
+
+That is not a limitation being hidden. It is the design, stated plainly, and the project delivers exactly what it promises. The evidence is in the last row of the table above: the shipped examples are **Todo** and **AI**. A todo list and a chat. Those are the canonical demonstrations that the wiring works, and they are the right examples for a tool whose job is wiring.
+
+So the honest framing is not "free tool missing features." It is:
+
+**Better-T-Stack scaffolds a stack. A SaaS starter kit scaffolds a product.**
+
+Both are scaffolders. They stop at different lines. Better-T-Stack stops when the frontend can call the backend and the backend can reach the database, type-safely, with your choice of nine frontends and six backends. That is a defensible place to stop, and it is where most scaffolders should stop.
+
+A SaaS starter stops somewhere else: when a person can sign up, join an organization, be assigned a role, be charged monthly, receive an email about it, and be looked at by you in an admin panel when they write in confused. Everything between those two lines is the bill.
+
+## The itemised bill
+
+Here is what sits between `bun create better-t-stack@latest` and a product you can charge for. Estimates assume a competent developer building each item to a standard they would put in front of a paying company, and they exclude the time spent deciding how to do it, which for several rows is larger than the implementation.
+
+| Line item                     | Better-T-Stack | What "done" actually means                                                                            | Hours          |
+| ----------------------------- | :------------: | ----------------------------------------------------------------------------------------------------- | -------------- |
+| Type-safe stack wiring        |      Yes       | Frontend, API, runtime, database and ORM agreeing at the type level                                   | 0              |
+| Auth library configured       |    Optional    | Better Auth or Clerk set up: sign in, sign out, sessions                                              | 0              |
+| Organizations and invitations |       No       | Schema, invite tokens, expiry, seat counting, ownership transfer, the leaving-member case             | 25 to 40       |
+| Roles and permissions         |       No       | A policy layer every query and route consults, plus the UI that reflects it                           | 20 to 30       |
+| Multi-tenant isolation        |       No       | Enforced at the query layer rather than the view layer, and tested against a second tenant            | 15 to 25       |
+| Billing                       |       No       | Not checkout. Proration, upgrades, downgrades, dunning, invoices, idempotent webhooks, reconciliation | 25 to 40       |
+| Transactional email           |       No       | Templates, previews, per-locale copy, deliverability, unsubscribe, compliance                         | 15 to 25       |
+| Admin panel                   |       No       | Ten sections nobody sees but you cannot operate without: users, orgs, subs, refunds, logs, flags      | 40 to 60       |
+| Component library             |       No       | Accessible, themed, tested, and yours to edit rather than locked in a package                         | 30 to 50       |
+| Internationalization          |       No       | Not translation. Routing, formatters, plural rules, and a key-parity check that fails the build       | 20 to 35       |
+| Test suite with a gate        |       No       | The tests, the fixtures, the CI wiring, and the discipline of never merging red                       | 60 to 100      |
+| Sample commerce or course     |       No       | A working reference implementation of the thing you are selling, with seed data                       | 30 to 60       |
+| **Total**                     |                |                                                                                                       | **280 to 465** |
+
+At $150 an hour, that is **$42,000 to $69,750**. Put your own rate on it and the number moves, but not the conclusion. Against a one-time price of $249, the comparison is not close for anyone whose time has a price.
+
+But the hours are the boring argument, and I would rather make the interesting one.
+
+## The part that is not hours
+
+Look at four rows in that table: **multi-tenant isolation, roles and permissions, webhook idempotency, and session revocation.**
+
+They share a property that none of the other rows have. **The wrong implementation passes review, works in development, and demos correctly.**
+
+A tenant filter applied in the view layer instead of the query layer works perfectly with one tenant. It works perfectly in your tests, because your fixtures have one tenant. It fails on the day your second customer's data appears in your first customer's dashboard, and that is not a bug report, it is a phone call.
+
+A webhook handler without an idempotency key works every time you test it, because you never send the same event twice. Stripe does, on retry, and then somebody has been charged twice or granted a plan twice.
+
+A permission check that reads the role from the session rather than re-reading it from the database works until somebody is demoted and keeps their old session.
+
+These are not hard problems. They are problems where **being wrong is invisible until it is expensive**, which is a completely different risk profile from "this takes 40 hours." You cannot buy your way out of them with more hours, because you do not know you need the hours. You avoid them by starting from a foundation where somebody already made the mistake and fixed it, and where a test now exists that fails if it comes back.
+
+That, rather than the hour count, is what a paid starter kit is actually for.
+
+## What the paid side looks like concretely
+
+To be specific rather than abstract, here is what "already solved" means in this codebase, with the numbers read out of the test run rather than typed into a marketing file.
+
+**A coverage gate rather than a coverage badge.** 141 test files, 472 tests, and four thresholds in the config:
+
+```ts
+coverage: {
+  thresholds: { branches: 100, functions: 100, lines: 100, statements: 100 },
+}
+```
+
+The error branches in the previous section are exactly what a branch-coverage gate at 100 forces you to test. That is the mechanism, not the number.
+
+**Architecture the compiler agrees with.** Three lint rules make the module boundaries executable:
+
+```ts
+{
+  files: ["src/modules/*/domain/**/*.{ts,tsx}"],
+  rules: {
+    "no-restricted-imports": ["error", { patterns: [{
+      group: ["react", "react/**", "next", "next/**", "drizzle-orm", "drizzle-orm/**",
+              "~/src/app/**", "~/src/presentation/**", "~/src/platform/**",
+              "~/src/integrations/**", "~/src/modules/*/infrastructure/**"],
+      message: "Domain may only import shared-kernel domain and same-context domain code.",
+    }] }],
+  },
+}
+```
+
+You cannot put a database query in a React component. The build fails and tells you why.
+
+**Strictness with no escape hatch.** `strict`, plus `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noPropertyAccessFromIndexSignature` and `verbatimModuleSyntax`. `typescript/no-explicit-any` is an error, and the linter runs with `denyWarnings: true`, so there is no warning you can learn to ignore.
+
+**Optional features, not a fixed template.** The [configurator](/#cli) asks twelve questions and offers four extras: a store with sample products, a subscription course, a visual page builder and a visual post editor. Turning one on adds a module. Leaving it off means that code does not exist in your repository.
+
+None of this is a criticism of Better-T-Stack. It is a description of where the two products stop.
+
+## When Better-T-Stack is the right answer
+
+Stated properly, because a comparison that always recommends the paid option is an advertisement rather than a comparison.
+
+**Use Better-T-Stack if:**
+
+- You are prototyping, and the thing may not exist in a month.
+- You are learning, and the plumbing is the point. Building auth once is a genuinely valuable education and nobody should be talked out of it.
+- Your product is not a SaaS. No organizations, no subscriptions, no admin. A tool, a game, an internal dashboard, a client site.
+- You already have an internal library for the boring three quarters, which many agencies and experienced teams do.
+- Your stack is outside what any paid kit offers. Nuxt, Svelte, Solid, Astro, React Native, Convex, tRPC. Better-T-Stack covers all of those and no paid starter covers most of them.
+- Your budget is genuinely zero. That is a legitimate constraint and there is no shame in it. Better-T-Stack is a better free option than any paid product's free tier.
+
+**Consider paying if:**
+
+- You are building one product you intend to charge companies for, with seats, roles, invoices and a security questionnaire in your future.
+- You have already built organizations and billing once and remember exactly how long the boring parts took.
+- You want a test gate you did not have to write, because writing a coverage suite from zero is the item nobody ever gets to.
+- You want the architectural boundaries enforced rather than intended.
+- Your time has a price and 280 to 465 hours of it costs more than a few hundred dollars.
+
+## They are not really competitors
+
+The most useful thing I can tell you is that this is not a two-horse race.
+
+Better-T-Stack is a scaffolder for _any_ TypeScript project, across nine frontends and six backends. A SaaS starter kit is a foundation for _one kind_ of business. The overlap is the ten minutes at the start where both of them write a project. After that they are doing different jobs.
+
+The mistake to avoid is not "choosing the free one." It is choosing either one without knowing which of the two jobs you needed doing. A founder who scaffolds a beautiful type-safe stack and then spends six months building organizations and billing has not saved money. They have paid the bill in the currency that does not show up on an invoice.
+
+## Related reading
+
+<Cards>
+
+<Card title="The ShipFast alternative" href="/blog/shipfast-alternative-for-engineers">
+  The other end of the market: what 22 hours saved costs you at hour 300.
+</Card>
+
+<Card title="Supastarter vs SaaSy Land" href="/blog/supastarter-alternative">
+  The closest paid competitor, compared on the decision that happens before you type a command.
+</Card>
+
+<Card title="Choosing a SaaS stack for AI coding agents" href="/blog/choosing-a-saas-stack-for-ai-coding-agents">
+  A four-question test for any dependency, applied layer by layer to a production stack.
+</Card>
+
+<Card title="Repository readiness for AI coding agents" href="/blog/ai-coding-agents-repository-readiness">
+  Why agents learn your architecture from what fails, not from your readme.
+</Card>
+
+</Cards>
+
+<Callout title="Check it before you pay for it">
+
+Run the free one first. Then, if the bill above is a bill you would rather not pay, the [documentation](/docs) is public and the [configurator](/#cli) is live on the homepage. Every number here comes out of the test suite rather than a marketing file. [See what it costs](/#pricing): one payment from $249, unlimited projects, lifetime core updates, no per-user fees.
+
+</Callout>
+
+## Frequently asked questions
+
+<Accordions>
+
+<Accordion title="Is Better-T-Stack free?">
+
+Yes. It is MIT licensed and its README commits to "free and open source: forever." At the time of writing it has 5,636 GitHub stars and roughly 2,476 npm downloads a week. Nothing in this article argues that you should not use it, and for a large share of readers it is the correct choice.
+
+</Accordion>
+
+<Accordion title="What does Better-T-Stack actually scaffold?">
+
+A stack. Frontend from React, Next.js, Nuxt, Svelte, Solid, Astro or React Native; backend from Hono, Express, Fastify, Elysia or Convex; tRPC or oRPC; Bun, Node or Cloudflare Workers; SQLite, Postgres, MySQL or MongoDB; Drizzle, Prisma or Mongoose; optionally Better Auth or Clerk. It wires those together correctly and type-safely, which is a real and difficult job.
+
+</Accordion>
+
+<Accordion title="What does Better-T-Stack not include?">
+
+Billing, transactional email, an admin panel, roles and permissions, multi-tenancy, internationalization, a component library and a test suite. This is by design rather than oversight: the project's stated philosophy is "minimal templates: bare-bones scaffolds with zero bloat," and its only shipped examples are a Todo app and an AI chat.
+
+</Accordion>
+
+<Accordion title="Is a paid SaaS boilerplate worth it when a free CLI exists?">
+
+Only if the work it removes is work you would otherwise do. If you enjoy building auth flows, or your product does not need billing, or you already have an internal library for all of it, the free CLI is strictly better. If you would be rebuilding organizations, roles, webhooks and an admin for the third time, a few hundred dollars against 200 or more hours is not a close call.
+
+</Accordion>
+
+<Accordion title="How long does it take to add billing to a scaffolded project?">
+
+Checkout takes an afternoon. Billing takes 25 to 40 hours, because checkout is the easy tenth: the rest is proration, upgrades, downgrades, dunning, invoice history, idempotent webhook handling and the reconciliation job that catches the webhook you never received. Getting the first payment is not the same as being able to bill reliably.
+
+</Accordion>
+
+<Accordion title="Can I use Better-T-Stack and a paid starter kit together?">
+
+Not usefully in the same project, since both generate the foundation and you only get one foundation. They fit different projects. Many developers use a free scaffolder for prototypes and internal tools and a paid foundation for the product that has to make money, which is a sensible allocation rather than a contradiction.
+
+</Accordion>
+
+<Accordion title="Does Better-T-Stack include authentication?">
+
+Optionally, as a wiring step: it can set up Better Auth or Clerk. That gets you sign in and sign out correctly configured. It does not get you organizations, invitations, seat counting, role-gated actions, enforced two-factor, impersonation for support or session revocation, all of which are separate features on top of the library.
+
+</Accordion>
+
+<Accordion title="Which is better for AI coding agents?">
+
+Both are good starting points, for different reasons. A minimal scaffold gives an agent a small context and nothing to be confused by. A larger foundation with enforced boundaries gives it working examples and a build that fails when it drifts. The worst option is the one neither offers: a large codebase whose rules exist only in a readme.
+
+</Accordion>
+
+<Accordion title="How many hours does a paid starter kit actually save?">
+
+For a multi-tenant SaaS with billing, roles and an admin, the itemised range in this article is 280 to 465 hours of competent work. For a single-user tool with one Stripe checkout, it is closer to 20. The honest number depends entirely on what you are building, which is why the table is itemised rather than totalled for you.
+
+</Accordion>
+
+<Accordion title="Should I just build it myself?">
+
+Build it yourself when the plumbing is what you want to learn, when your product is strange enough that a starter's assumptions would fight you, or when your time genuinely has no opportunity cost. Buy when you have already built it once and remember exactly how long the boring three quarters took.
+
+</Accordion>
+
+</Accordions>
+
+### Sources
+
+- [Better-T-Stack](https://better-t-stack.dev/), for the product description and the install command
+- [create-better-t-stack on GitHub](https://github.com/AmanVarshney01/create-better-t-stack), for the README, the philosophy quoted above, the full option list, the MIT license and the star count
+- [create-better-t-stack on npm](https://www.npmjs.com/package/create-better-t-stack), for weekly download figures
+- [SaaSy Land documentation](/docs) and the [configurator](/#cli), for the module list and the scaffold questions
+- This repository's `vite.config.ts` and `tsconfig.json`, for the coverage thresholds, lint rules and compiler flags quoted above
+
+_Written by Piotr J. Borowiecki, who builds SaaSy Land and therefore has an obvious interest in this comparison. Figures for Better-T-Stack were read from its public repository and npm on 15 August 2026. The recommendation to use it for prototypes, learning projects and non-SaaS work is meant literally._

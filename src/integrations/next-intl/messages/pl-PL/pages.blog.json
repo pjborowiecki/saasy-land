@@ -18,6 +18,14 @@
     "backToBlog": "Wszystkie wpisy",
     "writtenBy": "Autor",
     "dateLabel": "Opublikowano",
-    "contents": "Spis treści"
+    "contents": "Spis treści",
+    "readingTime": "{minutes} min czytania",
+    "share": {
+      "label": "Udostępnij",
+      "x": "Udostępnij na X",
+      "linkedin": "Udostępnij na LinkedIn",
+      "copy": "Skopiuj link",
+      "copied": "Link skopiowany"
+    }
   }
 }

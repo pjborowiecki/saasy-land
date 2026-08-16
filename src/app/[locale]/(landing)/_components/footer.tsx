@@ -13,6 +13,7 @@ import { Wordmark } from "~/src/presentation/components/custom/wordmark"
 import { BuildLogForm } from "~/src/app/[locale]/(landing)/_components/build-log-form"
 import { FooterCopyright } from "~/src/app/[locale]/(landing)/_components/footer-copyright"
 import { APP_GITHUB_URL, APP_NAME, CONTACT_EMAIL } from "~/src/presentation/branding"
+import { ROUTES } from "~/src/routes"
 
 const COLUMN_HEADING_CLASSNAME = "font-mono text-label text-muted-foreground uppercase"
 
@@ -139,8 +140,8 @@ export async function Footer(): Promise<JSX.Element> {
 
           <LinkColumn heading={t("product")}>
             <li>
-              <a className={FOOTER_LINK_CLASSNAME} href="/#line">
-                {t("links.line")}
+              <a className={FOOTER_LINK_CLASSNAME} href="/#foundation">
+                {t("links.foundation")}
               </a>
             </li>
             <li>
@@ -161,6 +162,12 @@ export async function Footer(): Promise<JSX.Element> {
             <li>
               <Link className={FOOTER_LINK_CLASSNAME} href="/blog">
                 {t("links.blog")}
+              </Link>
+            </li>
+            {/* The only route out of the marketing site for somebody who has already bought. */}
+            <li>
+              <Link className={FOOTER_LINK_CLASSNAME} href={ROUTES.SIGN_IN}>
+                {t("links.signIn")}
               </Link>
             </li>
           </LinkColumn>

@@ -1,0 +1,574 @@
+---
+title: "AI Coding Agents for SaaS in 2026: Why the Repository Decides"
+description: "84% of developers use AI coding tools; 33% trust the output. What moves results is not the model, it is your repository. Plus a 20-point readiness scorecard."
+excerpt: "Every study of the last two years points at the same thing, and it is not the model. Here is the evidence, a metric that predicts agent output quality, and a 20-point scorecard for your own codebase."
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-08-15
+image: /images/blog/ai-coding-agents-repository-readiness.webp
+tags:
+  - ai-agents
+  - architecture
+  - testing
+  - tooling
+faq:
+  - question: Which AI coding agent is best in 2026?
+    answer: >-
+      There is no single best agent, and the question is less important than it sounds. As of January 2026,
+      GitHub Copilot led workplace adoption at 29%, with Cursor and Claude Code tied at 18%. Choose by harness
+      fit: terminal-native for multi-file work, IDE-native for incremental work, delegated only if your
+      repository scores 17 or above on the Agent-Ready Repository Scorecard.
+  - question: Do AI coding agents actually make developers faster?
+    answer: >-
+      Not reliably, and not in the conditions most teams work in. METR's randomized controlled trial found 16
+      experienced developers were 19% slower on real tasks in their own mature repositories, while believing
+      they were 20% faster. Speed appears when the repository can reject wrong changes automatically. Without
+      that, output rises and throughput does not.
+  - question: Why does my AI coding agent keep producing code that is almost right?
+    answer: >-
+      Because nothing in your repository contradicts it. An agent optimizes for what it can observe, and if the
+      only available signal is that the code looks like the surrounding code, it will produce code that looks
+      like the surrounding code and does the wrong thing. This is the top frustration for 45% of developers
+      surveyed. Lower your Time to No and the category shrinks.
+  - question: What is AGENTS.md and do I need one?
+    answer: >-
+      AGENTS.md is a markdown file at your repository root that tells coding agents your commands, boundaries
+      and conventions. It was formalized as an open specification in August 2025, donated to the Linux
+      Foundation's Agentic AI Foundation in December 2025, and now ships in over 60,000 public repositories,
+      read by more than 30 agents. Yes, you need one, and it should be short enough to stay true.
+  - question: Should I have an AGENTS.md and a CLAUDE.md?
+    answer: >-
+      Keep one file real and make the others point at it. Duplicated instruction files disagree within a month,
+      and an agent following a stale file follows it confidently. Put everything in AGENTS.md, and use
+      tool-specific files only for genuinely tool-specific behaviour.
+  - question: Does 100% test coverage matter for AI-assisted development?
+    answer: >-
+      It matters more than it did before agents, for a reason unrelated to the usual debate. A coverage
+      threshold that fails the build is a rule an agent cannot route around: it cannot add behaviour without
+      adding a test. Coverage as a badge does nothing. Coverage as a gate converts a review burden into a build
+      failure that costs nobody any time.
+  - question: Can an AI agent just build my SaaS boilerplate for me?
+    answer: >-
+      It will, and the result will look right. What it will not tell you is which auth edge cases it skipped,
+      which webhook is not idempotent, or that the i18n parity check it never wrote would have caught the
+      missing translations. The output of an agent is only as trustworthy as the checks that reviewed it, and
+      on an empty repository there are none.
+  - question: Which agent handles large codebases best?
+    answer: >-
+      The question mostly resolves to context assembly rather than to the agent. Agents that actively search by
+      running grep, opening files and following imports will find your existing helpers. Agents relying on
+      ambient editor context find whatever is open. In a large repository the difference shows up as
+      duplication, which is why having one canonical example per pattern matters more as the codebase grows.
+  - question: How do I stop an agent from touching migrations or secrets?
+    answer: >-
+      Name the paths in AGENTS.md as human-review-only, and back that with CI rather than with trust.
+      Instruction files set intent; branch protection, required reviewers on those paths and a failing build
+      enforce it. Any surface where a mistake is irreversible or expensive belongs in both places.
+  - question: Is it worth switching agents to get better results?
+    answer: >-
+      Switching gives you a one-time change in proposal quality that resets whenever the next model ships.
+      Lowering your Time to No changes how many wrong proposals reach you at all, applies to every agent you
+      use, and compounds. Do the second first. Then switch agents as often as you like, because at that point
+      the cost of being wrong about the choice is low.
+---
+
+Two numbers from the last twelve months describe the state of AI-assisted development better than any benchmark.
+
+The first: **84% of developers now use or plan to use AI tools** in their development process, up from 76% a year earlier ([Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)).
+
+The second: in the same survey, **more developers now actively distrust the accuracy of AI output (46%) than trust it (33%)**. Only 3% say they trust it highly, and trust in accuracy has fallen year over year rather than risen.
+
+Adoption climbed. Confidence fell. The industry's response has been to shop for a better agent, which is why every comparison article you have read this year ranks eleven tools on a leaderboard that will be wrong by the time you finish reading it.
+
+This article argues something different, and then gives you a way to test it on your own codebase. The model is not the variable that moves your outcome. **Your repository is.** An agent is a loop: propose, observe, correct. What it observes comes from your codebase. If your codebase cannot contradict a wrong change quickly, the agent has nothing to correct against, so it optimizes for the only thing left available to it, which is plausibility.
+
+That is the entire mechanism behind the failure everyone is describing.
+
+<Callout title="What you get from this article">
+
+1. The evidence, from four independent studies, that agent output quality tracks repository quality rather than model capability.
+2. **Time to No**, a metric for how fast your repository can tell an agent it is wrong, and why it predicts output quality better than a benchmark score.
+3. The **Agent-Ready Repository Scorecard**: 10 checks, scored out of 20, that you can run on your codebase in about fifteen minutes.
+4. An honest comparison of the 2026 agent landscape grouped by harness architecture, with no leaderboard, and the reasoning for why we refuse to publish one.
+5. A working `AGENTS.md` for a SaaS codebase, and the four-step workflow that ships.
+
+</Callout>
+
+_Last updated 15 August 2026. Written while building and shipping the codebase this site sells, and running agents against it daily._
+
+## What is an AI coding agent?
+
+An AI coding agent is a program that reads a codebase, plans a change, edits files, runs commands, and reacts to the results without a human driving each step. This is what separates it from an autocomplete assistant: the agent closes its own loop by executing your tests, your type checker and your build, then correcting from what they return.
+
+That last clause is the whole subject of this article. An agent's ceiling is set by the quality and the latency of the signals it can observe. A model that scores well on a benchmark and a model that scores poorly will both produce confident, plausible, wrong code in a repository that has nothing to say back.
+
+## The 2026 paradox: adoption up, trust down, output worse
+
+Four independent studies, run by different organizations using different methods, converge on the same finding. Agent-assisted output is faster to produce and more expensive to maintain.
+
+| Study                                                                                                                   | Method                                                                                                          | Finding                                                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)                                         | Annual survey of tens of thousands of developers                                                                | 84% use or plan to use AI tools. 46% distrust the accuracy of the output against 33% who trust it. The **top frustration, cited by 45%**, is "AI solutions that are almost right, but not quite."                       |
+| [METR randomized controlled trial](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), July 2025 | 16 experienced open-source developers, 246 real tasks, in their own mature repositories (22k+ stars, 1M+ lines) | Developers were **19% slower** with AI tools. They believed they had been 20% faster.                                                                                                                                   |
+| [GitClear Maintainability Gap](https://www.gitclear.com/the_ai_code_quality_maintainability_gap), 2026                  | Analysis of hundreds of millions of changed lines                                                               | Block duplication rose from 40.3 to **73.0 per million changed lines**, the highest on record. Copy-pasted code went from 9.4% of new code in 2022 to 15.7% in early 2026, while refactored code fell from 21% to 3.8%. |
+| [Google DORA report](https://dora.dev/), 2024                                                                           | Industry-wide DevOps research                                                                                   | A 25% increase in AI adoption correlated with a **7.2% decrease in delivery stability**.                                                                                                                                |
+
+Read those four rows again as a sequence rather than as four separate complaints, because they describe one causal chain.
+
+The METR result is the one people find hardest to believe, and it is the most instructive. Those were not junior developers on unfamiliar code. They averaged five years of experience on the specific repositories involved. They were slower anyway, and they could not feel it. A 39-point gap between perceived and actual productivity is not a skill problem. It is a **feedback problem**. Something in the loop was telling them things were going well when they were not.
+
+### The three failure modes
+
+Each study is measuring a different symptom of the same missing signal. Naming them makes them easier to hunt.
+
+**Plausible drift.** The agent produces code that reads correctly, uses your naming conventions, and does the wrong thing. This is the "almost right" category that 45% of developers named as their top frustration. It survives because nothing in the repository disagrees with it. Reviewing it costs more than writing the change would have, because a wrong answer that looks right is harder to reject than a wrong answer that looks wrong.
+
+**Silent duplication.** The agent needs a helper, cannot find the one you already have, and writes a second one. Multiply by every feature and you get GitClear's 81% rise in duplicated blocks over 2023. Duplicated blocks are not a style complaint: research associates cloned code with **15% to 50% more defects**. The agent did not choose to duplicate. It could not observe that the original existed.
+
+**Confident regression.** A change passes whatever checks exist, merges, and breaks something no check covered. That is DORA's 7.2% stability decline expressed as one incident. Output rose, the gate did not move, so more untested change reached production per unit of time.
+
+All three have the same root. The agent could not be told "no" fast enough, or at all.
+
+## Time to No: the metric that predicts agent output quality
+
+**Time to No is how long your repository takes to tell an AI coding agent that its change is wrong.** Measure it from the moment the agent stops writing to the moment an automated signal contradicts it. A repository with strict types, a coverage gate and one verification command answers in seconds. A repository without them answers at code review, or in production, or never.
+
+Time to No matters because of how an agent's loop is structured. The agent proposes, observes, and corrects. Correction is only possible against observations it can reach **inside its own run**. Anything slower than that is not feedback for the agent. It is cleanup for you.
+
+Here is the ladder, with the signals ordered by how fast they arrive.
+
+| Signal                             | What it catches                        | Typical Time to No      | Reaches the agent? |
+| ---------------------------------- | -------------------------------------- | ----------------------- | :----------------: |
+| Editor language server             | Wrong shape, missing field, bad import | Under 1 second          |        Yes         |
+| `tsc --strict`                     | Type breaks across the project         | 5 to 30 seconds         |        Yes         |
+| Linter and formatter               | Convention drift, unsafe patterns      | 5 to 20 seconds         |        Yes         |
+| Unit and integration tests         | Wrong behaviour on a covered path      | 30 seconds to 3 minutes |        Yes         |
+| Coverage threshold                 | Behaviour added with no test at all    | Same run                |        Yes         |
+| End-to-end tests in a real browser | Broken flow across layers              | 2 to 10 minutes         |      Usually       |
+| CI on the pull request             | All of the above, on a clean machine   | 5 to 15 minutes         |         No         |
+| Human code review                  | Intent, design, judgement              | Hours to days           |         No         |
+| Production                         | Everything nobody checked              | Days to never           |         No         |
+
+The line between "usually" and "no" is the important one. **The agent only learns from the rows it can reach inside its own loop.** Everything below that line is feedback for you, not for it, and every hour of it is an hour you are paying to review output that a machine could have rejected for free.
+
+This reframes the entire tooling question. Switching from one frontier agent to another changes how good the proposals are. Lowering your Time to No changes how many wrong proposals ever reach you. The second lever is larger, it compounds, and it does not reset when a new model ships next month.
+
+<Callout type="warn" title="The uncomfortable implication">
+
+A more capable agent in a repository with a high Time to No produces worse outcomes than a less capable agent in a repository with a low one. It writes more code, faster, with the same proportion of wrong answers, and every one of them arrives at your review queue instead of dying in the loop.
+
+</Callout>
+
+### How to measure your own Time to No
+
+You do not need instrumentation. You need one deliberately broken change.
+
+<Steps>
+
+<Step>
+
+**Pick a real invariant.** Something your product genuinely depends on: a webhook that must not charge twice, a permission check on an admin route, a currency conversion.
+
+</Step>
+
+<Step>
+
+**Break it in the smallest possible way.** Invert one boolean. Drop one `await`. Change one comparison operator. Do not break the syntax, because syntax errors are caught by everything and prove nothing.
+
+</Step>
+
+<Step>
+
+**Start a stopwatch and run your verification command.** Whatever an agent would run. If you do not have a single command an agent could run, your Time to No is already "human review" and you can stop the exercise here.
+
+</Step>
+
+<Step>
+
+**Record when something fails, and what.** Not when you notice. When the machine objects, with a message specific enough that an agent could act on it.
+
+</Step>
+
+<Step>
+
+**Repeat for four or five invariants across different layers.** Auth, billing, data access, i18n, the admin. The slowest one is your real Time to No, because that is the layer where agents will do the most damage.
+
+</Step>
+
+</Steps>
+
+Most teams who run this honestly find at least one layer where the answer is "nothing failed." That layer is where your agent has been writing fiction.
+
+## The Agent-Ready Repository Scorecard
+
+Ten checks, scored 0, 1 or 2, for a maximum of 20. Score your own repository. It takes about fifteen minutes and the result is more useful than any benchmark comparison, because it is about the codebase you actually work in.
+
+### Context: can the agent find the truth?
+
+**1. An agent instruction file exists and is current.**
+
+`AGENTS.md` was formalized as an open specification in August 2025 with participation from OpenAI, Google, Cursor and Factory, donated to the Linux Foundation's Agentic AI Foundation in December 2025, and now ships in more than 60,000 public repositories, read by over 30 agents.
+
+- **0**: No instruction file. Every agent starts from zero and infers your conventions from whatever files it happens to open.
+- **1**: A file exists, but it is prose the agent has to interpret, or it has drifted from reality.
+- **2**: It states the commands, the boundaries and the conventions in under 200 lines, and it cannot rot, because CI runs the same commands it names.
+
+**2. Types are contracts, not decoration.**
+
+- **0**: `any` is common. External data enters the system unvalidated.
+- **1**: Strict TypeScript, but boundaries (HTTP bodies, environment variables, webhook payloads, database rows) are trusted rather than parsed.
+- **2**: Strict TypeScript with no `any`, plus schema validation at every external boundary. A wrong shape fails at the edge, in under a second, with a message naming the field.
+
+**3. There is exactly one canonical example of each pattern.**
+
+Agents work by nearest-neighbour imitation. They copy the closest thing they can find. If your repository contains three ways to fetch data, the agent will pick one at random and you have a one-in-three chance of the one you wanted.
+
+- **0**: Multiple competing patterns for the same job, all in active use.
+- **1**: A documented preference that nothing enforces.
+- **2**: One implemented example per pattern, so the nearest neighbour is always the right neighbour.
+
+### Verification: can the repository say no?
+
+**4. One command runs everything.**
+
+- **0**: A README paragraph describing steps in a specific order.
+- **1**: Several scripts, and you have to know which to run when.
+- **2**: A single command that type-checks, lints, tests and reports, exiting 0 or 1. An agent can run it without being told how.
+
+**5. Coverage is a gate, not a report.**
+
+- **0**: No coverage measurement.
+- **1**: Coverage is measured and displayed on a badge nobody blocks a merge over.
+- **2**: A threshold that fails the build. New behaviour without a test cannot merge, which means the agent cannot add untested behaviour even if it wants to.
+
+**6. Critical paths run in a real browser.**
+
+- **0**: No end-to-end tests.
+- **1**: jsdom or mocked environments only, which pass while the real thing is broken.
+- **2**: Real browser engines exercising sign-up, checkout and the webhook path.
+
+**7. The type check is zero-tolerance.**
+
+- **0**: Type errors are normal background noise.
+- **1**: Errors are tracked in a backlog.
+- **2**: One error exits non-zero and blocks the merge. Agents respond to binary signals; a count that "went up a bit" is not a signal.
+
+### Boundaries: can the agent stay inside them?
+
+**8. Architectural rules are enforced by tooling.**
+
+- **0**: Conventions live in a senior engineer's head.
+- **1**: Written down in a wiki, enforced by review.
+- **2**: An import-boundary rule fails the build when a layer reaches somewhere it should not. The agent learns your architecture by hitting the wall, in seconds, not by reading about it.
+
+**9. Dangerous surfaces are explicitly off-limits.**
+
+- **0**: Nothing is marked. Migrations, secrets and billing logic are as editable as a button component.
+- **1**: Informal warnings that a fresh agent session has never seen.
+- **2**: Migrations, secrets, billing webhooks and infrastructure named in the instruction file as human-review-only, and protected by CI rather than by hope.
+
+### Reviewability: can a human audit it afterwards?
+
+**10. Every quality claim maps to a command.**
+
+- **0**: Quality claims live in the README as adjectives.
+- **1**: Some claims can be verified if you know where to look.
+- **2**: Every claim maps to a command that regenerates the evidence. This is what makes an agent's work auditable at all: you are not checking whether it was careful, you are checking whether the evidence still generates.
+
+### Scoring
+
+<Cards>
+  <Card title="17 to 20 — Agent-ready">
+    The loop closes without you. Wrong changes die inside the agent's run, agents act as a throughput multiplier, and review stays about
+    intent rather than correctness.
+  </Card>
+  <Card title="11 to 16 — Agent-tolerant">
+    Agents help on well-covered paths and drift everywhere else. Review load rises in proportion to output, which cancels most of the gain.
+  </Card>
+  <Card title="0 to 10 — Agent-hostile">
+    The agent will feel fast and be wrong, and you will find out late. This is where the METR result lives.
+  </Card>
+</Cards>
+
+If you scored under 11, the highest-return work available to you this quarter is not evaluating agents. It is checks 4, 5 and 7, which are the three cheapest ways to buy back thousands of seconds of Time to No.
+
+## How the 2026 agent landscape actually compares
+
+Adoption first, because it is the one number here with a solid source. A JetBrains AI Pulse survey of more than 10,000 developers in January 2026 found **74% had adopted a specialized AI development tool**. GitHub Copilot led on workplace adoption at 29%, with Cursor and Claude Code tied at 18% each.
+
+Note what that distribution implies: no tool holds a majority, most teams run two or three, and the gap between first and third is smaller than the gap between a good repository and a bad one.
+
+<Callout type="info" title="Why there is no leaderboard in this article">
+
+We are not publishing benchmark rankings, and the reason is not diplomacy.
+
+Frontier scores on SWE-bench Verified and Terminal-Bench have changed hands repeatedly this year, sometimes within the same month. Any table of scores published today is a table of scores that was true once. Worse, the number is nearly useless for your decision: benchmark tasks come with a verifier attached, which is the exact thing most production repositories are missing. A benchmark measures an agent working in ideal conditions you have not reproduced.
+
+The two things that are stable enough to plan around are the **harness** (how the tool assembles context, where it runs, how it asks permission) and **your repository**. Those are what this section compares.
+
+</Callout>
+
+### Terminal-native agents
+
+**Examples: Claude Code, OpenAI Codex CLI, OpenCode, Aider.**
+
+These run as a process in your shell, with your shell's permissions. Context assembly is active rather than ambient: the agent runs `grep`, opens files, executes your test command, and reads what comes back. Because they live where your tooling lives, they close the verification loop most directly. If you have a one-command verify, a terminal agent will use it without being asked twice.
+
+- **Best for:** teams whose engineering culture already lives in the terminal, long multi-file changes, work where running the test suite is the main feedback signal.
+- **Costs you:** no visual diff review by default, so review discipline has to come from you or from CI. Permission models vary a lot, and a permissive configuration in a repository without boundaries is exactly the combination that produces confident regressions.
+- **Notable:** open-source options in this group (OpenCode, Aider) give you model and provider choice, which matters if you have data residency constraints or want to control cost per token directly.
+
+### IDE-native agents
+
+**Examples: Cursor, GitHub Copilot, Windsurf, Cline, JetBrains Junie.**
+
+These live inside the editor and inherit its context: open files, cursor position, the language server, the project index. The language server is the underrated part. It gives them the fastest signal on the entire Time to No ladder, sub-second type feedback, without running anything.
+
+- **Best for:** inline pair-programming flow, incremental work in a file you are already reading, teams standardized on one editor.
+- **Costs you:** the editor's context window is not your repository's architecture. These agents see what is open, which makes silent duplication more likely in a large codebase unless your patterns are canonical (scorecard check 3).
+- **Notable:** Copilot's adoption lead is an enterprise procurement fact more than a capability fact. Judge it on your own repository, not on market share.
+
+### Delegated and asynchronous agents
+
+**Examples: Devin, Google Jules, cloud task runners including hosted Codex.**
+
+You hand over an issue and get back a pull request. There is no interactive loop, which means these agents are the most sensitive of all three groups to repository quality. They have exactly one shot at understanding your conventions, and the only correction signal available to them is whatever your CI says.
+
+- **Best for:** well-specified, bounded, repetitive work in a repository that scores high on the scorecard. Dependency bumps, test backfill, mechanical migrations across many files.
+- **Costs you:** everything, if your score is low. A delegated agent in an agent-hostile repository is a machine for generating plausible pull requests that a human has to fully re-derive.
+- **Rule of thumb:** do not delegate asynchronously until you score 17 or above. The whole model depends on CI being able to say no on your behalf.
+
+### The axes that matter
+
+| Axis                      | Why it decides your outcome                                                    |
+| ------------------------- | ------------------------------------------------------------------------------ |
+| Where it runs             | Determines which verification signals it can reach without help                |
+| Context assembly          | Active search finds your existing helper; ambient context often does not       |
+| Approval model            | Sets how much wrong work reaches you before something objects                  |
+| Model and provider choice | Matters for cost control, data residency and avoiding single-vendor risk       |
+| Instruction file support  | `AGENTS.md` support means one file governs every tool your team uses           |
+| Cost structure            | Per-seat, per-token and per-task pricing reward completely different workflows |
+
+### Which agent should you choose?
+
+| If your situation is                          | Start with                          | Because                                                                                                               |
+| --------------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Terminal-first team, large multi-file changes | A terminal-native agent             | It reaches your verify command directly and iterates against it                                                       |
+| Editor-first team, incremental work           | An IDE-native agent                 | Sub-second language-server feedback is the cheapest Time to No available                                              |
+| You need model choice or cost control         | An open-source agent                | Provider routing is a first-class feature rather than a roadmap item                                                  |
+| Bounded, repetitive work at scale             | A delegated agent, if you score 17+ | CI has to be able to reject on your behalf                                                                            |
+| You scored under 11 on the scorecard          | None of them, yet                   | Spend the quarter on checks 4, 5 and 7 instead. The return is larger and it applies to every agent you try afterwards |
+
+That last row is the honest answer for a large share of teams, and it is the one no tool vendor has an incentive to give you.
+
+## Instruction files: what belongs in AGENTS.md
+
+`AGENTS.md` is a plain markdown file at your repository root that tells any coding agent how to work in your codebase. More than 30 agents read it natively, including Claude Code, Codex, Cursor, Copilot, Aider, Windsurf, Devin, Zed and Gemini CLI, which makes it the one file worth maintaining carefully.
+
+| File                              | Read by           | Use it for                                                                   |
+| --------------------------------- | ----------------- | ---------------------------------------------------------------------------- |
+| `AGENTS.md`                       | Most major agents | The single source of truth: commands, boundaries, conventions                |
+| `CLAUDE.md`                       | Claude Code       | Only what is genuinely Claude-specific. Point it at `AGENTS.md` for the rest |
+| `.cursor/rules/`                  | Cursor            | Editor-scoped rules, path-specific overrides                                 |
+| `.github/copilot-instructions.md` | GitHub Copilot    | Copilot-specific phrasing where it differs                                   |
+
+The failure mode here is duplication. Four files describing the same conventions will disagree within a month, and a disagreeing instruction file is worse than none, because the agent follows the wrong one confidently. Keep one file real, and make the others point at it.
+
+### What actually belongs in it
+
+Write down the things an agent cannot infer by reading code, and nothing else.
+
+**Include:** the verification command, the definition of done, architectural boundaries and which direction dependencies flow, the surfaces that require human review, the one canonical example to copy for each common task.
+
+**Leave out:** anything the type system already states, restatements of your framework's documentation, aspirational conventions the codebase does not follow, and long prose. An instruction file that is not true is a liability.
+
+```markdown
+# AGENTS.md
+
+## Verify before you claim done
+
+Run `bun run verify`. It type-checks, lints, tests and enforces
+100% coverage. Exit code 0 means done. Nothing else does.
+
+## Architecture
+
+Dependencies flow one way: presentation -> application -> domain.
+The domain layer imports nothing from the other two. This is
+enforced by an import boundary rule, so a violation fails the build.
+
+## Conventions
+
+- Strict TypeScript. No `any`, no non-null assertions.
+- Validate every external boundary with a Zod schema: HTTP bodies,
+  environment variables, webhook payloads.
+- New behaviour needs a test in the same commit. The coverage
+  gate will reject it otherwise.
+- Copy the nearest existing module. There is exactly one example
+  of each pattern and it is the correct one.
+
+## Human review required (do not edit without asking)
+
+- `drizzle/migrations/**` (destructive and irreversible)
+- Stripe webhook handlers (must stay idempotent)
+- Anything reading a secret or environment variable
+- CI workflow files
+
+## Useful commands
+
+bun run dev # local dev server
+bun run verify # the only gate that matters
+bun run test:coverage # regenerates the coverage report
+bun run check:i18n # fails on a missing translation key
+```
+
+Roughly forty lines. Every statement in it is either enforced by a command or is a boundary a human has to hold. Nothing in it can quietly become false without a build failing.
+
+## The workflow that ships
+
+<Steps>
+
+<Step>
+
+**Plan before it writes.** Ask for the approach and the files it intends to touch, and read that before approving any edit. A wrong plan costs one message to fix. A wrong implementation costs a review cycle. Most agents now support an explicit planning mode; use it for anything above a one-file change.
+
+</Step>
+
+<Step>
+
+**Constrain the blast radius.** One module, one feature, one pull request. Agents are good at the change you asked for and indifferent to the ninety files they touched on the way. A small diff is not a stylistic preference here, it is the only way a human can still audit the output at agent speed.
+
+</Step>
+
+<Step>
+
+**Make it verify, not claim.** "Done" is exit code 0 from your verify command, run by the agent, with the output visible to you. Never accept a summary as evidence. The METR finding is precisely what it feels like when you accept confident summaries: everything reads like progress.
+
+</Step>
+
+<Step>
+
+**Review intent, not syntax.** The type checker, linter and test suite already reviewed the syntax. Your review should ask three questions instead. Does this solve the actual problem? Did it duplicate something that already exists? What did it decide not to test?
+
+</Step>
+
+</Steps>
+
+That third question is the one that catches the most. Ask an agent what it chose not to cover and it will usually tell you, accurately, and that answer is where your next incident lives.
+
+## What a high Time to No costs, in money
+
+Take a modest team shipping ten agent-assisted changes a week. Suppose one in six carries a defect that no automated check catches, which is conservative against GitClear's finding that cloned code alone associates with 15% to 50% more defects.
+
+That is roughly 1.7 defects a week reaching human review or production. At an $80 hourly rate, a defect caught in review costs perhaps an hour between the reviewer and the author. A defect that reaches production costs a debugging session, a fix, a deploy and the interruption of whatever else was happening, which is rarely under four hours.
+
+Weight it at three hours average and you are spending about **$400 a week, or $20,000 a year**, on defects that a coverage gate and a strict type check would have rejected in ninety seconds, for free, before a human ever saw them.
+
+The point is not the precision of that number. Substitute your own rate and your own defect ratio; the shape does not change. The cost of a high Time to No is continuous, it scales with agent output rather than against it, and it is invisible in every dashboard you currently look at, because it shows up as normal engineering work.
+
+This is why "which agent" is the wrong opening question. A better agent increases the numerator.
+
+## Where SaaSyLand fits
+
+We build a production SaaS codebase and sell it, and we run agents against it every day, which is the entire reason this article exists. So it is only fair to score it on our own scorecard, and to show you the command that proves each answer rather than asking you to take the number on trust.
+
+| Check                      | Score | Verify it yourself                                                                     |
+| -------------------------- | :---: | -------------------------------------------------------------------------------------- |
+| 1. Instruction file        |   2   | `AGENTS.md` at the root, plus per-area files, all naming commands CI runs              |
+| 2. Types as contracts      |   2   | `tsc --strict`, zero `any`, Zod at every boundary                                      |
+| 3. One canonical example   |   2   | One module shape, documented in the architecture docs                                  |
+| 4. One command             |   2   | `bun run verify`                                                                       |
+| 5. Coverage as a gate      |   2   | 100% statements, branches, functions and lines, enforced in `.github/workflows/ci.yml` |
+| 6. Real browsers           |   2   | 5 Playwright suites on Chromium and WebKit                                             |
+| 7. Zero-tolerance types    |   2   | `tsc --strict` blocks the merge on one error                                           |
+| 8. Enforced boundaries     |   2   | Layer rules fail the build, not the review                                             |
+| 9. Protected surfaces      |   2   | Migrations, secrets and webhooks marked human-review-only                              |
+| 10. Claims map to commands |   2   | Every number on our pricing page names the file that generates it                      |
+
+Twenty out of twenty is not a boast, it is a description of what the product is. A codebase with 140 test files, 5 Playwright suites and a coverage gate that fails the build is a codebase that can tell an agent it is wrong in about ninety seconds, on every one of the paths that matter. You can point any agent in this article at it and the loop closes without you.
+
+That is also why we do not publish testimonials. There is nothing to verify in a quote. The documentation is public, the coverage report is generated by the repository you would be buying, and the CI workflow that enforces it is in that repository. Check the evidence before you pay for it.
+
+**Who this is not for.** If you want something free to learn on, clone a template and enjoy it. If you are happy for a hosted vendor to run your auth and bill you per monthly active user, buy that instead. This is for people who intend to still own the margins at fifty thousand users, and who would rather their agent hit a wall in ninety seconds than in production.
+
+<Callout title="Start here">
+
+Read [the documentation](/docs) and the architecture section first. Then [see what it costs](/#pricing). One payment, from $249, lifetime core updates, no per-user fees.
+
+</Callout>
+
+## Frequently asked questions
+
+<Accordions>
+
+<Accordion title="Which AI coding agent is best in 2026?">
+
+There is no single best agent, and the honest answer is that the question is less important than it sounds. As of January 2026, GitHub Copilot led workplace adoption at 29%, with Cursor and Claude Code tied at 18%. Choose by harness fit: terminal-native for multi-file work, IDE-native for incremental work, delegated only if your repository scores 17 or above on the scorecard above.
+
+</Accordion>
+
+<Accordion title="Do AI coding agents actually make developers faster?">
+
+Not reliably, and not in the conditions most teams work in. METR's randomized controlled trial found 16 experienced developers were 19% slower on real tasks in their own mature repositories, while believing they were 20% faster. Speed appears when the repository can reject wrong changes automatically. Without that, output rises and throughput does not.
+
+</Accordion>
+
+<Accordion title="Why does my AI coding agent keep producing code that is almost right?">
+
+Because nothing in your repository contradicts it. An agent optimizes for what it can observe, and if the only available signal is "this looks like the surrounding code," it will produce code that looks like the surrounding code and does the wrong thing. This is the top frustration for 45% of developers surveyed. Lower your Time to No and the category shrinks.
+
+</Accordion>
+
+<Accordion title="What is AGENTS.md and do I need one?">
+
+`AGENTS.md` is a markdown file at your repository root that tells coding agents your commands, boundaries and conventions. It was formalized as an open specification in August 2025, donated to the Linux Foundation's Agentic AI Foundation in December 2025, and now ships in over 60,000 public repositories, read by more than 30 agents. Yes, you need one, and it should be short enough to stay true.
+
+</Accordion>
+
+<Accordion title="Should I have an AGENTS.md and a CLAUDE.md?">
+
+Keep one file real and make the others point at it. Duplicated instruction files disagree within a month, and an agent following a stale file follows it confidently. Put everything in `AGENTS.md`, and use tool-specific files only for genuinely tool-specific behaviour.
+
+</Accordion>
+
+<Accordion title="Does 100% test coverage matter for AI-assisted development?">
+
+It matters more than it did before agents, for a reason unrelated to the usual debate. A coverage threshold that fails the build is a rule an agent cannot route around: it cannot add behaviour without adding a test. Coverage as a badge does nothing. Coverage as a gate converts a review burden into a build failure that costs nobody any time.
+
+</Accordion>
+
+<Accordion title="Can an AI agent just build my SaaS boilerplate for me?">
+
+It will, and the result will look right. What it will not tell you is which auth edge cases it skipped, which webhook is not idempotent, or that the i18n parity check it never wrote would have caught the missing translations. The output of an agent is only as trustworthy as the checks that reviewed it, and on an empty repository there are none.
+
+</Accordion>
+
+<Accordion title="Which agent handles large codebases best?">
+
+The question mostly resolves to context assembly rather than to the agent. Agents that actively search (running `grep`, opening files, following imports) find your existing helpers. Agents relying on ambient editor context find whatever is open. In a large repository the difference shows up as duplication, which is why check 3 on the scorecard, one canonical example per pattern, matters more as the codebase grows.
+
+</Accordion>
+
+<Accordion title="How do I stop an agent from touching migrations or secrets?">
+
+Name the paths in `AGENTS.md` as human-review-only, and back that with CI rather than with trust. Instruction files set intent; branch protection, required reviewers on those paths and a failing build enforce it. Any surface where a mistake is irreversible or expensive belongs in both places.
+
+</Accordion>
+
+<Accordion title="Is it worth switching agents to get better results?">
+
+Switching gives you a one-time change in proposal quality that resets whenever the next model ships. Lowering your Time to No changes how many wrong proposals reach you at all, applies to every agent you use, and compounds. Do the second first. Then switch agents as often as you like, because at that point the cost of being wrong about the choice is low.
+
+</Accordion>
+
+</Accordions>
+
+### Sources
+
+- [Stack Overflow Developer Survey 2025: AI section](https://survey.stackoverflow.co/2025/ai)
+- [METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity" (July 2025)](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)
+- [GitClear, "The Maintainability Gap: 2026 AI Code Quality Research"](https://www.gitclear.com/the_ai_code_quality_maintainability_gap)
+- [Google DORA, State of DevOps research](https://dora.dev/)
+- [AGENTS.md open specification](https://agents.md/)
+
+_Written by Piotr J. Borowiecki, who builds SaaSyLand. Every claim about our own codebase in this article maps to a command in the repository, listed in the scorecard table above._

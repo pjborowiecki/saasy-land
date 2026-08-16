@@ -8,6 +8,8 @@ import { Reveal } from "~/src/app/[locale]/(landing)/_components/reveal"
 const DETAIL_DELAY_MS = 100
 const TERMS_DELAY_MS = 200
 
+const BADGES = ["projects", "license", "fees"] as const
+
 /**
  * The close.
  *
@@ -57,6 +59,19 @@ export async function GateSection(): Promise<JSX.Element> {
             <span className="text-price text-foreground tabular-nums">{t("price")}</span>
             <span className="font-mono text-spec text-muted-foreground">{t("terms")}</span>
           </p>
+          {/* The three terms a buyer at this price is actually asking about, and the two the line
+              above has no room for. Dots rather than a list, because three short nouns stacked
+              read as a feature table and this is a receipt. */}
+          <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 font-mono text-label text-muted-foreground/70 uppercase">
+            {BADGES.map((badge) => (
+              <li
+                className="flex items-center gap-2.5 before:text-muted-foreground/30 before:content-['·'] first:before:hidden"
+                key={badge}
+              >
+                {t(`badges.${badge}`)}
+              </li>
+            ))}
+          </ul>
           <p className="mx-auto mt-5 max-w-lg text-body-sm text-pretty text-muted-foreground">{t("assurance")}</p>
         </Reveal>
       </div>

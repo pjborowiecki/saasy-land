@@ -17,3 +17,5 @@ export const blogSource = loader({
   i18n,
   source: toFumadocsSource(blog, []),
 })
+
+export type BlogPost = ReturnType<typeof blogSource.getPages>[number]
