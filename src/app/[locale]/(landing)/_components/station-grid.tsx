@@ -121,7 +121,7 @@ export function StationCell({ body, id, loop, offsetSeconds, spec, title }: Stat
   return (
     <div className={cn("relative bg-background", isLit && "z-10")} onMouseEnter={handleEnter}>
       <AnimatePresence>
-        {isLit ? (
+        {isLit && (
           <m.div
             animate={SHOWN}
             aria-hidden
@@ -132,7 +132,7 @@ export function StationCell({ body, id, loop, offsetSeconds, spec, title }: Stat
             layoutId={HIGHLIGHT_ID}
             transition={PRESS}
           />
-        ) : undefined}
+        )}
       </AnimatePresence>
 
       <div className="relative flex h-full flex-col p-7 md:p-10">

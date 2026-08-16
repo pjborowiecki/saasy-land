@@ -35,12 +35,16 @@ test.describe("instant navigation", () => {
    * to `#pricing`: the page deliberately routes every visitor through the tiers rather than
    * dropping them straight into sign-up. The three tier buttons are the page's only real
    * commercial exit, so they are the client navigation worth asserting is instant.
+   *
+   * Matched by destination rather than by label. This test is about routing, and pinning it to
+   * the button's wording meant a copy edit in the message catalogue failed CI for a reason that
+   * had nothing to do with navigation, which is exactly what happened when the tiers were renamed.
    */
   test("landing to sign-up is instant on a client navigation", async ({ page }) => {
     await page.goto("/")
 
     await instant(page, async () => {
-      await page.locator("#pricing").getByRole("link", { name: /get the codebase/iu }).click()
+      await page.locator('#pricing a[href^="/auth/sign-up"]').first().click()
       await page.waitForURL((url) => url.pathname.endsWith("/auth/sign-up"))
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
     })

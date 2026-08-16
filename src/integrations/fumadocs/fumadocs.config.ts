@@ -8,14 +8,19 @@ export const docs = defineDocs({
 
 const blogDateSchema = z.union([z.string(), z.date()])
 
+const blogFaqSchema = z.array(z.object({ answer: z.string(), question: z.string() }))
+
 const blogSchema = pageSchema.extend({
   authorImage: z.string().optional(),
   authorName: z.string(),
   date: blogDateSchema,
   excerpt: z.string().optional(),
+  faq: blogFaqSchema.optional(),
+  featured: z.boolean().optional(),
   image: z.string().optional(),
   published: z.boolean().default(true),
   tags: z.array(z.string()).optional(),
+  updated: blogDateSchema.optional(),
 })
 
 export const blog = defineCollections({

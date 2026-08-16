@@ -179,7 +179,7 @@
   --text-display-hero: clamp(2.75rem, 5.8vw, 4.5rem);
   --text-display-hero--font-weight: 600;
   --text-display-hero--letter-spacing: -0.038em;
-  --text-display-hero--line-height: 1.02;
+  --text-display-hero--line-height: 1.14;
 
   --text-display-gate: clamp(2.25rem, 4.6vw, 3.5rem);
   --text-display-gate--font-weight: 600;
@@ -322,6 +322,27 @@
   --typeset-size: 15px;
   --typeset-leading: 1.75;
   --typeset-flow: 1.5em;
+}
+
+.typeset-article {
+  --typeset-font-body: var(--font-sans);
+  --typeset-font-heading: var(--font-heading);
+  --typeset-font-mono: var(--font-mono);
+  --typeset-size: 18px;
+  --typeset-leading: 1.72;
+  --typeset-flow: 1.4em;
+}
+
+.typeset-article :where(h2) {
+  font-size: 1.6em;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
+}
+
+.typeset-article :where(h3) {
+  font-size: 1.22em;
+  letter-spacing: -0.014em;
+  line-height: 1.35;
 }
 
 /*

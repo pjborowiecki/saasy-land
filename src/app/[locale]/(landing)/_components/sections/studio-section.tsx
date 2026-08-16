@@ -76,6 +76,19 @@ interface LessonRowProps {
  * same fact as a padlock and a paywall message, told as an inclusion rather than an exclusion,
  * which is the difference between a page that sells and a page that nags.
  */
+/** Play or lock. Two different glyphs carrying two different meanings, so two returns. */
+function LessonMarker({ isPreview, lockedLabel }: Readonly<{ isPreview: boolean; lockedLabel: string }>): JSX.Element {
+  if (isPreview) {
+    return <Play aria-hidden className="size-3 shrink-0 translate-y-0.5 fill-current text-ring" strokeWidth={0} />
+  }
+
+  return (
+    <Lock aria-hidden className="size-3 shrink-0 translate-y-0.5 text-muted-foreground/45" strokeWidth={2.25}>
+      <title>{lockedLabel}</title>
+    </Lock>
+  )
+}
+
 function LessonRow({ index, isPreview, lockedLabel, title }: LessonRowProps): JSX.Element {
   return (
     <li className="flex items-baseline gap-4 border-b border-border py-3.5 last:border-b-0">
@@ -85,13 +98,7 @@ function LessonRow({ index, isPreview, lockedLabel, title }: LessonRowProps): JS
       <span className={cn("min-w-0 flex-1 text-body-sm text-pretty", isPreview ? "text-foreground" : "text-muted-foreground")}>
         {title}
       </span>
-      {isPreview ? (
-        <Play aria-hidden className="size-3 shrink-0 translate-y-0.5 fill-current text-ring" strokeWidth={0} />
-      ) : (
-        <Lock aria-hidden className="size-3 shrink-0 translate-y-0.5 text-muted-foreground/45" strokeWidth={2.25}>
-          <title>{lockedLabel}</title>
-        </Lock>
-      )}
+      <LessonMarker isPreview={isPreview} lockedLabel={lockedLabel} />
     </li>
   )
 }
@@ -178,7 +185,7 @@ export async function StudioSection(): Promise<JSX.Element> {
   const t = await getTranslations("pages.landing.studio")
 
   return (
-    <section className="relative border-t border-border" id="studio">
+    <section className="relative border-t border-border" id="toolkit">
       <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10 md:py-32">
         <Reveal variant="heading">
           <h2 className="max-w-[18ch] text-headline-peak text-balance text-foreground">{t("title")}</h2>

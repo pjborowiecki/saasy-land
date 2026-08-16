@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { notFound } from "next/navigation"
 import { locale as rootLocale } from "next/root-params"
-import { Suspense, type JSX } from "react"
+import type { JSX } from "react"
 
 import { hasLocale } from "next-intl"
 import { getMessages } from "next-intl/server"
@@ -48,9 +48,6 @@ export function generateStaticParams(): { locale: Locale }[] {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-/** The page's own ground, so the shell paints the right colour before anything streams in. */
-const ROOT_SHELL_FALLBACK = <div className="min-h-svh bg-background" />
-
 export default async function RootLayout({ children }: Readonly<LayoutProps<"/[locale]">>): Promise<JSX.Element> {
   const locale = await rootLocale()
 
@@ -70,18 +67,16 @@ export default async function RootLayout({ children }: Readonly<LayoutProps<"/[l
     >
       <body suppressHydrationWarning className="flex min-h-full flex-col">
         <TranslationsProvider locale={locale} messages={messages}>
-          <Suspense fallback={ROOT_SHELL_FALLBACK}>
-            <AppRouterProvider>
-              <ThemeProvider>
-                <TooltipProvider>
-                  <OfflineBanner />
-                  {children}
-                  <Toaster />
-                  <VercelObservability />
-                </TooltipProvider>
-              </ThemeProvider>
-            </AppRouterProvider>
-          </Suspense>
+          <AppRouterProvider>
+            <ThemeProvider>
+              <TooltipProvider>
+                <OfflineBanner />
+                {children}
+                <Toaster />
+                <VercelObservability />
+              </TooltipProvider>
+            </ThemeProvider>
+          </AppRouterProvider>
         </TranslationsProvider>
       </body>
     </html>

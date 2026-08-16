@@ -53,6 +53,29 @@ interface HighlightGroupProps {
  * Hover state lives in the group rather than the cells because no cell can know it should give
  * the mark up unless something above it knows where the mark went.
  */
+/**
+ * The pointer surface under a group.
+ *
+ * A description list carries the `list` role, and jsx-a11y rightly refuses mouse handlers on a
+ * non-interactive role, so a `dl` group gets a roleless wrapper to listen on and keeps every grid,
+ * divide and negative margin on the list itself. Anything else listens on its own box.
+ */
+function HighlightSurface({ children, className, element, onMouseLeave }: HighlightSurfaceProps): JSX.Element {
+  if (element === "dl") {
+    return (
+      <div onMouseLeave={onMouseLeave}>
+        <dl className={className}>{children}</dl>
+      </div>
+    )
+  }
+
+  return (
+    <div className={className} onMouseLeave={onMouseLeave}>
+      {children}
+    </div>
+  )
+}
+
 export function HighlightGroup({ children, className, element = "div", name }: HighlightGroupProps): JSX.Element {
   const [hovered, setHovered] = useState<string>()
   const select = useCallback((id?: string): void => {
@@ -65,24 +88,18 @@ export function HighlightGroup({ children, className, element = "div", name }: H
 
   return (
     <HighlightContext value={state}>
-      {/*
-       * The pointer handler sits on a plain wrapper, never on the `dl`.
-       *
-       * A description list carries the `list` role, and jsx-a11y rightly refuses mouse handlers on
-       * non-interactive roles. The wrapper is roleless and layout-neutral — every grid, divide and
-       * negative margin stays on the list itself — so the semantics and the geometry both survive.
-       */}
-      {element === "dl" ? (
-        <div onMouseLeave={clear}>
-          <dl className={className}>{children}</dl>
-        </div>
-      ) : (
-        <div className={className} onMouseLeave={clear}>
-          {children}
-        </div>
-      )}
+      <HighlightSurface className={className} element={element} onMouseLeave={clear}>
+        {children}
+      </HighlightSurface>
     </HighlightContext>
   )
+}
+
+interface HighlightSurfaceProps {
+  readonly children: ReactNode
+  readonly className?: string | undefined
+  readonly element: "div" | "dl"
+  readonly onMouseLeave: () => void
 }
 
 interface HighlightItemProps {
@@ -120,7 +137,7 @@ export function HighlightItem({ children, className, contentClassName, id }: Hig
   return (
     <div className={cn("relative", isLit && "z-10", className)} onMouseEnter={handleEnter}>
       <AnimatePresence>
-        {isLit ? (
+        {isLit && (
           <m.div
             animate={SHOWN}
             aria-hidden
@@ -131,7 +148,7 @@ export function HighlightItem({ children, className, contentClassName, id }: Hig
             layoutId={name}
             transition={PRESS}
           />
-        ) : undefined}
+        )}
       </AnimatePresence>
       <div className={cn("relative", contentClassName)}>{children}</div>
     </div>

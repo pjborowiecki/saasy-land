@@ -30,6 +30,8 @@ interface MobileMenuProps {
   readonly openLabel: string
   readonly pricingLabel: string
   readonly qualityLabel: string
+  readonly signInHref: string
+  readonly signInLabel: string
   readonly studioLabel: string
 }
 
@@ -49,15 +51,17 @@ export function MobileMenu({
   openLabel,
   pricingLabel,
   qualityLabel,
+  signInHref,
+  signInLabel,
   studioLabel,
 }: MobileMenuProps): JSX.Element {
   const [isOpen, setIsOpen] = useState(false)
 
   const items = useMemo<readonly NavItem[]>(
     () => [
-      { hash: "line", label: lineLabel },
+      { hash: "foundation", label: lineLabel },
       { hash: "quality", label: qualityLabel },
-      { hash: "studio", label: studioLabel },
+      { hash: "toolkit", label: studioLabel },
       { hash: "pricing", label: pricingLabel },
       { hash: "faq", label: faqLabel },
     ],
@@ -102,7 +106,7 @@ export function MobileMenu({
       >
         {isOpen ? <X aria-hidden className="size-4.5" strokeWidth={1.5} /> : <Menu aria-hidden className="size-4.5" strokeWidth={1.5} />}
       </Button>
-      {isOpen ? (
+      {isOpen && (
         // Positioned against the header, not the viewport: the header carries `backdrop-blur`,
         // and a backdrop-filter makes an element the containing block for its fixed-position
         // descendants, so a `fixed inset-x-0 top-16 bottom-0` drawer would resolve against the
@@ -129,9 +133,16 @@ export function MobileMenu({
                 />
               </Link>
             </li>
+            {/* A phone has no room for a second bar action, so the drawer is the only place a
+                returning customer can reach their account. */}
+            <li>
+              <Link className={ROW_CLASSNAME} href={signInHref} onClick={close}>
+                {signInLabel}
+              </Link>
+            </li>
           </ul>
         </div>
-      ) : undefined}
+      )}
     </div>
   )
 }
