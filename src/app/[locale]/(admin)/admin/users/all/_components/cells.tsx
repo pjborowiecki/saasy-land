@@ -19,7 +19,7 @@ import type { DataTableFeatures } from "~/src/presentation/components/custom/dat
 
 import { EMPTY_STRING_LENGTH } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
 import { getStatusBadgeClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
-import { isUserRole, userListStatusColor } from "~/src/app/[locale]/(admin)/admin/users/all/_components/user-display"
+import { isUserRole, userListStatusColor } from "~/src/app/[locale]/(admin)/admin/users/all/_lib/user-display"
 import { initialsFromName } from "~/src/app/[locale]/(admin)/admin/users/all/_utils"
 
 /**

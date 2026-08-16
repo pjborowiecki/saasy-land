@@ -1,0 +1,16 @@
+{
+  "ariaLabel": "Główna",
+  "closeMenu": "Zamknij menu",
+  "getStarted": "Zacznij budować",
+  "items": {
+    "blog": "Blog",
+    "docs": "Dokumentacja",
+    "faq": "FAQ",
+    "foundation": "Fundament",
+    "pricing": "Cennik",
+    "quality": "Jakość",
+    "toolkit": "Narzędzia"
+  },
+  "openMenu": "Otwórz menu",
+  "signIn": "Zaloguj się"
+}

@@ -7,24 +7,13 @@ import { Badge } from "~/src/presentation/components/shadcn/badge"
 import { Button } from "~/src/presentation/components/shadcn/button"
 
 import { getBlogPostStatusDotClass } from "~/src/app/[locale]/(admin)/admin/_lib/status-colors"
-import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { getGridMetaTextClass, GridPostMeta, hasPostViews } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-helpers"
+import type { DummyPost } from "~/src/app/[locale]/(admin)/admin/blog/_lib/blog-post-data"
 
 interface BlogPostGridCardProps {
   readonly post: DummyPost
 }
 
-/**
- * No cover.
- *
- * The card used to open with a 16:9 block tinted by the post's category hue, so a grid of six
- * posts showed six large pastel rectangles in indigo, emerald, rose, blue, fuchsia and amber.
- * They were not images and they were not going to become images; they were coloured space where
- * a thumbnail would go, which is the most expensive kind of nothing on a page.
- *
- * Without it the card is what an editor actually scans: state, category, title, summary, who and
- * when. If real cover art arrives, it belongs exactly where the block was.
- */
 export async function BlogPostGridCard({ post }: BlogPostGridCardProps): Promise<JSX.Element> {
   const t = await getTranslations("pages.admin.blog")
 

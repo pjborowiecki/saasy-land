@@ -29,7 +29,7 @@ import {
   AUTH_PRIMARY_BUTTON_CLASS,
   AUTH_SECONDARY_BUTTON_CLASS,
 } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
-import { useTwoFactorRedirect } from "~/src/app/[locale]/(auth)/auth/two-factor/_components/use-two-factor-redirect"
+import { useTwoFactorRedirect } from "~/src/app/[locale]/(auth)/auth/two-factor/_lib/use-two-factor-redirect"
 
 /** A backup code is a code, so it is set in mono like the OTP it stands in for. */
 const BACKUP_CODE_INPUT_CLASS = "font-mono tracking-wider"

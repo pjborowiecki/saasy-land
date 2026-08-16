@@ -624,22 +624,6 @@
     }
   },
   "components": {
-    "navigation": {
-      "items": {
-        "blog": "Blog",
-        "docs": "Dokumentacja",
-        "faq": "FAQ",
-        "foundation": "Fundament",
-        "pricing": "Cennik",
-        "quality": "Jakość",
-        "toolkit": "Narzędzia"
-      },
-      "getStarted": "Zacznij budować",
-      "openMenu": "Otwórz menu",
-      "closeMenu": "Zamknij menu",
-      "ariaLabel": "Główna",
-      "signIn": "Zaloguj się"
-    },
     "footer": {
       "tagline": "Starter kit klasy produkcyjnej, który jest w pełni Twój.",
       "product": "Produkt",
@@ -648,13 +632,7 @@
       "rights": "Wszelkie prawa zastrzeżone.",
       "buildLog": {
         "title": "Dziennik budowy",
-        "body": "Jeden e-mail, gdy pojawia się nowy moduł albo zmienia się stos. Bez sekwencji marketingowych i bez odliczania do premiery.",
-        "label": "Adres e-mail",
-        "placeholder": "ty@firma.com",
-        "button": "Zapisz się",
-        "note": "Wypisujesz się jednym kliknięciem.",
-        "success": "Jesteś na liście.",
-        "error": "Nie udało się wysłać. Spróbuj ponownie albo napisz na hello@saasyland.com."
+        "body": "Sporadyczne notatki o tym, co tu powstaje, wysyłane wtedy, kiedy jest o czym pisać. Bez stałego harmonogramu i bez odliczania do premiery."
       },
       "links": {
         "blog": "Blog",

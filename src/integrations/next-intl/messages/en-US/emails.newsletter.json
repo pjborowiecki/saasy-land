@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "One click and you are in",
+    "preview": "Confirm the address and the build log is yours.",
+    "heading": "One click and you are in",
+    "body": "Someone entered this address on saasyland.com. Confirm it and you get the build log: what shipped, the decisions behind it, and the things that did not work. If you did not sign up, just delete this and we will not write again.",
+    "button": "Count me in",
+    "footer": "The link works once and expires in 24 hours. If anything looks off, write to us:"
+  },
+  "notification": {
+    "subject": "New newsletter subscriber",
+    "preview": "Someone confirmed a newsletter subscription.",
+    "heading": "New newsletter subscriber",
+    "body": "{email} confirmed a subscription from the {locale} landing page."
+  }
+}

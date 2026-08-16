@@ -1,4 +1,4 @@
-import type { JSX } from "react"
+import type { ComponentProps, JSX } from "react"
 
 import { cn } from "~/src/utils"
 
@@ -21,20 +21,19 @@ export const backgroundGridPatternClassName =
  * rather than as a colour: the same "signal" the landing uses, so the two surfaces feel lit by
  * the same source.
  */
-export function Background({
-  className,
-  glow = true,
-}: Readonly<{
-  className?: string
-  glow?: boolean
-}>): JSX.Element {
+interface BackgroundProps extends ComponentProps<"div"> {
+  readonly glow?: boolean
+}
+
+export function Background({ className, glow = true, ...props }: BackgroundProps): JSX.Element {
   return (
     <>
       <div
         aria-hidden
         className={cn("field-taper pointer-events-none fixed inset-0 opacity-70", backgroundGridPatternClassName, className)}
+        {...props}
       />
-      {glow ? <div aria-hidden className={cn("field-signal pointer-events-none fixed inset-0", className)} /> : undefined}
+      {glow && <div aria-hidden className={cn("field-signal pointer-events-none fixed inset-0", className)} />}
     </>
   )
 }

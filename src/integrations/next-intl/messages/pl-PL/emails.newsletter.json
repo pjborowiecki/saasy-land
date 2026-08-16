@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "Jedno kliknięcie i jesteś z nami",
+    "preview": "Potwierdź adres, a dziennik budowy jest Twój.",
+    "heading": "Jedno kliknięcie i jesteś z nami",
+    "body": "Ktoś podał ten adres na saasyland.com. Potwierdź go, a dostaniesz dziennik budowy: co powstało, jakie decyzje za tym stoją i co nie wypaliło. Jeśli to nie Ty się zapisywałeś, po prostu usuń tę wiadomość, a więcej nie napiszemy.",
+    "button": "Wchodzę w to",
+    "footer": "Link działa raz i wygasa po 24 godzinach. Jeśli coś wygląda nie tak, napisz na:"
+  },
+  "notification": {
+    "subject": "Nowy zapis na newsletter",
+    "preview": "Ktoś potwierdził zapis na newsletter.",
+    "heading": "Nowy zapis na newsletter",
+    "body": "{email} potwierdził zapis ze strony w wersji {locale}."
+  }
+}

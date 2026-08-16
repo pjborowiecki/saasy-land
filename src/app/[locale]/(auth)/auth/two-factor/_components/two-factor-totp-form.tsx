@@ -19,7 +19,7 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 import { AuthOtpField } from "~/src/app/[locale]/(auth)/auth/_components/auth-otp-field"
 import { AUTH_FORM_IDS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-form-ids"
 import { AUTH_PRIMARY_BUTTON_CLASS, AUTH_SECONDARY_BUTTON_CLASS } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
-import { useTwoFactorRedirect } from "~/src/app/[locale]/(auth)/auth/two-factor/_components/use-two-factor-redirect"
+import { useTwoFactorRedirect } from "~/src/app/[locale]/(auth)/auth/two-factor/_lib/use-two-factor-redirect"
 
 const verifyTotpInputSchema = twoFactorZodSchemas.verifyTotp
 

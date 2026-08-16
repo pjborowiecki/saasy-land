@@ -55,7 +55,8 @@ jobs:
             ${{ runner.os }}-turbopack-
 
       - name: Apply migrations
-        run: bun run db:migrate
+        # No env file on a runner: the setup action puts DATABASE_URL in the process env.
+        run: bunx drizzle-kit migrate --config=./src/platform/db/drizzle.config.ts
 
       - name: Build
         # Bun can SIGILL in N-API teardown after a successful Next build; the prerender

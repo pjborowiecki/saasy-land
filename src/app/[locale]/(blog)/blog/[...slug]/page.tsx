@@ -18,6 +18,7 @@ import { getRootLocale } from "~/src/integrations/next-intl/i18n.root-params"
 import { PostShare } from "~/src/app/[locale]/(blog)/_components/post-share"
 import { PostToc, PostTocItem } from "~/src/app/[locale]/(blog)/_components/post-toc"
 import { buildPostStructuredDataHtml, isPublished, readingTimeMinutes, summaryFromFrontmatter } from "~/src/app/[locale]/(blog)/_lib/posts"
+import { ROUTES } from "~/src/routes"
 
 const EMPTY_TAGS_LENGTH = 0
 
@@ -104,7 +105,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps): Promi
       <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10 md:py-28">
         <Link
           className="inline-flex items-center gap-2 font-mono text-label text-muted-foreground uppercase transition-colors duration-200 ease-exp hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-          href="/blog"
+          href={ROUTES.BLOG}
         >
           <span aria-hidden>&larr;</span>
           {t("post.backToBlog")}

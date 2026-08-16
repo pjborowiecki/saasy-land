@@ -1,7 +1,7 @@
 import type { JSX } from "react"
 
-import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { BlogPostGridCard } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-grid-card"
+import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_lib/blog-post-data"
 
 export function BlogPostsGrid(): JSX.Element {
   return (

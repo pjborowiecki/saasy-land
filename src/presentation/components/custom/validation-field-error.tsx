@@ -9,7 +9,7 @@ import { translateValidationMessage } from "~/src/integrations/next-intl/validat
 import { FieldError } from "~/src/presentation/components/shadcn/field"
 
 interface ValidationFieldErrorProps {
-  readonly message?: string
+  readonly message?: string | undefined
   readonly namespace: string
   readonly paramsByKey?: Readonly<Record<string, Readonly<Record<string, string | number>>>>
 }

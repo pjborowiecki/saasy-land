@@ -20,10 +20,12 @@ export async function sendEmail({
   react,
   subject,
   to,
-}: Readonly<SendEmailOptions>): Promise<void> {
-  const { error } = await resend.emails.send({ from, react, subject, to }, { idempotencyKey })
+}: Readonly<SendEmailOptions>): Promise<string> {
+  const { data, error } = await resend.emails.send({ from, react, subject, to }, { idempotencyKey })
 
   if (error) {
     throw new Error(`Failed to send "${subject}" to ${to}: ${error.message}`)
   }
+
+  return data.id
 }

@@ -6,6 +6,8 @@ import { Link } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { Wordmark } from "~/src/presentation/components/custom/wordmark"
 
+import { ROUTES } from "~/src/routes"
+
 const LINK_CLASSNAME =
   "rounded-md text-body-sm transition-colors duration-200 ease-exp hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
 
@@ -31,13 +33,13 @@ export async function BlogHeader(): Promise<JSX.Element> {
         </Link>
 
         <div className="flex items-center gap-5 lg:gap-7">
-          <Link className={`${LINK_CLASSNAME} text-muted-foreground`} href="/docs">
+          <Link className={`${LINK_CLASSNAME} text-muted-foreground`} href={ROUTES.DOCS}>
             {t("nav.docs")}
           </Link>
-          <Link aria-current="page" className={`${LINK_CLASSNAME} text-foreground`} href="/blog">
+          <Link aria-current="page" className={`${LINK_CLASSNAME} text-foreground`} href={ROUTES.BLOG}>
             {t("nav.blog")}
           </Link>
-          <Link className={CTA_CLASSNAME} href="/#pricing">
+          <Link className={CTA_CLASSNAME} href={ROUTES.HOME_PRICING_SECTION}>
             {t("nav.getStarted")}
           </Link>
         </div>

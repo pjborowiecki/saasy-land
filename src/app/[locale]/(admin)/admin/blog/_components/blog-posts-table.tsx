@@ -9,8 +9,8 @@ import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 import { Table, TableContainer, TableBody, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import { PAGINATION_FIRST_PAGE } from "~/src/app/[locale]/(admin)/admin/_lib/constants"
-import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-data"
 import { BlogPostTableRow } from "~/src/app/[locale]/(admin)/admin/blog/_components/blog-post-table-row"
+import { DUMMY_POSTS } from "~/src/app/[locale]/(admin)/admin/blog/_lib/blog-post-data"
 
 function BlogPostsTableHeader({ t }: { readonly t: (key: string) => string }): JSX.Element {
   return (

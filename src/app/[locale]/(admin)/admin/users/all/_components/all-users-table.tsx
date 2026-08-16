@@ -7,7 +7,7 @@ import type { getUsers } from "~/src/modules/user/use-cases/get-users.use-case"
 import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
 import { useAllUsersColumns } from "~/src/app/[locale]/(admin)/admin/users/all/_components/columns"
-import { DATA_TABLE_OPTIONS } from "~/src/app/[locale]/(admin)/admin/users/all/_components/options"
+import { DATA_TABLE_OPTIONS } from "~/src/app/[locale]/(admin)/admin/users/all/_lib/options"
 
 export interface AllUsersTableProps {
   /** Omitted while pending: the table renders its skeleton rows instead. */

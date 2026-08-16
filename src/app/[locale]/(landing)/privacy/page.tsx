@@ -3,7 +3,7 @@ import type { JSX } from "react"
 
 import { getTranslations } from "next-intl/server"
 
-import { LegalDocument, LegalSection } from "~/src/app/[locale]/(landing)/_components/legal-document"
+import { LegalDocument, LegalSection } from "~/src/app/[locale]/(landing)/_components/legal/legal-document"
 import { APP_NAME } from "~/src/presentation/branding"
 
 export async function generateMetadata(): Promise<Metadata> {

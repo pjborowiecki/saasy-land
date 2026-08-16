@@ -12,7 +12,7 @@ import {
   AUTH_PRIMARY_BUTTON_CLASS,
   AUTH_SECONDARY_BUTTON_CLASS,
 } from "~/src/app/[locale]/(auth)/auth/_constants/auth-styles"
-import { useVerifyEmailPanel, type VerifyEmailStatus } from "~/src/app/[locale]/(auth)/auth/verify-email/_components/use-verify-email-panel"
+import { useVerifyEmailPanel, type VerifyEmailStatus } from "~/src/app/[locale]/(auth)/auth/verify-email/_lib/use-verify-email-panel"
 
 const STATUS_COPY_CLASS = "text-body text-pretty text-muted-foreground"
 
