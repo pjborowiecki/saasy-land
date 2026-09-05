@@ -6,6 +6,7 @@ export {
   newsletterStatusEnum,
   newsletterSubscriber,
 } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
+export { license, licenseRelations, licenseStatusEnum, licenseTierEnum } from "~/src/modules/license/license.schema"
 export { product, productStatusEnum, productTypeEnum } from "~/src/modules/product/product.schema"
 export { session, sessionRelations } from "~/src/modules/session/session.schema"
 export { twoFactor, twoFactorRelations } from "~/src/modules/two-factor/two-factor.schema"

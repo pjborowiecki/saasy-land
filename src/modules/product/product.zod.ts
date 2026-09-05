@@ -1,5 +1,5 @@
 import { createSchemaFactory } from "drizzle-zod"
-import { z } from "zod/v4"
+import z from "zod/v4"
 
 import { CURRENCY_CODES } from "~/src/modules/_core/constants/currency"
 import { MIN_FIELD_LENGTH, userIdField } from "~/src/modules/_core/utils/zod-fields"
