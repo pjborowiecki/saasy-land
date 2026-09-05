@@ -1,5 +1,5 @@
 import { createSchemaFactory } from "drizzle-zod"
-import { z } from "zod/v4"
+import z from "zod/v4"
 
 import { SUBSCRIPTION_RESULT } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import {

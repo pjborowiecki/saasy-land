@@ -1721,7 +1721,8 @@ declare const messages: {
     },
     "app": {
       "title": "App Page",
-      "description": "Welcome to the App page."
+      "description": "Welcome to the App page.",
+      "license": "Manage your license"
     },
     "auth": {
       "forgot-password": {
@@ -2568,6 +2569,40 @@ declare const messages: {
           }
         }
       }
+    },
+    "license": {
+      "title": "Your license",
+      "description": "Your SaaSy Land license key and what it unlocks.",
+      "tier": {
+        "core": "Core",
+        "complete": "Complete"
+      },
+      "issued": "License key",
+      "pending": "Your key is being issued. Refresh in a moment.",
+      "revoked": "This license is no longer active. Write to us if that looks wrong.",
+      "usage": "Run this in the directory where you want the project, and paste the key when asked.",
+      "manage": "Invoices and receipts",
+      "buy": {
+        "title": "Get your license",
+        "description": "One payment, unlimited projects, lifetime updates.",
+        "core": "Get Core",
+        "complete": "Get Complete",
+        "pending": "Opening checkout...",
+        "error": "Checkout did not open. Try again, or email hello@saasyland.com."
+      },
+      "activations": {
+        "title": "Machines",
+        "description": "Each machine you scaffold on uses one slot. Free a slot when you stop using a machine.",
+        "count": "{used} of {limit} in use",
+        "unlimited": "{used} in use",
+        "none": "No machines have used this key yet.",
+        "activated": "Activated {date}",
+        "deactivate": "Free this slot",
+        "deactivating": "Freeing...",
+        "error": "That did not work. Try again, or email hello@saasyland.com.",
+        "success": "Slot freed."
+      },
+      "back": "Back to overview"
     },
     "newsletter": {
       "form": {

@@ -1,6 +1,6 @@
 import { pageSchema } from "fumadocs-core/source/schema"
 import { defineCollections, defineConfig, defineDocs } from "fumadocs-mdx/config"
-import { z } from "zod"
+import z from "zod/v4"
 
 export const docs = defineDocs({
   dir: "./src/integrations/fumadocs/content/docs",

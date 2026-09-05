@@ -1,0 +1,34 @@
+{
+  "title": "Twoja licencja",
+  "description": "Twój klucz licencyjny SaaSy Land i to, co odblokowuje.",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "Klucz licencyjny",
+  "pending": "Klucz jest właśnie wydawany. Odśwież za chwilę.",
+  "revoked": "Ta licencja nie jest już aktywna. Napisz do nas, jeśli to pomyłka.",
+  "usage": "Uruchom to w katalogu, w którym chcesz mieć projekt, i wklej klucz, gdy pojawi się pytanie.",
+  "manage": "Faktury i rachunki",
+  "buy": {
+    "title": "Kup licencję",
+    "description": "Jedna płatność, nieograniczona liczba projektów, aktualizacje na zawsze.",
+    "core": "Kup Core",
+    "complete": "Kup Complete",
+    "pending": "Otwieram płatność...",
+    "error": "Nie udało się otworzyć płatności. Spróbuj ponownie albo napisz na hello@saasyland.com."
+  },
+  "activations": {
+    "title": "Maszyny",
+    "description": "Każda maszyna, na której generujesz projekt, zajmuje jedno miejsce. Zwolnij je, gdy przestajesz z niej korzystać.",
+    "count": "{used} z {limit} w użyciu",
+    "unlimited": "{used} w użyciu",
+    "none": "Żadna maszyna nie użyła jeszcze tego klucza.",
+    "activated": "Aktywowano {date}",
+    "deactivate": "Zwolnij miejsce",
+    "deactivating": "Zwalnianie...",
+    "error": "Nie udało się. Spróbuj ponownie albo napisz na hello@saasyland.com.",
+    "success": "Miejsce zwolnione."
+  },
+  "back": "Wróć do przeglądu"
+}

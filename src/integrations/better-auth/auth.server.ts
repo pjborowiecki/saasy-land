@@ -1,5 +1,6 @@
 import "server-only"
 
+import { checkout, polar as polarPlugin, portal, webhooks } from "@polar-sh/better-auth"
 import { waitUntil } from "@vercel/functions"
 import { IP_HEADER_NAME } from "@vercel/functions/headers"
 import { betterAuth } from "better-auth"
@@ -15,9 +16,13 @@ import { env } from "~/src/platform/env"
 import { db } from "~/src/platform/db/client"
 import * as schema from "~/src/platform/db/schema"
 
+import { LICENSE_TIER } from "~/src/modules/license/license.constants"
+import { licenseWebhookHandlers } from "~/src/modules/license/license.webhooks"
+
 import { ac, DEFAULT_ROLE_CODE, ROLE_CODES, ROLES } from "~/src/integrations/better-auth/auth.access"
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from "~/src/integrations/better-auth/auth.constraints"
 import { authEmailHandlers } from "~/src/integrations/better-auth/auth.emails"
+import { polar } from "~/src/integrations/polar/polar.config"
 import { redis } from "~/src/integrations/redis/redis.config"
 
 import { APP_NAME } from "~/src/presentation/branding"
@@ -76,6 +81,21 @@ export const auth = betterAuth({
       roles: ROLES,
     }),
     multiSession({ maximumSessions: MAX_CONCURRENT_SESSIONS }),
+    polarPlugin({
+      client: polar,
+      use: [
+        checkout({
+          authenticatedUsersOnly: true,
+          products: [
+            { productId: env.POLAR_PRODUCT_ID_CORE, slug: LICENSE_TIER.CORE },
+            { productId: env.POLAR_PRODUCT_ID_COMPLETE, slug: LICENSE_TIER.COMPLETE },
+          ],
+          successUrl: ROUTES.APP,
+        }),
+        portal(),
+        webhooks({ ...licenseWebhookHandlers, secret: env.POLAR_WEBHOOK_SECRET }),
+      ],
+    }),
     twoFactor({ issuer: APP_NAME }),
     nextCookies(),
   ],
@@ -90,6 +110,7 @@ export const auth = betterAuth({
         window: RATE_LIMIT_WINDOW_IN_SECONDS,
       },
       [ROUTES.API_AUTH.GET_SESSION]: false,
+      [ROUTES.API_AUTH.POLAR_WEBHOOKS]: false,
       [ROUTES.API_AUTH.REQUEST_PASSWORD_RESET]: {
         max: MAX_FORGET_PASSWORD_ATTEMPTS,
         window: RATE_LIMIT_WINDOW_IN_SECONDS,

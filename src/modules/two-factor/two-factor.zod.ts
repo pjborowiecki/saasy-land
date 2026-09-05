@@ -1,5 +1,5 @@
 import { createSchemaFactory } from "drizzle-zod"
-import { z } from "zod/v4"
+import z from "zod/v4"
 
 import { twoFactor } from "~/src/modules/two-factor/two-factor.schema"
 

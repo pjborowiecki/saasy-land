@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
 import { useController, useForm } from "react-hook-form"
 import { toast } from "sonner"
-import type { z } from "zod/v4"
+import type z from "zod/v4"
 
 import { newsletterSubscriberZodSchemas } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.zod"
 import { subscribeToNewsletter } from "~/src/modules/newsletter-subscriber/use-cases/subscribe-to-newsletter.use-case"

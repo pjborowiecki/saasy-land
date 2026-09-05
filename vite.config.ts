@@ -6,9 +6,6 @@ const projectRoot = import.meta.dirname
 const ignorePatterns = [
   "node_modules",
   ".next",
-  // The Remotion project is a separate bundle with its own React, its own tsconfig and its own
-  // lint config. Type-aware rules run against this project's program, where its sources resolve
-  // to `any`, so every line in it reported as unsafe.
   "remotion",
   ".source",
   "dist",

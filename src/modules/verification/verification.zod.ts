@@ -1,5 +1,5 @@
 import { createSchemaFactory } from "drizzle-zod"
-import { z } from "zod/v4"
+import z from "zod/v4"
 
 import { MIN_FIELD_LENGTH } from "~/src/modules/_core/utils/zod-fields"
 import { verification } from "~/src/modules/verification/verification.schema"
