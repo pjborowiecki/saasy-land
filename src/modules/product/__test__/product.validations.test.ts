@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { PRODUCT_VALIDATION_MESSAGE, PRODUCT_VALIDATION_PARAMS } from "~/src/modules/product/product.validations"
 
 describe("product validation messages", () => {

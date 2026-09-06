@@ -1,0 +1,16 @@
+---
+title: "Authentication and security"
+description: "Authentication and security — SaaSy Land"
+---
+
+Authorization is enforced twice: route `beforeLoad` guards protect the admin and customer layouts, and each protected server function checks the caller independently. Use `requireAdmin` or `requireSession` for layouts and `withAuth(permission)` for operations. Customer operations derive ownership from the session.
+
+Better Auth stores sessions in D1 and handles credentials, OAuth, verification, password reset, two-factor authentication, impersonation and revocation. Cookie caching is bypassed when checking a protected server function. The final auth plugin is `tanstackStartCookies`, which forwards authentication cookies through server-function responses.
+
+D1 rate limits use atomic writes and the Cloudflare client IP header. Sensitive public operations have separate limit keys. Validate inputs with the module Zod schema, mask unexpected failures, verify payment webhook signatures, and keep all credentials behind server-only boundaries. Private routes and token mutations are excluded from prerendering.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

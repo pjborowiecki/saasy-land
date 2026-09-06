@@ -1,4 +1,3 @@
-
 import { spawnSync } from "node:child_process"
 import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, symlinkSync } from "node:fs"
 import { join } from "node:path"
@@ -6,28 +5,32 @@ import { join } from "node:path"
 const GROUPS: Record<string, string> = {
   "anthropics/skills": "anthropic",
   "better-auth/skills": "better-auth",
+  "cloudflare/skills": "cloudflare",
   "coreyhaines31/marketingskills": "coreyhaines31",
-  "elysiajs/skills": "elysiajs",
   "Leonxlnx/taste-skill": "taste",
   "mattpocock/skills": "matt-pocock",
-  "neondatabase/agent-skills": "neon",
-  "neondatabase/ai-rules": "neon",
-  "next-safe-action/skills": "next-safe-action",
   "pbakaus/impeccable": "impeccable",
   "polarsource/skills": "polar",
   "remotion-dev/skills": "remotion",
   "resend/resend-skills": "resend",
-  "stripe/ai": "stripe",
+  "TanStack/router": "tanstack/router",
   "TanStack/table": "tanstack/table",
-  "upstash/skills": "upstash",
-  "vercel-labs/agent-skills": "vercel",
-  "vercel/next.js": "vercel",
+}
+
+const START_PACKAGE = /^packages\/(?:react-start|start-[^/]+)\//
+
+const resolveGroup = (entry: { source?: string; skillPath?: string }): string | undefined => {
+  if (entry.source === "TanStack/router" && START_PACKAGE.test(entry.skillPath ?? "")) {
+    return "tanstack/start"
+  }
+
+  return GROUPS[entry.source ?? ""]
 }
 
 const AGENTS_DIR = ".agents/skills"
 const CLAUDE_DIR = ".claude/skills"
 
-const lock: { skills?: Record<string, { source?: string }> } = JSON.parse(readFileSync("skills-lock.json", "utf8"))
+const lock: { skills?: Record<string, { source?: string; skillPath?: string }> } = JSON.parse(readFileSync("skills-lock.json", "utf8"))
 const skills = lock.skills ?? {}
 
 rmSync(AGENTS_DIR, { force: true, recursive: true })
@@ -55,10 +58,10 @@ for (const name of Object.keys(skills)) {
 }
 
 let grouped = 0
-const roots = new Set<string>() 
+const roots = new Set<string>()
 const ungrouped: string[] = []
 for (const [name, entry] of Object.entries(skills)) {
-  const group = GROUPS[entry.source ?? ""]
+  const group = resolveGroup(entry)
   const staged = join(staging, name)
 
   if (!existsSync(staged)) {

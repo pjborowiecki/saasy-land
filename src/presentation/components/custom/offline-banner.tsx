@@ -1,20 +1,9 @@
-"use client"
-
 import { type JSX, useEffect, useState } from "react"
 
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
 
-/**
- * Offline notice, self-contained.
- *
- * This used to read `useOffline()` from `next/offline`, which required
- * `experimental.useOffline` — a router mode that holds a failed navigation, RSC fetch or Server
- * Action *pending for retry rather than surfacing it*. In production that turned every failed
- * fetch — an auth wall, a half-deployed build, a flaky network — into a click that changed the
- * URL and then did nothing, with no error anywhere. An offline banner is not worth that trade:
- * the browser's own online/offline events cover the banner's actual job.
- */
-export function OfflineBanner(): JSX.Element | undefined {
+/** Observe connectivity and recover caches left by earlier offline versions of the app. */
+export const OfflineBanner = (): JSX.Element | undefined => {
   const t = useTranslations("components.custom.offline-banner")
   const [isOffline, setIsOffline] = useState(false)
 
@@ -49,11 +38,15 @@ export function OfflineBanner(): JSX.Element | undefined {
   useEffect(() => {
     const recover = async (): Promise<void> => {
       try {
-        const registrations = (await navigator.serviceWorker?.getRegistrations()) ?? []
-        await Promise.all(registrations.map((registration) => registration.unregister()))
+        if ("serviceWorker" in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations()
+          await Promise.all(registrations.map((registration) => registration.unregister()))
+        }
 
-        const cacheKeys = (await globalThis.caches?.keys()) ?? []
-        await Promise.all(cacheKeys.map((key) => globalThis.caches.delete(key)))
+        if ("caches" in globalThis) {
+          const cacheKeys = await globalThis.caches.keys()
+          await Promise.all(cacheKeys.map((key) => globalThis.caches.delete(key)))
+        }
       } catch {
         // Recovery is best-effort by design.
       }

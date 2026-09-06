@@ -1,0 +1,25 @@
+---
+title: Розгортання до Cloudflare Workers
+description: Розгортання до Cloudflare Workers - SaaSy Land
+---
+
+Vite+, TanStack Start і TanStack Start `@cloudflare/vite-plugin`. `wrangler.jsonc` оголошує запис, налаштування сумісності, активи, спостережливість та окремий розвиток, перегляд та обов’язки продукції.
+
+Надання D1 і KV і замініть ідентифікатори держателя для цільового середовища. Налаштуйте свої секрети URL та провайдера `.env.preview` або `.env.production`. . Застосувати міграцію прямо, потім розгортати. Розгортання сценаріїв, які вводяться в обов'язкові ідентифікатори першими; створення сценаріїв, що передаються публічним сторінкам і перевірку вихідних артефактів. Ауттентифікація та приватні сторінки додатків динамічно працюють на Worker.
+
+Встановити користувальницький домен і OAuth URL-адреси зворотного зв'язку для цільового середовища. Встановлення залежностей і будівлі ніколи не відноситься до дистанційної міграції.
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

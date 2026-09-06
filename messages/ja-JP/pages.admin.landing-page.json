@@ -1,0 +1,76 @@
+{
+  "title": "ランディングページエディター",
+  "description": "まず、ページをセクションごとに作成し、内容が適切になってから公開してください。",
+  "actions": {
+    "preview": "プレビュー",
+    "saveChanges": "変更を保存する",
+    "publish": "公開"
+  },
+  "sidebar": {
+    "addSection": "セクションを追加します",
+    "sections": {
+      "hero": "ヒーローセクション",
+      "features": "機能一覧",
+      "video": "動画紹介",
+      "testimonials": "お客様の声",
+      "pricing": "価格表",
+      "gallery": "画像ギャラリー",
+      "faq": "よくある質問 (FAQ) 展開/閉じる",
+      "contact": "お問い合わせフォーム"
+    }
+  },
+  "canvas": {
+    "label": "キャンバス",
+    "viewport": {
+      "desktop": "デスクトップの幅",
+      "tablet": "タブレットの幅",
+      "mobile": "モバイル幅"
+    },
+    "sectionActions": {
+      "edit": "セクションを編集",
+      "duplicate": "セクションを複製",
+      "delete": "セクションを削除"
+    },
+    "badge": "倉庫チーム向けに設計されています",
+    "headingLead": "すべてのパレットを追跡",
+    "headingAccent": "搬入口から棚まで",
+    "description": "バーコードスキャン、棚卸、そして再発注アラートを、すべて一箇所で確認できます。現場ではオフラインでも利用でき、Wi-Fi環境に戻ると自動的にデータと同期します。",
+    "getStarted": "無料トライアルを開始する",
+    "bookDemo": "デモのご予約はこちらから",
+    "addSectionHere": "ここにセクションを追加してください",
+    "featuresHeading": "含まれる機能",
+    "featuresSubheading": "各シフトでフロア担当チームが使用する3つのツール。",
+    "feature1": "バーコードスキャン",
+    "feature2": "循環棚卸し",
+    "feature3": "補充アラート"
+  },
+  "properties": {
+    "title": "セクションの特性",
+    "description": "選択した要素をカスタマイズします",
+    "layout": "配置",
+    "alignLeft": "左揃え",
+    "alignCenter": "中央揃え",
+    "alignRight": "右揃え",
+    "spacing": "間隔",
+    "paddingTop": "上部パディング",
+    "paddingBot": "下部パディング",
+    "unit": "px",
+    "background": "背景スタイル",
+    "backgroundOptions": {
+      "page": "ページの背景",
+      "panel": "パネルの背景",
+      "raised": "浮き上がる背景",
+      "image": "画像をアップロードしてください"
+    },
+    "content": "コンテンツ",
+    "generateAI": "AIで生成",
+    "badgeText": "バッジのテキスト",
+    "heading": "見出し",
+    "subheading": "小見出し",
+    "buttonActions": "操作",
+    "primaryButton": "主要ボタン",
+    "secondaryButton": "補助ボタン",
+    "buttonEnabled": "ボタンが表示されています",
+    "label": "ラベル"
+  }
+}

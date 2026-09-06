@@ -1,0 +1,26 @@
+---
+title: Foire aux questions
+description: Foire aux questions — SaaSy Land
+---
+
+## À quel moment l'application utilise-t-elle?
+
+Cloudflare Workers. Bun gère les paquets et les scripts, tandis que Vite+ construit et teste l'application.
+
+## Les tests locaux ont-ils besoin d'un compte Cloudflare ?
+
+C'est pas vrai. Les tests d'unité et d'intégration utilisent SQLite et des maquettes de fixation. Les tests de navigateur utilisent une base de données locale dédiée Worker et D1. Le déploiement nécessite de vraies fixations.
+
+## Où une nouvelle opération devrait-elle vivre?
+
+Dans son module de fonctionnalités `use-cases` répertoire. La route coordonne le chargement; la fonction serveur valide et autorise l'opération.
+
+## Comment les langues sont-elles organisées?
+
+Anglais utilise des URLs non préfixées, polonais utilise `/pl-PL`, et chaque langue a les mêmes fichiers d'espace de noms pointillés sous `messages`.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

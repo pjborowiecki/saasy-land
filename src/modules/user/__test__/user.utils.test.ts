@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { getUserStatus } from "~/src/modules/user/user.utils"
 
 describe("user status helpers", () => {

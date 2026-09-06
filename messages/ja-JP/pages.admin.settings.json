@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "設定 | SaaSy Land",
+    "description": "作業スペースの設定、セキュリティ、および請求情報の管理を行ってください。"
+  },
+  "title": "設定",
+  "description": "作業スペースの設定、セキュリティ、および請求情報の管理を行ってください。",
+  "tabs": {
+    "general": "一般",
+    "security": "セキュリティ",
+    "team": "チームとメンバー",
+    "billing": "請求",
+    "integrations": "連携",
+    "api": "APIキー"
+  },
+  "profile": {
+    "title": "ワークスペースのプロフィール",
+    "description": "作業環境の設定や詳細情報を更新してください。",
+    "uploadImage": "画像をアップロードする",
+    "removeImage": "削除する",
+    "imageHint": "推奨サイズ：256x256ピクセル。最大2MB。",
+    "workspaceName": "ワークスペース名",
+    "supportEmail": "サポートメール",
+    "workspaceUrl": "ワークスペースのURL",
+    "urlHint": "これは、お客様のダッシュボードにログインするためのユニークなURLです。",
+    "saveChanges": "変更を保存する",
+    "urlPrefix": "app.saasyland.com/"
+  },
+  "preferences": {
+    "title": "環境設定",
+    "description": "ワークスペースの地域設定と言語設定を構成してください。",
+    "language": "言語",
+    "timezone": "タイムゾーン",
+    "announcements": {
+      "title": "新機能のご案内",
+      "description": "新機能やアップデートに関するメールを受け取ることができます。"
+    }
+  },
+  "dangerZone": {
+    "title": "危険区域",
+    "description": "作業スペースにおける不可逆的な変更。",
+    "delete": {
+      "title": "ワークスペースを削除",
+      "description": "このワークスペースと、そのすべてのデータを完全に削除します。この操作は取り消すことができません。",
+      "button": "ワークスペースを削除"
+    }
+  },
+  "security": {
+    "password": {
+      "title": "パスワードを変更する",
+      "description": "パスワードを更新して、アカウントのセキュリティを維持してください。",
+      "current": "現在のパスワード",
+      "new": "新しいパスワード",
+      "confirm": "新しいパスワードの確認",
+      "requirements": {
+        "title": "パスワードの設定要件",
+        "length": "8文字以上必要です",
+        "case": "少なくとも、大文字と小文字が一つずつ含まれている必要があります",
+        "special": "数字または特殊文字が少なくとも1つ必要です"
+      },
+      "update": "パスワードの更新",
+      "feedback": {
+        "updateSuccess": "パスワードが正常に更新されました。"
+      }
+    },
+    "twoFactor": {
+      "title": "二段階認証 (にだんか認証)",
+      "description": "アカウントのセキュリティをさらに強化してください。",
+      "app": "認証アプリ",
+      "appDescription": "Google Authenticatorや1Passwordなどのアプリを使って、時間制のコードを生成してください。",
+      "enable": "二段階認証を有効にする",
+      "dialogTitle": "二段階認証を有効にする",
+      "dialogDescription": "パスワードを確認し、その後、認証アプリでセットアップコードをスキャンしてください。",
+      "password": "現在のパスワード",
+      "continue": "続ける",
+      "scanInstructions": "この秘密鍵を認証アプリに追加するか、パスワードマネージャーからURIをスキャンしてください。",
+      "verificationCode": "認証コード",
+      "verifyAndEnable": "確認して有効化",
+      "backupCodesDescription": "これらのバックアップコードは、安全な場所に保管してください。認証デバイスにアクセスできなくなった場合に、各コードは一度のみ使用できます。",
+      "done": "完了",
+      "setupError": "二段階認証の設定を開始できませんでした。再度お試しください。",
+      "enabledSuccess": "二段階認証が有効になりました。",
+      "disable": "二段階認証を無効にする",
+      "disableDialogTitle": "二段階認証を無効にする",
+      "disableDialogDescription": "パスワードを入力して、二段階認証をオフにしてください。",
+      "disableConfirm": "無効にする",
+      "disabledSuccess": "二段階認証が現在、無効になっています。"
+    },
+    "sessions": {
+      "title": "有効なセッション",
+      "description": "アカウントに現在ログインしているデバイスを管理します。",
+      "logoutAll": "他のデバイスからすべてログアウトしてください",
+      "currentBadge": "現在のセッション",
+      "revoke": "取り消す",
+      "activeAgo": "{time}前にアクティブ",
+      "separator": " • ",
+      "feedback": {
+        "logoutAllSuccess": "他のセッションは、ログアウトされていました。",
+        "revokeSuccess": "セッションが取り消されました。"
+      }
+    }
+  }
+}

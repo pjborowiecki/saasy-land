@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "分析 | SaaSy Land",
+    "description": "SaaSのパフォーマンス、収益、およびユーザーエンゲージメントをモニタリングしてください。"
+  },
+  "title": "分析の概要",
+  "description": "SaaSのパフォーマンス、収益、およびユーザーエンゲージメントをモニタリングしてください。",
+  "actions": {
+    "datePicker": "過去30日間"
+  },
+  "tabs": {
+    "overview": "概要",
+    "revenue": "収入",
+    "audience": "ユーザー層",
+    "retention": "顧客維持率",
+    "reports": "報告書"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "月次経常収益の合計",
+      "value": "$124,500",
+      "trend": "14.2%",
+      "trendLabel": "先月と比較して"
+    },
+    "activeUsers": {
+      "title": "アクティブユーザー数",
+      "value": "45,231",
+      "trend": "5.4%",
+      "trendLabel": "先月と比較して"
+    },
+    "churn": {
+      "title": "顧客離脱率",
+      "value": "1.2%",
+      "trend": "0.4%",
+      "trendLabel": "先月と比較して"
+    },
+    "arpu": {
+      "title": "1ユーザーあたりの平均収入",
+      "value": "$42.50",
+      "trend": "2.1%",
+      "trendLabel": "先月と比較して"
+    }
+  },
+  "chart": {
+    "title": "売上概要",
+    "description": "過去30日間の日次売上高。",
+    "placeholder": "試用シリーズです。請求処理が完了すると、ここに実際の収益が表示されます。",
+    "legend": {
+      "new": "新規サブスクリプション",
+      "renewals": "継続更新"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "今日：{value}"
+  },
+  "regions": {
+    "title": "主要地域",
+    "viewAll": "すべてを表示"
+  },
+  "upgrades": {
+    "title": "最近のプランアップグレード",
+    "viewAll": "すべてを表示"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Proプランにアップグレード",
+        "time": "2分前"
+      },
+      "u2": {
+        "action": "Enterpriseにアップグレード",
+        "time": "1時間前"
+      },
+      "u3": {
+        "action": "Proプランにアップグレード",
+        "time": "3時間前"
+      },
+      "u4": {
+        "action": "Teamプランにアップグレード",
+        "time": "5時間前"
+      },
+      "u5": {
+        "action": "Proプランにアップグレード",
+        "time": "1日前"
+      }
+    }
+  }
+}

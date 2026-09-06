@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Refunds",
+    "description": "When you can request a SaaSy Land refund, how to request it, and the consumer rights that remain protected."
+  },
+  "title": "Refunds",
+  "lastUpdated": "Last updated 6 September 2026",
+  "description": "When you can request a SaaSy Land refund, how to request it, and the consumer rights that remain protected.",
+  "sections": {
+    "delivery": {
+      "title": "Before delivery",
+      "body": "You can request a full refund before the purchased CLI, private templates, or paid learning material have been delivered or made accessible through your account. Email hello@saasyland.com before accessing the paid product. No explanation is required for this voluntary pre-delivery refund. Reading or using the public MIT-licensed website repository does not count as delivery of the separate commercial product."
+    },
+    "afterDelivery": {
+      "title": "After delivery",
+      "body": "Digital material cannot be returned in the same way as a physical item, so the voluntary pre-delivery policy ends when you take delivery. This does not override cancellation rights or remedies provided by applicable law. If content is missing, defective, or materially different from what was promised, contact us so we can address the issue."
+    },
+    "consumerRights": {
+      "title": "Statutory consumer rights",
+      "body": "Where the law gives you a withdrawal period, that right continues to apply. For EU consumers, the usual distance-contract withdrawal period is 14 days. For digital content supplied during that period, loss of the withdrawal right requires the legally required express consent, acknowledgement, and confirmation. Merely stating that source code is non-returnable does not remove those rights. Mandatory rights for non-conforming or undelivered content also remain unaffected."
+    },
+    "request": {
+      "title": "How to request a refund",
+      "body": "Email hello@saasyland.com from the address used for your purchase. Include the order reference if you have it, and say that you would like a refund. We will identify the order and confirm the next steps. You do not need to submit a special form."
+    },
+    "processing": {
+      "title": "How refunds are paid",
+      "body": "Approved refunds are processed through Polar to the original payment method, for the amount paid in the original transaction currency. Processing times can vary. A refund ends access to the refunded paid product and revokes its licence key. The Commercial Licence explains which rights to already lawfully generated applications survive. Rights under the public code’s MIT licence and mandatory consumer remedies remain unaffected."
+    },
+    "freeServices": {
+      "title": "Free services",
+      "body": "Creating an account or joining the newsletter does not itself create a payment, so there is nothing to refund for those activities. Charges for third-party services you buy separately are subject to those providers’ refund terms."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+---
+title: App per il cliente
+description: Area protetta /app per i clienti firmati.
+---
+
+## Gruppo di rotta
+
+`src/routes/app*.tsx` e `src/presentation/components/custom/app/`
+
+## Stato
+
+Conchiglia dopo l'accesso. Espandi con il portale di fatturazione, biblioteca del corso, account deep-links, e contenuti di diritto-gated.
+
+## Guardie
+
+`src/integrations/better-auth/auth.guards.ts` + sessione; preferire casi d'uso per qualsiasi mutazione da questa superficie.

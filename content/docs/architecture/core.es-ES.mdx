@@ -1,0 +1,14 @@
+---
+title: Núcleo compartido
+description: Errores de dominio y catálogos compartidos en módulos/_core.
+---
+
+## Contenido
+
+- `constants/errors.ts` — `ERROR_CODES`, `AppError`, `ActionServerError` (el conjunto de términos relacionados con los errores)
+- `constants/` — catálogos de localización (y relacionados) utilizados por i18n y las configuraciones específicas de los productos.
+- `utils/` — funciones auxiliares puras, compartidas entre los distintos módulos.
+
+## ¿Por qué existe?
+
+Los **valores válidos** y los **códigos de error** transversales no deben ser redefinidos para cada función. Las ubicaciones (un subconjunto) que utilizan la aplicación siguen estando en `i18n.config.ts`; el catálogo más amplio puede ubicarse en `_core`.

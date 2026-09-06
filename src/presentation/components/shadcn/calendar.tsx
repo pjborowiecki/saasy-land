@@ -1,6 +1,4 @@
-"use client"
-
-import { useCallback, useMemo, type ComponentProps, type ReactNode } from "react"
+import { type ComponentProps, type ReactNode, useCallback, useMemo } from "react"
 
 import { type CalendarDate } from "@internationalized/date"
 import type { Key } from "@react-types/shared"
@@ -11,14 +9,14 @@ import {
   CalendarGridHeader as AriaCalendarGridHeader,
   RangeCalendar as AriaRangeCalendar,
   CalendarCell,
+  type CalendarCellRenderProps,
   CalendarGrid,
   CalendarGridBody,
   CalendarHeaderCell,
   CalendarHeading,
   CalendarMonthPicker,
-  CalendarYearPicker,
-  type CalendarCellRenderProps,
   type CalendarProps,
+  CalendarYearPicker,
   type DateValue,
   type RangeCalendarProps,
 } from "react-aria-components"
@@ -29,7 +27,7 @@ import {
   type CalendarYearPickerProps,
 } from "react-aria/useCalendar"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Button, buttonVariants } from "~/src/presentation/components/shadcn/button"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "~/src/presentation/components/shadcn/select"
@@ -81,11 +79,9 @@ const cellVariants = cva(
   },
 )
 
-function resolveVisibleMonthCount(numberOfMonths: number | undefined): number {
-  return numberOfMonths ?? DEFAULT_VISIBLE_MONTH_COUNT
-}
+const resolveVisibleMonthCount = (numberOfMonths: number | undefined): number => numberOfMonths ?? DEFAULT_VISIBLE_MONTH_COUNT
 
-function toYearFormat(format: HeaderFormat | undefined): YearFormat | undefined {
+const toYearFormat = (format: HeaderFormat | undefined): YearFormat | undefined => {
   if (format === undefined) {
     return undefined
   }
@@ -105,7 +101,7 @@ function toYearFormat(format: HeaderFormat | undefined): YearFormat | undefined 
   return { era: format.era, year: format.year }
 }
 
-function toNumberKey(key: string | number): number {
+const toNumberKey = (key: string | number): number => {
   if (typeof key === "number") {
     return key
   }
@@ -122,9 +118,9 @@ interface CalendarExtraProps {
   showWeekNumber?: boolean | undefined
 }
 
-function Calendar<T extends DateValue, M extends "single" | "multiple" = "single">(
-  props: Omit<CalendarProps<T, M>, "visibleDuration"> & CalendarExtraProps,
-) {
+const Calendar = <TValue extends DateValue, TSelectionMode extends "single" | "multiple" = "single">(
+  props: Omit<CalendarProps<TValue, TSelectionMode>, "visibleDuration"> & CalendarExtraProps,
+) => {
   const visibleMonthCount = resolveVisibleMonthCount(props.numberOfMonths)
   const visibleDuration = useMemo(() => ({ months: visibleMonthCount }), [visibleMonthCount])
 
@@ -143,7 +139,7 @@ function Calendar<T extends DateValue, M extends "single" | "multiple" = "single
   )
 }
 
-function RangeCalendar<T extends DateValue>(props: RangeCalendarProps<T> & CalendarExtraProps) {
+const RangeCalendar = <TValue extends DateValue>(props: RangeCalendarProps<TValue> & CalendarExtraProps) => {
   const visibleMonthCount = resolveVisibleMonthCount(props.numberOfMonths)
   const visibleDuration = useMemo(() => ({ months: visibleMonthCount }), [visibleMonthCount])
 
@@ -162,7 +158,7 @@ function RangeCalendar<T extends DateValue>(props: RangeCalendarProps<T> & Calen
   )
 }
 
-function CalendarInner({
+const CalendarInner = ({
   buttonVariant = "ghost",
   captionLayout = "label",
   headerFormat,
@@ -172,33 +168,31 @@ function CalendarInner({
   showWeekNumber = false,
 }: CalendarExtraProps & {
   isRange?: boolean | undefined
-}) {
-  return (
-    <div className="relative flex flex-col gap-4 md:flex-row">
-      <header className="absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1">
-        <Button className="size-(--cell-size) p-0 select-none aria-disabled:opacity-50" slot="previous" variant={buttonVariant}>
-          <ChevronLeftIcon className="cn-rtl-flip size-4" />
-        </Button>
-        <Button className="size-(--cell-size) p-0 select-none aria-disabled:opacity-50" slot="next" variant={buttonVariant}>
-          <ChevronRightIcon className="cn-rtl-flip size-4" />
-        </Button>
-      </header>
-      {Array.from({ length: numberOfMonths }, (_, monthIndex) => (
-        <CalendarMonthSection
-          captionLayout={captionLayout}
-          headerFormat={headerFormat}
-          isRange={isRange}
-          key={monthIndex}
-          monthIndex={monthIndex}
-          renderCell={renderCell}
-          showWeekNumber={showWeekNumber}
-        />
-      ))}
-    </div>
-  )
-}
+}) => (
+  <div className="relative flex flex-col gap-4 md:flex-row">
+    <header className="absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1">
+      <Button className="size-(--cell-size) p-0 select-none aria-disabled:opacity-50" slot="previous" variant={buttonVariant}>
+        <ChevronLeftIcon className="cn-rtl-flip size-4" />
+      </Button>
+      <Button className="size-(--cell-size) p-0 select-none aria-disabled:opacity-50" slot="next" variant={buttonVariant}>
+        <ChevronRightIcon className="cn-rtl-flip size-4" />
+      </Button>
+    </header>
+    {Array.from({ length: numberOfMonths }, (_, monthIndex) => (
+      <CalendarMonthSection
+        captionLayout={captionLayout}
+        headerFormat={headerFormat}
+        isRange={isRange}
+        key={monthIndex}
+        monthIndex={monthIndex}
+        renderCell={renderCell}
+        showWeekNumber={showWeekNumber}
+      />
+    ))}
+  </div>
+)
 
-function CalendarMonthSection({
+const CalendarMonthSection = ({
   captionLayout,
   headerFormat,
   isRange,
@@ -208,7 +202,7 @@ function CalendarMonthSection({
 }: CalendarExtraProps & {
   isRange?: boolean | undefined
   monthIndex: number
-}) {
+}) => {
   const gridOffset = useMemo(() => ({ months: monthIndex }), [monthIndex])
   const headingFormatProps = headerFormat === undefined ? {} : { format: headerFormat }
 
@@ -240,7 +234,7 @@ function CalendarMonthSection({
   )
 }
 
-function CalendarDayCell({
+const CalendarDayCell = ({
   date,
   isRange,
   renderCell,
@@ -250,7 +244,7 @@ function CalendarDayCell({
   isRange?: boolean | undefined
   renderCell?: CalendarRenderCell | undefined
   showWeekNumber: boolean
-}>) {
+}>) => {
   const cellClassName = useCallback(
     (renderProps: CalendarCellRenderProps) => cellVariants({ ...renderProps, showWeekNumber }),
     [showWeekNumber],
@@ -263,7 +257,7 @@ function CalendarDayCell({
   )
 }
 
-function CalendarCellDayContent({
+const CalendarCellDayContent = ({
   isRange,
   renderCell,
   renderProps,
@@ -271,7 +265,7 @@ function CalendarCellDayContent({
   isRange?: boolean | undefined
   renderCell?: CalendarRenderCell | undefined
   renderProps: CellRenderProps
-}>) {
+}>) => {
   const rangeActive = isRange === true
 
   return (
@@ -287,7 +281,7 @@ function CalendarCellDayContent({
   )
 }
 
-function CalendarPickerSelect({
+const CalendarPickerSelect = ({
   ariaLabel,
   items,
   onChange,
@@ -297,7 +291,7 @@ function CalendarPickerSelect({
   items: readonly { formatted: string; id: number }[]
   onChange: (key: string | number | null) => void
   value: string | number
-}>) {
+}>) => {
   const handleChange = useCallback(
     (nextValue: Key | null) => {
       onChange(nextValue)
@@ -325,7 +319,7 @@ function CalendarPickerSelect({
   )
 }
 
-function MonthDropdown({ format }: Readonly<{ format?: HeaderFormat | undefined }>) {
+const MonthDropdown = ({ format }: Readonly<{ format?: HeaderFormat | undefined }>) => {
   const monthFormat = format?.month
 
   return (
@@ -346,7 +340,7 @@ function MonthDropdown({ format }: Readonly<{ format?: HeaderFormat | undefined 
   )
 }
 
-function YearDropdown({ format }: Readonly<{ format?: HeaderFormat | undefined }>) {
+const YearDropdown = ({ format }: Readonly<{ format?: HeaderFormat | undefined }>) => {
   const yearFormat = toYearFormat(format)
 
   return (

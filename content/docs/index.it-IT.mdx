@@ -1,0 +1,50 @@
+---
+title: Documentazione
+description: SaaSy Land 2.0 — architettura, guide, caratteristiche e riferimento per l'avviamento completo.
+---
+
+Benvenuti nella documentazione per **SaaSy Land 2.0**, un dispositivo modulare completo SaaS starter su TanStack Start.
+
+<Callout title={"Come usare questi documenti"}>
+  Preferito **Guide** per le ricette di compito e **Architettura** per dove vive il codice. **Caratteristiche** e **Integrazioni**
+  descrivere la superficie del prodotto e gli adattatori del fornitore — comprese le aree pianificate come i pagamenti.
+</Callout>
+
+## Inizia qui.
+
+<Cards>
+  <Card title={"Progetto"} href="/docs/project/about">
+    Riguardo all'avviamento, al changelog, alla roadmap e al contributo.
+  </Card>
+  <Card title={"Iniziare"} href="/docs/getting-started">
+    Installare Bun deps, configurare env, migrare il database, eseguire localmente.
+  </Card>
+  <Card title={"Architettura"} href="/docs/architecture">
+    Moduli, consegna, integrazioni, piattaforme, SSR e confini di sicurezza.
+  </Card>
+  <Card title={"Guide"} href="/docs/guides">
+    Aggiungi funzionalità, DataTables, Nuqs URL stato, test, auth e altro ancora.
+  </Card>
+</Cards>
+
+## Capitolo
+
+| Capitolo        | Contenuto                                                       |
+| --------------- | --------------------------------------------------------------- |
+| Progetto        | Informazioni, changelog, roadmap, contribuendo                  |
+| Iniziare        | Installare, env, prima esecuzione, script, anteprima dispiegare |
+| Architettura    | Livelli, moduli, SSR/cache, fornitori                           |
+| Guide           | Ricette caratteristiche (tavole, Nuqs, test, auth, ...)         |
+| Caratteristiche | Auth, utenti, prodotti, pagamenti (pianificati), org, ...       |
+| Integrazioni    | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend,                  |
+| Sistema UI      | Shadcn, DataTable, tema, composizione                           |
+| Attrezzi        | Vitest, Playwright, Vite+, Agent skills, CI                     |
+| Riferimento     | Percorsi, inv, convenzioni, FAQ                                 |
+
+## Elaborazione locale
+
+File di contenuto: `content/docs`.
+
+MDX può usare componenti Fumadocs (`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`) e primitivi shadcn selezionati (`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …).
+
+Dopo l'aggiunta di pagine, aggiornare la cartella `meta.<locale>.json` `pages` array (lo script ponteggio fa questo per voi). Cartella `index` pagine sono sidebar **indici delle cartelle** — non elencare `index` di nuovo in `pages`.

@@ -1,0 +1,14 @@
+---
+title: Rôles et autorisations
+description: Rôles et autorisations — SaaSy Land
+---
+
+Rôles et déclarations `src/integrations/better-auth/auth.access.ts`C'est vrai. Le rôle par défaut est client. L'accès Admin est vérifié par `requireAdmin`; chaque opération du serveur vérifie la déclaration requise avec `withAuth`.
+
+Conservez les changements de rôle, les interdictions, la révocation de session et l'usurpation d'identité dans les cas d'utilisation par l'utilisateur ou la session. Dériver l'utilisateur courant de la session de requête et invalider les groupes de requête touchés après une mutation. Cacher un bouton est un comportement de présentation et ne remplace pas l'autorisation.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

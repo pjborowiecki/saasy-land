@@ -1,0 +1,30 @@
+---
+title: Architektur
+description: Architektur — SaaSy Land
+---
+
+SaaSy Land läuft als eine TanStack Start-Anwendung auf Cloudflare Workers. Routen koordinieren das Rendern und das Laden von Daten. Funktionsmodule sind für die Validierung, die Autorisierung und die Operationen zuständig. Integrationen konfigurieren externe Dienste. Die Präsentationsschicht verwaltet die bestehende Benutzeroberfläche.
+
+Es gibt keinen Dependency-Injection-Container. Importieren Sie die konkrete Komponente in der Ebene, in der sie benötigt wird. Halten Sie gemeinsam genutzte Hilfsfunktionen klein und platzieren Sie funktionsspezifische Hilfsfunktionen direkt neben der jeweiligen Funktion.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

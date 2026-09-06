@@ -1,58 +1,36 @@
-/** @vitest-environment jsdom */
-
-import { render, screen } from "@testing-library/react"
+import { CalendarDate } from "@internationalized/date"
+import { getRequest } from "@tanstack/react-start/server"
+import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { NextIntlClientProvider } from "next-intl"
 import { Link } from "react-aria-components"
+import { expect, it, vi } from "vite-plus/test"
+
+import { createTestRouter, renderWithRouter } from "~/src/platform/testing/lib/render"
 
 import { AppRouterProvider } from "~/src/providers/app-router-provider"
 
-import type * as I18nNavigation from "~/src/integrations/next-intl/i18n.navigation"
+import { Calendar } from "~/src/presentation/components/shadcn/calendar"
 
-type I18nRouter = ReturnType<typeof I18nNavigation.useRouter>
-
-const EMPTY_MESSAGES = {}
-
-const pushMock = vi.hoisted(() => vi.fn<I18nRouter["push"]>())
-
-const getPathnameMock = vi.hoisted(() =>
-  vi.fn<(args: { href: string; locale: string }) => string>(({ href, locale }) => `/${locale}${href}`),
-)
-
-// @ts-expect-error Vitest module mock factory is not inferred for the navigation exports.
-vi.mock(import("~/src/integrations/next-intl/i18n.navigation"), () => ({
-  getPathname: getPathnameMock,
-  useRouter: () => ({ push: pushMock }),
-}))
-
-function renderWithProvider() {
-  return render(
-    <NextIntlClientProvider locale="pl-PL" messages={EMPTY_MESSAGES}>
-      <AppRouterProvider>
-        <Link href="/admin">Console</Link>
-      </AppRouterProvider>
-    </NextIntlClientProvider>,
+const renderLink = () => {
+  vi.mocked(getRequest).mockReturnValue(new Request("http://localhost/pl-PL"))
+  const router = createTestRouter("/pl-PL")
+  const navigate = vi.spyOn(router, "navigate").mockResolvedValue()
+  renderWithRouter(
+    <AppRouterProvider>
+      <Link href="/admin">Console</Link>
+      <Calendar aria-label="Calendar" defaultValue={new CalendarDate(2026, 9, 6)} />
+    </AppRouterProvider>,
+    { router },
   )
+  return navigate
 }
-
-describe("app router provider", () => {
-  it("renders react-aria links with locale-prefixed hrefs", () => {
-    expect.hasAssertions()
-    pushMock.mockReset()
-    renderWithProvider()
-
-    expect(screen.getByRole("link", { name: "Console" })).toHaveAttribute("href", "/pl-PL/admin")
-    expect(getPathnameMock).toHaveBeenCalledWith({ href: "/admin", locale: "pl-PL" })
-  })
-
-  it("soft-navigates through the app router on click", async () => {
-    expect.hasAssertions()
-    pushMock.mockReset()
-    const user = userEvent.setup()
-    renderWithProvider()
-
-    await user.click(screen.getByRole("link", { name: "Console" }))
-
-    expect(pushMock).toHaveBeenCalledWith("/admin")
-  })
+it("gives React Aria links and calendar labels the selected app locale", () => {
+  renderLink()
+  expect(screen.getByRole("link", { name: "Console" })).toHaveAttribute("href", "/pl-PL/admin")
+  expect(screen.getByText("wrzesień 2026")).toBeVisible()
+})
+it("navigates through TanStack Router on click", async () => {
+  const navigate = renderLink()
+  await userEvent.setup().click(screen.getByRole("link", { name: "Console" }))
+  expect(navigate).toHaveBeenCalledWith(expect.objectContaining({ to: "/admin" }))
 })

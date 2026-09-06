@@ -1,42 +1,42 @@
 import { createSchemaFactory } from "drizzle-zod"
-import z from "zod/v4"
-
-import { twoFactor } from "~/src/modules/two-factor/two-factor.schema"
+import zod from "zod/v4"
 
 import { BACKUP_CODE_MAX_LENGTH, BACKUP_CODE_MIN_LENGTH, TWO_FACTOR_CODE_LENGTH } from "~/src/integrations/better-auth/auth.constraints"
 import { AUTH_VALIDATION_MESSAGE } from "~/src/integrations/better-auth/auth.validations"
 import { signInPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 
-const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
+import { twoFactor } from "~/src/modules/two-factor/two-factor.schema"
 
-const totpCodeField = z
+const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: zod })
+
+const totpCodeField = zod
   .string()
   .min(TWO_FACTOR_CODE_LENGTH, { message: AUTH_VALIDATION_MESSAGE.twoFactorCodeRequired })
   .max(TWO_FACTOR_CODE_LENGTH, { message: AUTH_VALIDATION_MESSAGE.twoFactorCodeLength })
 
-const backupCodeField = z
+const backupCodeField = zod
   .string()
   .min(BACKUP_CODE_MIN_LENGTH, { message: AUTH_VALIDATION_MESSAGE.backupCodeRequired })
   .max(BACKUP_CODE_MAX_LENGTH, { message: AUTH_VALIDATION_MESSAGE.backupCodeMaxLength })
 
 const passwordField = signInPasswordSchema
 
-const disableTwoFactor = z.object({
+const disableTwoFactor = zod.object({
   password: passwordField,
 })
 
-const enableTwoFactor = z.object({
+const enableTwoFactor = zod.object({
   password: passwordField,
 })
 
-const verifyBackupCode = z.object({
+const verifyBackupCode = zod.object({
   code: backupCodeField,
-  trustDevice: z.boolean().optional(),
+  trustDevice: zod.boolean().optional(),
 })
 
-const verifyTotp = z.object({
+const verifyTotp = zod.object({
   code: totpCodeField,
-  trustDevice: z.boolean().optional(),
+  trustDevice: zod.boolean().optional(),
 })
 
 const insert = createInsertSchema(twoFactor)

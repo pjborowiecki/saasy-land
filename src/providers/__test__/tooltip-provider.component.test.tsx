@@ -1,19 +1,13 @@
+import { type ComponentProps, createElement } from "react"
 /** @vitest-environment jsdom */
-
-import { createElement, type ComponentProps } from "react"
 
 import type * as BaseUiTooltip from "@base-ui/react/tooltip"
 import { render, screen } from "@testing-library/react"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { TooltipProvider } from "~/src/providers/tooltip-provider"
 
 const TOOLTIP_DELAY_MS = 100
-
-function TooltipProviderMock(props: Readonly<ComponentProps<typeof BaseUiTooltip.Tooltip.Provider>>) {
-  const { children, ...rest } = props
-
-  return createElement("div", { "data-props": JSON.stringify(rest), "data-testid": "tooltip-provider" }, children)
-}
 
 vi.mock(import("@base-ui/react/tooltip"), async (importOriginal): Promise<Partial<typeof BaseUiTooltip>> => {
   const actual = await importOriginal<typeof BaseUiTooltip>()
@@ -21,7 +15,7 @@ vi.mock(import("@base-ui/react/tooltip"), async (importOriginal): Promise<Partia
   return {
     Tooltip: {
       ...actual.Tooltip,
-      Provider: TooltipProviderMock,
+      Provider: (...args) => tooltipProviderMock(...args),
     },
   }
 })
@@ -37,3 +31,9 @@ describe("tooltip provider component", () => {
     expect(screen.getByTestId("tooltip-provider")).toHaveAttribute("data-props", expect.stringContaining(`"delay":${TOOLTIP_DELAY_MS}`))
   })
 })
+
+const tooltipProviderMock = (props: Readonly<ComponentProps<typeof BaseUiTooltip.Tooltip.Provider>>) => {
+  const { children, ...rest } = props
+
+  return createElement("div", { "data-props": JSON.stringify(rest), "data-testid": "tooltip-provider" }, children)
+}

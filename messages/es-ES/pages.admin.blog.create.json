@@ -1,0 +1,36 @@
+{
+  "title": "Escribir publicación",
+  "description": "Crea una nueva entrada de blog en formato Markdown con opciones avanzadas.",
+  "actions": {
+    "preview": "Previsualización",
+    "saveDraft": "Guardar borrador",
+    "publish": "Publicar"
+  },
+  "editor": {
+    "title": "## Título de la publicación",
+    "titlePlaceholder": "Introduce el título de la publicación aquí...",
+    "slug": "URL abreviado",
+    "slugPlaceholder": "titulo-del-articulo",
+    "contentPlaceholder": "Escriba el contenido de su publicación aquí... Puede usar Markdown.",
+    "fullscreen": "Pantalla completa"
+  },
+  "settings": {
+    "featuredImage": "Imagen destacada",
+    "upload": "Haz clic para subir",
+    "uploadHelp": "SVG, PNG, JPG o GIF (máx. 5 MB)",
+    "publishing": "Publicación",
+    "status": "Estado",
+    "statusDraft": "Borrador",
+    "statusPublished": "Publicado",
+    "statusScheduled": "Programado",
+    "category": "Categoría",
+    "categorySelect": "Seleccionar Categoría",
+    "categoryUpdates": "Actualizaciones del producto",
+    "categoryTutorials": "Tutoriales",
+    "categoryCompany": "Noticias de la empresa",
+    "tags": "Etiquetas",
+    "tagsPlaceholder": "Añade etiquetas separadas por comas...",
+    "excerpt": "Extracto",
+    "excerptPlaceholder": "Breve resumen de la publicación..."
+  }
+}

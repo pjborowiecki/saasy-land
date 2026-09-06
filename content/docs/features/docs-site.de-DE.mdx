@@ -1,0 +1,16 @@
+---
+title: Dokumentationsseite.
+description: Wie diese Dokumentation erstellt und erweitert wird.
+---
+
+## Inhaltsstamm
+
+`content/docs`
+
+- MDX-Seiten: `*.{locale}.mdx` für alle neun konfigurierten Sprachen (Punkt-Parser).
+- Ordner `meta.<locale>.json` für Titel/Reihenfolge/Symbole
+- `fallbackLanguage: en-US` für fehlende Übersetzungen.
+
+## App-Verkabelung.
+
+`fumadocs.source.ts`, Dokumentenlayout, Such-API. Seiten hinzufügen → Metadaten der `pages`-Arrays aktualisieren → neu aufbauen.

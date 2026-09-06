@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Criar conta",
+    "description": "Crie uma conta em {name}."
+  },
+  "form": {
+    "title": "Criar conta",
+    "description": "Crie uma conta em {name}.",
+    "name": "Nome",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Continuar",
+    "submitting": "Cadastrando...",
+    "success": "Conta criada com sucesso!",
+    "successCheckEmail": "Confira sua caixa de entrada para encontrar o link de verificação. Se seu e-mail já estiver verificado, entre na sua conta.",
+    "error": "Ocorreu um erro durante o cadastro. Por favor, tente novamente.",
+    "hasAccount": "Já possui uma conta? <signin>Entrar</signin>",
+    "or": "ou",
+    "confirmPassword": "Confirmar senha",
+    "termsAndPrivacy": "Ao se inscrever, você concorda com nossos <terms>Termos de Serviço</terms> e <privacy>Política de Privacidade</privacy>."
+  }
+}

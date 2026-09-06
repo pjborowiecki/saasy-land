@@ -1,0 +1,91 @@
+{
+  "title": "記事",
+  "description": "ブログのコンテンツを作成、管理、分析できます。",
+  "actions": {
+    "categories": "カテゴリ",
+    "writePost": "投稿を作成する",
+    "loadMore": "もっと記事を表示"
+  },
+  "stats": {
+    "totalViews": "総閲覧数（30日間）",
+    "subscribers": "加入者",
+    "publishedPosts": "公開済み投稿",
+    "draftsPending": "保留中の下書き：{count}件"
+  },
+  "filters": {
+    "all": "全投稿",
+    "published": "公開済み",
+    "drafts": "下書き",
+    "scheduled": "公開予約済み",
+    "search": "記事を検索..."
+  },
+  "badges": {
+    "published": "公開済み",
+    "draft": "下書き",
+    "scheduled": "公開予約済み"
+  },
+  "meta": {
+    "readTime": "読了目安：{minutes}分",
+    "publishedOn": "{date}",
+    "lastEdited": "最終編集：{time}",
+    "publishesTomorrow": "明日公開"
+  },
+  "labels": {
+    "gridView": "グリッド表示",
+    "tableView": "表表示",
+    "moreOptions": "さらにオプション"
+  },
+  "table": {
+    "postDetails": "投稿詳細",
+    "status": "ステータス",
+    "category": "カテゴリ",
+    "author": "著者",
+    "date": "日付",
+    "views": "閲覧数",
+    "actions": "操作",
+    "selectRow": "行を選択",
+    "emptyValue": "未設定",
+    "rowActions": "行の操作"
+  },
+  "pagination": {
+    "info": "全{total}件の記事のうち{start}〜{end}件を表示"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "データベースアーキテクチャを10倍の成長に対応できるよう拡張する",
+        "description": "弊社のエンジニアリングチームが、モノリシックな構成から分散アーキテクチャへと移行する過程について、詳細な技術解説を行います。",
+        "category": "エンジニアリング"
+      },
+      "post-2": {
+        "title": "高度分析ダッシュボード 2.0 をご紹介します",
+        "description": "レポートツールを全面的に見直し、お客様の行動パターンや収益指標について、より詳細な情報を提供できるようになりました。",
+        "category": "製品アップデート"
+      },
+      "post-3": {
+        "title": "私たちのデザインシステムの進化",
+        "description": "ウェブ、モバイル、そして社内管理ツールなど、様々なプラットフォームで一貫性のあるビジュアル表現を構築すること。",
+        "category": "デザイン"
+      },
+      "post-4": {
+        "title": "シリーズBラウンドの資金調達についてお知らせいたします",
+        "description": "この度、主要なベンチャーキャピタル企業による2500万ドルの投資を決定したことを、大変喜んでお知らせいたします。この投資により、当社の成長を加速させてまいります。",
+        "category": "会社ニュース"
+      },
+      "post-5": {
+        "title": "リアルタイムデータ活用におけるWebhookの活用方法",
+        "description": "数百万のイベントを安全に処理できる、堅牢なウェブフックシステムの構築方法を学びましょう。",
+        "category": "チュートリアル"
+      },
+      "post-6": {
+        "title": "顧客の解約率を下げるための戦略",
+        "description": "最も急速に成長しているSaaS企業が採用している、実績のある顧客維持戦略。",
+        "category": "マーケティング"
+      }
+    },
+    "dates": {
+      "draft": "2時間前",
+      "scheduled": "明日"
+    }
+  }
+}

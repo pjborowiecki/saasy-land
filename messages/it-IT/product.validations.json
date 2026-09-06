@@ -1,0 +1,6 @@
+{
+  "atLeastOneFieldRequired": "È necessario compilare almeno un campo.",
+  "nameRequired": "È obbligatorio indicare il nome del prodotto.",
+  "nameMaxLength": "Il nome del prodotto non può superare {max} caratteri.",
+  "priceCentsMin": "Il prezzo deve essere zero o superiore."
+}

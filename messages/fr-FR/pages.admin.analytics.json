@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Statistiques | SaaSy Land",
+    "description": "Surveillez les performances, les revenus et l'engagement des utilisateurs de votre SaaS."
+  },
+  "title": "Aperçu des analyses",
+  "description": "Surveillez les performances, les revenus et l'engagement des utilisateurs de votre SaaS.",
+  "actions": {
+    "datePicker": "Les 30 derniers jours"
+  },
+  "tabs": {
+    "overview": "Aperçu",
+    "revenue": "Revenus",
+    "audience": "Audience",
+    "retention": "Fidélisation",
+    "reports": "Rapports"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "MRR total",
+      "value": "$124,500",
+      "trend": "14.2%",
+      "trendLabel": "vs le mois dernier"
+    },
+    "activeUsers": {
+      "title": "Utilisateurs actifs",
+      "value": "45,231",
+      "trend": "5.4%",
+      "trendLabel": "vs le mois dernier"
+    },
+    "churn": {
+      "title": "Taux de désabonnement",
+      "value": "1.2%",
+      "trend": "0.4%",
+      "trendLabel": "vs le mois dernier"
+    },
+    "arpu": {
+      "title": "Revenu moyen par utilisateur",
+      "value": "$42.50",
+      "trend": "2.1%",
+      "trendLabel": "vs le mois dernier"
+    }
+  },
+  "chart": {
+    "title": "Aperçu des revenus",
+    "description": "Revenus quotidiens générés au cours des 30 derniers jours.",
+    "placeholder": "Série illustrative. Les revenus réels apparaissent ici une fois la facturation connectée.",
+    "legend": {
+      "new": "Nouvelles abonnements",
+      "renewals": "Renouvellements"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "Aujourd’hui : {value}"
+  },
+  "regions": {
+    "title": "Principales régions",
+    "viewAll": "Afficher tout"
+  },
+  "upgrades": {
+    "title": "Passages récents à une offre supérieure",
+    "viewAll": "Afficher tout"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Passé à l'offre Pro",
+        "time": "Il y a 2 minutes"
+      },
+      "u2": {
+        "action": "Amélioration vers l'offre Entreprise",
+        "time": "Il y a 1 heure"
+      },
+      "u3": {
+        "action": "Passé à l'offre Pro",
+        "time": "Il y a 3 heures"
+      },
+      "u4": {
+        "action": "Passé à l'offre Team",
+        "time": "Il y a 5 heures"
+      },
+      "u5": {
+        "action": "Passé à l'offre Pro",
+        "time": "Il y a 1 jour"
+      }
+    }
+  }
+}

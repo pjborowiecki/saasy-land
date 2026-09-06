@@ -1,0 +1,16 @@
+{
+  "ariaLabel": "メインナビゲーション",
+  "closeMenu": "メニューを閉じる",
+  "getStarted": "開発を始める",
+  "items": {
+    "blog": "ブログ",
+    "docs": "ドキュメント",
+    "faq": "FAQ",
+    "foundation": "基盤",
+    "pricing": "料金",
+    "quality": "品質",
+    "toolkit": "ツールキット"
+  },
+  "openMenu": "メニューを開く",
+  "signIn": "ログイン"
+}

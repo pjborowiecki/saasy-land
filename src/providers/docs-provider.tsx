@@ -1,12 +1,10 @@
-"use client"
-
 import { type ComponentProps, type ReactNode, useMemo } from "react"
 
-import { RootProvider } from "fumadocs-ui/provider/next"
+import { Link } from "@tanstack/react-router"
+import { RootProvider } from "fumadocs-ui/provider/tanstack"
 
 import { i18nUI } from "~/src/integrations/fumadocs/fumadocs.i18n"
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
-import { Link } from "~/src/integrations/next-intl/i18n.navigation"
+import type { Locale } from "~/src/integrations/use-intl/i18n.config"
 
 type DocsProviderProps = Readonly<{
   locale: Locale
@@ -16,15 +14,9 @@ type DocsProviderProps = Readonly<{
 type RootProviderComponents = NonNullable<ComponentProps<typeof RootProvider>["components"]>
 type DocsLinkProps = ComponentProps<NonNullable<RootProviderComponents["Link"]>>
 
-function DocsLink({ prefetch: _prefetch, tw: _tw, href, children, ...props }: DocsLinkProps) {
+const DocsLink = ({ prefetch: _prefetch, href, target, ...props }: DocsLinkProps) => {
   const linkHref = typeof href === "string" ? href : "/"
-
-  // Forward style/data-* so Fumadocs sidebar indentation and active states work.
-  return (
-    <Link {...props} href={linkHref}>
-      {children}
-    </Link>
-  )
+  return <Link {...props} {...(target === undefined ? {} : { target })} to={linkHref} />
 }
 
 const DOCS_PROVIDER_COMPONENTS = {
@@ -33,7 +25,7 @@ const DOCS_PROVIDER_COMPONENTS = {
 
 const DOCS_THEME = { enabled: false } as const
 
-export function DocsProvider({ locale, children }: DocsProviderProps) {
+export const DocsProvider = ({ locale, children }: DocsProviderProps) => {
   const components = useMemo(() => DOCS_PROVIDER_COMPONENTS, [])
   const i18n = useMemo(() => i18nUI.provider(locale), [locale])
 

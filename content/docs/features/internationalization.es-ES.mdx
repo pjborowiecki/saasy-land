@@ -1,0 +1,16 @@
+---
+title: Internacionalización y localidades
+description: Internacionalización y localidades — SaaSy Land
+---
+
+Los mensajes residen en `messages/{locale}` Para los nueve idiomas configurados como archivos de espacio de nombres delimitados, por ejemplo `pages.admin.users.json`La configuración de la localización, los helpers de URL, la carga de mensajes, los helpers de metadatos y la traducción de correos electrónicos residen en… `src/integrations/use-intl`.
+
+Utilizamos `/docs`; Utiliza los recursos de Polonia. `/pl-PL/docs`Legado `/en` y `/pl` Los enlaces están canonizados. Los archivos de ruta declaran `staticData.namespaces` y precargar los mismos espacios de nombres en su loader. `TranslationsProvider` reusable component, allowing developers to easily ship new features and updates using SaaSy Land Core. To ensure quality, we’ve implemented a test gate that requires all new code to pass through the \`/assets/tests/validate-template.xml\` file path. This file utilizes ICU placeholders to dynamically generate test cases. When deploying, use the \`--deploy-bundle\` command flag to initiate the deployment process. For edge computing scenarios, we recommend using `IntlProvider`Los mensajes compartidos se cargan en la raíz; los espacios de nombres solo para correo electrónico permanecen en el servidor.
+
+Lee el entorno con `getCurrentLocale` en el servidor y `useLocale` En los componentes. La URL selecciona la localización del documento. Las peticiones a la función del servidor utilizan la cookie de localización. Un cambio de idioma mantiene la ruta, la consulta y el fragmento y recarga el documento para cargar el contenido correspondiente. Ejecutar `bun run check:i18n` Después de modificar las claves.
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

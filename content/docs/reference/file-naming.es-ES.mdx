@@ -1,0 +1,15 @@
+---
+title: Nombres de archivos
+description: Prefijos de colocación y convenciones de carpetas.
+---
+
+| Patrón.        | Significado.                                                      |
+| -------------- | ----------------------------------------------------------------- |
+| `_components/` | Componentes de React locales a la ruta.                           |
+| `_lib/`        | Ayudantes locales de la ruta, parámetros de búsqueda, mapeadores. |
+| `_types/`      | Tipos locales al enrutamiento.                                    |
+| `use-cases/`   | Servicios de aplicaciones modularizadas.                          |
+| `*.server.ts`  | Integración exclusiva para el servidor.                           |
+| `__test__/`    | Pruebas colocalizadas.                                            |
+
+Es preferible utilizar nombres explícitos (`search-params.ts`) en lugar de incluir todo en archivos genéricos como `utils.ts`.

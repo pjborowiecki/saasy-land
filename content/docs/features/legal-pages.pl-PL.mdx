@@ -1,0 +1,10 @@
+---
+title: Strony prawne
+description: Polityka prywatności, regulamin, zwroty i licencja w każdym obsługiwanym języku.
+---
+
+Trasy części marketingowej udostępniają `/privacy`, `/terms`, `/refunds` i `/licence` we wszystkich dziewięciu obsługiwanych językach. Każda trasa ładuje swoją przestrzeń nazw tłumaczeń i wyświetla wspólny komponent `LegalPage`.
+
+Sekcje dokumentów i ich kolejność należą do `src/presentation/components/custom/legal-page`. Treść znajduje się w `messages/{locale}/pages.legal.*.json`, a linki w stopce w `src/data/marketing-footer.ts`. Przy zmianie zasad zaktualizuj wszystkie tłumaczenia.
+
+Strona licencji rozróżnia licencję MIT publicznego repozytorium od osobno dostarczanych płatnych materiałów. Polityka zwrotów zachowuje ustawowe prawa konsumenta. Dostosowując aplikację, dopilnuj zgodności dokumentów z rzeczywistym operatorem, procesem płatności, dostawcami i przetwarzaniem danych.

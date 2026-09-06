@@ -1,0 +1,21 @@
+---
+title: "Dodaj DataTable"
+description: "Wspólny zestaw TanStack DataTable na ekranach admina."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Kit location
+
+`src/presentation/components/custom/data-table`
+
+## Feature pattern (users)
+
+- `columns.tsx` / `cells.tsx` / `filters.tsx` / `actions.tsx` / `options.tsx`
+- Mapuj wiersze bazy → wiersze tabeli w `_lib` lub narzędziach modułu
+- Odświeżenie paska narzędzi → unieważnij odpowiedni klucz TanStack Query
+- Nie wciągaj środowiska uruchomieniowego tabeli do fallbacków Suspense
+
+## Options
+
+Pasek narzędzi (wyszukiwanie, filtry, eksport CSV, pobieranie, ustawienia), paginację, zaznaczanie i gęstość konfigurujesz przez `options` — zobacz UI → DataTable.

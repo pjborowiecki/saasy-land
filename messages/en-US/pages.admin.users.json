@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "User Management | SaaSy Land",
+    "description": "Manage your team members, permissions, and customer accounts."
+  },
+  "title": "User Management",
+  "description": "Manage your team members, permissions, and customer accounts.",
+  "actions": {
+    "addUser": "Add User",
+    "feedback": {
+      "banSuccess": "User banned.",
+      "deleteSuccess": "User deleted.",
+      "error": "Something went wrong. Please try again.",
+      "resetPasswordSuccess": "Password reset successfully.",
+      "unbanSuccess": "User unbanned."
+    },
+    "deleteDialog": {
+      "cancel": "Cancel",
+      "confirm": "Delete user",
+      "description": "Permanently delete {name} and their account data. This cannot be undone.",
+      "title": "Delete user?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Cancel",
+      "confirm": "Reset password",
+      "description": "Set a new password for {name}.",
+      "password": "New password",
+      "title": "Reset password"
+    },
+    "row": {
+      "ban": "Ban user",
+      "delete": "Delete user",
+      "edit": "Edit user",
+      "menu": "Row actions",
+      "resetPassword": "Reset password",
+      "unban": "Unban user",
+      "viewProfile": "View profile"
+    }
+  },
+  "search": {
+    "placeholder": "Search users by name, email, or ID..."
+  },
+  "filters": {
+    "groups": {
+      "identity": "Identity",
+      "access": "Access",
+      "activity": "Activity"
+    },
+    "role": {
+      "all": "Role: All",
+      "value": "Role: {role}",
+      "options": {
+        "admin": "Admin",
+        "customer": "Customer"
+      }
+    },
+    "status": {
+      "all": "Status: All",
+      "value": "Status: {status}",
+      "options": {
+        "active": "Active",
+        "pending": "Pending",
+        "banned": "Banned"
+      }
+    }
+  },
+  "tabs": {
+    "allUsers": "All Users",
+    "invitations": "Invitations",
+    "roles": "Roles & Permissions",
+    "security": "Security"
+  },
+  "table": {
+    "booleans": {
+      "no": "No",
+      "yes": "Yes"
+    },
+    "empty": "No users found.",
+    "emptyValue": "n/a",
+    "headers": {
+      "createdAt": "Created At",
+      "emailVerified": "Email verified",
+      "role": "Role",
+      "status": "Status",
+      "timezone": "Preferred time zone",
+      "twoFactorEnabled": "2FA enabled",
+      "updatedAt": "Updated At",
+      "user": "User"
+    },
+    "selectAll": "Select all rows",
+    "selectRow": "Select row",
+    "actionsColumn": "Row actions"
+  },
+  "pagination": {
+    "info": "Showing {start} to {end} of {total} results",
+    "goToPage": "Go to page {page}",
+    "nextPage": "Next page",
+    "previousPage": "Previous page"
+  },
+  "invitations": {
+    "title": "Invitations",
+    "description": "Manage pending team invitations and access links.",
+    "actions": {
+      "copyLink": "Copy Link",
+      "sendInvite": "Send Invite"
+    },
+    "search": {
+      "placeholder": "Search invites by email..."
+    },
+    "filters": {
+      "role": "Role: All",
+      "status": "Status: Pending"
+    },
+    "table": {
+      "headers": {
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "sentDate": "Sent Date"
+      }
+    },
+    "pagination": {
+      "info": "Showing {start} to {end} of {total} results"
+    }
+  },
+  "roles": {
+    "title": "Roles & Permissions",
+    "description": "Define access levels and manage permissions across your organization.",
+    "actions": {
+      "createRole": "Create Role"
+    },
+    "search": {
+      "placeholder": "Search roles by name or description..."
+    },
+    "filters": {
+      "type": "Type: All"
+    },
+    "table": {
+      "headers": {
+        "name": "Role Name",
+        "description": "Description",
+        "type": "Type",
+        "users": "Users"
+      },
+      "usersCount": "{count, plural, one {# user} other {# users}}"
+    },
+    "pagination": {
+      "info": "Showing {start} to {end} of {total} roles"
+    }
+  },
+  "security": {
+    "title": "Security",
+    "empty": {
+      "title": "No security events recorded",
+      "description": "Sign-in attempts, session revocations and role changes appear here once your workspace starts logging them. Turn on the audit log to begin collecting events.",
+      "action": "Enable audit log"
+    }
+  },
+  "demo": {
+    "roles": {
+      "r1": {
+        "name": "Administrator",
+        "description": "Full access to all system features, billing, and settings.",
+        "type": "System"
+      },
+      "r2": {
+        "name": "Editor",
+        "description": "Can edit products and content, but cannot manage users.",
+        "type": "System"
+      },
+      "r3": {
+        "name": "Support Agent",
+        "description": "Access to user sessions and basic troubleshooting tools.",
+        "type": "Custom"
+      },
+      "r4": {
+        "name": "Viewer",
+        "description": "Read-only access to analytics and dashboards.",
+        "type": "System"
+      },
+      "r5": {
+        "name": "API Developer",
+        "description": "Access to developer settings, API keys, and webhooks.",
+        "type": "Custom"
+      }
+    },
+    "invitations": {
+      "i1": {
+        "role": "Administrator",
+        "status": "Pending",
+        "sentDate": "2 hours ago"
+      },
+      "i2": {
+        "role": "Viewer",
+        "status": "Pending",
+        "sentDate": "Yesterday"
+      },
+      "i3": {
+        "role": "Editor",
+        "status": "Expired",
+        "sentDate": "Oct 10, 2023"
+      },
+      "i4": {
+        "role": "Subscriber",
+        "status": "Pending",
+        "sentDate": "Oct 20, 2023"
+      },
+      "i5": {
+        "role": "Editor",
+        "status": "Expired",
+        "sentDate": "Sep 28, 2023"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Se connecter",
+    "description": "Connectez-vous à votre compte {name}."
+  },
+  "form": {
+    "title": "Bienvenue à nouveau",
+    "description": "Veuillez saisir vos informations pour vous connecter à votre compte.",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "submit": "Continuer",
+    "submitting": "Connexion en cours...",
+    "success": "Connecté(e) avec succès !",
+    "error": "Adresse e-mail ou mot de passe incorrect. Veuillez réessayer.",
+    "noAccount": "N'avez-vous pas de compte ? <signup>S'inscrire</signup>",
+    "forgotPassword": "Mot de passe oublié ?",
+    "continueWithGithub": "Continuer avec GitHub",
+    "continueWithGoogle": "Continuer avec Google",
+    "or": "ou"
+  }
+}

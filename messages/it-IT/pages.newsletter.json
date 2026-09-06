@@ -1,0 +1,54 @@
+{
+  "form": {
+    "alreadySubscribed": "Già siete dentro. Non c'è niente da fare.",
+    "button": "Iscriviti",
+    "confirmationSent": "Successo! Ora controlla la tua casella di posta e conferma l'indirizzo.",
+    "error": "Quel messaggio non è stato inviato. Riprova oppure invia un'email a hello@saasyland.com.",
+    "label": "Indirizzo email",
+    "placeholder": "Il tuo indirizzo email",
+    "submitting": "Iscrivendosi..."
+  },
+  "confirm": {
+    "title": "Conferma l'iscrizione",
+    "description": "Conferma l'iscrizione al blog degli aggiornamenti di SaaSy Land.",
+    "confirmed": {
+      "title": "Sei dentro.",
+      "body": "L'indirizzo è stato confermato. Da qui è possibile consultare il registro delle build: quali componenti sono stati rilasciati, le decisioni che hanno portato a questa scelta e quali aspetti non hanno funzionato.",
+      "note": "Ogni email contiene un link per disiscriversi. Un semplice clic e sarai rimosso dalla lista.",
+      "action": "Ecco cosa si sta costruendo"
+    },
+    "expired": {
+      "title": "Quel link è scaduto.",
+      "body": "I link di conferma sono validi per 24 ore e funzionano una sola volta. Questo link è scaduto o è già stato utilizzato, pertanto l'indirizzo non è stato ancora confermato.",
+      "note": "Iscriviti nuovamente dalla sezione in basso e un nuovo link arriverà nella tua casella di posta in circa un minuto.",
+      "action": "Ritorno al sito"
+    },
+    "pending": {
+      "title": "Conferma dell'abbonamento...",
+      "body": "Attenda, stiamo verificando il Suo indirizzo email.",
+      "note": "Ci vorrà solo un momento.",
+      "action": "Ritorno al sito"
+    },
+    "error": {
+      "title": "Non siamo riusciti a confermare il suo indirizzo.",
+      "body": "Si prega di ricaricare questa pagina per riprovare.",
+      "note": "La sua iscrizione non è stata modificata.",
+      "action": "Ritorno al sito"
+    }
+  },
+  "unsubscribe": {
+    "title": "È stato rimosso dalla lista.",
+    "description": "Disiscriviti dal blog di sviluppo di SaaSy Land.",
+    "body": "A quell'indirizzo non verranno inviati ulteriori messaggi relativi ai log di compilazione. Non è necessaria alcuna conferma e non ci sono altri link da cliccare.",
+    "note": "Le email relative a transazioni o acquisti sono separate e vengono comunque recapitate, in quanto si tratta di messaggi che hai richiesto completando un'operazione di acquisto.",
+    "resubscribe": "Hai cambiato idea? Registrati nuovamente dalla sezione in fondo alla pagina",
+    "pending": {
+      "title": "Annullamento in corso…",
+      "body": "Attenda, stiamo aggiornando il suo abbonamento."
+    },
+    "error": {
+      "title": "Non è stato possibile disiscriversi da questo indirizzo.",
+      "body": "Apra il link di disiscrizione presente nella tua email e riprova."
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import { defineConfig, devices } from "@playwright/test"
 
 const isCI = Boolean(process.env["CI"])
-const appUrl = process.env["NEXT_PUBLIC_APP_URL"] ?? "http://127.0.0.1:3000"
+const appUrl = process.env["PLAYWRIGHT_BASE_URL"] ?? "http://127.0.0.1:3000"
+const startCommand = `bun run start:test --port ${new URL(appUrl).port || "3000"}`
+
 const CI_RETRIES = 2
 const DEV_RETRIES = 0
 const CI_WORKERS = 2
@@ -30,10 +32,7 @@ export default defineConfig({
     video: isCI ? "retain-on-failure" : "off",
   },
   webServer: {
-    // instant() verdicts require a production build with the testing API exposed — dev servers
-    // neither prefetch nor lock reliably, so they cannot produce a valid RED or GREEN.
-    command: isCI ? "bun run start" : "bun run build && bun run start",
-    env: { EXPOSE_TESTING_API: "1" },
+    command: isCI ? startCommand : `bun run db:migrate:test && bun run db:seed:test && bun run build:test && ${startCommand}`,
     reuseExistingServer: !isCI,
     timeout: 600_000,
     url: appUrl,

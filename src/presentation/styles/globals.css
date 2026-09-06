@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./fonts.css";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
@@ -408,6 +409,36 @@
 }
 
 @layer utilities {
+  .pv {
+    display: none;
+  }
+
+  .pv-100 {
+    display: inline;
+  }
+
+  [data-ppp="80"] .pv-100,
+  [data-ppp="70"] .pv-100,
+  [data-ppp="60"] .pv-100,
+  [data-ppp="50"] .pv-100 {
+    display: none;
+  }
+
+  [data-ppp="80"] .pv-80,
+  [data-ppp="70"] .pv-70,
+  [data-ppp="60"] .pv-60,
+  [data-ppp="50"] .pv-50 {
+    display: inline;
+  }
+
+  .ppp-note {
+    display: none;
+  }
+
+  [data-ppp] .ppp-note {
+    display: inline;
+  }
+
   /*
    * THE FIELD — the page's only background texture, and the reason the dark ground
    * reads as a surface rather than as an absence.

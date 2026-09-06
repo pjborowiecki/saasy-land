@@ -1,8 +1,9 @@
 import type * as ResendModule from "resend"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { resend } from "~/src/integrations/resend/resend.config"
 
-vi.mock(import("server-only"), () => ({}))
+vi.mock(import("@tanstack/react-start/server-only"), () => ({}))
 
 vi.mock(import("resend"), async (importOriginal) => {
   const actual = await importOriginal<typeof ResendModule>()

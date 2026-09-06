@@ -1,15 +1,8 @@
-import { env } from "~/src/platform/env"
+export const TEST_APP_URL = "http://localhost:3000"
 
-export const TEST_APP_URL = env.NEXT_PUBLIC_APP_URL
+export const createCookieHeader = (name: string, value: string): string => `${name}=${value}`
 
-export function createCookieHeader(name: string, value: string): string {
-  return `${name}=${value}`
-}
+export const createTestRequestUrl = (pathname: string): string => new URL(pathname, TEST_APP_URL).toString()
 
-export function createTestRequestUrl(pathname: string): string {
-  return new URL(pathname, TEST_APP_URL).toString()
-}
-
-export function createAuthActionUrl(callbackPath: string): string {
-  return `${TEST_APP_URL}/api/auth/callback?callbackURL=${encodeURIComponent(callbackPath)}`
-}
+export const createAuthActionUrl = (callbackPath: string): string =>
+  `${TEST_APP_URL}/api/auth/callback?callbackURL=${encodeURIComponent(callbackPath)}`

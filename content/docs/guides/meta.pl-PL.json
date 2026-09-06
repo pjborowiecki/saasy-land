@@ -1,0 +1,24 @@
+{
+  "title": "Instrukcje.",
+  "pages": [
+    "add-a-module",
+    "add-a-feature",
+    "add-a-use-case",
+    "add-an-admin-page",
+    "add-a-data-table",
+    "url-state",
+    "forms-and-validation",
+    "server-functions",
+    "i18n-messages",
+    "writing-tests",
+    "database-migrations",
+    "email-templates",
+    "theming-and-branding",
+    "auth-flows",
+    "roles-and-permissions",
+    "add-an-api-route",
+    "security-checklist",
+    "local-debugging"
+  ],
+  "icon": "BookOpen"
+}

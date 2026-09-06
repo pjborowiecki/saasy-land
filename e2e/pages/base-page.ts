@@ -1,9 +1,9 @@
 import type { Page, Response } from "@playwright/test"
 
-/** Next.js dev + WebKit often never reach `domcontentloaded`; `commit` is reliable. */
-export const APP_NAVIGATION_WAIT_UNTIL = "commit" as const
+/** Parse the streamed document before checking TanStack hydration and React boundaries. */
+export const APP_NAVIGATION_WAIT_UNTIL = "domcontentloaded" as const
 
-const SUSPENSE_READY_TIMEOUT_MS = 30_000
+const APP_READY_TIMEOUT_MS = 30_000
 
 export class BasePage {
   protected readonly page: Page
@@ -18,12 +18,17 @@ export class BasePage {
 
   async waitForAppReady(): Promise<void> {
     await this.page.locator("body").waitFor({ state: "visible" })
-    await this.waitForSuspenseBoundaries()
+    await this.waitForHydration()
   }
 
-  private async waitForSuspenseBoundaries(): Promise<void> {
+  private async waitForHydration(): Promise<void> {
     await this.page.waitForFunction(
       () => {
+        // Start clears this bootstrap state once hydration and the response stream have finished.
+        const hydration: unknown = Reflect.get(window, "$_TSR")
+        if (typeof hydration === "object" && hydration !== null && (!("hydrated" in hydration) || hydration.hydrated !== true)) {
+          return false
+        }
         for (const node of document.querySelectorAll('div[id^="S:"]')) {
           if (globalThis.getComputedStyle(node).display === "none") {
             return false
@@ -33,7 +38,7 @@ export class BasePage {
         return true
       },
       undefined,
-      { timeout: SUSPENSE_READY_TIMEOUT_MS },
+      { timeout: APP_READY_TIMEOUT_MS },
     )
   }
 }

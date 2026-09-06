@@ -1,0 +1,24 @@
+---
+title: Skrypty projektu
+description: Skrypty projektu — SaaSy Land
+---
+
+Skrypty w `package.json` korzystają z Vite+ do pracy lokalnej, formatowania, lintowania, typów, Vitest i budowania. `content` generuje kolekcje MDX, a `cf-typegen` typy bindingów Workera. `db:generate` tworzy migracje SQL, a `db:migrate:local` stosuje je do lokalnego D1. Polecenia migracji zdalnej i wdrożenia jawnie wskazują środowisko.
+
+`build:preview` i `build:production` budują Workera, prerenderują strony publiczne i sprawdzają artefakty. `clean` usuwa wygenerowane pliki i lokalny stan bindingów, więc najpierw wyeksportuj dane, które chcesz zachować.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

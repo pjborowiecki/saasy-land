@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "製品 | SaaSy Land",
+    "description": "物理的な商品、デジタルコンテンツのダウンロード、および保護されたコンテンツのサブスクリプションを管理します。"
+  },
+  "tabs": {
+    "all": "全製品",
+    "onetime": "一回払いの商品",
+    "subscriptions": "サブスクリプション",
+    "drafts": "下書き",
+    "categories": "カテゴリ",
+    "collections": "コレクション",
+    "courses": "コース"
+  },
+  "title": "製品",
+  "description": "物理的な商品、デジタルコンテンツのダウンロード、および保護されたコンテンツのサブスクリプションを管理します。",
+  "actions": {
+    "create": "製品を作成する"
+  },
+  "search": {
+    "placeholder": "製品名またはSKUで検索..."
+  },
+  "filters": {
+    "type": "種類：すべて",
+    "status": "状況：稼働中",
+    "category": "カテゴリ",
+    "collection": "コレクション",
+    "cycle": "サイクル",
+    "model": "モデル",
+    "visibility": "公開範囲",
+    "sortby": "並べ替え"
+  },
+  "table": {
+    "headers": {
+      "product": "プロダクト",
+      "type": "タイプ",
+      "pricing": "料金",
+      "status": "ステータス",
+      "metrics": "指標"
+    },
+    "actionsColumn": "行の操作",
+    "emptyValue": "n/a",
+    "rowActions": "行の操作",
+    "selectAll": "すべての行を選択します",
+    "selectRow": "行を選択",
+    "statusLabels": {
+      "archived": "保管済み",
+      "draft": "下書き",
+      "published": "有効"
+    },
+    "typeLabels": {
+      "course": "コース",
+      "one_time": "一度限り",
+      "subscription": "サブスクリプション"
+    },
+    "visibilityLabels": {
+      "hidden": "非公開",
+      "public": "公開"
+    }
+  },
+  "pagination": {
+    "info": "全{total}件の商品のうち{start}〜{end}件を表示",
+    "goToPage": "{page}ページへ移動",
+    "nextPage": "次のページ",
+    "previousPage": "前のページ"
+  },
+  "onetime": {
+    "title": "一回払いの商品",
+    "description": "個々の製品、デジタルコンテンツ、および実物の商品を管理します。"
+  },
+  "subscriptions": {
+    "title": "サブスクリプション",
+    "description": "定期的な請求プラン、会員ランク、および利用量に応じた料金体系を管理します。",
+    "table": {
+      "headers": {
+        "product": "プラン名",
+        "model": "モデル",
+        "pricing": "料金",
+        "status": "ステータス",
+        "metrics": "指標"
+      }
+    }
+  },
+  "categories": {
+    "title": "カテゴリ",
+    "description": "製品、サブスクリプションプラン、およびデジタルコンテンツを整理してください。",
+    "table": {
+      "headers": {
+        "category": "カテゴリ",
+        "visibility": "公開範囲",
+        "items": "項目",
+        "lastUpdated": "最終更新日"
+      }
+    }
+  },
+  "collections": {
+    "title": "コレクション",
+    "description": "製品、サブスクリプションプラン、およびデジタルコンテンツを整理し、グループ化してください。",
+    "table": {
+      "headers": {
+        "collection": "コレクション",
+        "visibility": "公開範囲",
+        "items": "項目",
+        "lastUpdated": "最終更新日"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "まだコースは提供していません",
+      "description": "ここに、お客様が公開されたコースが表示されます。コースのレッスン、料金、および受講者数を確認できます。まずはコースを作成して、始めてみましょう。",
+      "action": "コースを作成する"
+    }
+  }
+}

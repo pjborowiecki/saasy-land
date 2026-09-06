@@ -1,4 +1,4 @@
-import type { ProductValidationMessageKey } from "~/src/integrations/next-intl/i18n.types"
+import type { ProductValidationMessageKey } from "~/src/integrations/use-intl/i18n.types"
 
 const PRODUCT_NAME_MAX_LENGTH = 255
 

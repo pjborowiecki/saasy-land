@@ -1,0 +1,62 @@
+{
+  "title": "Überblick",
+  "description": "Willkommen zurück. Hier ist, was heute passiert.",
+  "actions": {
+    "last30Days": "Letzte 30 Tage",
+    "addProduct": "Produkt hinzufügen"
+  },
+  "stats": {
+    "activeUsers": {
+      "title": "Registrierte Benutzer"
+    },
+    "totalProducts": {
+      "title": "Produkte im Katalog"
+    },
+    "pendingVerification": {
+      "title": "Ausstehende E-Mail-Verifizierung"
+    }
+  },
+  "chart": {
+    "title": "Umsichtsüberblick",
+    "description": "Monatlich wiederkehrende Umsatze über die letzten 12 Monate",
+    "placeholder": "Beispielhafte Reihe. Die tatsächlichen Einnahmen werden hier angezeigt, sobald die Abrechnung eingerichtet ist.",
+    "filters": {
+      "12m": "12M",
+      "30d": "30D",
+      "7d": "7D"
+    }
+  },
+  "users": {
+    "title": "Benutzerverwaltung",
+    "description": "Verwalten Sie hier Ihre Teammitglieder und deren Kontoberechtigungen.",
+    "search": "Filter Benutzer...",
+    "filters": {
+      "role": "Rolle",
+      "status": "Status"
+    },
+    "export": "Exportieren",
+    "table": {
+      "columns": {
+        "user": "Nutzer",
+        "role": "Rolle",
+        "status": "Status",
+        "lastActive": "Letzte Aktivität",
+        "actions": "Aktionen"
+      },
+      "status": {
+        "active": "Aktiv",
+        "banned": "Verboten",
+        "pending": "Ausstehend"
+      },
+      "rowActions": {
+        "edit": "Bearbeiten Sie den Benutzer",
+        "delete": "Benutzer löschen"
+      },
+      "pagination": {
+        "showing": "{from} bis {to} von {total} Nutzern",
+        "previous": "Zurück",
+        "viewAll": "Alle Benutzer anzeigen"
+      }
+    }
+  }
+}

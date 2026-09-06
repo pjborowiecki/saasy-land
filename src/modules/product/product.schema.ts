@@ -1,27 +1,30 @@
-import { index, integer, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 import { DEFAULT_CURRENCY_CODE } from "~/src/modules/_core/constants/currency"
 
-export const productStatusEnum = pgEnum("product_status", ["draft", "published", "archived"])
-export const productTypeEnum = pgEnum("product_type", ["one_time", "subscription", "course"])
+export const productStatusEnum = { enumValues: ["draft", "published", "archived"] } as const
+export const productTypeEnum = { enumValues: ["one_time", "subscription", "course"] } as const
 
 export type ProductStatus = (typeof productStatusEnum.enumValues)[number]
 export type ProductType = (typeof productTypeEnum.enumValues)[number]
 
-export const product = pgTable(
+export const product = sqliteTable(
   "product",
   {
-    billingCycle: varchar("billing_cycle", { length: 32 }),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    currency: varchar("currency", { length: 3 }).notNull().default(DEFAULT_CURRENCY_CODE),
+    billingCycle: text("billing_cycle", { length: 32 }),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
+    currency: text("currency", { length: 3 }).notNull().default(DEFAULT_CURRENCY_CODE),
     description: text("description").notNull().default(""),
-    id: uuid("id").primaryKey(),
-    name: varchar("name", { length: 255 }).notNull(),
+    id: text("id").primaryKey(),
+    name: text("name", { length: 255 }).notNull(),
     priceCents: integer("price_cents").notNull().default(0),
-    status: productStatusEnum().notNull().default("draft"),
-    type: productTypeEnum().notNull().default("one_time"),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    status: text("status", { enum: productStatusEnum.enumValues }).notNull().default("draft"),
+    type: text("type", { enum: productTypeEnum.enumValues }).notNull().default("one_time"),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */

@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Analisi | SaaSy Land",
+    "description": "Monitora le prestazioni, i ricavi e il coinvolgimento degli utenti del tuo software as a service."
+  },
+  "title": "Panoramica sull'analisi dei dati",
+  "description": "Monitora le prestazioni, i ricavi e il coinvolgimento degli utenti del tuo software as a service.",
+  "actions": {
+    "datePicker": "Ultimi 30 giorni"
+  },
+  "tabs": {
+    "overview": "## Panoramica",
+    "revenue": "Ricavi",
+    "audience": "Pubblico",
+    "retention": "Fidelizzazione",
+    "reports": "Report"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "MRR totale",
+      "value": "$124,500",
+      "trend": "14.2%",
+      "trendLabel": "rispetto al mese scorso"
+    },
+    "activeUsers": {
+      "title": "Utenti attivi",
+      "value": "45,231",
+      "trend": "5.4%",
+      "trendLabel": "rispetto al mese scorso"
+    },
+    "churn": {
+      "title": "Tasso di abbandono",
+      "value": "1.2%",
+      "trend": "0.4%",
+      "trendLabel": "rispetto al mese scorso"
+    },
+    "arpu": {
+      "title": "Ricavi medi per utente",
+      "value": "$42.50",
+      "trend": "2.1%",
+      "trendLabel": "rispetto al mese scorso"
+    }
+  },
+  "chart": {
+    "title": "Panoramica dei ricavi",
+    "description": "Ricavi giornalieri generati negli ultimi 30 giorni.",
+    "placeholder": "Serie illustrativa. Le entrate effettive vengono visualizzate qui una volta che la fatturazione è stata collegata.",
+    "legend": {
+      "new": "Nuove iscrizioni",
+      "renewals": "Rinnovi"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "Oggi: {value}"
+  },
+  "regions": {
+    "title": "Principali regioni",
+    "viewAll": "Visualizza tutto"
+  },
+  "upgrades": {
+    "title": "Passaggi recenti a un piano superiore",
+    "viewAll": "Visualizza tutto"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Aggiornato al piano Pro",
+        "time": "2 minuti fa"
+      },
+      "u2": {
+        "action": "Aggiornato alla versione Enterprise",
+        "time": "Un'ora fa"
+      },
+      "u3": {
+        "action": "Aggiornato al piano Pro",
+        "time": "3 ore fa"
+      },
+      "u4": {
+        "action": "Aggiornato al piano Team",
+        "time": "5 ore fa"
+      },
+      "u5": {
+        "action": "Aggiornato al piano Pro",
+        "time": "Un giorno fa"
+      }
+    }
+  }
+}

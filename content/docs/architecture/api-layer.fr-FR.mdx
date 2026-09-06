@@ -1,0 +1,28 @@
+---
+title: TanStack Start Gestionnaires HTTP
+description: TanStack Start Gestionnaires HTTP — SaaSy Land
+---
+
+Les paramètres HTTP utilisent les gestionnaires de serveur natifs TanStack Start dans `src/routes`. Better Auth possède GET et POST sous `/api/auth/$`; Fumadocs utilise la recherche `/api/search`C'est vrai. Les opérations de produit sont des fonctions de serveur natives dans les modules de fonctionnalités.
+
+Déclarez les gestionnaires sur `createFileRoute` avec `server.handlers`C'est vrai. Utiliser le produit fourni `request`, valider l'entrée, faire appliquer les vérifications d'autorisation, et retourner un Web `Response`C'est vrai. Gardez la vérification webhook dans l'intégration du fournisseur. N'exposez pas un paramètre REST en double pour une opération qui n'est utilisée que par le client RPC dactylographié de cette application.
+
+```ts
+import { createFileRoute } from "@tanstack/react-router"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+
+export const Route = createFileRoute("/api/auth/$")({
+  server: {
+    handlers: {
+      GET: ({ request }) => auth.handler(request),
+      POST: ({ request }) => auth.handler(request),
+    },
+  },
+})
+```
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

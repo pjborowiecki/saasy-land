@@ -1,0 +1,13 @@
+---
+title: Plantillas de correo electrónico.
+description: Envío mediante Resend y plantillas con React Email.
+---
+
+## ¿Dónde?
+
+- Enviar helper: `integrations/resend`
+- Plantillas: `presentation/emails` (cada una exporta su componente + `*Subject(locale)`); integración en `integrations/better-auth/auth.emails.ts`.
+
+## Consejos locales.
+
+Usa el remitente de incorporación de Resend para las pruebas de humo; nunca incluyas claves de API en los commits.

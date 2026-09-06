@@ -1,5 +1,8 @@
 import { createSchemaFactory } from "drizzle-zod"
-import z from "zod/v4"
+import zod from "zod/v4"
+
+import { emailSchema } from "~/src/integrations/better-auth/auth.zod"
+import { I18N } from "~/src/integrations/use-intl/i18n.config"
 
 import { SUBSCRIPTION_RESULT } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import {
@@ -9,44 +12,41 @@ import {
 } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
 import { NEWSLETTER_SUBSCRIBER_VALIDATION_MESSAGE } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.validations"
 
-import { emailSchema } from "~/src/integrations/better-auth/auth.zod"
-import { I18N } from "~/src/integrations/next-intl/i18n.config"
+const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: zod })
 
-const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
+const localeField = zod.enum(I18N.SUPPORTED_LOCALES)
 
-const localeField = z.enum(I18N.LOCALES)
+const tokenField = zod.string().length(NEWSLETTER_TOKEN_LENGTH, { message: NEWSLETTER_SUBSCRIBER_VALIDATION_MESSAGE.tokenInvalid })
 
-const tokenField = z.string().length(NEWSLETTER_TOKEN_LENGTH, { message: NEWSLETTER_SUBSCRIBER_VALIDATION_MESSAGE.tokenInvalid })
-
-const subscribeToNewsletter = z.object({
+const subscribeToNewsletter = zod.object({
   email: emailSchema,
   locale: localeField,
-  source: z.enum(newsletterSourceEnum.enumValues).optional(),
+  source: zod.enum(newsletterSourceEnum.enumValues).optional(),
 })
 
-const unsubscribeFromNewsletter = z.object({
+const unsubscribeFromNewsletter = zod.object({
   token: tokenField,
 })
 
-const confirmNewsletterSubscription = z.object({
+const confirmNewsletterSubscription = zod.object({
   token: tokenField,
 })
 
-const setNewsletterSubscription = z.object({
-  isSubscribed: z.boolean(),
+const setNewsletterSubscription = zod.object({
+  isSubscribed: zod.boolean(),
   locale: localeField,
 })
 
-const subscriptionStatus = z.object({
-  isSubscribed: z.boolean(),
+const subscriptionStatus = zod.object({
+  isSubscribed: zod.boolean(),
 })
 
-const subscribeResult = z.object({
-  status: z.enum(SUBSCRIPTION_RESULT),
+const subscribeResult = zod.object({
+  status: zod.enum(SUBSCRIPTION_RESULT),
 })
 
-const confirmResult = z.object({
-  confirmed: z.boolean(),
+const confirmResult = zod.object({
+  confirmed: zod.boolean(),
 })
 
 const insert = createInsertSchema(newsletterSubscriber)

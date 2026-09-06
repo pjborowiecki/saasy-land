@@ -1,4 +1,4 @@
-import type { NewsletterSubscriberValidationMessageKey } from "~/src/integrations/next-intl/i18n.types"
+import type { NewsletterSubscriberValidationMessageKey } from "~/src/integrations/use-intl/i18n.types"
 
 export const NEWSLETTER_SUBSCRIBER_VALIDATION_MESSAGE = {
   emailRequired: "emailRequired",

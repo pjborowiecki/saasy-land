@@ -1,0 +1,25 @@
+---
+title: Disoccupazione a Cloudflare Workers
+description: Discussione su Cloudflare Workers — SaaSy Land
+---
+
+La costruzione del Worker è prodotta da Vite+, TanStack Start e `@cloudflare/vite-plugin`. `wrangler.jsonc` dichiara l'ingresso, le impostazioni di compatibilità, i beni, l'osservanza e lo sviluppo separato, l'anteprima e i binding di produzione.
+
+Disposizione D1 e KV e sostituire gli ID dei segnaposto per l'ambiente di destinazione. Impostare i suoi segreti URL e provider in `.env.preview` o `.env.production`. Applicare le migrazioni esplicitamente, quindi distribuire. Gli script di distribuzione convalidano prima gli ID vincolanti; costruiscono gli script prerender le pagine pubbliche e verificano gli artefatti di output. Le pagine di autenticazione e applicazioni private vengono eseguite dinamicamente sul Worker.
+
+Impostare il dominio personalizzato e OAuth URL di callback per l'ambiente di destinazione. Installare dipendenze e costruire non applica mai una migrazione remota.
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

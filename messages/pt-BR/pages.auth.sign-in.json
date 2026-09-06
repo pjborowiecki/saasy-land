@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Entrar",
+    "description": "Entre na sua conta em {name}."
+  },
+  "form": {
+    "title": "Bem-vindo(a) de volta",
+    "description": "Preencha seus dados para acessar sua conta.",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Continuar",
+    "submitting": "Conectando...",
+    "success": "Conectado(a) com sucesso!",
+    "error": "Email ou senha inválidos. Por favor, tente novamente.",
+    "noAccount": "Não tem uma conta? <signup>Cadastre-se</signup>",
+    "forgotPassword": "Esqueci a senha?",
+    "continueWithGithub": "Continue com o GitHub",
+    "continueWithGoogle": "Continue com o Google",
+    "or": "ou"
+  }
+}

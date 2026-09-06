@@ -1,0 +1,16 @@
+---
+title: "Сайт: www.dcs.com"
+description: Як будується і розширена документація.
+---
+
+## Корінь контенту
+
+`content/docs`
+
+- MDX сторінки: `*.{locale}.mdx` для всіх дев'яти налаштованих мов (dot parser)
+- Склад `meta.<locale>.json` заголовки / замовити / кремнію
+- `fallbackLanguage: en-US` для відсутніх перекладів
+
+## Електропроводка
+
+`fumadocs.source.ts`, docs макет, пошук API. Додавання сторінок → оновлення мета `pages` масиви → rebuild.

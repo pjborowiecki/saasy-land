@@ -1,0 +1,14 @@
+---
+title: プロバイダー
+description: プロバイダー — SaaSy Land
+---
+
+`src/routes/__root.tsx` ドキュメントとアプリケーション全体プロバイダの構成を所有しています。 ルータは QueryClient を作成し、キャッシュを SSR に接続します。 翻訳プロバイダは、アクティブなルート名空間を読み込みます。 `IntlProvider`. . テーマ、モーション、React Ariaルーティング、ツールチップ、通知、オフラインインジケータは、既存のプレゼンテーションの動作を保持します。
+
+Fumadocs は、TanStack プロバイダーとネイティブ ルーター リンク アダプターを使用します。 共有プロバイダーは、 `src/providers`; ページのみのコンテキストは、その機能の横にとどまります。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

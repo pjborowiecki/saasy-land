@@ -1,0 +1,71 @@
+{
+  "title": "Crea corso",
+  "actions": {
+    "cancel": "Annulla",
+    "save": "Salva corso"
+  },
+  "sections": {
+    "general": {
+      "title": "Informazioni generali",
+      "name": {
+        "label": "Titolo del corso",
+        "placeholder": "Modelli avanzati di progettazione dell'interfaccia utente..."
+      },
+      "description": {
+        "label": "Descrizione",
+        "placeholder": "Descrivete brevemente cosa gli studenti impareranno...",
+        "help": "Sarà visualizzato nella pagina principale del corso."
+      }
+    },
+    "curriculum": {
+      "title": "Programma",
+      "description": "Struttura il tuo corso in sezioni e lezioni.",
+      "expandAll": "Espandi tutto",
+      "addSection": "Aggiungi una sezione nuova",
+      "addLesson": "Aggiungi lezione"
+    },
+    "pricing": {
+      "title": "Prezzi e Accesso",
+      "model": {
+        "label": "Modello di fatturazione",
+        "oneTime": "Acquisto unico",
+        "subscription": "Abbonamento"
+      },
+      "price": {
+        "label": "Prezzo",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "Durata di accesso",
+        "lifetime": "Accesso a vita"
+      }
+    },
+    "status": {
+      "title": "Stato",
+      "publish": {
+        "label": "Pubblica il corso",
+        "description": "Rendete visibile agli studenti"
+      },
+      "certificate": {
+        "label": "Rilascia certificato",
+        "description": "Al raggiungimento del 100%"
+      }
+    },
+    "media": {
+      "title": "Anteprima del corso",
+      "upload": "Carica immagine",
+      "help": "1920x1080 pixel, risoluzione consigliata"
+    },
+    "organization": {
+      "title": "Organizzazione",
+      "category": {
+        "label": "Categoria",
+        "placeholder": "Seleziona la categoria..."
+      },
+      "difficulty": {
+        "label": "Livello di difficoltà",
+        "placeholder": "es. Principiante, Avanzato…"
+      }
+    }
+  }
+}

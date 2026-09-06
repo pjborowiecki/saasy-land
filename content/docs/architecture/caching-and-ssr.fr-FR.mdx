@@ -1,0 +1,14 @@
+---
+title: Cache et SSR
+description: Cache et SSR — SaaSy Land
+---
+
+Le QueryClient appartient à une instance routeur et est intégré au rendu du serveur. Chargeurs préchargent les données et namespace JSON; les composants lisent le même cache avec `useSuspenseQuery` ou `useSuspenseQueries`C'est vrai. Les requêtes déclarent les clés stables. Les mutations réussies invalident seulement les touches de fonctionnalité affectées.
+
+La documentation publique, le blog et les pages d'atterrissage sont prérendus au moment de la construction. Les itinéraires d'admin, de client, d'auth et de jeton de newsletter sont exclus. Cloudflare KV cache les métadonnées publiques GitHub. D1 stocke les sessions persistantes et les compteurs atomiques de limite de débit; KV n'est pas utilisé pour les décisions d'autorisation.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

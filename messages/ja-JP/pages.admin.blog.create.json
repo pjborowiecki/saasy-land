@@ -1,0 +1,36 @@
+{
+  "title": "投稿を作成する",
+  "description": "新しいMarkdownブログ記事を作成し、詳細設定を行います。",
+  "actions": {
+    "preview": "プレビュー",
+    "saveDraft": "下書きを保存する",
+    "publish": "公開"
+  },
+  "editor": {
+    "title": "投稿タイトル",
+    "titlePlaceholder": "投稿タイトルを入力してください...",
+    "slug": "URL スラッグ",
+    "slugPlaceholder": "post-title",
+    "contentPlaceholder": "ここに投稿内容を記述してください。Markdownを使用できます。",
+    "fullscreen": "全画面表示"
+  },
+  "settings": {
+    "featuredImage": "メイン画像",
+    "upload": "クリックしてファイルをアップロードしてください",
+    "uploadHelp": "SVG、PNG、JPG、またはGIF形式（最大5MB）",
+    "publishing": "公開設定",
+    "status": "ステータス",
+    "statusDraft": "下書き",
+    "statusPublished": "公開済み",
+    "statusScheduled": "公開予約済み",
+    "category": "カテゴリ",
+    "categorySelect": "カテゴリを選択してください",
+    "categoryUpdates": "製品アップデート",
+    "categoryTutorials": "チュートリアル",
+    "categoryCompany": "会社ニュース",
+    "tags": "タグ",
+    "tagsPlaceholder": "タグを追加してください…",
+    "excerpt": "抜粋",
+    "excerptPlaceholder": "投稿の簡単な概要です。"
+  }
+}

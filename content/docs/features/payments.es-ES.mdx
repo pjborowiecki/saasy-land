@@ -1,0 +1,18 @@
+---
+title: Pagos y facturación.
+description: Pedidos, reembolsos y gestión de facturación orientada a Stripe (planificado).
+---
+
+## Estado
+
+La interfaz de `/admin/payments` utiliza filas simuladas hoy en día. Las sentencias `order` en `APP_STATEMENTS` ya esbozan las funciones de lectura, actualización y reembolso.
+
+## Arquitectura planificada.
+
+- `modules/billing` o `modules/order`: casos de uso.
+- Carpeta de integración con Stripe (o Polar).
+- Controlador de gestión de webhooks.
+- Facturas de clientes disponibles en `/app`.
+- Asocie mejor el usuario de "Better Auth" con el identificador del cliente.
+
+Implementar permisos de acceso restringido; nunca exponer claves secretas al cliente.

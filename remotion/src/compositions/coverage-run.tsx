@@ -20,12 +20,12 @@ const SUITE_LINES = [
 const COVERAGE_ROWS = ["% Stmts", "% Branch", "% Funcs", "% Lines"] as const
 
 const TYPE_START = 0.4 * FPS
-const TYPE_END = 2.0 * FPS
+const TYPE_END = 2 * FPS
 const SPINNER_START = 2.2 * FPS
-const SUITE_AT = 4.0 * FPS
+const SUITE_AT = 4 * FPS
 const COVERAGE_START = 5.1 * FPS
 const COVERAGE_STEP = 0.5 * FPS
-const COUNT_DURATION = 1.0 * FPS
+const COUNT_DURATION = 1 * FPS
 const GATE_AT = 8.6 * FPS
 
 const LINE_HEIGHT = 48

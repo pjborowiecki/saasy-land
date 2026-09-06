@@ -1,0 +1,28 @@
+---
+title: Структура каталогу
+description: Структура каталогу — SaaSy Land
+---
+
+Використовуйте шашлик для файлів і папок. Файли маршруту використовують TanStack Router's dot і безстрокові конвенції. Відмінний UI належить до `presentation/components/custom`; генеровані примітиви відносяться до `presentation/components/shadcn`. . Особливість може містити `components`, `constants`, `hooks`й `types` коли вона потребує їх.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

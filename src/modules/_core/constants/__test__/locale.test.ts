@@ -1,4 +1,6 @@
-import { getLocaleDirection, isLocaleCode, LOCALE_CODES, LOCALES } from "~/src/modules/_core/constants/locale"
+import { describe, expect, it } from "vite-plus/test"
+
+import { LOCALES, LOCALE_CODES, getLocaleDirection, isLocaleCode } from "~/src/modules/_core/constants/locale"
 
 describe("locale catalog", () => {
   it("keeps locale codes unique and BCP 47 shaped", () => {

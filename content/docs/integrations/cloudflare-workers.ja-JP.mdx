@@ -1,0 +1,25 @@
+---
+title: Cloudflare Workers へのデプロイ
+description: Cloudflare Workers — SaaSy Land へのデプロイ
+---
+
+ワーカービルドは Vite+, TanStack Start で生成され、 `@cloudflare/vite-plugin`. `wrangler.jsonc` エントリー、互換性設定、アセット、観察性および別々の開発、プレビューおよび生産の結合を宣言します。
+
+D1 と KV を指定して、プレースホルダー ID をターゲット環境に置き換えます。 URL とプロバイダーの秘密を設定 `.env.preview` または `.env.production`. . 明示的にマイグレーションを適用し、デプロイします。 スクリプトをデプロイすると、結合 ID を最初に検証します。スクリプトのプレレンダーの公開ページを作成し、出力アーティファクトを確認します。 認証とプライベートなアプリケーションページは、ワーカー上で動的に実行されます。
+
+ターゲット環境のカスタムドメインとOAuthコールバックURLを設定します。 依存関係のインストールと建物は、リモートの移行を適用しません。
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Zahlungen",
+    "description": "Verwalten Sie Einnahmen, Transaktionen und Auszahlungsoptionen."
+  },
+  "title": "Zahlungen",
+  "description": "Verwalten Sie Einnahmen, Transaktionen und Auszahlungsoptionen.",
+  "actions": {
+    "export": "Exportieren",
+    "settings": "Zahlungseinstellungen"
+  },
+  "tabs": {
+    "transactions": "Transaktionen",
+    "subscriptions": "Abonnements",
+    "payouts": "Auszahlungen",
+    "refunds": "Rückerstattungen"
+  },
+  "stats": {
+    "refunded": {
+      "title": "Erstattet (30 Tage)",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "Rückerstattungsquote",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "Ausstehende Genehmigungen",
+      "subtitle": "In Höhe von 407,00 US-Dollar",
+      "value": "3"
+    },
+    "vsLastMonth": "gegen den Vormonat"
+  },
+  "table": {
+    "title": "Aktuelle Rückerstattungen",
+    "columns": {
+      "customer": "Kunde",
+      "amount": "Betrag",
+      "item": "Gekauftes Produkt",
+      "reason": "Grund",
+      "date": "Datum",
+      "status": "Status",
+      "rowActions": "Aktionen für diese Zeile"
+    },
+    "pagination": {
+      "showing": "Anzeige 1 bis 4 von insgesamt 24 Ergebnissen",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "Filtern von Rückerstattungen"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro jährlich",
+      "reason": "Unbeabsichtigte Verlängerung",
+      "status": "Verarbeitet",
+      "type": "Vollständige Rückerstattung"
+    },
+    "p2": {
+      "item": "Pro monatlich",
+      "reason": "Ausfallentschädigung",
+      "status": "Verarbeitet",
+      "type": "Teilrückerstattung"
+    },
+    "p3": {
+      "item": "Starter monatlich",
+      "reason": "Nicht für den Bedarf geeignet",
+      "status": "Ausstehend",
+      "type": "Vollständige Rückerstattung"
+    },
+    "p4": {
+      "item": "Pro jährlich",
+      "reason": "Betrügerische Belastung",
+      "status": "Fehlgeschlagen",
+      "type": "Vollständige Rückerstattung"
+    }
+  }
+}

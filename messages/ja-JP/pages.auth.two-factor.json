@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "title": "二段階認証",
+    "description": "{name}の二要素認証コードを入力してください。"
+  },
+  "form": {
+    "title": "二段階認証",
+    "description": "認証アプリの6桁のコードを入力するか、バックアップコードを使用してください。",
+    "code": "認証コード",
+    "backupCode": "バックアップコード",
+    "submit": "確認する",
+    "submitting": "確認中…",
+    "success": "ログインに成功しました！",
+    "useBackupCode": "バックアップコードを使う",
+    "useAuthenticator": "認証アプリの利用をお勧めします"
+  }
+}

@@ -1,0 +1,18 @@
+---
+title: 支払いと請求
+description: 注文、払い戻し、およびStripe指向の請求(予定)。
+---
+
+## ステータス
+
+アドミン `/admin/payments` UIは、今日のモック行を使用します。 ザ・オブ・ザ・ザ・ `order` のステートメント `APP_STATEMENTS` すでにスケッチの読み込み/更新/返金.
+
+## 計画されたアーキテクチャ
+
+- `modules/billing` または `modules/order` ユースケース
+- Stripe (または Polar) 統合フォルダ
+- Webhooks ルートハンドラ
+- 顧客のインボイスの下 `/app`
+- 地図 Better Auth ユーザ ↔ 顧客 ID
+
+クライアントに秘密鍵を明示しません。

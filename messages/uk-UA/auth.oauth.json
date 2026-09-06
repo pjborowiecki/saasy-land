@@ -1,0 +1,6 @@
+{
+  "google": "Увійдіть за допомогою Google",
+  "github": "Увійдіть за допомогою GitHub",
+  "success": "Успішно підписано!",
+  "continueWith": "Продовжити з {provider}"
+}

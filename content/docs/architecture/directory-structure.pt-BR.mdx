@@ -1,0 +1,28 @@
+---
+title: Estrutura do diretório
+description: Estrutura do diretório - SaaSy Land
+---
+
+Use kebab-case para arquivos e pastas. TanStack RouterO ponto e as convenções de rota sem caminho. `presentation/components/custom` Os primitivos gerados pertencem a `presentation/components/shadcn`. . Uma característica pode conter `components`, `constants`, `hooks`, e `types` Quando precisar deles.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

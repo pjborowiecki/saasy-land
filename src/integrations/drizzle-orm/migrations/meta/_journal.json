@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1788646199597,
+      "tag": "20260905220959_pink_famine",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788652905947,
+      "tag": "20260906000145_nosy_infant_terrible",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1788716727932,
+      "tag": "20260906174527_opposite_garia",
+      "breakpoints": true
+    }
+  ]
+}

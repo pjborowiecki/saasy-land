@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Remboursements",
+    "description": "Quand et comment demander un remboursement SaaSy Land, et quels droits des consommateurs restent protégés."
+  },
+  "title": "Remboursements",
+  "lastUpdated": "Dernière mise à jour : 6 septembre 2026",
+  "description": "Quand et comment demander un remboursement SaaSy Land, et quels droits des consommateurs restent protégés.",
+  "sections": {
+    "delivery": {
+      "title": "Avant la livraison",
+      "body": "Vous pouvez demander un remboursement intégral tant que les CLI, les modèles privés ou les contenus de formation payants n'ont pas été livrés ou rendus accessibles via votre compte. Veuillez contacter hello@saasyland.com avant d'accéder au produit payant. Aucune explication n'est requise pour ce remboursement volontaire, demandé avant la livraison. Le fait de consulter ou d'utiliser le dépôt de site web public sous licence MIT ne constitue pas une livraison du produit commercial distinct."
+    },
+    "afterDelivery": {
+      "title": "Après la livraison",
+      "body": "Les supports numériques ne peuvent pas être restitués comme un objet physique. La politique volontaire de remboursement avant livraison prend donc fin à leur réception. Cela ne prime pas sur les droits de rétractation ni sur les recours prévus par la loi applicable. Si des contenus manquent, sont défectueux ou diffèrent sensiblement de ce qui était promis, contactez-nous afin que nous puissions résoudre le problème."
+    },
+    "consumerRights": {
+      "title": "Droits légaux des consommateurs",
+      "body": "Lorsque la loi vous accorde un délai de rétractation, ce droit reste applicable. Pour les consommateurs de l’UE, le délai habituel de rétractation des contrats à distance est de 14 jours. Pour les contenus numériques fournis pendant ce délai, la perte du droit de rétractation nécessite le consentement exprès, la reconnaissance et la confirmation exigés par la loi. Indiquer simplement que le code source ne peut pas être retourné ne supprime pas ces droits. Les droits impératifs relatifs aux contenus non conformes ou non livrés restent également intacts."
+    },
+    "request": {
+      "title": "Comment demander un remboursement",
+      "body": "Écrivez à hello@saasyland.com depuis l’adresse utilisée pour l’achat. Indiquez la référence de commande si vous la possédez et précisez que vous souhaitez un remboursement. Nous identifierons la commande et confirmerons les étapes suivantes. Aucun formulaire particulier n’est nécessaire."
+    },
+    "processing": {
+      "title": "Modalités de remboursement",
+      "body": "Les remboursements approuvés sont traités par Polar sur le moyen de paiement d’origine, pour le montant payé dans la devise de la transaction initiale. Les délais de traitement peuvent varier. Un remboursement met fin à l’accès au produit payant remboursé et révoque sa clé de licence. La Licence commerciale précise quels droits sur les applications déjà générées licitement subsistent. Les droits issus de la licence MIT du code public et les recours impératifs des consommateurs restent inchangés."
+    },
+    "freeServices": {
+      "title": "Services gratuits",
+      "body": "La création d’un compte ou l’inscription à la newsletter n’entraîne en elle-même aucun paiement ; aucun remboursement n’est donc dû pour ces activités. Les services tiers achetés séparément sont soumis aux conditions de remboursement de leurs prestataires."
+    }
+  }
+}

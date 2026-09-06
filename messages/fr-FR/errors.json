@@ -1,0 +1,32 @@
+{
+  "boundary": {
+    "title": "Quelque chose s'est mal passé",
+    "description": "Cette section n'a pas pu être chargée. Vous pouvez réessayer sans quitter la page.",
+    "retry": "Réessayer"
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à la page d'accueil"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Authentification échouée. Veuillez réessayer.",
+    "CONFLICT": "Ceci existe déjà.",
+    "FORBIDDEN": "Vous n'avez pas la permission de faire cela.",
+    "INTERNAL_ERROR": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "NOT_FOUND": "Non trouvé.",
+    "TOO_MANY_REQUESTS": "Trop de tentatives. Veuillez réessayer dans quelques instants.",
+    "UNAUTHORIZED": "Vous devez être connecté(e) pour continuer.",
+    "VALIDATION": "Veuillez vérifier le formulaire et réessayer."
+  },
+  "unauthorized": {
+    "title": "Connexion requise",
+    "description": "Votre session a expiré ou vous n'êtes pas connecté(e). Connectez-vous pour continuer.",
+    "signIn": "Se connecter"
+  },
+  "forbidden": {
+    "title": "Accès refusé",
+    "description": "Votre compte ne dispose pas des autorisations nécessaires pour afficher cette page.",
+    "backToApp": "Retour à l'application"
+  }
+}

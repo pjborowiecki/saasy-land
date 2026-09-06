@@ -1,0 +1,17 @@
+{
+  "title": "Integrações",
+  "pages": [
+    "tanstack-start",
+    "better-auth",
+    "cloudflare-d1",
+    "use-intl",
+    "fumadocs",
+    "server-functions",
+    "resend",
+    "cloudflare-kv",
+    "cloudflare-workers",
+    "tanstack-table",
+    "shadcn"
+  ],
+  "icon": "Plug"
+}

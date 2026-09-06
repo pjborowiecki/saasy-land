@@ -1,0 +1,37 @@
+{
+  "title": "ライセンス",
+  "description": "購入済みCLIのライセンスキーと端末の有効化状況。",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "ライセンスキー",
+  "pending": "キーを発行中です。少し待ってからページを更新してください。",
+  "revoked": "このライセンスは現在無効です。誤りと思われる場合はお問い合わせください。",
+  "usage": "CLIのインストールと利用には購入と有効なキーが必要です。このコマンドを実行し、求められたらキーを入力してください。キーは秘密にしてください。",
+  "manage": "請求書と領収書",
+  "buy": {
+    "title": "ライセンスを購入",
+    "description": "独自ライセンスのCLIを購入すると、ここでキーを確認できます。一度の支払いで、購入したパッケージの範囲内で無制限のプロジェクトを作成できます。",
+    "core": "Coreを購入",
+    "complete": "Completeを購入",
+    "agency": "Agencyを購入",
+    "pending": "決済画面を開いています…",
+    "error": "決済画面を開けませんでした。再試行するか、hello@saasyland.comまでご連絡ください。",
+    "agreement": "決済に進むことで、<terms>利用規約</terms>と<licence>商用ライセンス</licence>に同意したものとします。購入前に<refunds>返金ポリシー</refunds>をご確認ください。"
+  },
+  "activations": {
+    "title": "端末",
+    "description": "プロジェクトを生成する端末ごとに有効化枠を1つ使用します。端末を使わなくなったら枠を解放してください。",
+    "count": "{limit}件中{used}件を使用中",
+    "unlimited": "{used}件を使用中",
+    "none": "このキーを使用した端末はまだありません。",
+    "activated": "有効化日：{date}",
+    "deactivate": "この有効化枠を解放",
+    "deactivating": "解放しています…",
+    "error": "操作に失敗しました。再試行するか、hello@saasyland.comまでご連絡ください。",
+    "success": "有効化枠を解放しました。"
+  },
+  "back": "概要に戻る",
+  "agreement": "<licence>商用ライセンス</licence>では、CLIの利用条件と生成したアプリケーションに関する権利を定めています。"
+}

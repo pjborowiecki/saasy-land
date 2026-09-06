@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Registrati",
+    "description": "Crea un account su {name}."
+  },
+  "form": {
+    "title": "Registrati",
+    "description": "Crea un account su {name}.",
+    "name": "Nome",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Continua",
+    "submitting": "Registrazione in corso...",
+    "success": "Account creato correttamente!",
+    "successCheckEmail": "Controlla la posta in arrivo per trovare il link di verifica. Se il tuo indirizzo email è già verificato, accedi.",
+    "error": "Si è verificato un errore durante la registrazione. Si prega di riprovare.",
+    "hasAccount": "Già hai un account? <signin>Accedi</signin>",
+    "or": "oppure",
+    "confirmPassword": "Conferma password",
+    "termsAndPrivacy": "Registrandosi, acconsenti al nostro <terms>Servizio</terms> e alla nostra <privacy>Informativa sulla privacy</privacy>."
+  }
+}

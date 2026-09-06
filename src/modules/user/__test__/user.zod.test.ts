@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { USER_VALIDATION_MESSAGE } from "~/src/modules/user/user.validations"
 import { userZodSchemas } from "~/src/modules/user/user.zod"
 

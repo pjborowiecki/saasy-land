@@ -1,0 +1,62 @@
+{
+  "title": "## Panoramica",
+  "description": "Ben ritrovati, ecco cosa sta succedendo oggi.",
+  "actions": {
+    "last30Days": "Ultimi 30 giorni",
+    "addProduct": "Aggiungi prodotto"
+  },
+  "stats": {
+    "activeUsers": {
+      "title": "Utenti registrati"
+    },
+    "totalProducts": {
+      "title": "Prodotti in catalogo"
+    },
+    "pendingVerification": {
+      "title": "Verifica dell'email in corso"
+    }
+  },
+  "chart": {
+    "title": "Panoramica dei ricavi",
+    "description": "Ricavi ricorrenti mensili negli ultimi 12 mesi",
+    "placeholder": "Serie illustrativa. Le entrate effettive vengono visualizzate qui una volta che la fatturazione è stata collegata.",
+    "filters": {
+      "12m": "12M",
+      "30d": "30D",
+      "7d": "7D"
+    }
+  },
+  "users": {
+    "title": "Gestione degli utenti",
+    "description": "Gestisci i membri del tuo team e le relative autorizzazioni di accesso qui.",
+    "search": "Filtra gli utenti...",
+    "filters": {
+      "role": "Ruolo",
+      "status": "Stato"
+    },
+    "export": "Esporta",
+    "table": {
+      "columns": {
+        "user": "Utente",
+        "role": "Ruolo",
+        "status": "Stato",
+        "lastActive": "Ultima attività",
+        "actions": "Azioni"
+      },
+      "status": {
+        "active": "Attivo",
+        "banned": "Vietato",
+        "pending": "In attesa"
+      },
+      "rowActions": {
+        "edit": "Modifica utente",
+        "delete": "Elimina utente"
+      },
+      "pagination": {
+        "showing": "Utenti da {from} a {to} di {total}",
+        "previous": "Precedente",
+        "viewAll": "Visualizza tutti gli utenti"
+      }
+    }
+  }
+}

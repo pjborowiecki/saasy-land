@@ -27,7 +27,7 @@ const COMMITS = [
 /** Frames from entering the track to reaching the gate, and from the gate to main. */
 const TO_GATE = 1.15 * FPS
 const AT_GATE = 0.75 * FPS
-const TO_MAIN = 1.0 * FPS
+const TO_MAIN = 1 * FPS
 
 interface CommitState {
   readonly opacity: number
@@ -134,7 +134,7 @@ export function MergeGate() {
             fill={THEME.card}
             height={112}
             rx={14}
-            stroke={examining === undefined ? THEME.hairlineLit : failing ? THEME.destructive : THEME.accent}
+            stroke={examining === undefined ? THEME.hairlineLit : (failing ? THEME.destructive : THEME.accent)}
             strokeWidth={2}
             width={GATE_WIDTH}
             x={GATE_X - GATE_WIDTH / 2}

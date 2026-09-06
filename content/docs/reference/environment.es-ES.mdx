@@ -1,0 +1,16 @@
+---
+title: Entorno y dependencias
+description: Entorno y dependencias — SaaSy Land
+---
+
+Utilizar `.env.development`, `.env.preview`, y `.env.production` Para el entorno Vite y Cloudflare correspondiente. Estos archivos se ignoran; `.env.example` documenta las claves necesarias. `VITE_APP_URL` es-ES: es público y se reemplaza en el momento de la compilación. Los secretos de los workers no tienen `VITE_` prefijo y se acceden a través de `env` from `cloudflare:workers`.
+
+Configurar `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, Configuración de Resend y la configuración de Polar para tu instalación. Nunca commits credenciales reales. Los IDs de vinculación deben estar en la ubicación adecuada. `wrangler.jsonc` entorno; las declaraciones de Worker generadas describen sus tipos.
+
+Solo Drizzle Studio e introspection son necesarios. `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID` y `CLOUDFLARE_ACCESS_TOKEN`. Local D1 no utiliza credenciales remotas. CI copia. `.env.test` Se despliega a los archivos del entorno local y se ejecuta con bindings locales.
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

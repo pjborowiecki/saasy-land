@@ -1,0 +1,16 @@
+---
+title: "Troubleshooting"
+description: "Troubleshooting — SaaSy Land"
+---
+
+If local queries report missing tables, run `bun run db:migrate:local`; browser tests use `db:migrate:test` and a separate D1 binding. If authentication fails, check the environment URL, `AUTH_SECRET`, the provider credentials and callback URLs.
+
+Missing translation errors usually indicate a namespace omitted from the route or a key missing in one locale. Run `check:i18n`. For documentation 404s, verify the localized MDX filename, page metadata and relative source link. For prerender failures, inspect the first failing URL in the build output.
+
+A deploy rejected for placeholder bindings needs real D1 and KV IDs in the target environment. Build and test operations do not create remote resources automatically.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

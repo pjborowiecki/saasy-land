@@ -1,0 +1,25 @@
+---
+title: Bereitstellen auf Cloudflare Workers.
+description: Bereitstellen auf Cloudflare Workers – SaaSy Land
+---
+
+Der Worker Build wird durch Vite+, TanStack Start und `@cloudflare/vite-plugin` erstellt. Die Datei `wrangler.jsonc` definiert den Einstiegspunkt, die Kompatibilitätseinstellungen, die Assets, die Observability-Funktionen sowie separate Bindungen für die Entwicklung, die Vorschau- und die Produktionsumgebung.
+
+Bereich D1 und KV, und ersetzen Sie die Platzhalter-IDs für die Zielumgebung. Legen Sie die URL und die Anmeldeinformationen des Anbieters in `.env.preview` oder `.env.production` fest. Führen Sie die Migrationen explizit aus und anschließend die Bereitstellung. Die Bereitstellungsskripte validieren zunächst die Binding-IDs; die Build-Skripte rendern öffentliche Seiten vorab und überprüfen die erstellten Artefakte. Die Authentifizierung und die privaten Anwendungsseiten werden dynamisch auf dem Worker ausgeführt.
+
+Legen Sie die benutzerdefinierte Domain und die OAuth-Callback-URLs für die Zielumgebung fest. Das Installieren von Abhängigkeiten und der Build-Prozess führen niemals eine Remote-Migration durch.
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

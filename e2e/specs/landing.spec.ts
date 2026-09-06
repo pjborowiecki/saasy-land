@@ -13,7 +13,11 @@ test.describe("landing page", () => {
   test("prefixed locale route renders localized landing page", async ({ landingPage, page }) => {
     await landingPage.goto("/pl")
 
-    await expect(page).toHaveURL(/\/pl\/?$/u)
+    await expect(page).toHaveURL(/\/pl-PL\/?$/u)
     await expect(landingPage.heroHeading()).toBeVisible()
+    await expect(page.locator("html")).toHaveAttribute("lang", "pl-PL")
+    expect(await page.context().cookies()).toEqual(
+      expect.arrayContaining([expect.objectContaining({ name: "saasyland.com_locale", value: "pl-PL" })]),
+    )
   })
 })

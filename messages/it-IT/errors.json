@@ -1,0 +1,32 @@
+{
+  "boundary": {
+    "title": "Qualcosa è andato storto",
+    "description": "Questa sezione non è stata caricata. Puoi riprovare senza uscire dalla pagina.",
+    "retry": "Riprova"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "description": "La pagina che stai cercando non esiste oppure è stata spostata.",
+    "backHome": "Ritorna alla pagina principale"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Autenticazione fallita. Si prega di riprovare.",
+    "CONFLICT": "Questo già esiste.",
+    "FORBIDDEN": "Non hai il permesso di farlo.",
+    "INTERNAL_ERROR": "Qualcosa è andato storto. Si prega di riprovare.",
+    "NOT_FOUND": "Non trovato.",
+    "TOO_MANY_REQUESTS": "Troppi tentativi. Si prega di riprovare tra poco.",
+    "UNAUTHORIZED": "È necessario essere autenticati per continuare.",
+    "VALIDATION": "Si prega di controllare il modulo e riprovare."
+  },
+  "unauthorized": {
+    "title": "Accesso riservato",
+    "description": "La sessione è terminata o non sei autenticato. Accedi per continuare.",
+    "signIn": "Accedi"
+  },
+  "forbidden": {
+    "title": "Accesso negato",
+    "description": "Il suo account non dispone dei permessi necessari per visualizzare questa pagina.",
+    "backToApp": "Torna all'app"
+  }
+}

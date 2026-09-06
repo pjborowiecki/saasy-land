@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Registrieren",
+    "description": "Erstelle ein Konto bei {name}."
+  },
+  "form": {
+    "title": "Registrieren",
+    "description": "Erstelle ein Konto bei {name}.",
+    "name": "Name",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "submit": "Fortfahren",
+    "submitting": "Registrierung läuft...",
+    "success": "Konto erfolgreich angelegt!",
+    "successCheckEmail": "Prüfe deinen Posteingang auf den Bestätigungslink. Wenn deine E-Mail-Adresse bereits bestätigt ist, melde dich an.",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "hasAccount": "Haben Sie bereits ein Konto? <signin>Anmelden</signin>",
+    "or": "oder",
+    "confirmPassword": "Passwort bestätigen",
+    "termsAndPrivacy": "Durch die Anmeldung erklären Sie sich mit unseren <terms>Nutzungsbedingungen</terms> und unserer <privacy>Datenschutzerklärung</privacy> einverstanden."
+  }
+}

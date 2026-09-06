@@ -1,21 +1,24 @@
-import { index, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-export const verification = pgTable(
+export const verification = sqliteTable(
   "verification",
   {
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
-    id: uuid("id").primaryKey(),
-    identifier: varchar("identifier", { length: 512 }).notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
+    expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+    id: text("id").primaryKey(),
+    identifier: text("identifier", { length: 512 }).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */
           new Date(),
       )
       .notNull(),
-    value: varchar("value", { length: 8192 }).notNull(),
+    value: text("value", { length: 8192 }).notNull(),
   },
   (table) => [
     index("verification_expiresAt_idx").on(table.expiresAt),

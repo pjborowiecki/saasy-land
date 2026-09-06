@@ -1,0 +1,37 @@
+{
+  "title": "Tu licencia",
+  "description": "Tu clave de licencia de la CLI y las activaciones de dispositivos.",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "Clave de licencia",
+  "pending": "Estamos emitiendo tu clave. Actualiza la página dentro de un momento.",
+  "revoked": "Esta licencia ya no está activa. Escríbenos si crees que es un error.",
+  "usage": "Para instalar y utilizar la CLI necesitas comprar una licencia y tener una clave válida. Ejecuta este comando e introduce la clave cuando se solicite. Mantenla en privado.",
+  "manage": "Facturas y recibos",
+  "buy": {
+    "title": "Compra tu licencia",
+    "description": "Compra la CLI propietaria y encuentra aquí tu clave. Un pago, proyectos ilimitados dentro de tu paquete.",
+    "core": "Comprar Core",
+    "complete": "Comprar Complete",
+    "agency": "Comprar Agency",
+    "pending": "Abriendo el pago…",
+    "error": "No se ha podido abrir el pago. Inténtalo de nuevo o escribe a hello@saasyland.com.",
+    "agreement": "Al continuar al pago, acepta los <terms>Términos de Servicio</terms> y la <licence>Licencia Comercial</licence>. Lea la <refunds>Política de Reembolsos</refunds> antes de comprar."
+  },
+  "activations": {
+    "title": "Dispositivos",
+    "description": "Cada dispositivo en el que generas proyectos ocupa una activación. Libérala cuando dejes de usar ese dispositivo.",
+    "count": "{used} de {limit} en uso",
+    "unlimited": "{used} en uso",
+    "none": "Ningún dispositivo ha utilizado esta clave todavía.",
+    "activated": "Activado el {date}",
+    "deactivate": "Liberar esta activación",
+    "deactivating": "Liberando…",
+    "error": "No ha funcionado. Inténtalo de nuevo o escribe a hello@saasyland.com.",
+    "success": "Activación liberada."
+  },
+  "back": "Volver al resumen",
+  "agreement": "La <licence>Licencia Comercial</licence> regula la CLI y sus derechos sobre las aplicaciones generadas."
+}

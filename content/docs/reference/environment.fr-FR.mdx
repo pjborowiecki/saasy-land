@@ -1,0 +1,16 @@
+---
+title: Environnement et liaisons
+description: Environnement et liaisons — SaaSy Land
+---
+
+Utilisation `.env.development`, `.env.preview`et `.env.production` pour l'environnement Vite et Cloudflare correspondant. Ces fichiers sont ignorés; `.env.example` documente les clés requises. `VITE_APP_URL` est public et remplacé au moment de la construction. Les secrets des travailleurs n'ont pas `VITE_` préfixe et sont accessibles par `env` de `cloudflare:workers`.
+
+Configurer `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, Resend paramètres et Polar paramètres pour votre installation. N'engagez jamais de vraies lettres de créances. Les identifiants de liaison font partie du code approprié. `wrangler.jsonc` environnement; les déclarations des travailleurs générées décrivent leurs types.
+
+Seulement Drizzle besoin de Studio et d'introspection `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID` et `CLOUDFLARE_ACCESS_TOKEN`. Local D1 n'utilise pas d'identifiants à distance. CI exemplaires `.env.test` aux fichiers d'environnement locaux et fonctionne avec des liaisons locales.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

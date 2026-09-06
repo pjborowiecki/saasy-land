@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Regulamin",
+    "description": "Warunki korzystania z saasyland.com, zakupu zastrzeżonego CLI SaaSy Land oraz zarządzania kontem i kluczem licencyjnym."
+  },
+  "title": "Regulamin",
+  "lastUpdated": "Ostatnia aktualizacja: 6 września 2026",
+  "description": "Warunki korzystania z saasyland.com, zakupu zastrzeżonego CLI SaaSy Land oraz zarządzania kontem i kluczem licencyjnym.",
+  "sections": {
+    "operator": {
+      "title": "Usługa i jej operator",
+      "body": "Operatorem SaaSy Land jest Piotr Borowiecki. Kontakt: hello@saasyland.com. Regulamin obejmuje witrynę, konta i zakupy. Opis produktu oraz informacje przy zakupie określają zawartość wybranego pakietu."
+    },
+    "accounts": {
+      "title": "Konta i bezpieczeństwo",
+      "body": "Podawaj prawidłowe dane konta, chroń dane logowania i powiadom nas o podejrzeniu nieuprawnionego dostępu. Nie udostępniaj konta w celu obejścia płatnego dostępu lub cudzej licencji. Odpowiadasz za działania, na które zezwalasz na swoim koncie. Konto zapewnia dostęp do klucza licencyjnego wydanego po zakupie oraz aktywacji urządzeń. Ten klucz również zachowaj w poufności."
+    },
+    "purchases": {
+      "title": "Zakupy i dostęp",
+      "body": "Core, Complete i Agency to pakiety płatne jednorazowo, o zawartości opisanej w cenniku i przy zakupie. Complete dodaje wskazane materiały edukacyjne, a Agency — opisany pakiet do pracy dla klientów i wsparcie. Dożywotnie aktualizacje rdzenia oznaczają aktualizacje głównej bazy kodu tak długo, jak SaaSy Land będzie je dostarczać. Nie jest to obietnica bezterminowej dostępności każdej usługi, integracji ani przyszłego, osobnego produktu.\n\nSubskrypcja newslettera jest bezpłatna i nie zobowiązuje do zakupu. Usługi podłączane do własnego wdrożenia mogą pobierać osobne opłaty."
+    },
+    "payments": {
+      "title": "Płatności i podatki",
+      "body": "Zakup obsługuje Polar jako formalny sprzedawca (merchant of record). Przed płatnością zobaczysz końcową cenę, walutę i informacje o właściwych podatkach. Potwierdzenie płatności identyfikuje transakcję. Do przetwarzania płatności mają również zastosowanie warunki odpowiedniego dostawcy płatności."
+    },
+    "licence": {
+      "title": "Publiczna strona i zastrzeżone CLI",
+      "body": "Publiczna strona i wcześniejsze wersje MIT nadal podlegają LICENSE.md. Dostarczane oddzielnie CLI i prywatne szablony są zastrzeżone i podlegają Licencji komercyjnej na stronie Licencja. Instalacja i korzystanie z CLI wymagają zakupu i ważnego klucza. Możesz modyfikować i komercyjnie wykorzystywać wygenerowane aplikacje w ramach pakietu; nie wolno modyfikować ani rozpowszechniać zastrzeżonego CLI ani odsprzedawać prywatnych szablonów jako zestawu startowego, z zastrzeżeniem obowiązkowych wyjątków prawnych. Zakup nie przenosi własności CLI ani nie zapewnia dostępu do prywatnego repozytorium."
+    },
+    "conduct": {
+      "title": "Dozwolone korzystanie",
+      "body": "Nie atakuj usługi, nie wysyłaj spamu, nie próbuj uzyskać nieuprawnionego dostępu, nie wykorzystuj cudzych danych niezgodnie z prawem i nie obchodź zabezpieczeń dostępu. Nie rozpowszechniaj płatnych materiałów, jeśli ich licencja na to nie pozwala. Możemy ograniczyć dostęp, gdy jest to racjonalnie potrzebne do zbadania nadużycia lub ochrony usługi, z uwzględnieniem obowiązującego prawa i Twoich uprawnień ustawowych."
+    },
+    "refunds": {
+      "title": "Zwroty i prawa konsumenta",
+      "body": "Strona Zwroty wyjaśnia, jak poprosić o zwrot przed dostarczeniem płatnych materiałów i jak stosujemy bezwzględnie obowiązujące prawa konsumenta. Regulamin nie wyłącza praw, których nie można zgodnie z prawem wyłączyć, w tym roszczeń dotyczących treści cyfrowych niedostarczonych lub niezgodnych z umową."
+    },
+    "responsibility": {
+      "title": "Twoje wdrożenia i nasza odpowiedzialność",
+      "body": "Przed wdrożeniem sprawdź i przetestuj kod. Samodzielnie wybierasz hosting, dane dostępowe, konfigurację, dostawców oraz sposób przetwarzania danych w swojej aplikacji. Nie gwarantujemy konkretnego wyniku biznesowego, nieprzerwanego działania usług zewnętrznych ani przydatności do każdego zastosowania. Ewentualne ograniczenie odpowiedzialności obowiązuje wyłącznie w zakresie dopuszczalnym prawem i nie wyłącza odpowiedzialności, której nie można zgodnie z prawem ograniczyć. Do kodu objętego licencją MIT stosuje się zawarte w niej postanowienia dotyczące gwarancji."
+    },
+    "law": {
+      "title": "Prawo, reklamacje i zmiany",
+      "body": "Regulamin podlega prawu polskiemu, bez pozbawiania konsumentów bezwzględnie obowiązującej ochrony dostępnej w kraju ich zamieszkania. Reklamacje kieruj na hello@saasyland.com, podając numer zamówienia i opis problemu, abyśmy mogli go zbadać.\n\nMożemy aktualizować regulamin na potrzeby przyszłego korzystania i zakupów. Zmiany nie odbierają z mocą wsteczną praw związanych z zakupem. O istotnych zmianach dotyczących trwającej usługi poinformujemy zgodnie z wymaganiami prawa."
+    }
+  }
+}

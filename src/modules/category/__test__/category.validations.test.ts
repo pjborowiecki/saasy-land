@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { CATEGORY_VALIDATION_MESSAGE, CATEGORY_VALIDATION_PARAMS } from "~/src/modules/category/category.validations"
 
 describe("category validation messages", () => {

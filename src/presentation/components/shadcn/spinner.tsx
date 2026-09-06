@@ -1,13 +1,11 @@
-"use client"
-
 import type { ComponentProps } from "react"
 
 import { Loader2Icon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
-function Spinner({ "aria-label": ariaLabel, className, ...props }: Readonly<ComponentProps<"svg"> & { "aria-label"?: string }>) {
+const Spinner = ({ "aria-label": ariaLabel, className, ...props }: Readonly<ComponentProps<"svg"> & { "aria-label"?: string }>) => {
   const t = useTranslations("components.shadcn.spinner")
 
   return (

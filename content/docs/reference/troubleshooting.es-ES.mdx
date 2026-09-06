@@ -1,0 +1,16 @@
+---
+title: Resolución de problemas
+description: Resolución de problemas — SaaSy Land
+---
+
+Si las consultas locales reportan tablas faltantes, ejecutar: \`bun deploy --test-gate\`. `bun run db:migrate:local`; Pruebas en el navegador `db:migrate:test` y un enlace D1 separado. Si la autenticación falla, verifica la URL del entorno. `AUTH_SECRET`, las credenciales del proveedor y las URLs de devolución de llamada.
+
+Las traducciones faltantes suelen indicar que falta un espacio de nombres en la ruta o que falta una clave en una localización. `check:i18n`Para las páginas de documentación 404, verifique el nombre de archivo MDX localizado, los metadatos de la página y el enlace de origen relativo. En caso de fallos de pre-renderizado, revise la primera URL fallida en la salida de la construcción.
+
+La implementación ha sido rechazada debido a la necesidad de identificadores D1 y KV en el entorno de destino. Las operaciones de construcción y pruebas no crean recursos remotos automáticamente.
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

@@ -1,0 +1,16 @@
+---
+title: Aplicación para clientes.
+description: Área protegida /app para clientes registrados.
+---
+
+## Grupo de rutas.
+
+`src/routes/app*.tsx` y `src/presentation/components/custom/app/`
+
+## Estado
+
+Una vez que el usuario inicia sesión, se mostrará una interfaz que incluirá el portal de facturación, la biblioteca de cursos, enlaces directos a la cuenta y contenido con acceso restringido.
+
+## Guardias.
+
+`src/integrations/better-auth/auth.guards.ts` + sesión; preferir casos de uso para cualquier modificación desde esta capa.

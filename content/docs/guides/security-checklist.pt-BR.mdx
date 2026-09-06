@@ -1,0 +1,16 @@
+---
+title: Autenticação e segurança
+description: Autenticação e segurança... SaaSy Land
+---
+
+Autorização é aplicada duas vezes: rota `beforeLoad` Os guardas protegem os layouts do administrador e do cliente, e cada função de servidor protegida verifica o chamador de forma independente. Use `requireAdmin` ou `requireSession` para layouts e `withAuth(permission)` para as operações. As operações do cliente derivam da propriedade da sessão.
+
+Better Auth Armazena sessões em D1 e lida com credenciais, OAuth, verificação, redefinição de senha, autenticação de dois fatores, personificação e revogação. `tanstackStartCookies`, que encaminha cookies de autenticação através de respostas de função de servidor.
+
+D1 Os limites de velocidade usam a escrita atômica e o Cloudflare Operações públicas sensíveis têm chaves de limite separadas. Validar entradas com o módulo Zod Esquema, máscaras de falhas inesperadas, verificação de assinaturas de pagamento webhook, e manter todas as credenciais atrás dos limites apenas do servidor.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

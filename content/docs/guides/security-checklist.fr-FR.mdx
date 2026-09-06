@@ -1,0 +1,16 @@
+---
+title: Authentification et sécurité
+description: Authentification et sécurité — SaaSy Land
+---
+
+L'autorisation est appliquée deux fois : itinéraire `beforeLoad` protège l'administrateur et le client, et chaque fonction de serveur protégé vérifie l'appelant indépendamment. Utilisation `requireAdmin` ou `requireSession` pour la mise en page et `withAuth(permission)` pour les opérations. Les opérations du client sont la propriété de la session.
+
+Better Auth stocke les sessions dans D1 et gère les identifiants, OAuth, vérification, réinitialisation du mot de passe, authentification à deux facteurs, imitation et révocation. La mise en cache des cookies est contournée lors de la vérification d'une fonction de serveur protégée. Le dernier plugin d'authentification est `tanstackStartCookies`, qui transmet les cookies d'authentification par des réponses serveur-fonction.
+
+Les limites de taux D1 utilisent les écritures atomiques et l'en-tête IP du client Cloudflare. Les opérations publiques sensibles ont des clés limites distinctes. Valider les entrées avec le schéma du module Zod, masquer les défaillances inattendues, vérifier les signatures de paiement webhook, et garder toutes les identifiants derrière les limites du serveur seulement. Les voies privées et les mutations de jeton sont exclues du prérendement.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

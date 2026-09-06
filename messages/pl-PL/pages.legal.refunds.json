@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Zwroty",
+    "description": "Kiedy możesz poprosić o zwrot za SaaSy Land, jak złożyć wniosek i jakie prawa konsumenta pozostają chronione."
+  },
+  "title": "Zwroty",
+  "lastUpdated": "Ostatnia aktualizacja: 6 września 2026",
+  "description": "Kiedy możesz poprosić o zwrot za SaaSy Land, jak złożyć wniosek i jakie prawa konsumenta pozostają chronione.",
+  "sections": {
+    "delivery": {
+      "title": "Przed dostarczeniem materiałów",
+      "body": "Możesz poprosić o pełny zwrot, zanim zakupione CLI, prywatne szablony lub płatne materiały edukacyjne zostaną dostarczone lub udostępnione na Twoim koncie. Napisz na hello@saasyland.com przed uzyskaniem dostępu do płatnego produktu. Ten dobrowolny zwrot przed dostawą nie wymaga uzasadnienia. Czytanie lub używanie publicznego repozytorium strony na licencji MIT nie stanowi dostawy oddzielnego produktu komercyjnego."
+    },
+    "afterDelivery": {
+      "title": "Po dostarczeniu materiałów",
+      "body": "Materiałów cyfrowych nie można zwrócić tak jak rzeczy fizycznej, dlatego dobrowolna polityka zwrotu przed dostarczeniem kończy się z chwilą ich otrzymania. Nie uchyla to prawa odstąpienia od umowy ani roszczeń przewidzianych przez obowiązujące prawo. Jeśli treści brakuje, jest wadliwa lub istotnie różni się od obietnicy, skontaktuj się z nami, abyśmy mogli rozwiązać problem."
+    },
+    "consumerRights": {
+      "title": "Ustawowe prawa konsumenta",
+      "body": "Jeśli prawo przyznaje okres na odstąpienie od umowy, uprawnienie to nadal obowiązuje. Dla konsumentów w UE zwykły termin odstąpienia od umowy zawartej na odległość wynosi 14 dni. W przypadku treści cyfrowych dostarczanych w tym okresie utrata prawa odstąpienia wymaga przewidzianej prawem wyraźnej zgody, przyjęcia do wiadomości skutków oraz potwierdzenia. Samo stwierdzenie, że kodu źródłowego nie można zwrócić, nie pozbawia tych praw. Nie narusza to również bezwzględnie obowiązujących praw dotyczących treści niezgodnych z umową lub niedostarczonych."
+    },
+    "request": {
+      "title": "Jak poprosić o zwrot",
+      "body": "Napisz na hello@saasyland.com z adresu użytego przy zakupie. Jeśli masz numer zamówienia, dołącz go i zaznacz, że prosisz o zwrot. Ustalimy, którego zamówienia dotyczy wniosek, i potwierdzimy dalsze kroki. Nie musisz składać specjalnego formularza."
+    },
+    "processing": {
+      "title": "Jak realizujemy zwroty",
+      "body": "Zatwierdzone zwroty są realizowane przez Polar na pierwotną metodę płatności, w wysokości zapłaconej kwoty i w pierwotnej walucie transakcji. Czas przetwarzania może się różnić. Zwrot kończy dostęp do objętego nim płatnego produktu i unieważnia jego klucz licencyjny. Licencja komercyjna wyjaśnia, które prawa do już zgodnie z licencją wygenerowanych aplikacji pozostają w mocy. Prawa wynikające z licencji MIT publicznego kodu i obowiązkowe uprawnienia konsumentów pozostają bez zmian."
+    },
+    "freeServices": {
+      "title": "Usługi bezpłatne",
+      "body": "Samo utworzenie konta lub zapisanie się do newslettera nie powoduje płatności, więc za te działania nie ma czego zwracać. Opłaty za usługi zewnętrzne kupowane osobno podlegają zasadom zwrotów ich dostawców."
+    }
+  }
+}

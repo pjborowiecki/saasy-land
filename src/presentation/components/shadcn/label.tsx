@@ -1,10 +1,8 @@
-"use client"
-
 import { LabelContext, Label as LabelPrimitive, type LabelProps } from "react-aria-components"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
-function Label({ className, htmlFor, slot, ...props }: Readonly<LabelProps>) {
+const Label = ({ className, htmlFor, slot, ...props }: Readonly<LabelProps>) => {
   const label = (
     <LabelPrimitive
       data-slot="label"

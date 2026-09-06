@@ -1,0 +1,14 @@
+---
+title: 役割と権限
+description: 役割と権限 — SaaSy Land
+---
+
+役割とステートメントは、 `src/integrations/better-auth/auth.access.ts`. . デフォルトのロールは顧客です。 管理者アクセスの確認 `requireAdmin`; 各サーバー操作は必須の記述をと点検します `withAuth`.
+
+ユーザー/セッションユースケースでロール変更、禁止、セッションの取消、偽装を保ちましょう。 リクエストセッションから現在のユーザーを導き出し、ミューテーション後に影響を受けるクエリグループを無効化します。 ボタンを隠すことは、プレゼンテーションの動作であり、権限を置換しません。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

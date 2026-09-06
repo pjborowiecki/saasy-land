@@ -1,0 +1,58 @@
+{
+  "title": "Preismodelle",
+  "description": "Verwalten Sie Abonnementsstufen und einmalige Zahlungsoptionen.",
+  "actions": {
+    "allTypes": "Alle Arten",
+    "createModel": "Erstellen Sie das Modell"
+  },
+  "stats": {
+    "monthlyRecurring": "Monatlich wiederkehrend",
+    "activeSubscribers": "Aktive Abonnenten",
+    "activeModels": "Aktive Modelle"
+  },
+  "tags": {
+    "subscription": "Abonnement",
+    "oneTime": "Einmalig",
+    "mostPopular": "Am beliebtesten"
+  },
+  "models": {
+    "monthly": {
+      "title": "Monatskarte",
+      "price": "$29",
+      "interval": "/ Monat",
+      "description": "Jeden Monat abgerechnet. Sie können jederzeit kündigen."
+    },
+    "annual": {
+      "title": "Jahreskarte",
+      "price": "$290",
+      "interval": "/ Jahr",
+      "description": "Sparen Sie 58 € gegenüber einer monatlichen Zahlung."
+    },
+    "lifetime": {
+      "title": "Kurslizenz",
+      "price": "$99",
+      "interval": "Lebenszeit",
+      "description": "Reguläre Preise für einzelne Artikel."
+    }
+  },
+  "labels": {
+    "includedAccess": "Inklusiver Zugang",
+    "activeUsers": "{count} aktiv",
+    "inactive": "Inaktiv",
+    "editModel": "Bearbeiten Sie das Modell",
+    "moreOptions": "Mehr Optionen",
+    "deleteModel": "Löschen Sie das Modell",
+    "toggleStatus": "Status umschalten"
+  },
+  "features": {
+    "allCourses": "Alle derzeit veröffentlichten Kurse",
+    "discord": "Exklusiver Discord-Community",
+    "qa": "Monatliche Live-Fragerunden",
+    "everythingInMonthly": "Alles im Monatsabo",
+    "sourceFiles": "Herunterladbare Quelldateien",
+    "portfolioReview": "Jährliches Einzelgespräch zur Portfoliobewertung",
+    "standaloneCourse": "Ausgewähltes Einzelmodul",
+    "lifetimeUpdates": "Lebenslange Updates für Materialien",
+    "guarantee": "30-tägige Geld-zurück-Garantie"
+  }
+}

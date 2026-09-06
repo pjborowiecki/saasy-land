@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Produits | SaaSy Land",
+    "description": "Gérez les produits physiques, les téléchargements numériques et les abonnements aux contenus protégés."
+  },
+  "tabs": {
+    "all": "Tous les produits",
+    "onetime": "Achats ponctuels",
+    "subscriptions": "Abonnements",
+    "drafts": "Brouillons",
+    "categories": "Catégories",
+    "collections": "Collections",
+    "courses": "Cours"
+  },
+  "title": "Produits",
+  "description": "Gérez les produits physiques, les téléchargements numériques et les abonnements aux contenus protégés.",
+  "actions": {
+    "create": "Créer un produit"
+  },
+  "search": {
+    "placeholder": "Recherchez des produits par nom ou par référence..."
+  },
+  "filters": {
+    "type": "Type: Tous",
+    "status": "Statut : Actif",
+    "category": "Catégorie",
+    "collection": "Collection",
+    "cycle": "Cycle",
+    "model": "Modèle",
+    "visibility": "Visibilité",
+    "sortby": "Trier par"
+  },
+  "table": {
+    "headers": {
+      "product": "Produit",
+      "type": "Type",
+      "pricing": "Tarifs",
+      "status": "Statut",
+      "metrics": "Mesures"
+    },
+    "actionsColumn": "Actions de la ligne",
+    "emptyValue": "n/a",
+    "rowActions": "Actions de la ligne",
+    "selectAll": "Sélectionner toutes les lignes",
+    "selectRow": "Sélectionner la ligne",
+    "statusLabels": {
+      "archived": "Archivé",
+      "draft": "Brouillon",
+      "published": "Actif"
+    },
+    "typeLabels": {
+      "course": "Cours",
+      "one_time": "Unique",
+      "subscription": "Abonnement"
+    },
+    "visibilityLabels": {
+      "hidden": "Masquée",
+      "public": "Publique"
+    }
+  },
+  "pagination": {
+    "info": "Produits {start} à {end} sur {total}",
+    "goToPage": "Aller à la page {page}",
+    "nextPage": "Page suivante",
+    "previousPage": "Page précédente"
+  },
+  "onetime": {
+    "title": "Achats ponctuels",
+    "description": "Gérez les produits individuels, les téléchargements numériques et les produits physiques."
+  },
+  "subscriptions": {
+    "title": "Abonnements",
+    "description": "Gérez les plans d'abonnement récurrents, les niveaux d'adhésion et les tarifs basés sur l'utilisation.",
+    "table": {
+      "headers": {
+        "product": "Nom du plan",
+        "model": "Modèle",
+        "pricing": "Tarifs",
+        "status": "Statut",
+        "metrics": "Mesures"
+      }
+    }
+  },
+  "categories": {
+    "title": "Catégories",
+    "description": "Organisez vos produits, vos abonnements et vos biens numériques.",
+    "table": {
+      "headers": {
+        "category": "Catégorie",
+        "visibility": "Visibilité",
+        "items": "Articles",
+        "lastUpdated": "Dernière mise à jour"
+      }
+    }
+  },
+  "collections": {
+    "title": "Collections",
+    "description": "Sélectionnez et regroupez vos produits, vos abonnements et vos biens numériques.",
+    "table": {
+      "headers": {
+        "collection": "Collection",
+        "visibility": "Visibilité",
+        "items": "Articles",
+        "lastUpdated": "Dernière mise à jour"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Pas de cours pour le moment",
+      "description": "Les cours que vous publiez apparaissent ici, avec leurs leçons, leurs tarifs et le nombre d'inscriptions. Créez le premier pour commencer.",
+      "action": "Créer un cours"
+    }
+  }
+}

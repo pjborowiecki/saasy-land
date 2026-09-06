@@ -1,0 +1,16 @@
+---
+title: Risoluzione dei problemi
+description: Risoluzione dei problemi — SaaSy Land
+---
+
+Se le domande locali segnalano le tabelle mancanti, eseguire `bun run db:migrate:local`; uso dei test del browser `db:migrate:test` e una legatura separata D1. Se l'autenticazione fallisce, controlla l'URL dell'ambiente, `AUTH_SECRET`, le credenziali del fornitore e gli URL di callback.
+
+Gli errori di traduzione mancanti di solito indicano un namespace omesso dal percorso o una chiave mancante in un locale. Corri! `check:i18n`. Per la documentazione 404s, verificare il nome file localizzato MDX, metadati di pagina e relativo link sorgente. Per i guasti prerender, ispezionare il primo URL difettoso nell'output di build.
+
+Una distribuzione respinta per gli attacchi dei segnaposto ha bisogno di ID reali D1 e KV nell'ambiente di destinazione. Le operazioni di compilazione e test non creano automaticamente risorse remote.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

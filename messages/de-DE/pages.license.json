@@ -1,0 +1,37 @@
+{
+  "title": "Deine Lizenz",
+  "description": "Dein gekaufter CLI-Lizenzschlüssel und deine Geräteaktivierungen.",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "Lizenzschlüssel",
+  "pending": "Dein Schlüssel wird ausgestellt. Lade die Seite gleich noch einmal.",
+  "revoked": "Diese Lizenz ist nicht mehr aktiv. Schreib uns, falls das nicht stimmt.",
+  "usage": "Installation und Nutzung der CLI erfordern einen Kauf und einen gültigen Schlüssel. Führe diesen Befehl aus und gib den Schlüssel ein, wenn du dazu aufgefordert wirst. Halte ihn geheim.",
+  "manage": "Rechnungen und Belege",
+  "buy": {
+    "title": "Lizenz kaufen",
+    "description": "Kaufe die proprietäre CLI und rufe deinen Lizenzschlüssel anschließend hier ab. Einmalige Zahlung, unbegrenzt viele Projekte innerhalb deines Pakets.",
+    "core": "Core kaufen",
+    "complete": "Complete kaufen",
+    "agency": "Agency kaufen",
+    "pending": "Checkout wird geöffnet…",
+    "error": "Der Checkout konnte nicht geöffnet werden. Versuche es erneut oder schreibe an hello@saasyland.com.",
+    "agreement": "Wenn Sie zum Checkout weitergehen, stimmen Sie den <terms>Nutzungsbedingungen</terms> und der <licence>kommerziellen Lizenz</licence> zu. Lesen Sie vor dem Kauf die <refunds>Erstattungsbedingungen</refunds>."
+  },
+  "activations": {
+    "title": "Geräte",
+    "description": "Jedes Gerät, auf dem du Projekte generierst, belegt einen Aktivierungsplatz. Gib den Platz frei, wenn du das Gerät nicht mehr verwendest.",
+    "count": "{used} von {limit} verwendet",
+    "unlimited": "{used} verwendet",
+    "none": "Bisher hat kein Gerät diesen Schlüssel verwendet.",
+    "activated": "Aktiviert am {date}",
+    "deactivate": "Aktivierungsplatz freigeben",
+    "deactivating": "Wird freigegeben…",
+    "error": "Das hat nicht funktioniert. Versuche es erneut oder schreibe an hello@saasyland.com.",
+    "success": "Aktivierungsplatz freigegeben."
+  },
+  "back": "Zurück zur Übersicht",
+  "agreement": "Die <licence>kommerzielle Lizenz</licence> regelt die CLI und Ihre Rechte an generierten Anwendungen."
+}

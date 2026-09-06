@@ -1,0 +1,71 @@
+{
+  "title": "Créer un cours",
+  "actions": {
+    "cancel": "Annuler",
+    "save": "Enregistrer le cours"
+  },
+  "sections": {
+    "general": {
+      "title": "Informations générales",
+      "name": {
+        "label": "Titre du cours",
+        "placeholder": "Ex. : modèles avancés de conception d’interfaces…"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Décrivez brièvement ce que les étudiants apprendront…",
+        "help": "Seront affichés sur la page d'accueil du cours."
+      }
+    },
+    "curriculum": {
+      "title": "Programme",
+      "description": "Structurez votre cours en sections et leçons.",
+      "expandAll": "Développer tout",
+      "addSection": "Ajouter une nouvelle section",
+      "addLesson": "Ajouter une leçon"
+    },
+    "pricing": {
+      "title": "Prix et accès",
+      "model": {
+        "label": "Modèle de facturation",
+        "oneTime": "Achat unique",
+        "subscription": "Abonnement"
+      },
+      "price": {
+        "label": "Prix",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "Durée d'accès",
+        "lifetime": "Accès à vie"
+      }
+    },
+    "status": {
+      "title": "Statut",
+      "publish": {
+        "label": "Publier le cours",
+        "description": "Rendez-le visible aux étudiants"
+      },
+      "certificate": {
+        "label": "Certifier",
+        "description": "À la fin de la progression à 100%"
+      }
+    },
+    "media": {
+      "title": "Miniature du cours",
+      "upload": "Télécharger l'image",
+      "help": "1920x1080px recommandé"
+    },
+    "organization": {
+      "title": "Organisation",
+      "category": {
+        "label": "Catégorie",
+        "placeholder": "Sélectionner une catégorie..."
+      },
+      "difficulty": {
+        "label": "Niveau de difficulté",
+        "placeholder": "e.g. Débutant, Avancé..."
+      }
+    }
+  }
+}

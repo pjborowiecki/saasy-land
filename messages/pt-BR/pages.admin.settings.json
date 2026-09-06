@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Configurações | SaaSy Land",
+    "description": "Gerencie suas preferências de espaço de trabalho, segurança e faturamento."
+  },
+  "title": "Configurações",
+  "description": "Gerencie suas preferências de espaço de trabalho, segurança e faturamento.",
+  "tabs": {
+    "general": "Geral",
+    "security": "Segurança",
+    "team": "Equipe e membros",
+    "billing": "Cobrança",
+    "integrations": "Integrações",
+    "api": "Chaves de API"
+  },
+  "profile": {
+    "title": "Perfil do Ambiente de Trabalho",
+    "description": "Atualize suas informações e detalhes de perfil.",
+    "uploadImage": "Carregar imagem",
+    "removeImage": "Remover",
+    "imageHint": "Tamanho recomendado: 256x256px. Tamanho máximo: 2MB.",
+    "workspaceName": "Nome do espaço de trabalho",
+    "supportEmail": "Email de suporte",
+    "workspaceUrl": "URL do ambiente de trabalho",
+    "urlHint": "Este é o seu URL exclusivo para acessar o painel.",
+    "saveChanges": "Salvar alterações",
+    "urlPrefix": "app.saasyland.com/"
+  },
+  "preferences": {
+    "title": "Preferências",
+    "description": "Configure as configurações regionais e de idioma para o seu espaço de trabalho.",
+    "language": "Idioma",
+    "timezone": "Fuso horário",
+    "announcements": {
+      "title": "Anúncios de novidades",
+      "description": "Receba e-mails sobre novos recursos e atualizações."
+    }
+  },
+  "dangerZone": {
+    "title": "Zona de perigo",
+    "description": "Ações irreversíveis para o seu espaço de trabalho.",
+    "delete": {
+      "title": "Excluir espaço de trabalho",
+      "description": "Exclua permanentemente este espaço de trabalho e todos os seus dados. Esta ação não poderá ser desfeita.",
+      "button": "Excluir espaço de trabalho"
+    }
+  },
+  "security": {
+    "password": {
+      "title": "Alterar senha",
+      "description": "Atualize sua senha para manter sua conta segura.",
+      "current": "Senha atual",
+      "new": "Nova senha",
+      "confirm": "Confirmar nova senha",
+      "requirements": {
+        "title": "Requisitos para a senha",
+        "length": "Mínimo de 8 caracteres",
+        "case": "Pelo menos uma letra maiúscula e uma letra minúscula",
+        "special": "Pelo menos um número ou caractere especial"
+      },
+      "update": "Atualizar senha",
+      "feedback": {
+        "updateSuccess": "Senha atualizada com sucesso."
+      }
+    },
+    "twoFactor": {
+      "title": "Autenticação de dois fatores (2FA)",
+      "description": "Adicione uma camada extra de segurança à sua conta.",
+      "app": "Aplicativo de autenticação",
+      "appDescription": "Utilize um aplicativo como o Google Authenticator ou o 1Password para gerar códigos de tempo limitado.",
+      "enable": "Ative a autenticação de dois fatores",
+      "dialogTitle": "Habilite a autenticação de dois fatores",
+      "dialogDescription": "Confirme sua senha e, em seguida, escaneie o código de configuração com seu aplicativo autenticador.",
+      "password": "Senha atual",
+      "continue": "Continuar",
+      "scanInstructions": "Adicione este código ao seu aplicativo autenticador, ou escaneie o URI a partir do seu gerenciador de senhas.",
+      "verificationCode": "Código de verificação",
+      "verifyAndEnable": "Verificar e ativar",
+      "backupCodesDescription": "Guarde esses códigos de backup em um local seguro. Cada código pode ser usado uma vez, caso você perca o acesso ao seu autenticador.",
+      "done": "Concluído",
+      "setupError": "Não foi possível iniciar a configuração de autenticação de dois fatores. Por favor, tente novamente.",
+      "enabledSuccess": "A autenticação de dois fatores está agora ativada.",
+      "disable": "Desativar a autenticação de dois fatores",
+      "disableDialogTitle": "Desativar a autenticação de dois fatores",
+      "disableDialogDescription": "Confirme sua senha para desativar a autenticação de dois fatores.",
+      "disableConfirm": "Desativar",
+      "disabledSuccess": "A autenticação de dois fatores está desativada."
+    },
+    "sessions": {
+      "title": "Sessões Ativas",
+      "description": "Gerencie os dispositivos que estão atualmente conectados à sua conta.",
+      "logoutAll": "Desconecte todos os outros dispositivos",
+      "currentBadge": "Sessão atual",
+      "revoke": "Revogar",
+      "activeAgo": "Atividade há {time}",
+      "separator": " • ",
+      "feedback": {
+        "logoutAllSuccess": "Outras sessões foram encerradas.",
+        "revokeSuccess": "Sessão encerrada."
+      }
+    }
+  }
+}

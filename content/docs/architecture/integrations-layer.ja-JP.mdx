@@ -1,0 +1,14 @@
+---
+title: 統合所有権
+description: 統合所有権 — SaaSy Land
+---
+
+各外部ライブラリまたはプロバイダは、ディレクトリを下に所有します。 `src/integrations`: Better Auth, Drizzle, Fumadocs, use-intl, Polar, Resend, GitHub. 設定ファイルはクライアントを初期化します。 共有アダプターはプロバイダの結果を正規化し、サーバー境界の背後にある資格情報を保持します。
+
+ビジネスの決定は、機能モジュールに残ります。 例えば、Polar Webhook ハンドラは、モジュールのユースケースでライセンスレコードを更新します。インテグレーション自体は、SDK を構成し、Webhooks の受信を検証します。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

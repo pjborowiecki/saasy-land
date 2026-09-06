@@ -1,0 +1,15 @@
+---
+title: "Dodaj stronę admina"
+description: "Trasa, sidebar i szkielet strony."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Steps
+
+1. Dodaj ścieżkę do `ROUTES`
+2. Dodaj wpis paska bocznego w `admin/constants/sidebar.ts` (+ etykiety i18n)
+3. Utwórz `app/[locale]/(admin)/admin/<feature>/page.tsx`
+4. Umieść obok `_components` / `_lib`
+5. Zabezpiecz dane przypadkami użycia + Suspense
+6. Opisz w rozdziale Funkcje

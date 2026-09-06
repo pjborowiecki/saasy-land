@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { AppError, ERROR_CODES } from "~/src/modules/_core/constants/errors"
 
 describe("app error", () => {

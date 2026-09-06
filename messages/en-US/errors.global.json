@@ -1,0 +1,5 @@
+{
+  "title": "Something went wrong",
+  "description": "The application ran into an unexpected error.",
+  "retry": "Reload"
+}

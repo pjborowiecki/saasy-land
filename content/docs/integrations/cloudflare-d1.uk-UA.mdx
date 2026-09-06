@@ -1,0 +1,23 @@
+---
+title: D1 і Drizzle
+description: D1 і Drizzle - SaaSy Land
+---
+
+Cloudflare D1 - База даних додатків. Використання модульних схем `drizzle-orm/sqlite-core`; `src/integrations/drizzle-orm/drizzle.schemas.ts` збирає їх. `drizzle.database.ts` створює адаптер Drizzle D1 від `env.DB`.
+
+Дати використання SQLite цілих міток в мілісекундах. Болеанські поля використовують SQLite загальний режим болеана. Відносини, унікальні обмеження та іноземні ключі залишаються в шемалі. Зберігайте атомію роботи з відповідним протоколом SQL або пакетом D1; не введіть басейн з підключенням PostgreSQL або інтерактивну операцію.
+
+Зареєструватися `db:generate` після зміни schemas, рецензування та впорядкування створеного SQL, і застосувати його локально. Віддалені міграції є чіткими командами середовища. База даних PostgreSQL вимагає окремого переглянуто експорт і імпорт; генерування міграції SQLite не передає існуючі дані.
+
+```sh
+bun run db:generate
+bun run db:migrate:local
+# After configuring real preview bindings:
+bun run db:migrate:preview
+```
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

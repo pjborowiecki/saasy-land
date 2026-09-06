@@ -1,0 +1,16 @@
+---
+title: "Customer app"
+description: "Protected /app area for signed-in customers."
+---
+
+## Route group
+
+`src/routes/app*.tsx` and `src/presentation/components/custom/app/`
+
+## Status
+
+Shell after sign-in. Expand with billing portal, course library, account deep-links, and entitlement-gated content.
+
+## Guards
+
+`src/integrations/better-auth/auth.guards.ts` + session; prefer use-cases for any mutation from this surface.

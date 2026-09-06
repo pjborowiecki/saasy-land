@@ -1,0 +1,16 @@
+---
+title: "Docs site"
+description: "How this documentation is built and extended."
+---
+
+## Content root
+
+`content/docs`
+
+- MDX pages: `*.{locale}.mdx` for all nine configured languages (dot parser)
+- Folder `meta.<locale>.json` for titles/order/icons
+- `fallbackLanguage: en-US` for missing translations
+
+## App wiring
+
+`fumadocs.source.ts`, docs layout, search API. Add pages → update meta `pages` arrays → rebuild.

@@ -1,0 +1,76 @@
+{
+  "title": "Landingpage-Editor",
+  "description": "Erstellen Sie den Seitenbereich für Bereich, und veröffentlichen Sie die Seite, wenn sie fertig ist.",
+  "actions": {
+    "preview": "Vorschau",
+    "saveChanges": "Änderungen speichern",
+    "publish": "Veröffentlichen"
+  },
+  "sidebar": {
+    "addSection": "Fügen Sie einen Abschnitt hinzu",
+    "sections": {
+      "hero": "Einstiegsbereich",
+      "features": "Funktionsübersicht",
+      "video": "Videoschau",
+      "testimonials": "Bewertungen",
+      "pricing": "Preisübersicht",
+      "gallery": "Bildergalerie",
+      "faq": "Häufig gestellte Fragen (FAQ)",
+      "contact": "Kontaktformular"
+    }
+  },
+  "canvas": {
+    "label": "Leinwand",
+    "viewport": {
+      "desktop": "Desktop-Breite",
+      "tablet": "Tabletbreite",
+      "mobile": "Mobile Breite"
+    },
+    "sectionActions": {
+      "edit": "Bearbeiten",
+      "duplicate": "Abschnitt duplizieren",
+      "delete": "Löschen Sie diesen Abschnitt"
+    },
+    "badge": "Für Lagerteams entwickelt",
+    "headingLead": "Verfolgen Sie jede Palette – von…",
+    "headingAccent": "zur Regalablage bringen",
+    "description": "Barcodescanning, Zählungen und Nachbestellungsbenachrichtigungen – alles an einem Ort. Die Anwendung funktioniert offline vor Ort und synchronisiert die Daten, sobald eine Verbindung zum WLAN besteht.",
+    "getStarted": "Kostenlosen Test starten",
+    "bookDemo": "Vereinbaren Sie eine Demo",
+    "addSectionHere": "Fügen Sie hier einen Abschnitt hinzu",
+    "featuresHeading": "Was ist enthalten?",
+    "featuresSubheading": "Drei Werkzeuge, die Ihr Reinigungsteam bei jedem Einsatz verwendet.",
+    "feature1": "Barcodescanning",
+    "feature2": "Regelmäßige Bestandszählungen",
+    "feature3": "Nachbestellhinweise"
+  },
+  "properties": {
+    "title": "Abschnittseigenschaften",
+    "description": "Passen Sie das ausgewählte Element an",
+    "layout": "Ausrichtung",
+    "alignLeft": "Links ausrichten",
+    "alignCenter": "Zentrieren",
+    "alignRight": "Rechts ausrichten",
+    "spacing": "Abstände",
+    "paddingTop": "Innenabstand",
+    "paddingBot": "Abstand unten",
+    "unit": "Bitte geben Sie den englischen Text an, den Sie übersetzt haben möchten",
+    "background": "Hintergrundgestaltung",
+    "backgroundOptions": {
+      "page": "Oberflächenbeschaffenheit",
+      "panel": "Paneloberfläche",
+      "raised": "Erhöhte Fläche",
+      "image": "Laden Sie ein Bild hoch"
+    },
+    "content": "Inhalt",
+    "generateAI": "Generieren Sie mit KI",
+    "badgeText": "Abzeichentext",
+    "heading": "Überschrift",
+    "subheading": "Zwischenüberschrift",
+    "buttonActions": "Aktionen",
+    "primaryButton": "Hauptschaltfläche",
+    "secondaryButton": "Sekundär-Taste",
+    "buttonEnabled": "Der Button wird angezeigt",
+    "label": "Etikett"
+  }
+}

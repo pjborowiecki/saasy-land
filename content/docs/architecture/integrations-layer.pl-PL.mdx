@@ -1,0 +1,14 @@
+---
+title: Własność integracji
+description: Własność integracji — SaaSy Land
+---
+
+Każda biblioteka lub usługa zewnętrzna ma katalog w `src/integrations`: Better Auth, Drizzle, Fumadocs, use-intl, Polar, Resend i GitHub. Pliki konfiguracji tworzą klientów. Wspólne adaptery normalizują wyniki usług i utrzymują dane dostępowe po stronie serwera.
+
+Decyzje biznesowe pozostają w modułach. Na przykład handlery webhooków Polar aktualizują licencje przez przypadki użycia modułu; integracja konfiguruje SDK i weryfikuje webhooki.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

@@ -1,0 +1,14 @@
+---
+title: Formulare und Validierung.
+description: Formulare und Validierung — SaaSy Land
+---
+
+Verwenden Sie `useForm` und `form.Field` aus `@tanstack/react-form`. Bewahren Sie die übersetzten Zod-Schemas in den Validierungsdateien der Funktion auf und verwenden Sie diese an der Serverseite wieder. Lesen Sie den Übermittlungsstatus mit `useSelector(form.store, selector)`; rendern Sie barrierefreie Felder mit den bereits vorhandenen Präsentationskomponenten.
+
+Die Komponenten für das Feld für die Authentifizierung verwenden das kleine `StringField`-Interface aus `integrations/tanstack-form/form.fields.ts`. Sie behalten Beschriftungen, das Verhalten beim Fokus, die Umschaltfunktion für Passwörter und Fehlermeldungen bei. Die Übermittlung erfolgt über die exportierten Mutationsoptionen, sichere Fehler werden behandelt, und die Senden-Schaltfläche bleibt deaktiviert, solange die Übermittlung läuft. Siehe die Formulare für die Anmeldung, Registrierung, das Zurücksetzen des Passworts und die Zwei-Faktor-Authentifizierung für vollständige Beispiele.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

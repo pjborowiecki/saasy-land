@@ -1,0 +1,36 @@
+{
+  "title": "Verfassen Sie einen Beitrag",
+  "description": "Erstellen Sie einen neuen Blogbeitrag im Markdown-Format mit erweiterten Einstellungen.",
+  "actions": {
+    "preview": "Vorschau",
+    "saveDraft": "Entwurf speichern",
+    "publish": "Veröffentlichen"
+  },
+  "editor": {
+    "title": "Post-Titel",
+    "titlePlaceholder": "Bitte geben Sie hier den Titel des Beitrags ein...",
+    "slug": "URL-Slug",
+    "slugPlaceholder": "Bitte geben Sie den zu übersetzenden englischen Text an",
+    "contentPlaceholder": "Bitte schreiben Sie hier den Inhalt Ihres Beitrags. Sie können Markdown verwenden.",
+    "fullscreen": "Vollbild"
+  },
+  "settings": {
+    "featuredImage": "Titelbild",
+    "upload": "Klicken Sie hier, um eine Datei hochzuladen",
+    "uploadHelp": "SVG, PNG, JPG oder GIF (maximal 5 MB)",
+    "publishing": "Veröffentlichung",
+    "status": "Status",
+    "statusDraft": "Entwurf",
+    "statusPublished": "Veröffentlicht",
+    "statusScheduled": "Geplant",
+    "category": "Kategorie",
+    "categorySelect": "Kategorien auswählen",
+    "categoryUpdates": "Produktaktualisierungen",
+    "categoryTutorials": "Anleitungen",
+    "categoryCompany": "Unternehmensnachrichten",
+    "tags": "Schlagwörter",
+    "tagsPlaceholder": "Fügen Sie Tags hinzu, getrennt durch Kommas...",
+    "excerpt": "Kurzbeschreibung",
+    "excerptPlaceholder": "Kurze Zusammenfassung des Beitrags..."
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Licence",
+    "description": "The website source code is MIT licensed. The separate SaaSy Land CLI is proprietary and requires a purchase and valid licence key. Brand rights are reserved."
+  },
+  "title": "Licence",
+  "lastUpdated": "Last updated 6 September 2026",
+  "description": "The website source code is MIT licensed. The separate SaaSy Land CLI is proprietary and requires a purchase and valid licence key. Brand rights are reserved.",
+  "sections": {
+    "publicCode": {
+      "title": "Public website and previous MIT releases",
+      "body": "The source code and associated technical documentation of the public saasyland.com website, including its account, checkout, and licence-management implementation, are MIT licensed as specified in LICENSE.md. You may use, modify, and redistribute that code, including commercially, subject to the MIT notice requirements. No trademark rights are granted in the SaaSy Land name, product names, logos, or other brand identifiers. Original SaaSy Land logos and brand artwork are excluded from the MIT copyright grant unless separately licensed; this exclusion does not cover generic interface components or third-party assets. Reusing the code does not permit you to present a fork as the official SaaSy Land service or imply our endorsement. Truthful references, required attribution, and uses permitted by law remain unaffected. Previously granted MIT and other open-source permissions remain valid, including for any previously licensed assets. Buying a package is not required to use MIT-licensed code."
+    },
+    "paidMaterial": {
+      "title": "Commercial product and agreement",
+      "body": "This commercial licence is between Piotr Borowiecki, operating as SaaSy Land, and the person or legal entity identified in the purchase. It covers the separately supplied proprietary CLI, its private generator templates, and paid learning or design material (the Product). The CLI is maintained in a separate, private repository and is not supplied under this website’s MIT licence. Purchasing a licence does not transfer ownership of the Product or grant access to its private repository. Rights not expressly granted are reserved."
+    },
+    "keys": {
+      "title": "Purchase, account, and licence key",
+      "body": "A paid licence and a valid licence key are required to install and use the CLI. After purchase, sign in at saasyland.com to obtain the key issued for your account. Subject to these terms, you receive a non-exclusive licence to install and run the CLI within the package and activation limits disclosed before purchase. Keep the key confidential; do not sell, publish, lend, or share it outside the licensed purchaser. Online validation is required for installation and use. Manage machine activations in your account; contact hello@saasyland.com if validation fails."
+    },
+    "packages": {
+      "title": "Projects, users, and updates",
+      "body": "Core and Complete permit unlimited generated applications for products owned by the purchaser. Agency also permits applications built for clients. A licence covers the purchasing individual or legal entity and its authorised personnel acting for that purchaser, subject to any seats and machine limits disclosed before purchase. Clients do not receive a licence to run the CLI. Complete and Agency include the additional material described at checkout. Payment is one-time; included core updates are supplied for as long as SaaSy Land provides them. This does not promise perpetual operation of third-party or online services."
+    },
+    "output": {
+      "title": "Rights to generated applications",
+      "body": "You may inspect, modify, run, host, and commercially exploit applications generated under your licence, including charging end users. Agency also permits delivery of an application and its source to the client it was built for, for that client’s own use and modification. These rights cover template code incorporated into those applications and do not transfer ownership of the CLI or underlying templates. Generated applications do not need a SaaSy Land licence key to run. You retain ownership of your original contributions. Existing, lawfully generated applications may continue to be used and maintained after CLI access ends."
+    },
+    "restrictions": {
+      "title": "Protecting the CLI and private material",
+      "body": "You may not modify or create derivative versions of the proprietary CLI, reverse engineer or decompile it, remove its notices, or bypass licence validation or activation limits, except to the extent applicable law permits despite this restriction. You may not distribute, sublicense, sell, publish, or provide shared or hosted access to the CLI. Do not redistribute the private templates, paid videos, or design files, or sell or publish generated code as a starter kit, template library, scaffold, or competing generator. These restrictions do not prevent the permitted use of generated applications or rights independently granted for open-source components."
+    },
+    "dependencies": {
+      "title": "Third-party and open-source components",
+      "body": "Third-party libraries, fonts, assets, and any previously MIT-licensed code retain their own licences. Keep all required notices and comply with those licences when distributing an application. This agreement does not make previously open-source material exclusive or remove rights granted by its copyright holders."
+    },
+    "termination": {
+      "title": "Suspension, termination, and refunds",
+      "body": "We may suspend a key when reasonably necessary to investigate misuse. For a material breach, we will notify you and allow a reasonable opportunity to remedy it where it can be remedied before terminating the commercial licence. Refunds end access to the refunded Product and invalidate the related key. When access ends, stop using and remove copies of the proprietary CLI and standalone paid material. The rights stated above for already lawfully generated applications survive; termination does not authorise new generation or redistribution of the Product. MIT rights and mandatory consumer remedies remain unaffected."
+    },
+    "warranty": {
+      "title": "Responsibility and applicable terms",
+      "body": "Review and test generated code and maintain your deployments. No particular business outcome is guaranteed. The Terms of Service and Refunds page also apply to the purchase. Polish law applies without removing mandatory consumer protections in your country of residence. Nothing here excludes liability or software-use rights that cannot lawfully be excluded. Changes apply to future purchases and do not retrospectively remove rights already purchased."
+    },
+    "questions": {
+      "title": "Questions and permission requests",
+      "body": "For licence questions, a different package, or permission beyond these grants, contact hello@saasyland.com before the proposed use. Any additional permission must be expressly granted in writing by SaaSy Land."
+    }
+  }
+}

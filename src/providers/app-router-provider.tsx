@@ -1,27 +1,28 @@
-"use client"
+import { type JSX, type ReactNode, useCallback } from "react"
 
-import { useCallback, type JSX, type ReactNode } from "react"
+import { useNavigate } from "@tanstack/react-router"
+import { I18nProvider, RouterProvider } from "react-aria-components"
 
-import { useLocale } from "next-intl"
-import { RouterProvider } from "react-aria-components"
+import { localizePathname } from "~/src/integrations/use-intl/i18n.paths"
+import { getCurrentLocale } from "~/src/integrations/use-intl/i18n.utils"
 
-import { getPathname, useRouter } from "~/src/integrations/next-intl/i18n.navigation"
-
-export function AppRouterProvider({ children }: { readonly children: ReactNode }): JSX.Element {
-  const router = useRouter()
-  const locale = useLocale()
+export const AppRouterProvider = ({ children }: { readonly children: ReactNode }): JSX.Element => {
+  const navigateRoute = useNavigate()
+  const locale = getCurrentLocale()
 
   const navigate = useCallback(
     (href: string) => {
-      router.push(href)
+      void navigateRoute({ to: href })
     },
-    [router],
+    [navigateRoute],
   )
-  const useHref = useCallback((href: string) => getPathname({ href, locale }), [locale])
+  const useHref = useCallback((href: string) => localizePathname({ locale, pathname: href }), [locale])
 
   return (
-    <RouterProvider navigate={navigate} useHref={useHref}>
-      {children}
-    </RouterProvider>
+    <I18nProvider locale={locale}>
+      <RouterProvider navigate={navigate} useHref={useHref}>
+        {children}
+      </RouterProvider>
+    </I18nProvider>
   )
 }

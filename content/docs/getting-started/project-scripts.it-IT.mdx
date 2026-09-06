@@ -1,0 +1,24 @@
+---
+title: Scrittori di progetto
+description: Scrittori di progetto — SaaSy Land
+---
+
+Scripts in `package.json` utilizzare Vite+ per lo sviluppo, la formattazione, lint, tipi, Vitest e costruisce. `content` genera MDX collezioni; `cf-typegen` genera tipi di binding Worker. `db:generate` crea migrazioni SQL; `db:migrate:local` li applica al locale D1. La migrazione remota e la distribuzione dei comandi nominano esplicitamente il loro ambiente.
+
+`build:preview` e `build:production` costruire il Worker, prerender pagine pubbliche e verificare artefatti di distribuzione. `clean` rimuove l'output generato e lo stato vincolante locale, quindi esporta tutti i dati locali che vuoi conservare per primo.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

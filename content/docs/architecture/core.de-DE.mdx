@@ -1,0 +1,14 @@
+---
+title: Gemeinsamer Kern
+description: Domänenfehler und gemeinsame Kataloge im Modul "_core".
+---
+
+## Inhaltsverzeichnis
+
+- `constants/errors.ts` — `ERROR_CODES`, `AppError`, `ActionServerError` (die zentrale Fehlerterminologie)
+- `constants/` — Lokalisierungs- (und zugehörige) Kataloge, die von der Internationalisierung (i18n) und den Produkteinstellungen verwendet werden.
+- `utils/` — reine Hilfsfunktionen, die von verschiedenen Modulen gemeinsam genutzt werden.
+
+## Warum es existiert.
+
+Gemeinsame **gültige Werte** und **Fehlercodes** sollten nicht für jede Funktion neu definiert werden. App-unterstützte Regionen (eine Auswahl) sind weiterhin in `i18n.config.ts`; der umfassendere Katalog kann in `_core` gespeichert werden.

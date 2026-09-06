@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "Un clic e sei dei nostri",
+    "preview": "Conferma il tuo indirizzo e ricevi il diario di sviluppo.",
+    "heading": "Un clic e sei dei nostri",
+    "body": "Qualcuno ha inserito questo indirizzo su saasyland.com. Confermalo per ricevere il diario di sviluppo: le novità, le decisioni che le hanno guidate e i tentativi che non hanno funzionato. Se non ti sei iscritto, elimina questa email e non ti scriveremo più.",
+    "button": "Ci sono",
+    "footer": "Il link può essere usato una sola volta e scade tra 24 ore. Se qualcosa non ti convince, scrivici:"
+  },
+  "notification": {
+    "subject": "Nuova iscrizione alla newsletter",
+    "preview": "È stata confermata un’iscrizione alla newsletter.",
+    "heading": "Nuova iscrizione alla newsletter",
+    "body": "{email} ha confermato un’iscrizione dalla pagina iniziale in {locale}."
+  }
+}

@@ -1,0 +1,26 @@
+---
+title: Häufig gestellte Fragen.
+description: Häufig gestellte Fragen – SaaSy Land
+---
+
+## Welche Laufzeitumgebung verwendet die Anwendung?
+
+Cloudflare Workers. Bun verwaltet Pakete und Skripte, während Vite+ die Anwendung erstellt und testet.
+
+## Benötigen lokale Tests ein Cloudflare-Konto?
+
+Nummer. Unit- und Integrationstests verwenden SQLite und Mock-Bindings. Browser-Tests nutzen einen dedizierten lokalen Worker und eine D1-Datenbank. Für die Bereitstellung sind jedoch echte Bindings erforderlich.
+
+## Wo sollte die neue Funktionalität untergebracht werden?
+
+In seinem Funktionsmodul, im Verzeichnis `use-cases`. Die Route koordiniert das Laden; die Serverfunktion validiert und autorisiert die Operation.
+
+## Wie sind Sprachen aufgebaut?
+
+Englisch verwendet URLs ohne Präfixe, Polnisch verwendet `/pl-PL`, und jede Sprache hat die gleichen, durch Punkte getrennten Namensraumdateien im Ordner `messages`.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

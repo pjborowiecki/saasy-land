@@ -1,0 +1,51 @@
+{
+  "metadata": {
+    "title": "Licença",
+    "description": "O código-fonte do site tem licença MIT. A CLI separada da SaaSy Land é proprietária e exige uma compra e uma chave de licença válida. Os direitos de marca são reservados."
+  },
+  "title": "Licença",
+  "lastUpdated": "Última atualização: 6 de setembro de 2026",
+  "description": "O código-fonte do site tem licença MIT. A CLI separada da SaaSy Land é proprietária e exige uma compra e uma chave de licença válida. Os direitos de marca são reservados.",
+  "sections": {
+    "publicCode": {
+      "title": "Site público e versões MIT anteriores",
+      "body": "O código-fonte e a documentação técnica associada do site público saasyland.com, incluindo a implementação de contas, pagamentos e gerenciamento de licenças, têm licença MIT conforme LICENSE.md. Você pode usar, modificar e redistribuir esse código, inclusive comercialmente, mantendo os avisos exigidos pela MIT. Nenhum direito de marca é concedido sobre o nome SaaSy Land, nomes de produtos, logotipos ou outros identificadores da marca. Os logotipos originais e as artes da marca SaaSy Land estão excluídos da licença de direitos autorais MIT, salvo licença separada; isso não se aplica a componentes genéricos de interface nem a recursos de terceiros. Reutilizar o código não permite apresentar uma versão derivada como o serviço oficial da SaaSy Land nem sugerir nosso apoio. Referências verdadeiras, atribuições obrigatórias e usos permitidos por lei continuam autorizados. As permissões MIT e de outras licenças de código aberto já concedidas continuam válidas, inclusive para recursos anteriormente licenciados. Não é necessário comprar um pacote para usar código sob MIT."
+    },
+    "paidMaterial": {
+      "title": "Produto comercial e contrato",
+      "body": "Esta licença comercial é um contrato entre Piotr Borowiecki, que atua como SaaSy Land, e a pessoa física ou jurídica identificada na compra. Ela cobre a CLI proprietária fornecida separadamente, seus modelos privados de geração e os materiais pagos de aprendizado ou design (o Produto). A CLI é mantida em um repositório separado e privado e não é fornecida sob a licença MIT deste site. A compra de uma licença não transfere a propriedade do Produto nem concede acesso ao repositório privado. Todos os direitos não expressamente concedidos são reservados."
+    },
+    "keys": {
+      "title": "Compra, conta e chave de licença",
+      "body": "A instalação e o uso da CLI exigem uma licença paga e uma chave de licença válida. Após a compra, entre em saasyland.com para obter a chave emitida para sua conta. De acordo com estes termos, você recebe uma licença não exclusiva para instalar e executar a CLI dentro dos limites do pacote e de ativações informados antes da compra. Mantenha a chave em sigilo; não a venda, publique, empreste nem compartilhe fora do comprador licenciado. A instalação e o uso exigem validação online. Gerencie as ativações de máquinas na sua conta; entre em contato com hello@saasyland.com se a validação falhar."
+    },
+    "packages": {
+      "title": "Projetos, usuários e atualizações",
+      "body": "Core e Complete permitem um número ilimitado de aplicativos gerados para produtos de propriedade do comprador. Agency também permite aplicativos desenvolvidos para clientes. A licença cobre a pessoa física ou jurídica compradora e seu pessoal autorizado atuando em seu nome, respeitando os limites de usuários e máquinas informados antes da compra. Os clientes não recebem licença para executar a CLI. Complete e Agency incluem o material adicional descrito no pagamento. O pagamento é único; as atualizações incluídas do código principal são fornecidas enquanto a SaaSy Land as oferecer. Isso não garante o funcionamento perpétuo de serviços de terceiros ou serviços online."
+    },
+    "output": {
+      "title": "Direitos sobre aplicativos gerados",
+      "body": "Você pode inspecionar, modificar, executar, hospedar e explorar comercialmente aplicativos gerados sob sua licença, inclusive cobrando dos usuários finais. Agency também permite entregar um aplicativo e seu código-fonte ao cliente para o qual foi desenvolvido, para uso e modificação pelo próprio cliente. Esses direitos cobrem o código dos modelos incorporado aos aplicativos e não transferem a propriedade da CLI nem dos modelos subjacentes. Os aplicativos gerados não precisam de uma chave de licença SaaSy Land para funcionar. Você mantém a propriedade de suas contribuições originais. Aplicativos existentes, gerados de forma legítima, podem continuar a ser usados e mantidos após o encerramento do acesso à CLI."
+    },
+    "restrictions": {
+      "title": "Proteção da CLI e dos materiais privados",
+      "body": "Você não pode modificar a CLI proprietária nem criar versões derivadas, realizar engenharia reversa ou descompilá-la, remover seus avisos legais ou contornar a validação de licença ou os limites de ativação, exceto na medida em que a legislação aplicável permita apesar desta restrição. Você não pode distribuir, sublicenciar, vender, publicar nem oferecer acesso compartilhado ou hospedado à CLI. Não redistribua os modelos privados, vídeos pagos ou arquivos de design, nem venda ou publique código gerado como kit inicial, biblioteca de modelos, estrutura de aplicativo ou gerador concorrente. Essas restrições não impedem os usos permitidos dos aplicativos gerados nem os direitos concedidos de forma independente para componentes de código aberto."
+    },
+    "dependencies": {
+      "title": "Componentes de terceiros e de código aberto",
+      "body": "Bibliotecas de terceiros, fontes, recursos e qualquer código previamente licenciado sob a licença MIT mantêm suas próprias licenças. Mantenha todas as notificações necessárias e cumpra as condições dessas licenças ao distribuir um aplicativo. Este acordo não torna material previamente de código aberto exclusivo, nem remove os direitos concedidos por seus respectivos detentores de direitos autorais."
+    },
+    "termination": {
+      "title": "Suspensão, encerramento e reembolsos",
+      "body": "Podemos suspender uma chave quando for razoavelmente necessário para investigar um uso indevido. Em caso de violação substancial, notificaremos você e, quando for possível corrigi-la, ofereceremos uma oportunidade razoável de correção antes de encerrar a licença comercial. Reembolsos encerram o acesso ao Produto reembolsado e invalidam a chave associada. Ao terminar o acesso, pare de usar e remova as cópias da CLI proprietária e dos materiais pagos independentes. Os direitos indicados acima para aplicativos já gerados de forma legítima continuam válidos; o encerramento não autoriza novas gerações nem a redistribuição do Produto. Os direitos MIT e as medidas obrigatórias de proteção ao consumidor permanecem inalterados."
+    },
+    "warranty": {
+      "title": "Responsabilidade e termos aplicáveis",
+      "body": "Revise e teste o código gerado e mantenha suas implementações. Não há garantia de um resultado comercial específico. Os termos de serviço e a página de reembolsos também se aplicam à compra. A lei polonesa se aplica, sem prejuízo das proteções obrigatórias ao consumidor em seu país de residência. Nada aqui exclui a responsabilidade ou os direitos de uso do software que não possam ser legalmente excluídos. As alterações se aplicam a compras futuras e não removem retroativamente direitos já adquiridos."
+    },
+    "questions": {
+      "title": "Dúvidas e pedidos de autorização",
+      "body": "Para questões sobre licenciamento, para um pacote diferente ou para obter permissão além das concessões aqui mencionadas, entre em contato com hello@saasyland.com antes da utilização proposta. Qualquer permissão adicional deve ser expressamente concedida por escrito pela SaaSy Land."
+    }
+  }
+}

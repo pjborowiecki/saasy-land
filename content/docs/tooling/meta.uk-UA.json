@@ -1,0 +1,17 @@
+{
+  "title": "Інструменти розробки",
+  "pages": [
+    "environment",
+    "database",
+    "testing",
+    "lint-format",
+    "vite-plus",
+    "playwright",
+    "agent-skills",
+    "ci-cd",
+    "scripts",
+    "graphify",
+    "conventional-commits"
+  ],
+  "icon": "Wrench"
+}

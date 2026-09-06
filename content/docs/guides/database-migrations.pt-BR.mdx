@@ -1,0 +1,23 @@
+---
+title: D1 e... Drizzle
+description: D1 e Drizzle - SaaSy Land
+---
+
+Cloudflare D1 É o banco de dados de aplicativos. `drizzle-orm/sqlite-core`; `src/integrations/drizzle-orm/drizzle.schemas.ts` Coleciona-os. `drizzle.database.ts` cria o Drizzle D1 Adaptador de `env.DB`.
+
+Datas de uso SQLite Tempos inteiros em milissegundos. SQLite Relações, restrições únicas e chaves estrangeiras permanecem no esquema. D1 Batch; não apresente um PostgreSQL pool de conexão ou uma transação interativa.
+
+Corra. `db:generate` As migrações remotas são comandos explícitos específicos do ambiente. PostgreSQL O banco de dados requer uma exportação e importação separadas revisadas; gerando SQLite Migrações não transferem dados existentes.
+
+```sh
+bun run db:generate
+bun run db:migrate:local
+# After configuring real preview bindings:
+bun run db:migrate:preview
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

@@ -1,0 +1,14 @@
+---
+title: "Cloudflare KV"
+description: "Cloudflare KV — SaaSy Land"
+---
+
+`env.CACHE` stores public, disposable cache entries. The GitHub integration caches star counts with a TTL and uses `waitUntil` for the cache write. It falls back gracefully if GitHub or KV is unavailable.
+
+KV is eventually consistent. Authentication sessions and rate limits live in D1. The action limiter uses one atomic SQL upsert per key and time window, so requests handled by separate Worker instances share the same limit. Do not use KV counters for authorization or sensitive limits.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

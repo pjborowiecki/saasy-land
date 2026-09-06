@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "Un clic y ya estás dentro",
+    "preview": "Confirma tu dirección y recibe el diario de desarrollo.",
+    "heading": "Un clic y ya estás dentro",
+    "body": "Alguien ha introducido esta dirección en saasyland.com. Confírmala para recibir el diario de desarrollo: lo que hemos publicado, las decisiones que hemos tomado y lo que no ha funcionado. Si no te has suscrito, elimina este correo y no volveremos a escribirte.",
+    "button": "Quiero recibirlo",
+    "footer": "El enlace solo se puede usar una vez y caduca en 24 horas. Si algo no te parece correcto, escríbenos:"
+  },
+  "notification": {
+    "subject": "Nueva suscripción al boletín",
+    "preview": "Se ha confirmado una suscripción al boletín.",
+    "heading": "Nueva suscripción al boletín",
+    "body": "{email} ha confirmado una suscripción desde la página de inicio en {locale}."
+  }
+}

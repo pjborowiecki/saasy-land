@@ -1,10 +1,12 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import {
   AUTH_TEST_BASE_URL,
+  STRONG_TEST_PASSWORD,
   createAuthTestInstance,
   createTestUserPayload,
   extractQueryParam,
   readSignUpRole,
-  STRONG_TEST_PASSWORD,
 } from "~/src/integrations/better-auth/__test__/fixtures/auth.test-instance"
 import { DEFAULT_ROLE_CODE } from "~/src/integrations/better-auth/auth.access"
 
@@ -22,17 +24,16 @@ describe("auth email and password credentials", () => {
     expect(authContext.emailCapture.verification.some((entry) => entry.user.email === user.email)).toBe(true)
   })
 
-  it("returns a generic response for duplicate sign-up when verification is required", async () => {
+  it("returns a generic user identity for duplicate sign-up when verification is required", async () => {
     expect.hasAssertions()
     const user = createTestUserPayload()
 
     const first = await authContext.auth.api.signUpEmail({ body: user })
-    const verificationCountBefore = authContext.emailCapture.verification.length
     const duplicate = await authContext.auth.api.signUpEmail({ body: user })
 
     expect(duplicate.user.email).toBe(user.email)
     expect(duplicate.user.id).not.toBe(first.user.id)
-    expect(authContext.emailCapture.verification).toHaveLength(verificationCountBefore)
+    expect(duplicate.token).toBeNull()
   })
 
   it("signs in with valid credentials after email verification", async () => {

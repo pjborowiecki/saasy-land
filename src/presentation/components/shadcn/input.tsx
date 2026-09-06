@@ -1,15 +1,16 @@
-"use client"
-
 import type { ComponentProps } from "react"
 
-import { composeRenderProps, Input as InputPrimitive } from "react-aria-components"
+import { useHydrated } from "@tanstack/react-router"
+import { Input as InputPrimitive, composeRenderProps } from "react-aria-components"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
-function Input({ className, type, ...props }: ComponentProps<typeof InputPrimitive>) {
+const Input = ({ className, type, readOnly = false, ...props }: ComponentProps<typeof InputPrimitive>) => {
+  const hydrated = useHydrated()
   return (
     <InputPrimitive
       type={type}
+      readOnly={readOnly || !hydrated}
       data-slot="input"
       className={composeRenderProps(className, (resolvedClassName) =>
         cn(

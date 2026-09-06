@@ -1,0 +1,19 @@
+---
+title: DataTable を追加
+description: 管理者画面で共有されたTanStack DataTableキットを使用します。
+---
+
+## キットの場所
+
+`src/presentation/components/custom/data-table`
+
+## 特徴パターン(ユーザ)
+
+- `columns.tsx` / `cells.tsx` / `filters.tsx` / `actions.tsx` / `options.tsx`
+- 地図DB行 → テーブル行 `_lib` またはモジュールのユーティリティ
+- ツールバーのリフレッシュ → 関連するTanStack Queryキーを無効にします
+- サスペンスフォールバックをテーブルランタイムの自由に保ちましょう
+
+## オプション
+
+ツールバーの構成(検索、フィルタ、CSVのエクスポート、フェッチ、設定)、パジネーション、選択、および密度を経由して `options` — UI → DataTable を参照してください。

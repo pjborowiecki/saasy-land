@@ -1,0 +1,54 @@
+{
+  "form": {
+    "alreadySubscribed": "Você já está dentro. Não há nada a fazer.",
+    "button": "Assine",
+    "confirmationSent": "Sucesso! Agora, verifique sua caixa de entrada e confirme o endereço.",
+    "error": "Não foi possível enviar. Tente novamente ou envie um e-mail para hello@saasyland.com.",
+    "label": "Endereço de e-mail",
+    "placeholder": "Seu endereço de e-mail",
+    "submitting": "Assinando..."
+  },
+  "confirm": {
+    "title": "Confirme sua assinatura",
+    "description": "Confirme sua inscrição para acompanhar a construção do SaaSy Land.",
+    "confirmed": {
+      "title": "Você está dentro.",
+      "body": "O endereço está confirmado. A partir daqui, você pode acessar o registro de compilação: o que foi lançado, as decisões que levaram a isso e os aspectos que não funcionaram.",
+      "note": "Cada e-mail contém um link para cancelar a inscrição. Com apenas um clique, você é removido da lista.",
+      "action": "Veja o que está sendo construído"
+    },
+    "expired": {
+      "title": "Aquele link expirou.",
+      "body": "Os links de confirmação têm validade de 24 horas e funcionam apenas uma vez. Este link expirou ou já foi utilizado, portanto, o endereço ainda não foi confirmado.",
+      "note": "Inscreva-se novamente no rodapé e um novo link será enviado para sua caixa de entrada em aproximadamente um minuto.",
+      "action": "Retornar ao site"
+    },
+    "pending": {
+      "title": "Confirmando sua assinatura...",
+      "body": "Por favor, aguarde enquanto confirmamos o seu endereço de e-mail.",
+      "note": "Isso levará apenas um instante.",
+      "action": "Retornar ao site"
+    },
+    "error": {
+      "title": "Não foi possível confirmar o seu endereço.",
+      "body": "Por favor, recarregue esta página para tentar novamente.",
+      "note": "Sua assinatura não foi alterada.",
+      "action": "Retornar ao site"
+    }
+  },
+  "unsubscribe": {
+    "title": "Você foi removido da lista.",
+    "description": "Cancelar a inscrição no registro de construção do SaaSy Land.",
+    "body": "Aquele endereço não receberá mais e-mails com registros de construção. Não é necessária confirmação e não há mais nada para clicar.",
+    "note": "E-mails transacionais referentes a sua conta ou a uma compra são enviados separadamente e ainda chegam, pois se trata de correspondência que você solicitou ao realizar uma compra.",
+    "resubscribe": "Mudou de ideia? Inscreva-se novamente no rodapé",
+    "pending": {
+      "title": "Descadastrando...",
+      "body": "Por favor, aguarde enquanto atualizamos sua assinatura."
+    },
+    "error": {
+      "title": "Não foi possível remover este endereço.",
+      "body": "Abra o link de cancelamento de inscrição que você recebeu no seu e-mail e tente novamente."
+    }
+  }
+}

@@ -1,13 +1,13 @@
-/** @vitest-environment jsdom */
-
 import type { JSX, ReactNode } from "react"
+/** @vitest-environment jsdom */
 
 import { createColumnHelper } from "@tanstack/react-table"
 import { render, renderHook, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { NextIntlClientProvider } from "next-intl"
+import { IntlProvider } from "use-intl/react"
+import { describe, expect, it } from "vite-plus/test"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 
@@ -82,16 +82,14 @@ const SELECTED_AFTER_ONE_CLICK = 1
 const FIRST_ROW_CHECKBOX = 0
 const HEADER_ROW_COUNT = 1
 
-function renderTable(data: Person[] = ROWS): void {
-  const messages = loadLocaleMessagesFromDir("en-US")
+const renderTable = (data: Person[] = ROWS): void => {
+  const messages = getTestMessages("en-US")
 
-  function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-    return (
-      <NextIntlClientProvider locale="en-US" messages={messages}>
-        {children}
-      </NextIntlClientProvider>
-    )
-  }
+  const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+    <IntlProvider locale="en-US" messages={messages}>
+      {children}
+    </IntlProvider>
+  )
 
   render(<DataTable columns={COLUMNS} data={data} />, { wrapper: Wrapper })
 }
@@ -124,7 +122,7 @@ describe("data table component", () => {
 
     await user.click(rowCheckbox())
     // The count alone would pass even with a checkbox stuck reporting unselected, which
-    // is what let a stale-memo bug through before.
+    // Is what let a stale-memo bug through before.
     expect(rowCheckbox()).toBeChecked()
     expect(screen.getByText(`${SELECTED_AFTER_ONE_CLICK} selected`)).toBeInTheDocument()
 
@@ -215,15 +213,13 @@ describe("data table structure", () => {
   it("renders placeholder cells for columns outside a header group", () => {
     expect.hasAssertions()
 
-    const messages = loadLocaleMessagesFromDir("en-US")
+    const messages = getTestMessages("en-US")
 
-    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-      return (
-        <NextIntlClientProvider locale="en-US" messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      )
-    }
+    const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+      <IntlProvider locale="en-US" messages={messages}>
+        {children}
+      </IntlProvider>
+    )
 
     render(<DataTable columns={GROUPED_COLUMNS} data={ROWS} />, { wrapper: Wrapper })
 
@@ -234,15 +230,13 @@ describe("data table structure", () => {
   it("shows skeleton rows instead of the empty state while data is in flight", () => {
     expect.hasAssertions()
 
-    const messages = loadLocaleMessagesFromDir("en-US")
+    const messages = getTestMessages("en-US")
 
-    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-      return (
-        <NextIntlClientProvider locale="en-US" messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      )
-    }
+    const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+      <IntlProvider locale="en-US" messages={messages}>
+        {children}
+      </IntlProvider>
+    )
 
     render(<DataTable columns={COLUMNS} isLoading />, { wrapper: Wrapper })
 
@@ -254,15 +248,13 @@ describe("data table structure", () => {
   it("applies meta classNames overrides to the container, table, and header slots", () => {
     expect.hasAssertions()
 
-    const messages = loadLocaleMessagesFromDir("en-US")
+    const messages = getTestMessages("en-US")
 
-    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-      return (
-        <NextIntlClientProvider locale="en-US" messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      )
-    }
+    const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+      <IntlProvider locale="en-US" messages={messages}>
+        {children}
+      </IntlProvider>
+    )
 
     const { container } = render(<DataTable columns={COLUMNS} data={ROWS} options={SLOT_OPTIONS} />, { wrapper: Wrapper })
 
@@ -274,15 +266,13 @@ describe("data table structure", () => {
   it("applies meta classNames overrides to the body, row, and pagination slots", () => {
     expect.hasAssertions()
 
-    const messages = loadLocaleMessagesFromDir("en-US")
+    const messages = getTestMessages("en-US")
 
-    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-      return (
-        <NextIntlClientProvider locale="en-US" messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      )
-    }
+    const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+      <IntlProvider locale="en-US" messages={messages}>
+        {children}
+      </IntlProvider>
+    )
 
     const { container } = render(<DataTable columns={COLUMNS} data={ROWS} options={SLOT_OPTIONS} />, { wrapper: Wrapper })
 

@@ -1,0 +1,23 @@
+---
+title: Solicito ciclo de vida.
+description: Pedir ciclo de vida - SaaSy Land
+---
+
+`src/server.ts` Canonicaliza URLs locais e mantém o cookie local em sincronia. `src/router.tsx` cria um novo QueryClient por roteador e o conecta à RCE. Arquivos nativos declaram componentes, guardas, carregadores, validação de busca e metadados.
+
+Os layouts do administrador e do cliente usam `beforeLoad` Guardas. Cada função de servidor protegida também verifica sua ligação, porque um RPC pode ser chamado independentemente de uma página. Nunca coloque uma resposta autenticada em um cache estático compartilhado.
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

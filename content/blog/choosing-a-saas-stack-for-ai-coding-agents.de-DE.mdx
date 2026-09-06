@@ -1,0 +1,357 @@
+---
+title: Die Auswahl des passenden SaaS-Stacks für KI-basierte Code-Agenten im Jahr 2026.
+description: Beliebt heißt nicht mehr, dass es auch agentenfreundlich ist. Ein Test mit vier Fragen, der für jede Abhängigkeit angewendet wird und schichtweise auf eine echte Produktionsumgebung für SaaS-Anwendungen geprüft wird.
+excerpt: Der übliche Rat war, sich für gängige Tools zu entscheiden, da Agenten diese bereits häufiger gesehen hatten. Im Jahr 2026 hat sich dieser Rat teilweise umgekehrt, und es gibt in diesem Repository eine Datei, die dies beweist.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-08-15
+image: /images/blog/choosing-a-saas-stack-for-ai-coding-agents.webp
+tags:
+  - ai-agents
+  - architecture
+  - typescript
+  - stack
+faq:
+  - question: Welche ist die beste Technologiebasis für KI-Codierungsagenten im Jahr 2026?
+    answer: End-to-End-TypeScript, mit einer typisierten Datenbankebene, Validierung des Schemas an jeder externen Schnittstelle, einer Authentifizierungslösung, die in Ihrem Repository integriert ist, und einem einzigen Befehl, der Typüberprüfungen, Linting und Tests durchführt. Welche spezifischen Bibliotheken verwendet werden, ist von untergeordneter Bedeutung; entscheidend ist, ob eine fehlerhafte Verwendung dazu führt, dass der Code nicht kompiliert. Bewerten Sie jeden Kandidaten hinsichtlich der Einschränkungen, der Konvergenz, der Überprüfbarkeit und der Aktualität, bevor Sie ihn übernehmen.
+  - question: Hilft die Auswahl eines weit verbreiteten Frameworks KI-gesteuerten Programmierassistenten?
+    answer: Weniger als früher, und manchmal gar nicht. Beliebtheit ermöglicht einem Modell zwar mehr Trainingsdaten, jedoch hauptsächlich basierend auf der Version, auf der es trainiert wurde. Ein Framework, das schneller Änderungen einführt als Modelle neu trainiert werden, erzeugt selbstbewussten, flüssigen, aber fehlerhaften Code. Stabilität ist wichtiger als Umfang, sobald eine Bibliothek sich schnell weiterentwickelt.
+  - question: Warum schreibt mein Agent Code, der auf APIs basiert, die nicht mehr verfügbar sind?
+    answer: Da es die Version abruft, auf der es trainiert wurde. Untersuchungen ergaben, dass veraltete API-Funktionen in acht weit verbreiteten Bibliotheken zu 25 % bis 38 % genutzt wurden, was auf veraltetes Wissen über Parameter und eine fehlende Echtzeitübersicht über den aktuellen Zustand der API zurückzuführen ist. Ihr Typprüfer stellt die kostengünstigste Lösung für dieses Problem dar, weshalb Fehler an untypisierten Schnittstellen weiterhin bestehen bleiben.
+  - question: Soll ich einem KI-Agenten die Auswahl meiner Abhängigkeiten überlassen?
+    answer: Nicht ohne zunächst zu überprüfen, ob jedes Paket tatsächlich existiert. Modelle der Spitzenklasse, die zwischen Oktober 2025 und März 2026 veröffentlicht wurden, erfanden Paketnamen in einer Rate zwischen 4,62 % und 6,10 %. Angreifer registrieren diese erfundenen Namen nun bei öffentlichen Registern, eine Angriffsmethode, die als "Slopsquatting" bezeichnet wird. Behandeln Sie jede neue Abhängigkeit, die ein Agent hinzufügt, wie einen noch nicht überprüften Pull Request von einer unbekannten Person.
+  - question: Ist ein Monorepository besser für KI-Codierungsagenten geeignet?
+    answer: Nur wenn die Grenzen durch Tools durchgesetzt werden und nicht in einer README-Datei beschrieben sind. Ein Monorepository, bei dem das Überschreiten von Paketgrenzen zu einem Build-Fehler führt, vermittelt Ihrem Agenten die Architektur innerhalb von Sekunden. Ein Monorepository, das durch Konventionen zusammengehalten wird, bietet dem Agenten mehr Möglichkeiten, den richtigen Code im falschen Paket abzulegen.
+  - question: Welche Bereiche eines SaaS-Angebots sollten Agenten niemals alleine erstellen?
+    answer: "Alles, bei dem ein scheinbar harmloser Fehler teure Folgen haben kann und unauffällig bleibt: die Verarbeitung von Sitzungen und Tokens, Zahlungs-Webhooks, Datenbankmigrationen, die Isolierung von Mandanten und alles, was geheime Daten ausliest. Diese Bereiche haben gemeinsam, dass die falsche Version Tests und Demos erfolgreich durchläuft, aber erst unter Bedingungen versagt, die Ihre Testumgebung nicht nachbilden kann."
+  - question: Benötige ich tRPC oder oRPC für eine API, die agentenfreundlich ist?
+    answer: Sie benötigen Typdefinitionen, die die Netzwerkbegrenzung überschreiten; die spezifische Bibliothek ist zweitrangig. Jede Lösung, bei der der Aufruf eines Clients an einen geänderten Endpunkt zu einem Kompilierfehler führt, ist akzeptabel. Eine einfache Anfrage (fetch) an eine JSON-Route ohne Typdefinitionen funktioniert nicht, da dies eine Grenze darstellt, an der eine fehlerhafte Annahme problemlos kompiliert und in die Produktion gelangt.
+  - question: Wie viele Abhängigkeiten sind für einen Codebestand, der von Agenten unterstützt wird, zu viele?
+    answer: Bewerten Sie die Anzahl der verwendeten Oberflächen, anstatt die Anzahl der Pakete. Jede Abhängigkeit ist eine API, die das Modell möglicherweise falsch speichert. Die entscheidende Frage ist also, wie viele davon entscheidend sind, unbekannt und ungeprüft. Eine Abhängigkeit, die durch strenge Typdefinitionen und Tests abgesichert ist, verursacht nur geringe Kosten. Eine Abhängigkeit, die untypisierte Daten in Ihre Geschäftslogik zurückliefert, verursacht hingegen Kosten bei jeder zukünftigen Änderung.
+  - question: Hilft Tailwind tatsächlich KI-gesteuerten Programmierassistenten?
+    answer: Ja, der Grund dafür liegt eher in der Struktur als im Stil. Stilelemente wirken sich direkt auf das Element aus, das sie beeinflussen, sodass das Agent keine zweite Datei mehr berücksichtigen und aktualisieren muss. Das gleiche Argument spricht für die Zusammenfassung von Tests und Typdefinitionen und gegen jegliche Muster, bei denen eine Änderung in einer Datei widergespiegelt werden muss, die das Agent keinen Grund hat zu öffnen.
+  - question: Soll ich die Stacks wechseln, um die Leistung meines Agenten zu verbessern?
+    answer: Fast nie. Die Kosten für Migration sind sicher und der Gewinn ist begrenzt, während das Hinzufügen von strengen Datentypen, der Überprüfung von Grenzen und einem einzigen Verifizierungsbefehl zu Ihrer bestehenden Infrastruktur kostengünstig ist und sofortige Auswirkungen hat. Ändern Sie Ihre Infrastruktur, wenn Sie sie ohnehin ändern wollten, und lassen Sie die Anpassungsfähigkeit dabei eine untergeordnete Rolle spielen, anstatt den ausschlaggebenden Grund dafür.
+---
+
+Der Rat, den man überall bekommt, wenn es darum geht, eine Technologiebasis für KI-Codierungsagenten auszuwählen, lautet, dass es besser ist, populäre Lösungen zu wählen, da Modelle diese bereits häufiger gesehen haben. Das klingt offensichtlich richtig. Und es war auch richtig. Im Jahr 2026 sieht es jedoch teilweise anders aus, und der Beweis dafür ist eine Datei, die dieses Repository selbst generiert.
+
+Führen Sie `next dev` in Next.js 16 aus, und es schreibt Folgendes in Ihre `AGENTS.md`-Datei, ohne dass Sie es anfordern:
+
+```markdown
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all
+differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/`
+before writing any code. Heed deprecation notices.
+```
+
+Das weltweit beliebteste React-Framework weist nun eine Warnmeldung an Entwickler aus, die darauf hinweist, dass ihre Kenntnisse darüber möglicherweise nicht mehr korrekt sind. Das ist keine Kritik an Next.js. Es ist eine ehrliche Antwort auf ein tatsächliches Problem und stellt die klarste Aussage darüber dar, was die Wahl einer bestimmten Technologie im Jahr 2026 wirklich bedeutet.
+
+Dieser Artikel befasst sich mit diesem Problem und möglichen Lösungen. Es handelt sich nicht um eine Checkliste. Checklisten sind schnell veraltet, und eine Liste kann Ihnen keine Auskunft darüber geben, was Sie mit der Bibliothek tun sollen, die Sie bereits nutzen, und die dort nicht aufgeführt ist.
+
+<Callout title={"Was Ihnen dieser Artikel bietet."}>
+
+1. Was ein Stack für einen Agenten tatsächlich leistet, ist präziser und nützlicher als nur "Ihm beim Schreiben von Code zu helfen".
+2. **Die Diskrepanz bei den Daten**: Warum die Datenmenge nicht mehr ein verlässliches Maß für die Qualität eines Agenten ist – einschließlich der Forschungsergebnisse und der zugehörigen Artefakte.
+3. **Der Agent Stack Test**: vier Fragen, die insgesamt 8 Punkte bewerten können und mit jeder Abhängigkeit durchgeführt werden können, auch mit solchen, die nach diesem Artikel entstanden sind.
+4. Der Test wurde schrittweise auf eine Produktions-SaaS-Architektur angewendet, wobei die damit verbundenen Kompromisse offen berücksichtigt wurden.
+5. Welche Vermögenswerte Agenten niemals besitzen sollten und warum diese Dinge eine Gemeinsamkeit aufweisen.
+
+</Callout>
+
+_Letzte Aktualisierung: 15. August 2026. Dies ist der zweite Teil einer Reihe; der erste behandelt [warum Ihr Repository die Qualität der Agentenausgabe bewertet](/blog/ai-coding-agents-repository-readiness) und ist es wert, zuerst gelesen zu werden, falls Sie das noch nicht getan haben._
+
+## Was genau bewirkt ein Stack für einen KI-basierten Codeagenten?
+
+Ein Stack macht einen Agenten nicht korrekt. Er verändert **wie viele fehlerhafte Programme überhaupt ausgedrückt werden können**. Jede Bibliotheksauswahl verkleinert entweder den Bereich von Code, der zwar kompiliert, aber dennoch fehlerhaft ist, oder er erweitert ihn. Das ist der gesamte Mechanismus, und genau deshalb ist "agentenfähig" eine Eigenschaft, die man testen kann, anstatt sich auf ein Gefühl zu verlassen.
+
+Stellen Sie sich denselben Fehler in zwei verschiedenen Codebasen vor. Ein Agent liest eine Datenbankspalte fälschlicherweise als Text, obwohl es sich um einen Zeitstempel handelt.
+
+In einem textbasierten Abfrageeditor lässt sich der Fehler nicht ausdrücken. Der Code lässt sich nicht kompilieren, der Agent erkennt den Fehler während seiner eigenen Ausführung und behebt ihn. Die entstandenen Kosten betrugen etwa zwei Sekunden.
+
+In einer direkten Abfrage, die `any` zurückliefert, kompiliert der Fehler, besteht die Überprüfung, da er syntaktisch korrekt ist, und erzeugt sechs Wochen später eine falsche Datumsangabe in einer Rechnungsbestätigung. Entstandene Kosten: ein Vorfall.
+
+Gleiches Modell. Gleiche Anweisung. Derselbe Fehler. Das System entschied, ob es sich um einen Kompilierungsfehler oder einen Vorfall handelte.
+
+## Die Diskrepanz bei den Währungen, und warum "Populär" nicht mehr als Stellvertreter diente.
+
+Hier ist das Argument, das alle aufbringen: Beliebte Bibliotheken kommen häufiger in den Trainingsdaten vor, daher schreiben die Modelle sie auch genauer. Der erste Teil stimmt. Der zweite Teil hängt jedoch nun vollständig von etwas ab, das dieses Argument ignoriert, nämlich **wie schnell sich die Bibliothek verändert**.
+
+**Die "Currency Gap" ist der Abstand zwischen der API, an die sich ein Modell erinnert, und der API, die Sie tatsächlich ausliefern.** Das Volumen der Trainingsdaten gibt Ihnen Aufschluss darüber, wie selbstbewusst ein Modell eine Bibliothek schreiben wird. Die "Currency Gap" zeigt Ihnen, ob dieses Selbstbewusstsein gerechtfertigt ist. Es sind unterschiedliche Größen, und bei schnelllebigen Frameworks zeigen sie mittlerweile sogar in entgegengesetzte Richtungen.
+
+Die Forschungsergebnisse zu diesem Thema sind eindeutig. Eine Untersuchung von acht weit verbreiteten Bibliotheken ergab **veraltete API-Nutzungsraten von 25 % bis 38 %** in von Modellen generiertem Code, was auf veraltetes parametrisches Wissen und das Fehlen einer aktuellen Übersicht darüber, wie die API heute funktioniert, zurückzuführen ist ([APILOT, arXiv](https://arxiv.org/pdf/2409.16526)). Die Arbeit an sich entwickelnden APIs sieht dasselbe Problem als einen Wissenskonflikt: Das Modell spekuliert nicht, sondern ruft selbstbewusst eine Version ab, die nicht mehr existiert ([When LLMs Lag Behind, arXiv](https://arxiv.org/html/2604.09515v1)).
+
+Dies führt zu einer überraschenden Rangfolge. Sortiert nach dem Ausmaß, in dem der Speicher des Modells Probleme verursacht:
+
+| Bibliotheksporträt.                                                   | Trainingsvolumen. | API-Fluktuation. | Nettoauswirkung auf die Ergebnisse des Agenten.                           |
+| --------------------------------------------------------------------- | ----------------- | ---------------- | ------------------------------------------------------------------------- |
+| Beliebt und stabil (React, PostgreSQL, Tailwind).                     | Hoch.             | Niedrig.         | **Mit freundlichen Grüßen.** Der Speicher ist groß und weiterhin korrekt. |
+| Klein und stabil (Zod, hauptsächlich für spezialisierte Anwendungen). | Niedriger.        | Niedrig.         | **Gut.** Weniger Speicher, aber was vorhanden ist, ist korrekt.           |
+| Beliebt und schnell entwickelt (eine Framework-Mittelversion).        | Hoch.             | Hoch.            | **Schlimmst.** Selbstbewusst, fließend und falsch.                        |
+| Klein und schnell.                                                    | Niedrig.          | Hoch.            | Schlecht, aber der Agent weicht aus, anstatt klare Aussagen zu treffen.   |
+
+Die Zelle unten rechts ist die interessante. Wenn ein Modell wenig über eine Bibliothek weiß, neigt es dazu, vorsichtig zu sein, zu suchen oder den Quellcode zu lesen. Wenn es hingegen viel über die _vorherige Version_ einer Bibliothek weiß, gibt es Aussagen. **Das Konfidenzniveau wird anhand des Trainingsumfangs und nicht der Korrektheit berechnet**, sodass der ungünstigste Fall ein hoher Trainingsumfang bei gleichzeitig hoher Änderungsrate ist: ein Agent, der veralteten Code fließend schreibt und niemals Zweifel äußert.
+
+Das ist genau das, worüber Next.js im obigen Abschnitt warnt. Es ist das am häufigsten verwendete React-Framework, und es wurden so viele Änderungen vorgenommen, dass der Anbieter es für notwendig hielt, eine gedruckte Warnung für die Mitarbeiter herauszugeben.
+
+### Was man damit anfangen kann.
+
+Man kann dem Modell keinen Speicher reparieren, aber man kann Fehler kostengünstig machen.
+
+- **Bevorzugen Sie Stabilität gegenüber Beliebtheit, wenn diese im Konflikt stehen.** Eine API, die seit fünf Jahren stabil ist und von dem Modell halbwegs erinnert wird, ist besser als eine umgeschriebene API, an die es völlig falsch erinnert.
+- **Lassen Sie den Compiler die Versionsabweichungen erkennen.** Fehler aufgrund von veralteten APIs sind nur an undefinierten Übergängen teuer. Dies ist das eigentliche Argument für End-zu-End-Typen, und es ist stärker als das übliche Argument.
+- **Fixieren und verlinken Sie die Dokumente, die der Agent liest.** Der eigene Rat von Next lautet, die Dokumentation in `node_modules` zu lesen, und nicht im Web. Die lokalen Dokumente entsprechen Ihrer installierten Version; ein Blogbeitrag aus dem Jahr 2024 nicht.
+- **Gehen Sie neue Abhängigkeiten als nicht vertrauenswürdig an.** Weitere Informationen dazu finden Sie weiter unten, da es sich hier um ein Sicherheitsproblem handelt und nicht nur um ein Problem der Korrektheit.
+
+## Der Agent-Stack-Test.
+
+Vier Fragen pro Abhängigkeit, bewertet mit 0, 1 oder 2 Punkten, insgesamt 8 Punkte. Dies bezieht sich auf Bibliotheken, die zum Zeitpunkt der Erstellung dieses Dokuments noch nicht existierten, was den Zweck einer Prüfung darstellt, im Gegensatz zu einer einfachen Auflistung.
+
+### Einschränkung: Kann eine fehlerhafte Nutzung zu Kompilierungsfehlern führen?
+
+- **0**: Die Bibliothek gibt `any` zurück, oder die Konfiguration ist zeichenkettenbasiert, oder Fehler treten erst zur Laufzeit auf.
+- **1**: Typen existieren zwar, sind aber lediglich Hinweise; ein falscher Aufruf führt dennoch zur Kompilierung bei einem Cast.
+- **2**: Fehlgebrauch ist ein Typfehler. Falsche Programme sind nicht ausdrückbar.
+
+### 2. Konvergenz: Gibt es eine eindeutige Vorgehensweise, um die Aufgabe zu erledigen?
+
+Agenten arbeiten durch Nachahmung, daher erhöht eine Bibliothek mit sechs äquivalenten APIs die Wahrscheinlichkeit, dass sie die API verwendet, die Ihr Code bereits nutzt, auf das Sechsfache.
+
+- **0**: Viele äquivalente Ansätze, die alle häufig in der Praxis vorkommen und ebenfalls in den Trainingsdaten enthalten sind.
+- **1**: Eine empfohlene Vorgehensweise, sowie weit verbreitete, ältere Alternativen.
+- **2**: Es gibt nur einen Weg, und die Alternativen wurden entfernt, anstatt veraltet zu sein.
+
+### 3. Nachweisbarkeit: Kann der Agent selbst beweisen, dass es funktioniert?
+
+- **0**: Die Korrektheit lässt sich nur von einem Menschen überprüft werden, der die laufende Anwendung betrachtet.
+- **1**: Testbar, allerdings ist die Einrichtung manuell genug, sodass der Agent dies nicht durchführen wird.
+- **2**: Ein bereits vom Agenten ausgeführter Befehl deckt diesen Bereich ab.
+
+### 4. Währung: Ist das Gedächtnis des Modells aktuell?
+
+- **0**: Umfangreiche Änderungen der Hauptversion im letzten Jahr, einschließlich der Umbenennung oder Entfernung öffentlich zugänglicher APIs.
+- **1**: Jüngste, geringfügige Änderungen oder die Dokumente, aus denen das Modell gelernt hat, sind mittlerweile teilweise fehlerhaft.
+- **2**: Die öffentliche API ist seit einiger Zeit stabil genug, sodass bereits abgerufener Code weiterhin funktioniert, oder die Bibliothek maschinenlesbare Dokumente zusammen mit der installierten Version bereitstellt.
+
+**Die Auswertung der Bewertung.** Ein Wert zwischen 7 und 8 bedeutet, dass einem Agenten diese Komponente ohne Aufsicht anvertraut werden kann. Ein Wert zwischen 4 und 6 bedeutet, dass sie mit einer Art von Begrenzung oder einem Test darum herum funktioniert. Ein Wert von 3 oder darunter bedeutet entweder, dass Sie sie in eine von Ihnen verwaltete Schnittstelle einbetten, oder Sie akzeptieren, dass ein Mensch jeden Aufrufpunkt manuell erstellen muss.
+
+Der Test konzentriert sich bewusst auf die _Form_ einer Abhängigkeit, und nicht auf deren Qualität. Exzellente Bibliotheken schneiden hier schlecht ab (eine hervorragende Bibliothek während eines größeren Umbaus erhält beispielsweise die Bewertung 0 bei der Funktion "Währung"), während weniger bedeutende Bibliotheken gut abschneiden. Es wird hier die Eignung des Anbieters gemessen, nicht die Qualität.
+
+## Die Prüfung schrittweise anwenden.
+
+Was folgt, ist die Liste der Komponenten, die wir versenden, und zwar mit einer ehrlichen Aufschlüsselung, einschließlich der Bereiche, in denen Kosten entstehen. Ihre Ergebnisse können abweichen; entscheidend ist jedoch die dahinterliegende Logik.
+
+### Sprache: TypeScript, strikt, keine Ausnahmen.
+
+**Punktzahl: 8/8.** Dies ist die Vorauswahl, von der alle anderen Einträge auf der Liste abhängen.
+
+Der strikte Modus ist die Basis, nicht das Ziel. Die Eigenschaften, die für Agenten wichtig sind, sind diejenigen, die Menschen normalerweise deaktivieren: kein implizites `any`, kein ungeprüfter Indexzugriff, keine Nicht-Null-Assertions. Jedes dieser Flags wandelt eine Klasse von selbstbewussten, aber falschen Agentenausgaben von einer Laufzeitüberraschung in eine rote Markierung, die der Agent sieht, bevor er seinen Zug beendet.
+
+Die Version ist weniger wichtig als die Konfiguration. Eine lose konfigurierte, aktuelle TypeScript-Version ist für die Arbeit mit Agenten ungünstiger als eine streng konfigurierte, ältere Version.
+
+### Laufzeitumgebung und Frameworks: Bun, Next.js, React.
+
+**Punktzahl: 6/8.** Einschränkung 2, Konvergenz 1, Verifizierbarkeit 2, Relevanz 1.
+
+Das ist der ehrliche Schwachpunkt, und es ist derselbe, vor dem Next.js warnt. Der Kern von React ist seit langem stabil genug, sodass die Modellspeicherung zuverlässig ist. Die Framework-Schicht darum herum ist es nicht, und dieser Aspekt verursacht Probleme.
+
+Wir tragen diese Kosten bewusst, weil die Alternative mehr kostet: React verfügt über den umfangreichsten und zuverlässigsten Datensatz für die Entwicklung von Benutzeroberflächen, die Ökosystem-Annahme in jeder Bibliothek, die wir verwenden, und einen Pool an qualifizierten Bewerbern. Die empfohlene Lösung ist die, die Next selbst vorschlägt: Agenten auf die installierte Dokumentation zu verweisen, anstatt auf ihren eigenen Speicher. Das ist ein Eintrag von nur zwei Zeilen in `AGENTS.md`, und keine Änderung der Architektur.
+
+Convergence verliert hier einen Punkt aus einem triftigen Grund: Serverkomponenten, Client-Komponenten, Route-Handler und Serveraktionen sind vier verschiedene Möglichkeiten, Daten zu übertragen – alle aktuell, alle im Trainingsdatensatz enthalten. Ein Agent wählt dann nach Gefühl vor, es sei denn, Ihr Repository enthält genau ein Beispiel für jedes dieser Muster.
+
+### API-Schicht: Elysia auf Bun, vollständig typisiert.
+
+**Punktzahl: 7 von 8.**
+
+Die relevante Eigenschaft ist nicht das Framework selbst, sondern dass die Eingabe- und Ausgabedatentypen eines Handlers für den Aufrufer sichtbar sind. Wenn sich die Struktur einer Route ändert, schlägt jeder Aufrufpunkt, der dadurch ungültig wird, beim Kompilieren fehl.
+
+Die hier genannten Hinweise zu konkurrierenden Lösungen nennen in der Regel spezifische RPC-Bibliotheken. Das ist eine mögliche Implementierung der Funktionalität, aber nicht die Funktionalität selbst. Jede Lösung, bei der eine Änderung eines Endpunkts zu einem Build-Fehler an der Aufrufstelle führt, ist qualifiziert. Nicht qualifiziert ist hingegen ein einfaches `fetch`-Aufruf zu einer JSON-Route, die manuell an der Aufrufstelle definiert wird, da dies eine Grenze darstellt, an der eine fehlerhafte Annahme eines Moduls problemlos kompiliert, ausgeliefert und von einem Kunden entdeckt werden kann.
+
+**Ungetypte API-Schnittstellen sind Orte, an denen Fehler von Agenten überleben können.**
+
+### Datenbank: Drizzle über Neon Postgres.
+
+**Ergebnis: 8/8.**
+
+Das Schema ist in TypeScript geschrieben, wodurch es sowohl die Quelle für die Migration als auch die Typdefinition darstellt. Es gibt also kein separates Artefakt, das sich verändern könnte. Eine Anfrage, die auf eine nicht existierende Spalte verweist, führt zu einem Kompilierungsfehler, nicht zu einer 500er-Fehlermeldung.
+
+Zwei Eigenschaften erzielen die volle Punktzahl, und zwar über die reine Texterkennung hinaus. Erstens liest der Query-Builder dem SQL so ähnlich, dass das Wissen eines Modells in Bezug auf SQL (sehr umfangreich, sehr stabil und seit Jahrzehnten etabliert) direkt übertragen werden kann. Zweitens ist Postgres selbst die wichtigste Komponente im gesamten System: die SQL-Abfragen, die ein Modell im Jahr 2021 gelernt hat, funktionieren bis heute.
+
+### Validierung: Zod an jeder äußeren Begrenzung.
+
+**Punktzahl: 8/8.** Dies ist die Ebene, die die meisten Stapel überspringen, und die, die am schnellsten Ergebnisse liefert.
+
+Typen definieren, was Sie glauben. Schemata überprüfen dies. Jeder Ort, an dem Daten in den Prozess eintreten (HTTP-Bodies, Umgebungsvariablen, Webhook-Payloads, Antworten von Drittanbietern, JSON-Spalten in Datenbanken), ist ein Ort, an dem das Typsystem einer Zusage vertraut, die niemand verifiziert hat.
+
+Für die Arbeit mit Agenten ist dies wichtiger als für die Arbeit von Menschen. Ein Mensch, der eine Integration erstellt, ist eher misstrauisch gegenüber den Daten, da er bereits negative Erfahrungen gemacht hat. Ein Agent hingegen schreibt den optimalen Ablauf mit größter Sicherheit, da seine Trainingsdaten hauptsächlich diesen optimalen Ablauf enthalten. Ein Schema am Rand wandelt diesen Optimismus in eine erfasste Fehlermeldung um, die das betreffende Feld benennt.
+
+### Authentifizierung: Better Auth in deinem Repository
+
+**Punktzahl: 7 von 8.**
+
+Die relevante Eigenschaft ist, dass die Implementierung auf Ihrem eigenen Quellcode basiert und nicht ein undurchsichtig gehosteter Aufruf. Ein Agent kann nachvollziehen, wie eine Sitzung gestartet wird, dem Token folgen, wo es verifiziert wird, und es auf eine Weise verlängern, die Sie in einem Diff überprüfen können.
+
+Die Authentifizierungsbewertungen sind hier aus strukturellen Gründen schlechter, und zwar unabhängig vom Preismodell: Der entscheidende Teil der Logik liegt hinter einer API-Schnittstelle, auf die der Agent keinen Zugriff hat. Daher enden alle Fragen zum Verhalten in Vermutungen oder der Recherche in der Dokumentation, und jede Anpassung wird zu einer Integration anstatt zu einer direkten Änderung.
+
+Der entscheidende Nachteil liegt in der Aktualität. Es handelt sich um eine schnelllebige Bibliothek in einem Ökosystem, das sich noch im Aufbau befindet, daher ist die Speicherung von API-Informationen unzuverlässig. Es ist ein gutes Beispiel dafür, wie der Test seine Funktion erfüllt: eine Bibliothek kann die richtige Wahl sein und trotzdem in einem bestimmten Bereich schlecht abschneiden. Die Kenntnis dieses Bereichs zeigt Ihnen, wo die Grenzen gezogen werden müssen.
+
+### Styling: Tailwind.
+
+**Punktzahl: 7 von 8.**
+
+Der üblichste Grund, der genannt wird, ist das Volumen der Trainingsdaten. Der bessere Grund ist jedoch struktureller: die Stile liegen auf dem Element, das sie formatieren, sodass **es keine zweite Datei gibt, die der Agent im Gedächtnis behalten muss**. Eine Stylesheet-Datei in einem anderen Verzeichnis stellt eine Synchronisierungsanforderung dar, und das Ausfallverhalten der Agenten besteht nicht darin, dass sie Inhalte schlecht formatieren, sondern darin, dass sie eine der beiden Stellen aktualisieren.
+
+Diese Vorgehensweise erweitert frühere Gestaltungsrichtlinien. Das gleiche Argument spricht für die Zusammenfassung von Tests und Datentypen an einem Ort und argumentiert gegen jegliche Struktur, bei der eine Änderung irgendwo anders widergespiegelt werden muss, wo der Verantwortliche keinen Grund dazu hätte, nachzusehen.
+
+### Internationalisierung: next-intl mit Paritätsprüfung.
+
+**Bewertung: 7/8**, und es verdient seinen Platz hier aus einem Grund, der nicht wirklich mit der Internationalisierung (i18n) zusammenhängt.
+
+Übersetzungen sind oft ein stiller, unsichtbarer Fehler. Ein Entwickler fügt eine Funktion hinzu, schreibt englische Texte, und dadurch fehlen nun Schlüssel in anderen Sprachversionen. Nichts stürzt ab. Die Tests laufen problemlos. Der Fehler wird an genau die Kunden ausgeliefert, die ihn nicht klar melden können.
+
+Die Lösung ist keine bessere Bibliothek, sondern das `bun run check:i18n` den Build abbricht, wenn ein Schlüssel fehlt. Jeder Teil Ihres Systems, der diese Struktur aufweist (an einer Stelle vorhanden, an einer anderen Stelle stillschweigend fehlend), benötigt die gleiche Behandlung. Solange dies nicht der Fall ist, ist dieser Teil für Ihren Agenten und für Sie unsichtbar.
+
+### Zahlungen und E-Mail: Stripe, Resend
+
+**Note: 6/8** und **7/8**.
+
+Stripe verliert hier Punkte eher aufgrund mangelnder Übereinstimmung als aufgrund der Qualität. Es gibt viele korrekte Möglichkeiten, eine Zahlung abzuwickeln, alle sind dokumentiert und im Trainingsdatensatz enthalten. Ein Mitarbeiter, der aufgefordert wird, eine Rechnungsstellung hinzuzufügen, wählt möglicherweise eine Option, die nicht mit der bereits in Ihrem Code verwendet wird. Die Lösung ist Punkt 3 aus dem Repository-Scorecard: genau ein implementiertes Beispiel, sodass der nächste passende Lösungsvorschlag der richtige ist.
+
+Webhooks sollten eine eigene Warnmeldung erhalten und bekommen diese weiter unten.
+
+### Testen: Vitest und Playwright.
+
+**Punktzahl: 8/8**, und es ist die Ebene, die dafür sorgt, dass alle anderen Punktzahlen nutzbar sind.
+
+Der springende Punkt ist nicht die Abdeckung als reine Zahl. Es geht darum, dass `bun run verify` existiert, mit dem Ergebnis 0 oder 1 beendet wird, und ein Agent es ausführen kann, ohne angewiesen werden zu müssen. Alles, was über dieser Zeile steht, dient dazu, den Ausdrucksbereich eines Agenten einzugrenzen. Diese Zeile soll erfassen, was dennoch durchgekommen ist.
+
+## Abhängigkeitsanzahl entspricht der Oberfläche des Wirkstoffs.
+
+Jede Abhängigkeit ist eine API, die das Modell möglicherweise falsch speichert. Das verändert die übliche Argumentation, dass es „zu viele Abhängigkeiten“ gibt, die normalerweise auf die Größe der Softwarepakete und die Lieferkette bezogen ist, und formuliert sie zusätzlich als Argument für die Richtigkeit.
+
+Dieser Code verwendet 48 Laufzeitabhängigkeiten, was angesichts einer vollständigen SaaS-Anwendung eher gering ist. Entscheidend ist nicht die Anzahl, sondern die Struktur: fast alle dieser Abhängigkeiten sind entweder vollständig typisiert oder in einer Komponente enthalten, die wir selbst kontrollieren. Dadurch führen fehlerhafte Annahmen über diese Abhängigkeiten zu Kompilierungsfehlern anstatt zu Problemen im laufenden Betrieb.
+
+Es gibt nun einen zweiten Grund, vorsichtig zu sein, und zwar einen im Bereich der Sicherheit. Modelle, die zwischen Oktober 2025 und März 2026 veröffentlicht wurden, zeigten bei der Erfindung von Paketnamen eine Halluzinationsrate zwischen **4,62 % und 6,10 %** ([arXiv](https://arxiv.org/pdf/2605.17062)). Angreifer melden diese erfundenen Namen bei öffentlichen Registern an und warten – ein Angriff, der als **Slopsquatting** bezeichnet wird ([Mend](https://www.mend.io/blog/the-hallucinated-package-attack-slopsquatting/)).
+
+Die praktische Regel: **eine von einem Agenten hinzugefügte Abhängigkeit ist ein noch nicht begutachteter Pull Request von einer unbekannten Person.** Überprüfen Sie, ob das Paket existiert, ob sein Name dem entspricht, was Sie erwartet haben, und ob Sie es tatsächlich benötigt haben. Lockfiles und ein Überprüfungsschritt bei Änderungen in der `package.json`-Datei decken den größten Teil der potenziellen Risiken ab – und das mit nahezu keinem zusätzlichen Aufwand.
+
+## Was Agenten niemals alleine besitzen sollten.
+
+Einige Komponenten von SaaS-Anwendungen haben eine Gemeinsamkeit: **die falsche Version wirkt plausibel, besteht Tests, funktioniert in Demos einwandfrei und versagt erst unter Bedingungen, die Ihre Testumgebung nicht nachbilden kann.** Diese Eigenschaft, und nicht die Schwierigkeit, ist es, die es unsicher macht, diese zu delegieren.
+
+| Oberfläche.                        | Warum die falsche Version die Prüfung besteht.                                                       |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Sitzungs- und Tokenverwaltung.     | Ein funktionierender Login beweist nichts über Ablauf, Rotation oder Widerruf.                       |
+| Zahlungsintegrationen.             | Ein nicht-idempotenter Handler ist korrekt, bis der Wiederholungsversuch eintrifft.                  |
+| Datenbankmigrationen.              | Die Umkehrbarkeit und der Datenverlust sind unsichtbar, bis die Wiederherstellung durchgeführt wird. |
+| Mieterisolation.                   | Die Anfrage ist für den Testtenant korrekt, aber für den zweiten nicht.                              |
+| Alles, was ein Geheimnis aufdeckt. | Das Protokollieren eines Tokens ist eine einfache Änderung, die einwandfrei funktioniert.            |
+
+Der Webhook ist der deutlichste Fall. Stripe wiederholt Versuche bei Antworten, die keine 2xx-Codes liefern. Ein Handler, der die Belastung beim ersten Versuch korrekt durchführt und sie bei einem Wiederholungsversuch erneut ausführt, besteht jeden Test, den ein Tester entwickeln würde, da das Schreiben eines solchen Tests bereits das Wissen über den Fehlerfall erfordert. Dies stellt keine Einschränkung der Modellfähigkeiten dar. Vielmehr spiegelt die Testsuite, die ein Agent erstellt, die Fehlerfälle wider, die in seinen Trainingsdaten enthalten sind. Fehler aufgrund fehlender Idempotenz sind dabei im Verhältnis zu den tatsächlichen Kosten, die durch solche Fehler entstehen, unterrepräsentiert.
+
+Markieren Sie diese Pfade in `AGENTS.md` als ausschließlich für die menschliche Überprüfung vorgesehen und legen Sie die erforderlichen Prüfer fest, um sicherzustellen, dass die Absicht durchgesetzt wird und nicht nur vorausgesetzt.
+
+## Der Stapel – und wo Sie ihn überprüfen können.
+
+Jede der folgenden Aussagen bezieht sich auf eine Funktion im Repository, das Sie erwerben würden, und nicht auf eine Beschreibung auf einer Seite.
+
+| Schicht.           | Auswahl.                             | Ergebnis. | Überprüfen                                                                                     |
+| ------------------ | ------------------------------------ | :-------: | ---------------------------------------------------------------------------------------------- |
+| Sprache            | TypeScript, strikt, kein `any`.      |     8     | `tsc --strict` blockiert den Merge.                                                            |
+| Laufzeitumgebung   | Bun                                  |     7     | `bun run verify`                                                                               |
+| Framework          | Next.js, React                       |     6     | Installierte Dokumente sind in `AGENTS.md` hinterlegt.                                         |
+| API                | Elysia, vollständig eingegeben.      |     7     | Änderungen der Route führen während der Bauphase zu Unterbrechungen an den Verbindungsstellen. |
+| Datenbank          | Drizzle, Neon Postgres               |     8     | Schema ist die Migration und die Arten.                                                        |
+| Validierung.       | Zod an jeder Grenze.                 |     8     | HTTP, Umgebungsvariablen, Webhooks und Datensätze wurden alle erfolgreich verarbeitet.         |
+| Authentifizierung. | Better Auth im Repository            |     7     | Lesbare Quelle, `$0` pro Nutzer.                                                               |
+| Styling            | Tailwind, shadcn/ui – im Repository. |     7     | 56 bearbeitbare Komponenten.                                                                   |
+| i18n               | next-intl, Paritätssicherung.        |     7     | `bun run check:i18n`                                                                           |
+| Tests              | Vitest, Playwright.                  |     8     | 140 Testdateien, 5 Testsuiten, 100 % Abdeckung.                                                |
+
+Die vollständig abgedeckte Komponente ist der Teil, der sicherstellt, dass der Rest des Systems sicher für den Einsatz von Agenten ist. Sie kann so schnell schreiben, wie sie möchte; nichts, was sie beschädigt, gelangt in die Hauptversion, und Fehler werden im Zuge des Pull Requests entdeckt, anstatt von Kunden gemeldet.
+
+**Für wen dies nicht gedacht ist.** Wenn Sie etwas suchen, das Sie kostenlos erlernen und nutzen können, klonen Sie eine Vorlage und nutzen Sie diese. Wenn Sie es vorziehen, dass ein externer Anbieter Ihre Authentifizierung verwaltet und Sie pro monatlich aktivem Nutzer abrechnet, kaufen Sie das stattdessen. Dies ist für diejenigen gedacht, die auch bei fünfzigtausend Nutzern ihre eigenen Gewinnspannen behalten möchten.
+
+<Callout title={"Überprüfen Sie es, bevor Sie bezahlen."}>
+
+Die [Dokumentation](/docs) ist öffentlich, und der Coverage-Bericht wird direkt vom Repository selbst generiert. Sehen Sie sich anschließend die [Kosten](/#pricing): ein einmaliger Preis ab 249 $, lebenslange Updates des Kernsystems, keine nutzungsabhängigen Gebühren.
+
+</Callout>
+
+## Häufig gestellte Fragen.
+
+<Accordions>
+
+<Accordion title={"Welche ist die beste Technologiebasis für KI-Codierungsagenten im Jahr 2026?"}>
+
+End-to-End-TypeScript, mit einer typisierten Datenbankebene, Validierung des Schemas an jeder externen Schnittstelle, einer Authentifizierungslösung, die in Ihrem Repository integriert ist, und einem einzigen Befehl, der Typüberprüfungen, Linting und Tests durchführt. Welche spezifischen Bibliotheken verwendet werden, ist von untergeordneter Bedeutung; entscheidend ist, ob eine fehlerhafte Verwendung dazu führt, dass der Code nicht kompiliert. Bewerten Sie jeden Kandidaten hinsichtlich der Einschränkungen, der Konvergenz, der Überprüfbarkeit und der Aktualität, bevor Sie ihn übernehmen.
+
+</Accordion>
+
+<Accordion title={"Hilft die Auswahl eines weit verbreiteten Frameworks KI-gesteuerten Programmierassistenten?"}>
+
+Weniger als früher, und manchmal gar nicht. Beliebtheit ermöglicht einem Modell zwar mehr Trainingsdaten, jedoch hauptsächlich basierend auf der Version, auf der es trainiert wurde. Ein Framework, das schneller Änderungen einführt als Modelle neu trainiert werden, erzeugt selbstbewussten, flüssigen, aber fehlerhaften Code. Stabilität ist wichtiger als Umfang, sobald eine Bibliothek sich schnell weiterentwickelt.
+
+</Accordion>
+
+<Accordion title={"Warum schreibt mein Agent Code, der auf APIs basiert, die nicht mehr verfügbar sind?"}>
+
+Da es die Version abruft, auf der es trainiert wurde. Untersuchungen ergaben, dass veraltete API-Funktionen in acht weit verbreiteten Bibliotheken zu 25 % bis 38 % genutzt wurden, was auf veraltetes Wissen über Parameter und eine fehlende Echtzeitübersicht über den aktuellen Zustand der API zurückzuführen ist. Ihr Typprüfer stellt die kostengünstigste Lösung für dieses Problem dar, weshalb Fehler an untypisierten Schnittstellen weiterhin bestehen bleiben.
+
+</Accordion>
+
+<Accordion title={"Soll ich einem KI-Agenten die Auswahl meiner Abhängigkeiten überlassen?"}>
+
+Nicht ohne zunächst zu überprüfen, ob jedes Paket tatsächlich existiert. Modelle der Spitzenklasse, die zwischen Oktober 2025 und März 2026 veröffentlicht wurden, erfanden Paketnamen in einer Rate zwischen 4,62 % und 6,10 %. Angreifer registrieren diese erfundenen Namen nun bei öffentlichen Registern, eine Angriffsmethode, die als "Slopsquatting" bezeichnet wird. Behandeln Sie jede neue Abhängigkeit, die ein Agent hinzufügt, wie einen noch nicht überprüften Pull Request von einer unbekannten Person.
+
+</Accordion>
+
+<Accordion title={"Ist ein Monorepository besser für KI-Codierungsagenten geeignet?"}>
+
+Nur wenn die Grenzen durch Tools durchgesetzt werden und nicht in einer README-Datei beschrieben sind. Ein Monorepository, bei dem das Überschreiten von Paketgrenzen zu einem Build-Fehler führt, vermittelt Ihrem Agenten die Architektur innerhalb von Sekunden. Ein Monorepository, das durch Konventionen zusammengehalten wird, bietet dem Agenten mehr Möglichkeiten, den richtigen Code im falschen Paket abzulegen.
+
+</Accordion>
+
+<Accordion title={"Welche Bereiche eines SaaS-Angebots sollten Agenten niemals alleine erstellen?"}>
+
+Alles, bei dem ein scheinbar harmloser Fehler teure Folgen haben kann und unauffällig bleibt: die Verarbeitung von Sitzungen und Tokens, Zahlungs-Webhooks, Datenbankmigrationen, die Isolierung von Mandanten und alles, was geheime Daten ausliest. Diese Bereiche haben gemeinsam, dass die falsche Version Tests und Demos erfolgreich durchläuft, aber erst unter Bedingungen versagt, die Ihre Testumgebung nicht nachbilden kann.
+
+</Accordion>
+
+<Accordion title={"Benötige ich tRPC oder oRPC für eine API, die agentenfreundlich ist?"}>
+
+Sie benötigen Typdefinitionen, die die Netzwerkbegrenzung überschreiten; die spezifische Bibliothek ist zweitrangig. Jede Lösung, bei der der Aufruf eines Clients an einen geänderten Endpunkt zu einem Kompilierfehler führt, ist akzeptabel. Eine einfache Anfrage (fetch) an eine JSON-Route ohne Typdefinitionen funktioniert nicht, da dies eine Grenze darstellt, an der eine fehlerhafte Annahme problemlos kompiliert und in die Produktion gelangt.
+
+</Accordion>
+
+<Accordion title={"Wie viele Abhängigkeiten sind für einen Codebestand, der von Agenten unterstützt wird, zu viele?"}>
+
+Bewerten Sie die Anzahl der verwendeten Oberflächen, anstatt die Anzahl der Pakete. Jede Abhängigkeit ist eine API, die das Modell möglicherweise falsch speichert. Die entscheidende Frage ist also, wie viele davon entscheidend sind, unbekannt und ungeprüft. Eine Abhängigkeit, die durch strenge Typdefinitionen und Tests abgesichert ist, verursacht nur geringe Kosten. Eine Abhängigkeit, die untypisierte Daten in Ihre Geschäftslogik zurückliefert, verursacht hingegen Kosten bei jeder zukünftigen Änderung.
+
+</Accordion>
+
+<Accordion title={"Hilft Tailwind tatsächlich KI-gesteuerten Programmierassistenten?"}>
+
+Ja, der Grund dafür liegt eher in der Struktur als im Stil. Stilelemente wirken sich direkt auf das Element aus, das sie beeinflussen, sodass das Agent keine zweite Datei mehr berücksichtigen und aktualisieren muss. Das gleiche Argument spricht für die Zusammenfassung von Tests und Typdefinitionen und gegen jegliche Muster, bei denen eine Änderung in einer Datei widergespiegelt werden muss, die das Agent keinen Grund hat zu öffnen.
+
+</Accordion>
+
+<Accordion title={"Soll ich die Stacks wechseln, um die Leistung meines Agenten zu verbessern?"}>
+
+Fast nie. Die Kosten für Migration sind sicher und der Gewinn ist begrenzt, während das Hinzufügen von strengen Datentypen, der Überprüfung von Grenzen und einem einzigen Verifizierungsbefehl zu Ihrer bestehenden Infrastruktur kostengünstig ist und sofortige Auswirkungen hat. Ändern Sie Ihre Infrastruktur, wenn Sie sie ohnehin ändern wollten, und lassen Sie die Anpassungsfähigkeit dabei eine untergeordnete Rolle spielen, anstatt den ausschlaggebenden Grund dafür.
+
+</Accordion>
+
+</Accordions>
+
+### Quellen.
+
+- [APILOT: Die Navigation großer Sprachmodelle zur Generierung von sicherem Code durch die Vermeidung veralteter API-Probleme.](https://arxiv.org/pdf/2409.16526)
+- [Wenn LLMs hinterherhinken: Wissenskonflikte durch sich entwickelnde APIs bei der Codeerstellung.](https://arxiv.org/html/2604.09515v1)
+- [Überprüfung von Halluzinationen bei LLM-Paketen (2026).](https://arxiv.org/pdf/2605.17062)
+- [Der Halluzinierte Paketangriff: Eine Erklärung von Slopsquatting.](https://www.mend.io/blog/the-hallucinated-package-attack-slopsquatting/)
+- [Agenten.md – offene Spezifikation](https://agents.md/)
+
+_Verfasst von Piotr J. Borowiecki, der SaaSyLand entwickelt. Die oben genannte Next.js-Warnung wird in der Datei `AGENTS.md` dieses Repositorys durch `next dev` generiert und nicht manuell hinzugefügt._

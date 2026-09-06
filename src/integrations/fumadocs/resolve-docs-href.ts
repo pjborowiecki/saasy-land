@@ -1,26 +1,22 @@
-const HASH_NOT_FOUND_INDEX = -1
+import { I18N } from "~/src/integrations/use-intl/i18n.config"
 
-/**
- * Fumadocs `resolveHref` only matches storage keys that keep the `.mdx` extension.
- * Markdown authors usually write `./page-slug` without it — retry with `.mdx` when needed.
- */
-export function resolveDocsRelativeHref(resolveHref: (href: string) => string, href: string): string {
+const LOCALIZED_MDX_EXTENSION = new RegExp(`(?:\\.(?:${I18N.SUPPORTED_LOCALES.join("|")}))?\\.mdx?$`, "u")
+
+/** Resolve MDX links against their source file, including directory index pages. */
+export const resolveDocsRelativeHref = ({
+  href,
+  pathname,
+  sourcePath,
+}: {
+  href: string
+  pathname: string
+  sourcePath?: string | undefined
+}): string => {
   if (!href.startsWith("./") && !href.startsWith("../")) {
     return href
   }
-
-  const resolved = resolveHref(href)
-  if (resolved !== href) {
-    return resolved
-  }
-
-  const hashIndex = href.indexOf("#")
-  const pathPart = hashIndex === HASH_NOT_FOUND_INDEX ? href : href.slice(0, hashIndex)
-  const hashPart = hashIndex === HASH_NOT_FOUND_INDEX ? "" : href.slice(hashIndex)
-
-  if (pathPart.endsWith(".mdx") || pathPart.endsWith(".md")) {
-    return href
-  }
-
-  return resolveHref(`${pathPart}.mdx${hashPart}`)
+  const basePath = sourcePath === undefined ? pathname : `/docs/${sourcePath}`
+  const url = new URL(href, `https://docs.invalid${basePath}`)
+  url.pathname = url.pathname.replace(LOCALIZED_MDX_EXTENSION, "").replace(/\/index$/u, "")
+  return `${url.pathname}${url.search}${url.hash}`
 }

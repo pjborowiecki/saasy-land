@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "ユーザー管理 | SaaSy Land",
+    "description": "チームメンバー、アクセス権、および顧客アカウントの管理を行ってください。"
+  },
+  "title": "ユーザー管理",
+  "description": "チームメンバー、アクセス権、および顧客アカウントの管理を行ってください。",
+  "actions": {
+    "addUser": "ユーザーを追加する",
+    "feedback": {
+      "banSuccess": "利用者が停止されました。",
+      "deleteSuccess": "ユーザーが削除されました。",
+      "error": "何らかの不具合が発生しました。再度お試しください。",
+      "resetPasswordSuccess": "パスワードが正常に再設定されました。",
+      "unbanSuccess": "アカウントの利用停止が解除されました。"
+    },
+    "deleteDialog": {
+      "cancel": "キャンセル",
+      "confirm": "ユーザーを削除する",
+      "description": "{name}とそのアカウントデータを完全に削除します。この操作は取り消せません。",
+      "title": "ユーザーを削除しますか？"
+    },
+    "resetPasswordDialog": {
+      "cancel": "キャンセル",
+      "confirm": "パスワードをリセットする",
+      "description": "{name}の新しいパスワードを設定します。",
+      "password": "新しいパスワード",
+      "title": "パスワードをリセットする"
+    },
+    "row": {
+      "ban": "ユーザーを利用停止",
+      "delete": "ユーザーを削除する",
+      "edit": "ユーザーを編集する",
+      "menu": "行の操作",
+      "resetPassword": "パスワードをリセットする",
+      "unban": "利用停止を解除",
+      "viewProfile": "プロフィールを表示"
+    }
+  },
+  "search": {
+    "placeholder": "名前、メールアドレス、またはIDでユーザーを検索します。"
+  },
+  "filters": {
+    "groups": {
+      "identity": "ユーザー情報",
+      "access": "アクセス",
+      "activity": "活動"
+    },
+    "role": {
+      "all": "役割：すべて",
+      "value": "ロール：{role}",
+      "options": {
+        "admin": "管理者",
+        "customer": "顧客"
+      }
+    },
+    "status": {
+      "all": "状況：すべて",
+      "value": "ステータス：{status}",
+      "options": {
+        "active": "有効",
+        "pending": "保留中",
+        "banned": "利用停止"
+      }
+    }
+  },
+  "tabs": {
+    "allUsers": "全ユーザー",
+    "invitations": "招待",
+    "roles": "ロールと権限",
+    "security": "セキュリティ"
+  },
+  "table": {
+    "booleans": {
+      "no": "いいえ",
+      "yes": "はい"
+    },
+    "empty": "ユーザーが見つかりませんでした。",
+    "emptyValue": "n/a",
+    "headers": {
+      "createdAt": "作成日",
+      "emailVerified": "メールアドレスの確認が完了しました",
+      "role": "ロール",
+      "status": "ステータス",
+      "timezone": "希望するタイムゾーン",
+      "twoFactorEnabled": "二段階認証が有効になっています",
+      "updatedAt": "更新日",
+      "user": "ユーザー"
+    },
+    "selectAll": "すべての行を選択します",
+    "selectRow": "行を選択",
+    "actionsColumn": "行の操作"
+  },
+  "pagination": {
+    "info": "全{total}件の結果のうち{start}〜{end}件を表示",
+    "goToPage": "{page}ページへ移動",
+    "nextPage": "次のページ",
+    "previousPage": "前のページ"
+  },
+  "invitations": {
+    "title": "招待",
+    "description": "チームへの招待状況とアクセスリンクを管理します。",
+    "actions": {
+      "copyLink": "リンクをコピーします",
+      "sendInvite": "招待を送る"
+    },
+    "search": {
+      "placeholder": "メールで招待を検索..."
+    },
+    "filters": {
+      "role": "役割：すべて",
+      "status": "状況：保留中"
+    },
+    "table": {
+      "headers": {
+        "email": "メールアドレス",
+        "role": "ロール",
+        "status": "ステータス",
+        "sentDate": "送信日"
+      }
+    },
+    "pagination": {
+      "info": "全{total}件の結果のうち{start}〜{end}件を表示"
+    }
+  },
+  "roles": {
+    "title": "ロールと権限",
+    "description": "組織全体でアクセスレベルを定義し、権限を管理してください。",
+    "actions": {
+      "createRole": "ロールを作成"
+    },
+    "search": {
+      "placeholder": "名前または説明で求人を検索..."
+    },
+    "filters": {
+      "type": "種類：すべて"
+    },
+    "table": {
+      "headers": {
+        "name": "ロール名",
+        "description": "説明",
+        "type": "タイプ",
+        "users": "ユーザー"
+      },
+      "usersCount": "{count, plural, other {#人のユーザー}}"
+    },
+    "pagination": {
+      "info": "全{total}件のロールのうち{start}〜{end}件を表示"
+    }
+  },
+  "security": {
+    "title": "セキュリティ",
+    "empty": {
+      "title": "セキュリティイベントは記録されていません",
+      "description": "ログイン試行、セッションの取り消し、およびロールの変更は、ワークスペースでの記録が開始されると、こちらに表示されます。監査ログを有効にして、イベントの収集を開始してください。",
+      "action": "監査ログを有効にする"
+    }
+  },
+  "demo": {
+    "roles": {
+      "r1": {
+        "name": "管理者",
+        "description": "システム機能、請求、および設定の全機能へのアクセスが可能です。",
+        "type": "システム"
+      },
+      "r2": {
+        "name": "編集者",
+        "description": "製品やコンテンツの編集は可能ですが、ユーザーの管理はできません。",
+        "type": "システム"
+      },
+      "r3": {
+        "name": "サポート担当者",
+        "description": "ユーザーセッションへのアクセスと、基本的なトラブルシューティングツール。",
+        "type": "カスタム"
+      },
+      "r4": {
+        "name": "閲覧者",
+        "description": "分析データとダッシュボードへの閲覧専用アクセス。",
+        "type": "システム"
+      },
+      "r5": {
+        "name": "API 開発者",
+        "description": "開発者向け設定、APIキー、およびウェブフックへのアクセス。",
+        "type": "カスタム"
+      }
+    },
+    "invitations": {
+      "i1": {
+        "role": "管理者",
+        "status": "保留中",
+        "sentDate": "2時間前"
+      },
+      "i2": {
+        "role": "閲覧者",
+        "status": "保留中",
+        "sentDate": "昨日"
+      },
+      "i3": {
+        "role": "編集者",
+        "status": "有効期限切れ",
+        "sentDate": "2023年10月10日"
+      },
+      "i4": {
+        "role": "加入者",
+        "status": "保留中",
+        "sentDate": "2023年10月20日"
+      },
+      "i5": {
+        "role": "編集者",
+        "status": "有効期限切れ",
+        "sentDate": "2023年9月28日"
+      }
+    }
+  }
+}

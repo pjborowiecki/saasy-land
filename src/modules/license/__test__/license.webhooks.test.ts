@@ -1,11 +1,13 @@
-import { env } from "~/src/platform/env"
+import { env } from "cloudflare:workers"
+
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 
 import { licenseWebhookHandlers } from "~/src/modules/license/license.webhooks"
-import type { attachLicenseKey } from "~/src/modules/license/use-cases/attach-license-key.use-case"
-import type { grantLicense } from "~/src/modules/license/use-cases/grant-license.use-case"
-import type { revokeLicense } from "~/src/modules/license/use-cases/revoke-license.use-case"
+import type { attachLicenseKey } from "~/src/modules/license/use-cases/attach-license-key"
+import type { grantLicense } from "~/src/modules/license/use-cases/grant-license"
+import type { revokeLicense } from "~/src/modules/license/use-cases/revoke-license"
 
 const USER_ID = "018f2b9c-0000-7000-8000-000000000005"
 const UNKNOWN_PRODUCT_ID = "00000000-0000-4000-8000-00000000ffff"
@@ -16,25 +18,25 @@ const useCaseMocks = vi.hoisted(() => ({
   revokeLicense: vi.fn<typeof revokeLicense>(),
 }))
 
-vi.mock(import("server-only"), () => ({}))
+vi.mock(import("@tanstack/react-start/server-only"), () => ({}))
 
-vi.mock(import("~/src/modules/license/use-cases/attach-license-key.use-case"), () => ({
+vi.mock(import("~/src/modules/license/use-cases/attach-license-key"), () => ({
   attachLicenseKey: useCaseMocks.attachLicenseKey,
 }))
 
-vi.mock(import("~/src/modules/license/use-cases/grant-license.use-case"), () => ({ grantLicense: useCaseMocks.grantLicense }))
+vi.mock(import("~/src/modules/license/use-cases/grant-license"), () => ({ grantLicense: useCaseMocks.grantLicense }))
 
-vi.mock(import("~/src/modules/license/use-cases/revoke-license.use-case"), () => ({ revokeLicense: useCaseMocks.revokeLicense }))
+vi.mock(import("~/src/modules/license/use-cases/revoke-license"), () => ({ revokeLicense: useCaseMocks.revokeLicense }))
 
-function orderPayload(productId: string | null = JSON_NULL, externalId?: string) {
-  return { data: { customer: { externalId }, customerId: "cus_1", id: "ord_1", productId } }
-}
+const orderPayload = (productId: string | null = JSON_NULL, externalId?: string) => ({
+  data: { customer: { externalId }, customerId: "cus_1", id: "ord_1", productId },
+})
 
-function grantPayload(licenseKeyId?: string, externalId?: string) {
-  return { data: { customer: { externalId }, id: "grant_1", properties: { licenseKeyId } } }
-}
+const grantPayload = (licenseKeyId?: string, externalId?: string) => ({
+  data: { customer: { externalId }, id: "grant_1", properties: { licenseKeyId } },
+})
 
-function resetUseCases(): void {
+const resetUseCases = (): void => {
   useCaseMocks.attachLicenseKey.mockClear()
   useCaseMocks.grantLicense.mockClear()
   useCaseMocks.revokeLicense.mockClear()

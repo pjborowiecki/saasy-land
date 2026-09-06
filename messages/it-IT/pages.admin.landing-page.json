@@ -1,0 +1,76 @@
+{
+  "title": "Editor di pagine di destinazione",
+  "description": "Componete la sezione per sezione, quindi pubblicate quando il risultato vi sembra corretto.",
+  "actions": {
+    "preview": "Anteprima",
+    "saveChanges": "Salva le modifiche",
+    "publish": "Pubblica"
+  },
+  "sidebar": {
+    "addSection": "Aggiungi sezione",
+    "sections": {
+      "hero": "Sezione principale",
+      "features": "Griglie di funzionalità",
+      "video": "Galleria video",
+      "testimonials": "Testimonianze",
+      "pricing": "Tabella dei prezzi",
+      "gallery": "Galleria immagini",
+      "faq": "Domande frequenti (FAQ) a espansione",
+      "contact": "Modulo di contatto"
+    }
+  },
+  "canvas": {
+    "label": "Area di lavoro",
+    "viewport": {
+      "desktop": "Larghezza dello schermo",
+      "tablet": "Larghezza del tablet",
+      "mobile": "Larghezza su dispositivi mobili"
+    },
+    "sectionActions": {
+      "edit": "Modifica sezione",
+      "duplicate": "Duplica sezione",
+      "delete": "Elimina la sezione"
+    },
+    "badge": "Progettato per i team di magazzino",
+    "headingLead": "Traccia ogni pallet a partire da...",
+    "headingAccent": "fissare allo scaffale",
+    "description": "Scansione di codici a barre, conteggi ciclici e avvisi di riordino, tutto in un'unica soluzione. Funziona offline durante le operazioni in campo e si sincronizza quando il dispositivo è connesso alla rete Wi-Fi.",
+    "getStarted": "Inizia la prova gratuita",
+    "bookDemo": "Prenota una dimostrazione",
+    "addSectionHere": "Aggiungi sezione qui",
+    "featuresHeading": "Cosa è incluso",
+    "featuresSubheading": "Tre strumenti che il team addetto alla pavimentazione utilizza in ogni turno.",
+    "feature1": "Scansione di codici a barre",
+    "feature2": "Inventari ciclici",
+    "feature3": "Avvisi di riordino"
+  },
+  "properties": {
+    "title": "Proprietà della sezione",
+    "description": "Personalizzare l'elemento selezionato",
+    "layout": "Allineamento",
+    "alignLeft": "Allineare a sinistra",
+    "alignCenter": "Allineare al centro",
+    "alignRight": "Allineare a destra",
+    "spacing": "Spaziature",
+    "paddingTop": "Spaziatura superiore",
+    "paddingBot": "Spaziatura inferiore",
+    "unit": "px",
+    "background": "Stile di sfondo",
+    "backgroundOptions": {
+      "page": "Superficie della pagina",
+      "panel": "Superficie del pannello",
+      "raised": "Superficie rialzata",
+      "image": "Carica un'immagine"
+    },
+    "content": "Contenuto",
+    "generateAI": "Genera con l'IA",
+    "badgeText": "Testo del badge",
+    "heading": "Titolo",
+    "subheading": "Sottotitolo",
+    "buttonActions": "Azioni",
+    "primaryButton": "Pulsante principale",
+    "secondaryButton": "Pulsante secondario",
+    "buttonEnabled": "Il pulsante è visibile",
+    "label": "Etichetta"
+  }
+}

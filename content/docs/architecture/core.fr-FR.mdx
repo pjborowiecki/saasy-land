@@ -1,0 +1,14 @@
+---
+title: Core noyau partagé
+description: Erreurs de domaine et catalogues partagés dans les modules/_core.
+---
+
+## Table des matières
+
+- `constants/errors.ts` — `ERROR_CODES`, `AppError`, `ActionServerError` (le vocabulaire d'erreur unique)
+- `constants/` — catalogues locaux (et connexes) utilisés par les boutons i18n et produits
+- `utils/` — aides pures partagées entre modules
+
+## Pourquoi il existe
+
+Transverses **valeurs valables** et **codes d'erreur** ne devrait pas être redéfini par caractéristique. Des locaux (sous-set) compatibles avec l'application vivent encore dans `i18n.config.ts`; le catalogue plus large peut vivre dans `_core`.

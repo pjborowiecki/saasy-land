@@ -1,0 +1,14 @@
+---
+title: "Integration ownership"
+description: "Integration ownership — SaaSy Land"
+---
+
+Each external library or provider owns a directory under `src/integrations`: Better Auth, Drizzle, Fumadocs, use-intl, Polar, Resend and GitHub. Configuration files initialize clients. Shared adapters normalize provider results and keep credentials behind server boundaries.
+
+Business decisions remain in feature modules. For example, Polar webhook handlers update license records through module use cases; the integration itself configures the SDK and verifies incoming webhooks.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

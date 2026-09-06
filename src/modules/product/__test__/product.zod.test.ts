@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { PRODUCT_VALIDATION_MESSAGE } from "~/src/modules/product/product.validations"
 import { productZodSchemas } from "~/src/modules/product/product.zod"
 

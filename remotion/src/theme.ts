@@ -28,9 +28,9 @@ export const THEME = {
   mutedForeground: "oklch(0.715 0.012 265)",
   /** The receding series in a two-series chart. */
   series: "oklch(0.55 0.075 245)",
+  seriesDim: "oklch(0.55 0.075 245 / 0.22)",
   /** The console rail, one step darker than the ground, exactly as `--sidebar` is on the page. */
   sidebar: "oklch(0.152 0.005 265)",
-  seriesDim: "oklch(0.55 0.075 245 / 0.22)",
 } as const
 
 /**

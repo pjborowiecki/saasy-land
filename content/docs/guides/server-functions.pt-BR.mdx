@@ -1,0 +1,30 @@
+---
+title: Funções do servidor e casos de uso
+description: Funções do servidor e casos de uso - SaaSy Land
+---
+
+Operações de recurso ao vivo. `src/modules/{feature}/use-cases/{operation}.ts`. . Exportar um nativo. `createServerFn` com seu esquema de entrada, autorização ou middleware limite de taxa, e um manipulador que chama D1 ou o adaptador do provedor. Uma mutação devolve dados diretamente e joga um cofre. `AppError` Não devolve um envelope de ação específico.
+
+Exportar `mutationOptions` Ao lado de mutações e `queryOptions` Além das leituras, componentes usam TanStack Query e traduzir erros com `useActionError`. . Mutações bem-sucedidas invalidam suas chaves de busca. Nunca confie em uma identidade de usuário fornecida por um cliente quando a operação deve agir. `context.auth.user.id`.
+
+Use `withAuth` para operações protegidas e `withRateLimit` para operações públicas sensíveis. A validação é feita antes do encarregado. Mantenha os erros do provedor e os detalhes internos fora das respostas públicas.
+
+```ts
+import { createServerFn } from "@tanstack/react-start"
+import { mutationOptions } from "@tanstack/react-query"
+import type * as zod from "zod"
+import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { categoryZodSchemas } from "~/src/modules/category/category.zod"
+
+// Follow the complete implementation in modules/category/use-cases/create-category.ts.
+const schema = categoryZodSchemas.createCategory
+const validate = (input: zod.input<typeof schema>) => schema.parse(input)
+```
+
+O existente. `createCategory` A operação demonstra validação, verificação de permissão, D1 inserir e exportar opções de mutação.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "Gerenciamento de Usuários | SaaSy Land",
+    "description": "Gerencie seus membros da equipe, permissões e contas de clientes."
+  },
+  "title": "Gerenciamento de usuários",
+  "description": "Gerencie seus membros da equipe, permissões e contas de clientes.",
+  "actions": {
+    "addUser": "Adicionar usuário",
+    "feedback": {
+      "banSuccess": "Usuário banido.",
+      "deleteSuccess": "Usuário removido.",
+      "error": "Algo deu errado. Por favor, tente novamente.",
+      "resetPasswordSuccess": "A senha foi redefinida com sucesso.",
+      "unbanSuccess": "Usuário removido da lista de banidos."
+    },
+    "deleteDialog": {
+      "cancel": "Cancelar",
+      "confirm": "Excluir usuário",
+      "description": "Excluir permanentemente {name} e os dados da conta. Esta ação não pode ser desfeita.",
+      "title": "Excluir usuário?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Cancelar",
+      "confirm": "Redefinir senha",
+      "description": "Defina uma nova senha para {name}.",
+      "password": "Nova senha",
+      "title": "Redefinir senha"
+    },
+    "row": {
+      "ban": "Bloquear usuário",
+      "delete": "Excluir usuário",
+      "edit": "Editar usuário",
+      "menu": "Ações da linha",
+      "resetPassword": "Redefinir senha",
+      "unban": "Remover o bloqueio do usuário",
+      "viewProfile": "Visualizar perfil"
+    }
+  },
+  "search": {
+    "placeholder": "Pesquise usuários por nome, e-mail ou ID..."
+  },
+  "filters": {
+    "groups": {
+      "identity": "Identidade",
+      "access": "Acesso",
+      "activity": "Atividade"
+    },
+    "role": {
+      "all": "Função: Todos",
+      "value": "Função: {role}",
+      "options": {
+        "admin": "Administrador",
+        "customer": "Cliente"
+      }
+    },
+    "status": {
+      "all": "Status: Tudo",
+      "value": "Status: {status}",
+      "options": {
+        "active": "Ativo",
+        "pending": "Pendente",
+        "banned": "Proibido"
+      }
+    }
+  },
+  "tabs": {
+    "allUsers": "Todos os usuários",
+    "invitations": "Convites",
+    "roles": "Funções e Permissões",
+    "security": "Segurança"
+  },
+  "table": {
+    "booleans": {
+      "no": "Não",
+      "yes": "Sim"
+    },
+    "empty": "Nenhum usuário encontrado.",
+    "emptyValue": "n/a",
+    "headers": {
+      "createdAt": "Criado em",
+      "emailVerified": "Email verificado",
+      "role": "Função",
+      "status": "Status",
+      "timezone": "Fuso horário preferencial",
+      "twoFactorEnabled": "Autenticação de dois fatores ativada",
+      "updatedAt": "Atualizado em",
+      "user": "Usuário"
+    },
+    "selectAll": "Selecionar todas as linhas",
+    "selectRow": "Selecione a linha",
+    "actionsColumn": "Ações da linha"
+  },
+  "pagination": {
+    "info": "Exibindo de {start} a {end} de {total} resultados",
+    "goToPage": "Ir para a página {page}",
+    "nextPage": "Próxima página",
+    "previousPage": "Página anterior"
+  },
+  "invitations": {
+    "title": "Convites",
+    "description": "Gerencie os convites pendentes da equipe e os links de acesso.",
+    "actions": {
+      "copyLink": "Copiar link",
+      "sendInvite": "Enviar convite"
+    },
+    "search": {
+      "placeholder": "Pesquisar convites por e-mail..."
+    },
+    "filters": {
+      "role": "Função: Todos",
+      "status": "Status: Pendente"
+    },
+    "table": {
+      "headers": {
+        "email": "E-mail",
+        "role": "Função",
+        "status": "Status",
+        "sentDate": "Data de envio"
+      }
+    },
+    "pagination": {
+      "info": "Exibindo de {start} a {end} de {total} resultados"
+    }
+  },
+  "roles": {
+    "title": "Funções e Permissões",
+    "description": "Defina os níveis de acesso e gerencie as permissões em toda a sua organização.",
+    "actions": {
+      "createRole": "Criar função"
+    },
+    "search": {
+      "placeholder": "Pesquise vagas por nome ou descrição..."
+    },
+    "filters": {
+      "type": "Tipo: Todos"
+    },
+    "table": {
+      "headers": {
+        "name": "Nome do Cargo",
+        "description": "Descrição",
+        "type": "Tipo",
+        "users": "Usuários"
+      },
+      "usersCount": "{count, plural, one {# usuário} other {# usuários}}"
+    },
+    "pagination": {
+      "info": "Exibindo de {start} a {end} de {total} funções"
+    }
+  },
+  "security": {
+    "title": "Segurança",
+    "empty": {
+      "title": "Nenhum evento de segurança registrado",
+      "description": "As tentativas de acesso, revogações de sessão e alterações de função serão exibidas aqui assim que seu espaço de trabalho começar a registrar esses eventos. Ative o registro de auditoria para começar a coletar os eventos.",
+      "action": "Habilitar registro de auditoria"
+    }
+  },
+  "demo": {
+    "roles": {
+      "r1": {
+        "name": "Administrador",
+        "description": "Acesso completo a todas as funcionalidades do sistema, faturamento e configurações.",
+        "type": "Sistema"
+      },
+      "r2": {
+        "name": "Editor",
+        "description": "É possível editar produtos e conteúdo, mas não é possível gerenciar usuários.",
+        "type": "Sistema"
+      },
+      "r3": {
+        "name": "Agente de suporte",
+        "description": "Acesso às sessões do usuário e ferramentas básicas de solução de problemas.",
+        "type": "Personalização"
+      },
+      "r4": {
+        "name": "Leitor",
+        "description": "Acesso somente para leitura a análises e painéis.",
+        "type": "Sistema"
+      },
+      "r5": {
+        "name": "Desenvolvedor de API",
+        "description": "Acesso às configurações do desenvolvedor, chaves de API e webhooks.",
+        "type": "Personalização"
+      }
+    },
+    "invitations": {
+      "i1": {
+        "role": "Administrador",
+        "status": "Pendente",
+        "sentDate": "Há 2 horas"
+      },
+      "i2": {
+        "role": "Leitor",
+        "status": "Pendente",
+        "sentDate": "Ontem"
+      },
+      "i3": {
+        "role": "Editor",
+        "status": "Vencido",
+        "sentDate": "10 de outubro de 2023"
+      },
+      "i4": {
+        "role": "Assinante",
+        "status": "Pendente",
+        "sentDate": "20 de outubro de 2023"
+      },
+      "i5": {
+        "role": "Editor",
+        "status": "Vencido",
+        "sentDate": "28 de setembro de 2023"
+      }
+    }
+  }
+}

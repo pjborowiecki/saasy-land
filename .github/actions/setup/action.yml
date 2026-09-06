@@ -1,68 +1,41 @@
 name: Setup toolchain
-description: Install Bun, Vite+, and project dependencies, then export the CI-only environment.
+description: Install Bun, Vite+, dependencies, and local Cloudflare test configuration.
 
 inputs:
   bun-version:
-    description: Bun version to install. Must match the version pinned in vercel.json.
+    description: Bun version used by package.json.
     required: false
-    default: "1.3.14"
+    default: "1.4.0"
   node-version:
-    description: Node version for the Vite+ toolchain.
+    description: Node version for Vite+ and the SQLite test harness.
     required: false
     default: "24"
-  database-url:
-    description: >-
-      Real database for jobs that build. `next build` executes "use cache" functions to
-      fill the static shell, so prerendering issues live queries. Jobs that only lint and
-      test can leave this unset and keep the placeholder.
-    required: false
-    default: ""
 
 runs:
   using: composite
   steps:
-    - name: Setup Bun
-      uses: oven-sh/setup-bun@v2
+    - uses: oven-sh/setup-bun@v2
       with:
         bun-version: ${{ inputs.bun-version }}
-
-    - name: Setup Vite+
-      uses: voidzero-dev/setup-vp@v1
+    - uses: voidzero-dev/setup-vp@v1
       with:
         node-version: ${{ inputs.node-version }}
         cache: true
         run-install: false
-
-    - name: Cache Bun package downloads
-      uses: actions/cache@v5
+    - uses: actions/cache@v5
       with:
         path: ~/.bun/install/cache
         key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
         restore-keys: ${{ runner.os }}-bun-
-
     - name: Install dependencies
       shell: bash
       run: bun install --frozen-lockfile --ignore-scripts
-
-    - name: Generate Next types
+    - name: Configure isolated test environment
+      shell: bash
+      run: |
+        cp .env.test .env.development
+        cp .env.test .env.preview
+        echo "VITE_APP_URL=http://127.0.0.1:3000" >> "$GITHUB_ENV"
+    - name: Generate binding and content types
       shell: bash
       run: bun run typegen
-
-    - name: Export CI-only environment
-      shell: bash
-      env:
-        DATABASE_URL: ${{ inputs.database-url }}
-      run: |
-        echo "DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@127.0.0.1:5432/postgres}" >> "$GITHUB_ENV"
-        cat >> "$GITHUB_ENV" <<'ENV'
-        AUTH_SECRET=ci_dummy_secret_000000000000000000000000000000000000000000000000000000000000
-        NEXT_PUBLIC_APP_URL=http://127.0.0.1:3000
-        RESEND_API_KEY=re_ci_dummy_key_for_build_validation_only_000000000000
-        RESEND_EMAIL_FROM=onboarding@resend.dev
-        KV_REST_API_URL=https://example.upstash.io
-        KV_REST_API_TOKEN=ci_dummy_upstash_token
-        GITHUB_CLIENT_ID=ci_dummy_github_id
-        GITHUB_CLIENT_SECRET=ci_dummy_github_secret
-        GOOGLE_CLIENT_ID=ci_dummy_google_id
-        GOOGLE_CLIENT_SECRET=ci_dummy_google_secret
-        ENV

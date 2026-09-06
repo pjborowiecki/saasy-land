@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Área de aplicativos conectados."
+    },
+    "welcome": "Aplicativo: {name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "Lar"
+    },
+    "header": {
+      "notifications": "Notificações",
+      "searchPlaceholder": "Pesquisar no console",
+      "searchEmpty": "Não encontrei nenhuma seção correspondente."
+    },
+    "userWidget": {
+      "settings": "Configurações",
+      "signedInAs": "Conectado como <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Sair",
+      "signingOut": "Despedindo-me...",
+      "success": "Até logo"
+    }
+  },
+  "labels": {
+    "unknownLocation": "Localização desconhecida",
+    "gettingStartedSection": "Seção 1: Primeiros passos",
+    "welcomeLesson": "Boas-vindas ao curso",
+    "setupLesson": "Configurar seu ambiente",
+    "coreConceptsSection": "Seção 2: Conceitos fundamentais",
+    "development": "Desenvolvimento",
+    "design": "Design",
+    "beginner": "Iniciante",
+    "intermediate": "Intermediário",
+    "advanced": "Avançado",
+    "oneYearAccess": "Acesso por 1 ano",
+    "products": "produtos",
+    "noCourses": "Nenhum curso encontrado.",
+    "previousPage": "Página anterior",
+    "nextPage": "Próxima página",
+    "rowActions": "Ações da linha",
+    "actions": "Ações",
+    "saasPlans": "Planos SaaS",
+    "addOns": "Complementos",
+    "coreSubscription": "Assinatura Core",
+    "legacy": "Versão anterior",
+    "hidden": "Oculta",
+    "public": "Pública"
+  }
+}

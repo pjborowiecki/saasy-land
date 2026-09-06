@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "title": "Zwei-Faktor-Authentifizierung",
+    "description": "Gib deinen Code zur Zwei-Faktor-Authentifizierung für {name} ein."
+  },
+  "form": {
+    "title": "Zwei-Faktor-Authentifizierung",
+    "description": "Geben Sie den 6-stelligen Code aus Ihrer Authenticator-App ein oder verwenden Sie einen Wiederherstellungscode.",
+    "code": "Authentifizierungscode",
+    "backupCode": "Sicherheitsкод",
+    "submit": "Überprüfen",
+    "submitting": "Überprüfen…",
+    "success": "Anmeldung erfolgreich!",
+    "useBackupCode": "Verwenden Sie stattdessen einen Sicherheitscode",
+    "useAuthenticator": "Verwenden Sie stattdessen eine Authenticator-App"
+  }
+}

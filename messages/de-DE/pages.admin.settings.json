@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Einstellungen | SaaSy Land",
+    "description": "Verwalten Sie Ihre Einstellungen für den Arbeitsbereich, die Sicherheit und die Abrechnung."
+  },
+  "title": "Einstellungen",
+  "description": "Verwalten Sie Ihre Einstellungen für den Arbeitsbereich, die Sicherheit und die Abrechnung.",
+  "tabs": {
+    "general": "Allgemein",
+    "security": "Sicherheit",
+    "team": "Team & Mitglieder",
+    "billing": "Abrechnung",
+    "integrations": "Integrationen",
+    "api": "API-Schlüssel"
+  },
+  "profile": {
+    "title": "Arbeitsbereichprofil",
+    "description": "Aktualisieren Sie Ihre Arbeitsbereichsidentität und Ihre persönlichen Daten.",
+    "uploadImage": "Bild hochladen",
+    "removeImage": "Entfernen",
+    "imageHint": "Empfohlene Größe: 256x256 Pixel. Maximal 2 MB.",
+    "workspaceName": "Arbeitsbereichsname",
+    "supportEmail": "Support-E-Mail",
+    "workspaceUrl": "Arbeitsbereich-URL",
+    "urlHint": "Dies ist Ihre persönliche URL, um sich in Ihr Dashboard einzuloggen.",
+    "saveChanges": "Änderungen speichern",
+    "urlPrefix": "app.saasyland.com/"
+  },
+  "preferences": {
+    "title": "Einstellungen",
+    "description": "Konfigurieren Sie die regionalen Einstellungen und Spracheinstellungen für Ihren Arbeitsbereich.",
+    "language": "Sprache",
+    "timezone": "Zeitzone",
+    "announcements": {
+      "title": "Funktionsankündigungen",
+      "description": "Erhalten Sie E-Mails über neue Funktionen und Updates."
+    }
+  },
+  "dangerZone": {
+    "title": "Gefahrenzone",
+    "description": "Unwiderrufliche Maßnahmen für Ihren Arbeitsbereich.",
+    "delete": {
+      "title": "Löschen Sie den Arbeitsbereich",
+      "description": "Löschen Sie diesen Arbeitsbereich und alle zugehörigen Daten dauerhaft. Dieser Vorgang kann nicht rückgängig gemacht werden.",
+      "button": "Löschen Sie den Arbeitsbereich"
+    }
+  },
+  "security": {
+    "password": {
+      "title": "Passwort ändern",
+      "description": "Aktualisieren Sie Ihr Passwort, um Ihr Konto weiterhin sicher zu halten.",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "confirm": "Passwort bestätigen",
+      "requirements": {
+        "title": "Passwortanforderungen",
+        "length": "Mindestens 8 Zeichen lang",
+        "case": "Mindestens ein Groß- und Kleinbuchstabe",
+        "special": "Mindestens eine Zahl oder ein Sonderzeichen"
+      },
+      "update": "Passwort aktualisieren",
+      "feedback": {
+        "updateSuccess": "Passwort erfolgreich aktualisiert."
+      }
+    },
+    "twoFactor": {
+      "title": "Zwei-Faktor-Authentifizierung (2FA)",
+      "description": "Verbessern Sie die Sicherheit Ihres Kontos zusätzlich.",
+      "app": "Authentifizierungs-App",
+      "appDescription": "Verwenden Sie eine App wie Google Authenticator oder 1Password, um zeitbasierte Codes zu generieren.",
+      "enable": "Aktivieren Sie die Zwei-Faktor-Authentifizierung",
+      "dialogTitle": "Aktivieren Sie die Zwei-Faktor-Authentifizierung",
+      "dialogDescription": "Bitte bestätigen Sie Ihr Passwort und scannen Sie anschließend den Aktivierungscode mit Ihrer Authenticator-App.",
+      "password": "Aktuelles Passwort",
+      "continue": "Fortfahren",
+      "scanInstructions": "Fügen Sie diesen Code Ihrem Authenticator-App hinzu oder scannen Sie den URI mit Ihrem Passwort-Manager.",
+      "verificationCode": "Bestätigungscode",
+      "verifyAndEnable": "Überprüfen und aktivieren",
+      "backupCodesDescription": "Bewahren Sie diese Wiederherstellungscodes an einem sicheren Ort auf. Jeder Code kann einmal verwendet werden, falls Sie den Zugriff auf Ihren Authenticator verlieren.",
+      "done": "Erledigt",
+      "setupError": "Die Zwei-Faktor-Authentifizierung konnte nicht gestartet werden. Bitte versuchen Sie es erneut.",
+      "enabledSuccess": "Die Zwei-Faktor-Authentifizierung ist jetzt aktiviert.",
+      "disable": "Zwei-Faktor-Authentifizierung deaktivieren",
+      "disableDialogTitle": "Zwei-Faktor-Authentifizierung deaktivieren",
+      "disableDialogDescription": "Bitte bestätigen Sie Ihr Passwort, um die Zwei-Faktor-Authentifizierung zu deaktivieren.",
+      "disableConfirm": "Deaktivieren",
+      "disabledSuccess": "Die Zwei-Faktor-Authentifizierung ist jetzt deaktiviert."
+    },
+    "sessions": {
+      "title": "Aktive Sitzungen",
+      "description": "Verwalten Sie die Geräte, die derzeit bei Ihrem Konto angemeldet sind.",
+      "logoutAll": "Melden Sie alle anderen Geräte ab",
+      "currentBadge": "Aktuelle Sitzung",
+      "revoke": "Widerrufen",
+      "activeAgo": "Vor {time} aktiv",
+      "separator": " • ",
+      "feedback": {
+        "logoutAllSuccess": "Andere Sitzungen wurden abgemeldet.",
+        "revokeSuccess": "Sitzung beendet."
+      }
+    }
+  }
+}

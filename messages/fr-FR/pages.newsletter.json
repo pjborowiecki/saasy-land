@@ -1,0 +1,54 @@
+{
+  "form": {
+    "alreadySubscribed": "Vous êtes déjà autorisé. Aucune action à effectuer.",
+    "button": "S'abonner",
+    "confirmationSent": "Succès ! Vérifiez maintenant votre boîte de réception et confirmez l'adresse.",
+    "error": "Cela n'a pas été envoyé. Veuillez réessayer, ou envoyez un e-mail à hello@saasyland.com.",
+    "label": "Adresse e-mail",
+    "placeholder": "Ton adresse e-mail",
+    "submitting": "S'abonner..."
+  },
+  "confirm": {
+    "title": "Confirmez votre abonnement",
+    "description": "Confirmez votre abonnement au blog de suivi de la construction de SaaSy Land.",
+    "confirmed": {
+      "title": "Vous êtes accepté(e).",
+      "body": "L'adresse est confirmée. Vous pouvez consulter le journal de construction ici : ce qui a été déployé, les décisions qui ont motivé ce déploiement, et les éléments qui n'ont pas fonctionné.",
+      "note": "Chaque email contient un lien de désinscription. Un simple clic et vous êtes retiré de la liste.",
+      "action": "Découvrez ce qui est en cours de construction"
+    },
+    "expired": {
+      "title": "Ce lien n'est plus valide.",
+      "body": "Les liens de confirmation sont valables pendant 24 heures et ne fonctionnent qu'une fois. Celui-ci a expiré ou a déjà été utilisé, donc l'adresse n'est pas encore confirmée.",
+      "note": "Inscrivez-vous à nouveau depuis le pied de page, et un nouveau lien arrivera dans votre boîte de réception en environ une minute.",
+      "action": "Retour au site"
+    },
+    "pending": {
+      "title": "Confirmation de votre abonnement…",
+      "body": "Veuillez patienter pendant que nous vérifions votre adresse e-mail.",
+      "note": "Cela ne prendra que quelques instants.",
+      "action": "Retour au site"
+    },
+    "error": {
+      "title": "Nous n'avons pas pu confirmer votre adresse.",
+      "body": "Veuillez recharger cette page pour réessayer.",
+      "note": "Votre abonnement n'a pas été modifié.",
+      "action": "Retour au site"
+    }
+  },
+  "unsubscribe": {
+    "title": "Vous êtes radié(e).",
+    "description": "Se désinscrire du suivi de construction de SaaSy Land.",
+    "body": "Cette adresse ne recevra plus de courriel concernant les rapports de construction. Aucune confirmation n'est nécessaire, et il ne faut cliquer sur aucun lien.",
+    "note": "Les emails transactionnels concernant un compte ou un achat sont envoyés séparément et parviennent toujours, car il s'agit de courriers que vous avez demandés en effectuant un achat.",
+    "resubscribe": "Vous avez changé d'avis ? Inscrivez-vous à nouveau depuis le pied de page",
+    "pending": {
+      "title": "Se désinscrire…",
+      "body": "Veuillez patienter pendant que nous mettons à jour votre abonnement."
+    },
+    "error": {
+      "title": "Nous n'avons pas pu supprimer cette adresse.",
+      "body": "Ouvrez le lien de désinscription dans votre email et réessayez."
+    }
+  }
+}

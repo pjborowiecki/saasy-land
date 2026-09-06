@@ -1,5 +1,3 @@
-"use client"
-
 import { useTheme } from "@wrksz/themes/client"
 import { CircleCheckIcon, InfoIcon, Loader2Icon, OctagonXIcon, TriangleAlertIcon } from "lucide-react"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
@@ -20,7 +18,7 @@ const TOAST_OPTIONS = {
   },
 } as const
 
-function Toaster(props: Readonly<ToasterProps>) {
+const Toaster = (props: Readonly<ToasterProps>) => {
   const { theme = THEME.DEFAULT_THEME } = useTheme()
 
   return (

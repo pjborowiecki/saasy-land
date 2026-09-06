@@ -1,0 +1,37 @@
+{
+  "title": "Your license",
+  "description": "Your purchased CLI licence key and machine activations.",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "License key",
+  "pending": "Your key is being issued. Refresh in a moment.",
+  "revoked": "This license is no longer active. Write to us if that looks wrong.",
+  "usage": "A purchase and a valid key are required to install and use the CLI. Run this command and provide your key when prompted. Keep the key private.",
+  "manage": "Invoices and receipts",
+  "buy": {
+    "title": "Get your license",
+    "description": "Purchase the proprietary CLI, then find your licence key here. One payment, unlimited projects within your package.",
+    "core": "Get Core",
+    "complete": "Get Complete",
+    "agency": "Get Agency",
+    "pending": "Opening checkout...",
+    "error": "Checkout did not open. Try again, or email hello@saasyland.com.",
+    "agreement": "By continuing to checkout, you agree to the <terms>Terms of Service</terms> and <licence>Commercial Licence</licence>. Read the <refunds>Refund Policy</refunds> before purchasing."
+  },
+  "activations": {
+    "title": "Machines",
+    "description": "Each machine you scaffold on uses one slot. Free a slot when you stop using a machine.",
+    "count": "{used} of {limit} in use",
+    "unlimited": "{used} in use",
+    "none": "No machines have used this key yet.",
+    "activated": "Activated {date}",
+    "deactivate": "Free this slot",
+    "deactivating": "Freeing...",
+    "error": "That did not work. Try again, or email hello@saasyland.com.",
+    "success": "Slot freed."
+  },
+  "back": "Back to overview",
+  "agreement": "The <licence>Commercial Licence</licence> covers the CLI and your rights to generated applications."
+}

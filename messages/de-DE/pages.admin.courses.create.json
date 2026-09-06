@@ -1,0 +1,71 @@
+{
+  "title": "Erstellen Sie den Kurs",
+  "actions": {
+    "cancel": "Abbrechen",
+    "save": "Kurs speichern"
+  },
+  "sections": {
+    "general": {
+      "title": "Allgemeine Informationen",
+      "name": {
+        "label": "Kursbetitel",
+        "placeholder": "Fortgeschrittene UI-Designmuster..."
+      },
+      "description": {
+        "label": "Beschreibung",
+        "placeholder": "Beschreiben Sie kurz, was die Studierenden lernen werden.",
+        "help": "Wird auf der Übersichtsseite des Kurses angezeigt."
+      }
+    },
+    "curriculum": {
+      "title": "Lehrplan",
+      "description": "Gliedern Sie Ihren Kurs in Abschnitte und Lektionen.",
+      "expandAll": "Erweitern Sie alle",
+      "addSection": "Neuen Abschnitt hinzufügen",
+      "addLesson": "Füge eine Lektion hinzu"
+    },
+    "pricing": {
+      "title": "Preisgestaltung und Zugriff",
+      "model": {
+        "label": "Abrechnungsmodell",
+        "oneTime": "Einmaliger Kauf",
+        "subscription": "Abonnement"
+      },
+      "price": {
+        "label": "Preis",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "Zugriffszeitraum",
+        "lifetime": "Lebenslanger Zugriff"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "publish": {
+        "label": "Veröffentlichen Sie den Kurs",
+        "description": "Stellen Sie es den Studierenden sichtbar zur Verfügung"
+      },
+      "certificate": {
+        "label": "Bescheinigung erstellen",
+        "description": "Bei 100% Abschluss"
+      }
+    },
+    "media": {
+      "title": "Kursvorschaubild",
+      "upload": "Bild hochladen",
+      "help": "1920x1080 Pixel empfohlen"
+    },
+    "organization": {
+      "title": "Organisation",
+      "category": {
+        "label": "Kategorie",
+        "placeholder": "Kategorie auswählen..."
+      },
+      "difficulty": {
+        "label": "Schwierigkeitsgrad",
+        "placeholder": "Anfänger, Fortgeschrittene..."
+      }
+    }
+  }
+}

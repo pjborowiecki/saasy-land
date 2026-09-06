@@ -1,20 +1,18 @@
-"use client"
-
 import type { ComponentProps, ReactNode } from "react"
 
 import { XIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
 import {
-  Dialog as SheetPrimitive,
-  DialogTrigger as SheetTriggerPrimitive,
   Heading,
   ModalOverlay as ModalOverlayPrimitive,
-  Modal as ModalPrimitive,
-  type DialogTriggerProps as SheetTriggerPrimitiveProps,
   type ModalOverlayProps as ModalOverlayPrimitiveProps,
+  Modal as ModalPrimitive,
+  Dialog as SheetPrimitive,
+  DialogTrigger as SheetTriggerPrimitive,
+  type DialogTriggerProps as SheetTriggerPrimitiveProps,
 } from "react-aria-components"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
@@ -28,38 +26,34 @@ type SheetProps = Omit<ModalOverlayPrimitiveProps, "children" | "className"> &
     side?: SheetSide
   }
 
-function SheetTrigger({ ...props }: Readonly<SheetTriggerPrimitiveProps>) {
-  return <SheetTriggerPrimitive data-slot="sheet-trigger" {...props} />
-}
+const SheetTrigger = ({ ...props }: Readonly<SheetTriggerPrimitiveProps>) => <SheetTriggerPrimitive data-slot="sheet-trigger" {...props} />
 
-function SheetClose({ className, size = "default", variant = "outline", ...props }: ComponentProps<typeof Button>) {
-  return <Button className={cn(className)} data-slot="sheet-close" size={size} slot="close" variant={variant} {...props} />
-}
+const SheetClose = ({ className, size = "default", variant = "outline", ...props }: ComponentProps<typeof Button>) => (
+  <Button className={cn(className)} data-slot="sheet-close" size={size} slot="close" variant={variant} {...props} />
+)
 
-function SheetOverlay({
+const SheetOverlay = ({
   children,
   className,
   ...props
 }: Omit<ModalOverlayPrimitiveProps, "children" | "className"> & {
   children: ReactNode
   className?: string
-}) {
-  return (
-    <ModalOverlayPrimitive
-      className={cn(
-        "fixed inset-0 z-50 bg-black/10 transition-opacity duration-150 data-entering:opacity-0 data-exiting:opacity-0 supports-backdrop-filter:backdrop-blur-xs",
-        className,
-      )}
-      data-slot="sheet-overlay"
-      isDismissable
-      {...props}
-    >
-      {children}
-    </ModalOverlayPrimitive>
-  )
-}
+}) => (
+  <ModalOverlayPrimitive
+    className={cn(
+      "fixed inset-0 z-50 bg-black/10 transition-opacity duration-150 data-entering:opacity-0 data-exiting:opacity-0 supports-backdrop-filter:backdrop-blur-xs",
+      className,
+    )}
+    data-slot="sheet-overlay"
+    isDismissable
+    {...props}
+  >
+    {children}
+  </ModalOverlayPrimitive>
+)
 
-function Sheet({ children, className, isDismissable = true, showCloseButton = true, side = "right", ...props }: SheetProps) {
+const Sheet = ({ children, className, isDismissable = true, showCloseButton = true, side = "right", ...props }: SheetProps) => {
   const t = useTranslations("components.shadcn.sheet")
 
   return (
@@ -91,28 +85,26 @@ function Sheet({ children, className, isDismissable = true, showCloseButton = tr
 
 const SheetContent = Sheet
 
-function SheetHeader({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("flex flex-col gap-0.5 p-4", className)} data-slot="sheet-header" {...props} />
-}
+const SheetHeader = ({ className, ...props }: ComponentProps<"div">) => (
+  <div className={cn("flex flex-col gap-0.5 p-4", className)} data-slot="sheet-header" {...props} />
+)
 
-function SheetFooter({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("mt-auto flex flex-col gap-2 p-4", className)} data-slot="sheet-footer" {...props} />
-}
+const SheetFooter = ({ className, ...props }: ComponentProps<"div">) => (
+  <div className={cn("mt-auto flex flex-col gap-2 p-4", className)} data-slot="sheet-footer" {...props} />
+)
 
-function SheetTitle({ className, ...props }: Readonly<Omit<ComponentProps<typeof Heading>, "slot">>) {
-  return (
-    <Heading
-      className={cn("cn-font-heading text-base font-medium text-foreground", className)}
-      data-slot="sheet-title"
-      slot="title"
-      {...props}
-    />
-  )
-}
+const SheetTitle = ({ className, ...props }: Readonly<Omit<ComponentProps<typeof Heading>, "slot">>) => (
+  <Heading
+    className={cn("cn-font-heading text-base font-medium text-foreground", className)}
+    data-slot="sheet-title"
+    slot="title"
+    {...props}
+  />
+)
 
-function SheetDescription({ className, ...props }: Readonly<Omit<ComponentProps<"div">, "slot">>) {
-  return <div className={cn("text-sm text-muted-foreground", className)} data-slot="sheet-description" {...props} />
-}
+const SheetDescription = ({ className, ...props }: Readonly<Omit<ComponentProps<"div">, "slot">>) => (
+  <div className={cn("text-sm text-muted-foreground", className)} data-slot="sheet-description" {...props} />
+)
 
 export type { DialogProps as SheetPrimitiveProps, DialogTriggerProps as SheetTriggerPrimitiveProps } from "react-aria-components"
 

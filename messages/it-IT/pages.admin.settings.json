@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Impostazioni | SaaSy Land",
+    "description": "Gestisci le tue preferenze di area di lavoro, le impostazioni di sicurezza e le informazioni di fatturazione."
+  },
+  "title": "Impostazioni",
+  "description": "Gestisci le tue preferenze di area di lavoro, le impostazioni di sicurezza e le informazioni di fatturazione.",
+  "tabs": {
+    "general": "Generale",
+    "security": "Sicurezza",
+    "team": "Team e membri",
+    "billing": "Fatturazione",
+    "integrations": "Integrazioni",
+    "api": "Chiavi API"
+  },
+  "profile": {
+    "title": "Profilo dell'ambiente di lavoro",
+    "description": "Aggiorna le informazioni e i dettagli relativi al tuo profilo di lavoro.",
+    "uploadImage": "Carica immagine",
+    "removeImage": "Rimuovere",
+    "imageHint": "Dimensione consigliata: 256x256 pixel. Dimensione massima: 2 MB.",
+    "workspaceName": "Nome dell'ambiente di lavoro",
+    "supportEmail": "Email di assistenza",
+    "workspaceUrl": "URL dello spazio di lavoro",
+    "urlHint": "Questo è il tuo URL univoco per accedere al pannello di controllo.",
+    "saveChanges": "Salva modifiche",
+    "urlPrefix": "app.saasyland.com/"
+  },
+  "preferences": {
+    "title": "Preferenze",
+    "description": "Configura le impostazioni regionali e linguistiche del tuo ambiente di lavoro.",
+    "language": "Lingua",
+    "timezone": "Fuso orario",
+    "announcements": {
+      "title": "Annunci di nuove funzionalità",
+      "description": "Riceverai email con informazioni sulle nuove funzionalità e sugli aggiornamenti."
+    }
+  },
+  "dangerZone": {
+    "title": "Zona di pericolo",
+    "description": "Azioni definitive per il tuo ambiente di lavoro.",
+    "delete": {
+      "title": "Elimina area di lavoro",
+      "description": "Elimina definitivamente questo spazio di lavoro e tutti i suoi dati. Questa operazione non potrà essere annullata.",
+      "button": "Elimina area di lavoro"
+    }
+  },
+  "security": {
+    "password": {
+      "title": "Cambia password",
+      "description": "Aggiorna la password per mantenere sicuro il tuo account.",
+      "current": "Password attuale",
+      "new": "Nuova password",
+      "confirm": "Conferma nuova password",
+      "requirements": {
+        "title": "Requisiti della password",
+        "length": "Almeno 8 caratteri",
+        "case": "Almeno una lettera maiuscola e una lettera minuscola",
+        "special": "Almeno un numero o un carattere speciale"
+      },
+      "update": "Aggiorna password",
+      "feedback": {
+        "updateSuccess": "Password aggiornata correttamente."
+      }
+    },
+    "twoFactor": {
+      "title": "Autenticazione a due fattori (2FA)",
+      "description": "Aumenta ulteriormente la sicurezza del tuo account.",
+      "app": "App di autenticazione",
+      "appDescription": "Utilizza un'app come Google Authenticator o 1Password per generare codici a tempo.",
+      "enable": "Abilita l'autenticazione a due fattori",
+      "dialogTitle": "Abilitare l'autenticazione a due fattori",
+      "dialogDescription": "Confermi la password, quindi scansiona il codice di configurazione con la tua app di autenticazione.",
+      "password": "Password attuale",
+      "continue": "Continua",
+      "scanInstructions": "Aggiungi questo codice alla tua app di autenticazione, oppure scansiona il codice QR dal tuo gestore di password.",
+      "verificationCode": "Codice di verifica",
+      "verifyAndEnable": "Verificare e attivare",
+      "backupCodesDescription": "Conservi questi codici di backup in un luogo sicuro. Ogni codice può essere utilizzato una sola volta nel caso in cui perda l'accesso al suo dispositivo di autenticazione.",
+      "done": "Fatto",
+      "setupError": "Impossibile avviare la configurazione di autenticazione a due fattori. Si prega di riprovare.",
+      "enabledSuccess": "L'autenticazione a due fattori è ora attiva.",
+      "disable": "Disabilitare l'autenticazione a due fattori",
+      "disableDialogTitle": "Disabilitare l'autenticazione a due fattori",
+      "disableDialogDescription": "Conferma la password per disattivare l'autenticazione a due fattori.",
+      "disableConfirm": "Disabilita",
+      "disabledSuccess": "L'autenticazione a due fattori è ora disabilitata."
+    },
+    "sessions": {
+      "title": "Sessioni attive",
+      "description": "Gestisci i dispositivi attualmente connessi al tuo account.",
+      "logoutAll": "Disconnetti tutti gli altri dispositivi",
+      "currentBadge": "Sessione corrente",
+      "revoke": "Revocare",
+      "activeAgo": "Attività {time} fa",
+      "separator": " • ",
+      "feedback": {
+        "logoutAllSuccess": "Altre sessioni sono state disconnesse.",
+        "revokeSuccess": "Session interrotta."
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+---
+title: Proprietà dell'integrazione
+description: Proprietà dell'integrazione — SaaSy Land
+---
+
+Ogni libreria o fornitore esterno possiede una directory sotto `src/integrations`: Better Auth, Drizzle, Fumadocs, use-intl, Polar, Resend e GitHub. I file di configurazione inizializzano i client. Gli adattatori condivisi normalizzano i risultati del provider e tengono le credenziali dietro i confini del server.
+
+Le decisioni di business rimangono nei moduli di funzionalità. Ad esempio, Polar webhook handlers aggiornano i record di licenza attraverso i casi di utilizzo del modulo; l'integrazione stessa configura il SDK e verifica i webhook in arrivo.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

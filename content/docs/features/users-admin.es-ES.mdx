@@ -1,0 +1,20 @@
+---
+title: Usuarios (administrador)
+description: Usuarios activos (tabla), pestañas, suplantación de identidad, bloqueo/rol/contraseña.
+---
+
+## Rutas.
+
+`/admin/users` con el parámetro de búsqueda `tab` de TanStack Router (`allUsers` | `invitations` | `roles` | `security`).
+
+## Módulo.
+
+`modules/user/use-cases` — listado/creación/actualización/eliminación, bloqueo/desbloqueo, establecer rol/contraseña, suplantar identidad, actualizar tabla.
+
+## Interfaz de usuario.
+
+La tabla se encuentra en `admin/users/components/all-users-tab`. El estado se obtiene de forma **derivada** (`getUserStatus`: activo / pendiente / bloqueado), y no es una columna de tipo enumeración en la base de datos.
+
+## Estado de la URL.
+
+`admin/users/constants/search-params.ts` — analizadores compartidos + `searchParamsCache`.

@@ -24,7 +24,7 @@ test.describe("auth routing", () => {
   test("unauthenticated localized /pl/app redirects to localized sign-in", async ({ page }) => {
     await page.goto("/pl/app", { waitUntil: APP_NAVIGATION_WAIT_UNTIL })
 
-    await expect(page).toHaveURL(/\/pl\/auth\/sign-in/u)
+    await expect(page).toHaveURL(/\/pl-PL\/auth\/sign-in/u)
   })
 
   test("auth callback without session redirects to sign-in", async ({ page }) => {

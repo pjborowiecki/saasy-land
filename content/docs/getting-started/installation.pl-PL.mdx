@@ -1,0 +1,23 @@
+---
+title: Środowisko lokalne
+description: Praca lokalna — SaaSy Land
+---
+
+Zainstaluj Bun 1.4 i Node 24 lub nowszy, a następnie zależności projektu. Skopiuj `.env.example` do `.env.development` i ustaw długi, losowy `AUTH_SECRET`, publiczny `VITE_APP_URL` oraz integracje, których będziesz używać.
+
+Serwer deweloperski korzysta z zasobów D1 i KV środowiska preview przez zdalne bindingi Cloudflare, tak samo jak React Projects. Zaloguj się przez Wrangler i przed uruchomieniem zastosuj zapisane migracje SQLite w środowisku development. Polecenie deweloperskie generuje treść Fumadocs i uruchamia Vite+ z pluginem Cloudflare. Testy przeglądarkowe używają osobnego lokalnego magazynu w `.wrangler/test`.
+
+OAuth, e-maile i płatności wymagają danych usługodawców; podczas pracy używaj danych testowych i środowiska sandbox Polar. Testy korzystają z przykładowych wartości i mocków, zamiast wysyłać wiadomości lub obciążać klienta.
+
+```sh
+bun install
+cp .env.example .env.development
+bun run db:migrate:development
+bun run dev
+```
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

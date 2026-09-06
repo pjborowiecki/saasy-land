@@ -1,0 +1,16 @@
+---
+title: Site dos médicos.
+description: Como esta documentação é construída e estendida.
+---
+
+## Raiz de conteúdo
+
+`content/docs`
+
+- MDX Páginas: `*.{locale}.mdx` para todos os nove idiomas configurados (dot parser)
+- Pasta `meta.<locale>.json` Para títulos/ordem/icons
+- `fallbackLanguage: en-US` para traduções desaparecidas
+
+## Fiação de aplicativos.
+
+`fumadocs.source.ts`, layout do Docs, busca API Adicionar páginas → atualizar meta `pages` Arrays → reconstruir.

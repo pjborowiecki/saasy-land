@@ -1,30 +1,28 @@
 import type { JSX } from "react"
 
-import { createTranslator } from "next-intl"
-import { Body, Button, Container, Head, Heading, Html, pixelBasedPreset, Preview, Tailwind, Text } from "react-email"
+import { Body, Button, Container, Head, Heading, Html, Preview, Tailwind, Text, pixelBasedPreset } from "react-email"
+import { createTranslator } from "use-intl"
+
+import { I18N, type Locale } from "~/src/integrations/use-intl/i18n.config"
+import { getEmailMessages } from "~/src/integrations/use-intl/i18n.emails"
 
 import { NEWSLETTER_TOKEN_LENGTH } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
 import { confirmationUrl } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.utils"
 
-import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
-
-import { CONTACT_EMAIL } from "~/src/presentation/branding"
+import { APP_URL, CONTACT_EMAIL } from "~/src/presentation/branding"
 
 const TAILWIND_CONFIG = { presets: [pixelBasedPreset] }
 
-export function newsletterConfirmationSubject(locale: Locale): string {
-  return createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.newsletter.confirmation" })("subject")
-}
+export const newsletterConfirmationSubject = (locale: Locale): string =>
+  createTranslator({ locale, messages: getEmailMessages(locale), namespace: "emails.newsletter.confirmation" })("subject")
 
 interface NewsletterConfirmationEmailProps {
-  readonly confirmationToken: string
+  readonly confirmUrl: string
   readonly locale: Locale
 }
 
-export function NewsletterConfirmationEmail({ confirmationToken, locale }: Readonly<NewsletterConfirmationEmailProps>): JSX.Element {
-  const t = createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.newsletter.confirmation" })
-  const confirmUrl = confirmationUrl(locale, confirmationToken)
+export const NewsletterConfirmationEmail = ({ confirmUrl, locale }: Readonly<NewsletterConfirmationEmailProps>): JSX.Element => {
+  const t = createTranslator({ locale, messages: getEmailMessages(locale), namespace: "emails.newsletter.confirmation" })
 
   return (
     <Html lang={locale}>
@@ -55,6 +53,6 @@ export function NewsletterConfirmationEmail({ confirmationToken, locale }: Reado
 }
 
 NewsletterConfirmationEmail.PreviewProps = {
-  confirmationToken: "0".repeat(NEWSLETTER_TOKEN_LENGTH),
+  confirmUrl: confirmationUrl({ locale: I18N.DEFAULT_LOCALE, origin: APP_URL, token: "0".repeat(NEWSLETTER_TOKEN_LENGTH) }),
   locale: I18N.DEFAULT_LOCALE,
 } satisfies NewsletterConfirmationEmailProps

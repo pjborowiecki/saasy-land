@@ -3,9 +3,8 @@
   "aliases": {
     "components": "~/src/presentation/components",
     "hooks": "~/src/hooks",
-    "utils": "~/src/utils",
     "ui": "~/src/presentation/components/shadcn",
-    "lib": "~/src/utils"
+    "utils": "~/src/lib/utils"
   },
   "iconLibrary": "lucide",
   "menuAccent": "subtle",
@@ -15,9 +14,9 @@
   "rtl": false,
   "style": "base-lyra",
   "tailwind": {
-    "config": "",
-    "css": "src/presentation/styles/globals.css",
     "baseColor": "neutral",
+    "config": "",
+    "css": "~/src/presentation/styles/globals.css",
     "cssVariables": true,
     "prefix": ""
   },

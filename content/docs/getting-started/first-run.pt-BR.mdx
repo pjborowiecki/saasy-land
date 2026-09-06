@@ -1,0 +1,23 @@
+---
+title: Desenvolvimento local
+description: Desenvolvimento local... SaaSy Land
+---
+
+Instalar Bun 1.4 e Node 24 ou mais novo, então instale dependências. `.env.example` para `.env.development` e configurar um longo aleatório `AUTH_SECRET`, o público `VITE_APP_URL`, e qualquer integração externa que você vai exercer.
+
+O desenvolvimento local usa CloudflareÉ local. D1 e... KV Aplique o check-in SQLite O comando de desenvolvimento gera Fumadocs Contente e corra. Vite+ com o Cloudflare O estado local vive sob `.wrangler/`.
+
+OAuth, e-mail e faturamento requerem credenciais de provedor; use credenciais de teste e Polar Testes usam valores falsos e zombam em vez de enviar mensagens reais ou carregar um cliente.
+
+```sh
+bun install
+cp .env.example .env.development
+bun run db:migrate:development
+bun run dev
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

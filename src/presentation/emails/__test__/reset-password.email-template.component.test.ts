@@ -1,6 +1,7 @@
+import { type ComponentProps, createElement } from "react"
 /** @vitest-environment jsdom */
 
-import { createElement, type ComponentProps } from "react"
+import { describe, expect, it } from "vite-plus/test"
 
 import { ResetPasswordEmail } from "~/src/presentation/emails/reset-password.email-template"
 

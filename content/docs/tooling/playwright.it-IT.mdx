@@ -1,0 +1,26 @@
+---
+title: Test e CI
+description: Test e CI — SaaSy Land
+---
+
+Vite+ funziona Vitest in tre progetti: test di nodo, test di integrazione e test componenti jsdom. Tenere i test di comportamento esistenti accanto al codice che esercitano sotto `__test__`. Importare API di test da `vite-plus/test`. Utilizzare Playwright per flussi di browser completi e controlli di rendering.
+
+La configurazione condivisa fornisce servizi locali D1 e KV Mocks. D1 gestisce le migrazioni SQL verificate contro SQLite. Il ponte RPC server-funzione preserva il vero middleware e pipeline di validazione di TanStack. Gli helper di rendering dei componenti forniscono reali contesti QueryClient e Router. OAuth e le chiamate di pagamento sono mocked in test.
+
+Eseguire il progetto focalizzato durante la modifica, quindi eseguire la suite completa, cancello di copertura, controllare e visualizzare l'anteprima costruire. I test del browser verificano le pagine pubbliche, i reindirizzamenti auth, la SSR senza JavaScript e la navigazione del cliente. CI utilizza i binding locali e non richiede un database o un segreto del fornitore dal vivo.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

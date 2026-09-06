@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Analítica | SaaSy Land",
+    "description": "Monitorice el rendimiento, los ingresos y la participación de sus usuarios de SaaS."
+  },
+  "title": "Visión general de las analíticas",
+  "description": "Monitorice el rendimiento, los ingresos y la participación de sus usuarios de SaaS.",
+  "actions": {
+    "datePicker": "Últimos 30 días"
+  },
+  "tabs": {
+    "overview": "Resumen",
+    "revenue": "Ingresos",
+    "audience": "Audiencia",
+    "retention": "Retención",
+    "reports": "Informes"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "MRR total",
+      "value": "$124,500",
+      "trend": "14.2%",
+      "trendLabel": "vs. el mes pasado"
+    },
+    "activeUsers": {
+      "title": "Usuarios activos",
+      "value": "45,231",
+      "trend": "5.4%",
+      "trendLabel": "vs. el mes pasado"
+    },
+    "churn": {
+      "title": "Tasa de abandono",
+      "value": "1.2%",
+      "trend": "0.4%",
+      "trendLabel": "vs. el mes pasado"
+    },
+    "arpu": {
+      "title": "Ingresos medios por usuario",
+      "value": "$42.50",
+      "trend": "2.1%",
+      "trendLabel": "vs. el mes pasado"
+    }
+  },
+  "chart": {
+    "title": "Visión general de los ingresos",
+    "description": "Ingresos diarios generados durante los últimos 30 días.",
+    "placeholder": "Series ilustrativa. Los ingresos reales se muestran aquí una vez que se conecta la facturación.",
+    "legend": {
+      "new": "Nuevas suscripciones",
+      "renewals": "Renovaciones"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "Hoy: {value}"
+  },
+  "regions": {
+    "title": "Regiones destacadas",
+    "viewAll": "Ver todo"
+  },
+  "upgrades": {
+    "title": "Cambios de plan recientes",
+    "viewAll": "Ver todo"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Actualizado a Plan Pro",
+        "time": "Hace 2 minutos"
+      },
+      "u2": {
+        "action": "Actualizado a versión Enterprise",
+        "time": "Hace 1 hora"
+      },
+      "u3": {
+        "action": "Actualizado a Plan Pro",
+        "time": "Hace 3 horas"
+      },
+      "u4": {
+        "action": "Actualizado a Plan de Equipo",
+        "time": "Hace 5 horas"
+      },
+      "u5": {
+        "action": "Actualizado a Plan Pro",
+        "time": "Hace 1 día"
+      }
+    }
+  }
+}

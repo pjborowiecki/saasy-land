@@ -1,0 +1,30 @@
+---
+title: サーバー機能とユースケース
+description: サーバー機能とユースケース — SaaSy Land
+---
+
+特徴の操作はで住んでいます `src/modules/{feature}/use-cases/{operation}.ts`. . ネイティブのエクスポート `createServerFn` 入力スキーマ、承認、またはレートリミットミドルウェア、およびD1またはプロバイダアダプタを呼び出すハンドラ。 ミューテーションはデータを直接返し、安全を投げます `AppError`;フレームワーク固有のアクションエンベロープを返さない。
+
+輸出入 `mutationOptions` 変異の横にある `queryOptions` 読んでいる側。 コンポーネントは TanStack Query を使用し、エラーを変換します。 `useActionError`. . 成功した突然変異は、その機能のクエリキーを無効化します。 操作が機能するべきとき顧客によって供給されるユーザー ID を信頼しないで下さい `context.auth.user.id`.
+
+利用条件 `withAuth` 保護された操作のためおよび `withRateLimit` 敏感な公共の操作のため。 バリデーションはハンドラの前に実行されます。 プロバイダのエラーと内部の詳細は、パブリックレスポンスから守ってください。
+
+```ts
+import { createServerFn } from "@tanstack/react-start"
+import { mutationOptions } from "@tanstack/react-query"
+import type * as zod from "zod"
+import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { categoryZodSchemas } from "~/src/modules/category/category.zod"
+
+// Follow the complete implementation in modules/category/use-cases/create-category.ts.
+const schema = categoryZodSchemas.createCategory
+const validate = (input: zod.input<typeof schema>) => schema.parse(input)
+```
+
+既存の `createCategory` 操作は検証、許可チェック、D1 インサート、およびエクスポートされたミューテーションオプションを示します。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

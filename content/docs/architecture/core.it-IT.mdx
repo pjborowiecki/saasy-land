@@ -1,0 +1,14 @@
+---
+title: Core kernel condiviso
+description: Errori di dominio e cataloghi condivisi in moduli/_core.
+---
+
+## Contenuto
+
+- `constants/errors.ts` — `ERROR_CODES`, `AppError`, `ActionServerError` (l'unico vocabolario di errore)
+- `constants/` — cataloghi locali (e relativi) utilizzati da i18n e manopole di prodotto
+- `utils/` — aiutanti puri condivisi tra moduli
+
+## Perché esiste
+
+Taglio incrociato **Valori validi** e **codici di errore** non deve essere ridefinito per funzione. Locali abilitati all'app (sottoset) vivono ancora `i18n.config.ts`; il catalogo più ampio può vivere `_core`.

@@ -1,0 +1,30 @@
+---
+title: Серверні функції та випадки використання
+description: Серверні функції та випадки використання — SaaSy Land
+---
+
+Функціональні операції в режимі реального часу `src/modules/{feature}/use-cases/{operation}.ts`. . Експорт рідного `createServerFn` з його вхідним schema, авторизації або номінальний посередник, і обробник, який викликає D1 або адаптера постачальника. Відшкодування повертає дані безпосередньо і кидає сейф `AppError`; він не повертає в рамковий конверт дії.
+
+Експорт `mutationOptions` бокові мутації і `queryOptions` бокові читання. Використання компонентів TanStack Query і перевести помилки з `useActionError`. . Успішні мутації недійсні свої функції ключі запиту. Ніколи не довіряйте ідентифікатор користувача, який подається замовником, коли операція повинна діяти на `context.auth.user.id`.
+
+Зареєструватися `withAuth` для захищених операцій та `withRateLimit` для чутливих публічних операцій. Дійсність проходить до обробника. Зберігайте помилки провайдера та внутрішні деталі з публічних відповідей.
+
+```ts
+import { createServerFn } from "@tanstack/react-start"
+import { mutationOptions } from "@tanstack/react-query"
+import type * as zod from "zod"
+import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { categoryZodSchemas } from "~/src/modules/category/category.zod"
+
+// Follow the complete implementation in modules/category/use-cases/create-category.ts.
+const schema = categoryZodSchemas.createCategory
+const validate = (input: zod.input<typeof schema>) => schema.parse(input)
+```
+
+В даний час `createCategory` Операція демонструє перевірку дійсності, перевірок дозволу, вставку D1 і експортуються параметри мутації.
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

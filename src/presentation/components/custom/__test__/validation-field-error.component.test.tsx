@@ -1,23 +1,22 @@
-/** @vitest-environment jsdom */
-
 import { render, screen } from "@testing-library/react"
-import { NextIntlClientProvider } from "next-intl"
+/** @vitest-environment jsdom */
+import { IntlProvider } from "use-intl/react"
+import { describe, expect, it } from "vite-plus/test"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { ValidationFieldError } from "~/src/presentation/components/custom/validation-field-error"
 
 const MIN_LENGTH_PARAMS = { passwordMinLength: { min: 8 } }
 
-const messages = loadLocaleMessagesFromDir("en-US")
+const messages = getTestMessages("en-US")
 
-function renderWithMessages(node: React.ReactNode): ReturnType<typeof render> {
-  return render(
-    <NextIntlClientProvider locale="en-US" messages={messages}>
+const renderWithMessages = (node: React.ReactNode): ReturnType<typeof render> =>
+  render(
+    <IntlProvider locale="en-US" messages={messages}>
       {node}
-    </NextIntlClientProvider>,
+    </IntlProvider>,
   )
-}
 
 describe("validationFieldError", () => {
   it("renders nothing when there is no message", () => {

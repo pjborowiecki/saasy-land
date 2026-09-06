@@ -1,0 +1,74 @@
+{
+  "title": "Produkt erstellen",
+  "actions": {
+    "cancel": "Abbrechen",
+    "save": "Produkt speichern"
+  },
+  "sections": {
+    "general": {
+      "title": "Allgemeine Informationen",
+      "name": {
+        "label": "Produktname",
+        "placeholder": "Pro Plan, E-Book..."
+      },
+      "description": {
+        "label": "Beschreibung",
+        "placeholder": "Beschreiben Sie bitte kurz, was dieses Produkt beinhaltet.",
+        "help": "Wird auf den Seiten des Bezahlvorgangs und im Kundenportal angezeigt."
+      }
+    },
+    "pricing": {
+      "title": "Preisgestaltung und Abrechnung",
+      "model": {
+        "label": "Abrechnungsmodell",
+        "subscription": "Abonnement",
+        "oneTime": "Einmalig"
+      },
+      "price": {
+        "label": "Preis",
+        "placeholder": "0.00",
+        "currencySymbol": "$"
+      },
+      "period": {
+        "label": "Abrechnungszeitraum",
+        "monthly": "Monatlich",
+        "yearly": "Jährlich"
+      }
+    },
+    "media": {
+      "title": "Medien & Bilder",
+      "upload": "Klicken Sie, um eine Datei hochzuladen, oder ziehen Sie die Datei per Drag & Drop hierher",
+      "help": "SVG, PNG, JPG oder GIF (maximal 800 x 400 Pixel)"
+    },
+    "status": {
+      "title": "Status",
+      "publish": {
+        "label": "Produkt veröffentlichen",
+        "description": "Machen Sie es für Kunden sichtbar"
+      },
+      "requireLogin": {
+        "label": "Benötigt Anmeldung",
+        "description": "Der Benutzer muss authentifiziert sein"
+      }
+    },
+    "organization": {
+      "title": "Organisation",
+      "category": {
+        "label": "Kategorie",
+        "placeholder": "Kategorie auswählen...",
+        "options": {
+          "addons": "Erweiterungen",
+          "saas": "SaaS-Pakete"
+        }
+      },
+      "collection": {
+        "label": "Sammlung",
+        "placeholder": "Hinzufügen zur Sammlung...",
+        "options": {
+          "core": "Core-Abonnement",
+          "legacy": "Altbestand"
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import {
   AUTH_TEST_BASE_URL,
   createAuthTestInstance,

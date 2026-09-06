@@ -1,0 +1,23 @@
+---
+title: Trasy i obsługa żądań
+description: Trasy i obsługa żądań — SaaSy Land
+---
+
+`src/server.ts` kanonizuje adresy językowe i synchronizuje cookie języka. `src/router.tsx` tworzy osobny QueryClient dla routera i łączy go z SSR. Natywne pliki tras deklarują komponenty, strażników, loadery, walidację parametrów i metadane.
+
+Układy panelu i aplikacji klienta używają strażników `beforeLoad`. Każda chroniona funkcja serwerowa również sprawdza użytkownika, ponieważ RPC można wywołać niezależnie od strony. Odpowiedzi uwierzytelnionych nie umieszczaj we wspólnej pamięci statycznej.
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

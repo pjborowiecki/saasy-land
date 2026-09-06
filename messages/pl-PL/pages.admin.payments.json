@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Płatności",
+    "description": "Zarządzaj przychodami, transakcjami i ustawieniami wypłat."
+  },
+  "title": "Płatności",
+  "description": "Zarządzaj przychodami, transakcjami i ustawieniami wypłat.",
+  "actions": {
+    "export": "Eksportuj",
+    "settings": "Ustawienia płatności"
+  },
+  "tabs": {
+    "transactions": "Transakcje",
+    "subscriptions": "Subskrypcje",
+    "payouts": "Wypłaty",
+    "refunds": "Zwroty"
+  },
+  "stats": {
+    "refunded": {
+      "title": "Zwrócono (30 dni)",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "Wskaźnik zwrotów",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "Oczekujące zatwierdzenia",
+      "subtitle": "Na łączną kwotę 407,00 USD",
+      "value": "3"
+    },
+    "vsLastMonth": "w porównaniu z poprzednim miesiącem"
+  },
+  "table": {
+    "title": "Ostatnie zwroty",
+    "columns": {
+      "customer": "Klient",
+      "amount": "Kwota",
+      "item": "Zakupiony produkt",
+      "reason": "Powód",
+      "date": "Data",
+      "status": "Status",
+      "rowActions": "Akcje wiersza"
+    },
+    "pagination": {
+      "showing": "Wyniki od 1 do 4 z 24",
+      "previous": "Poprzednia",
+      "next": "Następna",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "Filtruj zwroty"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro roczny",
+      "reason": "Przypadkowe odnowienie",
+      "status": "Zrealizowano",
+      "type": "Pełny zwrot"
+    },
+    "p2": {
+      "item": "Pro miesięczny",
+      "reason": "Rekompensata za przerwę w działaniu",
+      "status": "Zrealizowano",
+      "type": "Częściowy zwrot"
+    },
+    "p3": {
+      "item": "Starter miesięczny",
+      "reason": "Nie spełnia oczekiwań",
+      "status": "Oczekuje",
+      "type": "Pełny zwrot"
+    },
+    "p4": {
+      "item": "Pro roczny",
+      "reason": "Nieautoryzowane obciążenie",
+      "status": "Niepowodzenie",
+      "type": "Pełny zwrot"
+    }
+  }
+}

@@ -166,9 +166,7 @@ export const CURRENCIES = {
 
 export type CurrencyCode = keyof typeof CURRENCIES
 
-function isCurrencyCode(value: string): value is CurrencyCode {
-  return value in CURRENCIES
-}
+const isCurrencyCode = (value: string): value is CurrencyCode => value in CURRENCIES
 
 export const CURRENCY_CODES = nonEmptyTuple(Object.keys(CURRENCIES).filter((code) => isCurrencyCode(code)))
 

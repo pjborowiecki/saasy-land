@@ -1,31 +1,34 @@
-import { index, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-export const categoryIconEnum = pgEnum("category_icon", ["Archive", "FolderOpen", "Puzzle"])
-export const categoryKindEnum = pgEnum("category_kind", ["category", "collection"])
-export const categoryVisibilityEnum = pgEnum("category_visibility", ["public", "hidden"])
+export const categoryIconEnum = { enumValues: ["Archive", "FolderOpen", "Puzzle"] } as const
+export const categoryKindEnum = { enumValues: ["category", "collection"] } as const
+export const categoryVisibilityEnum = { enumValues: ["public", "hidden"] } as const
 
 export type CategoryIcon = (typeof categoryIconEnum.enumValues)[number]
 export type CategoryKind = (typeof categoryKindEnum.enumValues)[number]
 export type CategoryVisibility = (typeof categoryVisibilityEnum.enumValues)[number]
 
-export const category = pgTable(
+export const category = sqliteTable(
   "category",
   {
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
     description: text("description").notNull().default(""),
-    icon: categoryIconEnum().notNull().default("FolderOpen"),
-    id: uuid("id").primaryKey(),
-    kind: categoryKindEnum().notNull().default("category"),
-    name: varchar("name", { length: 255 }).notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    icon: text("icon", { enum: categoryIconEnum.enumValues }).notNull().default("FolderOpen"),
+    id: text("id").primaryKey(),
+    kind: text("kind", { enum: categoryKindEnum.enumValues }).notNull().default("category"),
+    name: text("name", { length: 255 }).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */
           new Date(),
       )
       .notNull(),
-    visibility: categoryVisibilityEnum().notNull().default("public"),
+    visibility: text("visibility", { enum: categoryVisibilityEnum.enumValues }).notNull().default("public"),
   },
   (table) => [index("category_createdAt_idx").on(table.createdAt)],
 )

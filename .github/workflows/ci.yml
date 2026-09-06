@@ -44,11 +44,9 @@ jobs:
 
   e2e:
     name: Build and E2E
-    # Fork PRs cannot read secrets, and pushes to main are covered by E2E (full).
-    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'pull_request'
     permissions:
       contents: read
     uses: ./.github/workflows/e2e-reusable.yml
     with:
       browser: chromium
-    secrets: inherit

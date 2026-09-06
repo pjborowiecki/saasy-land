@@ -1,0 +1,14 @@
+---
+title: Plataforma e testes
+description: Plataforma e testes - SaaSy Land
+---
+
+Cloudflare fornece o tempo de execução através de explícito D1, KV As declarações geradas vivem sob `src/types`. . A configuração específica do fornecedor pertence a `src/integrations`. . O diretório restante da plataforma mantém a infraestrutura de testes: cópias vinculantes, dispositivos de solicitação, a ponte RPC e ajudadores de renderização.
+
+Mantenha as configurações de implantação específicas do ambiente. `wrangler.jsonc` e o correspondente arquivo de ambiente ignorado. Mantenha as credenciais de teste dentro `.env.test` e nunca substituí-los com credenciais de produção.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

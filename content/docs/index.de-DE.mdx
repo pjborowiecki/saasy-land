@@ -1,0 +1,52 @@
+---
+title: Dokumentation
+description: SaaSy Land 2.0 – Architektur, Anleitungen, Funktionen und Referenzmaterial für Entwickler, die Full-Stack-Anwendungen erstellen möchten.
+---
+
+Willkommen zur Dokumentation von **SaaSy Land 2.0**, einem modularen, Full-Stack-SaaS-Starter-Kit, basierend auf TanStack Start.
+
+<Callout title={"Wie man diese Dokumentation verwendet."}>
+  Bevorzugen Sie **Guides** für Anleitungen und Aufgabenbeschreibungen und **Architecture** für Bereiche, in denen Code gespeichert ist.
+  **Features** und **Integrations** beschreiben die Produktfunktionalität und die Anbindung an Drittanbieter – einschließlich geplanter
+  Bereiche wie Zahlungsabwicklung.
+</Callout>
+
+## Beginnen Sie hier.
+
+<Cards>
+  <Card title={"Projekt"} href="/docs/project/about">
+    Über den Einstieg, die Versionshinweise, die Planung und die Möglichkeit zur Mitarbeit.
+  </Card>
+  <Card title={"Erste Schritte."} href="/docs/getting-started">
+    Installieren Sie die Bun-Abhängigkeiten, konfigurieren Sie die Umgebung, migrieren Sie die Datenbank und führen Sie die Anwendung lokal
+    aus.
+  </Card>
+  <Card title={"Architektur"} href="/docs/architecture">
+    Module, Lieferung, Integrationen, Plattform, SSR (Server-Side Rendering) und Sicherheitsgrenzen.
+  </Card>
+  <Card title={"Anleitungen."} href="/docs/guides">
+    Erweiterungen, DataTables, Nuqs-URL-Status, Tests, Authentifizierung und weitere Funktionen wurden hinzugefügt.
+  </Card>
+</Cards>
+
+## Kapitel.
+
+| Kapitel.                   | Inhaltsverzeichnis                                                         |
+| -------------------------- | -------------------------------------------------------------------------- |
+| Projekt                    | Über, Änderungsprotokoll, Fahrplan, Mitwirken.                             |
+| Erste Schritte.            | Installieren, Umgebung, erster Start, Skripte, Vorschau-Bereitstellung.    |
+| Architektur                | Schichten, Module, SSR/Cache, Anbieter.                                    |
+| Anleitungen.               | Funktionsrezepte (Tabellen, Nuqs, Tests, Authentifizierungen, …)           |
+| Funktionen                 | Berechtigungen, Benutzer, Produkte, Zahlungen (geplant), Organisationen, … |
+| Integrationen              | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend, …                           |
+| Benutzeroberflächensystem. | Shadcn, DataTable, Design, Gestaltung.                                     |
+| Entwicklungswerkzeuge      | Vitest, Playwright, Vite+, Agenten-Fähigkeiten, CI                         |
+| Referenz.                  | Routen, Umgebung, Vereinbarungen, FAQ                                      |
+
+## Lokale Bearbeitung.
+
+Inhaltdateien: `content/docs`.
+
+MDX kann Fumadocs-Komponenten (`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`) und ausgewählte Shadcn-Elemente (`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …) verwenden.
+
+Nachdem Sie Seiten hinzugefügt haben, aktualisieren Sie das `meta.<locale>.json` Array `pages` (das Scaffolding-Skript erledigt dies für Sie). Seiten im Ordner `index` sind **Ordnerindizes** – listen Sie `index` nicht erneut in `pages` auf.

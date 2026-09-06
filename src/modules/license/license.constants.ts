@@ -1,4 +1,5 @@
 export const LICENSE_TIER = {
+  AGENCY: "agency",
   COMPLETE: "complete",
   CORE: "core",
 } as const

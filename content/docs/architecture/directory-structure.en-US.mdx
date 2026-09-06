@@ -1,0 +1,28 @@
+---
+title: "Directory structure"
+description: "Directory structure — SaaSy Land"
+---
+
+Use kebab-case for files and folders. Route files use TanStack Router’s dot and pathless-route conventions. Reusable UI belongs under `presentation/components/custom`; generated primitives belong under `presentation/components/shadcn`. A feature may contain `components`, `constants`, `hooks`, and `types` when it needs them.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

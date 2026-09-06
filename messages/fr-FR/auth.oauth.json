@@ -1,0 +1,6 @@
+{
+  "google": "Connectez-vous avec Google",
+  "github": "Connectez-vous avec GitHub",
+  "success": "Connecté(e) avec succès !",
+  "continueWith": "Continuer avec {provider}"
+}

@@ -1,0 +1,9 @@
+{
+  "yes": "Oui",
+  "no": "Non",
+  "confirm": "Confirmer",
+  "cancel": "Annuler",
+  "loading": "Chargement...",
+  "noDataToDisplay": "Aucune donnée à afficher",
+  "copyright": "© {years}"
+}

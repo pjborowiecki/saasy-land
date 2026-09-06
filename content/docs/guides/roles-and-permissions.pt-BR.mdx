@@ -1,0 +1,14 @@
+---
+title: Funções e permissões
+description: Funções e permissões... SaaSy Land
+---
+
+Funções e declarações vivem em `src/integrations/better-auth/auth.access.ts`. . O papel padrão é cliente. Acesso administrativo é verificado por `requireAdmin` Cada operação do servidor verifica a declaração necessária com `withAuth`.
+
+Mantenha mudanças de papéis, banimentos, cancelamento de sessão e personificação em casos de uso de usuários/sessões. Derivar o usuário atual da sessão de solicitação e invalidar grupos afetados após uma mutação. Esconder um botão é comportamento de apresentação e não substitui autorização.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

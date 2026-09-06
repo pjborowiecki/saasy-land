@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Verify Email",
+    "description": "Verify your email address for your {name} account."
+  },
+  "form": {
+    "title": "Verify your email",
+    "description": "Confirm your email address to finish setting up your account.",
+    "verifying": "Verifying your email…",
+    "success": "Your email has been verified.",
+    "continue": "Continue",
+    "invalidToken": "This verification link is invalid or has expired.",
+    "pendingDescription": "Check your inbox and follow the verification link. Then sign in to continue.",
+    "email": "Email",
+    "emailPlaceholder": "Your email address",
+    "emailRequired": "Enter your email address to resend the verification link.",
+    "resend": "Resend verification email",
+    "resendSuccess": "If an account exists for that email, a new verification link has been sent.",
+    "backToSignIn": "Back to sign in",
+    "resending": "Sending verification email…"
+  }
+}

@@ -1,0 +1,18 @@
+---
+title: Pagamenti e fatturazione
+description: Ordini, rimborsi, e Stripe-oriented fatturazione (pianificata).
+---
+
+## Stato
+
+Amministrazioni `/admin/payments` L'UI usa le file mock oggi. The `order` dichiarazioni `APP_STATEMENTS` già schizzo letto/aggiornamento/rimborso.
+
+## Architettura pianificata
+
+- `modules/billing` o `modules/order` Casi d'uso
+- Stripe (o Polar) cartella di integrazione
+- Gestore di rotta Webhooks
+- Fatture del cliente sotto `/app`
+- Mappa Better Auth utente ↔ cliente id
+
+Implementare dietro le autorizzazioni; mai esporre le chiavi segrete al cliente.

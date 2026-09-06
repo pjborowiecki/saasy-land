@@ -14,14 +14,14 @@ export const TWO_FACTOR_CODE_LENGTH = 6
 export const PASSWORD_UPPERCASE_PATTERN = /[A-Z]/u
 export const PASSWORD_SPECIAL_CHAR_PATTERN = /[^A-Za-z0-9]/u
 
-export function getPasswordRuleState(password: string): {
+export const getPasswordRuleState = (
+  password: string,
+): {
   readonly hasSpecialChar: boolean
   readonly hasUppercase: boolean
   readonly isMinLength: boolean
-} {
-  return {
-    hasSpecialChar: PASSWORD_SPECIAL_CHAR_PATTERN.test(password),
-    hasUppercase: PASSWORD_UPPERCASE_PATTERN.test(password),
-    isMinLength: password.length >= PASSWORD_MIN_LENGTH,
-  }
-}
+} => ({
+  hasSpecialChar: PASSWORD_SPECIAL_CHAR_PATTERN.test(password),
+  hasUppercase: PASSWORD_UPPERCASE_PATTERN.test(password),
+  isMinLength: password.length >= PASSWORD_MIN_LENGTH,
+})

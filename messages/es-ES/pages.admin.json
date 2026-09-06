@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Área de aplicaciones con inicio de sesión."
+    },
+    "welcome": "Aplicación: {name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "Inicio"
+    },
+    "header": {
+      "notifications": "Notificaciones",
+      "searchPlaceholder": "Buscar en la consola",
+      "searchEmpty": "No se encontró ninguna sección coincidente."
+    },
+    "userWidget": {
+      "settings": "Ajustes",
+      "signedInAs": "Iniciado sesión como <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Cerrar sesión",
+      "signingOut": "Desconectándose...",
+      "success": "¡Hasta luego!"
+    }
+  },
+  "labels": {
+    "unknownLocation": "Ubicación desconocida",
+    "gettingStartedSection": "Sección 1: Primeros pasos",
+    "welcomeLesson": "Bienvenida al curso",
+    "setupLesson": "Configurar tu entorno",
+    "coreConceptsSection": "Sección 2: Conceptos básicos",
+    "development": "Desarrollo",
+    "design": "Diseño",
+    "beginner": "Principiante",
+    "intermediate": "Intermedio",
+    "advanced": "Avanzado",
+    "oneYearAccess": "Acceso durante 1 año",
+    "products": "productos",
+    "noCourses": "No se encontraron cursos.",
+    "previousPage": "Página anterior",
+    "nextPage": "Página siguiente",
+    "rowActions": "Acciones de la fila",
+    "actions": "Acciones",
+    "saasPlans": "Planes SaaS",
+    "addOns": "Complementos",
+    "coreSubscription": "Suscripción Core",
+    "legacy": "Versión anterior",
+    "hidden": "Oculta",
+    "public": "Pública"
+  }
+}

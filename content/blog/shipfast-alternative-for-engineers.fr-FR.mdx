@@ -1,0 +1,353 @@
+---
+title: L'alternative ShipFast pour les Fondateurs qui s'inscrivent encore dans la deuxième année
+description: "ShipFast publie son arithmétique: 22 heures enregistrées. C'est le deuxième nombre, celui qui décide si l'entreprise survit, a établi ligne par ligne contre une fondation plus stricte."
+excerpt: ShipFast est honnête sur ce qu'il vous sauve. Vingt-deux heures, sur la page d'accueil. Le nombre que personne ne publie est ce que vous dépensez entre le lancement et la deuxième cohorte payante, et c'est là qu'une plaque de chaudière est effectivement jugée.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+featured: true
+updated: 2026-08-15
+image: /images/blog/shipfast-alternative-for-engineers.webp
+tags:
+  - comparison
+  - boilerplate
+  - architecture
+  - nextjs
+faq:
+  - question: Quelle est la meilleure alternative ShipFast en 2026?
+    answer: Ça dépend de ce que vous construisez. Si vous voulez valider une idée ce week-end et passer à autre chose, ShipFast est déjà le bon outil et aucune alternative ne le bat à temps pour le premier déploiement. Si vous avez l'intention de charger des équipes, d'ajouter des sièges, de passer un examen de sécurité ou encore de maintenir la base de codes dans deux ans, vous voulez une fondation avec un modèle de données relationnelles, une porte de test et des limites architecturales imposées. C'est le métier à travers lequel cet article fonctionne.
+  - question: Est-ce que ShipFast est écrit dans TypeScript?
+    answer: "Les deux. ShipFast envoie un dépôt JavaScript et un dépôt TypeScript comme options distinctes, et la documentation couvre les deux. C'est une vraie différence par rapport à une base de code où strict TypeScript est la seule chose qui existe : quand le système de type est un choix de distribution, ce n'est pas une contrainte que votre futur code doit satisfaire, et rien n'empêche un contributeur ultérieur d'atteindre le chemin non tapé."
+  - question: Est-ce que ShipFast inclut des tests automatisés?
+    answer: La documentation publique n'a pas de page pour les tests. Ses sections sont Tutoriels, Caractéristiques, Composants, Sécurité, Déploiement et Extras. Ceci est conforme à l'objectif déclaré du produit, qui est la vitesse à déployer d'abord plutôt que la maintenance à long terme, mais cela signifie que le filet de sécurité de régression est quelque chose que vous construisez vous-même avant votre deuxième fonction.
+  - question: Est-ce que ShipFast soutient des organisations ou des locataires multiples?
+    answer: La documentation n'a pas de page pour les locataires multiples, les organisations, les équipes ou le contrôle d'accès basé sur le rôle. Pour un produit mono-opérateur qui est parfait. Pour tout ce qui est vendu à une entreprise, il s'agit de l'élément le plus important du travail restant, parce que l'isolement des locataires doit être appliqué à la couche de requête plutôt que ajouté à la couche d'interface utilisateur une fois que les clients existent.
+  - question: Pourquoi l'utilisation de MongoDB est-elle importante pour une plaque de chaudière SaaS ?
+    answer: Parce que les objets des factures SaaS sont relationnels. Les utilisateurs appartiennent à des organisations, les organisations détiennent des abonnements, les abonnements produisent des factures, des postes de référence de factures. Un modèle de magasin de documents qui avec le niveau d'application rejoint et aucune clé étrangère, donc l'intégrité référente devient le code que vous devez écrire et garder correcte plutôt qu'une propriété garantie par la base de données.
+  - question: Est-ce qu'un kit de démarrage de 249 $ vaut quand ShipFast coûte 199 $?
+    answer: "Les cinquante dollars ne sont pas la décision. Les deux prix sont une erreur d'arrondi par rapport au travail. La décision est quel ensemble de problèmes vous préférez posséder: à 199 $ vous possédez la location, les rôles, l'administrateur, la suite de test et le modèle de données réécrire; à 249 $ ceux qui arrivent écrits et couverts. Prix la différence dans vos propres heures et la comparaison cesse d'être sur le prix."
+  - question: Puis-je migrer un projet ShipFast existant ?
+    answer: Oui, et la voie honnête n'est pas une migration. Échafaudez un nouveau projet, transférez votre logique d'affaires dans les limites du module, et déplacez vos données avec un script unique. Les parties qui méritent d'être conservées sont votre code de domaine et votre copie. Les pièces que vous remplacez, le câblage auth, la plomberie de facturation et le modèle de données, sont les pièces qu'un kit de démarrage était censé vous donner de toute façon.
+  - question: Combien de clients ShipFast ont ?
+    answer: Sa page d'accueil indique 8 393 fabricants au moment de l'écriture, ainsi qu'un rabais qui compte à la baisse par rapport aux 8 400 premiers clients. C'est une véritable validation de l'offre et elle doit être prise au sérieux. Il mesure combien de personnes souhaitent un démarrage rapide, ce qui est une question différente de combien de ces projets étaient encore maintenus un an plus tard.
+  - question: Qu'est-ce que "l'architecture mise en œuvre par le linter"signifie réellement?
+    answer: Que les limites sont exécutables plutôt que décrites. Dans cette base de codes, le code de domaine ne peut pas importer React, Next, Drizzle ou infrastructure; le code d'application ne peut pas importer l'infrastructure; le code de présentation ne peut pas importer l'ORM. Ce sont des règles en peluche qui échouent à la construction, donc une violation architecturale est un contrôle rouge plutôt qu'un paragraphe dans une lecture que personne ne lit.
+  - question: Dois-je acheter une plaque de chaudière du tout, ou commencer par create-next-app?
+    answer: Commencez à partir de zéro quand la plomberie est la chose que vous voulez apprendre, ou quand votre produit est assez étrange que les hypothèses d'un démarreur vous combattre. Achetez lorsque le travail entre un dossier vide et votre première ligne vraiment nouvelle est le travail que vous avez fait avant et que vous préférez ne pas faire à nouveau. Presque personne n'a jamais été payé pour sa mise en œuvre auth.
+---
+
+<Callout title={"Ce que cet article est"}>
+
+Une comparaison technique, écrite comme un examen de code est écrit. Il couvre:
+
+1. Le numéro ShipFast publie, et le second qui décide si l'entreprise survit.
+2. Quatre décisions architecturales en ShipFast, et ce que chacun coûte à l'heure 300 plutôt qu'à l'heure 22.
+3. Le reste détaillé: ce que vous construisez encore après que la plaque de chaudière a fait son travail.
+4. Architecture linter force, ce qui est la différence qui n'est pas une fonctionnalité.
+5. Qui devrait acheter ShipFast, dit clairement, parce que pour un grand nombre de lecteurs qui est la bonne réponse.
+
+</Callout>
+
+_Dernière mise à jour 15 août 2026. Chaque revendication au sujet de ShipFast est tirée de sa page d'accueil publique et de sa documentation et est liée en bas. Chaque numéro de cette base de code provient de sa propre suite de test, et la [la documentation](/docs) est public pour que vous puissiez vérifier._
+
+## Le nombre ShipFast publie, et celui qu'il ne publie pas
+
+ShipFast fait quelque chose que la plupart des plaques de chaudière évitent: il montre son arithmétique. Sa page d'accueil itemise le travail qu'il supprime et le totalise. Stripe 4 étiquettes de référencement, deux. Google OAuthDNS, trois. Protégé. API les routes, deux. **"22+ heures de maux de tête."**
+
+Ce chiffre est honnête, et le marché est d'accord avec lui. **8 393 fabricants** ont payé pour le produit. Un témoignage sur la page met la figure personnelle à "15 heures et plus." Je n'ai aucun argument avec tout cela. Si votre objectif est d'avoir une page d'atterrissage, une connexion et une caisse de travail en direct avant lundi, ShipFast est le bon achat et cet article ne vous en dissuadera pas.
+
+Le deuxième numéro est celui qu'aucun kit de démarrage ne publie, parce qu'il est plus difficile d'énumérer et beaucoup plus grand:
+
+**Combien d'heures y a-t-il entre votre lancement et votre deuxième cohorte?**
+
+Pas entre un dossier vide et un déploiement. Entre un déploiement et une entreprise. C'est là que la première équipe demande des sièges, où le service financier du premier client demande une facture avec son nom d'entreprise, où vous découvrez que "delete account"doit passer par neuf tables, et où quelqu'un demande si l'application peut être utilisée en allemand.
+
+L'heure 22 est une question de plaque de chaudière. **L'heure 300 est une question d'architecture**, et les deux n'ont presque rien à voir avec l'autre.
+
+## En un coup d'oeil
+
+| Dimension                         | ShipFast                                             | SaaSy Land                                                                                  |
+| --------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Promesse primaire                 | Expédiez votre startup en quelques jours             | Commencer à l'heure 300                                                                     |
+| Livraison                         | Accès au dépôt, JavaScript **ou** Version TypeScript | CLI n'écrit que les modules sélectionnés                                                    |
+| Base de données                   | MongoDB, ou Supabase                                 | Postgres ou SQLite, votre fournisseur, schéma tapé                                          |
+| Resp.: Ministère de l'Agriculture | NextAuth, Google OAuth et liens magiques             | Better Auth dans votre dépôt, 2FA, OAuth, sessions que vous pouvez lire                     |
+| Paiements                         | Stripe ou Lemon Squeezy                              | Stripe, Polar ou Lemon Squeezy, les sangles filés et testés                                 |
+| Essais automatisés                | Pas de section de documentation                      | 141 fichiers de test, 472 tests, 100% portail sur les branches, les fonctions et les lignes |
+| Multi-pensions                    | Pas de section de documentation                      | Un seul ou plusieurs locataires, choisis au moment de l'échafaudage                         |
+| Rôles et autorisations            | Pas de section de documentation                      | Inclus                                                                                      |
+| Panneau d'administration          | Pas de section de documentation                      | Inclus                                                                                      |
+| Internationalisation              | Pas de section de documentation                      | next-intl, parité des clés mise en œuvre par une vérification qui échoue la construction    |
+| Type de rigueur                   | Facultatif, par choix de dépôt                       | `strict`Plus `exactOptionalPropertyTypes` et `noUncheckedIndexedAccess`, non `any`          |
+| Limites architecturales           | Convention                                           | Lint règles qui échouent la construction                                                    |
+| Prix                              | 199 $ Entrée, 249 $ All-in                           | 249 $ unique, projets illimités, licence commerciale, mises à jour à vie                    |
+
+Tout dans la colonne ShipFast est tiré de sa propre page d'accueil et index de documentation. "Pas de section de documentation"signifie exactement cela et rien de plus: les documents publics sont organisés en Tutoriels, Caractéristiques, Composants, Sécurité, Déploiement et Extras, et aucun de ceux-ci ne contient une page sur le sujet.
+
+## Ce que ShipFast obtient bien, sans qualification
+
+Trois choses, et elles ne sont pas petites.
+
+**L'offre est exceptionnellement honnête.** La plupart des plaques de chaudière vendent un résultat. ShipFast vend un intervalle, indique l'intervalle, et vous permet de vérifier si l'intervalle vaut le prix. C'est un meilleur positionnement que presque n'importe quoi dans la catégorie et c'est pourquoi le nombre est cité si souvent.
+
+**La bibliothèque des composants est vraiment utile.** En-têtes, héros, témoignages, blocs de prix, sections FAQ, modales. Si vous avez déjà passé un samedi à obtenir une table de prix pour regarder à droite, vous savez que la surface de marketing est un travail réel que les fondateurs sous-estiment systématiquement.
+
+**La portée est disciplinée.** ShipFast ne prétend pas être une plate-forme d'entreprise. Il est destiné aux personnes qui valident les idées rapidement, son créateur le dit directement, et le produit est cohérent avec cet objectif. Un outil qui sait ce qu'il n'est pas plus rare qu'il ne devrait l'être.
+
+Si vous lancez un bulletin d'information payant, un emballage AI à usage unique, un répertoire, ou tout autre chose où le client est une personne avec une carte de crédit, arrêtez de lire. Achetez ShipFast. Vous serez en vie plus tôt et cet article n'est pas pour vous.
+
+## Quatre décisions, et ce que chacun coûte à l'heure 300
+
+Le reste est pour l'autre lecteur: celui qui construit quelque chose qu'une entreprise va payer, avec plus d'un siège, et qui a l'intention de le maintenir quand il a des clients.
+
+### Le présent règlement est obligatoire dans tous ses éléments et directement applicable dans tout État membre. Un magasin de documents sous un produit relationnel
+
+La ligne de pile de ShipFast est indiquée sur sa page d'accueil comme **"Mongo + Mailgun + Stripe + NextJS + Tailwind + NextAuth = ShipFast"**, avec Supabase disponible comme alternative.
+
+Les objets sur lesquels les factures SaaS sont relationnelles, et pas d'ailleurs. Un utilisateur appartient à une organisation. Une organisation détient un abonnement. Un abonnement produit des factures. Une facture comporte des éléments de ligne qui renvoient à un prix qui fait référence à un produit. Chaque flèche de cette phrase est une clé étrangère.
+
+Dans Postgres, ces flèches sont des contraintes. La base de données refuse d'orpheliner une facture. Une cascade sur la suppression de compte est une propriété schématique plutôt qu'un chemin de code que vous souhaitez que quelqu'un se souvienne. Un rapport joignant les abonnements aux organisations aux sièges est une question.
+
+Dans un magasin de documents, chacune de ces flèches devient le code d'application. La jointure est un deuxième aller-retour. La garantie d'intégrité est une convention. Rien de tout cela n'est un problème à l'heure 22, quand vous avez quatre documents et un utilisateur. C'est le genre de problème qui arrive tranquillement à l'heure 300, quand un billet d'appui dit qu'une organisation annulée est toujours facturée et qu'il faut deux jours pour savoir pourquoi.
+
+Il y a une autre ride spécifique à cette décennie. Les agents de codage écrivent beaucoup mieux le code relationnel que le code document, car le schéma est le type : un constructeur de requêtes tapé sur un schéma déclaré Postgres fait d'une colonne incorrecte une erreur de compilation. Nous avons écrit sur le mécanisme en [choisir une pile SaaS pour les agents de codage AI](/blog/choosing-a-saas-stack-for-ai-coding-agents), et il s'applique avec force ici. La mauvaise forme dans un magasin de documents compile, déploie et démos correctement.
+
+### 2. NextAuth, et ce qui se passe au siège trois
+
+NextAuth résout "let a person log in with Google" et il le résout bien. Les caractéristiques d'un produit d'affaires sont celles qui sont juste derrière : les organisations avec des invitations, les rôles qui permettent des actions spécifiques, deux facteurs appliqués par la politique plutôt que offert comme une option, l'imitation du soutien, la révocation de session quand quelqu'un quitte l'entreprise, et les pistes de vérification pour tout cela.
+
+Rien de tout ça n'est exotique. Chacun d'eux est sur le premier questionnaire de sécurité que votre premier client d'affaires vous envoie. Et chacun, ajouté tard, touche le modèle de session, ce qui signifie qu'il touche tout ce qui lit la session.
+
+L'alternative n'est pas tant une bibliothèque différente qu'une hypothèse de départ différente: que le code auth vit dans votre dépôt, dans une source lisible, avec l'organisation et le modèle de rôle déjà présents dans le schéma, que vous l'allumez ou non. C'est ce que signifie « Better Auth dans votre dépôt » dans le tableau ci-dessus. C'est aussi la raison pour laquelle il n'y a pas de ligne par mois-active-utilisateur dans votre modèle de coût au cours de la deuxième année.
+
+### 3. Le Comité des droits de l'homme Deux dépôts, et un système de type qui est une préférence
+
+ShipFast envoie une version JavaScript et une version TypeScript. C'est une décision de produit défendable. Il s'agit également d'une déclaration structurelle, et la déclaration est que **le système type est une option de distribution plutôt qu'une contrainte.**
+
+Comparez avec ce à quoi ressemble la rigueur quand ce n'est pas facultatif. La configuration de cette base de code TypeScript n'est pas "strict: true" et rien d'autre. C'est :
+
+```jsonc
+{
+  "strict": true,
+  "exactOptionalPropertyTypes": true,
+  "noUncheckedIndexedAccess": true,
+  "noPropertyAccessFromIndexSignature": true,
+  "noImplicitReturns": true,
+  "noFallthroughCasesInSwitch": true,
+  "noUnusedLocals": true,
+  "noUnusedParameters": true,
+  "verbatimModuleSyntax": true,
+}
+```
+
+`noUncheckedIndexedAccess` seul change le caractère d'une base de code: `array[0]` est `T | undefined`, donc le bogue "il est évidemment là"devient une erreur de compilation plutôt qu'une page 3am. `exactOptionalPropertyTypes` signifie qu'il est explicite `undefined` n'est pas la même qu'une clé absente, ce qui est exactement la distinction qui produit la perte silencieuse de données dans un gestionnaire de mise à jour.
+
+En plus de ça, `typescript/no-explicit-any` est une erreur plutôt qu'un avertissement, et le linter court avec `denyWarnings: true`C'est vrai. Il n'y a pas de `any` écoutille d'évacuation, et il n'y a aucun avertissement vous pouvez apprendre à ignorer, parce qu'un avertissement échoue la construction.
+
+Le point n'est pas que les utilisateurs ShipFast écrivent un mauvais code. C'est qu'une base de code où la rigueur est un choix par projet contiendra, avec suffisamment de temps et suffisamment de contributeurs, le choix le plus faible quelque part. Et tu ne sauras pas où ça compte jusqu'à ce que ça compte.
+
+### 4. L'Agence européenne pour l'environnement Les sections de la documentation ne sont pas
+
+C'est la chose la plus utile que vous pouvez faire lors de l'évaluation de n'importe quel kit de démarrage, et il faut quatre minutes : ouvrir l'index de documentation et lire la table des matières plutôt que la page d'accueil.
+
+ShipFast est Tutoriels, Caractéristiques, Composants, Sécurité, Déploiement, Extras. Sous Caractéristiques : référencement, base de données, e-mails, paiements, OAuth, liens magiques, support, gestion des erreurs, analyse. Sous Sécurité : limite de taux, limite d'envoi, en-têtes de sécurité, validation du schéma. Il s'agit d'un ensemble bien organisé de documents pour le produit qu'il est.
+
+Ce qui n'y est pas : testing, multi-tenance, organisations, rôles et permissions, panel d'administration, internationalisation.
+
+Une page de doc manquante n'est pas une preuve qu'une fonctionnalité est absente. C'est, cependant, un proxy fiable pour savoir si la fonctionnalité est une partie supportée du produit ou quelque chose que vous êtes censé construire. Et chacun de ces six est une semaine de travail qui arrive au pire moment possible, qui est après que vous ayez des clients en fonction de la chose que vous êtes sur le point de restructurer.
+
+## L'heure 300: le reste indiqué
+
+Voici le deuxième arithmétique, dans le même esprit que le premier. Il s'agit d'estimations prudentes pour un promoteur compétent qui construit chaque article selon une norme qu'il serait disposé à mettre devant une entreprise payante, et ils excluent le temps passé à décider comment le faire.
+
+| Ce que vous construisez encore             | Pourquoi ce n'est pas un après-midi                                                                                           | Estimation honnête   |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| Organisations et invitations               | Schema, jetons d'invitation, expiration, comptage des sièges, transfert de propriété, l'affaire des membres sortants          | 25 à 40 heures       |
+| Rôles et autorisations                     | Une politique couche chaque requête et chaque itinéraire doit consulter, plus l'interface utilisateur qui le reflète          | 20 à 30 heures       |
+| Isolement des locataires                   | Appliquée à la couche de requête, et non à la couche vue, et testée pour le deuxième locataire                                | 15 à 25 heures       |
+| Panneau d'administration                   | Dix sections que personne ne voit mais que vous ne pouvez pas opérer sans: utilisateurs, orgs, subs, remboursements, journaux | 40 à 60 heures       |
+| Facturation au-delà de la première caisse  | Proration, mises à jour, rétrogrades, dunning, manipulation du webhook idémpotent, historique des factures                    | 25 à 40 heures       |
+| Email transactionnel qui n'est pas un spam | Modèles, prévisualisation, copie par localité, livraison, désabonnement et conformité                                         | 15 à 25 heures       |
+| Internationalisation                       | Pas de traduction. Le routage, les formateurs, les règles plurielles et la vérification de la parité des clés                 | 20 à 35 heures       |
+| Une suite d'essai que les portes déploient | Les tests, les fixations, le câblage CI et la discipline de ne jamais fusionner le rouge                                      | 60 à 100 heures      |
+| **Total général**                          |                                                                                                                               | **220 à 355 heures** |
+
+À 150 $ de l'heure, l'extrémité basse de cette gamme est **$33,000**C'est vrai. Le sommet est de plus de 53 000 $. Par contre, la différence entre une plaque de chaudière de 199 $ et une plaque de 249 $ ne vaut pas la peine d'y penser pendant plus d'une seconde.
+
+Et les heures sont la partie bon marché. La partie coûteuse est que quatre de ces huit éléments, l'isolement des locataires, les permissions, webhook idempotency et la révocation de session, partagent une propriété: **la mauvaise implémentation passe l'examen et les démos correctement.** Elle échoue plus tard, silencieusement, en production, sur les données de quelqu'un d'autre. Ce n'est pas une catégorie de bug que vous corrigez avec plus d'heures. C'est une catégorie que vous évitez avec une fondation qui l'a obtenu juste avant votre arrivée.
+
+## La différence qui n'est pas une caractéristique
+
+Les tableaux de caractéristiques sont la forme la plus faible de comparaison, car n'importe qui peut ajouter une ligne. Voici la différence qui ne peut pas être ajoutée à une table par un concurrent la semaine prochaine, parce que c'est une propriété de la façon dont le code est tenu ensemble.
+
+**Dans cette base de codes, l'architecture est exécutable.** Non documenté. Exécuté, par le linter, sur chaque commit.
+
+```ts
+// vite.config.ts, abridged
+lint: {
+  options: { typeAware: true, typeCheck: true },
+}
+```
+
+Il y a trois de ces règles. Le code de domaine ne peut pas importer React, Ensuite, le code ORM, infrastructure ou application. Le code d'application ne peut pas importer d'infrastructure. Le code de présentation ne peut pas importer Drizzle ou entrer dans l'infrastructure d'un module, et doit appeler un cas d'utilisation d'application à la place.
+
+La conséquence mérite d'être exprimée clairement. **Vous ne pouvez pas accidentellement mettre une requête de base de données dans un composant React.** Pas "vous ne devriez pas". Vous ne pouvez pas: la construction échoue avec un message qui dit pourquoi. Un nouveau contributeur apprend l'architecture dans le temps qu'il faut pour lire une erreur. Ainsi qu'un agent de codage, qui est de plus en plus le même énoncé.
+
+Chaque kit de démarrage a un diagramme d'architecture dans sa lecture. Très peu en ont un avec lequel le compilateur est d'accord. Six mois en, c'est la différence entre une base de code qui a encore la forme que vous avez conçu et une qui est discrètement devenu un dossier de fichiers.
+
+## Qui devrait acheter ShipFast
+
+Déclaré sans couverture, parce qu'une comparaison qui trouve le concurrent sans valeur est une comparaison que personne ne croit.
+
+Achetez ShipFast si vous validez une idée et l'honnête durée de vie prévue du code est de moins de six mois. Achetez-le si votre client est un individu plutôt qu'une entreprise. Achetez-le si vous avez expédié cette pile avant et savez exactement quelles pièces vous remplacerez. Achetez-le si la vitesse à une caisse en direct est la seule métrique qui compte ce mois-ci, parce que sur cette métrique il est excellent et il a 8 393 personnes qui sont d'accord.
+
+La stratégie derrière elle est cohérente: expédier beaucoup de choses rapidement, garder celui qui fonctionne, jeter le reste. Si c'est votre stratégie, achetez l'outil construit pour elle.
+
+## Qui devrait acheter ça à la place
+
+Achetez-le si vous construisez une chose et que vous avez l'intention de la construire encore en deux ans. Si votre client est une entreprise, ce qui signifie des sièges, des factures, des rôles et un questionnaire de sécurité. Si vous préférez posséder votre auth que de le louer par utilisateur actif. Si vous avez jamais hérité d'une base de code qui n'avait pas de tests et rappelez-vous ce que cela ressentait. Si vous voulez que votre architecture soit appliquée plutôt que décrite.
+
+Et l'acheter si vous avez déjà été à travers la première version de cette histoire une fois, ce qui est la raison la plus commune que les gens arrivent ici.
+
+## Déplacement d'un projet ShipFast
+
+La voie honnête n'est pas une migration et quiconque vous dit le contraire vend quelque chose.
+
+<Steps>
+
+<Step>
+
+**Un échafaudage frais.** Exécutez le CLI, répondez aux questions, prenez Postgres. Vous obtenez seulement les modules que vous avez sélectionnés, qui est une surface de départ plus petite que celle que vous quittez.
+
+</Step>
+
+<Step>
+
+**Portez le domaine, pas la plomberie.** Votre logique d'affaires et votre copie marketing valent la peine d'être conservées. Votre câblage d'auth, votre plomberie de facturation et l'accès aux données sont les pièces que vous remplacez, et ils n'ont jamais été la raison pour laquelle quelqu'un vous a payé.
+
+</Step>
+
+<Step>
+
+**Déplacez les données une fois.** Un magasin de documents à un schéma relationnel est une transformation une fois scriptée, et il est vraiment plus facile avant que vous ayez cent mille documents qu'après.
+
+</Step>
+
+<Step>
+
+**Allumez la porte.** Écrire des tests pour la logique portée jusqu'à ce que le seuil de couverture cesse d'échouer. C'est l'étape que les gens sautent et la seule qui change la façon dont l'année prochaine se sent.
+
+</Step>
+
+</Steps>
+
+## Prix, honnêtement
+
+ShipFast est de 199 $ pour le niveau Starter et de 249 $ pour All-in au moment de l'écriture, tous les deux actualisés à partir des prix de liste plus élevés, les deux une fois, les deux pour des projets illimités.
+
+SaaSy Land est 249 $ une fois. Projets illimités, une licence commerciale, des mises à jour de base à vie, pas de frais par siège et pas de frais d'utilisation par mois-active.
+
+Ces prix sont suffisamment proches pour que le prix ne le décide pas. Ce qui devrait décider c'est laquelle des deux factures restantes vous préférez payer : les 220 à 355 heures dans le tableau ci-dessus, ou cinquante dollars.
+
+<Callout title={"Vérifiez-le avant de le payer"}>
+
+Les [la documentation](/docs) est public, et chaque numéro sur cette page sort de la suite de test plutôt qu'un fichier de marketing. Lis-le d'abord, puis [voir ce qu'il coûte](/#pricing): un paiement à partir de 249 $, mises à jour de base à vie, projets illimités, pas de frais par utilisateur.
+
+</Callout>
+
+## Lecture connexe
+
+<Cards>
+
+<Card title={"Supastarter vs SaaSy Land"} href="/blog/supastarter-alternative">
+  Le concurrent payé le plus proche, comparé sur la seule décision qui se produit avant de taper une commande.
+</Card>
+
+<Card title={"Better-T-Stack vs un kit de démarrage payant"} href="/blog/better-t-stack-vs-saas-starter-kit">
+  Le meilleur échafaudage libre dans TypeScript, et un compte-rendu détaillé de ce qu'il laisse délibérément.
+</Card>
+
+<Card title={"Choisir une pile SaaS pour les agents de codage AI"} href="/blog/choosing-a-saas-stack-for-ai-coding-agents">
+  Pourquoi une couche relationnelle dactylographiée produit une meilleure sortie d'agent qu'un magasin de documents.
+</Card>
+
+<Card title={"Préparation au dépôt pour les agents de codage de l'IA"} href="/blog/ai-coding-agents-repository-readiness">
+  Ce qui rend une base de code lisible pour un agent, et pourquoi les limites imposées importent plus que les instructions.
+</Card>
+
+</Cards>
+
+## Foire aux questions
+
+<Accordions>
+
+<Accordion title={"Quelle est la meilleure alternative ShipFast en 2026?"}>
+
+Ça dépend de ce que vous construisez. Si vous voulez valider une idée ce week-end et passer à autre chose, ShipFast est déjà le bon outil et aucune alternative ne le bat à temps pour le premier déploiement. Si vous avez l'intention de charger des équipes, d'ajouter des sièges, de passer un examen de sécurité ou encore de maintenir la base de codes dans deux ans, vous voulez une fondation avec un modèle de données relationnelles, une porte de test et des limites architecturales imposées. C'est le métier à travers lequel cet article fonctionne.
+
+</Accordion>
+
+<Accordion title={"Est-ce que ShipFast est écrit dans TypeScript?"}>
+
+Les deux. ShipFast envoie un dépôt JavaScript et un dépôt TypeScript comme options distinctes, et la documentation couvre les deux. C'est une vraie différence par rapport à une base de code où strict TypeScript est la seule chose qui existe : quand le système de type est un choix de distribution, ce n'est pas une contrainte que votre futur code doit satisfaire, et rien n'empêche un contributeur ultérieur d'atteindre le chemin non tapé.
+
+</Accordion>
+
+<Accordion title={"Est-ce que ShipFast inclut des tests automatisés?"}>
+
+La documentation publique n'a pas de page pour les tests. Ses sections sont Tutoriels, Caractéristiques, Composants, Sécurité, Déploiement et Extras. Ceci est conforme à l'objectif déclaré du produit, qui est la vitesse à déployer d'abord plutôt que la maintenance à long terme, mais cela signifie que le filet de sécurité de régression est quelque chose que vous construisez vous-même avant votre deuxième fonction.
+
+</Accordion>
+
+<Accordion title={"Est-ce que ShipFast soutient des organisations ou des locataires multiples?"}>
+
+La documentation n'a pas de page pour les locataires multiples, les organisations, les équipes ou le contrôle d'accès basé sur le rôle. Pour un produit mono-opérateur qui est parfait. Pour tout ce qui est vendu à une entreprise, il s'agit de l'élément le plus important du travail restant, parce que l'isolement des locataires doit être appliqué à la couche de requête plutôt que ajouté à la couche d'interface utilisateur une fois que les clients existent.
+
+</Accordion>
+
+<Accordion title={"Pourquoi l'utilisation de MongoDB est-elle importante pour une plaque de chaudière SaaS ?"}>
+
+Parce que les objets des factures SaaS sont relationnels. Les utilisateurs appartiennent à des organisations, les organisations détiennent des abonnements, les abonnements produisent des factures, des postes de référence de factures. Un modèle de magasin de documents qui avec le niveau d'application rejoint et aucune clé étrangère, donc l'intégrité référente devient le code que vous devez écrire et garder correcte plutôt qu'une propriété garantie par la base de données.
+
+</Accordion>
+
+<Accordion title={"Est-ce qu'un kit de démarrage de 249 $ vaut quand ShipFast coûte 199 $?"}>
+
+Les cinquante dollars ne sont pas la décision. Les deux prix sont une erreur d'arrondi par rapport au travail. La décision est quel ensemble de problèmes vous préférez posséder: à 199 $ vous possédez la location, les rôles, l'administrateur, la suite de test et le modèle de données réécrire; à 249 $ ceux qui arrivent écrits et couverts. Prix la différence dans vos propres heures et la comparaison cesse d'être sur le prix.
+
+</Accordion>
+
+<Accordion title={"Puis-je migrer un projet ShipFast existant ?"}>
+
+Oui, et la voie honnête n'est pas une migration. Échafaudez un nouveau projet, transférez votre logique d'affaires dans les limites du module, et déplacez vos données avec un script unique. Les parties qui méritent d'être conservées sont votre code de domaine et votre copie. Les pièces que vous remplacez, le câblage auth, la plomberie de facturation et le modèle de données, sont les pièces qu'un kit de démarrage était censé vous donner de toute façon.
+
+</Accordion>
+
+<Accordion title={"Combien de clients ShipFast ont ?"}>
+
+Sa page d'accueil indique 8 393 fabricants au moment de l'écriture, ainsi qu'un rabais qui compte à la baisse par rapport aux 8 400 premiers clients. C'est une véritable validation de l'offre et elle doit être prise au sérieux. Il mesure combien de personnes souhaitent un démarrage rapide, ce qui est une question différente de combien de ces projets étaient encore maintenus un an plus tard.
+
+</Accordion>
+
+<Accordion title={"Qu'est-ce que l'architecture mise en œuvre par linter signifie réellement ?"}>
+
+Que les limites sont exécutables plutôt que décrites. Dans cette base de codes, le code de domaine ne peut pas importer React, Next, Drizzle ou infrastructure; le code d'application ne peut pas importer l'infrastructure; le code de présentation ne peut pas importer l'ORM. Ce sont des règles en peluche qui échouent à la construction, donc une violation architecturale est un contrôle rouge plutôt qu'un paragraphe dans une lecture que personne ne lit.
+
+</Accordion>
+
+<Accordion title={"Dois-je acheter une plaque de chaudière du tout, ou commencer par create-next-app?"}>
+
+Commencez à partir de zéro quand la plomberie est la chose que vous voulez apprendre, ou quand votre produit est assez étrange que les hypothèses d'un démarreur vous combattre. Achetez lorsque le travail entre un dossier vide et votre première ligne vraiment nouvelle est le travail que vous avez fait avant et que vous préférez ne pas faire à nouveau. Presque personne n'a jamais été payé pour sa mise en œuvre auth.
+
+</Accordion>
+
+</Accordions>
+
+### Sources
+
+- [page d'accueil ShipFast](https://shipfa.st/), pour le prix, la ligne de cheminée, la ventilation de 22 heures et le nombre de clients
+- [ShipFast documentation](https://shipfa.st/docs), pour la structure de la documentation et les options de dépôt JavaScript et TypeScript
+- [SaaSy Land documentation](/docs), pour la configuration, la liste des modules et la grille d'essai
+- Ce dépôt est `tsconfig.json` et `vite.config.ts`, pour les drapeaux du compilateur et les règles de linte citées ci-dessus
+
+_Écrit par Piotr J. Borowiecki, qui construit SaaSy Land. Les chiffres pour ShipFast ont été lus à partir de ses pages publiques le 15 août 2026 et peuvent avoir changé depuis; les liens ci-dessus vont à la source plutôt qu'à une capture d'écran._

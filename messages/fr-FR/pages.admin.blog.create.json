@@ -1,0 +1,36 @@
+{
+  "title": "Écrire un article",
+  "description": "Créez un nouvel article de blog Markdown avec des paramètres avancés.",
+  "actions": {
+    "preview": "Prévisualisation",
+    "saveDraft": "Enregistrer la version préliminaire",
+    "publish": "Publier"
+  },
+  "editor": {
+    "title": "Titre de l’article",
+    "titlePlaceholder": "Entrez le titre de l'article ici…",
+    "slug": "Identifiant d’URL",
+    "slugPlaceholder": "titre-de-l-article",
+    "contentPlaceholder": "Écrivez le contenu de votre publication ici... Vous pouvez utiliser Markdown.",
+    "fullscreen": "Plein écran"
+  },
+  "settings": {
+    "featuredImage": "Image en vedette",
+    "upload": "Cliquez pour importer",
+    "uploadHelp": "SVG, PNG, JPG ou GIF (max. 5 Mo)",
+    "publishing": "Publication",
+    "status": "Statut",
+    "statusDraft": "Brouillon",
+    "statusPublished": "Publié",
+    "statusScheduled": "Planifié",
+    "category": "Catégorie",
+    "categorySelect": "Sélectionner la catégorie",
+    "categoryUpdates": "Mises à jour des produits",
+    "categoryTutorials": "Tutoriels",
+    "categoryCompany": "Actualités de l'entreprise",
+    "tags": "Étiquettes",
+    "tagsPlaceholder": "Ajoutez des balises séparées par des virgules...",
+    "excerpt": "Extrait",
+    "excerptPlaceholder": "Voici un bref résumé de l'article..."
+  }
+}

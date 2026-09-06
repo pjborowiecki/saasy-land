@@ -1,0 +1,16 @@
+---
+title: Środowisko i bindingi
+description: Środowisko i bindingi — SaaSy Land
+---
+
+Korzystaj z `.env.development`, `.env.preview` i `.env.production` dla odpowiedniego środowiska Vite i Cloudflare. Pliki są ignorowane; `.env.example` opisuje wymagane klucze. `VITE_APP_URL` jest publiczny i podstawiany podczas budowania. Sekrety Workera nie mają prefiksu `VITE_`; odczytuje się je przez `env` z `cloudflare:workers`.
+
+Ustaw `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, konfigurację Resend oraz Polar. Nie zapisuj prawdziwych danych w repozytorium. Identyfikatory bindingów należą do odpowiedniego środowiska w `wrangler.jsonc`; wygenerowane deklaracje Workera określają ich typy.
+
+Wymagane nazwy sekretów są zadeklarowane dla każdego środowiska w `wrangler.jsonc`: obejmują uwierzytelnianie, Resend, Polar oraz dane Cloudflare używane przez narzędzia Drizzle. Serwer deweloperski łączy się z bindingami preview. Testy przeglądarkowe używają osobnej lokalnej konfiguracji w `src/platform/testing/wrangler.jsonc` i przykładowych wartości z `.env.test`; nie potrzebują zdalnych danych dostępowych.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

@@ -1,0 +1,16 @@
+---
+title: Dépannage
+description: Dépannage — SaaSy Land
+---
+
+Si les requêtes locales rapportent des tables manquantes, lancez `bun run db:migrate:local`; utilisation des tests du navigateur `db:migrate:test` et une liaison séparée D1. Si l'authentification échoue, vérifiez l'URL de l'environnement, `AUTH_SECRET`, les identifiants du fournisseur et les URLs de rappel.
+
+Les erreurs de traduction manquantes indiquent habituellement un espace de noms omis de l'itinéraire ou une clé manquante dans une localité. Courir `check:i18n`C'est vrai. Pour la documentation 404s, vérifiez le nom de fichier local MDX, les métadonnées de page et le lien source relatif. Pour les défaillances de prérender, inspectez la première URL défaillante dans la sortie de build.
+
+Un déploiement rejeté pour les fixations de placeholder nécessite des identifiants réels D1 et KV dans l'environnement cible. Les opérations de construction et de test ne créent pas automatiquement des ressources distantes.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

@@ -1,0 +1,12 @@
+---
+title: Zwei-Faktor-Authentifizierung
+description: TOTP-Aktivierung, -Verifizierung und -Wiederherstellungscodes.
+---
+
+## Modul
+
+`modules/two-factor/use-cases` — Aktivieren, Deaktivieren, TOTP verifizieren, Backup-Code verifizieren.
+
+## Benutzererfahrung.
+
+Einstellungen, Reiter "Sicherheit" + `/auth/two-factor`-Route für die Herausforderung. Beachten Sie die Einschränkungen des Better Auth 2FA-Plugins in `auth.constraints.ts`.

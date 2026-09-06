@@ -1,0 +1,52 @@
+---
+title: "Dokumentacja"
+description: "SaaSy Land 2.0 — architektura, przewodniki, funkcje i referencja startera full-stack."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+Witaj w dokumentacji **SaaSy Land 2.0** — modułowego, full-stackowego startera SaaS opartego na TanStack Start.
+
+<Callout title="How to use these docs">
+  Prefer **Guides** for task recipes and **Architecture** for where code lives. **Features** and **Integrations** describe product surface
+  and vendor adapters — including planned areas like payments.
+</Callout>
+
+## Start here
+
+<Cards>
+  <Card title="Project" href="/docs/project/about">
+    About the starter, changelog, roadmap, and contributing.
+  </Card>
+  <Card title="Getting started" href="/docs/getting-started">
+    Install Bun deps, configure env, migrate the database, run locally.
+  </Card>
+  <Card title="Architecture" href="/docs/architecture">
+    Modules, delivery, integrations, platform, SSR, and security boundaries.
+  </Card>
+  <Card title="Guides" href="/docs/guides">
+    Add features, DataTables, Nuqs URL state, tests, auth, and more.
+  </Card>
+</Cards>
+
+## Chapters
+
+| Chapter         | Contents                                           |
+| --------------- | -------------------------------------------------- |
+| Project         | About, changelog, roadmap, contributing            |
+| Getting started | Install, env, first run, scripts, preview deploy   |
+| Architecture    | Layers, modules, SSR/cache, providers              |
+| Guides          | Feature recipes (tables, Nuqs, tests, auth, …)     |
+| Features        | Auth, users, products, payments (planned), orgs, … |
+| Integrations    | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend, …   |
+| UI system       | Shadcn, DataTable, theme, composition              |
+| Tooling         | Vitest, Playwright, Vite+, agent skills, CI        |
+| Reference       | Routes, env, conventions, FAQ                      |
+
+## Local editing
+
+Content files: `content/docs`.
+
+W MDX możesz używać komponentów Fumadocs (`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`) oraz wybranych prymitywów shadcn (`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …).
+
+Po dodaniu stron zaktualizuj tablicę `pages` w pliku `meta.<locale>.json` danego katalogu (skrypt szkieletowy robi to za Ciebie). Strony `index` w katalogu pełnią rolę **indeksów katalogu** w pasku bocznym — nie wpisuj `index` ponownie w `pages`.

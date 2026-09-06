@@ -1,6 +1,4 @@
-import z from "zod/v4"
-
-import { MIN_FIELD_LENGTH } from "~/src/modules/_core/utils/zod-fields"
+import zod from "zod/v4"
 
 import {
   EMAIL_MAX_LENGTH,
@@ -12,18 +10,23 @@ import {
 } from "~/src/integrations/better-auth/auth.constraints"
 import { AUTH_VALIDATION_MESSAGE } from "~/src/integrations/better-auth/auth.validations"
 
-export const emailSchema = z.email({ message: AUTH_VALIDATION_MESSAGE.emailInvalid }).max(EMAIL_MAX_LENGTH, {
+import { MIN_FIELD_LENGTH } from "~/src/modules/_core/utils/zod-fields"
+
+/** A single leading slash, so a redirect target stays on the host the request arrived at. */
+const INTERNAL_PATH_PATTERN = /^\/(?!\/)/u
+
+export const emailSchema = zod.email({ message: AUTH_VALIDATION_MESSAGE.emailInvalid }).max(EMAIL_MAX_LENGTH, {
   message: AUTH_VALIDATION_MESSAGE.emailMaxLength,
 })
 
-export const nameSchema = z
+export const nameSchema = zod
   .string()
   .min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.nameRequired })
   .max(NAME_MAX_LENGTH, { message: AUTH_VALIDATION_MESSAGE.nameMaxLength })
 
-export const signInPasswordSchema = z.string().min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.passwordRequired })
+export const signInPasswordSchema = zod.string().min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.passwordRequired })
 
-export const strictPasswordSchema = z
+export const strictPasswordSchema = zod
   .string()
   .min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.passwordRequired })
   .min(PASSWORD_MIN_LENGTH, { message: AUTH_VALIDATION_MESSAGE.passwordMinLength })
@@ -35,25 +38,24 @@ export const strictPasswordSchema = z
     message: AUTH_VALIDATION_MESSAGE.passwordSpecialCharacter,
   })
 
-export function withMatchingPasswords<T extends z.ZodType<{ confirmPassword: string; password: string }>>(schema: T) {
-  return schema.refine((data) => data.password === data.confirmPassword, {
+export const withMatchingPasswords = <TValue extends zod.ZodType<{ confirmPassword: string; password: string }>>(schema: TValue) =>
+  schema.refine((data) => data.password === data.confirmPassword, {
     message: AUTH_VALIDATION_MESSAGE.passwordsMustMatch,
     path: ["confirmPassword"],
   })
-}
 
-const passwordConfirmationSchema = z.object({
-  confirmPassword: z.string().min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.confirmPasswordRequired }),
+const passwordConfirmationSchema = zod.object({
+  confirmPassword: zod.string().min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.confirmPasswordRequired }),
   password: strictPasswordSchema,
 })
 
-const emailFormSchema = z.object({
+const emailFormSchema = zod.object({
   email: emailSchema,
 })
 
 export const signUpWithPasswordSchema = withMatchingPasswords(
   passwordConfirmationSchema.extend({
-    callbackURL: z.url().optional(),
+    callbackURL: zod.string().regex(INTERNAL_PATH_PATTERN).optional(),
     email: emailSchema,
     name: nameSchema,
   }),

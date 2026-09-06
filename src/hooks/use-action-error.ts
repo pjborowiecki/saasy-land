@@ -1,36 +1,31 @@
-"use client"
-
 import { useCallback } from "react"
 
-import { useTranslations } from "next-intl"
-import type { SafeActionResult } from "next-safe-action"
+import { useTranslations } from "use-intl/react"
 
-import { type ActionServerError, ERROR_CODES } from "~/src/modules/_core/constants/errors"
+import { AUTH_ERRORS } from "~/src/integrations/better-auth/auth.errors"
 
-import { AUTH_ERRORS, type AuthErrorMessageKey } from "~/src/integrations/better-auth/auth.errors"
+import { ERROR_CODES } from "~/src/modules/_core/constants/errors"
 
-const AUTH_ERROR_MESSAGE_KEYS = new Set<string>(Object.values(AUTH_ERRORS))
+const AUTH_ERROR_KEYS = Object.values(AUTH_ERRORS)
+const ACTION_ERROR_KEYS = Object.values(ERROR_CODES)
 
-function isAuthErrorMessageKey(value: string): value is AuthErrorMessageKey {
-  return AUTH_ERROR_MESSAGE_KEYS.has(value)
-}
-
-type ActionResult = SafeActionResult<ActionServerError, undefined, object | undefined>
-
-export function useActionError(): (result?: ActionResult) => string | undefined {
+export const useActionError = (): ((error: unknown) => string) => {
   const t = useTranslations()
-
   return useCallback(
-    (result) => {
-      if (result?.serverError) {
-        const { code, message } = result.serverError
-
-        return code === ERROR_CODES.AUTH_API_ERROR && isAuthErrorMessageKey(message)
-          ? t(`auth.errors.${message}`)
-          : t(`errors.action.${code}`)
+    (error: unknown) => {
+      const message = error instanceof Error ? error.message : ""
+      const authKey = AUTH_ERROR_KEYS.find((key) => key === message)
+      if (authKey !== undefined) {
+        return t(`auth.errors.${authKey}`)
       }
-
-      return result?.validationErrors ? t(`errors.action.${ERROR_CODES.VALIDATION}`) : undefined
+      const actionKey = ACTION_ERROR_KEYS.find((key) => key === message)
+      if (actionKey !== undefined) {
+        return t(`errors.action.${actionKey}`)
+      }
+      if (error instanceof Error && (error.name === "ZodError" || error.name === "ValidationError")) {
+        return t(`errors.action.${ERROR_CODES.VALIDATION}`)
+      }
+      return t(`errors.action.${ERROR_CODES.INTERNAL_ERROR}`)
     },
     [t],
   )

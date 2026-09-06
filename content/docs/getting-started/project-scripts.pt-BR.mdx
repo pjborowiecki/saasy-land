@@ -1,0 +1,24 @@
+---
+title: Roteiros do projeto.
+description: Roteiros do projeto - SaaSy Land
+---
+
+Roteiros em `package.json` usar Vite+ para desenvolvimento, formatação, fiapos, tipos, Vitest e constrói. `content` Gera. MDX Coleções; `cf-typegen` Gera tipos de ligação de trabalhadores. `db:generate` cria migrações SQL; `db:migrate:local` Aplicá-los para local D1Migração remota e implante comandos nomeie seu ambiente explicitamente.
+
+`build:preview` e... `build:production` Construir o trabalhador, pré-render páginas públicas e verificar artefatos de implantação. `clean` remove a saída gerada e o estado de ligação local, então exporte qualquer dado local que queira manter primeiro.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

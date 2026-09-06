@@ -1,0 +1,28 @@
+---
+title: TanStack Start HTTP handlers
+description: TanStack Start HTTP handlers – SaaSy Land
+---
+
+Las URL de HTTP utilizan los manejadores nativos de TanStack Start. `src/routes`. Better Auth gestiona GET y POST. `/api/auth/$`; El motor de búsqueda de Fumadocs utiliza: `/api/search`Las operaciones de producto son funciones nativas del servidor dentro de los módulos de características.
+
+Define los manejadores en `createFileRoute` con `server.handlers`Utiliza. `request`Verificar la entrada, aplicar controles de permisos, y devolver una Web. `Response`Manten la verificación de webhook en la integración del proveedor. No expongas un endpoint REST duplicado para una operación que solo es utilizada por el cliente RPC tipificado de esta aplicación.
+
+```ts
+import { createFileRoute } from "@tanstack/react-router"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+
+export const Route = createFileRoute("/api/auth/$")({
+  server: {
+    handlers: {
+      GET: ({ request }) => auth.handler(request),
+      POST: ({ request }) => auth.handler(request),
+    },
+  },
+})
+```
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

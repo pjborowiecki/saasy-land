@@ -1,8 +1,8 @@
 import type { ComponentProps, HTMLAttributes, ReactNode } from "react"
 
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps, cva } from "class-variance-authority"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 const markerVariants = cva(
   "group/marker relative flex min-h-4 w-full items-center gap-2 text-left text-sm text-muted-foreground [&_svg:not([class*='size-'])]:size-4 [a]:underline [a]:underline-offset-3 [a]:hover:text-foreground",
@@ -18,7 +18,7 @@ const markerVariants = cva(
   },
 )
 
-function Marker({
+const Marker = ({
   children,
   className,
   render,
@@ -27,7 +27,7 @@ function Marker({
 }: ComponentProps<"div"> &
   VariantProps<typeof markerVariants> & {
     render?: (props: HTMLAttributes<HTMLElement>) => ReactNode
-  }) {
+  }) => {
   if (render !== undefined) {
     const renderProps = {
       ...props,
@@ -47,28 +47,24 @@ function Marker({
   )
 }
 
-function MarkerIcon({ className, ...props }: ComponentProps<"span">) {
-  return (
-    <span
-      aria-hidden="true"
-      className={cn("size-4 shrink-0 [&_svg:not([class*='size-'])]:size-4", className)}
-      data-slot="marker-icon"
-      {...props}
-    />
-  )
-}
+const MarkerIcon = ({ className, ...props }: ComponentProps<"span">) => (
+  <span
+    aria-hidden="true"
+    className={cn("size-4 shrink-0 [&_svg:not([class*='size-'])]:size-4", className)}
+    data-slot="marker-icon"
+    {...props}
+  />
+)
 
-function MarkerContent({ className, ...props }: ComponentProps<"span">) {
-  return (
-    <span
-      className={cn(
-        "min-w-0 wrap-break-word group-data-[variant=separator]/marker:flex-none group-data-[variant=separator]/marker:text-center *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
-        className,
-      )}
-      data-slot="marker-content"
-      {...props}
-    />
-  )
-}
+const MarkerContent = ({ className, ...props }: ComponentProps<"span">) => (
+  <span
+    className={cn(
+      "min-w-0 wrap-break-word group-data-[variant=separator]/marker:flex-none group-data-[variant=separator]/marker:text-center *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+      className,
+    )}
+    data-slot="marker-content"
+    {...props}
+  />
+)
 
 export { Marker, MarkerContent, MarkerIcon, markerVariants }

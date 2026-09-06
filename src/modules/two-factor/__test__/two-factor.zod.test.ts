@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 
 describe("two-factor zod schemas", () => {

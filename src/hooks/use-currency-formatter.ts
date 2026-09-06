@@ -1,8 +1,6 @@
-"use client"
-
 import { useMemo, useRef } from "react"
 
-import { useLocale } from "next-intl"
+import { useLocale } from "use-intl/react"
 
 export interface CurrencyOptions extends Omit<Intl.NumberFormatOptions, "style"> {
   currency: string
@@ -11,17 +9,19 @@ export interface CurrencyOptions extends Omit<Intl.NumberFormatOptions, "style">
 
 type HookDefaults = Partial<CurrencyOptions>
 
-type RequiresCurrency<D> = D extends { currency: string } ? Partial<CurrencyOptions> : Partial<CurrencyOptions> & { currency: string }
+type RequiresCurrency<TData> = TData extends { currency: string }
+  ? Partial<CurrencyOptions>
+  : Partial<CurrencyOptions> & { currency: string }
 
-interface CurrencyFormatter<D extends HookDefaults> {
-  formatCurrency: (args: { value: number } & RequiresCurrency<D>) => string
-  formatCurrencyToParts: (args: { value: number } & RequiresCurrency<D>) => Intl.NumberFormatPart[]
+interface CurrencyFormatter<TData extends HookDefaults> {
+  formatCurrency: (args: { value: number } & RequiresCurrency<TData>) => string
+  formatCurrencyToParts: (args: { value: number } & RequiresCurrency<TData>) => Intl.NumberFormatPart[]
 }
 
 const formatterCache = new Map<string, Intl.NumberFormat>()
 
-function getFormatter(locale: string, options: Omit<CurrencyOptions, "locale">): Intl.NumberFormat {
-  const optionKeys = Object.keys(options).toSorted((a, b) => a.localeCompare(b))
+const getFormatter = (locale: string, options: Omit<CurrencyOptions, "locale">): Intl.NumberFormat => {
+  const optionKeys = Object.keys(options).toSorted((first, second) => first.localeCompare(second))
   const key = `${locale}\0${JSON.stringify(options, optionKeys)}`
 
   let formatter = formatterCache.get(key)
@@ -32,18 +32,18 @@ function getFormatter(locale: string, options: Omit<CurrencyOptions, "locale">):
   return formatter
 }
 
-export function useCurrencyFormatter<const D extends HookDefaults>(defaults?: D): CurrencyFormatter<D> {
+export const useCurrencyFormatter = <const TData extends HookDefaults>(defaults?: TData): CurrencyFormatter<TData> => {
   const routeLocale = useLocale()
 
   const config = useRef(defaults)
   config.current = defaults
 
-  return useMemo((): CurrencyFormatter<D> => {
-    const resolve = (args: { value: number } & RequiresCurrency<D>) => {
+  return useMemo((): CurrencyFormatter<TData> => {
+    const resolve = (args: { value: number } & RequiresCurrency<TData>) => {
       const { value, locale: localeArg, currency: currencyArg, ...callOptions } = args
 
       const currency = currencyArg ?? config.current?.currency
-      if (!currency) {
+      if (currency === undefined || currency.length === 0) {
         throw new Error("formatCurrency requires a currency code")
       }
 
@@ -59,11 +59,11 @@ export function useCurrencyFormatter<const D extends HookDefaults>(defaults?: D)
     }
 
     return {
-      formatCurrency: (args: { value: number } & RequiresCurrency<D>) => {
+      formatCurrency: (args: { value: number } & RequiresCurrency<TData>) => {
         const { formatter, value } = resolve(args)
         return formatter.format(value)
       },
-      formatCurrencyToParts: (args: { value: number } & RequiresCurrency<D>) => {
+      formatCurrencyToParts: (args: { value: number } & RequiresCurrency<TData>) => {
         const { formatter, value } = resolve(args)
         return formatter.formatToParts(value)
       },

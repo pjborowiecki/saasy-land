@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Analytik | SaaSy Land",
+    "description": "Überwachen Sie die Leistung, die Umsatzerlöse und das Nutzerengagement Ihres SaaS-Angebots."
+  },
+  "title": "Analysedaten im Überblick",
+  "description": "Überwachen Sie die Leistung, die Umsatzerlöse und das Nutzerengagement Ihres SaaS-Angebots.",
+  "actions": {
+    "datePicker": "Letzte 30 Tage"
+  },
+  "tabs": {
+    "overview": "Überblick",
+    "revenue": "Umsatz",
+    "audience": "Zielgruppe",
+    "retention": "Kundenbindung",
+    "reports": "Berichte"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "Gesamter MRR",
+      "value": "$124,500",
+      "trend": "14.2%",
+      "trendLabel": "gegen den Vormonat"
+    },
+    "activeUsers": {
+      "title": "Aktive Nutzer",
+      "value": "45,231",
+      "trend": "5.4%",
+      "trendLabel": "gegen den Vormonat"
+    },
+    "churn": {
+      "title": "Abwanderungsrate",
+      "value": "1.2%",
+      "trend": "0.4%",
+      "trendLabel": "gegen den Vormonat"
+    },
+    "arpu": {
+      "title": "Durchschnittlicher Umsatz pro Nutzer",
+      "value": "$42.50",
+      "trend": "2.1%",
+      "trendLabel": "gegen den Vormonat"
+    }
+  },
+  "chart": {
+    "title": "Umsichtsüberblick",
+    "description": "Täglicher Umsatz der letzten 30 Tage.",
+    "placeholder": "Beispielhafte Reihe. Die tatsächlichen Einnahmen werden hier angezeigt, sobald die Abrechnung eingerichtet ist.",
+    "legend": {
+      "new": "Neue Abonnements",
+      "renewals": "Erneuerungen"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "Heute: {value}"
+  },
+  "regions": {
+    "title": "Top-Regionen",
+    "viewAll": "Alle anzeigen"
+  },
+  "upgrades": {
+    "title": "Letzte Tarif-Upgrades",
+    "viewAll": "Alle anzeigen"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Aktualisiert auf den Pro-Plan",
+        "time": "Vor 2 Minuten"
+      },
+      "u2": {
+        "action": "Auf die Enterprise-Version aktualisiert",
+        "time": "Vor 1 Stunde"
+      },
+      "u3": {
+        "action": "Aktualisiert auf den Pro-Plan",
+        "time": "Vor 3 Stunden"
+      },
+      "u4": {
+        "action": "Aktualisiert auf den Team-Plan",
+        "time": "Vor 5 Stunden"
+      },
+      "u5": {
+        "action": "Aktualisiert auf den Pro-Plan",
+        "time": "Vor 1 Tag"
+      }
+    }
+  }
+}

@@ -1,9 +1,24 @@
-import { env } from "~/src/platform/env"
+import { env } from "cloudflare:workers"
+
+import type { JSX } from "react"
+
+import { render } from "react-email"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
-import { createTestRequestUrl, TEST_APP_URL } from "~/src/platform/testing/lib/test-request"
+import { TEST_APP_URL, createTestRequestUrl } from "~/src/platform/testing/lib/test-request"
 
 import { authEmailHandlers } from "~/src/integrations/better-auth/auth.emails"
+import { I18N } from "~/src/integrations/use-intl/i18n.config"
+
+import { APP_URL } from "~/src/presentation/branding"
+
+interface ResendSendPayload {
+  readonly from: string
+  readonly react: JSX.Element
+  readonly subject: string
+  readonly to: string
+}
 
 interface ResendSendResult {
   data: { id: string } | null
@@ -12,9 +27,9 @@ interface ResendSendResult {
 }
 
 const CALL_COUNT = 1
-const resendSendMock = vi.hoisted(() => vi.fn<(payload: unknown, options?: unknown) => Promise<ResendSendResult>>())
+const resendSendMock = vi.hoisted(() => vi.fn<(payload: ResendSendPayload, options?: unknown) => Promise<ResendSendResult>>())
 
-vi.mock(import("server-only"), () => ({}))
+vi.mock(import("@tanstack/react-start/server-only"), () => ({}))
 
 // @ts-expect-error Vitest module mock factory is not inferred for resend.config exports.
 vi.mock(import("~/src/integrations/resend/resend.config"), () => ({
@@ -27,12 +42,12 @@ const payload = {
   user: { email: "user@example.com", name: "User" },
 }
 
-function mockSuccessfulSend(): void {
+const mockSuccessfulSend = (): void => {
   resendSendMock.mockReset()
   resendSendMock.mockResolvedValue({ data: { id: "email_1" }, error: JSON_NULL, headers: JSON_NULL })
 }
 
-function mockFailedSend(): void {
+const mockFailedSend = (): void => {
   resendSendMock.mockReset()
   resendSendMock.mockResolvedValue({
     data: JSON_NULL,
@@ -42,6 +57,40 @@ function mockFailedSend(): void {
 }
 
 describe("auth email handlers", () => {
+  it.each(["", "null", "{}", '{"callbackURL":12}'])(
+    "uses the locale cookie when a repeated signup has no valid callback body: %j",
+    async (body) => {
+      expect.hasAssertions()
+      mockSuccessfulSend()
+      const request = new Request(createTestRequestUrl("/_serverFn/sign-up"), {
+        body,
+        headers: { cookie: `${I18N.COOKIE_NAME}=pl-PL` },
+        method: "POST",
+      })
+
+      await authEmailHandlers.sendExistingUserVerificationEmail({ user: { ...payload.user, emailVerified: false } }, request)
+
+      expect(resendSendMock).toHaveBeenCalledTimes(CALL_COUNT)
+      const email = resendSendMock.mock.calls[0]?.[0]
+      expect(email?.subject).toBe("Potwierdź adres e-mail")
+      const html = await render(email!.react)
+      expect(html).toContain(`href="${TEST_APP_URL}/pl-PL/auth/verify-email?token=`)
+    },
+  )
+
+  it("uses the public application URL for repeated signup verification when no request is available", async () => {
+    expect.hasAssertions()
+    mockSuccessfulSend()
+
+    await authEmailHandlers.sendExistingUserVerificationEmail({ user: { ...payload.user, emailVerified: false } })
+
+    expect(resendSendMock).toHaveBeenCalledTimes(CALL_COUNT)
+    const email = resendSendMock.mock.calls[0]?.[0]
+    expect(email).toMatchObject({ from: env.RESEND_EMAIL_FROM, subject: "Verify your email address", to: payload.user.email })
+    const html = await render(email!.react)
+    expect(html).toContain(`href="${APP_URL}/auth/verify-email?token=`)
+    expect(html).toContain('lang="en-US"')
+  })
   it("sendResetPasswordEmail sends localized email with an idempotency key", async () => {
     expect.hasAssertions()
     mockSuccessfulSend()

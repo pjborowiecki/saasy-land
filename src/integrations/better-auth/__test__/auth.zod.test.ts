@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { emailSchema, signInWithPasswordSchema, signUpWithPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 
 describe("email schema component", () => {

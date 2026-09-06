@@ -1,0 +1,5 @@
+{
+  "title": "Démarrage.",
+  "pages": ["prerequisites", "installation", "environment-variables", "first-run", "project-scripts", "deploy-preview"],
+  "icon": "Rocket"
+}

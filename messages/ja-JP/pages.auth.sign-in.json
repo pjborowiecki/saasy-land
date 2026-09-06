@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "ログイン",
+    "description": "{name}アカウントにログインします。"
+  },
+  "form": {
+    "title": "おかえりなさい",
+    "description": "アカウントにログインするには、詳細情報をご入力ください。",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "submit": "続ける",
+    "submitting": "サインイン中...",
+    "success": "ログインに成功しました！",
+    "error": "メールアドレスまたはパスワードが正しくありません。再度お試しください。",
+    "noAccount": "アカウントをお持ちでない場合？ <signup>登録</signup>",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "continueWithGithub": "GitHub で続ける",
+    "continueWithGoogle": "Google で続ける",
+    "or": "または"
+  }
+}

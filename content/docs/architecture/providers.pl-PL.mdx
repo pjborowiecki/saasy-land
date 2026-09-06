@@ -1,0 +1,14 @@
+---
+title: Providery
+description: Providery — SaaSy Land
+---
+
+`src/routes/__root.tsx` odpowiada za dokument i wspólne providery. Router tworzy QueryClient i łączy cache z SSR. Provider tłumaczeń ładuje namespace aktywnych tras do `IntlProvider`. Motyw, animacje, routing React Aria, podpowiedzi, powiadomienia i wskaźnik offline zachowują dotychczasowe zachowanie.
+
+Fumadocs używa providera TanStack i adaptera natywnych linków Routera. Wspólne providery należą do `src/providers`, a konteksty pojedynczej strony pozostają przy funkcji.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

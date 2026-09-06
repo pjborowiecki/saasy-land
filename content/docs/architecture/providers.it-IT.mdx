@@ -1,0 +1,14 @@
+---
+title: Fornitori
+description: Fornitori — SaaSy Land
+---
+
+`src/routes/__root.tsx` possiede la composizione del fornitore del documento e dell'applicazione. Il router crea un QueryClient e collega la sua cache alla SSR. Il fornitore di traduzione carica gli spazi di nome del percorso attivo in `IntlProvider`. Tema, movimento, React Aria routing, tooltips, notifiche e l'indicatore offline mantengono il comportamento di presentazione esistente.
+
+Fumadocs utilizza il suo fornitore TanStack e l'adattatore di collegamento Router nativo. I fornitori condivisi appartengono a `src/providers`; i contesti di sola pagina rimangono accanto alla loro caratteristica.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

@@ -1,0 +1,14 @@
+---
+title: Plattform und Testverfahren.
+description: Plattform und Testumgebung — SaaSy Land
+---
+
+Cloudflare stellt die Laufzeitumgebung über explizite Bindungen für D1, KV und Assets bereit. Die generierten Deklarationen finden sich unter `src/types`. Die vendor-spezifische Konfiguration gehört in `src/integrations`. Der restliche Plattformordner enthält die Testinfrastruktur: Binding-Mocks, Request-Fixtures, die RPC-Bridge und Render-Helfer.
+
+Bewahren Sie die für bestimmte Umgebungen spezifischen Bereitstellungseinstellungen in `wrangler.jsonc` und der zugehörigen ignorierten Umgebungskonfigurationsdatei. Bewahren Sie die Testzugangsdaten in `.env.test` auf und ersetzen Sie diese niemals durch Produktionszugangsdaten.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

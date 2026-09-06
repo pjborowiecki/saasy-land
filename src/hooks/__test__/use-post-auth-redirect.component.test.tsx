@@ -1,93 +1,35 @@
-/** @vitest-environment jsdom */
-
 import { type ReactNode } from "react"
 
+import { QueryClient } from "@tanstack/react-query"
 import { act, renderHook } from "@testing-library/react"
-import { NextIntlClientProvider } from "next-intl"
+import { expect, it, vi } from "vite-plus/test"
 
-import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
-import type * as AuthClient from "~/src/integrations/better-auth/auth.client"
-import type * as I18nNavigation from "~/src/integrations/next-intl/i18n.navigation"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { TestProviders, createTestRouter } from "~/src/platform/testing/lib/render"
+
+import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
+import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
 import { usePostAuthRedirect } from "~/src/hooks/use-post-auth-redirect"
 
-import { ROUTES } from "~/src/routes"
+vi.mock(import("~/src/integrations/better-auth/auth.session"), async (importOriginal) => ({
+  ...(await importOriginal()),
+  getCurrentSession: vi.fn<typeof getCurrentSession>(),
+}))
 
-type I18nRouter = ReturnType<typeof I18nNavigation.useRouter>
-
-const enMessages = loadLocaleMessagesFromDir("en-US")
-
-const pushMock = vi.hoisted(() => vi.fn<I18nRouter["push"]>())
-const getSessionMock = vi.hoisted(() => vi.fn<typeof AuthClient.getSession>())
-
-function createI18nRouterMock(): I18nRouter {
-  return {
-    back: vi.fn<I18nRouter["back"]>(),
-    forward: vi.fn<I18nRouter["forward"]>(),
-    prefetch: vi.fn<I18nRouter["prefetch"]>(),
-    push: pushMock,
-    refresh: vi.fn<I18nRouter["refresh"]>(),
-    replace: vi.fn<I18nRouter["replace"]>(),
-  }
-}
-
-vi.mock(import("~/src/integrations/better-auth/auth.client"), async (importOriginal): Promise<Partial<typeof AuthClient>> => {
-  const actual = await importOriginal<typeof AuthClient>()
-
-  return {
-    ...actual,
-    getSession: getSessionMock,
-  }
-})
-
-vi.mock(import("~/src/integrations/next-intl/i18n.navigation"), async (): Promise<Partial<typeof I18nNavigation>> => {
-  const { createI18nNavigationPartialMock } =
-    await import("~/src/integrations/next-intl/__test__/mocks/i18n-navigation-for-component-tests")
-
-  return createI18nNavigationPartialMock(createI18nRouterMock)
-})
-
-function renderPostAuthRedirectHook() {
-  return renderHook(() => usePostAuthRedirect(), {
-    wrapper: ({ children }: { children: ReactNode }) => (
-      <NextIntlClientProvider locale="en-US" messages={enMessages}>
-        {children}
-      </NextIntlClientProvider>
-    ),
-  })
-}
-
-describe("use post auth redirect component", () => {
-  it("navigates to the app dashboard for customers", async () => {
-    expect.hasAssertions()
-    pushMock.mockClear()
-    getSessionMock.mockClear()
-    getSessionMock.mockResolvedValue({ data: { user: { role: ROLE_CODES.CUSTOMER } } })
-
-    const { result } = renderPostAuthRedirectHook()
-
-    await act(async () => {
-      await result.current()
-    })
-
-    expect(getSessionMock).toHaveBeenCalledWith()
-    expect(pushMock).toHaveBeenCalledWith(ROUTES.APP)
-  })
-
-  it("navigates to the admin panel for admins", async () => {
-    expect.hasAssertions()
-    pushMock.mockClear()
-    getSessionMock.mockClear()
-    getSessionMock.mockResolvedValue({ data: { user: { role: ROLE_CODES.ADMIN } } })
-
-    const { result } = renderPostAuthRedirectHook()
-
-    await act(async () => {
-      await result.current()
-    })
-
-    expect(getSessionMock).toHaveBeenCalledWith()
-    expect(pushMock).toHaveBeenCalledWith(ROUTES.ADMIN)
-  })
+it.each([
+  ["customer", "/app"],
+  ["admin", "/admin"],
+] as const)("redirects %s after authentication", async (role, to) => {
+  vi.mocked(getCurrentSession).mockResolvedValue(createAuthSessionFixture({ role }))
+  const router = createTestRouter()
+  const navigate = vi.spyOn(router, "navigate").mockResolvedValue()
+  const queryClient = new QueryClient()
+  const wrapper = ({ children }: { children: ReactNode }) => (
+    <TestProviders router={router} queryClient={queryClient}>
+      {children}
+    </TestProviders>
+  )
+  const { result } = renderHook(() => usePostAuthRedirect(), { wrapper })
+  await act(() => result.current())
+  expect(navigate).toHaveBeenCalledWith({ to })
 })

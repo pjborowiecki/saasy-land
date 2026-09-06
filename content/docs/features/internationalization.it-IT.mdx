@@ -1,0 +1,16 @@
+---
+title: Internazionalizzazione e localizzazione
+description: Internazionalizzazione e localizzazione — SaaSy Land
+---
+
+I messaggi vivono in `messages/{locale}` per tutte le nove lingue configurate come file tratteggiati namespace, ad esempio `pages.admin.users.json`. Configurazione locale, helper URL, caricamento messaggi, metadati e helper di traduzione e-mail vivono in `src/integrations/use-intl`.
+
+Utilizzazione inglese `/docs`; usi polacchi `/pl-PL/docs`. Legacy `/en` e `/pl` i collegamenti sono canonicalizzati. I file di route dichiarano `staticData.namespaces` e precaricare gli stessi namespaces nel loro caricatore. `TranslationsProvider` assembla gli spazi di nome del percorso attivo in un `IntlProvider`. I messaggi condivisi sono caricati alla radice; gli spazi dei nomi e-mail rimangono sul server.
+
+Leggi il locale con `getCurrentLocale` sul server e `useLocale` in componenti. L'URL sceglie il documento locale. Le richieste di funzionalità server utilizzano il cookie locale. Un cambiamento linguistico mantiene il percorso, la query e il frammento e ricarica il documento per caricare il contenuto corrispondente. Corri! `bun run check:i18n` dopo aver cambiato le chiavi.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

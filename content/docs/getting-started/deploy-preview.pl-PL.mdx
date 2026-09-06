@@ -1,0 +1,25 @@
+---
+title: Wdrożenie na Cloudflare Workers
+description: Wdrożenie na Cloudflare Workers — SaaSy Land
+---
+
+Pakiet Workera powstaje przy użyciu Vite+, TanStack Start i `@cloudflare/vite-plugin`. Plik `wrangler.jsonc` deklaruje punkt wejścia, ustawienia zgodności, zasoby, obserwowalność oraz osobne bindingi development, preview i production.
+
+Utwórz D1 i KV, a następnie zastąp przykładowe identyfikatory w docelowym środowisku. Ustaw URL i sekrety usług w `.env.preview` lub `.env.production`. Jawnie zastosuj migracje i wykonaj wdrożenie. Skrypty wdrażania najpierw sprawdzają bindingi; skrypty budowania prerenderują publiczne strony i sprawdzają artefakty. Uwierzytelnianie i prywatne strony są renderowane dynamicznie przez Workera.
+
+Ustaw domenę i adresy callback OAuth dla danego środowiska. Instalacja zależności i budowanie nigdy nie stosują zdalnych migracji.
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

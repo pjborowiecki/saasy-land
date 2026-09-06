@@ -1,0 +1,25 @@
+---
+title: Déployer à Cloudflare Workers
+description: Déployer à Cloudflare Workers — SaaSy Land
+---
+
+La construction Worker est produite par Vite+, TanStack Start et `@cloudflare/vite-plugin`. `wrangler.jsonc` déclare l'entrée, les paramètres de compatibilité, les actifs, l'observabilité et les liaisons de développement, d'aperçu et de production séparées.
+
+Disposition D1 et KV et remplacer les identifiants du détenteur de place pour l'environnement cible. Définir son URL et ses secrets de fournisseur dans `.env.preview` ou `.env.production`C'est vrai. Appliquer les migrations explicitement, puis déployer. Déployer des scripts valider les ID de liaison d'abord; construire des scripts prérender des pages publiques et vérifier les artefacts de sortie. L'authentification et les pages d'applications privées fonctionnent dynamiquement sur le Worker.
+
+Définissez le domaine personnalisé et les URLs de callback OAuth pour l'environnement cible. Installer des dépendances et construire n'applique jamais une migration à distance.
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

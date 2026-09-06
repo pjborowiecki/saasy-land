@@ -1,0 +1,5 @@
+{
+  "title": "参照",
+  "pages": ["routes", "environment", "conventions", "glossary", "faq", "troubleshooting", "modules", "permissions", "file-naming"],
+  "icon": "Library"
+}

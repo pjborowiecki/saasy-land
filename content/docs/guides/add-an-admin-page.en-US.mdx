@@ -1,0 +1,13 @@
+---
+title: "Add an admin page"
+description: "Register routes, sidebar, and page shell."
+---
+
+## Steps
+
+1. Add path to `ROUTES`
+2. Add sidebar entry in `admin/constants/sidebar.ts` (+ i18n labels)
+3. Create `app/[locale]/(admin)/admin/<feature>/page.tsx`
+4. Colocate `_components` / `_lib`
+5. Gate data with use-cases + Suspense
+6. Document under Features

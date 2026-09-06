@@ -1,6 +1,6 @@
 import type { ComponentProps, JSX } from "react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 /*
  * `var(--border)`, never `var(--color-border)`. `@theme inline` declares
@@ -25,15 +25,13 @@ interface BackgroundProps extends ComponentProps<"div"> {
   readonly glow?: boolean
 }
 
-export function Background({ className, glow = true, ...props }: BackgroundProps): JSX.Element {
-  return (
-    <>
-      <div
-        aria-hidden
-        className={cn("field-taper pointer-events-none fixed inset-0 opacity-70", backgroundGridPatternClassName, className)}
-        {...props}
-      />
-      {glow && <div aria-hidden className={cn("field-signal pointer-events-none fixed inset-0", className)} />}
-    </>
-  )
-}
+export const Background = ({ className, glow = true, ...props }: BackgroundProps): JSX.Element => (
+  <>
+    <div
+      aria-hidden
+      className={cn("field-taper pointer-events-none fixed inset-0 opacity-70", backgroundGridPatternClassName, className)}
+      {...props}
+    />
+    {glow && <div aria-hidden className={cn("field-signal pointer-events-none fixed inset-0", className)} />}
+  </>
+)

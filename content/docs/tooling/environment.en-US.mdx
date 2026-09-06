@@ -1,0 +1,16 @@
+---
+title: "Environment and bindings"
+description: "Environment and bindings — SaaSy Land"
+---
+
+Use `.env.development`, `.env.preview`, and `.env.production` for the corresponding Vite and Cloudflare environment. These files are ignored; `.env.example` documents the required keys. `VITE_APP_URL` is public and replaced at build time. Worker secrets have no `VITE_` prefix and are accessed through `env` from `cloudflare:workers`.
+
+Configure `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, Resend settings and the Polar settings for your installation. Never commit real credentials. Binding IDs belong in the appropriate `wrangler.jsonc` environment; generated Worker declarations describe their types.
+
+Required secret names are declared for each environment in `wrangler.jsonc`, including authentication, Resend, Polar, and the Cloudflare credentials used by Drizzle tooling. Development connects to the preview bindings. Browser tests use their own local configuration in `src/platform/testing/wrangler.jsonc` and dummy values from `.env.test`; they do not need remote credentials.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

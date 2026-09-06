@@ -1,0 +1,14 @@
+---
+title: Cloudflare KV
+description: Cloudflare KV - SaaSy Land
+---
+
+`env.CACHE` Lojas públicas, entradas de cache descartáveis. GitHub O cache de integração conta com um TTL e usa `waitUntil` Ele cai de volta graciosamente se GitHub ou KV Não está disponível.
+
+KV Sessões de autenticação e limites de taxa vivem em D1O limitador de ação usa um subserviente SQL atômico por chave e janela de tempo, então pedidos manipulados por instâncias de Worker separadas compartilham o mesmo limite. KV Contadores para autorização ou limites sensíveis.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

@@ -1,0 +1,91 @@
+{
+  "title": "Publikacje",
+  "description": "Twórz, zarządzaj i analizuj zawartość swojego bloga.",
+  "actions": {
+    "categories": "Kategorie",
+    "writePost": "Napisz Post",
+    "loadMore": "Załaduj więcej artykułów"
+  },
+  "stats": {
+    "totalViews": "Całkowita liczba wyświetleń (30d)",
+    "subscribers": "Subskrybenci",
+    "publishedPosts": "Opublikowane Posty",
+    "draftsPending": "{count} szkiców oczekujących"
+  },
+  "filters": {
+    "all": "Wszystkie Posty",
+    "published": "Opublikowane",
+    "drafts": "Szkice",
+    "scheduled": "Zaplanowane",
+    "search": "Szukaj artykułów..."
+  },
+  "badges": {
+    "published": "Opublikowane",
+    "draft": "Szkic",
+    "scheduled": "Zaplanowane"
+  },
+  "meta": {
+    "readTime": "{minutes} min czytania",
+    "publishedOn": "{date}",
+    "lastEdited": "Ostatnio edytowano {time}",
+    "publishesTomorrow": "Publikacja jutro"
+  },
+  "labels": {
+    "gridView": "Widok Siatki",
+    "tableView": "Widok Tabeli",
+    "moreOptions": "Więcej opcji"
+  },
+  "table": {
+    "postDetails": "Szczegóły Posta",
+    "status": "Status",
+    "category": "Kategoria",
+    "author": "Autor",
+    "date": "Data",
+    "views": "Wyświetlenia",
+    "actions": "Akcje",
+    "selectRow": "Zaznacz wiersz",
+    "emptyValue": "Brak",
+    "rowActions": "Akcje wiersza"
+  },
+  "pagination": {
+    "info": "Wyświetlanie {start}–{end} z {total} postów"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "Skalowanie architektury bazy danych na potrzeby dziesięciokrotnego wzrostu",
+        "description": "Szczegółowy opis techniczny przejścia naszego zespołu z monolitu na architekturę rozproszoną.",
+        "category": "Inżynieria"
+      },
+      "post-2": {
+        "title": "Przedstawiamy zaawansowany panel analityczny 2.0",
+        "description": "Całkowicie przebudowaliśmy narzędzia raportowania, aby ułatwić analizę zachowań klientów i wskaźników przychodów.",
+        "category": "Aktualizacja produktu"
+      },
+      "post-3": {
+        "title": "Ewolucja naszego systemu projektowego",
+        "description": "Tworzenie spójnego języka wizualnego dla aplikacji internetowych, mobilnych i wewnętrznych narzędzi administracyjnych.",
+        "category": "Projektowanie"
+      },
+      "post-4": {
+        "title": "Ogłaszamy rundę finansowania serii B",
+        "description": "Ogłaszamy inwestycję w wysokości 25 mln USD od czołowych funduszy venture capital, która przyspieszy nasz rozwój.",
+        "category": "Aktualności firmy"
+      },
+      "post-5": {
+        "title": "Webhooki dla danych w czasie rzeczywistym",
+        "description": "Dowiedz się, jak tworzyć niezawodne systemy webhooków bezpiecznie obsługujące miliony zdarzeń.",
+        "category": "Poradnik"
+      },
+      "post-6": {
+        "title": "Strategie ograniczania odpływu klientów",
+        "description": "Sprawdzone sposoby utrzymania klientów stosowane przez najszybciej rozwijające się firmy SaaS.",
+        "category": "Marketing"
+      }
+    },
+    "dates": {
+      "draft": "2 godz. temu",
+      "scheduled": "Jutro"
+    }
+  }
+}

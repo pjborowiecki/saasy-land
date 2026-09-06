@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Reembolsos",
+    "description": "Cuándo puedes solicitar un reembolso de SaaSy Land, cómo hacerlo y qué derechos del consumidor siguen protegidos."
+  },
+  "title": "Reembolsos",
+  "lastUpdated": "Última actualización: 6 de septiembre de 2026",
+  "description": "Cuándo puedes solicitar un reembolso de SaaSy Land, cómo hacerlo y qué derechos del consumidor siguen protegidos.",
+  "sections": {
+    "delivery": {
+      "title": "Antes de la entrega",
+      "body": "Puede solicitar un reembolso completo antes de que la CLI adquirida, las plantillas privadas o el material educativo de pago hayan sido entregados o estén disponibles a través de su cuenta. Envíe un correo electrónico a hello@saasyland.com antes de acceder al producto de pago. No es necesario justificar esta solicitud de reembolso voluntario antes de la entrega. El acceso o uso del repositorio público con licencia MIT no se considera la entrega del producto comercial independiente."
+    },
+    "afterDelivery": {
+      "title": "Después de la entrega",
+      "body": "Los materiales digitales no pueden devolverse de la misma forma que un objeto físico, por lo que la política voluntaria de reembolso previo a la entrega termina cuando los recibes. Esto no anula los derechos de desistimiento ni los recursos previstos por la legislación aplicable. Si falta contenido, es defectuoso o difiere sustancialmente de lo prometido, contacta con nosotros para que podamos resolverlo."
+    },
+    "consumerRights": {
+      "title": "Derechos legales del consumidor",
+      "body": "Cuando la ley te concede un plazo de desistimiento, ese derecho sigue vigente. Para los consumidores de la UE, el plazo habitual de desistimiento de los contratos a distancia es de 14 días. En el caso de contenidos digitales suministrados durante ese plazo, la pérdida del derecho de desistimiento requiere el consentimiento expreso, el reconocimiento y la confirmación exigidos por la ley. Indicar simplemente que el código fuente no se puede devolver no elimina esos derechos. Tampoco se ven afectados los derechos irrenunciables relativos a contenidos no conformes o no entregados."
+    },
+    "request": {
+      "title": "Cómo solicitar un reembolso",
+      "body": "Escribe a hello@saasyland.com desde la dirección utilizada para comprar. Incluye la referencia del pedido si la tienes e indica que deseas un reembolso. Identificaremos el pedido y confirmaremos los siguientes pasos. No es necesario presentar un formulario específico."
+    },
+    "processing": {
+      "title": "Cómo se abonan los reembolsos",
+      "body": "Los reembolsos aprobados se tramitan a través de Polar al método de pago original, por el importe pagado y en la moneda de la transacción original. Los plazos de tramitación pueden variar. Un reembolso termina el acceso al producto de pago reembolsado y revoca su clave de licencia. La Licencia Comercial explica qué derechos sobre aplicaciones ya generadas legítimamente se conservan. Los derechos de la licencia MIT del código público y los derechos imperativos de los consumidores no se ven afectados."
+    },
+    "freeServices": {
+      "title": "Servicios gratuitos",
+      "body": "Crear una cuenta o suscribirse al boletín no genera por sí mismo ningún pago, por lo que no hay nada que reembolsar por estas actividades. Los cargos de servicios de terceros adquiridos por separado están sujetos a las condiciones de reembolso de esos proveedores."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "ログイン済みアプリ領域。"
+    },
+    "welcome": "アプリ：{name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "ホーム"
+    },
+    "header": {
+      "notifications": "通知",
+      "searchPlaceholder": "コンソールを検索する",
+      "searchEmpty": "申し訳ありませんが、該当するセクションが見つかりませんでした。"
+    },
+    "userWidget": {
+      "settings": "設定",
+      "signedInAs": "ログインしました: <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "サインアウト",
+      "signingOut": "ログアウトしています…",
+      "success": "またね"
+    }
+  },
+  "labels": {
+    "unknownLocation": "場所不明",
+    "gettingStartedSection": "セクション1：はじめに",
+    "welcomeLesson": "コースへようこそ",
+    "setupLesson": "開発環境のセットアップ",
+    "coreConceptsSection": "セクション2：基本概念",
+    "development": "開発",
+    "design": "デザイン",
+    "beginner": "初級",
+    "intermediate": "中級",
+    "advanced": "上級",
+    "oneYearAccess": "1年間のアクセス",
+    "products": "商品",
+    "noCourses": "コースが見つかりません。",
+    "previousPage": "前のページ",
+    "nextPage": "次のページ",
+    "rowActions": "行の操作",
+    "actions": "操作",
+    "saasPlans": "SaaSプラン",
+    "addOns": "アドオン",
+    "coreSubscription": "Coreサブスクリプション",
+    "legacy": "旧バージョン",
+    "hidden": "非公開",
+    "public": "公開"
+  }
+}

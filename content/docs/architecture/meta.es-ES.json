@@ -1,0 +1,21 @@
+{
+  "title": "Arquitectura",
+  "pages": [
+    "directory-structure",
+    "dependency-rules",
+    "modules-and-use-cases",
+    "core",
+    "delivery-layer",
+    "presentation-layer",
+    "integrations-layer",
+    "platform-layer",
+    "providers",
+    "request-lifecycle",
+    "caching-and-ssr",
+    "api-layer",
+    "security-model",
+    "i18n-architecture",
+    "testing-architecture"
+  ],
+  "icon": "Network"
+}

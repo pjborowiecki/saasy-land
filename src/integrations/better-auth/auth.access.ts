@@ -1,4 +1,4 @@
-import { createAccessControl, type RoleAuthorizeRequest } from "better-auth/plugins/access"
+import { type RoleAuthorizeRequest, createAccessControl } from "better-auth/plugins/access"
 import { adminAc, defaultStatements } from "better-auth/plugins/admin/access"
 
 export const ROLE_CODES = {
@@ -29,10 +29,8 @@ export const ROLES = {
 
 export type Permission = RoleAuthorizeRequest<typeof ac.statements>
 
-function isRole(value: string | null | undefined): value is Role {
-  return typeof value === "string" && (ROLE_VALUES as readonly string[]).includes(value)
-}
+const isRole = (value: string | null | undefined): value is Role =>
+  typeof value === "string" && (ROLE_VALUES as readonly string[]).includes(value)
 
-export function hasPermission(role: string | null | undefined, permission: Permission): boolean {
-  return isRole(role) && ROLES[role].authorize(permission).success
-}
+export const hasPermission = (role: string | null | undefined, permission: Permission): boolean =>
+  isRole(role) && ROLES[role].authorize(permission).success

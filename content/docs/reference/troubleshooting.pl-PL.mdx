@@ -1,0 +1,16 @@
+---
+title: Rozwiązywanie problemów
+description: Rozwiązywanie problemów — SaaSy Land
+---
+
+Jeśli lokalne zapytania zgłaszają brak tabel, uruchom `bun run db:migrate:local`; testy przeglądarkowe używają `db:migrate:test` i osobnego bindingu D1. Przy problemach z logowaniem sprawdź URL środowiska, `AUTH_SECRET`, dane usługodawców i adresy callback.
+
+Brak tłumaczenia zwykle oznacza pominięty namespace trasy albo klucz w jednym języku. Uruchom `check:i18n`. Dla błędów 404 dokumentacji sprawdź językowy plik MDX, metadane i względny link źródłowy. Przy błędzie prerenderingu sprawdź pierwszy nieudany URL w logu.
+
+Wdrożenie odrzucone z powodu przykładowych bindingów wymaga prawdziwych ID D1 i KV. Budowanie i testy nie tworzą automatycznie zdalnych zasobów.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

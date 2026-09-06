@@ -1,16 +1,15 @@
 import type { JSX } from "react"
 
-import { createTranslator } from "next-intl"
-import { Body, Button, Container, Head, Heading, Html, pixelBasedPreset, Preview, Section, Tailwind, Text } from "react-email"
+import { Body, Button, Container, Head, Heading, Html, Preview, Section, Tailwind, Text, pixelBasedPreset } from "react-email"
+import { createTranslator } from "use-intl"
 
-import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { I18N, type Locale } from "~/src/integrations/use-intl/i18n.config"
+import { getEmailMessages } from "~/src/integrations/use-intl/i18n.emails"
 
 const TAILWIND_CONFIG = { presets: [pixelBasedPreset] }
 
-export function verifyEmailSubject(locale: Locale): string {
-  return createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.verifyEmail" })("subject")
-}
+export const verifyEmailSubject = (locale: Locale): string =>
+  createTranslator({ locale, messages: getEmailMessages(locale), namespace: "emails.verifyEmail" })("subject")
 
 interface VerifyEmailProps {
   readonly locale: Locale
@@ -18,8 +17,8 @@ interface VerifyEmailProps {
   readonly verifyUrl: string
 }
 
-export function VerifyEmail({ locale, name, verifyUrl }: Readonly<VerifyEmailProps>): JSX.Element {
-  const t = createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.verifyEmail" })
+export const VerifyEmail = ({ locale, name, verifyUrl }: Readonly<VerifyEmailProps>): JSX.Element => {
+  const t = createTranslator({ locale, messages: getEmailMessages(locale), namespace: "emails.verifyEmail" })
 
   return (
     <Html lang={locale}>
@@ -49,5 +48,5 @@ export function VerifyEmail({ locale, name, verifyUrl }: Readonly<VerifyEmailPro
 VerifyEmail.PreviewProps = {
   locale: I18N.DEFAULT_LOCALE,
   name: "John Doe",
-  verifyUrl: "https://saasyland.com/en/auth/verify-email?token=12345",
+  verifyUrl: "https://saasyland.com/auth/verify-email?token=12345",
 } satisfies VerifyEmailProps

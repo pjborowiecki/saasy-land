@@ -1,0 +1,16 @@
+---
+title: Sitio de documentación.
+description: ¿Cómo se construye y se amplía esta documentación?
+---
+
+## Contenido raíz.
+
+`content/docs`
+
+- Páginas MDX: `*.{locale}.mdx` para los nueve idiomas configurados (analizador de puntos).
+- Carpeta `meta.<locale>.json` para títulos/orden/iconos.
+- `fallbackLanguage: en-US` para las traducciones que faltan.
+
+## Conexión de la aplicación.
+
+`fumadocs.source.ts`, diseño de la documentación, API de búsqueda. Añadir páginas → actualizar las matrices `pages` → reconstruir.

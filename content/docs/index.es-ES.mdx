@@ -1,0 +1,50 @@
+---
+title: Documentación
+description: SaaSy Land 2.0 — arquitectura, guías, características y documentación de referencia para el desarrollador full-stack.
+---
+
+¡Bienvenido a la documentación de **SaaSy Land 2.0**, una plataforma modular de inicio integral para SaaS, construida sobre TanStack Start.
+
+<Callout title={"Cómo utilizar esta documentación."}>
+  Prefiera **Guías** para las recetas de tareas y **Arquitectura** para indicar dónde se encuentra el código. **Funcionalidades** e
+  **Integraciones** describen la interfaz del producto y los adaptadores de proveedores, incluyendo áreas planificadas como los pagos.
+</Callout>
+
+## Comencemos aquí.
+
+<Cards>
+  <Card title={"Proyecto."} href="/docs/project/about">
+    Acerca del inicio, el registro de cambios, el plan de desarrollo y cómo contribuir.
+  </Card>
+  <Card title={"Comenzando."} href="/docs/getting-started">
+    Instalar las dependencias de Bun, configurar el entorno, migrar la base de datos, ejecutar localmente.
+  </Card>
+  <Card title={"Arquitectura"} href="/docs/architecture">
+    Módulos, entrega, integraciones, plataforma, SSR y límites de seguridad.
+  </Card>
+  <Card title={"Guías."} href="/docs/guides">
+    Añadir funcionalidades, DataTables, el estado de la URL de Nuqs, pruebas, autenticación y mucho más.
+  </Card>
+</Cards>
+
+## Capítulos
+
+| Capítulo.                       | Contenido                                                                      |
+| ------------------------------- | ------------------------------------------------------------------------------ |
+| Proyecto.                       | Acerca de, changelog, hoja de ruta, contribuciones.                            |
+| Comenzando.                     | Instalar, entorno, primera ejecución, scripts, previsualización de despliegue. |
+| Arquitectura                    | Capas, módulos, SSR/caché, proveedores.                                        |
+| Guías.                          | Características (recetas, Nuqs, pruebas, autenticación, etc.)                  |
+| Características                 | Auth, usuarios, productos, pagos (planificados), organizaciones, …             |
+| Integraciones                   | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend, …                               |
+| Sistema de interfaz de usuario. | Shadcn, DataTable, tema, composición.                                          |
+| Herramientas de desarrollo      | Vitest, Playwright, Vite+, habilidades del agente, CI.                         |
+| Referencia.                     | Rutas, entorno, convenciones, preguntas frecuentes.                            |
+
+## Edición local.
+
+Archivos de contenido: `content/docs`.
+
+MDX puede utilizar componentes de Fumadocs (`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`) y elementos seleccionados de shadcn primitives (`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …).
+
+Después de añadir páginas, actualice el archivo `meta.<locale>.json`, el array `pages` (el script de scaffolding lo hace por usted). Las páginas de la carpeta `index` son **índices de carpetas** — no incluya `index` de nuevo en `pages`.

@@ -1,0 +1,11 @@
+{
+  "empty": "Результатів не знайдено.",
+  "pagination": {
+    "nextPage": "Наступна сторінка",
+    "pageIndicator": "Сторінка {current} з {total}",
+    "previousPage": "Попередня сторінка",
+    "rowCount": "{count, plural, =0 {Немає рядків} one {# рядок} few {# рядки} many {# рядків} other {# рядка}}",
+    "selectedCount": "{selected, plural, one {Вибрано #} few {Вибрано #} many {Вибрано #} other {Вибрано #}}"
+  },
+  "resizeColumn": "Змінити розмір колонки"
+}

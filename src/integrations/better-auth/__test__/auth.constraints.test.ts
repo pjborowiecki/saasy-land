@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { PASSWORD_MIN_LENGTH, getPasswordRuleState } from "~/src/integrations/better-auth/auth.constraints"
 
 describe("get password rule state", () => {

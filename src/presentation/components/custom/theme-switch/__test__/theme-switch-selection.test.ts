@@ -1,3 +1,5 @@
+import { describe, expect, it, vi } from "vite-plus/test"
+
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 
 import { applyThemeSelection, isThemeValue } from "~/src/presentation/components/custom/theme-switch"

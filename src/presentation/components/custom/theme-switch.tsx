@@ -1,10 +1,10 @@
-"use client"
-
 import { type JSX, useCallback, useEffect, useState } from "react"
 
 import type { Key } from "@react-types/shared"
 import { useTheme } from "@wrksz/themes/client"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
+
+import { THEME } from "~/src/presentation/theme"
 
 import {
   Select,
@@ -17,21 +17,18 @@ import {
 } from "~/src/presentation/components/shadcn/select"
 import { Skeleton } from "~/src/presentation/components/shadcn/skeleton"
 
-import { THEME } from "~/src/presentation/theme"
-
 type ThemeValue = (typeof THEME.THEMES)[number]
 
-export function isThemeValue(value: Key | null): value is ThemeValue {
-  return typeof value === "string" && (THEME.THEMES as readonly string[]).includes(value)
-}
+export const isThemeValue = (value: Key | null): value is ThemeValue =>
+  typeof value === "string" && (THEME.THEMES as readonly string[]).includes(value)
 
-export function applyThemeSelection(value: Key | null, setTheme: (theme: ThemeValue) => void): void {
+export const applyThemeSelection = (value: Key | null, setTheme: (theme: ThemeValue) => void): void => {
   if (isThemeValue(value)) {
     setTheme(value)
   }
 }
 
-export function ThemeSwitchClient({
+export const ThemeSwitchClient = ({
   darkLabel,
   label,
   lightLabel,
@@ -43,7 +40,7 @@ export function ThemeSwitchClient({
   lightLabel: string
   placeholder: string
   systemLabel: string
-}): JSX.Element {
+}): JSX.Element => {
   const { theme, setTheme } = useTheme()
 
   const handleThemeChange = useCallback(
@@ -54,7 +51,7 @@ export function ThemeSwitchClient({
   )
 
   const [mounted, setMounted] = useState(false)
-  useEffect(function markThemeSwitchMounted() {
+  useEffect(() => {
     setMounted(true)
   }, [])
 
@@ -82,7 +79,7 @@ export function ThemeSwitchClient({
       <SelectTrigger className="h-9 w-full capitalize data-[size=default]:h-9">
         <SelectValue>
           {({ selectedText }) => {
-            if (selectedText !== undefined && selectedText !== null && selectedText.length > 0) {
+            if (selectedText.length > 0) {
               return selectedText
             }
 
@@ -104,7 +101,7 @@ export function ThemeSwitchClient({
   )
 }
 
-export function ThemeSwitch(): JSX.Element {
+export const ThemeSwitch = (): JSX.Element => {
   const t = useTranslations("components.custom.theme-switch")
 
   return (

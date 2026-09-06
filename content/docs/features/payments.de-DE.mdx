@@ -1,0 +1,18 @@
+---
+title: Zahlungen und Abrechnung.
+description: Bestellungen, Rückerstattungen und Stripe-basierte Abrechnung (geplant).
+---
+
+## Status
+
+Die Benutzeroberfläche unter `/admin/payments` verwendet heute Testdaten. Die `order`-Anweisungen in `APP_STATEMENTS` skizzieren bereits die Funktionen Lesen/Aktualisieren/Rückerstattung.
+
+## Geplante Architektur.
+
+- `modules/billing` oder `modules/order` Anwendungsfälle
+- Stripe- (oder Polar-) Integrationsordner
+- Webhook-Verarbeitungskomponente.
+- Kundenrechnungen unter `/app`.
+- Better-Auth-Nutzer ↔ Kunden-ID zuordnen
+
+Implementieren Sie die Berechtigungen serverseitig; geben Sie niemals geheime Schlüssel an den Client weiter.

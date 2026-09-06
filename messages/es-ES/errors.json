@@ -1,0 +1,32 @@
+{
+  "boundary": {
+    "title": "Algo ha salido mal",
+    "description": "Esta sección no se ha cargado. Puede volver a intentarlo sin salir de la página.",
+    "retry": "Inténtalo de nuevo"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que está buscando no existe o ha sido movida.",
+    "backHome": "Volver a la página principal"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Autenticación fallida. Por favor, inténtelo de nuevo.",
+    "CONFLICT": "Ya existe.",
+    "FORBIDDEN": "No tiene permiso para hacer esto.",
+    "INTERNAL_ERROR": "Algo ha salido mal. Por favor, inténtelo de nuevo.",
+    "NOT_FOUND": "No se ha encontrado.",
+    "TOO_MANY_REQUESTS": "Demasiados intentos. Por favor, inténtelo de nuevo en breve.",
+    "UNAUTHORIZED": "Debe estar conectado para continuar.",
+    "VALIDATION": "Por favor, revise el formulario e intente de nuevo."
+  },
+  "unauthorized": {
+    "title": "Inicio de sesión obligatorio",
+    "description": "Su sesión ha finalizado o no ha iniciado sesión. Inicie sesión para continuar.",
+    "signIn": "Iniciar sesión"
+  },
+  "forbidden": {
+    "title": "Acceso denegado",
+    "description": "Su cuenta no tiene permiso para acceder a esta página.",
+    "backToApp": "Volver a la aplicación"
+  }
+}

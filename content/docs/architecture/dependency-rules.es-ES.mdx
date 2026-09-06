@@ -1,0 +1,14 @@
+---
+title: Reglas de dependencias
+description: Reglas de dependencias — SaaSy Land
+---
+
+Las rutas importan la presentación y los casos de uso. La presentación importa las opciones de consulta/mutación nativas, esquemas y ayudantes compartidos. Los casos de uso importan los adaptadores de la base de datos y los proveedores a través de límites exclusivos del servidor. Las constantes del módulo y la validación deben ser utilizables tanto por las interfaces de usuario como por las funciones del servidor.
+
+No importe las vinculaciones de Worker ni la configuración que contenga secretos en un componente de navegador. TanStack Start divide… `createServerFn` Importar adaptadores compartidos que nunca deben ejecutarse en el navegador, fuera del paquete del navegador. `@tanstack/react-start/server-only`.
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

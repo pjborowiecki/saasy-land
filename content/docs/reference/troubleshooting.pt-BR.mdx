@@ -1,0 +1,16 @@
+---
+title: Solução de problemas.
+description: Solução de problemas... SaaSy Land
+---
+
+Se as consultas locais reportarem as mesas desaparecidas, corra. `bun run db:migrate:local` Os testes do navegador usam `db:migrate:test` e um separado D1 Se a autenticação falhar, verifique o URL do ambiente, `AUTH_SECRET`, as credenciais de provedor e URLs de retorno.
+
+Erros de tradução ausentes geralmente indicam um espaço de nomes omitido da rota ou uma chave faltando em um local. Corra. `check:i18n`Para documentação 404s, verifique o local. MDX Para falhas de pré-render, inspecione a primeira URL falhando na saída de compilação.
+
+Uma missão rejeitada para os placeholders precisa ser real. D1 e... KV As operações de construção e teste não criam recursos remotos automaticamente.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

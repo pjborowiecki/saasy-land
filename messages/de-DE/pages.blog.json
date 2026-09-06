@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "title": "Blog",
+    "description": "Was sich in SaaSy Land verändert hat, warum und zu welchem Preis."
+  },
+  "nav": {
+    "docs": "Dokumentation",
+    "blog": "Blog",
+    "home": "Startseite",
+    "getStarted": "Jetzt loslegen"
+  },
+  "index": {
+    "title": "Notizen zum Bauprozess.",
+    "description": "Was sich geändert hat, warum sich das geändert hat und welche Kosten damit verbunden waren. Geschrieben während des Baus des Produkts, das diese Website verkauft – daher bezieht sich jeder Artikel auf Code, der bereits ausgeliefert wurde, und nicht auf Code, der möglicherweise noch kommt.",
+    "empty": "Noch keine Veröffentlichungen."
+  },
+  "post": {
+    "backToBlog": "Alle Beiträge",
+    "writtenBy": "Verfasst von",
+    "dateLabel": "Veröffentlicht",
+    "contents": "Inhaltsverzeichnis",
+    "readingTime": "{minutes} Min. Lesezeit",
+    "cta": {
+      "label": "SaaSy Land 2.0",
+      "title": "Die drei zähen Monate, schon geschrieben.",
+      "body": "Authentifizierung in deiner eigenen Datenbank, Abrechnung, transaktionale E-Mails, eine Administrationskonsole, 9 Sprachen und eine Testabdeckung, die den Build scheitern lässt. Als Quellcode generiert, der dir gehört — keine gemietete Abhängigkeit.",
+      "primary": "Preise ansehen",
+      "secondary": "Zur Dokumentation"
+    },
+    "share": {
+      "label": "Teilen",
+      "x": "Teilen auf X",
+      "linkedin": "Teilen Sie es auf LinkedIn",
+      "copy": "Link kopieren",
+      "copied": "Link kopiert"
+    }
+  }
+}

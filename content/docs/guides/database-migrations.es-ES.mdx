@@ -1,0 +1,23 @@
+---
+title: D1 y Drizzle
+description: D1 y Drizzle – SaaSy Land
+---
+
+Cloudflare D1 es la base de datos de la aplicación. Los esquemas de módulos utilizan `drizzle-orm/sqlite-core`; `src/integrations/drizzle-orm/drizzle.schemas.ts` recolecta los. `drizzle.database.ts` genera el adaptador Drizzle D1 `env.DB`.
+
+Las fechas utilizan marcas de tiempo enteras de SQLite en milisegundos. Los campos booleanos utilizan el modo entero booleano de SQLite. Las relaciones, las restricciones únicas y las claves foráneas se mantienen en el esquema. Realizar la operación de forma atómica con una sentencia SQL o un lote D1; no introducir una piscina de conexiones PostgreSQL ni una transacción interactiva.
+
+Ejecutar `db:generate` Tras modificar los esquemas, revise y confirme el SQL generado, y aplícalo localmente. Las migraciones remotas son comandos específicos para cada entorno. Una base de datos PostgreSQL desplegada requiere una exportación y importación separadas y revisadas; generar migraciones SQLite no transfiere los datos existentes.
+
+```sh
+bun run db:generate
+bun run db:migrate:local
+# After configuring real preview bindings:
+bun run db:migrate:preview
+```
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

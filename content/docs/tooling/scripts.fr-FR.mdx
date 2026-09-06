@@ -1,0 +1,24 @@
+---
+title: Scénarios de projet
+description: Scénarios de projet — SaaSy Land
+---
+
+Scripts en `package.json` utiliser Vite+ pour le développement, le formatage, le lint, les types, Vitest et les builds. `content` génère des collections MDX; `cf-typegen` génère des types de reliure Worker. `db:generate` crée des migrations SQL; `db:migrate:local` les applique à D1 local. Les commandes de migration et de déploiement à distance nomment explicitement leur environnement.
+
+`build:preview` et `build:production` construire le Worker, préndre les pages publiques et vérifier les artefacts de déploiement. `clean` supprime la sortie générée et l'état de liaison locale, donc exportez toutes les données locales que vous voulez garder en premier.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

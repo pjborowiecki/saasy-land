@@ -1,12 +1,12 @@
+import type { JSX, ReactNode } from "react"
 // @vitest-environment jsdom
 
-import type { JSX, ReactNode } from "react"
-
 import { createColumnHelper } from "@tanstack/react-table"
-import { act, render, type RenderResult } from "@testing-library/react"
-import { NextIntlClientProvider } from "next-intl"
+import { type RenderResult, act, render } from "@testing-library/react"
+import { IntlProvider } from "use-intl/react"
+import { describe, expect, it } from "vite-plus/test"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 import type { DataTableColumnDef, DataTableFeatures, DataTableOptions } from "~/src/presentation/components/custom/data-table/features"
@@ -51,16 +51,14 @@ const COLUMNS = helper.columns([
 
 const PINNED_OPTIONS: DataTableOptions<Row> = { initialState: { columnPinning: { end: ["status"], start: ["select"] } } }
 
-function renderTable(options?: DataTableOptions<Row>): RenderResult {
-  const messages = loadLocaleMessagesFromDir("en-US")
+const renderTable = (options?: DataTableOptions<Row>): RenderResult => {
+  const messages = getTestMessages("en-US")
 
-  function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-    return (
-      <NextIntlClientProvider locale="en-US" messages={messages}>
-        {children}
-      </NextIntlClientProvider>
-    )
-  }
+  const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+    <IntlProvider locale="en-US" messages={messages}>
+      {children}
+    </IntlProvider>
+  )
 
   const table =
     options === undefined ? <DataTable columns={COLUMNS} data={DATA} /> : <DataTable columns={COLUMNS} data={DATA} options={options} />
@@ -68,7 +66,7 @@ function renderTable(options?: DataTableOptions<Row>): RenderResult {
   return render(table, { wrapper: Wrapper })
 }
 
-function resizeHandle(container: HTMLElement, index: number): Element {
+const resizeHandle = (container: HTMLElement, index: number): Element => {
   const handle = container.querySelectorAll('thead th button[aria-label="Resize column"]')[index]
 
   if (handle === undefined) {
@@ -78,7 +76,7 @@ function resizeHandle(container: HTMLElement, index: number): Element {
   return handle
 }
 
-function drag(handle: Element, from: number, to: number): void {
+const drag = (handle: Element, from: number, to: number): void => {
   act(() => {
     handle.dispatchEvent(new MouseEvent("mousedown", { bubbles: true, clientX: from }))
   })
@@ -183,15 +181,13 @@ describe("column pinning", () => {
   it("keeps the spacer and end region in skeleton rows while loading", () => {
     expect.hasAssertions()
 
-    const messages = loadLocaleMessagesFromDir("en-US")
+    const messages = getTestMessages("en-US")
 
-    function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-      return (
-        <NextIntlClientProvider locale="en-US" messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      )
-    }
+    const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+      <IntlProvider locale="en-US" messages={messages}>
+        {children}
+      </IntlProvider>
+    )
 
     const { container } = render(<DataTable columns={COLUMNS} data={EMPTY_DATA} isLoading options={PINNED_OPTIONS} />, { wrapper: Wrapper })
     const firstRowCells = container.querySelectorAll("tbody tr:first-child td")

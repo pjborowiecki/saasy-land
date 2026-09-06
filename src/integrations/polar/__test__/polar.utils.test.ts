@@ -1,6 +1,7 @@
-import type { LicenseKeyWithActivations } from "@polar-sh/sdk/models/components/licensekeywithactivations.js"
+import { env } from "cloudflare:workers"
 
-import { env } from "~/src/platform/env"
+import type { LicenseKeyWithActivations } from "@polar-sh/sdk/models/components/licensekeywithactivations.js"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 
@@ -46,7 +47,7 @@ const LICENSE_KEY: LicenseKeyWithActivations = {
   validations: 0,
 }
 
-vi.mock(import("server-only"), () => ({}))
+vi.mock(import("@tanstack/react-start/server-only"), () => ({}))
 
 describe("polar.utils", () => {
   it("returns the full key, not the masked one the webhook carries", async () => {

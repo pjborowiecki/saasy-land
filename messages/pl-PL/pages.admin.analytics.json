@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Analityka | SaaSy Land",
+    "description": "Śledź wyniki produktu, przychody i zaangażowanie użytkowników."
+  },
+  "title": "Przegląd analityki",
+  "description": "Śledź wyniki produktu, przychody i zaangażowanie użytkowników.",
+  "actions": {
+    "datePicker": "Ostatnie 30 dni"
+  },
+  "tabs": {
+    "overview": "Przegląd",
+    "revenue": "Przychody",
+    "audience": "Odbiorcy",
+    "retention": "Retencja",
+    "reports": "Raporty"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "Łączny MRR",
+      "value": "124 500 USD",
+      "trend": "14,2%",
+      "trendLabel": "wobec zeszłego miesiąca"
+    },
+    "activeUsers": {
+      "title": "Aktywni użytkownicy",
+      "value": "45 231",
+      "trend": "5,4%",
+      "trendLabel": "wobec zeszłego miesiąca"
+    },
+    "churn": {
+      "title": "Wskaźnik rezygnacji",
+      "value": "1,2%",
+      "trend": "0,4%",
+      "trendLabel": "wobec zeszłego miesiąca"
+    },
+    "arpu": {
+      "title": "Średni przychód na użytkownika",
+      "value": "42,50 USD",
+      "trend": "2,1%",
+      "trendLabel": "wobec zeszłego miesiąca"
+    }
+  },
+  "chart": {
+    "title": "Przegląd przychodów",
+    "description": "Dzienny przychód z ostatnich 30 dni.",
+    "placeholder": "Dane poglądowe. Rzeczywiste przychody pojawią się po podłączeniu płatności.",
+    "legend": {
+      "new": "Nowe subskrypcje",
+      "renewals": "Odnowienia"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "Dziś: {value}"
+  },
+  "regions": {
+    "title": "Najlepsze regiony",
+    "viewAll": "Zobacz wszystkie"
+  },
+  "upgrades": {
+    "title": "Ostatnie zmiany planu",
+    "viewAll": "Zobacz wszystkie"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Przejście na plan Pro",
+        "time": "2 min temu"
+      },
+      "u2": {
+        "action": "Przejście na Enterprise",
+        "time": "1 godzinę temu"
+      },
+      "u3": {
+        "action": "Przejście na plan Pro",
+        "time": "3 godziny temu"
+      },
+      "u4": {
+        "action": "Przejście na plan Team",
+        "time": "5 godzin temu"
+      },
+      "u5": {
+        "action": "Przejście na plan Pro",
+        "time": "1 dzień temu"
+      }
+    }
+  }
+}

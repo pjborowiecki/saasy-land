@@ -1,54 +1,50 @@
-"use client"
-
 import type { ComponentProps, ReactNode } from "react"
 
 import { XIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
 import {
   Dialog as DialogPrimitive,
   DialogTrigger as DialogTriggerPrimitive,
+  type DialogTriggerProps as DialogTriggerPrimitiveProps,
   Heading,
   ModalOverlay as ModalOverlayPrimitive,
-  Modal as ModalPrimitive,
-  type DialogTriggerProps as DialogTriggerPrimitiveProps,
   type ModalOverlayProps as ModalOverlayPrimitiveProps,
+  Modal as ModalPrimitive,
 } from "react-aria-components"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
-function DialogTrigger({ ...props }: Readonly<DialogTriggerPrimitiveProps>) {
-  return <DialogTriggerPrimitive data-slot="dialog-trigger" {...props} />
-}
+const DialogTrigger = ({ ...props }: Readonly<DialogTriggerPrimitiveProps>) => (
+  <DialogTriggerPrimitive data-slot="dialog-trigger" {...props} />
+)
 
-function DialogClose({ className, size = "default", variant = "outline", ...props }: ComponentProps<typeof Button>) {
-  return <Button className={cn(className)} data-slot="dialog-close" size={size} slot="close" variant={variant} {...props} />
-}
+const DialogClose = ({ className, size = "default", variant = "outline", ...props }: ComponentProps<typeof Button>) => (
+  <Button className={cn(className)} data-slot="dialog-close" size={size} slot="close" variant={variant} {...props} />
+)
 
-function DialogOverlay({
+const DialogOverlay = ({
   children,
   className,
   ...props
 }: Omit<ModalOverlayPrimitiveProps, "children" | "className"> & {
   children: ReactNode
   className?: string
-}) {
-  return (
-    <ModalOverlayPrimitive
-      className={cn(
-        "fixed inset-0 isolate z-50 bg-black/10 duration-100 data-entering:animate-in data-entering:fade-in-0 data-exiting:animate-out data-exiting:fade-out-0 supports-backdrop-filter:backdrop-blur-xs",
-        className,
-      )}
-      data-slot="dialog-overlay"
-      {...props}
-    >
-      {children}
-    </ModalOverlayPrimitive>
-  )
-}
+}) => (
+  <ModalOverlayPrimitive
+    className={cn(
+      "fixed inset-0 isolate z-50 bg-black/10 duration-100 data-entering:animate-in data-entering:fade-in-0 data-exiting:animate-out data-exiting:fade-out-0 supports-backdrop-filter:backdrop-blur-xs",
+      className,
+    )}
+    data-slot="dialog-overlay"
+    {...props}
+  >
+    {children}
+  </ModalOverlayPrimitive>
+)
 
-function Dialog({
+const Dialog = ({
   children,
   className,
   isDismissable = true,
@@ -59,7 +55,7 @@ function Dialog({
     children: ReactNode
     className?: string
     showCloseButton?: boolean
-  }) {
+  }) => {
   const t = useTranslations("components.shadcn.dialog")
 
   return (
@@ -85,18 +81,18 @@ function Dialog({
   )
 }
 
-function DialogHeader({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("flex flex-col gap-2", className)} data-slot="dialog-header" {...props} />
-}
+const DialogHeader = ({ className, ...props }: ComponentProps<"div">) => (
+  <div className={cn("flex flex-col gap-2", className)} data-slot="dialog-header" {...props} />
+)
 
-function DialogFooter({
+const DialogFooter = ({
   children,
   className,
   showCloseButton = false,
   ...props
 }: ComponentProps<"div"> & {
   showCloseButton?: boolean
-}) {
+}) => {
   const t = useTranslations("components.shadcn.dialog")
 
   return (
@@ -111,26 +107,22 @@ function DialogFooter({
   )
 }
 
-function DialogTitle({ className, ...props }: Readonly<Omit<ComponentProps<typeof Heading>, "slot">>) {
-  return (
-    <Heading
-      className={cn("cn-font-heading text-base leading-none font-medium", className)}
-      data-slot="dialog-title"
-      slot="title"
-      {...props}
-    />
-  )
-}
+const DialogTitle = ({ className, ...props }: Readonly<Omit<ComponentProps<typeof Heading>, "slot">>) => (
+  <Heading
+    className={cn("cn-font-heading text-base leading-none font-medium", className)}
+    data-slot="dialog-title"
+    slot="title"
+    {...props}
+  />
+)
 
-function DialogDescription({ className, ...props }: Readonly<Omit<ComponentProps<"div">, "slot">>) {
-  return (
-    <div
-      className={cn("text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground", className)}
-      data-slot="dialog-description"
-      {...props}
-    />
-  )
-}
+const DialogDescription = ({ className, ...props }: Readonly<Omit<ComponentProps<"div">, "slot">>) => (
+  <div
+    className={cn("text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground", className)}
+    data-slot="dialog-description"
+    {...props}
+  />
+)
 
 export type { DialogProps as DialogPrimitiveProps, DialogTriggerProps as DialogTriggerPrimitiveProps } from "react-aria-components"
 

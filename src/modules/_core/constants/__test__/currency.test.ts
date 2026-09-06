@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { CURRENCIES, CURRENCY_CODES, DEFAULT_CURRENCY_CODE } from "~/src/modules/_core/constants/currency"
 
 describe("currency catalog", () => {

@@ -16,14 +16,14 @@ mapping to remember. Only the exported React components are PascalCase, because 
 
 | Id              | Component      | Sits in                    | Draws                                                        |
 | --------------- | -------------- | -------------------------- | ------------------------------------------------------------ |
-| `app-tour`      | `AppTour`      | Hero → product bezel       | The console toured from dashboard to analytics and back       |
-| `cost-curve`    | `CostCurve`    | The line → auth cell       | Metered pricing curving away from a bill that stays at `$0`   |
-| `merge-gate`    | `MergeGate`    | The line → tests cell      | Commits reaching the coverage gate; the broken one stopped    |
-| `locale-format` | `LocaleFormat` | The line → i18n cell       | One number and one date re-formatted by `Intl` per locale     |
-| `scaffold-cli`  | `ScaffoldCli`  | The line → edge cell       | The CLI answering a prompt and writing the repository's tree  |
-| `coverage-run`  | `CoverageRun`  | Quality control → terminal | `bun run test:coverage`, printing and counting to 100         |
-| `page-designer` | `PageDesigner` | Studio → builder card      | Alignment and padding cycling, with the canvas answering      |
-| `record-audit`  | `RecordAudit`  | Record → under the receipt | Each claim resolving to the file it is read out of            |
+| `app-tour`      | `AppTour`      | Hero → product bezel       | The console toured from dashboard to analytics and back      |
+| `cost-curve`    | `CostCurve`    | The line → auth cell       | Metered pricing curving away from a bill that stays at `$0`  |
+| `merge-gate`    | `MergeGate`    | The line → tests cell      | Commits reaching the coverage gate; the broken one stopped   |
+| `locale-format` | `LocaleFormat` | The line → i18n cell       | One number and one date re-formatted by `Intl` per locale    |
+| `scaffold-cli`  | `ScaffoldCli`  | The line → edge cell       | The CLI answering a prompt and writing the repository's tree |
+| `coverage-run`  | `CoverageRun`  | Quality control → terminal | `bun run test:coverage`, printing and counting to 100        |
+| `page-designer` | `PageDesigner` | Studio → builder card      | Alignment and padding cycling, with the canvas answering     |
+| `record-audit`  | `RecordAudit`  | Record → under the receipt | Each claim resolving to the file it is read out of           |
 
 Loops are placed at page positions 1, 6, 7, 9 and 10 of 14. The last four sections (Compare,
 Pricing, FAQ, Gate) are deliberately still: they are decision-making surfaces, and motion beside a
@@ -55,7 +55,7 @@ mean quoting a competitor's price sheet.
 two ways at once: its poster showed a finished console while the video started from an empty one,
 and it rebuilt itself from nothing on every repeat. Both read as the page refreshing.
 
-So for anything that depicts a product surface, the last frame must be *byte-identical* to the
+So for anything that depicts a product surface, the last frame must be _byte-identical_ to the
 first, `seam` must be off, and the poster must be frame 0. Check it:
 
 ```bash

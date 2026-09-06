@@ -1,0 +1,14 @@
+---
+title: Cloudflare KV
+description: Cloudflare KV — SaaSy Land
+---
+
+`env.CACHE` speichert öffentliche, temporäre Cache-Einträge. Die GitHub-Integration speichert die Anzahl der Sterne mit einer TTL und verwendet `waitUntil` für das Schreiben in den Cache. Sie greift bei Ausfall von GitHub oder KV auf alternative Lösungen zurück.
+
+KV ist letztendlich konsistent. Authentifizierungs-Sessions und Ratenbegrenzungen werden in D1 gespeichert. Der Aktionsbegrenzer verwendet für jeden Schlüssel und Zeitfenster jeweils einen atomaren SQL-Upsert-Vorgang, sodass Anfragen, die von verschiedenen Worker-Instanzen bearbeitet werden, dieselbe Begrenzung einhalten. Verwenden Sie KV-Zähler nicht für die Autorisierung oder für sensible Begrenzungen.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

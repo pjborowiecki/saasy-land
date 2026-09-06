@@ -1,0 +1,25 @@
+---
+title: "Deploy to Cloudflare Workers"
+description: "Deploy to Cloudflare Workers — SaaSy Land"
+---
+
+The Worker build is produced by Vite+, TanStack Start and `@cloudflare/vite-plugin`. `wrangler.jsonc` declares the entry, compatibility settings, assets, observability and separate development, preview and production bindings.
+
+Provision D1 and KV and replace the placeholder IDs for the target environment. Set its URL and provider secrets in `.env.preview` or `.env.production`. Apply migrations explicitly, then deploy. Deploy scripts validate binding IDs first; build scripts prerender public pages and verify output artifacts. Authentication and private application pages run dynamically on the Worker.
+
+Set the custom domain and OAuth callback URLs for the target environment. Installing dependencies and building never applies a remote migration.
+
+```sh
+bunx wrangler login
+bunx wrangler d1 create saasyland_preview
+bunx wrangler kv namespace create CACHE --env preview
+# Update wrangler.jsonc and .env.preview first.
+bun run db:migrate:preview
+bun run deploy:preview
+```
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Informativa sulla privacy",
+    "description": "Come SaaSy Land tratta i dati di account, pagamenti, newsletter e funzionamento tecnico e come esercitare i tuoi diritti sulla privacy."
+  },
+  "title": "Informativa sulla privacy",
+  "lastUpdated": "Ultimo aggiornamento: 6 settembre 2026",
+  "description": "Come SaaSy Land tratta i dati di account, pagamenti, newsletter e funzionamento tecnico e come esercitare i tuoi diritti sulla privacy.",
+  "sections": {
+    "controller": {
+      "title": "Chi è il titolare",
+      "body": "SaaSy Land, disponibile su saasyland.com, è gestito da Piotr Borowiecki, titolare del trattamento dei dati personali qui descritto. Per domande o richieste sulla privacy, scrivi a hello@saasyland.com."
+    },
+    "collection": {
+      "title": "Quali dati raccogliamo",
+      "body": "Se crei un account, conserviamo il tuo nome, l'indirizzo email, l'immagine del profilo (se fornita), le impostazioni dell'account e lo stato di verifica. Le password sono memorizzate sotto forma di hash. Se scegli l'accesso tramite Google o GitHub, riceviamo le informazioni del profilo e di autenticazione necessarie per accedere al tuo account. I registri delle sessioni possono includere il tuo indirizzo IP, le informazioni sul browser e la data di scadenza. L'autenticazione a due fattori memorizza le informazioni necessarie per proteggere il tuo account.\n\nGli acquisti creano record relativi a clienti, ordini e licenze, inclusa la chiave generata, il suo stato e i record di attivazione associati. Polar gestisce i dati di emissione e attivazione delle licenze; il tuo account mostra i dispositivi attivi e ti permette di rilasciare un'attivazione. I dettagli della carta di credito sono gestiti dal fornitore di servizi di pagamento. I registri delle newsletter contengono il tuo indirizzo email, la lingua selezionata, la fonte di registrazione, lo stato di abbonamento, i token di conferma e disiscrizione, e i relativi timestamp. Le richieste generano anche log di sicurezza e operativi."
+    },
+    "purposes": {
+      "title": "Perché li utilizziamo",
+      "body": "Utilizziamo i dati dell’account e degli acquisti per fornire l’accesso, autenticarti, consegnare ciò che hai acquistato, offrire assistenza e gestire le licenze. Le email transazionali verificano gli indirizzi, confermano le modifiche e aiutano a recuperare gli account. Le newsletter vengono inviate dopo la conferma dell’iscrizione. Le informazioni tecniche aiutano a prevenire abusi, analizzare errori e mantenere affidabile il servizio."
+    },
+    "basis": {
+      "title": "Basi giuridiche",
+      "body": "Il trattamento necessario per fornire l’account e gestire gli acquisti si basa sull’esecuzione di un contratto o di misure precontrattuali richieste da te, ai sensi dell’articolo 6, paragrafo 1, lettera b del GDPR. L’invio della newsletter si basa sul consenso, lettera a. Sicurezza, prevenzione degli abusi e affidabilità del servizio si basano su interessi legittimi, lettera f. I documenti richiesti dalla normativa fiscale, contabile o da altre leggi applicabili sono trattati per adempiere obblighi legali, lettera c. Un indirizzo email è necessario per accedere a un account; l’iscrizione alla newsletter è facoltativa."
+    },
+    "providers": {
+      "title": "Fornitori e trasferimenti di dati",
+      "body": "Cloudflare fornisce hosting, database, cache e infrastruttura operativa. Resend invia le email. Polar gestisce il checkout e i pagamenti come Merchant of Record e tratta i dati secondo la propria informativa sulla privacy. Google e GitHub intervengono solo se scegli le rispettive opzioni di accesso. Possiamo inoltre comunicare informazioni quando richiesto dalla legge. Non vendiamo dati personali né condividiamo gli indirizzi della newsletter per il marketing di altre aziende.\n\nQuesti fornitori possono trattare dati al di fuori del tuo paese, anche fuori dallo SEE. Quando richiesto, i trasferimenti si basano su una decisione di adeguatezza applicabile o su garanzie contrattuali, come le clausole contrattuali tipo della Commissione europea. Contattaci per informazioni sulle garanzie pertinenti ai tuoi dati."
+    },
+    "retention": {
+      "title": "Per quanto tempo conserviamo i dati",
+      "body": "I dati dell’account vengono conservati finché sono necessari per gestirlo e fornire assistenza. Dopo la cancellazione dell’account, i dati vengono eliminati o anonimizzati, salvo che la conservazione sia necessaria per obblighi legali, prevenzione delle frodi o risoluzione di controversie. I documenti contabili e di pagamento sono conservati per il periodo previsto dalla legge. I dati di sessione e sicurezza vengono conservati solo per il tempo necessario alla loro finalità. I contatori scaduti dei limiti di richieste vengono eliminati ogni giorno.\n\nLe informazioni della newsletter vengono conservate durante l’iscrizione attiva. Dopo la cancellazione, una registrazione può essere mantenuta per rispettare la tua scelta ed evitare una nuova iscrizione accidentale. Puoi richiederne l’eliminazione. Le copie nei backup o nei sistemi dei fornitori possono rimanere fino alla scadenza dei rispettivi periodi ordinari di conservazione."
+    },
+    "cookies": {
+      "title": "Cookie e archiviazione locale",
+      "body": "I cookie essenziali di autenticazione mantengono attivo l’accesso e contribuiscono alla sicurezza dell’account. Il cookie saasyland.com_locale ricorda la lingua delle pagine che visiti. La memoria del browser può conservare anche preferenze dell’interfaccia, come il tema o lo stato della barra laterale. Queste funzioni supportano il servizio e le tue scelte.\n\nL’applicazione non aggiunge strumenti di tracciamento pubblicitario né cookie di analisi. I servizi esterni di accesso e pagamento seguono proprie pratiche di memorizzazione. Bloccare i cookie essenziali può impedire l’accesso o il funzionamento delle preferenze linguistiche."
+    },
+    "rights": {
+      "title": "Le tue scelte e i tuoi diritti",
+      "body": "A seconda della legge applicabile, puoi richiedere accesso, rettifica, cancellazione, limitazione del trattamento o una copia portabile dei dati e opporti ai trattamenti basati su interessi legittimi. Puoi revocare il consenso alla newsletter in qualsiasi momento tramite il link di cancellazione o contattandoci; ciò non pregiudica la liceità del trattamento precedente alla revoca. Non prendiamo decisioni che ti riguardano basate esclusivamente su trattamenti automatizzati con effetti giuridici o analogamente significativi.\n\nInvia le richieste a hello@saasyland.com. Potremmo dover verificare la tua identità. Risponderemo entro il termine previsto dalla legge, normalmente un mese ai sensi del GDPR. Puoi presentare un reclamo a un’autorità di protezione dei dati, tra cui il presidente dell’Ufficio polacco per la protezione dei dati personali (UODO), o all’autorità del luogo in cui vivi o lavori."
+    },
+    "changes": {
+      "title": "Modifiche all’informativa",
+      "body": "Aggiorniamo questa informativa quando cambiano il servizio o le modalità di trattamento dei dati. La data riportata sopra identifica la versione attuale. Se una modifica richiede una comunicazione specifica o il tuo consenso, li forniremo o acquisiremo prima di applicarla."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+---
+title: Ajouter une page d'administration
+description: Enregistrez les itinéraires, la barre latérale et le shell de page.
+---
+
+## Étapes
+
+1. Ajouter le chemin à `ROUTES`
+2. Ajouter une entrée dans la barre latérale `admin/constants/sidebar.ts` (+ étiquettes i18n)
+3. Créer `app/[locale]/(admin)/admin/<feature>/page.tsx`
+4. Colocate `_components` / `_lib`
+5. Données Gate avec cas d'utilisation + Suspense
+6. Document sous Caractéristiques

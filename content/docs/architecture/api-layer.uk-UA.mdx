@@ -1,0 +1,28 @@
+---
+title: TanStack Start HTTP обробники
+description: TanStack Start HTTP обробники - SaaSy Land
+---
+
+HTTP endpoints використовувати рідні TanStack Start обробники сервера в `src/routes`. Better Auth власники GET і POST під `/api/auth/$`; Fumadocs пошук використовує `/api/search`. . Робота з серверами є локальними функціями.
+
+Декларатори на ручках `createFileRoute` з `server.handlers`. . Використовуйте поставку `request`, валідувати вхід, виконувати перевірки дозволу, і повернути Веб-сайт `Response`. . Зберігати перевірку вебхока в інтеграції провайдера. Не піддавати дублікати REST кінцевої точки для операції, яка використовується тільки цим користувачем RPC клієнту.
+
+```ts
+import { createFileRoute } from "@tanstack/react-router"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+
+export const Route = createFileRoute("/api/auth/$")({
+  server: {
+    handlers: {
+      GET: ({ request }) => auth.handler(request),
+      POST: ({ request }) => auth.handler(request),
+    },
+  },
+})
+```
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

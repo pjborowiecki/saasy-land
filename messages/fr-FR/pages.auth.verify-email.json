@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Vérifier l'adresse e-mail",
+    "description": "Vérifiez l’adresse e-mail de votre compte {name}."
+  },
+  "form": {
+    "title": "Vérifiez votre adresse e-mail",
+    "description": "Veuillez confirmer votre adresse e-mail pour finaliser la configuration de votre compte.",
+    "verifying": "Vérification de votre adresse e-mail…",
+    "success": "Votre adresse e-mail a été vérifiée.",
+    "continue": "Continuer",
+    "invalidToken": "Ce lien de vérification est invalide ou a expiré.",
+    "pendingDescription": "Consultez votre boîte de réception et suivez le lien de vérification. Connectez-vous ensuite pour continuer.",
+    "email": "E-mail",
+    "emailPlaceholder": "Votre adresse e-mail",
+    "emailRequired": "Entrez votre adresse e-mail pour renvoyer le lien de vérification.",
+    "resend": "Renvoyer l’e-mail de vérification",
+    "resendSuccess": "Si un compte existe pour cette adresse e-mail, un nouveau lien de vérification a été envoyé.",
+    "backToSignIn": "Retour à la connexion",
+    "resending": "Envoi de l’e-mail de vérification…"
+  }
+}

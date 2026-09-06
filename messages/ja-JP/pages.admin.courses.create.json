@@ -1,0 +1,71 @@
+{
+  "title": "コースを作成する",
+  "actions": {
+    "cancel": "キャンセル",
+    "save": "コースを保存する"
+  },
+  "sections": {
+    "general": {
+      "title": "一般的な情報",
+      "name": {
+        "label": "コースタイトル",
+        "placeholder": "高度なUIデザインパターン..."
+      },
+      "description": {
+        "label": "説明",
+        "placeholder": "学生が学ぶ内容について、簡潔に説明してください。",
+        "help": "コースの紹介ページに表示されます。"
+      }
+    },
+    "curriculum": {
+      "title": "カリキュラム",
+      "description": "コースをセクションとレッスンに分けて構成してください。",
+      "expandAll": "すべてを展開する",
+      "addSection": "新しいセクションを追加する",
+      "addLesson": "レッスンを追加する"
+    },
+    "pricing": {
+      "title": "価格と利用方法",
+      "model": {
+        "label": "料金体系",
+        "oneTime": "一回払い",
+        "subscription": "サブスクリプション"
+      },
+      "price": {
+        "label": "価格",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "アクセス期間",
+        "lifetime": "生涯利用可能"
+      }
+    },
+    "status": {
+      "title": "ステータス",
+      "publish": {
+        "label": "コースを公開する",
+        "description": "受講者に公開する"
+      },
+      "certificate": {
+        "label": "証明書の発行",
+        "description": "全項目の修了時"
+      }
+    },
+    "media": {
+      "title": "コースのサムネイル",
+      "upload": "画像をアップロードする",
+      "help": "推奨解像度：1920x1080ピクセル"
+    },
+    "organization": {
+      "title": "組織",
+      "category": {
+        "label": "カテゴリ",
+        "placeholder": "カテゴリを選択してください。"
+      },
+      "difficulty": {
+        "label": "難易度",
+        "placeholder": "初心者、上級者..."
+      }
+    }
+  }
+}

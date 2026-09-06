@@ -1,0 +1,14 @@
+---
+title: Rollen und Berechtigungen.
+description: Rollen und Berechtigungen — SaaSy Land
+---
+
+Die Rollen und Anweisungen sind im Verzeichnis `src/integrations/better-auth/auth.access.ts` gespeichert. Die Standardrolle ist "Kunde". Administratorzugriff wird durch `requireAdmin` geprüft; jede Serveroperation überprüft die benötigte Anweisung mit `withAuth`.
+
+Behalten Sie Rollenwechsel, Sperrungen, Sitzungsaufhebungen und Identitätsdiebstahl in den Anwendungsfällen für Benutzer und Sitzungen bei. Leiten Sie den aktuellen Benutzer aus der Anfrage-Sitzung ab und ungültig machen Sie betroffene Abfragegruppen nach einer Änderung. Das Ausblenden eines Buttons ist eine Darstellungseigenschaft und ersetzt keine Autorisierung.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

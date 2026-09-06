@@ -1,0 +1,18 @@
+---
+title: Pagamentos e faturamento
+description: Ordens, reembolsos, e Stripe- faturamento orientado (planejado).
+---
+
+## Status
+
+Administrador. `/admin/payments` A UI usa ridicularizações hoje. O `order` Declarações em: `APP_STATEMENTS` Já esboce leitura/atualização/reembolso.
+
+## Arquitetura planejada.
+
+- `modules/billing` ou `modules/order` Casos de uso
+- Stripe (ou Polar) pasta integração
+- Liderador de rotas Webhooks.
+- As faturas do cliente estão abaixo. `/app`
+- Mapa Better Auth usuário ↔ ID do cliente
+
+Implementar por trás das permissões, nunca expor chaves secretas ao cliente.

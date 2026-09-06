@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Produtos | SaaSy Land",
+    "description": "Gerencie produtos físicos, downloads digitais e assinaturas de conteúdo protegido."
+  },
+  "tabs": {
+    "all": "Todos os produtos",
+    "onetime": "Compras únicas",
+    "subscriptions": "Assinaturas",
+    "drafts": "Rascunhos",
+    "categories": "Categorias",
+    "collections": "Coleções",
+    "courses": "Cursos"
+  },
+  "title": "Produtos",
+  "description": "Gerencie produtos físicos, downloads digitais e assinaturas de conteúdo protegido.",
+  "actions": {
+    "create": "Criar produto"
+  },
+  "search": {
+    "placeholder": "Pesquise produtos por nome ou código."
+  },
+  "filters": {
+    "type": "Tipo: Todos",
+    "status": "Status: Ativo",
+    "category": "Categoria",
+    "collection": "Coleção",
+    "cycle": "Ciclo",
+    "model": "Modelo",
+    "visibility": "Visibilidade",
+    "sortby": "Ordenar por"
+  },
+  "table": {
+    "headers": {
+      "product": "Produto",
+      "type": "Tipo",
+      "pricing": "Preços",
+      "status": "Status",
+      "metrics": "Métricas"
+    },
+    "actionsColumn": "Ações da linha",
+    "emptyValue": "n/a",
+    "rowActions": "Ações da linha",
+    "selectAll": "Selecionar todas as linhas",
+    "selectRow": "Selecione a linha",
+    "statusLabels": {
+      "archived": "Arquivado",
+      "draft": "Rascunho",
+      "published": "Ativo"
+    },
+    "typeLabels": {
+      "course": "Curso",
+      "one_time": "Único",
+      "subscription": "Assinatura"
+    },
+    "visibilityLabels": {
+      "hidden": "Oculta",
+      "public": "Pública"
+    }
+  },
+  "pagination": {
+    "info": "Exibindo de {start} a {end} de {total} produtos",
+    "goToPage": "Ir para a página {page}",
+    "nextPage": "Próxima página",
+    "previousPage": "Página anterior"
+  },
+  "onetime": {
+    "title": "Compras únicas",
+    "description": "Gerencie produtos individuais, downloads digitais e produtos físicos."
+  },
+  "subscriptions": {
+    "title": "Assinaturas",
+    "description": "Gerencie planos de cobrança recorrentes, níveis de assinatura e preços baseados no uso.",
+    "table": {
+      "headers": {
+        "product": "Nome do Plano",
+        "model": "Modelo",
+        "pricing": "Preços",
+        "status": "Status",
+        "metrics": "Métricas"
+      }
+    }
+  },
+  "categories": {
+    "title": "Categorias",
+    "description": "Organize seus produtos, planos de assinatura e produtos digitais.",
+    "table": {
+      "headers": {
+        "category": "Categoria",
+        "visibility": "Visibilidade",
+        "items": "Itens",
+        "lastUpdated": "Última atualização"
+      }
+    }
+  },
+  "collections": {
+    "title": "Coleções",
+    "description": "Organize e agrupe seus produtos, planos de assinatura e produtos digitais.",
+    "table": {
+      "headers": {
+        "collection": "Coleção",
+        "visibility": "Visibilidade",
+        "items": "Itens",
+        "lastUpdated": "Última atualização"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Ainda não há cursos disponíveis",
+      "description": "Os cursos que você publica aparecem aqui, com suas aulas, preços e número de inscrições. Crie o primeiro para começar.",
+      "action": "Criar curso"
+    }
+  }
+}

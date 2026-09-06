@@ -1,0 +1,20 @@
+---
+title: Utilisateurs (admin)
+description: Table des utilisateurs en direct, onglets, imitation, ban/role/mot de passe.
+---
+
+## Itinéraires
+
+`/admin/users` avec la recherche TanStack Router `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## Module
+
+`modules/user/use-cases` — list/create/update/delete, ban/unban, set role/password, personnalite, table de rafraîchissement.
+
+## Prestations de chômage
+
+Tableau des données `admin/users/components/all-users-tab`C'est vrai. L'état est **dérivés** (`getUserStatus`: actif / en attente / interdit), pas une colonne DB enum.
+
+## État de l' URL
+
+`admin/users/constants/search-params.ts` — analyseurs partagés + `searchParamsCache`.

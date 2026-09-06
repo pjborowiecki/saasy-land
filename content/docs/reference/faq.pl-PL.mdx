@@ -1,0 +1,26 @@
+---
+title: "Najczęstsze pytania"
+description: "Najczęstsze pytania — SaaSy Land"
+---
+
+## Jakie środowisko uruchamia aplikację?
+
+Cloudflare Workers. Bun zarządza pakietami i skryptami, a Vite+ buduje i testuje aplikację.
+
+## Czy lokalne testy wymagają konta Cloudflare?
+
+Nie. Testy jednostkowe i integracyjne używają SQLite i mocków bindingów. Testy przeglądarkowe używają osobnego lokalnego Workera i D1. Wdrożenie wymaga prawdziwych bindingów.
+
+## Gdzie umieścić nową operację?
+
+W katalogu `use-cases` odpowiedniego modułu. Trasa koordynuje ładowanie, a funkcja serwerowa waliduje i autoryzuje operację.
+
+## Jak zorganizowane są języki?
+
+Angielski używa adresów bez prefiksu. Pozostałe osiem języków używa pełnego kodu locale, np. `/pl-PL` lub `/ja-JP`. Każdy z dziewięciu języków ma taki sam zestaw przestrzeni nazw w `messages`.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

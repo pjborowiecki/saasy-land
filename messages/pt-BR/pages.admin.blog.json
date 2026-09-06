@@ -1,0 +1,91 @@
+{
+  "title": "Publicações",
+  "description": "Crie, gerencie e analise o conteúdo do seu blog.",
+  "actions": {
+    "categories": "Categorias",
+    "writePost": "Escreva um post",
+    "loadMore": "Carregar mais artigos"
+  },
+  "stats": {
+    "totalViews": "Visualizações Totais (30 dias)",
+    "subscribers": "Assinantes",
+    "publishedPosts": "Posts publicados",
+    "draftsPending": "{count} rascunhos pendentes"
+  },
+  "filters": {
+    "all": "Todas as publicações",
+    "published": "Publicado",
+    "drafts": "Rascunhos",
+    "scheduled": "Agendado",
+    "search": "Pesquisar artigos..."
+  },
+  "badges": {
+    "published": "Publicado",
+    "draft": "Rascunho",
+    "scheduled": "Agendado"
+  },
+  "meta": {
+    "readTime": "{minutes} min de leitura",
+    "publishedOn": "{date}",
+    "lastEdited": "Última edição: {time}",
+    "publishesTomorrow": "Será publicado amanhã"
+  },
+  "labels": {
+    "gridView": "Visão em grade",
+    "tableView": "Visão da Tabela",
+    "moreOptions": "Mais opções"
+  },
+  "table": {
+    "postDetails": "Detalhes da publicação",
+    "status": "Status",
+    "category": "Categoria",
+    "author": "Autor",
+    "date": "Data",
+    "views": "Visualizações",
+    "actions": "Ações",
+    "selectRow": "Selecione a linha",
+    "emptyValue": "Não definido",
+    "rowActions": "Ações da linha"
+  },
+  "pagination": {
+    "info": "Exibindo de {start} a {end} de {total} artigos"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "Escalando a arquitetura do banco de dados para um crescimento de 10 vezes",
+        "description": "Uma análise técnica detalhada de como nossa equipe de engenharia migrou de uma arquitetura monolítica para uma arquitetura distribuída.",
+        "category": "Engenharia"
+      },
+      "post-2": {
+        "title": "Apresentando o Painel de Análise Avançada 2.0",
+        "description": "Completamente reformulamos nossas ferramentas de relatório para fornecer a você informações mais detalhadas sobre o comportamento de seus clientes e indicadores de receita.",
+        "category": "Atualização do produto"
+      },
+      "post-3": {
+        "title": "A Evolução do Nosso Sistema de Design",
+        "description": "Desenvolver uma linguagem visual consistente que possa ser aplicada em diversas plataformas, incluindo web, dispositivos móveis e ferramentas administrativas internas.",
+        "category": "Design"
+      },
+      "post-4": {
+        "title": "Anunciamos nossa rodada de investimento Série B",
+        "description": "Temos o prazer de anunciar um investimento de 25 milhões de dólares, liderado por empresas de capital de risco de destaque, para acelerar nosso crescimento.",
+        "category": "Notícias da Empresa"
+      },
+      "post-5": {
+        "title": "Dominando os Webhooks para Dados em Tempo Real",
+        "description": "Aprenda como criar sistemas de webhooks robustos que processam milhões de eventos com segurança.",
+        "category": "Tutorial"
+      },
+      "post-6": {
+        "title": "Estratégias para Reduzir o Desligamento de Clientes",
+        "description": "Táticas comprovadas de retenção utilizadas pelas empresas de SaaS que apresentam o crescimento mais rápido.",
+        "category": "Marketing"
+      }
+    },
+    "dates": {
+      "draft": "2 horas atrás",
+      "scheduled": "Amanhã"
+    }
+  }
+}

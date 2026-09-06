@@ -1,6 +1,7 @@
 import type * as BetterAuthClientPluginsModule from "better-auth/client/plugins"
-import type { createAuthClient } from "better-auth/react"
 import type * as BetterAuthReactModule from "better-auth/react"
+import type { createAuthClient } from "better-auth/react"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { authClient } from "~/src/integrations/better-auth/auth.client"
 
@@ -36,11 +37,9 @@ vi.mock(import("better-auth/react"), async (importOriginal): Promise<Partial<typ
   }
 })
 
-function isRedirectHandler(value: unknown): value is () => void {
-  return typeof value === "function"
-}
+const isRedirectHandler = (value: unknown): value is () => void => typeof value === "function"
 
-function readTwoFactorRedirect(): (() => void) | undefined {
+const readTwoFactorRedirect = (): (() => void) | undefined => {
   const plugins = capturedConfig.value?.plugins
 
   if (!Array.isArray(plugins)) {
@@ -48,7 +47,7 @@ function readTwoFactorRedirect(): (() => void) | undefined {
   }
 
   for (const plugin of plugins) {
-    if (typeof plugin === "object" && plugin !== null && "onTwoFactorRedirect" in plugin) {
+    if ("onTwoFactorRedirect" in plugin) {
       const { onTwoFactorRedirect } = plugin
 
       if (isRedirectHandler(onTwoFactorRedirect)) {
@@ -82,7 +81,7 @@ describe("better auth client", () => {
     vi.stubGlobal("location", location)
     onTwoFactorRedirect?.()
 
-    expect(location.href).toBe(`/en${ROUTES.TWO_FACTOR}`)
+    expect(location.href).toBe(ROUTES.TWO_FACTOR)
   })
 
   it("uses the locale prefix when pathname matches the locale root", () => {
@@ -93,7 +92,7 @@ describe("better auth client", () => {
     vi.stubGlobal("location", location)
     onTwoFactorRedirect?.()
 
-    expect(location.href).toBe(`/pl${ROUTES.TWO_FACTOR}`)
+    expect(location.href).toBe(`/pl-PL${ROUTES.TWO_FACTOR}`)
   })
 
   it("falls back to the base path when location is unavailable", () => {

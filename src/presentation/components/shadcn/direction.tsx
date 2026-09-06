@@ -1,18 +1,16 @@
-"use client"
-
 import type { ComponentProps } from "react"
 
 import { I18nProvider, useLocale } from "react-aria-components"
 
-function DirectionProvider({
+const DirectionProvider = ({
   direction,
   locale: localeProp,
   ...props
 }: ComponentProps<typeof I18nProvider> & {
   direction?: "ltr" | "rtl"
-}) {
+}) => {
   // For compatibility with Radix / Base UI, if only a `direction` is provided and not a `locale`,
-  // create a locale string that forces the direction by setting the script to arabic or latin.
+  // Create a locale string that forces the direction by setting the script to arabic or latin.
   const { locale: currentLocale } = useLocale()
 
   let locale = localeProp
@@ -25,7 +23,7 @@ function DirectionProvider({
   return <I18nProvider {...props} {...(locale === undefined || locale === "" ? {} : { locale })} />
 }
 
-function useDirection() {
+const useDirection = () => {
   const { direction } = useLocale()
   return direction
 }

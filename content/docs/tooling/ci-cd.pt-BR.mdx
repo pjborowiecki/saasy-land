@@ -1,0 +1,26 @@
+---
+title: Testando e CI
+description: Testes e CI - SaaSy Land
+---
+
+Vite+ Corre. Vitest Em três projetos: testes de nós, testes de integração e testes de componentes jsdom. `__test__`. . Importar APIs de teste de `vite-plus/test`Use. Playwright Para todos os fluxos de navegadores e cheques de renderização.
+
+A montagem compartilhada fornece material local D1 e... KV Tolices. D1 corre as migrações SQL verificadas contra SQLiteA ponte RPC do servidor preserva o verdadeiro pipeline de validação e middleware do TanStack. OAuth e chamadas de pagamento são zombadas em testes.
+
+Execute o projeto focado enquanto edita, então execute a suíte completa, o portão de cobertura, cheque e construa pré-visualização. Testes de navegador verificam páginas públicas, redirecionamentos de autenticação, SSR sem JavaScript, e navegação de clientes. CI usa ligações locais e não requer um banco de dados ao vivo ou segredos de provedores.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

@@ -1,0 +1,16 @@
+---
+title: Docs サイト
+description: このドキュメントが作成され、拡張される方法
+---
+
+## コンテンツルート
+
+`content/docs`
+
+- MDX ページ: `*.{locale}.mdx` すべての9つの構成された言語(点のパーサー)のために
+- フォルダ `meta.<locale>.json` タイトル/注文/アイコン
+- `fallbackLanguage: en-US` 翻訳不足のため
+
+## アプリ配線
+
+`fumadocs.source.ts`, docs レイアウト, API を検索します。 ページを追加 → 更新メタ `pages` arrays → 再ビルド。

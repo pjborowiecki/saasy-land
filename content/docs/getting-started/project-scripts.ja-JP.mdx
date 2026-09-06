@@ -1,0 +1,24 @@
+---
+title: プロジェクトスクリプト
+description: プロジェクトスクリプト — SaaSy Land
+---
+
+スクリプトで `package.json` 開発、フォーマット、整形、タイプ、Vitest およびビルドに Vite+ を使用します。 `content` MDXコレクションを生成します。 `cf-typegen` ワーカーバインディングタイプを生成します。 `db:generate` SQLマイグレーションを作成します。 `db:migrate:local` ローカル D1 に適用します。 リモートマイグレーションとデプロイコマンドは、環境に明示的に名前を付けます。
+
+`build:preview` そして、 `build:production` Worker、prerenderの公開ページを作成し、デプロイメントアーファクトを確認します。 `clean` 生成された出力とローカルバインディング状態を削除します。そのため、最初に保存したいローカルデータをエクスポートします。
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

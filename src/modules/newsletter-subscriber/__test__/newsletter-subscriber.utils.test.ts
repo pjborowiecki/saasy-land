@@ -1,4 +1,6 @@
-import { env } from "~/src/platform/env"
+import { describe, expect, it } from "vite-plus/test"
+
+import { I18N } from "~/src/integrations/use-intl/i18n.config"
 
 import { CONFIRMATION_WINDOW_IN_HOURS, NEWSLETTER_TOKEN_LENGTH } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
 import {
@@ -8,9 +10,7 @@ import {
   unsubscribeUrl,
 } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.utils"
 
-import { I18N } from "~/src/integrations/next-intl/i18n.config"
-import { localePathPrefixes } from "~/src/integrations/next-intl/i18n.routing"
-
+import { APP_URL } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
 
 const SAMPLE_SIZE = 50
@@ -47,14 +47,32 @@ describe("newsletter-subscriber.utils", () => {
   it("points both token links at this deployment", () => {
     expect.hasAssertions()
 
-    expect(confirmationUrl(I18N.DEFAULT_LOCALE, TOKEN)).toBe(`${env.NEXT_PUBLIC_APP_URL}${ROUTES.NEWSLETTER_CONFIRM}?token=${TOKEN}`)
-    expect(unsubscribeUrl(I18N.DEFAULT_LOCALE, TOKEN)).toBe(`${env.NEXT_PUBLIC_APP_URL}${ROUTES.NEWSLETTER_UNSUBSCRIBE}?token=${TOKEN}`)
+    const options = { locale: I18N.DEFAULT_LOCALE, origin: APP_URL, token: TOKEN }
+    expect(confirmationUrl(options)).toBe(`${APP_URL}${ROUTES.NEWSLETTER_CONFIRM}?token=${TOKEN}`)
+    expect(unsubscribeUrl(options)).toBe(`${APP_URL}${ROUTES.NEWSLETTER_UNSUBSCRIBE}?token=${TOKEN}`)
   })
 
   it("keeps a subscriber in the language they signed up in", () => {
     expect.hasAssertions()
 
-    expect(confirmationUrl("pl-PL", TOKEN)).toContain(`${localePathPrefixes["pl-PL"]}${ROUTES.NEWSLETTER_CONFIRM}`)
-    expect(unsubscribeUrl("pl-PL", TOKEN)).toContain(`${localePathPrefixes["pl-PL"]}${ROUTES.NEWSLETTER_UNSUBSCRIBE}`)
+    expect(confirmationUrl({ locale: "pl-PL", origin: APP_URL, token: TOKEN })).toContain(`/pl-PL${ROUTES.NEWSLETTER_CONFIRM}`)
+    expect(unsubscribeUrl({ locale: "pl-PL", origin: APP_URL, token: TOKEN })).toContain(`/pl-PL${ROUTES.NEWSLETTER_UNSUBSCRIBE}`)
+  })
+
+  it.each(["http://localhost:3000", "http://127.0.0.1:3020", "https://preview.saasyland.com", APP_URL])(
+    "keeps newsletter action links on their originating deployment: %s",
+    (origin) => {
+      const options = { locale: "fr-FR" as const, origin, token: TOKEN }
+      expect(confirmationUrl(options)).toBe(`${origin}/fr-FR${ROUTES.NEWSLETTER_CONFIRM}?token=${TOKEN}`)
+      expect(unsubscribeUrl(options)).toBe(`${origin}/fr-FR${ROUTES.NEWSLETTER_UNSUBSCRIBE}?token=${TOKEN}`)
+    },
+  )
+
+  it("encodes tokens as a single query parameter", () => {
+    const token = "a&next=https://example.test/#part"
+    const url = new URL(confirmationUrl({ locale: "en-US", origin: APP_URL, token }))
+    expect(url.searchParams.get("token")).toBe(token)
+    expect([...url.searchParams.keys()]).toStrictEqual(["token"])
+    expect(url.hash).toBe("")
   })
 })

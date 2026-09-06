@@ -1,0 +1,28 @@
+---
+title: TanStack Start HTTP ハンドラ
+description: TanStack Start HTTP ハンドラ — SaaSy Land
+---
+
+HTTP エンドポイントでは、ネイティブ TanStack Start サーバー ハンドラを使用できます。 `src/routes`. Better Auth は GET と POST を所有しています。 `/api/auth/$`; Fumadocs 検索使用 `/api/search`. . 製品操作は、機能モジュールのネイティブサーバー機能です。
+
+ハンドルを宣言する `createFileRoute` と、 `server.handlers`. . 供給される使用して下さい `request`, 入力を検証, 権限チェックを強制し、Web を返す `Response`. . プロバイダーの統合で Webhook 検証を保ちましょう。 このアプリケーションの型 RPC クライアントでのみ使用される動作については、重複 REST エンドポイントを公開しないでください。
+
+```ts
+import { createFileRoute } from "@tanstack/react-router"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+
+export const Route = createFileRoute("/api/auth/$")({
+  server: {
+    handlers: {
+      GET: ({ request }) => auth.handler(request),
+      POST: ({ request }) => auth.handler(request),
+    },
+  },
+})
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

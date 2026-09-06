@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Condiciones de servicio",
+    "description": "Términos para el uso de saasyland.com, la compra del SaaSy Land CLI propietario, y la gestión de su cuenta y clave de licencia."
+  },
+  "title": "Condiciones de servicio",
+  "lastUpdated": "Última actualización: 6 de septiembre de 2026",
+  "description": "Términos para el uso de saasyland.com, la compra del SaaSy Land CLI propietario, y la gestión de su cuenta y clave de licencia.",
+  "sections": {
+    "operator": {
+      "title": "El servicio y su responsable",
+      "body": "SaaSy Land está gestionado por Piotr Borowiecki. Puedes contactar con nosotros en hello@saasyland.com. Estas condiciones se aplican al sitio web, las cuentas y las compras. La descripción del producto y la información del proceso de compra detallan el paquete que adquieres."
+    },
+    "accounts": {
+      "title": "Cuentas y seguridad",
+      "body": "Proporcione datos de cuenta precisos, mantenga sus credenciales seguras e infórmenos si sospecha de algún acceso no autorizado. No comparta una cuenta para eludir el acceso de pago o la licencia de otra persona. Usted sigue siendo responsable de la actividad que autorice a través de su cuenta. Su cuenta le proporciona acceso a la clave de licencia emitida tras la compra y a sus activaciones de máquina. Mantenga esa clave confidencial también."
+    },
+    "purchases": {
+      "title": "Compras y acceso",
+      "body": "Core, Complete y Agency son paquetes de pago único con el contenido descrito en la página de precios y durante la compra. Complete añade los materiales de aprendizaje anunciados; Agency añade el paquete para proyectos de clientes y la asistencia anunciados. Las actualizaciones de por vida del núcleo se refieren a las actualizaciones del código principal mientras SaaSy Land siga proporcionándolas. No garantizan que todos los servicios, integraciones o futuros productos independientes estén disponibles indefinidamente.\n\nLa suscripción al boletín es gratuita y no obliga a comprar. Los servicios que conectes a tu propia aplicación pueden cobrar sus propias tarifas."
+    },
+    "payments": {
+      "title": "Pagos e impuestos",
+      "body": "Polar gestiona el proceso de compra como Merchant of Record. Antes del pago se muestran el precio final, la moneda y el tratamiento fiscal aplicable. La confirmación del pago identifica la transacción. También se aplican las condiciones del proveedor de pagos correspondiente a la tramitación del pago."
+    },
+    "licence": {
+      "title": "Sitio web público y CLI (interfaz de línea de comandos) propietaria",
+      "body": "El sitio web público y las versiones MIT anteriores siguen regidos por LICENSE.md. La CLI y las plantillas privadas suministradas por separado son propietarias y se rigen por la Licencia Comercial de la página Licencia. Para instalar y utilizar la CLI se requiere una compra y una clave válida. Puede modificar y utilizar comercialmente las aplicaciones generadas dentro de su paquete; no puede modificar ni redistribuir la CLI propietaria ni revender las plantillas privadas como kit de inicio, salvo las excepciones legales obligatorias. La compra no transfiere la propiedad de la CLI ni da acceso al repositorio privado."
+    },
+    "conduct": {
+      "title": "Uso aceptable",
+      "body": "No ataques el servicio, envíes spam, intentes acceder sin autorización, utilices indebidamente datos ajenos ni eludas los controles de acceso. No redistribuyas materiales de pago cuando su licencia no lo permita. Podemos restringir el acceso cuando sea razonablemente necesario para investigar abusos o proteger el servicio, con sujeción a la ley aplicable y a tus derechos legales."
+    },
+    "refunds": {
+      "title": "Reembolsos y derechos del consumidor",
+      "body": "La página «Reembolsos» explica cómo solicitar un reembolso antes de la entrega de los materiales de pago y cómo se aplican los derechos irrenunciables del consumidor. Estas condiciones no excluyen derechos que legalmente no puedan excluirse, incluidos los recursos por contenidos digitales no suministrados o no conformes con el contrato."
+    },
+    "responsibility": {
+      "title": "Tus despliegues y nuestra responsabilidad",
+      "body": "Revisa y prueba el código antes de desplegarlo. Tú eliges el alojamiento, las credenciales, la configuración, los proveedores y cómo procesa datos tu aplicación. No garantizamos un resultado empresarial concreto, la continuidad de los servicios de terceros ni la idoneidad para todos los usos. Cualquier limitación de responsabilidad se aplica únicamente en la medida permitida por la ley y no excluye responsabilidades que legalmente no puedan limitarse. Las condiciones de garantía de la licencia MIT se aplican al código que cubre."
+    },
+    "law": {
+      "title": "Legislación, reclamaciones y cambios",
+      "body": "Estas condiciones se rigen por la legislación polaca, sin privarte de las protecciones irrenunciables del consumidor de tu país de residencia. Envía tus reclamaciones a hello@saasyland.com con la referencia del pedido y una descripción del problema para que podamos investigarlo.\n\nPodemos actualizar estas condiciones para usos y compras futuros. Los cambios no eliminan retroactivamente derechos vinculados a una compra. Comunicaremos los cambios sustanciales que afecten a un servicio en curso según exija la ley."
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "title": "Pubblicazioni",
+  "description": "Crea, gestisci e analizza i contenuti del tuo blog.",
+  "actions": {
+    "categories": "Categorie",
+    "writePost": "Scrivi un post",
+    "loadMore": "Carica altri articoli"
+  },
+  "stats": {
+    "totalViews": "Visualizzazioni totali (30 giorni)",
+    "subscribers": "Iscritti",
+    "publishedPosts": "Articoli pubblicati",
+    "draftsPending": "{count} bozze in attesa"
+  },
+  "filters": {
+    "all": "Tutti i post",
+    "published": "Pubblicato",
+    "drafts": "Bozze",
+    "scheduled": "Pianificato",
+    "search": "Cerca articoli..."
+  },
+  "badges": {
+    "published": "Pubblicato",
+    "draft": "Bozza",
+    "scheduled": "Pianificato"
+  },
+  "meta": {
+    "readTime": "{minutes} min di lettura",
+    "publishedOn": "{date}",
+    "lastEdited": "Ultima modifica: {time}",
+    "publishesTomorrow": "Verrà pubblicato domani"
+  },
+  "labels": {
+    "gridView": "Vista a griglia",
+    "tableView": "Vista tabella",
+    "moreOptions": "Altre opzioni"
+  },
+  "table": {
+    "postDetails": "Dettagli dell'annuncio",
+    "status": "Stato",
+    "category": "Categoria",
+    "author": "Autore",
+    "date": "Data",
+    "views": "Visualizzazioni",
+    "actions": "Azioni",
+    "selectRow": "Seleziona la riga",
+    "emptyValue": "Non impostato",
+    "rowActions": "Azioni della riga"
+  },
+  "pagination": {
+    "info": "Articoli da {start} a {end} di {total}"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "Scalare l'architettura del database per una crescita decuplicata",
+        "description": "Un'analisi approfondita del processo attraverso il quale il nostro team di ingegneri è passato da un'architettura monolitica a un'architettura distribuita.",
+        "category": "Ingegneria"
+      },
+      "post-2": {
+        "title": "Presentazione del nuovo Pannello di Analisi Avanzate 2.0",
+        "description": "Abbiamo completamente rinnovato i nostri strumenti di reportistica per offrirvi informazioni più approfondite sul comportamento dei vostri clienti e sulle vostre metriche di fatturato.",
+        "category": "Aggiornamento del prodotto"
+      },
+      "post-3": {
+        "title": "L'evoluzione del nostro sistema di progettazione",
+        "description": "Creare un linguaggio visivo coerente, che possa essere esteso e applicato in modo uniforme su siti web, applicazioni mobili e strumenti di gestione interni.",
+        "category": "Design"
+      },
+      "post-4": {
+        "title": "Annunciamo il nostro round di finanziamento di Serie B",
+        "description": "Siamo entusiasti di annunciare un investimento di 25 milioni di dollari, guidato da importanti società di venture capital, per accelerare la nostra crescita.",
+        "category": "Notizie aziendali"
+      },
+      "post-5": {
+        "title": "Padroneggiare i Webhook per i Dati in Tempo Reale",
+        "description": "Scoprite come creare sistemi di webhook affidabili, in grado di gestire milioni di eventi in modo sicuro.",
+        "category": "Tutorial"
+      },
+      "post-6": {
+        "title": "Strategie per ridurre il tasso di abbandono dei clienti",
+        "description": "Strategie comprovate per la fidelizzazione dei clienti, utilizzate dalle aziende SaaS in più rapida crescita.",
+        "category": "Marketing"
+      }
+    },
+    "dates": {
+      "draft": "2 ore fa",
+      "scheduled": "Domani"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+---
+title: ローカル開発
+description: ローカル開発 — SaaSy Land
+---
+
+Bun 1.4 および Node 24 または newer をインストールし、依存関係をインストールします。 コピー `.env.example` とりあえず `.env.development` 長いランダムな設定 `AUTH_SECRET`, 公共 `VITE_APP_URL`, あなたが運動する任意の外部の統合.
+
+ローカル開発は Cloudflare のローカル D1 と KV のバインディングを使用します。 開始前にチェックイン SQLite のマイグレーションを適用します。 開発コマンドは Fumadocs コンテンツを生成し、 Vite+ を Cloudflare プラグインで実行します。 現地の州生活 `.wrangler/`.
+
+OAuth、電子メールおよび請求はプロバイダの資格情報を必要とします;開発するときテストの資格情報およびPolarのサンドボックスを使用します。 テストは、実際のメッセージを送信するか、顧客を充電するのではなく、コミットされたダミー値とモックを使用します。
+
+```sh
+bun install
+cp .env.example .env.development
+bun run db:migrate:development
+bun run dev
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

@@ -1,0 +1,16 @@
+---
+title: "Internationalization and locales"
+description: "Internationalization and locales — SaaSy Land"
+---
+
+Messages live in `messages/{locale}` for all nine configured languages as dotted namespace files, for example `pages.admin.users.json`. Locale configuration, URL helpers, message loading, metadata and email translation helpers live in `src/integrations/use-intl`.
+
+English uses `/docs`; Polish uses `/pl-PL/docs`. Legacy `/en` and `/pl` links are canonicalized. Route files declare `staticData.namespaces` and preload the same namespaces in their loader. `TranslationsProvider` assembles the active route namespaces into an `IntlProvider`. Shared messages are loaded at the root; email-only namespaces stay on the server.
+
+Read the locale with `getCurrentLocale` on the server and `useLocale` in components. The URL chooses the document locale. Server-function requests use the locale cookie. A language change keeps the path, query and fragment and reloads the document to load the corresponding content. Run `bun run check:i18n` after changing keys.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

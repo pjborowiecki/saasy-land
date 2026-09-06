@@ -1,0 +1,16 @@
+---
+title: 環境と結合
+description: 環境とバインディング — SaaSy Land
+---
+
+利用条件 `.env.development`, `.env.preview`, と `.env.production` 対応するViteとCloudflare環境の場合。 これらのファイルは無視されます。 `.env.example` 必要なキーを文書化します。 `VITE_APP_URL` 公開され、ビルド時に置換されます。 労働者の秘密は持っていません `VITE_` 接頭辞とアクセス `env` から から `cloudflare:workers`.
+
+設定 `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, Resend 設定と Polar 設定をインストールします。 実際の資格情報をコミットしないでください。 ビンディング ID は、適切な `wrangler.jsonc` 環境; 生成されたワーカー宣言は、そのタイプを記述します。
+
+Drizzle スタジオおよびイントロスペクションの必要性だけ `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID` そして、 `CLOUDFLARE_ACCESS_TOKEN`. . ローカル D1 はリモートの資格情報を使用しません。 CI コピー `.env.test` ローカル環境ファイルに移動し、ローカルバインディングで実行します。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

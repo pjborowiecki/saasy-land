@@ -9,6 +9,6 @@ import { Config } from "@remotion/cli/config"
 
 Config.setRspack(true)
 // PNG, not JPEG: these are flat vector surfaces on a near-black ground, and JPEG's chroma
-// subsampling puts visible mosquito noise around the hairlines and the accent text.
+// Subsampling puts visible mosquito noise around the hairlines and the accent text.
 Config.setVideoImageFormat("png")
 Config.setOverwriteOutput(true)

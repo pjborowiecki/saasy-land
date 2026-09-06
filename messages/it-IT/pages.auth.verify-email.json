@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Verifica l'email",
+    "description": "Verifica l’indirizzo email del tuo account {name}."
+  },
+  "form": {
+    "title": "Verifica il tuo indirizzo email",
+    "description": "Conferma il tuo indirizzo email per completare la configurazione del tuo account.",
+    "verifying": "Verifichiamo il tuo indirizzo email…",
+    "success": "La sua email è stata verificata.",
+    "continue": "Continua",
+    "invalidToken": "Questo link di verifica non è valido o è scaduto.",
+    "pendingDescription": "Controlla la posta in arrivo e segui il link di verifica. Poi accedi per continuare.",
+    "email": "Email",
+    "emailPlaceholder": "Il tuo indirizzo email",
+    "emailRequired": "Inserisci il tuo indirizzo email per inviare nuovamente il link di verifica.",
+    "resend": "Invia di nuovo l’email di verifica",
+    "resendSuccess": "Se esiste già un account associato a quell'indirizzo email, è stato inviato un nuovo link di verifica.",
+    "backToSignIn": "Torna alla pagina di accesso",
+    "resending": "Invio dell’email di verifica…"
+  }
+}

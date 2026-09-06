@@ -1,0 +1,23 @@
+---
+title: "Routes and delivery"
+description: "Routes and delivery — SaaSy Land"
+---
+
+`src/server.ts` canonicalizes locale URLs and keeps the locale cookie in sync. `src/router.tsx` creates a fresh QueryClient per router and connects it to SSR. Native route files declare components, guards, loaders, search validation, and metadata.
+
+Admin and customer layouts use `beforeLoad` guards. Every protected server function also checks its caller, because an RPC can be called independently of a page. Never place an authenticated response in a shared static cache.
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

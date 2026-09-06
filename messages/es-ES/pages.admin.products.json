@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Productos | SaaSy Land",
+    "description": "Gestionar productos físicos, descargas digitales y suscripciones a contenido protegido."
+  },
+  "tabs": {
+    "all": "Todos los productos",
+    "onetime": "Compras únicas",
+    "subscriptions": "Suscripciones",
+    "drafts": "Borradores",
+    "categories": "Categorías",
+    "collections": "Colecciones",
+    "courses": "Cursos"
+  },
+  "title": "Productos",
+  "description": "Gestionar productos físicos, descargas digitales y suscripciones a contenido protegido.",
+  "actions": {
+    "create": "Crear producto"
+  },
+  "search": {
+    "placeholder": "Buscar productos por nombre o SKU..."
+  },
+  "filters": {
+    "type": "Tipo: Todos",
+    "status": "Estado: Activo",
+    "category": "Categoría",
+    "collection": "Colección",
+    "cycle": "Ciclo",
+    "model": "Modelo",
+    "visibility": "Visibilidad",
+    "sortby": "Ordenar por"
+  },
+  "table": {
+    "headers": {
+      "product": "Producto",
+      "type": "Tipo",
+      "pricing": "Precios",
+      "status": "Estado",
+      "metrics": "Métricas"
+    },
+    "actionsColumn": "Acciones de la fila",
+    "emptyValue": "n/a",
+    "rowActions": "Acciones de la fila",
+    "selectAll": "Seleccionar todas las filas",
+    "selectRow": "Seleccionar fila",
+    "statusLabels": {
+      "archived": "Archivado",
+      "draft": "Borrador",
+      "published": "Activo"
+    },
+    "typeLabels": {
+      "course": "Curso",
+      "one_time": "único",
+      "subscription": "Suscripción"
+    },
+    "visibilityLabels": {
+      "hidden": "Oculta",
+      "public": "Pública"
+    }
+  },
+  "pagination": {
+    "info": "Mostrando del {start} al {end} de {total} productos",
+    "goToPage": "Ir a la página {page}",
+    "nextPage": "Página siguiente",
+    "previousPage": "Página anterior"
+  },
+  "onetime": {
+    "title": "Compras únicas",
+    "description": "Gestionar productos individuales, descargas digitales y productos físicos."
+  },
+  "subscriptions": {
+    "title": "Suscripciones",
+    "description": "Gestionar planes de facturación recurrente, niveles de membresía y precios basados en el uso.",
+    "table": {
+      "headers": {
+        "product": "Nombre del plan",
+        "model": "Modelo",
+        "pricing": "Precios",
+        "status": "Estado",
+        "metrics": "Métricas"
+      }
+    }
+  },
+  "categories": {
+    "title": "Categorías",
+    "description": "Organice sus productos, planes de suscripción y productos digitales.",
+    "table": {
+      "headers": {
+        "category": "Categoría",
+        "visibility": "Visibilidad",
+        "items": "Artículos",
+        "lastUpdated": "Última actualización"
+      }
+    }
+  },
+  "collections": {
+    "title": "Colecciones",
+    "description": "Seleccione y agrupe sus productos, planes de suscripción y productos digitales.",
+    "table": {
+      "headers": {
+        "collection": "Colección",
+        "visibility": "Visibilidad",
+        "items": "Artículos",
+        "lastUpdated": "Última actualización"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Aún no hay cursos disponibles",
+      "description": "Aquí es donde aparecen los cursos que publica, junto con sus lecciones, precios y número de inscritos. Cree el primero para empezar.",
+      "action": "Crear curso"
+    }
+  }
+}

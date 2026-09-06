@@ -1,27 +1,27 @@
 import { createSchemaFactory } from "drizzle-zod"
-import z from "zod/v4"
-
-import { MIN_FIELD_LENGTH } from "~/src/modules/_core/utils/zod-fields"
-import { account } from "~/src/modules/account/account.schema"
+import zod from "zod/v4"
 
 import { AUTH_VALIDATION_MESSAGE } from "~/src/integrations/better-auth/auth.validations"
 import { emailSchema, nameSchema, signInPasswordSchema, strictPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 
-const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
+import { MIN_FIELD_LENGTH } from "~/src/modules/_core/utils/zod-fields"
+import { account } from "~/src/modules/account/account.schema"
 
-const changeEmail = z.object({
+const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: zod })
+
+const changeEmail = zod.object({
   newEmail: emailSchema,
 })
 
-const changePassword = z.object({
+const changePassword = zod.object({
   currentPassword: signInPasswordSchema,
   newPassword: strictPasswordSchema,
-  revokeOtherSessions: z.boolean().optional(),
+  revokeOtherSessions: zod.boolean().optional(),
 })
 
-const changePasswordForm = z
+const changePasswordForm = zod
   .object({
-    confirmNewPassword: z.string().min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.confirmPasswordRequired }),
+    confirmNewPassword: zod.string().min(MIN_FIELD_LENGTH, { message: AUTH_VALIDATION_MESSAGE.confirmPasswordRequired }),
     currentPassword: signInPasswordSchema,
     newPassword: strictPasswordSchema,
   })
@@ -30,7 +30,7 @@ const changePasswordForm = z
     path: ["confirmNewPassword"],
   })
 
-const updateUser = z.object({
+const updateUser = zod.object({
   name: nameSchema,
 })
 

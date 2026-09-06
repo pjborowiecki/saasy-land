@@ -1,0 +1,18 @@
+---
+title: Paiements & facturation
+description: Commandes, remboursements et facturation orientée Stripe (prévue).
+---
+
+## État
+
+Administrateur `/admin/payments` L'interface utilisateur utilise des lignes simulées aujourd'hui. Les `order` déclarations faites en `APP_STATEMENTS` déjà esquisse lecture/mise à jour/remboursement.
+
+## Architecture prévue
+
+- `modules/billing` ou `modules/order` Cas d'utilisation
+- Stripe (ou Polar) dossier d'intégration
+- Gestionnaire de route Webhooks
+- Les factures des clients `/app`
+- Carte Better Auth identificateur de client
+
+Implémenter derrière les permissions; ne jamais exposer les clés secrètes au client.

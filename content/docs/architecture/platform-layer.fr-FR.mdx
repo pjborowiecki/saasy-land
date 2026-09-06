@@ -1,0 +1,14 @@
+---
+title: Plateforme et essais
+description: Plateforme et essais — SaaSy Land
+---
+
+Cloudflare fournit le temps d'exécution au moyen de liaisons explicites D1, KV et d'actifs. Les déclarations générées vivent sous `src/types`C'est vrai. Configuration spécifique au fournisseur `src/integrations`C'est vrai. Le reste du répertoire de plate-forme contient une infrastructure de test : des maquettes de liaison, des installations de demande, le pont RPC et des aides de rendu.
+
+Conserver les paramètres de déploiement spécifiques à l'environnement dans `wrangler.jsonc` et le fichier d'environnement ignoré correspondant. Conserver les références de test dans `.env.test` et ne jamais les remplacer par des références de production.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

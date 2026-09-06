@@ -1,0 +1,397 @@
+---
+title: "Choosing a SaaS Stack for AI Coding Agents in 2026"
+description: "Popular does not mean agent-friendly any more. A four-question test for any dependency, applied layer by layer to a real production SaaS stack."
+excerpt: "The standard advice is to pick popular tools because agents have seen more of them. In 2026 that advice has partly inverted, and there is an artifact in this repository that proves it."
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-09-06
+image: /images/blog/choosing-a-saas-stack-for-ai-coding-agents.webp
+tags:
+  - ai-agents
+  - architecture
+  - typescript
+  - stack
+faq:
+  - question: What is the best tech stack for AI coding agents in 2026?
+    answer: >-
+      End-to-end TypeScript, with a typed database layer, schema validation at every external
+      boundary, auth that lives in your repository, and one command that type-checks, lints and
+      tests. The specific libraries matter far less than whether misusing them fails to compile.
+      Score any candidate on constraint, convergence, verifiability and currency before adopting it.
+  - question: Does picking a popular framework help AI coding agents?
+    answer: >-
+      Less than it used to, and sometimes not at all. Popularity gives a model more training data,
+      but only about the version it was trained on. A framework that ships breaking changes faster
+      than models retrain produces confident, fluent, wrong code. Stability matters more than
+      volume once a library moves quickly.
+  - question: Why does my agent write code using APIs that no longer exist?
+    answer: >-
+      Because it is recalling the version it was trained on. Research measured deprecated API usage
+      rates of 25% to 38% across eight widely used libraries, attributed to stale parametric
+      knowledge and no live view of what the API is today. Your type checker is the cheapest
+      correction for this, which is why untyped boundaries are where the problem survives.
+  - question: Should I let an AI agent choose my dependencies?
+    answer: >-
+      Not without checking that each package exists. Frontier models released between October 2025
+      and March 2026 hallucinated package names at rates between 4.62% and 6.10%, and attackers now
+      register those invented names on public registries, an attack called slopsquatting. Treat any
+      new dependency an agent adds as an unreviewed pull request from a stranger.
+  - question: Is a monorepo better for AI coding agents?
+    answer: >-
+      Only if the boundaries are enforced by tooling rather than described in a readme. A monorepo
+      whose package boundaries fail the build when crossed teaches an agent your architecture in
+      seconds. A monorepo held together by convention gives the agent more places to put the right
+      code in the wrong package.
+  - question: Which parts of a SaaS should an agent never write alone?
+    answer: >-
+      Anything where a plausible-looking mistake is expensive and silent: session and token
+      handling, payment webhooks, database migrations, tenant isolation, and anything reading a
+      secret. These share a property, which is that the wrong version passes tests and demos
+      correctly, and fails only under conditions your test suite does not reproduce.
+  - question: Do I need tRPC or oRPC for an agent-friendly API?
+    answer: >-
+      You need types that cross the network boundary; the specific library is secondary. Any
+      approach where a client calling a changed endpoint fails to compile will do. What does not
+      work is a plain fetch to an untyped JSON route, because that is a boundary where a wrong
+      assumption compiles cleanly and reaches production.
+  - question: How many dependencies is too many for an agent-assisted codebase?
+    answer: >-
+      Count surfaces rather than packages. Every dependency is an API the model may remember
+      incorrectly, so the question is how many of them are load-bearing, unfamiliar and unchecked.
+      A dependency covered by strict types and a test costs little. One that returns untyped data
+      into your business logic costs on every future change.
+  - question: Does Tailwind actually help AI coding agents?
+    answer: >-
+      Yes, for a structural reason rather than a stylistic one. Styles sit on the element they
+      style, so there is no second file the agent has to remember to open and update. The same
+      argument favours colocated tests and colocated types, and it argues against any pattern where
+      one change must be mirrored in a file the agent has no reason to open.
+  - question: Should I switch stacks to make my agent work better?
+    answer: >-
+      Almost never. Migration cost is certain and the gain is bounded, whereas adding strict types,
+      boundary validation and one verify command to your existing stack is cheap and applies
+      immediately. Change your stack when you were going to change it anyway, and let agent fit be
+      a tiebreaker rather than the reason.
+---
+
+The advice everyone gives about picking a stack for AI coding agents is that popular is better, because models have seen more of it. It sounds obviously true. It was true. In 2026 it is partly inverted, and the proof is a file this repository generates by itself.
+
+Run `next dev` on Next.js 16 and it writes this into your `AGENTS.md`, unprompted:
+
+```markdown
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all
+differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/`
+before writing any code. Heed deprecation notices.
+```
+
+The most popular React framework in the world now ships a warning to coding agents that what they remember about it is wrong. That is not a criticism of Next.js. It is an honest response to a real problem, and it is the single clearest statement of what stack choice actually means in 2026.
+
+This article is about that problem and what to do with it. It is not a shopping list. Lists go stale, and a list cannot tell you what to do about the library you already use that is not on it.
+
+<Callout title="What this article gives you">
+
+1. What a stack actually does for an agent, which is narrower and more useful than "helps it write code".
+2. **The currency gap**: why training-data volume stopped being a reliable proxy for agent fit, with the research and the artifacts.
+3. **The Agent Stack Test**: four questions, scored out of 8, that you can run against any dependency, including ones invented after this article.
+4. The test applied layer by layer to a production SaaS stack, with the honest tradeoffs.
+5. What agents should never own, and why those things share one property.
+
+</Callout>
+
+_Last updated 15 August 2026. This is the second piece in a series; the first covers [why your repository decides agent output quality](/blog/ai-coding-agents-repository-readiness) and is worth reading first if you have not._
+
+## What does a stack actually do for an AI coding agent?
+
+A stack does not make an agent correct. It changes **how many wrong programs are expressible**. Every library choice either shrinks the space of code that compiles-but-is-wrong, or widens it. That is the whole mechanism, and it is why "agent-friendly" is a property you can test rather than a vibe.
+
+Consider the same mistake in two codebases. An agent misreads a database column as a string when it is a timestamp.
+
+In a typed query builder, the mistake is not expressible. The code does not compile, the agent sees the error inside its own run, and it corrects. Elapsed cost: about two seconds.
+
+In a raw query returning `any`, the mistake compiles, passes review because it reads correctly, and produces a wrong date in a billing email six weeks later. Elapsed cost: an incident.
+
+Same model. Same prompt. Same mistake. The stack decided whether it was a compile error or an incident.
+
+## The currency gap, and why popular stopped being a proxy
+
+Here is the argument everyone makes: popular libraries appear more often in training data, so models write them more accurately. The first half is true. The second half now depends entirely on something the argument ignores, which is **how fast the library changes**.
+
+**The currency gap is the distance between the API a model remembers and the API you actually ship.** Training-data volume tells you how confidently a model will write a library. The currency gap tells you whether that confidence is warranted. They are different quantities, and for fast-moving frameworks they now point in opposite directions.
+
+The research on this is unambiguous. A study of eight widely used libraries measured **deprecated API usage rates of 25% to 38%** in model-generated code, attributing it to stale parametric knowledge and the absence of any live view of what the API is today ([APILOT, arXiv](https://arxiv.org/pdf/2409.16526)). Work on evolving APIs frames the same failure as a knowledge conflict: the model is not guessing, it is confidently recalling a version that no longer exists ([When LLMs Lag Behind, arXiv](https://arxiv.org/html/2604.09515v1)).
+
+This produces a counterintuitive ranking. Sorted by how much trouble the model's memory causes:
+
+| Library profile                                         | Training volume | API churn | Net effect on agent output                      |
+| ------------------------------------------------------- | --------------- | --------- | ----------------------------------------------- |
+| Popular and stable (React, PostgreSQL, Tailwind)        | High            | Low       | **Best.** Memory is large and still correct     |
+| Small and stable (Zod, most focused utilities)          | Lower           | Low       | **Good.** Less memory, but what exists is right |
+| Popular and fast-moving (a framework mid-major-version) | High            | High      | **Worst.** Confident, fluent and wrong          |
+| Small and fast-moving                                   | Low             | High      | Bad, but the agent hedges instead of asserting  |
+
+The bottom-right cell is the interesting one. When a model knows little about a library, it tends to hedge, search, or read the source. When it knows a lot about the _previous version_ of a library, it asserts. **Confidence is calibrated to training volume, not to correctness**, so the worst case is high volume plus high churn: an agent that writes obsolete code fluently and never signals doubt.
+
+That is exactly the case Next.js is warning about in the block above. It is the most-trained-on React framework there is, and it shipped enough change that the vendor decided a printed warning to agents was warranted.
+
+### What to do about it
+
+You cannot fix a model's memory, but you can make its errors cheap:
+
+- **Prefer stability over popularity when they conflict.** A five-year-stable API the model half-remembers beats a rewritten API it fully misremembers.
+- **Let the compiler catch the version drift.** Deprecated-API errors are only expensive at untyped boundaries. This is the real argument for end-to-end types, and it is stronger than the usual one.
+- **Pin and vendor the docs the agent reads.** Next's own advice is to read the guide in `node_modules`, not the web. Local docs match your installed version; a blog post from 2024 does not.
+- **Treat new dependencies as untrusted.** More on this below, because it is a security problem and not only a correctness one.
+
+## The Agent Stack Test
+
+Four questions per dependency, scored 0, 1 or 2, for 8 points. It applies to libraries that did not exist when this was written, which is the point of a test rather than a list.
+
+### 1. Constraint: can misuse fail to compile?
+
+- **0**: The library hands back `any`, or config is string-keyed, or errors surface only at runtime.
+- **1**: Types exist but are advisory; a wrong call still compiles under a cast.
+- **2**: Misuse is a type error. Wrong programs are not expressible.
+
+### 2. Convergence: is there one obvious way to do the job?
+
+Agents work by imitation, so a library with six equivalent APIs gives you a one-in-six chance of the one your codebase already uses.
+
+- **0**: Many equivalent approaches, all common in the wild and all in the training data.
+- **1**: A recommended way, plus widely used legacy alternatives.
+- **2**: One way, and the alternatives are gone rather than deprecated.
+
+### 3. Verifiability: can the agent prove it works, itself?
+
+- **0**: Correctness is only observable by a human looking at the running app.
+- **1**: Testable, but the setup is manual enough that the agent will not do it.
+- **2**: A command the agent already runs covers it.
+
+### 4. Currency: is the model's memory of it current?
+
+- **0**: Major version churn inside the last year, with renamed or removed public APIs.
+- **1**: Recent minor changes, or the docs the model learned from are now wrong in places.
+- **2**: The public API has been stable long enough that recalled code still runs, or the library ships machine-readable docs alongside the installed version.
+
+**Reading the score.** 7 to 8 is a dependency an agent can be trusted with unsupervised. 4 to 6 means it works with a type boundary or a test around it. 3 or below means either wrap it in an interface you own, or accept that a human writes every call site.
+
+The test is deliberately about the _shape_ of a dependency rather than its quality. Excellent libraries score badly here (a great library mid-rewrite scores 0 on currency), and unremarkable ones score well. This measures agent fit, not merit.
+
+## Applying the test, layer by layer
+
+What follows is the stack we ship, scored honestly, including where it costs something. Your answers may differ; the reasoning is the transferable part.
+
+### Language: TypeScript, strict, no escapes
+
+**Score: 8/8.** This is the choice everything else on the list depends on.
+
+Strict mode is the floor, not the goal. The properties that matter for agents are the ones people usually turn off: no implicit `any`, no unchecked index access, no non-null assertions. Each of those flags converts a class of confident-but-wrong agent output from a runtime surprise into a red squiggle the agent sees before it finishes its turn.
+
+The version matters less than the settings. A loosely configured recent TypeScript is worse for agent work than a strictly configured older one.
+
+### Runtime and framework: Cloudflare Workers, TanStack Start, React
+
+**Score: 6/8.** Constraint 2, convergence 1, verifiability 2, currency 1.
+
+This is the honest weak point, and it is the same one Next.js warns about. React's core has been stable long enough that model memory is reliable. The framework layer around it has not been, and the currency point costs it.
+
+The current public application uses React with TanStack Start on Cloudflare Workers. Bun and Vite+ provide the local toolchain. Agents should read the installed package documentation and the pinned official TanStack Start and Cloudflare skills before changing framework or deployment code.
+
+Convergence loses a point because route loaders, server functions, query caching and ordinary HTTP endpoints have different responsibilities. This repository demonstrates where each belongs: route files coordinate navigation, feature use cases own operations, and vendor integrations own service configuration.
+
+### API layer: TanStack Start server functions, typed end to end
+
+**Score: 7/8.**
+
+The property that matters is not the framework, it is that a handler's input and output types are visible to the caller. When a route's shape changes, every call site that is now wrong fails to compile.
+
+The competitor advice here usually names specific RPC libraries. That is one implementation of the property, not the property. Any approach where changing an endpoint breaks the build at its call sites qualifies. What does not qualify is a plain `fetch` to a JSON route typed by hand at the call site, because that is a boundary where an agent's wrong assumption compiles cleanly, ships, and is discovered by a customer.
+
+**Untyped API boundaries are where agent mistakes go to survive.**
+
+### Database: Drizzle over Cloudflare D1
+
+**Score: 8/8.**
+
+The schema is TypeScript, so it is both the migration source and the type source, and there is no second artifact to drift. A query referencing a column that does not exist is a compile error, not a 500.
+
+Two properties matter beyond typing. Drizzle queries resemble SQL, so existing SQL knowledge transfers. Cloudflare D1 uses SQLite semantics, so agents must follow the D1 adapter and installed documentation instead of copying Postgres-specific queries. Versioned migrations and isolated local bindings make changes reviewable before any remote operation.
+
+### Validation: Zod at every external boundary
+
+**Score: 8/8.** This is the layer most stacks skip and the one that pays back fastest.
+
+Types describe what you believe. Schemas check it. Every place data enters the process (HTTP bodies, environment variables, webhook payloads, third-party responses, database JSON columns) is a place where the type system is trusting a promise nobody verified.
+
+For agent work this matters more than it does for human work. A human writing an integration tends to be suspicious of the payload because they have been burned. An agent writes the happy path with total confidence, because the happy path is what its training data mostly contains. A schema at the edge turns that optimism into a caught error with a message naming the field.
+
+### Auth: Better Auth, in your repository
+
+**Score: 7/8.**
+
+The agent-relevant property is that the implementation is source you own rather than an opaque hosted call. An agent can read how a session is issued, follow the token to where it is verified, and extend it in a way you can review in a diff.
+
+Hosted auth scores worse here for a structural reason, separate from the pricing argument: the important half of the logic is behind an API boundary the agent cannot read, so any question about behaviour ends in a guess or a docs lookup, and any customization becomes an integration rather than a change.
+
+The point it loses is currency. This is a fast-moving library in an ecosystem that is still consolidating, so model memory of its API is unreliable. It is a good example of the test doing its job: a library can be the right choice and still score badly on one axis, and knowing which axis tells you where to put the guardrail.
+
+### Styling: Tailwind
+
+**Score: 7/8.**
+
+The usual reason given is training data volume. The better reason is structural: the styles sit on the element they style, so **there is no second file the agent has to remember to open**. A stylesheet in another directory is a synchronization obligation, and the failure mode for agents is not that they style badly, it is that they update one of the two places.
+
+This generalizes past styling. The same argument favours colocated tests and colocated types, and it argues against any pattern where one change must be mirrored somewhere the agent has no reason to look.
+
+### Internationalization: use-intl with a parity check
+
+**Score: 7/8**, and it earns its place here for a reason that is not really about i18n.
+
+Translations are the archetypal silent failure. An agent adds a feature, writes English strings, and the other locales are now missing keys. Nothing crashes. Tests pass. The bug ships to exactly the customers who cannot report it clearly.
+
+The fix is not a better library, it is that `bun run check:i18n` fails the build on a missing key. Any part of your system with that shape (present in one place, silently absent in another) needs the same treatment, and until it has one it is invisible to your agent and to you.
+
+### Payments and email: Polar, Resend
+
+**Score: 6/8** and **7/8**.
+
+Payment integrations lose points on convergence rather than quality. This application uses Polar checkout and verified webhooks, with purchase and licence-key handling in feature use cases. Follow that implementation and the provider’s documented retry behavior. Resend delivers the localized email templates from the Worker.
+
+Webhooks deserve their own warning and get one below.
+
+### Testing: Vitest and Playwright
+
+**Score: 8/8**, and it is the layer that makes every other score usable.
+
+The point is not coverage as a number. It is that `bun run check && bun run test:coverage` exists, exits 0 or 1, and an agent can run it without being told how. Everything above this line is about narrowing what an agent can express. This line is about catching what still got through.
+
+## Dependency count is agent surface area
+
+Every dependency is an API the model might remember incorrectly. That reframes the usual "too many dependencies" argument, which is normally about bundle size and supply chain, into a correctness argument as well.
+
+The runtime dependencies are listed in `package.json`. What matters is not the count but the shape: nearly all of them are either typed end to end or wrapped at a boundary we own, so a wrong assumption about them fails to compile rather than failing in production.
+
+There is now a second reason to be careful, and it is a security one. Frontier models released between October 2025 and March 2026 were measured hallucinating package names at rates between **4.62% and 6.10%** ([arXiv](https://arxiv.org/pdf/2605.17062)). Attackers register those invented names on public registries and wait, an attack named **slopsquatting** ([Mend](https://www.mend.io/blog/the-hallucinated-package-attack-slopsquatting/)).
+
+The practical rule: **a dependency an agent added is an unreviewed pull request from a stranger.** Check that the package exists, that its name is what you expected rather than a near-miss, and that you actually needed it. Lockfiles and a review step on `package.json` changes cover most of the exposure for close to zero effort.
+
+## What agents should never own alone
+
+Some parts of a SaaS share one property: **the wrong version looks right, passes tests, demos correctly, and fails only under conditions your test suite does not reproduce.** That property, not difficulty, is what makes them unsafe to delegate.
+
+| Surface                    | Why the wrong version passes review                                 |
+| -------------------------- | ------------------------------------------------------------------- |
+| Session and token handling | A working login proves nothing about expiry, rotation or revocation |
+| Payment webhooks           | A non-idempotent handler is correct until the retry arrives         |
+| Database migrations        | Reversibility and data loss are invisible until the rollback        |
+| Tenant isolation           | The query is right for the test tenant and wrong for the second one |
+| Anything reading a secret  | Logging a token is a one-line change that works perfectly           |
+
+The webhook is the clearest case. Stripe retries on non-2xx, so a handler that charges correctly on the first delivery and charges again on the retry passes every test an agent would think to write, because writing the test requires already knowing the failure mode. This is not a limit on model capability. It is that the test suite an agent writes reflects the failure modes in its training data, and idempotency bugs are underrepresented there relative to how often they cost real money.
+
+Mark these paths in `AGENTS.md` as human-review-only, and back it with required reviewers so intent is enforced rather than trusted.
+
+## The stack, and where to check it
+
+Every claim below maps to a command in the public website repository, rather than to an adjective on a page.
+
+| Layer      | Choice                          | Score | Verify                                   |
+| ---------- | ------------------------------- | :---: | ---------------------------------------- |
+| Language   | TypeScript, strict, no `any`    |   8   | `tsc --strict` blocks the merge          |
+| Runtime    | Cloudflare Workers              |   7   | `bun run check && bun run test:coverage` |
+| Framework  | TanStack Start, React           |   6   | Installed docs pinned in `AGENTS.md`     |
+| API        | TanStack Start server functions |   7   | Route change breaks call sites at build  |
+| Database   | Drizzle, Cloudflare D1          |   8   | Schema is the migration and the types    |
+| Validation | Zod at every boundary           |   8   | HTTP, env, webhooks and rows all parsed  |
+| Auth       | Better Auth, in-repo            |   7   | Readable source, `$0` per user           |
+| Styling    | Tailwind, shadcn/ui in-repo     |   7   | 56 components you can edit               |
+| i18n       | use-intl, parity gated          |   7   | `bun run check:i18n`                     |
+| Tests      | Vitest, Playwright              |   8   | 176 test files, 8 suites, 100% gate      |
+
+The 100% coverage gate is the part that makes the rest safe to run an agent against. It can write as fast as it likes; nothing it breaks reaches main, and you find out at the pull request rather than from a customer.
+
+**Who this is not for.** If you want something free to learn on, clone a template and enjoy it. If you would rather a hosted vendor run your auth and bill you per monthly active user, buy that instead. This is for people who intend to still own their margins at fifty thousand users.
+
+<Callout title="Check it before you pay for it">
+
+The [documentation](/docs) is public and the coverage report is generated by the repository itself. Then [see what it costs](/#pricing): one payment from $249, lifetime core updates, no per-user fees.
+
+</Callout>
+
+## Frequently asked questions
+
+<Accordions>
+
+<Accordion title="What is the best tech stack for AI coding agents in 2026?">
+
+End-to-end TypeScript, with a typed database layer, schema validation at every external boundary, auth that lives in your repository, and one command that type-checks, lints and tests. The specific libraries matter far less than whether misusing them fails to compile. Score any candidate on constraint, convergence, verifiability and currency before adopting it.
+
+</Accordion>
+
+<Accordion title="Does picking a popular framework help AI coding agents?">
+
+Less than it used to, and sometimes not at all. Popularity gives a model more training data, but only about the version it was trained on. A framework that ships breaking changes faster than models retrain produces confident, fluent, wrong code. Stability matters more than volume once a library moves quickly.
+
+</Accordion>
+
+<Accordion title="Why does my agent write code using APIs that no longer exist?">
+
+Because it is recalling the version it was trained on. Research measured deprecated API usage rates of 25% to 38% across eight widely used libraries, attributed to stale parametric knowledge and no live view of what the API is today. Your type checker is the cheapest correction for this, which is why untyped boundaries are where the problem survives.
+
+</Accordion>
+
+<Accordion title="Should I let an AI agent choose my dependencies?">
+
+Not without checking that each package exists. Frontier models released between October 2025 and March 2026 hallucinated package names at rates between 4.62% and 6.10%, and attackers now register those invented names on public registries, an attack called slopsquatting. Treat any new dependency an agent adds as an unreviewed pull request from a stranger.
+
+</Accordion>
+
+<Accordion title="Is a monorepo better for AI coding agents?">
+
+Only if the boundaries are enforced by tooling rather than described in a readme. A monorepo whose package boundaries fail the build when crossed teaches an agent your architecture in seconds. A monorepo held together by convention gives the agent more places to put the right code in the wrong package.
+
+</Accordion>
+
+<Accordion title="Which parts of a SaaS should an agent never write alone?">
+
+Anything where a plausible-looking mistake is expensive and silent: session and token handling, payment webhooks, database migrations, tenant isolation, and anything reading a secret. These share a property, which is that the wrong version passes tests and demos correctly, and fails only under conditions your test suite does not reproduce.
+
+</Accordion>
+
+<Accordion title="Do I need tRPC or oRPC for an agent-friendly API?">
+
+You need types that cross the network boundary; the specific library is secondary. Any approach where a client calling a changed endpoint fails to compile will do. What does not work is a plain fetch to an untyped JSON route, because that is a boundary where a wrong assumption compiles cleanly and reaches production.
+
+</Accordion>
+
+<Accordion title="How many dependencies is too many for an agent-assisted codebase?">
+
+Count surfaces rather than packages. Every dependency is an API the model may remember incorrectly, so the question is how many of them are load-bearing, unfamiliar and unchecked. A dependency covered by strict types and a test costs little. One that returns untyped data into your business logic costs on every future change.
+
+</Accordion>
+
+<Accordion title="Does Tailwind actually help AI coding agents?">
+
+Yes, for a structural reason rather than a stylistic one. Styles sit on the element they style, so there is no second file the agent has to remember to open and update. The same argument favours colocated tests and colocated types, and it argues against any pattern where one change must be mirrored in a file the agent has no reason to open.
+
+</Accordion>
+
+<Accordion title="Should I switch stacks to make my agent work better?">
+
+Almost never. Migration cost is certain and the gain is bounded, whereas adding strict types, boundary validation and one verify command to your existing stack is cheap and applies immediately. Change your stack when you were going to change it anyway, and let agent fit be a tiebreaker rather than the reason.
+
+</Accordion>
+
+</Accordions>
+
+### Sources
+
+- [APILOT: Navigating Large Language Models to Generate Secure Code by Sidestepping Outdated API Pitfalls](https://arxiv.org/pdf/2409.16526)
+- [When LLMs Lag Behind: Knowledge Conflicts from Evolving APIs in Code Generation](https://arxiv.org/html/2604.09515v1)
+- [Re-evaluating LLM Package Hallucinations (2026)](https://arxiv.org/pdf/2605.17062)
+- [The Hallucinated Package Attack: Slopsquatting Explained](https://www.mend.io/blog/the-hallucinated-package-attack-slopsquatting/)
+- [AGENTS.md open specification](https://agents.md/)
+
+_Written by Piotr J. Borowiecki, who builds SaaSyLand. The Next.js warning quoted at the top illustrates the risk of stale framework knowledge. This repository now uses TanStack Start and Cloudflare Workers; its root instructions and pinned skills describe that stack._
