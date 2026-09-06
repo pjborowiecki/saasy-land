@@ -1,0 +1,16 @@
+---
+title: Sito Docs
+description: Come questa documentazione è costruita ed estesa.
+---
+
+## radice del contenuto
+
+`content/docs`
+
+- MDX pagine: `*.{locale}.mdx` per tutte le nove lingue configurate (dot parser)
+- Cartella `meta.<locale>.json` per titoli/ordine/icon
+- `fallbackLanguage: en-US` per le traduzioni mancanti
+
+## cablaggio dell'app
+
+`fumadocs.source.ts`, layout dei documenti, ricerca API. Aggiungi pagine → update meta `pages` arrays → ricostruire.

@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "S'inscrire",
+    "description": "Créez un compte sur {name}."
+  },
+  "form": {
+    "title": "S'inscrire",
+    "description": "Créez un compte sur {name}.",
+    "name": "Nom",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "submit": "Continuer",
+    "submitting": "Inscription...",
+    "success": "Compte créé avec succès !",
+    "successCheckEmail": "Consulte ta boîte de réception pour trouver le lien de vérification. Si ton adresse e-mail est déjà vérifiée, connecte-toi.",
+    "error": "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.",
+    "hasAccount": "Déjà un compte ? <signin>Connectez-vous</signin>",
+    "or": "ou",
+    "confirmPassword": "Confirmer le mot de passe",
+    "termsAndPrivacy": "En vous inscrivant, vous acceptez nos <terms>Conditions d'utilisation</terms> et notre <privacy>Politique de confidentialité</privacy>."
+  }
+}

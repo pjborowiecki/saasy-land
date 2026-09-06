@@ -1,0 +1,357 @@
+---
+title: Escolhendo um SaaS Stack para AI Coding Agentes em 2026
+description: Popular não significa mais agente amigável. Um teste de quatro perguntas para qualquer dependência, aplicado camada por camada para uma produção real SaaS pilha.
+excerpt: O conselho padrão é escolher ferramentas populares porque os agentes viram mais delas. Em 2026, esse conselho inverteu-se parcialmente, e há um artefato neste repositório que o prova.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-08-15
+image: /images/blog/choosing-a-saas-stack-for-ai-coding-agents.webp
+tags:
+  - ai-agents
+  - architecture
+  - typescript
+  - stack
+faq:
+  - question: Qual é a melhor pilha de tecnologia para agentes codificadores de IA em 2026?
+    answer: Fim-a-fim TypeScript, com uma camada de banco de dados digitado, validação de esquema em cada limite externo, autenticação que vive em seu repositório, e um comando que tipo-checks, fiapos e testes. As bibliotecas específicas são muito menos importantes do que se usar errado não as compilar. Marcar qualquer candidato em restrição, convergência, verificação e moeda antes de adotá-la.
+  - question: Escolher um framework popular ajuda agentes codificadores de IA?
+    answer: Menos do que antes, e às vezes nem tanto. A popularidade dá a um modelo mais dados de treinamento, mas apenas sobre a versão em que foi treinado. Um framework que quebra as naves muda mais rápido do que o retreinamento de modelos produz um código confiante, fluente e errado. A estabilidade importa mais que o volume uma vez que uma biblioteca se move rapidamente.
+  - question: Por que meu agente escreve código usando APIs que não existem mais?
+    answer: Porque está lembrando a versão em que foi treinado. API taxas de uso de 25% a 38% em oito bibliotecas amplamente utilizadas, atribuídas ao conhecimento paramétrico velho e sem visão ao vivo do que API Seu tipo de verificador é a correção mais barata para isso, e é por isso que limites não digitados são onde o problema sobrevive.
+  - question: Devo deixar um agente de IA escolher minhas dependências?
+    answer: Não sem verificar se cada pacote existe. Modelos de fronteira lançados entre outubro de 2025 e março de 2026 nomes de pacotes alucinados em taxas entre 4,62% e 6,10%, e atacantes agora registram esses nomes inventados em registros públicos, um ataque chamado de desleixo. Trate qualquer nova dependência que um agente adicionar como um pedido de retirada sem revisão de um estranho.
+  - question: Um monorrepo é melhor para agentes codificadores de IA?
+    answer: Só se os limites forem forçados por ferramentas em vez de descritos em um readme. Um monorrepo cujos limites de pacote falham na construção quando cruzado ensina a um agente sua arquitetura em segundos. Um monorrepo unido por convenção dá ao agente mais lugares para colocar o código certo no pacote errado.
+  - question: Que partes de um SaaS Um agente nunca deveria escrever sozinho?
+    answer: "Qualquer coisa onde um erro de aparência plausível seja caro e silencioso: manipulação de sessão e fichas, pagamento de webhooks, migração de banco de dados, isolamento de inquilinos, e qualquer coisa lendo um segredo. Eles compartilham uma propriedade, que é que a versão errada passa testes e demos corretamente, e falha apenas em condições que sua suíte de teste não se reproduz."
+  - question: Preciso de TRPC ou ORPC para um agente amigo API?
+    answer: Você precisa de tipos que cruzem o limite da rede, a biblioteca específica é secundária. Qualquer abordagem em que um cliente que chama um ponto final alterado não compilá-lo-á. O que não funciona é uma simples busca para uma rota JSON não digitada, porque essa é uma fronteira onde uma suposição errada compila de forma limpa e atinge a produção.
+  - question: Quantas dependências são demais para uma base de código assistida por agentes?
+    answer: Contar superfícies em vez de pacotes. API O modelo pode se lembrar incorretamente, então a questão é quantos deles são portadores de carga, desconhecidos e descontrolados, uma dependência coberta por tipos rígidos e um teste custa pouco, um que devolve dados não digitados em sua lógica de negócios custa cada mudança futura.
+  - question: Sim. Tailwind Realmente ajudar agentes codificadores de IA?
+    answer: Sim, por uma razão estrutural em vez de estilística. Estilos sentam no elemento estilo, então não há segundo arquivo que o agente tenha que lembrar de abrir e atualizar. O mesmo argumento favorece testes colocados e tipos colocados, e argumenta contra qualquer padrão onde uma mudança deve ser espelhada em um arquivo que o agente não tem razão para abrir.
+  - question: Devo trocar as pilhas para fazer meu agente trabalhar melhor?
+    answer: Quase nunca. O custo da migração é certo e o ganho é limitado, enquanto adicionar tipos rígidos, validação de limites e um comando de verificação para sua pilha existente é barato e se aplica imediatamente. Mude sua pilha quando ia trocá-la de qualquer jeito, e deixe o agente se encaixar ser um desempate ao invés da razão.
+---
+
+O conselho que todos dão sobre escolher uma pilha para agentes codificadores de IA é que popular é melhor, porque modelos já viram mais disso. Parece, obviamente, verdade. Era verdade. Em 2026 é parcialmente invertido, e a prova é um arquivo que este repositório gera por si só.
+
+Corra. `next dev` Em frente. Next.js 16 e escreve isso em seu `AGENTS.md`, unprompted:
+
+```markdown
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all
+differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/`
+before writing any code. Heed deprecation notices.
+```
+
+O mais popular React Isso não é uma crítica ao que eles fazem. Next.jsÉ uma resposta honesta a um problema real, e é a declaração mais clara do que a escolha de pilha realmente significa em 2026.
+
+Este artigo é sobre esse problema e o que fazer com ele. Não é uma lista de compras. As listas estão velhas, e uma lista não pode dizer o que fazer com a biblioteca que você já usa que não está nela.
+
+<Callout title={"O que este artigo lhe dá?"}>
+
+1. O que uma pilha realmente faz para um agente, que é mais estreito e útil do que "ajuda a escrever código".
+2. **A diferença de moeda.**Por que o volume de dados de treinamento deixou de ser um proxy confiável para agente adequado, com a pesquisa e os artefatos.
+3. **O Teste do Agente Stack.**Quatro perguntas, marcadas em 8, que você pode correr contra qualquer dependência, incluindo as inventadas após este artigo.
+4. O teste aplicado camada por camada a uma produção SaaS Stack, com as trocas honestas.
+5. O que os agentes nunca deveriam ter, e por que essas coisas dividem uma propriedade.
+
+</Callout>
+
+_Última atualização em 15 de agosto de 2026. Esta é a segunda peça de uma série, a primeira capa. [Por que seu repositório decide a qualidade de saída do agente](/blog/ai-coding-agents-repository-readiness) e vale a pena ler primeiro se você não tiver._
+
+## O que uma pilha faz para um agente codificador de IA?
+
+Uma pilha não faz um agente correto. Isso muda. **Quantos programas errados são expressíveis**. . Cada escolha de biblioteca encolhe o espaço de código que compila, mas está errado, ou o amplia. Esse é todo o mecanismo, e é por isso que "amigável a agentes" é uma propriedade que você pode testar ao invés de uma vibração.
+
+Considere o mesmo erro em duas bases de código. Um agente lê mal uma coluna de banco de dados como uma string quando é uma data.
+
+Em um construtor de consultas digitadas, o erro não é expressível. O código não compila, o agente vê o erro dentro de sua própria execução, e ele corrige. Custo decorrido: cerca de dois segundos.
+
+Em uma consulta crua retornando `any`, o erro compila, passa revisão porque ele lê corretamente, e produz uma data errada em um e-mail de faturamento seis semanas depois. Custo decorrido: um incidente.
+
+Mesmo modelo. Mesma prompt. O mesmo erro. A pilha decidiu se foi um erro de compilação ou um incidente.
+
+## A diferença de moeda, e por que popular deixou de ser um proxy
+
+Aqui está o argumento que todos fazem: bibliotecas populares aparecem com mais frequência em dados de treinamento, então modelos escrevem com mais precisão. A primeira metade é verdade. A segunda metade agora depende inteiramente de algo que o argumento ignora, que é **O quão rápido a biblioteca muda**.
+
+**A diferença de moeda é a distância entre o API Um modelo se lembra e o API Você realmente envia.** O volume de dados de treinamento diz o quão confiante um modelo escreverá uma biblioteca. A diferença de moeda diz se essa confiança é justificada. Eles são quantidades diferentes, e para estruturas de movimento rápido eles agora apontam em direções opostas.
+
+A pesquisa sobre isso é inequívoca. Um estudo de oito bibliotecas amplamente usadas medido **Depreciada. API Taxas de uso de 25% a 38%** em código gerado por modelos, atribuindo-o ao conhecimento paramétrico obsoleto e à ausência de qualquer visão ao vivo do que o API é hoje ([APILOT, arXiv](https://arxiv.org/pdf/2409.16526)). Trabalhar na evolução das APIs enquadra o mesmo fracasso que um conflito de conhecimento: o modelo não é adivinhar, é lembrar confiantemente de uma versão que não existe mais ([Quando LLMs Lag Behind, arXiv](https://arxiv.org/html/2604.09515v1)).
+
+Isso produz uma classificação contra-intuitiva. Ordenado pelo problema que a memória do modelo causa:
+
+| Perfil da biblioteca                                                   | Volume de treinamento | API Churn | Efeito líquido na saída do agente.                |
+| ---------------------------------------------------------------------- | --------------------- | --------- | ------------------------------------------------- |
+| Popular e estável.React, PostgreSQL, Tailwind)                         | Alto.                 | Baixo.    | **Melhor.** A memória é grande e ainda correta.   |
+| Pequeno e estável.Zod, utilitários mais focados)                       | Mais baixo.           | Baixo.    | **Bom.** Menos memória, mas o que existe é certo. |
+| Popular e em movimento rápido (uma estrutura no meio da grande versão) | Alto.                 | Alto.     | **Pior.** Confiante, fluente e errada.            |
+| Pequenos e rápidos.                                                    | Baixo.                | Alto.     | Ruim, mas o agente se cerca em vez de afirmar     |
+
+A célula inferior direita é a interessante. Quando um modelo sabe pouco sobre uma biblioteca, tende a cercar, pesquisar ou ler a fonte. Quando ele sabe muito sobre o _Versão anterior_ de uma biblioteca, afirma. **Confiança é calibrada para o volume do treinamento, não para corrigir.**Então, o pior caso é alto volume mais alto churn: um agente que escreve código obsoleto fluentemente e nunca sinaliza dúvida.
+
+Esse é exatamente o caso. Next.js É o mais treinado. React Framework existe, e enviou bastante mudança que o vendedor decidiu que um aviso impresso para os agentes era justificado.
+
+### O que fazer sobre isso?
+
+Você não pode consertar a memória de um modelo, mas você pode tornar seus erros baratos:
+
+- **Prefere estabilidade sobre popularidade quando entram em conflito.** Uma mesa de cinco anos. API O modelo meio-lembra-se de um reescrito API Ele se lembra completamente errado.
+- **Deixe o compilador pegar a versão.** Depreciada...API Este é o verdadeiro argumento para tipos de ponta a ponta, e é mais forte do que o habitual.
+- **Pin e vendedor os documentos que o agente lê.** O conselho do próximo é ler o guia. `node_modules`, não a web. Os médicos locais combinam com sua versão instalada, um post de 2024 não.
+- **Trate novas dependências como não confiáveis.** Mais sobre isso abaixo, porque é um problema de segurança e não apenas um problema de correção.
+
+## O Teste do Agente Stack.
+
+Quatro perguntas por dependência, pontuação 0, 1 ou 2, por 8 pontos. Aplica-se a bibliotecas que não existiam quando isso foi escrito, que é o ponto de um teste em vez de uma lista.
+
+### Um. Restrição: o mau uso pode falhar em compilar?
+
+- **0**As mãos da biblioteca para trás. `any`, ou configuração é chaveado em cordas, ou erros aparecem apenas em tempo de execução.
+- **1**Os tipos existem mas são consultivos, uma chamada errada ainda compila sob um elenco.
+- **2**Erro é um erro de tipo. Programas errados não são expressíveis.
+
+### Dois. Convergence: existe uma maneira óbvia de fazer o trabalho?
+
+Agentes trabalham por imitação, então uma biblioteca com seis APIs equivalentes lhe dá uma chance em seis do que sua base de código já usa.
+
+- **0**Muitas abordagens equivalentes, todas comuns na natureza e todas nos dados de treinamento.
+- **1**Uma forma recomendada, além de alternativas de legado amplamente usadas.
+- **2**Uma maneira, e as alternativas se foram em vez de serem depreciadas.
+
+### 3. Verificabilidade: o agente pode provar que funciona?
+
+- **0**Correção só é observável por um humano olhando para o aplicativo em execução.
+- **1**Testável, mas a configuração é manual o suficiente para que o agente não o faça.
+- **2**Um comando que o agente já comanda cobre.
+
+### Quatro. Moeda: a memória do modelo é atual?
+
+- **0**Versão principal churn dentro do ano passado, com APIs públicas renomeadas ou removidas.
+- **1**Mudanças menores recentes, ou os documentos que o modelo aprendeu agora estão errados em lugares.
+- **2**O público API Tem sido estável o suficiente que o código recordado ainda funciona, ou os documentos legíveis por máquinas da biblioteca ao lado da versão instalada.
+
+**Lendo o placar.** De 7 a 8 é uma dependência que se pode confiar a um agente sem supervisão. 4 a 6 significa que ele trabalha com um limite de tipo ou um teste em torno dele. 3 ou abaixo significa embrulhá-lo em uma interface que você possui, ou aceitar que um humano escreve todos os sites de chamadas.
+
+O teste é deliberadamente sobre o _Forma._ de uma dependência em vez de sua qualidade. Excelentes bibliotecas pontuam mal aqui (uma grande biblioteca no meio da reescrita de notas 0 na moeda), e as não notáveis pontuam bem. Este agente de medidas se encaixa, não mérito.
+
+## Aplicando o teste, camada por camada.
+
+O que se segue é a pilha que enviamos, marcou honestamente, incluindo onde custa alguma coisa. Suas respostas podem diferir, o raciocínio é a parte transferível.
+
+### Língua: TypeScript, rigoroso, sem fugas
+
+**Pontuação: 8/8.** Esta é a escolha que tudo o resto da lista depende.
+
+Modo rígido é o chão, não o gol. As propriedades que importam para os agentes são as que as pessoas normalmente desligam, sem implícitas. `any`, sem acesso ao índice não verificado, sem afirmações não nulas. Cada uma dessas bandeiras converte uma classe de agentes confiantes, mas errados, de uma surpresa em tempo de corrida em um rabisco vermelho que o agente vê antes de terminar sua vez.
+
+A versão importa menos que as configurações. TypeScript é pior para o trabalho de agente do que para um mais velho.
+
+### Tempo de execução e estrutura: Bun, Next.js, React
+
+**Pontuação: 6/8.** Restrição 2, convergência 1, verificação 2, moeda 1.
+
+Este é o ponto fraco honesto, e é o mesmo Next.js Alertas. ReactO núcleo tem sido estável o suficiente para que a memória do modelo seja confiável.
+
+Nós pagamos esse custo deliberadamente, porque a alternativa custa mais: React A mitigação é a que o próximo recomenda, que está apontando agentes para os documentos instalados em vez de em sua memória. `AGENTS.md` Não é uma mudança de arquitetura.
+
+Convergence perde um ponto por uma razão real: componentes do servidor, componentes do cliente, manipuladores de rota e ações do servidor são quatro maneiras de mover dados, todos atuais, todos nos dados de treinamento, e um agente vai escolher por vibe a menos que seu repositório tenha exatamente um exemplo de cada padrão.
+
+### API Camada: Elysia Em frente. Bun, datilografado ponta a ponta
+
+**Pontuação: 7/8.**
+
+A propriedade que importa não é o framework, é que a entrada e os tipos de saída de um manipulador são visíveis para o chamador. Quando a forma de uma rota muda, todo site de chamadas que está errado falha em compilar.
+
+O conselho do concorrente aqui geralmente nomeia bibliotecas RPC específicas. Essa é uma implementação da propriedade, não a propriedade. Qualquer abordagem onde mudar um ponto final quebra a construção em seus locais de chamada se qualifica. O que não se qualifica é uma planície. `fetch` Para uma rota JSON datilografada à mão no local de chamada, porque é um limite onde a suposição errada de um agente compila de forma limpa, naves, e é descoberta por um cliente.
+
+**Sem digitação. API Os limites são onde os erros dos agentes sobrevivem.**
+
+### Banco de dados: Drizzle sobre Neon Postgres
+
+**Pontuação: 8/8.**
+
+O esquema é TypeScript, então é tanto a fonte de migração e a fonte do tipo, e não há segundo artefato para derivar. Uma consulta referenciando uma coluna que não existe é um erro de compilação, não um 500.
+
+Duas propriedades ganham a pontuação completa além da digitação óbvia, primeiro, o construtor de consultas lê perto o suficiente do SQL que o conhecimento SQL de um modelo (muito grande, muito estável, décadas de idade) transfere diretamente. Postgres O SQL que um modelo aprendeu em 2021 ainda funciona hoje.
+
+### Validação: Zod em cada limite externo.
+
+**Pontuação: 8/8.** Esta é a camada que a maioria das pilhas saltam e a que paga mais rápido.
+
+Tipos descrevem o que você acredita. Schemas verifiquem. Cada lugar que os dados entram no processo (corpos HTP, variáveis de ambiente, cargas úteis webhook, respostas de terceiros, colunas JSON de banco de dados) é um lugar onde o sistema de tipo está confiando em uma promessa que ninguém verificou.
+
+Para o trabalho de agente isso importa mais do que para o trabalho humano. Uma escrita humana uma integração tende a suspeitar da carga porque eles foram queimados. Um agente escreve o caminho feliz com total confiança, porque o caminho feliz é o que seus dados de treinamento contêm principalmente. Um esquema na borda transforma esse otimismo em um erro pego com uma mensagem nomeando o campo.
+
+### Auth: Better Auth, em seu repositório
+
+**Pontuação: 7/8.**
+
+A propriedade relevante para o agente é que a implementação é fonte sua em vez de uma chamada opaca hospedada. Um agente pode ler como uma sessão é emitida, seguir o símbolo para onde ele é verificado, e estendê-lo de uma forma que você pode rever em um diff.
+
+A parte importante da lógica está por trás de uma questão estrutural, separada do argumento de preços. API Limite o agente não pode ler, então qualquer pergunta sobre comportamento termina em um palpite ou um exame médico, e qualquer personalização torna-se uma integração em vez de uma mudança.
+
+O ponto que perde é a moeda. Esta é uma biblioteca em movimento rápido em um ecossistema que ainda está se consolidando, então memória modelo de sua API não é confiável. É um bom exemplo do teste fazendo seu trabalho: uma biblioteca pode ser a escolha certa e ainda marcar mal em um eixo, e saber qual eixo lhe diz onde colocar o trilho de guarda.
+
+### Styling: Tailwind
+
+**Pontuação: 7/8.**
+
+A razão usual dada é o volume de dados de treinamento. A melhor razão é estrutural: os estilos sentam-se no elemento que eles estilo, então **Não há segundo arquivo que o agente tenha que lembrar de abrir.**. . Uma folha de estilo em outro diretório é uma obrigação de sincronização, e o modo de falha para os agentes não é o estilo ruim, é que eles atualizam um dos dois lugares.
+
+Isso generaliza o estilo passado. O mesmo argumento favorece testes colocados e tipos colocados, e argumenta contra qualquer padrão onde uma mudança deve ser espelhada em algum lugar que o agente não tem razão para olhar.
+
+### Internacionalização: next-intl com uma verificação de paridade.
+
+**Pontuação: 7/8**, e ganha seu lugar aqui por uma razão que não é realmente sobre i18n.
+
+Traduções são o fracasso silencioso arquetípico. Um agente adiciona um recurso, escreve cordas inglesas, e os outros locais estão faltando chaves. Nada cai. Os testes passam. Os insetos enviam exatamente para os clientes que não podem reportar claramente.
+
+O conserto não é uma biblioteca melhor, é que `bun run check:i18n` falha na construção de uma chave desaparecida. Qualquer parte do seu sistema com essa forma (presente em um lugar, silenciosamente ausente em outro) precisa do mesmo tratamento, e até que tenha um é invisível para o seu agente e para você.
+
+### Pagamentos e e-mail: Stripe, Resend
+
+**Pontuação: 6/8.** e... **7/8**.
+
+Stripe Há muitas maneiras corretas de receber um pagamento, tudo documentado, tudo nos dados de treinamento, e um agente pediu para adicionar faturamento escolherá com confiança uma forma que não corresponda à que sua base de códigos já usa, a mitigação é a verificação 3 do placar do repositório, exatamente um exemplo implementado, então o vizinho mais próximo é o certo.
+
+Webhooks merecem o seu próprio aviso e obter um abaixo.
+
+### Testando: Vitest e... Playwright
+
+**Pontuação: 8/8**, e é a camada que faz todos os outros pontos utilizáveis.
+
+O ponto não é a cobertura como um número. É isso. `bun run verify` existe, sai 0 ou 1, e um agente pode executá-lo sem ser informado como. Tudo acima desta linha é sobre estreitar o que um agente pode expressar. Essa fala é sobre pegar o que ainda passou.
+
+## Contagem de dependência é área de superfície do agente.
+
+Cada dependência é uma API O modelo pode lembrar-se incorretamente, que reformula o habitual argumento de "demasiadas dependências", que normalmente é sobre o tamanho do pacote e a cadeia de suprimentos, em um argumento de correção também.
+
+Esta base de códigos executa 48 dependências de tempo de execução, que é modesta para uma completa SaaS. O que importa não é a contagem, mas a forma: quase todos eles são datilografados final a fim ou envolto em uma fronteira que possuímos, então uma suposição errada sobre eles falha em compilar em vez de falhar na produção.
+
+Agora há uma segunda razão para ter cuidado, e é uma questão de segurança. Modelos de fronteira liberados entre outubro de 2025 e março de 2026 foram medidos alucinando nomes de pacotes a taxas entre **4,62% e 6,10%** ([Arxiv.](https://arxiv.org/pdf/2605.17062)). Os atacantes registram os nomes inventados nos registros públicos e esperem, um ataque chamado **Slopsquatting** ([Conserte.](https://www.mend.io/blog/the-hallucinated-package-attack-slopsquatting/)).
+
+A regra prática: **uma dependência que um agente adicionou é um pedido de retirada sem revisão de um estranho.** Verifique se o pacote existe, que seu nome é o que você esperava em vez de um quase miss, e que você realmente precisava dele. Bloqueios e um passo de revisão `package.json` As mudanças cobrem a maior parte da exposição por quase zero de esforço.
+
+## O que os agentes nunca deveriam possuir sozinhos.
+
+Algumas partes de um SaaS compartilhar uma propriedade: **A versão errada parece certa, passa nos testes, demos corretamente, e falha apenas sob condições que sua suíte de testes não reproduz.** Essa propriedade, não dificuldade, é o que os torna inseguros para delegar.
+
+| Surface                         | Por que a versão errada passa revisão                                       |
+| ------------------------------- | --------------------------------------------------------------------------- |
+| Sessão e manipulação de fichas  | Um login de trabalho não prova nada sobre expiração, rotação ou revogação   |
+| Anzóis de pagamento             | Um manipulador não-idepotente está correto até que a repetição chegue.      |
+| Migrações de banco de dados     | Reversibilidade e perda de dados são invisíveis até o retorno.              |
+| Isolação de inquilinos.         | A consulta é certa para o inquilino do teste e errada para o segundo.       |
+| Qualquer coisa lendo um segredo | Registrar um símbolo é uma mudança de uma linha que funciona perfeitamente. |
+
+O webhook é o caso mais claro. Stripe É que o conjunto de testes que um agente escreve reflete os modos de falha em seus dados de treinamento, e erros de imunidade estão sub-representados lá em relação à frequência com que custam dinheiro real.
+
+Marque esses caminhos. `AGENTS.md` Como humano-revisão-somente, e de volta com revisores necessários assim a intenção é forçada em vez de confiável.
+
+## A pilha, e onde verificar.
+
+Cada reclamação abaixo de mapas para um comando no repositório que você estaria comprando, em vez de um adjetivo em uma página.
+
+| Camada          | Escolha                             | Ponto. | Verifique.                                                 |
+| --------------- | ----------------------------------- | :----: | ---------------------------------------------------------- |
+| Idioma          | TypeScript, rigoroso, não `any`     |   8    | `tsc --strict` Bloqueia a fusão.                           |
+| Hora da corrida | Bun                                 |   7    | `bun run verify`                                           |
+| Quadro.         | Next.js, React                      |   6    | Docs instalados presos em `AGENTS.md`                      |
+| API             | Elysia, datilografado ponta a ponta |   7    | Mudança de rota quebra os locais de chamada na construção. |
+| Banco de dados  | Drizzle, Neon Postgres              |   8    | Esquema é a migração e os tipos                            |
+| Validação       | Zod em cada limite                  |   8    | HTTP, Env, Webhooks e linhas todas analisadas.             |
+| Auth.           | Better Auth, in-repo                |   7    | Fonte legível, `$0` por usuário                            |
+| Styling.        | Tailwind, shadcn/ui In-repo         |   7    | 56 componentes que você pode editar                        |
+| i18n            | next-intl, paridade fechada         |   7    | `bun run check:i18n`                                       |
+| Testes          | Vitest, Playwright                  |   8    | 140 arquivos de teste, 5 suítes, 100% portão.              |
+
+O portão de cobertura de 100% é a parte que faz o resto seguro para comandar um agente contra. Pode escrever o mais rápido que quiser, nada que quebre atinge o principal, e você descobre no pedido de retirada em vez de um cliente.
+
+**Para quem não é.** Se quer algo livre para aprender, clone um modelo e aproveite. Se você prefere um vendedor hospedado executar sua autorização e cobrar você por usuário ativo mensal, compre isso em vez disso. Isto é para pessoas que pretendem ainda possuir suas margens em 50 mil usuários.
+
+<Callout title={"Cheque antes de pagar."}>
+
+O [documentação](/docs) é público e o relatório de cobertura é gerado pelo próprio repositório. Então... [Veja quanto custa.](/#pricing)Um pagamento de 249 dólares, atualizações do núcleo vitalício, sem taxas por usuário.
+
+</Callout>
+
+## Perguntas frequentes.
+
+<Accordions>
+
+<Accordion title={"Qual é a melhor pilha de tecnologia para agentes codificadores de IA em 2026?"}>
+
+Fim-a-fim TypeScript, com uma camada de banco de dados digitado, validação de esquema em cada limite externo, autenticação que vive em seu repositório, e um comando que tipo-checks, fiapos e testes. As bibliotecas específicas são muito menos importantes do que se usar errado não as compilar. Marcar qualquer candidato em restrição, convergência, verificação e moeda antes de adotá-la.
+
+</Accordion>
+
+<Accordion title={"Escolher um framework popular ajuda agentes codificadores de IA?"}>
+
+Menos do que antes, e às vezes nem tanto. A popularidade dá a um modelo mais dados de treinamento, mas apenas sobre a versão em que foi treinado. Um framework que quebra as naves muda mais rápido do que o retreinamento de modelos produz um código confiante, fluente e errado. A estabilidade importa mais que o volume uma vez que uma biblioteca se move rapidamente.
+
+</Accordion>
+
+<Accordion title={"Por que meu agente escreve código usando APIs que não existem mais?"}>
+
+Porque está lembrando a versão em que foi treinado. API taxas de uso de 25% a 38% em oito bibliotecas amplamente utilizadas, atribuídas ao conhecimento paramétrico velho e sem visão ao vivo do que API Seu tipo de verificador é a correção mais barata para isso, e é por isso que limites não digitados são onde o problema sobrevive.
+
+</Accordion>
+
+<Accordion title={"Devo deixar um agente de IA escolher minhas dependências?"}>
+
+Não sem verificar se cada pacote existe. Modelos de fronteira lançados entre outubro de 2025 e março de 2026 nomes de pacotes alucinados em taxas entre 4,62% e 6,10%, e atacantes agora registram esses nomes inventados em registros públicos, um ataque chamado de desleixo. Trate qualquer nova dependência que um agente adicionar como um pedido de retirada sem revisão de um estranho.
+
+</Accordion>
+
+<Accordion title={"Um monorrepo é melhor para agentes codificadores de IA?"}>
+
+Só se os limites forem forçados por ferramentas em vez de descritos em um readme. Um monorrepo cujos limites de pacote falham na construção quando cruzado ensina a um agente sua arquitetura em segundos. Um monorrepo unido por convenção dá ao agente mais lugares para colocar o código certo no pacote errado.
+
+</Accordion>
+
+<Accordion title={"Que partes de um SaaS Um agente nunca deveria escrever sozinho?"}>
+
+Qualquer coisa onde um erro de aparência plausível seja caro e silencioso: manipulação de sessão e fichas, pagamento de webhooks, migração de banco de dados, isolamento de inquilinos, e qualquer coisa lendo um segredo. Eles compartilham uma propriedade, que é que a versão errada passa testes e demos corretamente, e falha apenas em condições que sua suíte de teste não se reproduz.
+
+</Accordion>
+
+<Accordion title={"Preciso de TRPC ou ORPC para um agente amigo API?"}>
+
+Você precisa de tipos que cruzem o limite da rede, a biblioteca específica é secundária. Qualquer abordagem em que um cliente que chama um ponto final alterado não compilá-lo-á. O que não funciona é uma simples busca para uma rota JSON não digitada, porque essa é uma fronteira onde uma suposição errada compila de forma limpa e atinge a produção.
+
+</Accordion>
+
+<Accordion title={"Quantas dependências são demais para uma base de código assistida por agentes?"}>
+
+Contar superfícies em vez de pacotes. API O modelo pode se lembrar incorretamente, então a questão é quantos deles são portadores de carga, desconhecidos e descontrolados, uma dependência coberta por tipos rígidos e um teste custa pouco, um que devolve dados não digitados em sua lógica de negócios custa cada mudança futura.
+
+</Accordion>
+
+<Accordion title={"Sim. Tailwind Realmente ajudar agentes codificadores de IA?"}>
+
+Sim, por uma razão estrutural em vez de estilística. Estilos sentam no elemento estilo, então não há segundo arquivo que o agente tenha que lembrar de abrir e atualizar. O mesmo argumento favorece testes colocados e tipos colocados, e argumenta contra qualquer padrão onde uma mudança deve ser espelhada em um arquivo que o agente não tem razão para abrir.
+
+</Accordion>
+
+<Accordion title={"Devo trocar as pilhas para fazer meu agente trabalhar melhor?"}>
+
+Quase nunca. O custo da migração é certo e o ganho é limitado, enquanto adicionar tipos rígidos, validação de limites e um comando de verificação para sua pilha existente é barato e se aplica imediatamente. Mude sua pilha quando ia trocá-la de qualquer jeito, e deixe o agente se encaixar ser um desempate ao invés da razão.
+
+</Accordion>
+
+</Accordions>
+
+### Fontes
+
+- [Navegando por grandes modelos de linguagem para gerar código seguro ao passar despercebido API Pitfalls](https://arxiv.org/pdf/2409.16526)
+- [Quando LLMs Lag Behind: Conflitos de Conhecimento de Evoluindo APIs em Geração de Código](https://arxiv.org/html/2604.09515v1)
+- [Reavaliando o pacote LLM Alucinações (2026)](https://arxiv.org/pdf/2605.17062)
+- [O ataque do pacote alucinado, Slopsquatting explicado.](https://www.mend.io/blog/the-hallucinated-package-attack-slopsquatting/)
+- [AGENTES.MD especificação aberta](https://agents.md/)
+
+_Escrito por Piotr J. Borowiecki, que constrói SaaSyLandO... Next.js aviso citado no topo é gerado no próprio repositório `AGENTS.md` Por... `next dev`, não escrito à mão._

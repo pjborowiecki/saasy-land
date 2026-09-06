@@ -1,0 +1,5 @@
+{
+  "title": "Sistema de interfaz de usuario.",
+  "pages": ["shadcn-components", "data-table", "theme", "fonts-and-branding", "composition-patterns"],
+  "icon": "Palette"
+}

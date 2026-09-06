@@ -3,13 +3,14 @@
 import { readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
-import { SERVER_ONLY_NAMESPACES } from "../src/integrations/next-intl/i18n.client-messages"
-import { getLocaleMessagesDir, loadLocaleMessagesFromDir } from "../src/integrations/next-intl/i18n.utils"
-import { I18N } from "~/src/integrations/next-intl/i18n.config"
+const SERVER_ONLY_NAMESPACES = ["emails"] as const
+import { I18N } from "~/src/integrations/use-intl/i18n.config"
+
+import { getLocaleMessagesDir, loadLocaleMessagesFromDir } from "./i18n-messages"
 
 const MESSAGES_DIR = getLocaleMessagesDir()
 const SOURCE_LOCALE = I18N.DEFAULT_LOCALE
-const MESSAGE_TYPES_PATH = join(import.meta.dirname, "../src/integrations/next-intl/en-US.d.json.ts")
+const MESSAGE_TYPES_PATH = join(import.meta.dirname, "../src/integrations/use-intl/en-US.d.json.ts")
 
 function compareAlphabetically(a: string, b: string): number {
   return a.localeCompare(b)
@@ -46,7 +47,7 @@ function checkLocaleParity(): boolean {
   const sourceKeys = loadLocaleKeys(SOURCE_LOCALE)
   const problems: string[] = []
 
-  for (const locale of I18N.LOCALES) {
+  for (const locale of I18N.SUPPORTED_LOCALES) {
     if (locale === SOURCE_LOCALE) {
       continue
     }
@@ -71,7 +72,7 @@ function checkLocaleParity(): boolean {
   }
 
   if (problems.length === 0) {
-    process.stdout.write(`✅ Translation keys are in sync across ${I18N.LOCALES.join(", ")}.\n`)
+    process.stdout.write(`✅ Translation keys are in sync across ${I18N.SUPPORTED_LOCALES.join(", ")}.\n`)
     return true
   }
 
@@ -83,7 +84,6 @@ function checkLocaleParity(): boolean {
 
 const SOURCE_ROOT = join(import.meta.dirname, "../src")
 const UNIQUE_BINDING = 1
-const CLIENT_DIRECTIVE = '"use client"'
 
 function collectSourceFiles(dir: string, found: string[] = []): string[] {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -110,7 +110,7 @@ function checkClientNamespaces(): boolean {
   for (const file of collectSourceFiles(SOURCE_ROOT)) {
     const source = readFileSync(file, "utf8")
 
-    if (!source.startsWith(CLIENT_DIRECTIVE)) {
+    if (file.includes("/__test__/") || !file.includes("/presentation/components/")) {
       continue
     }
 
@@ -130,20 +130,20 @@ function checkClientNamespaces(): boolean {
   }
 
   if (violations.length === 0) {
-    process.stdout.write(`✅ No Client Component reads a server-only namespace.\n`)
+    process.stdout.write(`✅ No browser component reads an email namespace.\n`)
     return true
   }
 
   process.stderr.write("\n❌ Client Component reads a namespace withheld from the client payload.\n\n")
   process.stderr.write(`${violations.join("\n")}\n\n`)
-  process.stderr.write("Either move the read to a Server Component, or drop the namespace from SERVER_ONLY_NAMESPACES.\n\n")
+  process.stderr.write("Keep email translations in the email integration.\n\n")
   return false
 }
 
 /**
  * Resolve every literal `t("key")` call back to its namespace and confirm the key exists.
  *
- * next-intl's `IntlMessages` augmentation does not make `t()` key-safe, so a typo or a
+ * use-intl's `IntlMessages` augmentation does not make `t()` key-safe, so a typo or a
  * key that was never added survives typecheck and only fails at runtime with
  * MISSING_MESSAGE. Dynamic keys (template literals, variables) are skipped.
  */
@@ -157,7 +157,9 @@ function checkMessageKeys(): boolean {
     // `const t = useTranslations("ns")` / `const t = await getTranslations("ns")`
     const namespacesByBinding = new Map<string, Set<string>>()
 
-    for (const match of source.matchAll(/(?:const|let)\s+(?<binding>\w+)\s*=\s*(?:await\s+)?(?:useTranslations|getTranslations)\(\s*"(?<namespace>[^"]+)"\s*\)/gu)) {
+    for (const match of source.matchAll(
+      /(?:const|let)\s+(?<binding>\w+)\s*=\s*(?:await\s+)?(?:useTranslations|getTranslations)\(\s*"(?<namespace>[^"]+)"\s*\)/gu,
+    )) {
       const { binding, namespace } = match.groups ?? {}
 
       if (binding !== undefined && namespace !== undefined) {

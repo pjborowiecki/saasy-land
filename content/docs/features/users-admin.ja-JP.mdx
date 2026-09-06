@@ -1,0 +1,20 @@
+---
+title: ユーザ(admin)
+description: ライブユーザーテーブル、タブ、偽装、禁止/ルール/パスワード。
+---
+
+## 路線図
+
+`/admin/users` TanStack Routerで検索 `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## モジュール
+
+`modules/user/use-cases` — リスト/作成/更新/削除, 禁止/禁止, ロール/パスワードの設定, 偽装, リフレッシュテーブル.
+
+## ツイート
+
+データテーブル下 `admin/users/components/all-users-tab`. . ステータスは **デリケート** (`getUserStatus`: アクティブ/保留/禁止)、DB列ではありません。
+
+## URL の状態
+
+`admin/users/constants/search-params.ts` — 共有パーサ + `searchParamsCache`.

@@ -1,0 +1,50 @@
+---
+title: ドキュメント
+description: SaaSy Land 2.0 — アーキテクチャ、ガイド、機能、およびフルスタックスターターの参照。
+---
+
+ドキュメントへようこそ **SaaSy Land 2.0**, モジュラーフルスタック SaaS 始動機 TanStack Start.
+
+<Callout title={"これらのドキュメントを使用する方法"}>
+  プリファー **ガイド** タスクのレシピと **建築設計** コードが生きている場所のために。 **おすすめ商品** そして、 **インテグレーション**
+  商品の表面とベンダーのアダプターを記述します。 支払いなどの計画された領域を含みます。
+</Callout>
+
+## 詳しくはこちら
+
+<Cards>
+  <Card title={"プロジェクト"} href="/docs/project/about">
+    始動機、変更ログ、ロードマップ、貢献について
+  </Card>
+  <Card title={"はじめに"} href="/docs/getting-started">
+    Bun depsをインストールし、envを設定し、データベースを移行し、ローカルで実行します。
+  </Card>
+  <Card title={"建築設計"} href="/docs/architecture">
+    モジュール、配信、統合、プラットフォーム、SSR、セキュリティ境界。
+  </Card>
+  <Card title={"ガイド"} href="/docs/guides">
+    機能、DataTables、Nuqs URL の状態、テスト、auth などを追加します。
+  </Card>
+</Cards>
+
+## チャプター
+
+| チャレンジャー     | コンテンツ                                                |
+| ------------------ | --------------------------------------------------------- |
+| プロジェクト       | 変更ログ、ロードマップ、貢献について                      |
+| はじめに           | インストール, env, 最初の実行, スクリプト, プレビュー展開 |
+| 建築設計           | レイヤー、モジュール、SSR/キャッシュ、プロバイダ          |
+| ガイド             | 特徴のレシピ(テーブル、Nuqs、テスト、auth、...)           |
+| おすすめ商品       | Auth、ユーザー、製品、支払い(予定)、orgs、...             |
+| インテグレーション | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend, ...        |
+| UIシステム         | Shadcn, DataTable, テーマ, 構成                           |
+| ツーリング         | Vitest, Playwright, Vite+, エージェントのスキル, CI       |
+| 参考文献           | ルート、 env、コンベンション、FAQ                         |
+
+## ローカル編集
+
+コンテンツファイル: `content/docs`.
+
+MDX は Fumadocs コンポーネントを使うことができます。`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`)および選択されたshadcnのプリミティブ()`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …).
+
+ページを追加した後、フォルダを更新する `meta.<locale>.json` `pages` array(scaffoldスクリプトはあなたのためにこれを行います)。 フォルダ `index` ページはサイドバーです **フォルダのインデックス** — リストしない `index` 再び、 `pages`.

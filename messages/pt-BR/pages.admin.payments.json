@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Pagamentos",
+    "description": "Gerencie as receitas, as transações e as configurações de pagamento."
+  },
+  "title": "Pagamentos",
+  "description": "Gerencie as receitas, as transações e as configurações de pagamento.",
+  "actions": {
+    "export": "Exportar",
+    "settings": "Configurações de Pagamento"
+  },
+  "tabs": {
+    "transactions": "Transações",
+    "subscriptions": "Assinaturas",
+    "payouts": "Repasses",
+    "refunds": "Reembolsos"
+  },
+  "stats": {
+    "refunded": {
+      "title": "Reembolsado (30 dias)",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "Taxa de reembolso",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "Aprovações pendentes",
+      "subtitle": "Totalizando $407,00",
+      "value": "3"
+    },
+    "vsLastMonth": "comparado ao mês passado"
+  },
+  "table": {
+    "title": "Reembolsos recentes",
+    "columns": {
+      "customer": "Cliente",
+      "amount": "Valor",
+      "item": "Produto comprado",
+      "reason": "Razão",
+      "date": "Data",
+      "status": "Status",
+      "rowActions": "Ações da linha"
+    },
+    "pagination": {
+      "showing": "Exibindo de 1 a 4 de 24 resultados",
+      "previous": "Anterior",
+      "next": "Próxima",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "Filtrar reembolsos"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro anual",
+      "reason": "Renovação involuntária",
+      "status": "Processado",
+      "type": "Reembolso total"
+    },
+    "p2": {
+      "item": "Pro mensal",
+      "reason": "Compensação por indisponibilidade",
+      "status": "Processado",
+      "type": "Reembolso parcial"
+    },
+    "p3": {
+      "item": "Starter mensal",
+      "reason": "Não atende às necessidades",
+      "status": "Pendente",
+      "type": "Reembolso total"
+    },
+    "p4": {
+      "item": "Pro anual",
+      "reason": "Cobrança fraudulenta",
+      "status": "Falhou",
+      "type": "Reembolso total"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+import type { JSX } from "react"
+
+import type { LucideIcon } from "lucide-react"
+import { useTranslations } from "use-intl/react"
+
+import { Card, CardContent, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
+
+interface PaymentsRefundStatCardProps {
+  readonly icon: LucideIcon
+  readonly statKey: "refunded" | "refundRate" | "pending"
+  readonly trendIcon?: LucideIcon
+}
+
+export const PaymentsRefundStatCard = ({ icon: Icon, statKey, trendIcon: TrendIcon }: PaymentsRefundStatCardProps): JSX.Element => {
+  const t = useTranslations("pages.admin.payments")
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="text-xs font-medium text-muted-foreground">{t(`stats.${statKey}.title`)}</CardTitle>
+        <Icon className="size-4 text-muted-foreground" />
+      </CardHeader>
+      <CardContent>
+        <div className="text-headline-support text-foreground tabular-nums">{t(`stats.${statKey}.value`)}</div>
+        <PaymentsRefundStatTrend statKey={statKey} trendIcon={TrendIcon} />
+      </CardContent>
+    </Card>
+  )
+}
+
+const PaymentsRefundStatTrend = ({
+  statKey,
+  trendIcon: TrendIcon,
+}: {
+  readonly statKey: PaymentsRefundStatCardProps["statKey"]
+  readonly trendIcon: LucideIcon | undefined
+}): JSX.Element => {
+  const t = useTranslations("pages.admin.payments")
+
+  if (statKey === "pending") {
+    return (
+      <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+        <span>{t("stats.pending.subtitle")}</span>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-ring">
+      {TrendIcon !== undefined && <TrendIcon className="size-3.5" />}
+      <span>{t(`stats.${statKey}.trend`)}</span>
+      <span className="ml-1 text-muted-foreground">{t("stats.vsLastMonth")}</span>
+    </div>
+  )
+}

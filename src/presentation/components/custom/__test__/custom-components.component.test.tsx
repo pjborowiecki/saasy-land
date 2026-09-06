@@ -1,9 +1,6 @@
-/** @vitest-environment jsdom */
-
-import type * as NextDynamic from "next/dynamic"
-import type { ComponentType } from "react"
-
 import { render, screen } from "@testing-library/react"
+import { describe, expect, it } from "vite-plus/test"
+/** @vitest-environment jsdom */
 
 import { Background, backgroundGridPatternClassName } from "~/src/presentation/components/custom/background"
 import { GithubInfo } from "~/src/presentation/components/custom/github-info"
@@ -19,38 +16,14 @@ import {
   Lead,
   List,
   Muted,
-  P,
+  Paragraph,
   Prose,
   Small,
   TableWrap,
 } from "~/src/presentation/components/custom/typography"
-import { VercelObservability } from "~/src/presentation/components/custom/vercel-observability"
 import { Wordmark } from "~/src/presentation/components/custom/wordmark"
 
 import { APP_NAME } from "~/src/presentation/branding"
-
-const DYNAMIC_STUB_COUNT = 2
-
-vi.mock(import("next/dynamic"), async (): Promise<Partial<typeof NextDynamic>> => {
-  const { createElement } = await import("react")
-
-  function dynamicDefault<P>(
-    dynamicOptions: NextDynamic.Loader<P> | NextDynamic.DynamicOptions<P>,
-    _options?: NextDynamic.DynamicOptions<P>,
-  ): ComponentType<P> {
-    if (typeof dynamicOptions === "function") {
-      void dynamicOptions()
-    } else if ("loader" in dynamicOptions && typeof dynamicOptions.loader === "function") {
-      void dynamicOptions.loader()
-    }
-
-    return function DynamicStub() {
-      return createElement("div", { "data-testid": "dynamic-stub" })
-    }
-  }
-
-  return { default: dynamicDefault }
-})
 
 describe("background helper", () => {
   it("renders grid and signal by default", () => {
@@ -110,7 +83,7 @@ describe("typography components", () => {
         <H2>Heading 2</H2>
         <H3>Heading 3</H3>
         <H4>Heading 4</H4>
-        <P>Paragraph</P>
+        <Paragraph>Paragraph</Paragraph>
         <Lead>Lead</Lead>
         <Large>Large</Large>
         <Small>Small</Small>
@@ -140,13 +113,5 @@ describe("typography components", () => {
     expect(screen.getByText("Quote").tagName).toBe("BLOCKQUOTE")
     expect(screen.getByText("code").tagName).toBe("CODE")
     expect(screen.getByText("Cell").tagName).toBe("TD")
-  })
-})
-
-describe("vercel observability component", () => {
-  it("renders analytics and speed insights stubs", () => {
-    expect.hasAssertions()
-    render(<VercelObservability />)
-    expect(screen.getAllByTestId("dynamic-stub")).toHaveLength(DYNAMIC_STUB_COUNT)
   })
 })

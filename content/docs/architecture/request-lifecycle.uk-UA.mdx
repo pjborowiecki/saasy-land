@@ -1,0 +1,23 @@
+---
+title: Запит життєвого циклу
+description: Запит життєвого циклу — SaaSy Land
+---
+
+`src/server.ts` канонічність локальних URL-адрес і зберігає локальний cookie в синхронізації. `src/router.tsx` Створює свіжу QueryClient на маршрутизаторі і підключає її до SSR. Нативні файли маршруту заявляють компоненти, охоронці, навантажувачі, перевірку пошуку та метадані.
+
+Використання макетів та макетів клієнтів `beforeLoad` охоронці. Кожна захищена функція сервера також перевіряє її дзвоника, тому що RPC може бути викликана незалежно від сторінки. Ніколи не розмістили автентифіковану відповідь на загальний статичний кеш.
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

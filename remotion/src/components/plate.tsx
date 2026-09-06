@@ -21,11 +21,7 @@ import { SEAM, THEME } from "../theme"
  * worse than nothing, because it dips the whole surface to the ground colour once per loop and
  * that dip is precisely what reads as the page reloading.
  */
-export function Plate({
-  children,
-  ground = THEME.card,
-  seam = true,
-}: Readonly<{ children: ReactNode; ground?: string; seam?: boolean }>) {
+export function Plate({ children, ground = THEME.card, seam = true }: Readonly<{ children: ReactNode; ground?: string; seam?: boolean }>) {
   const frame = useCurrentFrame()
   const { durationInFrames } = useVideoConfig()
 

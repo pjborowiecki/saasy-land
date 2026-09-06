@@ -1,0 +1,30 @@
+---
+title: アーキテクチャ
+description: アーキテクチャ — SaaSy Land
+---
+
+SaaSy Land は Cloudflare Workers の 1 つの TanStack Start アプリケーションとして実行されます。 ルートは、レンダリングとデータの読み込みを調整します。 特徴 モジュール自身の検証、承認および操作。 インテグレーションは外部サービスを設定します。 プレゼンテーションは既存のUIを所有しています。
+
+依存性注射容器はありません。 独自のレイヤーでコンクリートのコラボレーターをインポートします。 共有ヘルパーを小さく保ち、機能のみのヘルパーを機能の横に保ちます。
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## 関連ガイド
+
+- [アーキテクチャ](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

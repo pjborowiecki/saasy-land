@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "Paramètres | SaaSy Land",
+    "description": "Gérez vos préférences d'espace de travail, vos paramètres de sécurité et vos informations de facturation."
+  },
+  "title": "Paramètres",
+  "description": "Gérez vos préférences d'espace de travail, vos paramètres de sécurité et vos informations de facturation.",
+  "tabs": {
+    "general": "Général",
+    "security": "Sécurité",
+    "team": "Équipe et membres",
+    "billing": "Facturation",
+    "integrations": "Intégrations",
+    "api": "Clés API"
+  },
+  "profile": {
+    "title": "Profil de l'espace de travail",
+    "description": "Mettez à jour votre identité et vos informations de profil.",
+    "uploadImage": "Télécharger l'image",
+    "removeImage": "Supprimer",
+    "imageHint": "Taille recommandée : 256x256 px. Maximum 2 Mo.",
+    "workspaceName": "Espace de travail",
+    "supportEmail": "E-mail d’assistance",
+    "workspaceUrl": "Espace de travail (URL)",
+    "urlHint": "C'est votre URL unique pour vous connecter à votre tableau de bord.",
+    "saveChanges": "Enregistrer les modifications",
+    "urlPrefix": "app.saasyland.com/"
+  },
+  "preferences": {
+    "title": "Préférences",
+    "description": "Configurez les paramètres régionaux et de langue pour votre espace de travail.",
+    "language": "Langue",
+    "timezone": "Fuseau horaire",
+    "announcements": {
+      "title": "Annonces de nouvelles fonctionnalités",
+      "description": "Recevez des emails concernant les nouvelles fonctionnalités et les mises à jour."
+    }
+  },
+  "dangerZone": {
+    "title": "Zone de danger",
+    "description": "Actions irréversibles pour votre espace de travail.",
+    "delete": {
+      "title": "Supprimer l'espace de travail",
+      "description": "Supprimer définitivement cet espace de travail ainsi que toutes ses données. Cette action ne peut être annulée.",
+      "button": "Supprimer l'espace de travail"
+    }
+  },
+  "security": {
+    "password": {
+      "title": "Changer le mot de passe",
+      "description": "Mettez à jour votre mot de passe pour assurer la sécurité de votre compte.",
+      "current": "Mot de passe actuel",
+      "new": "Nouveau mot de passe",
+      "confirm": "Confirmer le nouveau mot de passe",
+      "requirements": {
+        "title": "Exigences concernant les mots de passe",
+        "length": "Minimum 8 caractères de longueur",
+        "case": "Au moins une lettre majuscule et une lettre minuscule",
+        "special": "Au moins un chiffre ou un caractère spécial"
+      },
+      "update": "Mettre à jour le mot de passe",
+      "feedback": {
+        "updateSuccess": "Mot de passe mis à jour avec succès."
+      }
+    },
+    "twoFactor": {
+      "title": "Authentification à deux facteurs (2FA)",
+      "description": "Renforcez la sécurité de votre compte.",
+      "app": "Application d'authentification",
+      "appDescription": "Utilisez une application comme Google Authenticator ou 1Password pour générer des codes à durée limitée.",
+      "enable": "Activer l'authentification à deux facteurs",
+      "dialogTitle": "Activer l'authentification à deux facteurs",
+      "dialogDescription": "Confirmez votre mot de passe, puis scannez le code de configuration avec votre application d'authentification.",
+      "password": "Mot de passe actuel",
+      "continue": "Continuer",
+      "scanInstructions": "Ajoutez ce secret à votre application d'authentification, ou scannez l'URI depuis votre gestionnaire de mots de passe.",
+      "verificationCode": "Code de vérification",
+      "verifyAndEnable": "Vérifier et activer",
+      "backupCodesDescription": "Conservez ces codes de sauvegarde dans un endroit sûr. Chaque code peut être utilisé une fois si vous perdez l'accès à votre authentificateur.",
+      "done": "Terminé",
+      "setupError": "Impossible de démarrer la configuration de l'authentification à deux facteurs. Veuillez réessayer.",
+      "enabledSuccess": "L'authentification à deux facteurs est désormais activée.",
+      "disable": "Désactiver l'authentification à deux facteurs",
+      "disableDialogTitle": "Désactiver l'authentification à deux facteurs",
+      "disableDialogDescription": "Confirmez votre mot de passe pour désactiver l'authentification à deux facteurs.",
+      "disableConfirm": "Désactiver",
+      "disabledSuccess": "L'authentification à deux facteurs est maintenant désactivée."
+    },
+    "sessions": {
+      "title": "Sessions actives",
+      "description": "Gérez les appareils actuellement connectés à votre compte.",
+      "logoutAll": "Déconnectez tous les autres appareils",
+      "currentBadge": "Session actuelle",
+      "revoke": "Révoquer",
+      "activeAgo": "Activité il y a {time}",
+      "separator": " • ",
+      "feedback": {
+        "logoutAllSuccess": "D'autres sessions ont été déconnectées.",
+        "revokeSuccess": "Session révoquée."
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+---
+title: 管理者ページを追加する
+description: ルート、サイドバー、ページシェルを登録します。
+---
+
+## ステップ
+
+1. パスを追加する `ROUTES`
+2. サイドバーのエントリを追加する `admin/constants/sidebar.ts` (+ i18nラベル)
+3. 作成する `app/[locale]/(admin)/admin/<feature>/page.tsx`
+4. コロケーション `_components` / `_lib`
+5. ユースケースでデータをゲート+サスペンス
+6. 特徴の下の文書

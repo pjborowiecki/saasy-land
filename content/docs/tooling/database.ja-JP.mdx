@@ -1,0 +1,23 @@
+---
+title: D1とDrizzle
+description: D1 と Drizzle — SaaSy Land
+---
+
+Cloudflare D1 はアプリケーションデータベースです。 モジュールスキーマの使用 `drizzle-orm/sqlite-core`; `src/integrations/drizzle-orm/drizzle.schemas.ts` それらを収集します。 `drizzle.database.ts` Drizzle D1 アダプターを作成します。 `env.DB`.
+
+日付は、ミリ秒でSQLite整数タイムスタンプを使用します。 Boolean フィールドは SQLite integer boolean モードを使用します。 関係、固有の制約、外部キーはスキーマに残ります。 適切なSQLステートメントまたはD1のバッチで操作原子を保持します。 PostgreSQL接続プールまたはインタラクティブなトランザクションは導入しません。
+
+ログイン `db:generate` スキーマを変更した後、生成されたSQLを見直してコミットし、ローカルで適用します。 リモートマイグレーションは、明示的な環境固有のコマンドです。 デプロイされた PostgreSQL データベースには、別のレビューされたエクスポートとインポートが必要です。 SQLite のマイグレーションを生成すると、既存のデータを転送しません。
+
+```sh
+bun run db:generate
+bun run db:migrate:local
+# After configuring real preview bindings:
+bun run db:migrate:preview
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

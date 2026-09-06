@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Produkty | SaaSy Land",
+    "description": "Zarządzaj produktami fizycznymi, plikami cyfrowymi i subskrypcjami z dostępem do chronionych treści."
+  },
+  "tabs": {
+    "all": "Wszystkie produkty",
+    "onetime": "Zakupy jednorazowe",
+    "subscriptions": "Subskrypcje",
+    "drafts": "Wersje robocze",
+    "categories": "Kategorie",
+    "collections": "Kolekcje",
+    "courses": "Kursy"
+  },
+  "title": "Produkty",
+  "description": "Zarządzaj produktami fizycznymi, plikami cyfrowymi i subskrypcjami z dostępem do chronionych treści.",
+  "actions": {
+    "create": "Utwórz produkt"
+  },
+  "search": {
+    "placeholder": "Szukaj produktów według nazwy lub SKU…"
+  },
+  "filters": {
+    "type": "Typ: wszystkie",
+    "status": "Status: aktywne",
+    "category": "Kategoria",
+    "collection": "Kolekcja",
+    "cycle": "Cykl",
+    "model": "Model",
+    "visibility": "Widoczność",
+    "sortby": "Sortuj według"
+  },
+  "table": {
+    "headers": {
+      "product": "Produkt",
+      "type": "Typ",
+      "pricing": "Ceny",
+      "status": "Status",
+      "metrics": "Wskaźniki"
+    },
+    "actionsColumn": "Akcje wiersza",
+    "emptyValue": "n/d",
+    "rowActions": "Akcje wiersza",
+    "selectAll": "Zaznacz wszystkie wiersze",
+    "selectRow": "Zaznacz wiersz",
+    "statusLabels": {
+      "archived": "Zarchiwizowany",
+      "draft": "Szkic",
+      "published": "Aktywny"
+    },
+    "typeLabels": {
+      "course": "Kurs",
+      "one_time": "Jednorazowy",
+      "subscription": "Subskrypcja"
+    },
+    "visibilityLabels": {
+      "hidden": "Ukryta",
+      "public": "Publiczna"
+    }
+  },
+  "pagination": {
+    "info": "Wyświetlanie {start} do {end} z {total} produktów",
+    "goToPage": "Przejdź do strony {page}",
+    "nextPage": "Następna strona",
+    "previousPage": "Poprzednia strona"
+  },
+  "onetime": {
+    "title": "Zakupy jednorazowe",
+    "description": "Zarządzaj pojedynczymi produktami, plikami cyfrowymi i towarami fizycznymi."
+  },
+  "subscriptions": {
+    "title": "Subskrypcje",
+    "description": "Zarządzaj planami cyklicznych rozliczeń, poziomami członkostwa i cenami zależnymi od zużycia.",
+    "table": {
+      "headers": {
+        "product": "Nazwa planu",
+        "model": "Model",
+        "pricing": "Ceny",
+        "status": "Status",
+        "metrics": "Wskaźniki"
+      }
+    }
+  },
+  "categories": {
+    "title": "Kategorie",
+    "description": "Porządkuj produkty, plany subskrypcji i materiały cyfrowe.",
+    "table": {
+      "headers": {
+        "category": "Kategoria",
+        "visibility": "Widoczność",
+        "items": "Elementy",
+        "lastUpdated": "Ostatnia aktualizacja"
+      }
+    }
+  },
+  "collections": {
+    "title": "Kolekcje",
+    "description": "Twórz grupy produktów, planów subskrypcji i materiałów cyfrowych.",
+    "table": {
+      "headers": {
+        "collection": "Kolekcja",
+        "visibility": "Widoczność",
+        "items": "Elementy",
+        "lastUpdated": "Ostatnia aktualizacja"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Nie ma jeszcze kursów",
+      "description": "Opublikowane kursy pojawią się tutaj wraz z lekcjami, cenami i liczbą zapisów. Utwórz pierwszy, aby zacząć.",
+      "action": "Utwórz kurs"
+    }
+  }
+}

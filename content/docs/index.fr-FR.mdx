@@ -1,0 +1,50 @@
+---
+title: Documentation
+description: SaaSy Land 2.0 — architecture, guides, caractéristiques et référence pour le démarreur complet.
+---
+
+Bienvenue dans la documentation pour **SaaSy Land 2,0**, un démarreur modulaire complet SaaS sur TanStack Start.
+
+<Callout title={"Comment utiliser ces documents"}>
+  Préférez **Guides** pour les recettes de tâches et **Architecture** pour l'endroit où vit le code. **Caractéristiques** et
+  **Intégrations** décrire la surface du produit et les adaptateurs du fournisseur, y compris les domaines prévus comme les paiements.
+</Callout>
+
+## Commencez ici.
+
+<Cards>
+  <Card title={"Projet"} href="/docs/project/about">
+    À propos du démarrage, du changement de journal, de la feuille de route et de la contribution.
+  </Card>
+  <Card title={"Commencer"} href="/docs/getting-started">
+    Installez Bun deps, configurez env, migrez la base de données, lancez localement.
+  </Card>
+  <Card title={"Architecture"} href="/docs/architecture">
+    Modules, livraison, intégrations, plate-forme, SSR et frontières de sécurité.
+  </Card>
+  <Card title={"Guides"} href="/docs/guides">
+    Ajouter des fonctionnalités, DataTables, Nuqs URL état, tests, auth, et plus encore.
+  </Card>
+</Cards>
+
+## Chapitres
+
+| Chapitre                    | Table des matières                                                     |
+| --------------------------- | ---------------------------------------------------------------------- |
+| Projet                      | À propos, changement de journal, feuille de route, contribution        |
+| Commencer                   | Installer, env, première exécution, scripts, prévisualisation déployer |
+| Architecture                | Couches, modules, SSR/cache, fournisseurs                              |
+| Guides                      | Recettes (tables, Nuqs, tests, auth, ...)                              |
+| Caractéristiques            | Auth, utilisateurs, produits, paiements (prévus), orgs, ...            |
+| Intégrations                | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend, …                       |
+| Système d'assurance-chômage | Shadcn, DataTable, thème, composition                                  |
+| Outillage                   | Vitest, Playwright, Vite+, compétences en agent, CI                    |
+| Référence                   | Routes, env, conventions, FAQ                                          |
+
+## Édition locale
+
+Fichiers de contenu & #160;: `content/docs`.
+
+MDX peut utiliser des composants Fumadocs (`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`) et sélection des primitifs shadcn (`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …).
+
+Après l'ajout de pages, mettre à jour le dossier `meta.<locale>.json` `pages` tableau (le script d'échafaudage le fait pour vous). Dossier `index` les pages sont dans la barre latérale **index des dossiers** — ne figurent pas sur la liste `index` de nouveau dans `pages`.

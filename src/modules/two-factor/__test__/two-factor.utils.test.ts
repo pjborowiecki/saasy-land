@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { createOtpSlotIndices, extractTotpSecret, parseTwoFactorEnableData } from "~/src/modules/two-factor/two-factor.utils"
 
 const OTP_SLOT_COUNT = 6

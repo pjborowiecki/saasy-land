@@ -1,0 +1,91 @@
+{
+  "title": "Veröffentlichungen",
+  "description": "Erstellen, verwalten und analysieren Sie Ihre Blog-Inhalte.",
+  "actions": {
+    "categories": "Kategorien",
+    "writePost": "Verfassen Sie einen Beitrag",
+    "loadMore": "Mehr Artikel laden"
+  },
+  "stats": {
+    "totalViews": "Gesamte Aufrufe (30 Tage)",
+    "subscribers": "Abonnenten",
+    "publishedPosts": "Veröffentlichte Beiträge",
+    "draftsPending": "{count} ausstehende Entwürfe"
+  },
+  "filters": {
+    "all": "Alle Beiträge",
+    "published": "Veröffentlicht",
+    "drafts": "Entwürfe",
+    "scheduled": "Geplant",
+    "search": "Artikel suchen…"
+  },
+  "badges": {
+    "published": "Veröffentlicht",
+    "draft": "Entwurf",
+    "scheduled": "Geplant"
+  },
+  "meta": {
+    "readTime": "{minutes} Min. Lesezeit",
+    "publishedOn": "{date}",
+    "lastEdited": "Zuletzt bearbeitet: {time}",
+    "publishesTomorrow": "Erscheint morgen"
+  },
+  "labels": {
+    "gridView": "Rasteransicht",
+    "tableView": "Tabellenansicht",
+    "moreOptions": "Mehr Optionen"
+  },
+  "table": {
+    "postDetails": "Stellenbeschreibung",
+    "status": "Status",
+    "category": "Kategorie",
+    "author": "Autor",
+    "date": "Datum",
+    "views": "Aufrufe",
+    "actions": "Aktionen",
+    "selectRow": "Auswahlzeile",
+    "emptyValue": "Nicht festgelegt",
+    "rowActions": "Aktionen für diese Zeile"
+  },
+  "pagination": {
+    "info": "Beiträge {start} bis {end} von {total}"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "Skalierung der Datenbankarchitektur für ein 10-faches Wachstum",
+        "description": "Eine detaillierte technische Betrachtung, wie unser Entwicklungsteam von einer monolithischen Architektur zu einer verteilten Architektur übergegangen ist.",
+        "category": "Technik"
+      },
+      "post-2": {
+        "title": "Einführung des erweiterten Analyse-Dashboards 2.0",
+        "description": "Wir haben unsere Reporting-Tools grundlegend überarbeitet, um Ihnen tiefere Einblicke in das Verhalten Ihrer Kunden und Ihre Umsatzkennzahlen zu ermöglichen.",
+        "category": "Produktaktualisierung"
+      },
+      "post-3": {
+        "title": "Die Entwicklung unseres Designsystems",
+        "description": "Eine einheitliche visuelle Sprache entwickeln, die sich nahtlos über Web, Mobile und interne Verwaltungstools erstreckt.",
+        "category": "Design"
+      },
+      "post-4": {
+        "title": "Wir freuen uns, unsere Series-B-Finanzierungsrunde bekannt zu geben",
+        "description": "Wir freuen uns sehr, eine Investition von 25 Millionen Dollar bekannt zu geben, die von führenden Venture-Capital-Gesellschaften angeführt wird, um unser Wachstum zu beschleunigen.",
+        "category": "Unternehmensnachrichten"
+      },
+      "post-5": {
+        "title": "Die Nutzung von Webhooks für Echtzeitdaten",
+        "description": "Erfahren Sie, wie Sie robuste Webhook-Systeme entwickeln, die Millionen von Ereignissen sicher verarbeiten können.",
+        "category": "Tutorial"
+      },
+      "post-6": {
+        "title": "Strategien zur Reduzierung der Kundenabwanderung",
+        "description": "Bewährte Strategien zur Kundenbindung, die von den am schnellsten wachsenden SaaS-Unternehmen eingesetzt werden.",
+        "category": "Marketing"
+      }
+    },
+    "dates": {
+      "draft": "2 Stunden zuvor",
+      "scheduled": "Morgen"
+    }
+  }
+}

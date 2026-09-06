@@ -1,0 +1,23 @@
+---
+title: Routen und Zustellungen.
+description: Routen und Zustellung – SaaSy Land
+---
+
+`src/server.ts` vereinheitlicht sprachabhängige URLs und hält das Sprach-Cookie aktuell. `src/router.tsx` erstellt für jeden Router einen neuen QueryClient und bindet ihn an SSR an. Die nativen Routendateien definieren Komponenten, Zugriffskontrollen, Loader, die Validierung von Suchparametern und Metadaten.
+
+Administratoren- und Kundenlayouts verwenden `beforeLoad`-Sicherheitsmechanismen. Jede geschützte Serverfunktion überprüft außerdem ihren Aufrufer, da ein RPC unabhängig von einer Seite aufgerufen werden kann. Vermeiden Sie es, authentifizierte Antworten in einem gemeinsam genutzten, statischen Cache zu speichern.
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Produkte | SaaSy Land",
+    "description": "Verwalten Sie physische Produkte, digitale Downloads und Abonnements für geschützte Inhalte."
+  },
+  "tabs": {
+    "all": "Alle Produkte",
+    "onetime": "Einmalige Käufe",
+    "subscriptions": "Abonnements",
+    "drafts": "Entwürfe",
+    "categories": "Kategorien",
+    "collections": "Sammlungen",
+    "courses": "Kurse"
+  },
+  "title": "Produkte",
+  "description": "Verwalten Sie physische Produkte, digitale Downloads und Abonnements für geschützte Inhalte.",
+  "actions": {
+    "create": "Produkt erstellen"
+  },
+  "search": {
+    "placeholder": "Produkte nach Name oder Artikelnummer suchen…"
+  },
+  "filters": {
+    "type": "Typ: Alle",
+    "status": "Status: Aktiv",
+    "category": "Kategorie",
+    "collection": "Sammlung",
+    "cycle": "Zyklus",
+    "model": "Modell",
+    "visibility": "Sichtbarkeit",
+    "sortby": "Sortieren nach"
+  },
+  "table": {
+    "headers": {
+      "product": "Produkt",
+      "type": "Typ",
+      "pricing": "Preise",
+      "status": "Status",
+      "metrics": "Metriken"
+    },
+    "actionsColumn": "Aktionen für diese Zeile",
+    "emptyValue": "n/a",
+    "rowActions": "Aktionen für diese Zeile",
+    "selectAll": "Alle Zeilen auswählen",
+    "selectRow": "Auswahlzeile",
+    "statusLabels": {
+      "archived": "Archiviert",
+      "draft": "Entwurf",
+      "published": "Aktiv"
+    },
+    "typeLabels": {
+      "course": "Kurs",
+      "one_time": "Einmalig",
+      "subscription": "Abonnement"
+    },
+    "visibilityLabels": {
+      "hidden": "Ausgeblendet",
+      "public": "Öffentlich"
+    }
+  },
+  "pagination": {
+    "info": "Produkte {start} bis {end} von {total}",
+    "goToPage": "Zu Seite {page}",
+    "nextPage": "Nächste Seite",
+    "previousPage": "Vorherige Seite"
+  },
+  "onetime": {
+    "title": "Einmalige Käufe",
+    "description": "Verwalten Sie einzelne Produkte, digitale Downloads und physische Waren."
+  },
+  "subscriptions": {
+    "title": "Abonnements",
+    "description": "Verwalten Sie wiederkehrende Abrechnungspläne, Mitgliedschaftsstufen und nutzungsabhängige Preismodelle.",
+    "table": {
+      "headers": {
+        "product": "Planungsname",
+        "model": "Modell",
+        "pricing": "Preise",
+        "status": "Status",
+        "metrics": "Metriken"
+      }
+    }
+  },
+  "categories": {
+    "title": "Kategorien",
+    "description": "Organisieren Sie Ihre Produkte, Abonnements und digitalen Güter.",
+    "table": {
+      "headers": {
+        "category": "Kategorie",
+        "visibility": "Sichtbarkeit",
+        "items": "Artikel",
+        "lastUpdated": "Zuletzt aktualisiert"
+      }
+    }
+  },
+  "collections": {
+    "title": "Sammlungen",
+    "description": "Ordnen und gruppieren Sie Ihre Produkte, Abonnements und digitalen Inhalte.",
+    "table": {
+      "headers": {
+        "collection": "Sammlung",
+        "visibility": "Sichtbarkeit",
+        "items": "Artikel",
+        "lastUpdated": "Zuletzt aktualisiert"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Noch keine Kurse verfügbar",
+      "description": "Die von Ihnen veröffentlichten Kurse werden hier mit ihren Lektionen, Preisen und der Anzahl der Teilnehmer angezeigt. Erstellen Sie zunächst einen Kurs, um zu beginnen.",
+      "action": "Erstellen Sie einen Kurs"
+    }
+  }
+}

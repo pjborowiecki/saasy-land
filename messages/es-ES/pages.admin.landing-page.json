@@ -1,0 +1,76 @@
+{
+  "title": "Editor de página de destino",
+  "description": "Componga la página sección por sección, y publíquela cuando esté lista.",
+  "actions": {
+    "preview": "Previsualización",
+    "saveChanges": "Guardar cambios",
+    "publish": "Publicar"
+  },
+  "sidebar": {
+    "addSection": "Añadir sección",
+    "sections": {
+      "hero": "Sección principal",
+      "features": "Características Principales",
+      "video": "Galería de vídeos",
+      "testimonials": "Testimonios",
+      "pricing": "Tabla de precios",
+      "gallery": "Galería de imágenes",
+      "faq": "Preguntas frecuentes (FAQ)",
+      "contact": "Formulario de contacto"
+    }
+  },
+  "canvas": {
+    "label": "Lona",
+    "viewport": {
+      "desktop": "Ancho de pantalla",
+      "tablet": "Ancho de la tableta",
+      "mobile": "Ancho móvil"
+    },
+    "sectionActions": {
+      "edit": "Editar sección",
+      "duplicate": "Duplicar sección",
+      "delete": "Eliminar sección"
+    },
+    "badge": "Diseñado para equipos de almacén",
+    "headingLead": "Realiza un seguimiento de cada palé desde...",
+    "headingAccent": "fijar a la estantería",
+    "description": "Escaneo de códigos de barras, recuentos cíclicos y alertas de reposición, todo en un mismo lugar. Funciona sin conexión en el almacén y se sincroniza cuando el equipo vuelve a estar conectado a la red Wi-Fi.",
+    "getStarted": "Comience su prueba gratuita",
+    "bookDemo": "Reserva una demostración",
+    "addSectionHere": "Añadir sección aquí",
+    "featuresHeading": "¿Qué está incluido?",
+    "featuresSubheading": "Tres herramientas que el equipo de limpieza utiliza en cada turno.",
+    "feature1": "Escaneo de códigos de barras",
+    "feature2": "Recuentos cíclicos de inventario",
+    "feature3": "Alertas de reposición"
+  },
+  "properties": {
+    "title": "Propiedades de la sección",
+    "description": "Personalizar el elemento seleccionado",
+    "layout": "Alineación",
+    "alignLeft": "Alinear a la izquierda",
+    "alignCenter": "Centrar",
+    "alignRight": "Alinear a la derecha",
+    "spacing": "Espaciado",
+    "paddingTop": "Relleno superior",
+    "paddingBot": "Espaciado inferior",
+    "unit": "px",
+    "background": "Estilo de Fondo",
+    "backgroundOptions": {
+      "page": "Superficie de la página",
+      "panel": "Superficie del panel",
+      "raised": "Superficie elevada",
+      "image": "Subir una imagen"
+    },
+    "content": "Contenido",
+    "generateAI": "Generar con IA",
+    "badgeText": "Texto del distintivo",
+    "heading": "Encabezado",
+    "subheading": "Subtítulo",
+    "buttonActions": "Acciones",
+    "primaryButton": "Botón principal",
+    "secondaryButton": "Botón secundario",
+    "buttonEnabled": "Se muestra el botón",
+    "label": "Etiqueta"
+  }
+}

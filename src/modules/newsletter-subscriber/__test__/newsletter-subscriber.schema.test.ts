@@ -1,4 +1,5 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import { describe, expect, it } from "vite-plus/test"
 
 import {
   newsletterLocaleEnum,
@@ -14,7 +15,7 @@ describe("newsletter subscriber schema", () => {
       drizzleAdapter(
         {},
         {
-          provider: "pg",
+          provider: "sqlite",
           schema: { newsletterSubscriber },
         },
       ),
@@ -25,7 +26,7 @@ describe("newsletter subscriber schema", () => {
     expect.hasAssertions()
     expect(newsletterStatusEnum.enumValues).toStrictEqual(["subscribed", "unsubscribed", "pending"])
     expect(newsletterSourceEnum.enumValues).toStrictEqual(["footer", "blog", "app"])
-    expect(newsletterLocaleEnum.enumValues).toStrictEqual(["en-US", "pl-PL"])
+    expect(newsletterLocaleEnum.enumValues).toStrictEqual(["en-US", "de-DE", "es-ES", "fr-FR", "it-IT", "ja-JP", "pl-PL", "pt-BR", "uk-UA"])
     const onUpdate = newsletterSubscriber.updatedAt.onUpdateFn
     expect(onUpdate).toBeDefined()
     expect(onUpdate?.()).toBeInstanceOf(Date)

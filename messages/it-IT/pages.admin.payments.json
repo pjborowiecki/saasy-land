@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Pagamenti",
+    "description": "Gestisci le entrate, le transazioni e le impostazioni di pagamento."
+  },
+  "title": "Pagamenti",
+  "description": "Gestisci le entrate, le transazioni e le impostazioni di pagamento.",
+  "actions": {
+    "export": "Esporta",
+    "settings": "Impostazioni di pagamento"
+  },
+  "tabs": {
+    "transactions": "Transazioni",
+    "subscriptions": "Abbonamenti",
+    "payouts": "Accrediti",
+    "refunds": "Rimborsi"
+  },
+  "stats": {
+    "refunded": {
+      "title": "Rimborsato (30 giorni)",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "Tasso di rimborso",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "Approvazioni in attesa",
+      "subtitle": "Ammontando a 407,00 dollari",
+      "value": "3"
+    },
+    "vsLastMonth": "rispetto al mese scorso"
+  },
+  "table": {
+    "title": "Rimborsi recenti",
+    "columns": {
+      "customer": "Cliente",
+      "amount": "Importo",
+      "item": "Prodotto acquistato",
+      "reason": "Ragione",
+      "date": "Data",
+      "status": "Stato",
+      "rowActions": "Azioni della riga"
+    },
+    "pagination": {
+      "showing": "Mostrando da 1 a 4 di 24 risultati",
+      "previous": "Precedente",
+      "next": "Successiva",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "Filtrare i rimborsi"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro annuale",
+      "reason": "Rinnovo involontario",
+      "status": "Elaborato",
+      "type": "Rimborso completo"
+    },
+    "p2": {
+      "item": "Pro mensile",
+      "reason": "Indennità per tempi di inattività",
+      "status": "Elaborato",
+      "type": "Rimborso parziale"
+    },
+    "p3": {
+      "item": "Starter mensile",
+      "reason": "Non adatto alle esigenze",
+      "status": "In attesa",
+      "type": "Rimborso completo"
+    },
+    "p4": {
+      "item": "Pro annuale",
+      "reason": "Addebito fraudolento",
+      "status": "Fallito",
+      "type": "Rimborso completo"
+    }
+  }
+}

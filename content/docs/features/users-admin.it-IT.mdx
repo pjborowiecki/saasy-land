@@ -1,0 +1,20 @@
+---
+title: Utenti (admin)
+description: Live users table, tabs, impersonation, ban/role/password.
+---
+
+## Percorsi
+
+`/admin/users` con TanStack Router ricerca `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## Modulo
+
+`modules/user/use-cases` — elenco/creare/aggiornamento/determinare, ban/unban, set ruolo/password, impersonare, tabella di aggiornamento.
+
+## U.
+
+DataTable sotto `admin/users/components/all-users-tab`. Lo stato è **derivato** (`getUserStatus`: attivo / in attesa / vietato), non una colonna DB enum.
+
+## Stato dell'URL
+
+`admin/users/constants/search-params.ts` — parrucchiere condivise + `searchParamsCache`.

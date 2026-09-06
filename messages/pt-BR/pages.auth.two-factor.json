@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "title": "Autenticação de dois fatores",
+    "description": "Digite seu código de autenticação de dois fatores para {name}."
+  },
+  "form": {
+    "title": "Autenticação de dois fatores",
+    "description": "Insira o código de 6 dígitos do seu aplicativo autenticador, ou utilize um código de recuperação.",
+    "code": "Código de autenticação",
+    "backupCode": "Código de backup",
+    "submit": "Verificar",
+    "submitting": "Verificando...",
+    "success": "Conectado(a) com sucesso!",
+    "useBackupCode": "Utilize um código de backup em vez disso",
+    "useAuthenticator": "Use um aplicativo autenticador em vez disso"
+  }
+}

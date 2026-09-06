@@ -1,0 +1,26 @@
+{
+  "resetPassword": {
+    "subject": "Réinitialisez votre mot de passe",
+    "preview": "Réinitialisez votre mot de passe SaaSy Land",
+    "heading": "Réinitialisez votre mot de passe",
+    "body": "Bonjour {name}, nous avons reçu une demande de réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour en choisir un nouveau.",
+    "button": "Réinitialiser le mot de passe",
+    "footer": "Si vous n’avez pas fait cette demande, vous pouvez ignorer cet e-mail."
+  },
+  "verifyEmail": {
+    "subject": "Vérifiez votre adresse e-mail",
+    "preview": "Vérifiez votre adresse e-mail pour SaaSy Land",
+    "heading": "Vérifiez votre adresse e-mail",
+    "body": "Bonjour {name}, merci pour votre inscription. Confirmez votre adresse e-mail pour terminer la configuration de votre compte.",
+    "button": "Vérifier l’adresse e-mail",
+    "footer": "Si vous n’avez pas créé de compte, vous pouvez ignorer cet e-mail."
+  },
+  "changeEmailConfirmation": {
+    "subject": "Confirmez votre nouvelle adresse e-mail",
+    "preview": "Confirmez votre changement d’adresse e-mail pour SaaSy Land",
+    "heading": "Confirmez le changement d’adresse",
+    "body": "Bonjour {name}, nous avons reçu une demande de changement de votre adresse e-mail vers {newEmail}. Cliquez sur le bouton ci-dessous pour confirmer ce changement.",
+    "button": "Confirmer le changement",
+    "footer": "Si vous n’avez pas demandé ce changement, vous pouvez ignorer cet e-mail."
+  }
+}

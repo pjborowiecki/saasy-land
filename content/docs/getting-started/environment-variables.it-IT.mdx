@@ -1,0 +1,16 @@
+---
+title: Ambiente e vincoli
+description: Ambiente e vincoli — SaaSy Land
+---
+
+Uso `.env.development`, `.env.preview`? `.env.production` per l'ambiente Vite e Cloudflare corrispondente. Questi file sono ignorati; `.env.example` documenta le chiavi richieste. `VITE_APP_URL` è pubblico e sostituito al tempo di costruzione. I segreti del lavoratore non hanno `VITE_` prefisso e accesso attraverso `env` da `cloudflare:workers`.
+
+Configurazione `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, Resend impostazioni e le impostazioni Polar per l'installazione. Non impegnate mai le credenziali reali. I documenti di collegamento appartengono all'apposito `wrangler.jsonc` ambiente; le dichiarazioni generate Worker descrivono i loro tipi.
+
+Solo Drizzle Studio e bisogno di introspezione `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID` e `CLOUDFLARE_ACCESS_TOKEN`. Local D1 non utilizza credenziali remote. CI copie `.env.test` ai file ambientali locali e funziona con binding locali.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

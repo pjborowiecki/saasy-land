@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "title": "Analytics | SaaSy Land",
+    "description": "Monitor your SaaS performance, revenue, and user engagement."
+  },
+  "title": "Analytics Overview",
+  "description": "Monitor your SaaS performance, revenue, and user engagement.",
+  "actions": {
+    "datePicker": "Last 30 Days"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "revenue": "Revenue",
+    "audience": "Audience",
+    "retention": "Retention",
+    "reports": "Reports"
+  },
+  "kpi": {
+    "mrr": {
+      "title": "Total MRR",
+      "value": "$124,500",
+      "trend": "14.2%",
+      "trendLabel": "vs last month"
+    },
+    "activeUsers": {
+      "title": "Active Users",
+      "value": "45,231",
+      "trend": "5.4%",
+      "trendLabel": "vs last month"
+    },
+    "churn": {
+      "title": "Churn Rate",
+      "value": "1.2%",
+      "trend": "0.4%",
+      "trendLabel": "vs last month"
+    },
+    "arpu": {
+      "title": "Avg. Revenue Per User",
+      "value": "$42.50",
+      "trend": "2.1%",
+      "trendLabel": "vs last month"
+    }
+  },
+  "chart": {
+    "title": "Revenue Overview",
+    "description": "Daily revenue generated over the last 30 days.",
+    "placeholder": "Illustrative series. Real revenue appears here once billing is connected.",
+    "legend": {
+      "new": "New Subscriptions",
+      "renewals": "Renewals"
+    },
+    "tooltip": "{date}: {value}",
+    "activeTooltip": "Today: {value}"
+  },
+  "regions": {
+    "title": "Top Regions",
+    "viewAll": "View All"
+  },
+  "upgrades": {
+    "title": "Recent Upgrades",
+    "viewAll": "View All"
+  },
+  "demo": {
+    "upgrades": {
+      "u1": {
+        "action": "Upgraded to Pro Plan",
+        "time": "2 mins ago"
+      },
+      "u2": {
+        "action": "Upgraded to Enterprise",
+        "time": "1 hour ago"
+      },
+      "u3": {
+        "action": "Upgraded to Pro Plan",
+        "time": "3 hours ago"
+      },
+      "u4": {
+        "action": "Upgraded to Team Plan",
+        "time": "5 hours ago"
+      },
+      "u5": {
+        "action": "Upgraded to Pro Plan",
+        "time": "1 day ago"
+      }
+    }
+  }
+}

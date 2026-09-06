@@ -1,50 +1,44 @@
-"use client"
-
-import { use, type ComponentProps } from "react"
+import { type ComponentProps, use } from "react"
 
 import { OTPInput, OTPInputContext } from "input-otp"
 import { MinusIcon } from "lucide-react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
-function InputOTP({
+const InputOTP = ({
   className,
   containerClassName,
   ...props
 }: ComponentProps<typeof OTPInput> & {
   containerClassName?: string
-}) {
-  return (
-    <OTPInput
-      className={cn("disabled:cursor-not-allowed", className)}
-      containerClassName={cn("cn-input-otp flex items-center has-disabled:opacity-50", containerClassName)}
-      data-slot="input-otp"
-      spellCheck={false}
-      {...props}
-    />
-  )
-}
+}) => (
+  <OTPInput
+    className={cn("disabled:cursor-not-allowed", className)}
+    containerClassName={cn("cn-input-otp flex items-center has-disabled:opacity-50", containerClassName)}
+    data-slot="input-otp"
+    spellCheck={false}
+    {...props}
+  />
+)
 
-function InputOTPGroup({ className, ...props }: ComponentProps<"div">) {
-  return (
-    <div
-      className={cn(
-        "flex items-center rounded-lg has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40",
-        className,
-      )}
-      data-slot="input-otp-group"
-      {...props}
-    />
-  )
-}
+const InputOTPGroup = ({ className, ...props }: ComponentProps<"div">) => (
+  <div
+    className={cn(
+      "flex items-center rounded-lg has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40",
+      className,
+    )}
+    data-slot="input-otp-group"
+    {...props}
+  />
+)
 
-function InputOTPSlot({
+const InputOTPSlot = ({
   className,
   index,
   ...props
 }: ComponentProps<"div"> & {
   index: number
-}) {
+}) => {
   const inputOTPContext = use(OTPInputContext)
   const slot = inputOTPContext.slots[index]
   const char = slot?.char
@@ -71,12 +65,10 @@ function InputOTPSlot({
   )
 }
 
-function InputOTPSeparator({ ...props }: ComponentProps<"div">) {
-  return (
-    <div aria-hidden="true" className="flex items-center [&_svg:not([class*='size-'])]:size-4" data-slot="input-otp-separator" {...props}>
-      <MinusIcon />
-    </div>
-  )
-}
+const InputOTPSeparator = ({ ...props }: ComponentProps<"div">) => (
+  <div aria-hidden="true" className="flex items-center [&_svg:not([class*='size-'])]:size-4" data-slot="input-otp-separator" {...props}>
+    <MinusIcon />
+  </div>
+)
 
 export { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot }

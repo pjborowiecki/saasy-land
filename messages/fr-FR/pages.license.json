@@ -1,0 +1,37 @@
+{
+  "title": "Votre licence",
+  "description": "Votre clé de licence CLI achetée et les activations de vos appareils.",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "Clé de licence",
+  "pending": "Votre clé est en cours d’émission. Actualisez la page dans un instant.",
+  "revoked": "Cette licence n’est plus active. Écrivez-nous si cela vous semble incorrect.",
+  "usage": "L’installation et l’utilisation de la CLI nécessitent un achat et une clé valide. Exécutez cette commande et saisissez votre clé lorsqu’elle vous est demandée. Gardez-la confidentielle.",
+  "manage": "Factures et reçus",
+  "buy": {
+    "title": "Acheter votre licence",
+    "description": "Achetez la CLI propriétaire, puis retrouvez votre clé ici. Un seul paiement, un nombre illimité de projets dans le cadre de votre forfait.",
+    "core": "Acheter Core",
+    "complete": "Acheter Complete",
+    "agency": "Acheter Agency",
+    "pending": "Ouverture du paiement…",
+    "error": "Le paiement n’a pas pu s’ouvrir. Réessayez ou écrivez à hello@saasyland.com.",
+    "agreement": "En poursuivant vers le paiement, vous acceptez les <terms>Conditions générales</terms> et la <licence>Licence commerciale</licence>. Consultez la <refunds>Politique de remboursement</refunds> avant d’acheter."
+  },
+  "activations": {
+    "title": "Appareils",
+    "description": "Chaque appareil sur lequel vous générez des projets occupe une activation. Libérez-la lorsque vous cessez d’utiliser cet appareil.",
+    "count": "{used} sur {limit} utilisés",
+    "unlimited": "{used} utilisés",
+    "none": "Aucun appareil n’a encore utilisé cette clé.",
+    "activated": "Activé le {date}",
+    "deactivate": "Libérer cette activation",
+    "deactivating": "Libération…",
+    "error": "Cela n’a pas fonctionné. Réessayez ou écrivez à hello@saasyland.com.",
+    "success": "Activation libérée."
+  },
+  "back": "Retour à la vue d’ensemble",
+  "agreement": "La <licence>Licence commerciale</licence> régit la CLI et vos droits sur les applications générées."
+}

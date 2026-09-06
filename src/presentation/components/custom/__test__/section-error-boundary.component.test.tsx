@@ -1,24 +1,26 @@
+import { type JSX, type ReactNode, useCallback, useState } from "react"
 /** @vitest-environment jsdom */
 
-import { useCallback, useState, type JSX, type ReactNode } from "react"
-
-import { render, screen } from "@testing-library/react"
+import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { NextIntlClientProvider } from "next-intl"
+import { IntlProvider } from "use-intl/react"
+import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { renderWithRouter as render } from "~/src/platform/testing/lib/render"
+
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { SectionErrorBoundary } from "~/src/presentation/components/custom/section-error-boundary"
 
 const FIRST_ATTEMPT = 0
 const SECOND_ATTEMPT = 1
 
-function Boom(): JSX.Element {
+const Boom = (): JSX.Element => {
   throw new Error("section blew up")
 }
 
 /** Throws once, then succeeds — so `retry()` has something different to render. */
-function BoomOnce({ attempt }: Readonly<{ attempt: number }>): JSX.Element {
+const BoomOnce = ({ attempt }: Readonly<{ attempt: number }>): JSX.Element => {
   if (attempt === FIRST_ATTEMPT) {
     throw new Error("section blew up")
   }
@@ -31,7 +33,7 @@ function BoomOnce({ attempt }: Readonly<{ attempt: number }>): JSX.Element {
  * throw deliberately, so the report is expected output rather than a failure — silence
  * it for the render that provokes it and leave the rest of the suite untouched.
  */
-function withoutReactErrorLogging(run: () => void): void {
+const withoutReactErrorLogging = (run: () => void): void => {
   const consoleError = vi.spyOn(console, "error").mockReturnValue()
 
   try {
@@ -41,21 +43,21 @@ function withoutReactErrorLogging(run: () => void): void {
   }
 }
 
-function renderBoundary(children: ReactNode, title?: string): void {
-  const messages = loadLocaleMessagesFromDir("en-US")
+const renderBoundary = (children: ReactNode, title?: string): void => {
+  const messages = getTestMessages("en-US")
 
-  function Wrapper({ children: wrapped }: { children: ReactNode }): JSX.Element {
-    return (
-      <NextIntlClientProvider locale="en-US" messages={messages}>
-        {wrapped}
-      </NextIntlClientProvider>
-    )
-  }
+  const Wrapper = ({ children: wrapped }: { children: ReactNode }): JSX.Element => (
+    <IntlProvider locale="en-US" messages={messages}>
+      {wrapped}
+    </IntlProvider>
+  )
 
   render(<SectionErrorBoundary {...(title === undefined ? {} : { title })}>{children}</SectionErrorBoundary>, { wrapper: Wrapper })
 }
 
 describe("section error boundary component", () => {
+  beforeEach(() => vi.stubEnv("DEV", false))
+  afterEach(() => vi.unstubAllEnvs())
   it("renders children while nothing throws", () => {
     expect.hasAssertions()
     renderBoundary(<p>all good</p>)
@@ -93,7 +95,7 @@ describe("section error boundary component", () => {
 
   it("surfaces the raw error message in development", () => {
     expect.hasAssertions()
-    vi.stubEnv("NODE_ENV", "development")
+    vi.stubEnv("DEV", true)
 
     try {
       withoutReactErrorLogging(() => {
@@ -108,9 +110,9 @@ describe("section error boundary component", () => {
   it("re-renders the failed subtree when retry is pressed", async () => {
     expect.hasAssertions()
     const user = userEvent.setup()
-    const messages = loadLocaleMessagesFromDir("en-US")
+    const messages = getTestMessages("en-US")
 
-    function Harness(): JSX.Element {
+    const Harness = (): JSX.Element => {
       const [attempt, setAttempt] = useState(FIRST_ATTEMPT)
 
       const fixIt = useCallback(() => {
@@ -118,14 +120,14 @@ describe("section error boundary component", () => {
       }, [])
 
       return (
-        <NextIntlClientProvider locale="en-US" messages={messages}>
+        <IntlProvider locale="en-US" messages={messages}>
           <button type="button" onClick={fixIt}>
             fix it
           </button>
           <SectionErrorBoundary>
             <BoomOnce attempt={attempt} />
           </SectionErrorBoundary>
-        </NextIntlClientProvider>
+        </IntlProvider>
       )
     }
 

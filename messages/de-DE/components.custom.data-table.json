@@ -1,0 +1,11 @@
+{
+  "empty": "Keine Ergebnisse gefunden.",
+  "pagination": {
+    "nextPage": "Nächste Seite",
+    "pageIndicator": "Seite {current} von {total}",
+    "previousPage": "Vorherige Seite",
+    "rowCount": "{count, plural, =0 {Keine Zeilen} one {# Zeile} other {# Zeilen}}",
+    "selectedCount": "{selected, plural, one {# ausgewählt} other {# ausgewählt}}"
+  },
+  "resizeColumn": "Spalte anpassen"
+}

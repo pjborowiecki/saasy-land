@@ -1,0 +1,24 @@
+---
+title: Сценарії проекту
+description: Сценарії проекту — SaaSy Land
+---
+
+Скрипки в `package.json` Використовуйте Vite+ для розробки, форматування, розфарбовування, типи, Vitest та збірки. `content` генерує колекції MDX; `cf-typegen` генерує ручні типи робітників. `db:generate` створення міграції SQL; `db:migrate:local` застосовується до місцевих D1. Віддалена міграція і розгортання команд, які називають їх середовищем явно.
+
+`build:preview` і `build:production` побудувати працівника, пререндерних публічних сторінок і перевірити розгортання артефактів. `clean` видаліть генерований вихідний та місцевий обов'язковий стан, щоб експортувати будь-які локальні дані, які ви хочете зберегти спочатку.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

@@ -1,0 +1,14 @@
+---
+title: "Dependency rules"
+description: "Dependency rules — SaaSy Land"
+---
+
+Routes import presentation and use cases. Presentation imports native query/mutation options, schemas, and shared helpers. Use cases import the database and vendor adapters through server-only boundaries. Module constants and validation must remain usable by both forms and server functions.
+
+Do not import Worker bindings or secret-bearing configuration into a browser component. TanStack Start splits `createServerFn` handlers out of the browser bundle. Shared adapters that must never execute in the browser import `@tanstack/react-start/server-only`.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

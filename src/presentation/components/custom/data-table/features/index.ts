@@ -1,4 +1,7 @@
 import {
+  type ColumnDef,
+  type RowData,
+  type TableOptions,
   columnFilteringFeature,
   columnOrderingFeature,
   columnPinningFeature,
@@ -10,8 +13,8 @@ import {
   createPaginatedRowModel,
   createSortedRowModel,
   filterFn_equals,
-  filterFn_includesString,
   filterFn_inNumberRange,
+  filterFn_includesString,
   globalFilteringFeature,
   metaHelper,
   rowExpandingFeature,
@@ -23,9 +26,6 @@ import {
   sortFn_datetime,
   sortFn_text,
   tableFeatures,
-  type ColumnDef,
-  type RowData,
-  type TableOptions,
 } from "@tanstack/react-table"
 
 interface DataTableMeta {

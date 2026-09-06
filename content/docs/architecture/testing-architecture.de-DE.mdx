@@ -1,0 +1,26 @@
+---
+title: Testen und Continuous Integration.
+description: Testen und CI — SaaSy Land
+---
+
+Vite+ führt Vitest in drei Projekten aus: Node-Tests, Integrationstests und jsdom-Komponententests. Behalten Sie die bestehenden Verhaltenstests neben dem zugehörigen Code im Ordner `__test__`. Importieren Sie die Test-APIs aus `vite-plus/test`. Verwenden Sie Playwright für vollständige Browserabläufe und Rendering-Prüfungen.
+
+Die gemeinsame Konfiguration stellt lokale D1- und KV-Mocks bereit. D1 führt die eingeprägten SQL-Migrationen gegen SQLite aus. Die Server-Funktions-RPC-Schnittstelle behält die echten Middleware- und Validierungs-Pipelines von TanStack bei. Komponenten-Rendering-Hilfsfunktionen stellen echte QueryClient- und Router-Kontexte bereit. Externe E-Mail-, OAuth- und Zahlungsaufrufe werden in den Tests simuliert.
+
+Führen Sie das fokussierte Projekt parallel zur Bearbeitung aus, anschließend das vollständige Paket, die Abdeckungsprüfung, die Überprüfung und den Vorschau-Build. Die Browser-Tests überprüfen öffentliche Seiten, Authentifizierungs-Weiterleitungen, SSR ohne JavaScript und die Client-Navigation. Die Continuous Integration (CI) verwendet lokale Bindungen und benötigt weder eine aktive Datenbank noch Provider-Geheimnisse.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

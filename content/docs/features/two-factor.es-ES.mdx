@@ -1,0 +1,12 @@
+---
+title: Autenticación de dos factores
+description: Activación, verificación y códigos de respaldo de TOTP.
+---
+
+## Módulo.
+
+`modules/two-factor/use-cases` — habilitar, deshabilitar, verificar TOTP, verificar código de respaldo.
+
+## Experiencia de usuario.
+
+Configuración, pestaña de seguridad + ruta `/auth/two-factor` para el desafío. Cumplir con las restricciones del plugin Better Auth 2FA en `auth.constraints.ts`.

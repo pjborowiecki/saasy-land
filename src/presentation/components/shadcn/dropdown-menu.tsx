@@ -1,39 +1,37 @@
-"use client"
-
 import type { ComponentProps, ReactNode } from "react"
 
 import { cva } from "class-variance-authority"
 import { CheckIcon, ChevronRightIcon } from "lucide-react"
 import {
-  composeRenderProps,
   Header as HeaderPrimitive,
   MenuItem as MenuItemPrimitive,
-  Menu as MenuPrimitive,
-  MenuSection as MenuSectionPrimitive,
-  MenuTrigger as MenuTriggerPrimitive,
-  Popover as PopoverPrimitive,
-  Separator as SeparatorPrimitive,
-  SubmenuTrigger as SubmenuTriggerPrimitive,
   type MenuItemProps as MenuItemPrimitiveProps,
+  Menu as MenuPrimitive,
   type MenuProps,
+  MenuSection as MenuSectionPrimitive,
   type MenuSectionProps as MenuSectionPrimitiveProps,
+  MenuTrigger as MenuTriggerPrimitive,
   type MenuTriggerProps,
+  Popover as PopoverPrimitive,
   type PopoverProps,
+  Separator as SeparatorPrimitive,
   type SeparatorProps,
+  SubmenuTrigger as SubmenuTriggerPrimitive,
+  composeRenderProps,
 } from "react-aria-components"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 const DROPDOWN_MENU_OFFSET = 4
 const DROPDOWN_MENU_CROSS_OFFSET = 0
 const DROPDOWN_MENU_SUB_OFFSET = 0
 const DROPDOWN_MENU_SUB_CROSS_OFFSET = -3
 
-function DropdownMenuTrigger({ ...props }: Readonly<MenuTriggerProps>) {
-  return <MenuTriggerPrimitive data-slot="dropdown-menu-trigger" {...props} />
-}
+const DropdownMenuTrigger = ({ ...props }: Readonly<MenuTriggerProps>) => (
+  <MenuTriggerPrimitive data-slot="dropdown-menu-trigger" {...props} />
+)
 
-function DropdownMenu({
+const DropdownMenu = ({
   "data-slot": dataSlot = "dropdown-menu-content",
   children,
   className,
@@ -46,45 +44,41 @@ function DropdownMenu({
     "data-slot"?: string
     children?: ReactNode
     className?: string
-  }) {
-  return (
-    <PopoverPrimitive
-      className={cn(
-        "z-50 w-(--trigger-width) min-w-32 origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none data-entering:animate-in data-entering:fade-in-0 data-entering:zoom-in-95 data-exiting:animate-out data-exiting:overflow-hidden data-exiting:fade-out-0 data-exiting:zoom-out-95 data-[placement=bottom]:slide-in-from-top-2 data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2 **:data-[slot$=-item]:data-focused:bg-foreground/10",
-        className,
-      )}
-      crossOffset={crossOffset}
-      data-slot={dataSlot}
-      offset={offset}
-      placement={placement}
-    >
-      <MenuPrimitive className="max-h-[inherit] overflow-x-hidden overflow-y-auto outline-hidden" {...props}>
-        {children}
-      </MenuPrimitive>
-    </PopoverPrimitive>
-  )
-}
+  }) => (
+  <PopoverPrimitive
+    className={cn(
+      "z-50 w-(--trigger-width) min-w-32 origin-(--trigger-anchor-point) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none data-entering:animate-in data-entering:fade-in-0 data-entering:zoom-in-95 data-exiting:animate-out data-exiting:overflow-hidden data-exiting:fade-out-0 data-exiting:zoom-out-95 data-[placement=bottom]:slide-in-from-top-2 data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2 **:data-[slot$=-item]:data-focused:bg-foreground/10",
+      className,
+    )}
+    crossOffset={crossOffset}
+    data-slot={dataSlot}
+    offset={offset}
+    placement={placement}
+  >
+    <MenuPrimitive className="max-h-[inherit] overflow-x-hidden overflow-y-auto outline-hidden" {...props}>
+      {children}
+    </MenuPrimitive>
+  </PopoverPrimitive>
+)
 
-function DropdownMenuGroup({ ...props }: Omit<MenuSectionPrimitiveProps<object>, "children"> & { children?: ReactNode }) {
-  return <MenuSectionPrimitive data-slot="dropdown-menu-group" {...props} />
-}
+const DropdownMenuGroup = ({ ...props }: Omit<MenuSectionPrimitiveProps<object>, "children"> & { children?: ReactNode }) => (
+  <MenuSectionPrimitive data-slot="dropdown-menu-group" {...props} />
+)
 
-function DropdownMenuLabel({
+const DropdownMenuLabel = ({
   className,
   inset,
   ...props
 }: ComponentProps<typeof HeaderPrimitive> & {
   inset?: boolean
-}) {
-  return (
-    <HeaderPrimitive
-      className={cn("px-1.5 py-1 text-xs font-medium text-muted-foreground data-inset:pl-7", className)}
-      data-inset={inset}
-      data-slot="dropdown-menu-label"
-      {...props}
-    />
-  )
-}
+}) => (
+  <HeaderPrimitive
+    className={cn("px-1.5 py-1 text-xs font-medium text-muted-foreground data-inset:pl-7", className)}
+    data-inset={inset}
+    data-slot="dropdown-menu-label"
+    {...props}
+  />
+)
 
 const dropdownMenuItemVariants = cva(
   "group/dropdown-menu-item relative flex cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -101,7 +95,7 @@ const dropdownMenuItemVariants = cva(
   },
 )
 
-function DropdownMenuItem({
+const DropdownMenuItem = ({
   children,
   className,
   inset,
@@ -111,7 +105,7 @@ function DropdownMenuItem({
 }: MenuItemPrimitiveProps & {
   inset?: boolean
   variant?: "default" | "destructive"
-}) {
+}) => {
   const resolvedTextValue = textValue ?? (typeof children === "string" ? children : undefined)
 
   return (
@@ -142,11 +136,11 @@ function DropdownMenuItem({
   )
 }
 
-function DropdownMenuSub({ ...props }: ComponentProps<typeof SubmenuTriggerPrimitive>) {
-  return <SubmenuTriggerPrimitive data-slot="dropdown-menu-sub" {...props} />
-}
+const DropdownMenuSub = ({ ...props }: ComponentProps<typeof SubmenuTriggerPrimitive>) => (
+  <SubmenuTriggerPrimitive data-slot="dropdown-menu-sub" {...props} />
+)
 
-function DropdownMenuSubTrigger({
+const DropdownMenuSubTrigger = ({
   children,
   className,
   inset,
@@ -154,7 +148,7 @@ function DropdownMenuSubTrigger({
   ...props
 }: MenuItemPrimitiveProps & {
   inset?: boolean
-}) {
+}) => {
   const resolvedTextValue = textValue ?? (typeof children === "string" ? children : undefined)
 
   return (
@@ -178,44 +172,37 @@ function DropdownMenuSubTrigger({
   )
 }
 
-function DropdownMenuSubContent({
+const DropdownMenuSubContent = ({
   className,
   crossOffset = DROPDOWN_MENU_SUB_CROSS_OFFSET,
   offset = DROPDOWN_MENU_SUB_OFFSET,
   placement = "end top",
   ...props
-}: ComponentProps<typeof DropdownMenu>) {
-  return (
-    <DropdownMenu
-      className={cn(
-        "w-auto min-w-[96px] rounded-lg bg-popover p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10 duration-100",
-        className,
-      )}
-      crossOffset={crossOffset}
-      data-slot="dropdown-menu-sub-content"
-      offset={offset}
-      placement={placement}
-      {...props}
-    />
-  )
-}
+}: ComponentProps<typeof DropdownMenu>) => (
+  <DropdownMenu
+    className={cn(
+      "w-auto min-w-[96px] rounded-lg bg-popover p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10 duration-100",
+      className,
+    )}
+    crossOffset={crossOffset}
+    data-slot="dropdown-menu-sub-content"
+    offset={offset}
+    placement={placement}
+    {...props}
+  />
+)
 
-function DropdownMenuSeparator({ className, ...props }: Readonly<SeparatorProps>) {
-  return <SeparatorPrimitive className={cn("-mx-1 my-1 h-px bg-border", className)} data-slot="dropdown-menu-separator" {...props} />
-}
+const DropdownMenuSeparator = ({ className, ...props }: Readonly<SeparatorProps>) => (
+  <SeparatorPrimitive className={cn("-mx-1 my-1 h-px bg-border", className)} data-slot="dropdown-menu-separator" {...props} />
+)
 
-function DropdownMenuShortcut({ className, ...props }: ComponentProps<"span">) {
-  return (
-    <span
-      className={cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground group-focus/dropdown-menu-item:text-accent-foreground",
-        className,
-      )}
-      data-slot="dropdown-menu-shortcut"
-      {...props}
-    />
-  )
-}
+const DropdownMenuShortcut = ({ className, ...props }: ComponentProps<"span">) => (
+  <span
+    className={cn("ml-auto text-xs tracking-widest text-muted-foreground group-focus/dropdown-menu-item:text-accent-foreground", className)}
+    data-slot="dropdown-menu-shortcut"
+    {...props}
+  />
+)
 
 export {
   DropdownMenu,

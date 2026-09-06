@@ -1,0 +1,14 @@
+---
+title: Formularze i walidacja
+description: Formularze i walidacja — SaaSy Land
+---
+
+Używaj `useForm` i `form.Field` z `@tanstack/react-form`. Tłumaczone schematy Zod przechowuj w plikach walidacji funkcji i wykorzystuj również na serwerze. Stan wysyłania odczytuj przez `useSelector(form.store, selector)`; dostępne pola renderuj przez istniejące komponenty prezentacji.
+
+Komponenty pól uwierzytelniania przyjmują mały kontrakt `StringField` z `integrations/tanstack-form/form.fields.ts`. Zachowują etykiety, fokus, przełączanie widoczności hasła i błędy. Wysyłaj formularz przez eksportowane opcje mutacji, obsługuj bezpieczne błędy i blokuj przycisk w trakcie żądania. Kompletne przykłady znajdziesz w formularzach logowania, rejestracji, resetu hasła i 2FA.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

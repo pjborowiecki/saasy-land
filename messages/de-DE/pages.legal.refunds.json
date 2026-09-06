@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Rückerstattungen",
+    "description": "Wann Sie bei SaaSy Land eine Erstattung beantragen können, wie Sie vorgehen und welche Verbraucherrechte geschützt bleiben."
+  },
+  "title": "Rückerstattungen",
+  "lastUpdated": "Zuletzt aktualisiert am 6. September 2026",
+  "description": "Wann Sie bei SaaSy Land eine Erstattung beantragen können, wie Sie vorgehen und welche Verbraucherrechte geschützt bleiben.",
+  "sections": {
+    "delivery": {
+      "title": "Vor der Bereitstellung",
+      "body": "Sie können eine vollständige Rückerstattung beantragen, bevor die gekaufte CLI, private Vorlagen oder kostenpflichtige Lernmaterialien geliefert oder über Ihr Konto zugänglich gemacht wurden. Bitte senden Sie eine E-Mail an hello@saasyland.com, bevor Sie auf das kostenpflichtige Produkt zugreifen. Es ist keine Erklärung erforderlich, um eine freiwillige Rückerstattung vor der Lieferung zu beantragen. Das Lesen oder Verwenden des öffentlich unter der MIT-Lizenz stehenden Repositorys stellt keinen Zugriff auf das separate, kommerzielle Produkt dar."
+    },
+    "afterDelivery": {
+      "title": "Nach der Bereitstellung",
+      "body": "Digitale Materialien können nicht wie körperliche Waren zurückgegeben werden. Daher endet die freiwillige Erstattungsmöglichkeit vor der Bereitstellung, sobald Sie die Materialien erhalten. Gesetzliche Widerrufsrechte und Rechtsbehelfe bleiben unberührt. Wenn Inhalte fehlen, fehlerhaft sind oder wesentlich vom zugesagten Inhalt abweichen, kontaktieren Sie uns, damit wir das Problem beheben können."
+    },
+    "consumerRights": {
+      "title": "Gesetzliche Verbraucherrechte",
+      "body": "Soweit Ihnen das Gesetz eine Widerrufsfrist einräumt, gilt dieses Recht weiterhin. Für Verbraucher in der EU beträgt die übliche Widerrufsfrist bei Fernabsatzverträgen 14 Tage. Bei digitalen Inhalten, die innerhalb dieser Frist bereitgestellt werden, setzt der Verlust des Widerrufsrechts die gesetzlich vorgeschriebene ausdrückliche Zustimmung, Kenntnisnahme und Bestätigung voraus. Die bloße Erklärung, Quellcode könne nicht zurückgegeben werden, beseitigt diese Rechte nicht. Zwingende Rechte bei nicht vertragsgemäßen oder nicht bereitgestellten Inhalten bleiben ebenfalls unberührt."
+    },
+    "request": {
+      "title": "So beantragen Sie eine Erstattung",
+      "body": "Schreiben Sie von der beim Kauf verwendeten Adresse an hello@saasyland.com. Geben Sie, sofern vorhanden, die Bestellnummer an und teilen Sie uns mit, dass Sie eine Erstattung wünschen. Wir ermitteln die Bestellung und bestätigen die nächsten Schritte. Ein besonderes Formular ist nicht erforderlich."
+    },
+    "processing": {
+      "title": "So werden Erstattungen ausgezahlt",
+      "body": "Genehmigte Erstattungen werden über Polar auf die ursprüngliche Zahlungsmethode abgewickelt, in Höhe des gezahlten Betrags und in der ursprünglichen Transaktionswährung. Die Bearbeitungszeiten können variieren. Eine Erstattung beendet den Zugang zum erstatteten kostenpflichtigen Produkt und macht seinen Lizenzschlüssel ungültig. Die kommerzielle Lizenz erklärt, welche Rechte an bereits rechtmäßig generierten Anwendungen fortbestehen. Rechte aus der MIT-Lizenz des öffentlichen Codes und zwingende Verbraucherrechte bleiben unberührt."
+    },
+    "freeServices": {
+      "title": "Kostenlose Dienste",
+      "body": "Die Kontoerstellung und die Newsletteranmeldung lösen für sich genommen keine Zahlung aus; deshalb gibt es hierfür nichts zu erstatten. Für separat erworbene Dienste Dritter gelten die Erstattungsbedingungen der jeweiligen Anbieter."
+    }
+  }
+}

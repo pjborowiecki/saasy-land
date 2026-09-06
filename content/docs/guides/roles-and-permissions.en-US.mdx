@@ -1,0 +1,14 @@
+---
+title: "Roles and permissions"
+description: "Roles and permissions — SaaSy Land"
+---
+
+Roles and statements live in `src/integrations/better-auth/auth.access.ts`. The default role is customer. Admin access is checked by `requireAdmin`; each server operation checks the required statement with `withAuth`.
+
+Keep role changes, bans, session revocation and impersonation in user/session use cases. Derive the current user from the request session and invalidate affected query groups after a mutation. Hiding a button is presentation behavior and does not replace authorization.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

@@ -1,4 +1,6 @@
-import { DEFAULT_ROLE_CODE, hasPermission, ROLE_CODES, ROLE_VALUES, ROLES } from "~/src/integrations/better-auth/auth.access"
+import { describe, expect, it } from "vite-plus/test"
+
+import { DEFAULT_ROLE_CODE, ROLES, ROLE_CODES, ROLE_VALUES, hasPermission } from "~/src/integrations/better-auth/auth.access"
 
 describe("auth roles", () => {
   it("exposes a single catalog of role codes", () => {

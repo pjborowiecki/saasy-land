@@ -1,0 +1,23 @@
+---
+title: Ciclo de vida de la solicitud
+description: Ciclo de vida de la solicitud – SaaSy Land
+---
+
+`src/server.ts` Normaliza las URLs de las localizaciones y mantiene el cookie de la localización sincronizado. `src/router.tsx` crea un nuevo QueryClient para cada router y lo conecta a SSR. Los archivos de ruta nativos declaran componentes, guardias, loaders, validación de búsqueda y metadatos.
+
+Las plantillas de administración y de clientes se utilizan. `beforeLoad` También se implementan controles de acceso. Cada función del servidor protegida también verifica a su llamador, ya que una llamada RPC puede ser realizada independientemente de una página. Nunca se debe almacenar una respuesta autenticada en una caché estática compartida.
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

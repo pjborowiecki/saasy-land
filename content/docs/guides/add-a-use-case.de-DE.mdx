@@ -1,0 +1,30 @@
+---
+title: Serverfunktionen und Anwendungsfälle.
+description: Serverfunktionen und Anwendungsfälle – SaaSy Land
+---
+
+Funktionen werden im Verzeichnis `src/modules/{feature}/use-cases/{operation}.ts` gespeichert. Exportieren Sie eine native `createServerFn` mit ihrem Eingabedefinitionschema, Autorisierungs- oder Ratenbegrenzung (Rate-Limit)-Middleware sowie eine Handler-Funktion, die entweder D1 oder den Provider-Adapter aufruft. Eine Mutation gibt Daten direkt zurück und wirft einen sicheren `AppError`; sie gibt kein framework-spezifisches Action-Envelope zurück.
+
+Exportieren Sie `mutationOptions` neben den Mutationen und `queryOptions` neben den Leseoperationen. Komponenten verwenden TanStack Query und übersetzen Fehler mit `useActionError`. Erfolgreiche Mutationen invalidieren die zugehörigen Feature-Query-Schlüssel. Verlassen Sie sich niemals auf eine Benutzer-ID, die von einem Kunden bereitgestellt wird, wenn die Operation auf `context.auth.user.id` angewendet werden soll.
+
+Verwenden Sie `withAuth` für geschützte Operationen und `withRateLimit` für sensible, öffentliche Operationen. Die Validierung läuft vor der Ausführung des Handlers ab. Halten Sie Provider-Fehler und interne Details aus öffentlichen Antworten heraus.
+
+```ts
+import { createServerFn } from "@tanstack/react-start"
+import { mutationOptions } from "@tanstack/react-query"
+import type * as zod from "zod"
+import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { categoryZodSchemas } from "~/src/modules/category/category.zod"
+
+// Follow the complete implementation in modules/category/use-cases/create-category.ts.
+const schema = categoryZodSchemas.createCategory
+const validate = (input: zod.input<typeof schema>) => schema.parse(input)
+```
+
+Die bestehende Operation `createCategory` demonstriert die Validierung, die Überprüfung von Berechtigungen, einen D1-Eintrag sowie exportierte Mutationsoptionen.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

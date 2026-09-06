@@ -1,0 +1,24 @@
+---
+title: Projektsskripte
+description: Projekt-Skripte — SaaSy Land
+---
+
+Skripte in `package.json` verwenden Vite+ für die Entwicklung, Formatierung, Linting, Typdefinitionen, Vitest und Builds. `content` generiert MDX-Sammlungen; `cf-typegen` generiert Typdefinitionen für Worker. `db:generate` erstellt SQL-Migrationen; `db:migrate:local` wendet diese auf D1 lokal an. Befehle für Remote-Migrationen und Deployments nennen ihre Umgebung explizit.
+
+`build:preview` und `build:production` erstellen das Worker-Modul, rendern öffentliche Seiten vorab und überprüfen die bereitgestellten Artefakte. `clean` entfernt generierte Ausgaben und lokale Bindungsdaten; speichern Sie daher zunächst alle lokalen Daten, die Sie behalten möchten.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

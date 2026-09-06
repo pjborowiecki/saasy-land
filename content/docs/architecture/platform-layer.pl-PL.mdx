@@ -1,0 +1,14 @@
+---
+title: Platforma i testowanie
+description: Platforma i testowanie — SaaSy Land
+---
+
+Cloudflare zapewnia środowisko przez jawne bindingi D1, KV i zasobów. Wygenerowane deklaracje znajdują się w `src/types`. Konfiguracja usług należy do `src/integrations`. Katalog platformy zawiera infrastrukturę testową: mocki bindingów, żądania testowe, most RPC i narzędzia renderowania.
+
+Ustawienia wdrożenia pozostają w `wrangler.jsonc` i odpowiednim ignorowanym pliku środowiska. Dane testowe przechowuj w `.env.test` i nigdy nie zastępuj ich danymi produkcyjnymi.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

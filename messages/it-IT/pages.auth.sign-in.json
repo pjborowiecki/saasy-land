@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Accedi",
+    "description": "Accedi al tuo account {name}."
+  },
+  "form": {
+    "title": "Ben ritrovato/a",
+    "description": "Inserisci i tuoi dati per accedere al tuo account.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Continua",
+    "submitting": "Effettuando l'accesso...",
+    "success": "Accesso effettuato correttamente!",
+    "error": "Indirizzo email o password non validi. Si prega di riprovare.",
+    "noAccount": "Non hai un account? <signup>Registrati</signup>",
+    "forgotPassword": "Password dimenticata?",
+    "continueWithGithub": "Continua con GitHub",
+    "continueWithGoogle": "Continua con Google",
+    "or": "oppure"
+  }
+}

@@ -1,0 +1,14 @@
+---
+title: Prise en charge de l'intégration
+description: Propriété de l'intégration — SaaSy Land
+---
+
+Chaque bibliothèque ou fournisseur externe possède un répertoire `src/integrations`: Better Auth, Drizzle, Fumadocs, use-intl, Polar, Resend et GitHub. Les fichiers de configuration initialisent les clients. Les adaptateurs partagés normalisent les résultats du fournisseur et maintiennent les identifiants derrière les frontières du serveur.
+
+Les décisions d'affaires demeurent dans les modules de fonctionnalités. Par exemple, Polar les gestionnaires de webhook mettent à jour les enregistrements de licence grâce à des cas d'utilisation de module; l'intégration elle-même configure le SDK et vérifie les webhooks entrants.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

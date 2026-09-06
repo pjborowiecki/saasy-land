@@ -1,0 +1,14 @@
+---
+title: Cache i SSR
+description: Cache i SSR — SaaSy Land
+---
+
+QueryClient należy do instancji routera i jest zintegrowany z renderowaniem serwerowym. Loadery pobierają dane i pliki namespace, a komponenty odczytują ten sam cache przez `useSuspenseQuery` lub `useSuspenseQueries`. Zapytania mają stabilne klucze. Udane mutacje odświeżają tylko klucze powiązanej funkcji.
+
+Publiczne strony dokumentacji, bloga i landing page są prerenderowane podczas budowania. Panel, aplikacja klienta, uwierzytelnianie i trasy tokenów newslettera są wykluczone. Cloudflare KV przechowuje publiczne metadane GitHuba. D1 przechowuje sesje i atomowe liczniki limitów; KV nie podejmuje decyzji o uprawnieniach.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

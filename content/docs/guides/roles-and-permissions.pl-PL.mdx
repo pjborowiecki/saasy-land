@@ -1,0 +1,14 @@
+---
+title: Role i uprawnienia
+description: Role i uprawnienia — SaaSy Land
+---
+
+Role i uprawnienia znajdują się w `src/integrations/better-auth/auth.access.ts`. Domyślną rolą jest klient. Dostęp do panelu sprawdza `requireAdmin`, a każda operacja serwerowa sprawdza wymagane uprawnienie przez `withAuth`.
+
+Zmiany ról, blokady, unieważnianie sesji i impersonacja pozostają w przypadkach użycia użytkowników i sesji. Odczytuj bieżącego użytkownika z sesji żądania i odświeżaj powiązane grupy zapytań po mutacji. Ukrycie przycisku jest zachowaniem prezentacji i nie zastępuje autoryzacji.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

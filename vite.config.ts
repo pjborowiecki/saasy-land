@@ -1,37 +1,50 @@
+import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
-import { defineConfig, loadEnv } from "vite-plus"
+import { parseEnv } from "node:util"
+import { type PluginOption, defineConfig, lazyPlugins, loadEnv } from "vite-plus"
+
+import { I18N } from "./src/integrations/use-intl/i18n.config.ts"
+import { canonicalizePathname, deLocalizePathname, localizePathname } from "./src/integrations/use-intl/i18n.paths.ts"
+import { ROUTES } from "./src/routes.ts"
 
 const projectRoot = import.meta.dirname
 
+const isE2E = process.env["E2E"] === "true"
+const usesRemoteBindings = !isE2E && process.env["CLOUDFLARE_ENV"] === "development"
+const testEnvPath = resolve(projectRoot, ".env.test")
+const testEnv = isE2E ? parseEnv(readFileSync(testEnvPath, "utf8")) : {}
+const testBindings = Object.fromEntries(Object.entries(testEnv).filter((entry): entry is [string, string] => entry[1] !== undefined))
+
+const UNLISTED_ROUTES = [ROUTES.ADMIN, ROUTES.APP, "/auth", "/newsletter", "/api"]
+
 const ignorePatterns = [
-  "node_modules",
-  ".next",
-  "remotion",
-  ".source",
-  "dist",
-  "build",
-  "scripts",
-  "e2e",
-  "coverage",
-  "playwright-report",
-  "test-results",
-  "blob-report",
-  "graphify-out",
-  ".vite-hooks",
-  ".vscode",
-  ".agents",
-  ".intent",
-  "src/platform/testing/mocks",
-  "src/integrations/next-intl/__test__/mocks",
-  "bun.lock",
   "**/*.d.ts",
   "**/*.tsbuildinfo",
-  "src/types/env.d.ts",
-  "src/integrations/next-intl/*.d.json.ts",
-  "src/platform/db/migrations/**",
+  ".agents",
+  "remotion",
+  ".claude",
+  ".output",
+  ".source",
+  ".tanstack",
+  ".vscode",
+  ".wrangler",
+  "blob-report",
+  "coverage",
+  "dist",
+  "dist-ssr",
+  "e2e",
+  "node_modules",
+  "playwright-report",
+  "playwright/.cache",
+  "scripts",
+  "src/integrations/**/*.d.json.ts",
+  "src/integrations/**/migrations/**",
+  "src/routeTree.gen.ts",
+  "src/types/worker-configuration.d.ts",
+  "test-results",
 ]
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   fmt: {
     arrowParens: "always",
     bracketSpacing: true,
@@ -44,41 +57,12 @@ export default defineConfig(({ mode }) => ({
     sortImports: {
       customGroups: [
         {
-          elementNamePattern: ["server-only"],
+          elementNamePattern: ["@tanstack/react-start/server-only"],
           groupName: "server-only",
-          modifiers: ["side_effect"],
         },
         {
-          elementNamePattern: ["react", "react/**", "next", "next/**"],
-          groupName: "react-and-next",
-        },
-        {
-          elementNamePattern: ["~/src/platform/env", "~/src/platform/env/**"],
-          groupName: "environment",
-        },
-        {
-          elementNamePattern: ["~/src/platform/**"],
-          groupName: "platform",
-        },
-        {
-          elementNamePattern: ["~/src/modules/**"],
-          groupName: "modules",
-        },
-        {
-          elementNamePattern: ["~/src/providers/**"],
-          groupName: "providers",
-        },
-        {
-          elementNamePattern: ["~/src/integrations/**"],
-          groupName: "integrations",
-        },
-        {
-          elementNamePattern: ["~/src/utils", "~/src/utils/**"],
-          groupName: "utils",
-        },
-        {
-          elementNamePattern: ["~/src/hooks/**"],
-          groupName: "hooks",
+          elementNamePattern: ["cloudflare:workers"],
+          groupName: "cloudflare",
         },
         {
           elementNamePattern: ["~/src/presentation/components/shadcn/**"],
@@ -93,22 +77,76 @@ export default defineConfig(({ mode }) => ({
           groupName: "components-other",
         },
         {
+          elementNamePattern: ["~/src/presentation/branding/**"],
+          groupName: "branding",
+        },
+        {
+          elementNamePattern: [
+            "~/src/constants",
+            "~/src/constants/**",
+            "~/src/data",
+            "~/src/data/**",
+            "~/src/presentation/theme",
+            "~/src/presentation/theme/**",
+          ],
+          groupName: "constants",
+        },
+        {
+          elementNamePattern: ["~/src/hooks/**"],
+          groupName: "hooks",
+        },
+        {
+          elementNamePattern: ["~/src/integrations/**"],
+          groupName: "integrations",
+        },
+        {
+          elementNamePattern: ["~/src/lib/**"],
+          groupName: "lib",
+        },
+        {
+          elementNamePattern: ["~/src/modules/**"],
+          groupName: "modules",
+        },
+        {
+          elementNamePattern: ["~/src/platform/**"],
+          groupName: "platform",
+        },
+        {
+          elementNamePattern: ["~/src/providers/**"],
+          groupName: "providers",
+        },
+        {
+          elementNamePattern: ["react", "react/**", "react-dom", "react-dom/**"],
+          groupName: "react",
+        },
+        {
+          elementNamePattern: ["~/src/routes/**"],
+          groupName: "routes",
+        },
+        {
           elementNamePattern: ["~/src/presentation/styles/**"],
           groupName: "styles",
+        },
+        {
+          elementNamePattern: ["~/src/types/**"],
+          groupName: "types",
         },
       ],
       groups: [
         "server-only",
-        { newlinesBetween: true },
-        "react-and-next",
+        "cloudflare",
+        "react",
         ["builtin", "external"],
-        "environment",
         "platform",
-        "modules",
         "providers",
         "integrations",
-        "utils",
+        "modules",
+        "routes",
         "hooks",
+        "constants",
+        "types",
+        "lib",
+        "branding",
         "components-shadcn",
         "components-custom",
         "components-other",
@@ -126,248 +164,130 @@ export default defineConfig(({ mode }) => ({
       stylesheet: "./src/presentation/styles/globals.css",
     },
     tabWidth: 2,
-    trailingComma: "all",
+    trailwingComma: "all",
     useTabs: false,
   },
   lint: {
     categories: {
       correctness: "error",
+      nursery: "error",
       pedantic: "error",
       perf: "error",
       style: "error",
       suspicious: "error",
     },
+    env: { browser: true, es2024: true, node: true, worker: true },
+    globals: { HTMLRewriter: "readonly", caches: "readonly" },
     ignorePatterns,
     options: {
-      denyWarnings: true,
-      reportUnusedDisableDirectives: "error",
       typeAware: true,
       typeCheck: true,
     },
     overrides: [
       {
-        // The root layout is the app-wide provider stack; its JSX depth is inherent, not sprawl.
-        files: ["src/app/*/layout.tsx"],
+        files: ["src/**/*.test.{ts,tsx}", "src/**/__test__/**", "src/platform/testing/**"],
         rules: {
-          "react/jsx-max-depth": ["error", { max: 7 }],
+          "no-await-in-loop": "off",
+          "no-magic-numbers": "off",
+          "unicorn/no-null": "off",
         },
+      },
+      {
+        files: ["src/presentation/**", "src/hooks/**"],
+        rules: { "typescript/consistent-return": "off" },
+      },
+      {
+        files: ["src/platform/testing/mocks/**"],
+        rules: { "require-await": "off", "typescript/require-await": "off" },
       },
       {
         files: ["vite.config.ts"],
         rules: {
-          "import/no-nodejs-modules": "off",
-          "max-lines-per-function": "off",
-        },
-      },
-      {
-        files: ["src/presentation/components/shadcn/label.tsx"],
-        rules: {
-          "jsx-a11y/label-has-associated-control": "off",
-        },
-      },
-      {
-        files: ["src/integrations/next-intl/i18n.utils.ts"],
-        rules: {
-          "import/no-nodejs-modules": "off",
-        },
-      },
-      {
-        files: ["e2e/**/*.{ts,tsx}"],
-        rules: {
-          "vitest/consistent-test-filename": "off",
-          "vitest/prefer-expect-assertions": "off",
-          "vitest/prefer-importing-vitest-globals": "off",
-          "vitest/prefer-to-be-falsy": "off",
-          "vitest/prefer-to-be-truthy": "off",
-          "vitest/valid-title": "off",
-        },
-      },
-      {
-        files: ["src/modules/*/domain/**/*.{ts,tsx}", "src/modules/shared-kernel/domain/**/*.{ts,tsx}"],
-        rules: {
-          "no-restricted-imports": [
-            "error",
-            {
-              patterns: [
-                {
-                  group: [
-                    "react",
-                    "react/**",
-                    "next",
-                    "next/**",
-                    "drizzle-orm",
-                    "drizzle-orm/**",
-                    "~/src/app/**",
-                    "~/src/presentation/**",
-                    "~/src/platform/**",
-                    "~/src/integrations/**",
-                    "~/src/modules/*/infrastructure/**",
-                    "~/src/modules/*/application/**",
-                  ],
-                  message: "Domain may only import shared-kernel domain and same-context domain code.",
-                },
-              ],
-            },
-          ],
-        },
-      },
-      {
-        files: ["src/modules/*/application/**/*.{ts,tsx}", "src/modules/shared-kernel/application/**/*.{ts,tsx}"],
-        rules: {
-          "no-restricted-imports": [
-            "error",
-            {
-              patterns: [
-                {
-                  group: [
-                    "react",
-                    "react/**",
-                    "next",
-                    "next/**",
-                    "drizzle-orm",
-                    "drizzle-orm/**",
-                    "~/src/app/**",
-                    "~/src/presentation/**",
-                    "~/src/platform/**",
-                    "~/src/integrations/**",
-                    "~/src/modules/*/infrastructure/**",
-                  ],
-                  message: "Application may only import domain, shared-kernel, and own application ports.",
-                },
-              ],
-            },
-          ],
-        },
-      },
-      {
-        files: ["src/presentation/**/*.{ts,tsx}"],
-        rules: {
-          "no-restricted-imports": [
-            "error",
-            {
-              paths: [
-                {
-                  message: "Import from `~/src/integrations/next-intl/i18n.navigation` instead.",
-                  name: "next/link",
-                },
-                {
-                  importNames: ["redirect", "permanentRedirect", "useRouter", "usePathname"],
-                  message: "Import from `~/src/integrations/next-intl/i18n.navigation` instead.",
-                  name: "next/navigation",
-                },
-              ],
-              patterns: [
-                {
-                  group: ["drizzle-orm", "drizzle-orm/**", "~/src/modules/*/infrastructure/**", "~/src/platform/db/**"],
-                  message: "Presentation must call application use cases, not infrastructure or Drizzle.",
-                },
-              ],
-            },
-          ],
+          "max-lines": "off",
         },
       },
     ],
-    plugins: ["typescript", "react", "react-perf", "jsx-a11y", "unicorn", "import", "promise", "vitest", "oxc", "eslint"],
     rules: {
-      "capitalized-comments": "off",
-      "consistent-return": "off",
-      "eslint/no-magic-numbers": [
-        "error",
-        {
-          ignore: [0],
-          ignoreArrayIndexes: true,
-          ignoreDefaultValues: true,
-          ignoreTypeIndexes: true,
-        },
-      ],
-      "func-style": "off",
-      "id-length": "off",
-      "import/consistent-type-specifier-style": "off",
-      "import/exports-last": "off",
-      "import/group-exports": "off",
-      "import/max-dependencies": "off",
-      "import/no-named-export": "off",
-      "import/no-namespace": "off",
-      "import/no-unassigned-import": "off",
-      "import/prefer-default-export": "off",
+      "id-length": ["error", { exceptions: ["_", "m", "t"], properties: "never" }],
       "max-lines": ["error", { max: 800 }],
       "max-lines-per-function": ["error", { max: 150 }],
       "max-statements": ["error", { max: 20 }],
-      "no-restricted-imports": [
+      "new-cap": ["error", { properties: false }],
+      "no-magic-numbers": ["error", { ignore: [0], ignoreArrayIndexes: true, ignoreDefaultValues: true, ignoreTypeIndexes: true }],
+      "no-ternary": "off",
+      "no-underscore-dangle": ["error", { allow: ["_splat", "__executeServer"] }],
+      "one-var": ["error", "never"],
+      "sort-imports": ["error", { ignoreDeclarationSort: true }],
+      "typescript/only-throw-error": [
         "error",
         {
-          paths: [
-            {
-              message: "Import from `~/src/integrations/next-intl/i18n.navigation` instead.",
-              name: "next/link",
-            },
-            {
-              importNames: ["redirect", "permanentRedirect", "useRouter", "usePathname"],
-              message: "Import from `~/src/integrations/next-intl/i18n.navigation` instead.",
-              name: "next/navigation",
-            },
+          allow: [
+            { from: "package", name: "NotFoundError", package: "@tanstack/router-core" },
+            { from: "package", name: "Redirect", package: "@tanstack/router-core" },
           ],
         },
       ],
-      "no-ternary": "off",
-      "prefer-arrow-callback": "off",
-      "react/jsx-max-depth": ["error", { max: 5 }],
-      "react/jsx-props-no-spreading": "off",
-      "react/react-in-jsx-scope": "off",
-      "sort-imports": "off",
-      "typescript/no-explicit-any": "error",
-      "typescript/no-floating-promises": "error",
-      "typescript/no-misused-promises": [
-        "error",
-        {
-          checksVoidReturn: {
-            arguments: true,
-            attributes: false,
-            properties: true,
-            returns: true,
-            variables: true,
-          },
-        },
-      ],
-      "typescript/no-unsafe-argument": "error",
-      "typescript/no-unsafe-assignment": "error",
-      "typescript/no-unsafe-call": "error",
-      "typescript/no-unsafe-member-access": "error",
-      "typescript/no-unsafe-return": "error",
-      "typescript/no-unsafe-type-assertion": "error",
-      "typescript/prefer-nullish-coalescing": "error",
       "typescript/prefer-readonly-parameter-types": "off",
-      "typescript/strict-boolean-expressions": [
-        "error",
-        {
-          allowNullableNumber: true,
-          allowNullableString: true,
-        },
-      ],
-      "typescript/strict-void-return": "off",
-      "vitest/prefer-importing-vitest-globals": "off",
-      "vitest/prefer-to-be-falsy": "off",
-      "vitest/prefer-to-be-truthy": "off",
-      "vitest/valid-title": "error",
+      "unicorn/no-useless-undefined": ["error", { checkArguments: false }],
     },
   },
-  oxc: {
-    jsx: {
-      runtime: "automatic",
-    },
-  },
-  resolve: { tsconfigPaths: true },
-  staged: {
-    "*": "vp check --fix",
-  },
+  plugins:
+    lazyPlugins(async (): Promise<PluginOption[]> => {
+      const { cloudflare } = await import("@cloudflare/vite-plugin")
+      const { tanstackStart } = await import("@tanstack/react-start/plugin/vite")
+
+      const { fumadocsMdx } = await import("fumadocs-mdx/vite")
+      const { default: tailwindcss } = await import("@tailwindcss/vite")
+      const { default: viteReact } = await import("@vitejs/plugin-react")
+
+      if (process.env["VITEST"] === "true") {
+        return [viteReact()]
+      }
+
+      return [
+        cloudflare({
+          ...(isE2E
+            ? {
+                config: { vars: testBindings },
+                configPath: "./src/platform/testing/wrangler.jsonc",
+              }
+            : {}),
+          inspectorPort: false,
+          persistState: isE2E ? { path: ".wrangler/test" } : true,
+          remoteBindings: usesRemoteBindings,
+          viteEnvironment: { name: "ssr" },
+        }),
+        fumadocsMdx({ configPath: "./src/integrations/fumadocs/fumadocs.config.ts" }),
+        tailwindcss(),
+        tanstackStart({
+          pages: I18N.SUPPORTED_LOCALES.map((locale) => ({ path: localizePathname({ locale, pathname: "/" }) })),
+          prerender: {
+            autoStaticPathsDiscovery: true,
+            crawlLinks: true,
+            enabled: true,
+            filter: (page) => {
+              const { pathname, search, hash } = new URL(page.path, "http://localhost")
+              return (
+                search.length === 0 &&
+                hash.length === 0 &&
+                canonicalizePathname(pathname) === pathname &&
+                !UNLISTED_ROUTES.some((route) => deLocalizePathname(pathname).startsWith(route))
+              )
+            },
+          },
+        }),
+        viteReact(),
+      ]
+    }) ?? [],
+  resolve: { noExternal: ["fumadocs-core", "fumadocs-ui"], tsconfigPaths: true },
+  server: { port: 3000, strictPort: true, watch: { ignored: ["**/coverage/**"] } },
+  staged: { "*": "vp check --fix" },
   test: {
-    alias: {
-      "@wrksz/themes/client": resolve(projectRoot, "src/platform/testing/mocks/wrksz-themes.ts"),
-      "@wrksz/themes/next": resolve(projectRoot, "src/platform/testing/mocks/wrksz-themes.ts"),
-      bun: resolve(projectRoot, "src/platform/testing/mocks/bun.ts"),
-      "next/font/google": resolve(projectRoot, "src/platform/testing/mocks/next-font-google.ts"),
-      "next/navigation": resolve(projectRoot, "src/platform/testing/mocks/next-navigation.ts"),
-    },
+    alias: [
+      { find: "vitest", replacement: resolve(projectRoot, "node_modules/vite-plus/dist/test/index.js") },
+      { find: "cloudflare:workers", replacement: resolve(projectRoot, "src/platform/testing/mocks/cloudflare.ts") },
+      { find: /^@wrksz\/themes(?:\/client)?$/u, replacement: resolve(projectRoot, "src/platform/testing/mocks/wrksz-themes.ts") },
+    ],
     coverage: {
       clean: true,
       exclude: [
@@ -375,12 +295,17 @@ export default defineConfig(({ mode }) => ({
         "**/__test__/**",
         "**/*.d.ts",
         "**/migrations/**",
-        "src/app/**",
+        "src/routes/**",
+        "src/routeTree.gen.ts",
+        "src/presentation/components/custom/admin/**",
+        "src/presentation/components/custom/app/**",
+        "src/presentation/components/custom/auth/**",
+        "src/presentation/components/custom/blog/**",
+        "src/presentation/components/custom/landing-page/**",
         "src/presentation/components/shadcn/**",
-        "src/platform/db/migrations/**",
+        "src/integrations/drizzle-orm/migrations/**",
         "src/integrations/fumadocs/**",
-        "src/integrations/next-intl/*.d.json.ts",
-        "src/integrations/next-intl/messages/**",
+        "src/integrations/use-intl/*.d.json.ts",
         "src/providers/translations-provider.tsx",
         "src/presentation/styles/**",
         "src/types/**",
@@ -396,13 +321,19 @@ export default defineConfig(({ mode }) => ({
         branches: 100,
         functions: 100,
         lines: 100,
-        "src/integrations/next-intl/i18n.locale.ts": {
+        "src/integrations/better-auth/auth.access.ts": {
           branches: 100,
           functions: 100,
           lines: 100,
           statements: 100,
         },
-        "src/integrations/next-intl/i18n.utils.ts": {
+        "src/integrations/use-intl/i18n.locale.ts": {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
+        "src/integrations/use-intl/i18n.utils.ts": {
           branches: 100,
           functions: 100,
           lines: 100,
@@ -414,21 +345,15 @@ export default defineConfig(({ mode }) => ({
           lines: 100,
           statements: 100,
         },
-        "src/modules/user-access/auth/auth.access.ts": {
-          branches: 100,
-          functions: 100,
-          lines: 100,
-          statements: 100,
-        },
         statements: 100,
       },
     },
     deps: {
       interopDefault: true,
     },
-    env: loadEnv(mode, projectRoot, ""),
+    env: loadEnv("test", projectRoot, ""),
     environment: "node",
-    exclude: ["node_modules/**", ".next/**", "dist/**", "build/**", "e2e/**", "src/platform/db/migrations/**"],
+    exclude: ["node_modules/**", "dist/**", "build/**", "e2e/**", "src/integrations/drizzle-orm/migrations/**"],
     globals: true,
     isolate: true,
     passWithNoTests: false,
@@ -464,9 +389,9 @@ export default defineConfig(({ mode }) => ({
     ],
     server: {
       deps: {
-        inline: ["@next-safe-action/adapter-better-auth", "next-intl"],
+        inline: ["better-auth"],
       },
     },
-    setupFiles: ["@testing-library/jest-dom/vitest"],
+    setupFiles: ["@testing-library/jest-dom/vitest", "src/platform/testing/setup.ts"],
   },
-}))
+})

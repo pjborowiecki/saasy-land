@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "E-Mail bestätigen",
+    "description": "Bestätige die E-Mail-Adresse für dein Konto bei {name}."
+  },
+  "form": {
+    "title": "Überprüfen Sie Ihre E-Mail-Adresse",
+    "description": "Bitte bestätigen Sie Ihre E-Mail-Adresse, um die Einrichtung Ihres Kontos abzuschließen.",
+    "verifying": "Ihre E-Mail wird überprüft…",
+    "success": "Ihre E-Mail-Adresse wurde erfolgreich verifiziert.",
+    "continue": "Fortfahren",
+    "invalidToken": "Dieser Bestätigungslink ist ungültig oder abgelaufen.",
+    "pendingDescription": "Prüfen Sie Ihren Posteingang und folgen Sie dem Bestätigungslink. Melden Sie sich danach an, um fortzufahren.",
+    "email": "E-Mail",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "emailRequired": "Bitte geben Sie Ihre E-Mail-Adresse ein, um den Bestätigungslink erneut zu senden.",
+    "resend": "Bestätigungs-E-Mail erneut senden",
+    "resendSuccess": "Falls bereits ein Konto mit dieser E-Mail-Adresse existiert, wurde ein neuer Bestätigungslink gesendet.",
+    "backToSignIn": "Zur Anmeldung zurück",
+    "resending": "Bestätigungs-E-Mail wird gesendet…"
+  }
+}

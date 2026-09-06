@@ -1,0 +1,6 @@
+{
+  "google": "Inicie sesión con Google",
+  "github": "Inicia sesión con GitHub",
+  "success": "¡Inicio de sesión exitoso!",
+  "continueWith": "Continuar con {provider}"
+}

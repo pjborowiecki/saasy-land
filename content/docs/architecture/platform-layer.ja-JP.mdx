@@ -1,0 +1,14 @@
+---
+title: プラットフォームとテスト
+description: プラットフォームとテスト — SaaSy Land
+---
+
+Cloudflare は、explicit D1、KV、およびアセットバインディングによるランタイムを提供します。 生成された宣言は下に住んでいます `src/types`. . ベンダー固有のセットアップは、 `src/integrations`. . 残りのプラットフォームディレクトリは、テストインフラストラクチャを保持しています。バインディングモック、リクエストフィクスチャ、RPCブリッジ、レンダリングヘルパー。
+
+環境固有の展開設定を保ちましょう `wrangler.jsonc` 対応する無視環境ファイル。 テスト資格情報を保持する `.env.test` 生産資格情報に代わることはありません。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

@@ -1,0 +1,14 @@
+---
+title: "Platform and testing"
+description: "Platform and testing — SaaSy Land"
+---
+
+Cloudflare provides the runtime through explicit D1, KV and asset bindings. Generated declarations live under `src/types`. Vendor-specific setup belongs in `src/integrations`. The remaining platform directory holds testing infrastructure: binding mocks, request fixtures, the RPC bridge and render helpers.
+
+Keep environment-specific deployment settings in `wrangler.jsonc` and the corresponding ignored environment file. Keep test credentials in `.env.test` and never replace them with production credentials.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

@@ -1,0 +1,151 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "drop-trailing-slash",
+    "run_worker_first": ["/*", "!/assets/*", "!/fonts/*", "!/motion/*"],
+  },
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "keep_vars": true,
+  "main": "./src/server.ts",
+  "name": "saasyland",
+  "observability": {
+    "enabled": true,
+  },
+  "env": {
+    "development": {
+      "name": "saasyland-development",
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "1b7de265-e888-4fcf-8587-191850cd6438",
+          "database_name": "saasyland_com_preview",
+          "migrations_dir": "./src/integrations/drizzle-orm/migrations",
+          "remote": true,
+        },
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "CACHE",
+          "id": "7c72cac1ea774231bb6d945d32fbd00f",
+          "remote": true,
+        },
+      ],
+      "secrets": {
+        "required": [
+          "AUTH_SECRET",
+          "AUTH_GITHUB_CLIENT_ID",
+          "AUTH_GITHUB_CLIENT_SECRET",
+          "AUTH_GOOGLE_CLIENT_ID",
+          "AUTH_GOOGLE_CLIENT_SECRET",
+          "CLOUDFLARE_ACCOUNT_ID",
+          "CLOUDFLARE_DATABASE_ID",
+          "CLOUDFLARE_ACCESS_TOKEN",
+          "RESEND_API_KEY",
+          "RESEND_EMAIL_FROM",
+          "POLAR_ACCESS_TOKEN",
+          "POLAR_WEBHOOK_SECRET",
+          "POLAR_SERVER",
+          "POLAR_ORGANIZATION_ID",
+          "POLAR_PRODUCT_ID_CORE",
+          "POLAR_PRODUCT_ID_COMPLETE",
+          "POLAR_PRODUCT_ID_AGENCY",
+        ],
+      },
+    },
+    "preview": {
+      "name": "saasyland-preview",
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "preview.saasyland.com",
+        },
+      ],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "1b7de265-e888-4fcf-8587-191850cd6438",
+          "database_name": "saasyland_com_preview",
+          "migrations_dir": "./src/integrations/drizzle-orm/migrations",
+          "remote": true,
+        },
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "CACHE",
+          "id": "7c72cac1ea774231bb6d945d32fbd00f",
+          "remote": true,
+        },
+      ],
+      "secrets": {
+        "required": [
+          "AUTH_SECRET",
+          "AUTH_GITHUB_CLIENT_ID",
+          "AUTH_GITHUB_CLIENT_SECRET",
+          "AUTH_GOOGLE_CLIENT_ID",
+          "AUTH_GOOGLE_CLIENT_SECRET",
+          "CLOUDFLARE_ACCOUNT_ID",
+          "CLOUDFLARE_DATABASE_ID",
+          "CLOUDFLARE_ACCESS_TOKEN",
+          "RESEND_API_KEY",
+          "RESEND_EMAIL_FROM",
+          "POLAR_ACCESS_TOKEN",
+          "POLAR_WEBHOOK_SECRET",
+          "POLAR_SERVER",
+          "POLAR_ORGANIZATION_ID",
+          "POLAR_PRODUCT_ID_CORE",
+          "POLAR_PRODUCT_ID_COMPLETE",
+          "POLAR_PRODUCT_ID_AGENCY",
+        ],
+      },
+    },
+    "production": {
+      "name": "saasyland",
+      "routes": [
+        {
+          "custom_domain": true,
+          "pattern": "saasyland.com",
+        },
+      ],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "1925697b-20a5-4f47-b62b-cf98f332a9e2",
+          "database_name": "saasyland_com_production",
+          "migrations_dir": "./src/integrations/drizzle-orm/migrations",
+          "remote": true,
+        },
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "CACHE",
+          "id": "f4722faebd594c06864cb1421b627431",
+          "remote": true,
+        },
+      ],
+      "secrets": {
+        "required": [
+          "AUTH_SECRET",
+          "AUTH_GITHUB_CLIENT_ID",
+          "AUTH_GITHUB_CLIENT_SECRET",
+          "AUTH_GOOGLE_CLIENT_ID",
+          "AUTH_GOOGLE_CLIENT_SECRET",
+          "CLOUDFLARE_ACCOUNT_ID",
+          "CLOUDFLARE_DATABASE_ID",
+          "CLOUDFLARE_ACCESS_TOKEN",
+          "RESEND_API_KEY",
+          "RESEND_EMAIL_FROM",
+          "POLAR_ACCESS_TOKEN",
+          "POLAR_WEBHOOK_SECRET",
+          "POLAR_SERVER",
+          "POLAR_ORGANIZATION_ID",
+          "POLAR_PRODUCT_ID_CORE",
+          "POLAR_PRODUCT_ID_COMPLETE",
+          "POLAR_PRODUCT_ID_AGENCY",
+        ],
+      },
+    },
+  },
+}

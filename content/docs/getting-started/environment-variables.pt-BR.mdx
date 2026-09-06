@@ -1,0 +1,16 @@
+---
+title: Meio ambiente e ligações
+description: Ambiente e ligações... SaaSy Land
+---
+
+Use `.env.development`, `.env.preview`, e `.env.production` para o Vite correspondente e Cloudflare Esses arquivos são ignorados. `.env.example` Documenta as chaves necessárias. `VITE_APP_URL` é público e substituído em tempo de construção. Os segredos dos trabalhadores não têm `VITE_` prefixo e são acessados através `env` De... `cloudflare:workers`.
+
+Configure `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, configurações Resend e as configurações Polar para sua instalação. Nunca cometa credenciais reais. Identidades vinculantes pertencem ao apropriado. `wrangler.jsonc` Ambiente; declarações geradas de trabalhadores descrevem seus tipos.
+
+Apenas. Drizzle Estúdio e necessidade de introspecção `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID` e... `CLOUDFLARE_ACCESS_TOKEN`Local. D1 Não usa credenciais remotas. CI Entendido. `.env.test` para os arquivos de ambiente local e corre com ligações locais.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

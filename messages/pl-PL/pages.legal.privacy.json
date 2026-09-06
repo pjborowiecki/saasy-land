@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Polityka prywatności",
+    "description": "Jak SaaSy Land przetwarza dane konta, płatności, newslettera i dane techniczne oraz jak skorzystać z praw dotyczących prywatności."
+  },
+  "title": "Polityka prywatności",
+  "lastUpdated": "Ostatnia aktualizacja: 6 września 2026",
+  "description": "Jak SaaSy Land przetwarza dane konta, płatności, newslettera i dane techniczne oraz jak skorzystać z praw dotyczących prywatności.",
+  "sections": {
+    "controller": {
+      "title": "Kto odpowiada za dane",
+      "body": "Operatorem SaaSy Land pod adresem saasyland.com jest Piotr Borowiecki, administrator opisanych tu danych osobowych. Pytania i wnioski dotyczące prywatności kieruj na hello@saasyland.com."
+    },
+    "collection": {
+      "title": "Jakie dane zbieramy",
+      "body": "Jeśli założysz konto, przechowujemy Twoje imię i nazwisko, adres e-mail, zdjęcie profilowe, jeśli je podasz, ustawienia konta oraz status weryfikacji. Hasła przechowujemy w postaci skrótów kryptograficznych. Jeśli wybierzesz logowanie przez Google lub GitHub, otrzymujemy dane profilu i uwierzytelniania potrzebne do zalogowania. Dane sesji mogą obejmować adres IP, informacje o przeglądarce i termin ważności. Weryfikacja dwuetapowa wymaga przechowywania informacji służących zabezpieczeniu konta.\n\nZakupy powodują utworzenie danych klienta, zamówienia i licencji. Dane karty obsługuje dostawca płatności. Dane newslettera obejmują adres e-mail, wybrany język, źródło zapisu, status subskrypcji, tokeny potwierdzenia i rezygnacji oraz powiązane daty. Żądania generują także dzienniki bezpieczeństwa i działania usługi. Przechowujemy także wydany klucz licencyjny, jego status i powiązane aktywacje. Polar przetwarza dane wydawania i aktywacji licencji; konto pokazuje aktywne urządzenia i pozwala zwolnić aktywację."
+    },
+    "purposes": {
+      "title": "Do czego wykorzystujemy dane",
+      "body": "Dane konta i zakupów służą zapewnieniu dostępu, uwierzytelnianiu, dostarczeniu zakupionych materiałów, obsłudze klienta i zarządzaniu licencjami. Wiadomości transakcyjne weryfikują adresy, potwierdzają zmiany i pomagają odzyskać konto. Newsletter wysyłamy po potwierdzeniu zapisu. Informacje techniczne pomagają zapobiegać nadużyciom, diagnozować błędy i utrzymywać niezawodność usługi."
+    },
+    "basis": {
+      "title": "Podstawy prawne",
+      "body": "Przetwarzanie niezbędne do prowadzenia konta i realizacji zakupów opiera się na wykonaniu umowy lub podjęciu działań na Twoje żądanie przed jej zawarciem, zgodnie z art. 6 ust. 1 lit. b RODO. Wysyłka newslettera opiera się na zgodzie, art. 6 ust. 1 lit. a. Bezpieczeństwo, przeciwdziałanie nadużyciom i niezawodność usługi opierają się na prawnie uzasadnionych interesach, art. 6 ust. 1 lit. f. Dokumentację wymaganą przez przepisy podatkowe, rachunkowe lub inne obowiązujące przepisy przetwarzamy w celu wykonania obowiązków prawnych, art. 6 ust. 1 lit. c. Podanie adresu e-mail jest niezbędne do korzystania z konta; zapis do newslettera jest dobrowolny."
+    },
+    "providers": {
+      "title": "Dostawcy usług i przekazywanie danych",
+      "body": "Cloudflare zapewnia hosting, bazę danych, pamięć podręczną i infrastrukturę operacyjną. Resend dostarcza wiadomości e-mail. Polar obsługuje zakup i płatności jako formalny sprzedawca (merchant of record) oraz przetwarza dane zgodnie z własną polityką prywatności. Google i GitHub uczestniczą w przetwarzaniu tylko wtedy, gdy wybierzesz ich opcje logowania. Możemy także ujawnić informacje, gdy wymaga tego prawo. Nie sprzedajemy danych osobowych ani nie udostępniamy adresów z newslettera do marketingu innych firm.\n\nDostawcy mogą przetwarzać dane poza Twoim krajem, w tym poza Europejskim Obszarem Gospodarczym. Gdy jest to wymagane, przekazanie opiera się na odpowiedniej decyzji stwierdzającej odpowiedni stopień ochrony lub zabezpieczeniach umownych, takich jak standardowe klauzule umowne Komisji Europejskiej. Skontaktuj się z nami, aby uzyskać informacje o zabezpieczeniach dotyczących Twoich danych."
+    },
+    "retention": {
+      "title": "Jak długo przechowujemy dane",
+      "body": "Dane konta przechowujemy przez czas potrzebny do jego prowadzenia i zapewnienia wsparcia. Po usunięciu konta dane usuwamy lub anonimizujemy, chyba że dalsze przechowywanie jest niezbędne ze względu na obowiązki prawne, zapobieganie oszustwom lub rozstrzyganie sporów. Dane płatnicze i księgowe przechowujemy przez okres wymagany prawem. Dane sesji i bezpieczeństwa przechowujemy tylko tak długo, jak wymaga tego ich cel. Wygasłe liczniki ograniczania żądań usuwamy codziennie.\n\nInformacje o newsletterze przechowujemy przez czas aktywnej subskrypcji. Zapis o rezygnacji może pozostać, aby uszanować Twoją decyzję i zapobiec przypadkowemu ponownemu zapisaniu. Możesz poprosić o usunięcie danych. Kopie zapasowe lub kopie w systemach dostawców mogą pozostać do końca ich zwykłych okresów przechowywania."
+    },
+    "cookies": {
+      "title": "Pliki cookie i pamięć przeglądarki",
+      "body": "Niezbędne pliki cookie uwierzytelniania utrzymują zalogowanie i wspierają bezpieczeństwo konta. Plik saasyland.com_locale zapamiętuje język odwiedzanych stron. Pamięć przeglądarki może także przechowywać preferencje interfejsu, takie jak motyw lub stan panelu bocznego. Funkcje te służą działaniu usługi i zachowaniu Twoich ustawień.\n\nAplikacja nie dodaje mechanizmów śledzenia reklamowego ani analitycznych plików cookie. Zewnętrzne usługi logowania i płatności stosują własne zasady przechowywania danych. Zablokowanie niezbędnych plików cookie może uniemożliwić logowanie lub zapamiętanie języka."
+    },
+    "rights": {
+      "title": "Twoje wybory i prawa",
+      "body": "W zależności od obowiązującego prawa możesz żądać dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania lub przeniesienia oraz wnieść sprzeciw wobec przetwarzania opartego na prawnie uzasadnionym interesie. Zgodę na newsletter możesz wycofać w dowolnym momencie przez link rezygnacji lub kontakt z nami; nie wpływa to na zgodność z prawem wcześniejszego przetwarzania. Nie podejmujemy wobec Ciebie decyzji opartych wyłącznie na zautomatyzowanym przetwarzaniu, które wywołują skutki prawne lub podobnie istotnie na Ciebie wpływają.\n\nWnioski kieruj na hello@saasyland.com. Możemy potrzebować potwierdzenia Twojej tożsamości. Odpowiemy w terminie wymaganym prawem, zwykle w ciągu miesiąca zgodnie z RODO. Możesz złożyć skargę do organu ochrony danych, w tym Prezesa Urzędu Ochrony Danych Osobowych w Polsce lub organu właściwego dla miejsca zamieszkania albo pracy."
+    },
+    "changes": {
+      "title": "Zmiany polityki",
+      "body": "Aktualizujemy tę politykę, gdy zmieniają się usługa lub zasady przetwarzania danych. Data powyżej wskazuje aktualną wersję. Jeśli zmiana wymaga osobnego powiadomienia lub Twojej zgody, zapewnimy je przed jej zastosowaniem."
+    }
+  }
+}

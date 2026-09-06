@@ -1,0 +1,6 @@
+{
+  "atLeastOneFieldRequired": "少なくとも一つ以上の項目を入力してください。",
+  "nameRequired": "製品名が必要です。",
+  "nameMaxLength": "商品名は{max}文字以内で入力してください。",
+  "priceCentsMin": "価格はゼロ以上である必要があります。"
+}

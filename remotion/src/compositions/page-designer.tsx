@@ -42,7 +42,7 @@ export function PageDesigner() {
   const selected = true
 
   // The padding eases between the sequence's stops rather than jumping, so the canvas grows and
-  // settles the way a dragged control would move it.
+  // Settles the way a dragged control would move it.
   const paddingValue = Math.round(
     interpolate(
       frame,
@@ -58,7 +58,7 @@ export function PageDesigner() {
   const panes = 1
 
   // The field lights while the value is actually moving, and is dark at both ends of the cycle,
-  // so the frame the loop wraps to is identical to the frame it wraps from.
+  // So the frame the loop wraps to is identical to the frame it wraps from.
   const editing =
     interpolate(frame % CYCLE, [0, 0.08 * CYCLE, 0.5 * CYCLE, 0.7 * CYCLE], [0, 1, 1, 0], {
       extrapolateLeft: "clamp",

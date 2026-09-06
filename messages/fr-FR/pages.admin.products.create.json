@@ -1,0 +1,74 @@
+{
+  "title": "Créer un produit",
+  "actions": {
+    "cancel": "Annuler",
+    "save": "Enregistrer le produit"
+  },
+  "sections": {
+    "general": {
+      "title": "Informations générales",
+      "name": {
+        "label": "Nom du produit",
+        "placeholder": "Pro Plan, E-book..."
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Décrivez brièvement ce que ce produit comprend…",
+        "help": "Seront affichés sur les pages de paiement et sur le portail client."
+      }
+    },
+    "pricing": {
+      "title": "Prix et facturation",
+      "model": {
+        "label": "Modèle de facturation",
+        "subscription": "Abonnement",
+        "oneTime": "Unique"
+      },
+      "price": {
+        "label": "Prix",
+        "placeholder": "0.00",
+        "currencySymbol": "$"
+      },
+      "period": {
+        "label": "Période de facturation",
+        "monthly": "Mensuel",
+        "yearly": "Annuel"
+      }
+    },
+    "media": {
+      "title": "Médias & Images",
+      "upload": "Cliquez pour importer ou glissez-déposez",
+      "help": "SVG, PNG, JPG ou GIF (max. 800x400 px)"
+    },
+    "status": {
+      "title": "Statut",
+      "publish": {
+        "label": "Publier le produit",
+        "description": "Rendez-le visible aux clients"
+      },
+      "requireLogin": {
+        "label": "Requête d'authentification",
+        "description": "L'utilisateur doit être authentifié"
+      }
+    },
+    "organization": {
+      "title": "Organisation",
+      "category": {
+        "label": "Catégorie",
+        "placeholder": "Sélectionner une catégorie...",
+        "options": {
+          "addons": "Modules complémentaires",
+          "saas": "Plans d'abonnement SaaS"
+        }
+      },
+      "collection": {
+        "label": "Collection",
+        "placeholder": "Ajouter à la collection...",
+        "options": {
+          "core": "Abonnement Core",
+          "legacy": "Ancienne version"
+        }
+      }
+    }
+  }
+}

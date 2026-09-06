@@ -1,21 +1,19 @@
-"use client"
-
 import type { ComponentProps, ReactElement } from "react"
 
 import { MessageScroller as MessageScrollerPrimitive } from "@shadcn/react/message-scroller"
 import { ArrowDownIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
 const messageScrollerButtonRenderCache = new Map<string, ReactElement>()
 
-function getMessageScrollerButtonRender(
+const getMessageScrollerButtonRender = (
   size: NonNullable<ComponentProps<typeof Button>["size"]>,
   variant: NonNullable<ComponentProps<typeof Button>["variant"]>,
-): ReactElement {
+): ReactElement => {
   const cacheKey = `${size}:${variant}`
   const cached = messageScrollerButtonRenderCache.get(cacheKey)
 
@@ -28,55 +26,47 @@ function getMessageScrollerButtonRender(
   return element
 }
 
-function MessageScrollerProvider(props: Readonly<ComponentProps<typeof MessageScrollerPrimitive.Provider>>) {
-  return <MessageScrollerPrimitive.Provider {...props} />
-}
+const MessageScrollerProvider = (props: Readonly<ComponentProps<typeof MessageScrollerPrimitive.Provider>>) => (
+  <MessageScrollerPrimitive.Provider {...props} />
+)
 
-function MessageScroller({ className, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Root>) {
-  return (
-    <MessageScrollerPrimitive.Root
-      className={cn("group/message-scroller relative flex size-full min-h-0 flex-col overflow-hidden", className)}
-      data-slot="message-scroller"
-      {...props}
-    />
-  )
-}
+const MessageScroller = ({ className, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Root>) => (
+  <MessageScrollerPrimitive.Root
+    className={cn("group/message-scroller relative flex size-full min-h-0 flex-col overflow-hidden", className)}
+    data-slot="message-scroller"
+    {...props}
+  />
+)
 
-function MessageScrollerViewport({ className, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Viewport>) {
-  return (
-    <MessageScrollerPrimitive.Viewport
-      className={cn(
-        "size-full min-h-0 min-w-0 scroll-fade-b scrollbar-thin scrollbar-gutter-stable overflow-y-auto overscroll-contain contain-content data-autoscrolling:scrollbar-thumb-transparent data-autoscrolling:scrollbar-track-transparent",
-        className,
-      )}
-      data-slot="message-scroller-viewport"
-      {...props}
-    />
-  )
-}
+const MessageScrollerViewport = ({ className, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Viewport>) => (
+  <MessageScrollerPrimitive.Viewport
+    className={cn(
+      "size-full min-h-0 min-w-0 scroll-fade-b scrollbar-thin scrollbar-gutter-stable overflow-y-auto overscroll-contain contain-content data-autoscrolling:scrollbar-thumb-transparent data-autoscrolling:scrollbar-track-transparent",
+      className,
+    )}
+    data-slot="message-scroller-viewport"
+    {...props}
+  />
+)
 
-function MessageScrollerContent({ className, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Content>) {
-  return (
-    <MessageScrollerPrimitive.Content
-      className={cn("flex h-max min-h-full flex-col gap-6", className)}
-      data-slot="message-scroller-content"
-      {...props}
-    />
-  )
-}
+const MessageScrollerContent = ({ className, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Content>) => (
+  <MessageScrollerPrimitive.Content
+    className={cn("flex h-max min-h-full flex-col gap-6", className)}
+    data-slot="message-scroller-content"
+    {...props}
+  />
+)
 
-function MessageScrollerItem({ className, scrollAnchor = false, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Item>) {
-  return (
-    <MessageScrollerPrimitive.Item
-      className={cn("min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]", className)}
-      data-slot="message-scroller-item"
-      scrollAnchor={scrollAnchor}
-      {...props}
-    />
-  )
-}
+const MessageScrollerItem = ({ className, scrollAnchor = false, ...props }: ComponentProps<typeof MessageScrollerPrimitive.Item>) => (
+  <MessageScrollerPrimitive.Item
+    className={cn("min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]", className)}
+    data-slot="message-scroller-item"
+    scrollAnchor={scrollAnchor}
+    {...props}
+  />
+)
 
-function MessageScrollerButton({
+const MessageScrollerButton = ({
   children,
   className,
   direction = "end",
@@ -84,7 +74,7 @@ function MessageScrollerButton({
   size = "icon-sm",
   variant = "secondary",
   ...props
-}: ComponentProps<typeof MessageScrollerPrimitive.Button> & Pick<ComponentProps<typeof Button>, "size" | "variant">) {
+}: ComponentProps<typeof MessageScrollerPrimitive.Button> & Pick<ComponentProps<typeof Button>, "size" | "variant">) => {
   const t = useTranslations("components.shadcn.message-scroller")
   const resolvedSize = size ?? "icon-sm"
   const resolvedVariant = variant ?? "secondary"

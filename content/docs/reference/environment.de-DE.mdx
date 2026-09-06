@@ -1,0 +1,16 @@
+---
+title: Umgebung und Abhängigkeiten.
+description: Umgebung und Konfigurationen — SaaSy Land
+---
+
+Verwenden Sie `.env.development`, `.env.preview` und `.env.production` für die entsprechenden Vite- und Cloudflare-Umgebungen. Diese Dateien werden ignoriert; `.env.example` dokumentiert die benötigten Schlüssel. `VITE_APP_URL` ist öffentlich und wird während des Build-Prozesses ersetzt. Worker-Geheimnisse haben kein `VITE_`-Präfix und werden über `env` von `cloudflare:workers` aufgerufen.
+
+Konfiguriere `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET` sowie die Einstellungen für Resend und Polar für deine Installation. Committe niemals echte Zugangsdaten. Binding-IDs gehören in die passende Umgebung in `wrangler.jsonc`; generierte Worker-Deklarationen beschreiben ihre Typen.
+
+Die erforderlichen Geheimnisnamen werden für jede Umgebung in `wrangler.jsonc` deklariert, einschließlich der Authentifizierungsdaten, der Resend-Daten, der Polar-Daten sowie der Cloudflare-Anmeldeinformationen, die von den Drizzle-Tools verwendet werden. Die Entwicklungsumgebung verbindet sich mit den Preview-Bindings. Die Browser-Tests verwenden ihre eigene lokale Konfiguration in `src/platform/testing/wrangler.jsonc` und verwenden Dummy-Werte aus `.env.test`; sie benötigen keine externen Anmeldeinformationen.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

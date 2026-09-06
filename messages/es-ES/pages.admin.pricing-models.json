@@ -1,0 +1,58 @@
+{
+  "title": "Modelos de precios",
+  "description": "Gestionar los niveles de suscripción y las opciones de pago único.",
+  "actions": {
+    "allTypes": "Todos los tipos",
+    "createModel": "Crear Modelo"
+  },
+  "stats": {
+    "monthlyRecurring": "Mensual y recurrente",
+    "activeSubscribers": "Suscriptores activos",
+    "activeModels": "Modelos activos"
+  },
+  "tags": {
+    "subscription": "Suscripción",
+    "oneTime": "Único",
+    "mostPopular": "Más populares"
+  },
+  "models": {
+    "monthly": {
+      "title": "Pase mensual",
+      "price": "$29",
+      "interval": "/ mes",
+      "description": "Se factura mensualmente. Puede cancelar en cualquier momento."
+    },
+    "annual": {
+      "title": "Abono anual",
+      "price": "$290",
+      "interval": "/ año",
+      "description": "Ahorre 58 € en comparación con el pago mensual."
+    },
+    "lifetime": {
+      "title": "Licencia del curso",
+      "price": "$99",
+      "interval": "/ de por vida",
+      "description": "Precios estándar para artículos individuales."
+    }
+  },
+  "labels": {
+    "includedAccess": "Acceso Incluido",
+    "activeUsers": "{count} activos",
+    "inactive": "Inactivo",
+    "editModel": "Edita el modelo",
+    "moreOptions": "Más opciones",
+    "deleteModel": "Eliminar modelo",
+    "toggleStatus": "Alternar estado"
+  },
+  "features": {
+    "allCourses": "Todos los cursos actualmente publicados",
+    "discord": "Comunidad exclusiva de Discord",
+    "qa": "Sesiones mensuales en directo de preguntas y respuestas",
+    "everythingInMonthly": "Todo en el Pase Mensual",
+    "sourceFiles": "Archivos fuente descargables",
+    "portfolioReview": "Revisión anual individual del portafolio",
+    "standaloneCourse": "Curso independiente seleccionado",
+    "lifetimeUpdates": "Actualizaciones de por vida para el material",
+    "guarantee": "Garantía de devolución del dinero en 30 días"
+  }
+}

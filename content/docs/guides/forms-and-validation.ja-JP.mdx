@@ -1,0 +1,14 @@
+---
+title: フォームと検証
+description: フォームと検証 — SaaSy Land
+---
+
+利用条件 `useForm` そして、 `form.Field` から から `@tanstack/react-form`. . 機能の検証ファイルで Zod スキーマを翻訳し、サーバー境界で再利用します。 投稿状態を読んでください。 `useSelector(form.store, selector)`; 既存のプレゼンテーションのプリミティブでアクセス可能なフィールドをレンダリングします。
+
+auth のフィールドコンポーネントは小さい受け入れます `StringField` 契約から `integrations/tanstack-form/form.fields.ts`. . ラベル、フォーカス動作、パスワードトグル、エラーメッセージを保存します。 エクスポートされたミューテーションオプションを使用して送信し、安全なエラーを処理し、送信ボタンを保留します。 完全な例については、サインイン、サインアップ、パスワードリセット、および2要素フォームを参照してください。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

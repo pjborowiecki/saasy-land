@@ -1,35 +1,19 @@
+import { expect, it } from "vite-plus/test"
+
 import { resolveDocsRelativeHref } from "~/src/integrations/fumadocs/resolve-docs-href"
 
-describe("docs relative href resolution", () => {
-  it("returns absolute and non-relative hrefs unchanged", () => {
-    expect.hasAssertions()
-    const resolveHref = vi.fn<(href: string) => string>()
+it.each([
+  ["/docs/architecture", "/docs/architecture"],
+  ["https://example.com", "https://example.com"],
+  ["#shape", "#shape"],
+  ["./directory-structure", "/docs/architecture/directory-structure"],
+  ["./directory-structure#shape", "/docs/architecture/directory-structure#shape"],
+  ["./directory-structure.en-US.mdx?mode=full#shape", "/docs/architecture/directory-structure?mode=full#shape"],
+  ["../getting-started/index.pl-PL.mdx", "/docs/getting-started"],
+])("resolves %s from a directory index", (href, expected) => {
+  expect(resolveDocsRelativeHref({ href, pathname: "/docs/architecture", sourcePath: "architecture/index.en-US.mdx" })).toBe(expected)
+})
 
-    expect(resolveDocsRelativeHref(resolveHref, "/docs/architecture")).toBe("/docs/architecture")
-    expect(resolveDocsRelativeHref(resolveHref, "https://example.com")).toBe("https://example.com")
-    expect(resolveHref).not.toHaveBeenCalled()
-  })
-
-  it("retries with .mdx when bare relative href is unresolved", () => {
-    expect.hasAssertions()
-    const resolveHref = vi
-      .fn<(href: string) => string>()
-      .mockReturnValueOnce("./directory-structure")
-      .mockReturnValueOnce("/docs/architecture/directory-structure")
-
-    expect(resolveDocsRelativeHref(resolveHref, "./directory-structure")).toBe("/docs/architecture/directory-structure")
-    expect(resolveHref).toHaveBeenCalledWith("./directory-structure")
-    expect(resolveHref).toHaveBeenCalledWith("./directory-structure.mdx")
-  })
-
-  it("preserves hash fragments when retrying with .mdx", () => {
-    expect.hasAssertions()
-    const resolveHref = vi
-      .fn<(href: string) => string>()
-      .mockReturnValueOnce("./directory-structure#shape")
-      .mockReturnValueOnce("/docs/architecture/directory-structure#shape")
-
-    expect(resolveDocsRelativeHref(resolveHref, "./directory-structure#shape")).toBe("/docs/architecture/directory-structure#shape")
-    expect(resolveHref).toHaveBeenCalledWith("./directory-structure.mdx#shape")
-  })
+it("resolves sibling blog links without a documentation source path", () => {
+  expect(resolveDocsRelativeHref({ href: "./another-post", pathname: "/blog/first-post" })).toBe("/blog/another-post")
 })

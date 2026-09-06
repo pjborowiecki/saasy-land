@@ -1,11 +1,11 @@
-import { relations } from "drizzle-orm"
-import { index, pgEnum, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { relations, sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 import { LICENSE_STATUS, LICENSE_TIER } from "~/src/modules/license/license.constants"
 import { user } from "~/src/modules/user/user.schema"
 
-export const licenseTierEnum = pgEnum("license_tier", [LICENSE_TIER.CORE, LICENSE_TIER.COMPLETE])
-export const licenseStatusEnum = pgEnum("license_status", [LICENSE_STATUS.ACTIVE, LICENSE_STATUS.REVOKED])
+export const licenseTierEnum = { enumValues: [LICENSE_TIER.CORE, LICENSE_TIER.COMPLETE, LICENSE_TIER.AGENCY] } as const
+export const licenseStatusEnum = { enumValues: [LICENSE_STATUS.ACTIVE, LICENSE_STATUS.REVOKED] } as const
 
 export type LicenseTier = (typeof licenseTierEnum.enumValues)[number]
 export type LicenseStatus = (typeof licenseStatusEnum.enumValues)[number]
@@ -13,26 +13,28 @@ export type LicenseStatus = (typeof licenseStatusEnum.enumValues)[number]
 export const POLAR_ID_MAX_LENGTH = 64
 export const LICENSE_KEY_MAX_LENGTH = 128
 
-export const license = pgTable(
+export const license = sqliteTable(
   "license",
   {
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    id: uuid("id").primaryKey(),
-    key: varchar("key", { length: LICENSE_KEY_MAX_LENGTH }).unique(),
-    polarCustomerId: varchar("polar_customer_id", { length: POLAR_ID_MAX_LENGTH }).notNull(),
-    polarLicenseKeyId: varchar("polar_license_key_id", { length: POLAR_ID_MAX_LENGTH }).unique(),
-    polarOrderId: varchar("polar_order_id", { length: POLAR_ID_MAX_LENGTH }),
-    status: licenseStatusEnum().notNull().default(LICENSE_STATUS.ACTIVE),
-    tier: licenseTierEnum().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
+    id: text("id").primaryKey(),
+    key: text("key", { length: LICENSE_KEY_MAX_LENGTH }).unique(),
+    polarCustomerId: text("polar_customer_id", { length: POLAR_ID_MAX_LENGTH }).notNull(),
+    polarLicenseKeyId: text("polar_license_key_id", { length: POLAR_ID_MAX_LENGTH }).unique(),
+    polarOrderId: text("polar_order_id", { length: POLAR_ID_MAX_LENGTH }),
+    status: text("status", { enum: licenseStatusEnum.enumValues }).notNull().default(LICENSE_STATUS.ACTIVE),
+    tier: text("tier", { enum: licenseTierEnum.enumValues }).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */
           new Date(),
       )
       .notNull(),
-    userId: uuid("user_id")
+    userId: text("user_id")
       .notNull()
       .unique()
       .references(() => user.id, { onDelete: "cascade" }),

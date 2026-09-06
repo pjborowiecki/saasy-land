@@ -1,0 +1,14 @@
+---
+title: Abhängigkeitsregeln.
+description: Abhängigkeitsregeln – SaaSy Land
+---
+
+Routen für die Präsentation und Anwendungsfälle. Die Präsentation importiert native Abfrage- und Mutationsoptionen, Schemata sowie gemeinsame Hilfsfunktionen. Die Anwendungsfälle importieren die Datenbank und die jeweiligen Anbieteradapter über serverseitige Schnittstellen. Die Modulkonstanten und Validierungsmechanismen müssen sowohl von den Formularen als auch von den serverseitigen Funktionen weiterhin nutzbar sein.
+
+Importieren Sie keine Worker-Bindings oder konfigurationsdateien, die geheime Informationen enthalten, in eine Browser-Komponente. TanStack Start trennt die Handler für `createServerFn` aus dem Browser-Bundle aus. Gemeinsame Adapter, die niemals im Browser ausgeführt werden dürfen, importieren `@tanstack/react-start/server-only`.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

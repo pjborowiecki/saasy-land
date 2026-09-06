@@ -1,0 +1,76 @@
+{
+  "title": "Éditeur de page d'atterrissage",
+  "description": "Composez la page section par section, puis publiez-la une fois qu'elle vous semble correcte.",
+  "actions": {
+    "preview": "Prévisualisation",
+    "saveChanges": "Enregistrer les modifications",
+    "publish": "Publier"
+  },
+  "sidebar": {
+    "addSection": "Ajouter une section",
+    "sections": {
+      "hero": "Section d’accueil",
+      "features": "Grille des fonctionnalités",
+      "video": "Présentation des vidéos",
+      "testimonials": "Témoignages",
+      "pricing": "Tableau des tarifs",
+      "gallery": "Galerie d'images",
+      "faq": "FAQ Accordéon",
+      "contact": "Formulaire de contact"
+    }
+  },
+  "canvas": {
+    "label": "Canevas",
+    "viewport": {
+      "desktop": "Largeur de l'écran",
+      "tablet": "Largeur de la tablette",
+      "mobile": "Largeur mobile"
+    },
+    "sectionActions": {
+      "edit": "Modifier la section",
+      "duplicate": "Dupliquer la section",
+      "delete": "Supprimer la section"
+    },
+    "badge": "Conçu pour les équipes de l'entrepôt",
+    "headingLead": "Suivez chaque palette, de...",
+    "headingAccent": "ancrer dans la barre",
+    "description": "La lecture des codes-barres, les inventaires et les alertes de réapprovisionnement, le tout regroupé au même endroit. Fonctionne en mode hors ligne sur le terrain et se synchronise lorsque l'appareil est de nouveau connecté au réseau Wi-Fi.",
+    "getStarted": "Commencez votre essai gratuit",
+    "bookDemo": "Réserver une démonstration",
+    "addSectionHere": "Ajouter une section ici",
+    "featuresHeading": "Ce qui est inclus",
+    "featuresSubheading": "Trois outils que votre équipe d'entretien utilise à chaque service.",
+    "feature1": "Numérisation des codes-barres",
+    "feature2": "Inventaires tournants",
+    "feature3": "Alertes de réapprovisionnement"
+  },
+  "properties": {
+    "title": "Propriétés de la section",
+    "description": "Personnaliser l'élément sélectionné",
+    "layout": "Alignement",
+    "alignLeft": "Aligner à gauche",
+    "alignCenter": "Centrer",
+    "alignRight": "Aligner à droite",
+    "spacing": "Espaces",
+    "paddingTop": "Marge intérieure supérieure",
+    "paddingBot": "Marge intérieure inférieure",
+    "unit": "px",
+    "background": "Contexte et Style",
+    "backgroundOptions": {
+      "page": "Surface de la page",
+      "panel": "Surface du panneau",
+      "raised": "Surface surélevée",
+      "image": "Télécharger une image"
+    },
+    "content": "Contenu",
+    "generateAI": "Générer avec l'IA",
+    "badgeText": "Texte du badge",
+    "heading": "Titre",
+    "subheading": "Sous-titre",
+    "buttonActions": "Actions",
+    "primaryButton": "Bouton principal",
+    "secondaryButton": "Bouton secondaire",
+    "buttonEnabled": "Bouton affiché",
+    "label": "Libellé"
+  }
+}

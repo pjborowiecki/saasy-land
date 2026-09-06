@@ -1,0 +1,62 @@
+{
+  "title": "Aperçu",
+  "description": "Bienvenue à nouveau, voici ce qui se passe aujourd'hui.",
+  "actions": {
+    "last30Days": "Les 30 derniers jours",
+    "addProduct": "Ajouter un produit"
+  },
+  "stats": {
+    "activeUsers": {
+      "title": "Utilisateurs enregistrés"
+    },
+    "totalProducts": {
+      "title": "Produits du catalogue"
+    },
+    "pendingVerification": {
+      "title": "Vérification de l'adresse e-mail en cours"
+    }
+  },
+  "chart": {
+    "title": "Aperçu des revenus",
+    "description": "Revenu récurrent mensuel sur les 12 derniers mois",
+    "placeholder": "Série illustrative. Les revenus réels apparaissent ici une fois la facturation connectée.",
+    "filters": {
+      "12m": "12M",
+      "30d": "30D",
+      "7d": "7D"
+    }
+  },
+  "users": {
+    "title": "Gestion des utilisateurs",
+    "description": "Gérez ici les membres de votre équipe et leurs permissions d'accès.",
+    "search": "Filtrer les utilisateurs...",
+    "filters": {
+      "role": "Rôle",
+      "status": "Statut"
+    },
+    "export": "Exporter",
+    "table": {
+      "columns": {
+        "user": "Utilisateur",
+        "role": "Rôle",
+        "status": "Statut",
+        "lastActive": "Dernière activité",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Actif",
+        "banned": "Interdit",
+        "pending": "En cours"
+      },
+      "rowActions": {
+        "edit": "Modifier l'utilisateur",
+        "delete": "Supprimer l'utilisateur"
+      },
+      "pagination": {
+        "showing": "Utilisateurs {from} à {to} sur {total}",
+        "previous": "Précédent",
+        "viewAll": "Afficher tous les utilisateurs"
+      }
+    }
+  }
+}

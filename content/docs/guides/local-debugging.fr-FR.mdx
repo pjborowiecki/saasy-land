@@ -1,0 +1,23 @@
+---
+title: Développement local
+description: Développement local — SaaSy Land
+---
+
+Installer Bun 1.4 et Noeud 24 ou plus récent, puis installer les dépendances. Copier `.env.example` à `.env.development` et configurer un long aléatoire `AUTH_SECRET`, le public `VITE_APP_URL`, et toutes les intégrations externes que vous exercerez.
+
+Le développement local utilise des liaisons CloudflareS locales D1 et KV. Appliquer les migrations checked-in SQLite avant de commencer. La commande de développement génère du contenu Fumadocs et exécute Vite+ avec le plugin Cloudflare. L'État local vit sous `.wrangler/`.
+
+OAuth, les courriels et la facturation exigent des identifiants du fournisseur; utilisez les identifiants de test et Polar sandbox lors du développement. Les tests utilisent des valeurs fictives et des maquettes engagées au lieu d'envoyer des messages réels ou de charger un client.
+
+```sh
+bun install
+cp .env.example .env.development
+bun run db:migrate:development
+bun run dev
+```
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

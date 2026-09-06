@@ -1,0 +1,16 @@
+---
+title: Kunden-App
+description: Geschützter Bereich /App-Bereich für eingeloggte Kunden.
+---
+
+## RoutenGruppe
+
+`src/routes/app*.tsx` und `src/presentation/components/custom/app/`
+
+## Status
+
+Nach der Anmeldung. Erweiterung mit Abrechnungsportal, Kursbibliothek, direkten Verlinkungen zum Konto und Inhalten, die eine Berechtigung erfordern.
+
+## Wachen.
+
+`src/integrations/better-auth/auth.guards.ts` + Session; bevorzugen Sie Anwendungsfälle für jegliche Änderung, die von dieser Ebene aus erfolgt.

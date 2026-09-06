@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Conditions d’utilisation",
+    "description": "Conditions d'utilisation de saasyland.com, d'achat de l'outil en ligne SaaSy Land CLI, et de gestion de votre compte et de votre clé de licence."
+  },
+  "title": "Conditions d’utilisation",
+  "lastUpdated": "Dernière mise à jour : 6 septembre 2026",
+  "description": "Conditions d'utilisation de saasyland.com, d'achat de l'outil en ligne SaaSy Land CLI, et de gestion de votre compte et de votre clé de licence.",
+  "sections": {
+    "operator": {
+      "title": "Le service et son exploitant",
+      "body": "SaaSy Land est exploité par Piotr Borowiecki. Vous pouvez nous contacter à hello@saasyland.com. Ces conditions s’appliquent au site, aux comptes et aux achats. La description du produit et les informations du parcours d’achat précisent le contenu de l’offre choisie."
+    },
+    "accounts": {
+      "title": "Comptes et sécurité",
+      "body": "Fournissez des informations de compte précises, protégez vos identifiants et informez-nous si vous suspectez un accès non autorisé. Ne partagez pas un compte afin de contourner un accès payant ou d'utiliser une licence d'une autre personne. Vous restez responsable de toute activité que vous autorisez via votre compte. Votre compte vous donne accès à la clé de licence qui vous a été délivrée après l'achat, ainsi qu'à ses activations machine. Gardez également cette clé confidentielle."
+    },
+    "purchases": {
+      "title": "Achats et accès",
+      "body": "Core, Complete et Agency sont des offres à paiement unique dont le contenu est décrit sur la page des tarifs et lors de l’achat. Complete ajoute les supports de formation annoncés ; Agency ajoute l’offre pour les projets clients et l’assistance annoncées. Les mises à jour à vie du socle désignent les mises à jour du code principal tant que SaaSy Land continue à les fournir. Cela ne garantit pas que chaque service, intégration ou futur produit distinct restera disponible indéfiniment.\n\nL’abonnement à la newsletter est gratuit et n’entraîne aucune obligation d’achat. Les services que vous connectez à votre propre déploiement peuvent facturer leurs propres frais."
+    },
+    "payments": {
+      "title": "Paiements et taxes",
+      "body": "Polar gère le parcours d’achat en tant que Merchant of Record. Le prix final, la devise et le régime fiscal applicable sont affichés avant le paiement. Votre confirmation de paiement identifie la transaction. Les conditions du prestataire de paiement concerné s’appliquent également au traitement du paiement."
+    },
+    "licence": {
+      "title": "Site web public et interface en ligne propriétaire",
+      "body": "Le site public et les versions MIT précédentes restent régis par LICENSE.md. La CLI et les modèles privés fournis séparément sont propriétaires et relèvent de la Licence commerciale publiée sur la page Licence. Un achat et une clé valide sont nécessaires pour installer et utiliser la CLI. Vous pouvez modifier et exploiter commercialement les applications générées dans le cadre de votre forfait ; vous ne pouvez pas modifier ou redistribuer la CLI propriétaire, ni revendre les modèles privés comme kit de démarrage, sous réserve des exceptions légales impératives. L’achat ne transfère pas la propriété de la CLI et ne donne pas accès au dépôt privé."
+    },
+    "conduct": {
+      "title": "Utilisation acceptable",
+      "body": "N’attaquez pas le service, n’envoyez pas de spam, ne tentez pas d’accès non autorisé, n’utilisez pas abusivement les données d’autrui et ne contournez pas les contrôles d’accès. Ne redistribuez pas de supports payants si leur licence ne le permet pas. Nous pouvons restreindre l’accès lorsque cela est raisonnablement nécessaire pour enquêter sur des abus ou protéger le service, sous réserve du droit applicable et de vos droits légaux."
+    },
+    "refunds": {
+      "title": "Remboursements et droits des consommateurs",
+      "body": "La page « Remboursements » explique comment demander un remboursement avant la livraison des supports payants et comment s’appliquent les droits impératifs des consommateurs. Ces conditions n’excluent aucun droit dont l’exclusion serait illégale, notamment les recours pour des contenus numériques non fournis ou non conformes au contrat."
+    },
+    "responsibility": {
+      "title": "Vos déploiements et notre responsabilité",
+      "body": "Examinez et testez le code avant de le déployer. Vous choisissez l’hébergement, les identifiants, la configuration, les prestataires et la manière dont votre application traite les données. Nous ne garantissons ni résultat commercial particulier, ni continuité des services tiers, ni adéquation à tous les usages. Toute limitation de responsabilité s’applique uniquement dans les limites autorisées par la loi et n’exclut pas une responsabilité qui ne peut légalement être limitée. Les dispositions de garantie de la licence MIT s’appliquent au code qu’elle couvre."
+    },
+    "law": {
+      "title": "Droit applicable, réclamations et modifications",
+      "body": "Ces conditions sont régies par le droit polonais, sans vous priver des protections impératives des consommateurs de votre pays de résidence. Adressez vos réclamations à hello@saasyland.com avec la référence de commande et une description du problème afin que nous puissions l’examiner.\n\nNous pouvons mettre à jour ces conditions pour les utilisations et achats futurs. Les modifications ne suppriment pas rétroactivement les droits liés à un achat. Les changements importants affectant un service en cours seront communiqués conformément à la loi."
+    }
+  }
+}

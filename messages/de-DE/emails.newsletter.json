@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "Ein Klick, und du bist dabei",
+    "preview": "Bestätige deine Adresse und erhalte das Entwicklungsjournal.",
+    "heading": "Ein Klick, und du bist dabei",
+    "body": "Jemand hat diese Adresse auf saasyland.com eingetragen. Bestätige sie, um das Entwicklungsjournal zu erhalten: neue Funktionen, die Entscheidungen dahinter und Dinge, die nicht funktioniert haben. Falls du dich nicht angemeldet hast, lösche diese E-Mail einfach. Wir schreiben dir dann nicht noch einmal.",
+    "button": "Ich bin dabei",
+    "footer": "Der Link kann einmal verwendet werden und läuft nach 24 Stunden ab. Falls etwas nicht stimmt, schreib uns:"
+  },
+  "notification": {
+    "subject": "Neue Newsletter-Anmeldung",
+    "preview": "Eine Newsletter-Anmeldung wurde bestätigt.",
+    "heading": "Neue Newsletter-Anmeldung",
+    "body": "{email} hat eine Anmeldung über die Landingpage in der Sprache {locale} bestätigt."
+  }
+}

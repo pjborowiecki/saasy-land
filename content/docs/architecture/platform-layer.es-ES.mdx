@@ -1,0 +1,14 @@
+---
+title: Plataforma y pruebas
+description: Plataforma y pruebas – SaaSy Land
+---
+
+Cloudflare ofrece el entorno de ejecución a través de las vinculaciones explícitas de D1, KV y activos. Las declaraciones generadas se almacenan bajo… `src/types`La configuración específica del proveedor debe ir en `src/integrations`El directorio de la plataforma restante contiene la infraestructura de pruebas: mocks de vinculación, fixtures de solicitud, el puente RPC y los ayudantes de renderizado.
+
+Mantener la configuración de despliegue específica del entorno `wrangler.jsonc` y el archivo de entorno correspondiente que se ignora. Mantener las credenciales de prueba. `.env.test` y nunca los reemplaces con las credenciales de producción.
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

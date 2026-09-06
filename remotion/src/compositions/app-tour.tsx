@@ -73,18 +73,16 @@ function pointAt(index: number): Point {
  */
 function seriesPath(close: boolean): string {
   const points = SERIES.map((_, index) => pointAt(index))
-  const segments: string[] = [`M${points[0]!.x.toFixed(2)} ${points[0]!.y.toFixed(2)}`]
+  const segments: string[] = [`M${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)}`]
 
   for (let index = 0; index < points.length - 1; index++) {
-    const previous = points[Math.max(0, index - 1)]!
-    const current = points[index]!
-    const next = points[index + 1]!
-    const after = points[Math.min(points.length - 1, index + 2)]!
+    const previous = points[Math.max(0, index - 1)]
+    const current = points[index]
+    const next = points[index + 1]
+    const after = points[Math.min(points.length - 1, index + 2)]
     const c1 = { x: current.x + (next.x - previous.x) / 6, y: current.y + (next.y - previous.y) / 6 }
     const c2 = { x: next.x - (after.x - current.x) / 6, y: next.y - (after.y - current.y) / 6 }
-    segments.push(
-      `C${c1.x.toFixed(2)} ${c1.y.toFixed(2)} ${c2.x.toFixed(2)} ${c2.y.toFixed(2)} ${next.x.toFixed(2)} ${next.y.toFixed(2)}`,
-    )
+    segments.push(`C${c1.x.toFixed(2)} ${c1.y.toFixed(2)} ${c2.x.toFixed(2)} ${c2.y.toFixed(2)} ${next.x.toFixed(2)} ${next.y.toFixed(2)}`)
   }
 
   const path = segments.join(" ")
@@ -156,7 +154,15 @@ function DashboardScreen({ highlighted }: Readonly<{ highlighted: number }>) {
             </linearGradient>
           </defs>
           {[0, 1, 2, 3].map((line) => (
-            <line key={line} stroke={THEME.hairline} strokeWidth={1} x1={0} x2={CHART_W} y1={(line / 3) * CHART_H} y2={(line / 3) * CHART_H} />
+            <line
+              key={line}
+              stroke={THEME.hairline}
+              strokeWidth={1}
+              x1={0}
+              x2={CHART_W}
+              y1={(line / 3) * CHART_H}
+              y2={(line / 3) * CHART_H}
+            />
           ))}
           <path d={seriesPath(true)} fill="url(#tourFill)" />
           <path d={seriesPath(false)} fill="none" stroke={THEME.accent} strokeLinecap="round" strokeWidth={3} />
@@ -325,7 +331,7 @@ export function AppTour() {
     { easing: Easing.bezier(0.4, 0, 0.2, 1), extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   )
   // The rail and the breadcrumb change while the working area is empty, so the chrome and the
-  // content never disagree about which page is open.
+  // Content never disagree about which page is open.
   const showAnalytics = frame >= TOUR_TO_ANALYTICS + GAP && frame < TOUR_TO_DASHBOARD + GAP
 
   const highlighted = Math.floor((frame - HIGHLIGHT_FROM) / HIGHLIGHT_STEP)

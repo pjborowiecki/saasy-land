@@ -1,8 +1,8 @@
 import type { ComponentProps, HTMLAttributes, ReactNode } from "react"
 
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps, cva } from "class-variance-authority"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Separator } from "~/src/presentation/components/shadcn/separator"
 
@@ -23,24 +23,22 @@ const buttonGroupVariants = cva(
   },
 )
 
-function ButtonGroup({ className, orientation, ...props }: ComponentProps<"fieldset"> & VariantProps<typeof buttonGroupVariants>) {
-  return (
-    <fieldset
-      data-orientation={orientation}
-      data-slot="button-group"
-      className={cn(buttonGroupVariants({ orientation }), className)}
-      {...props}
-    />
-  )
-}
+const ButtonGroup = ({ className, orientation, ...props }: ComponentProps<"fieldset"> & VariantProps<typeof buttonGroupVariants>) => (
+  <fieldset
+    data-orientation={orientation}
+    data-slot="button-group"
+    className={cn(buttonGroupVariants({ orientation }), className)}
+    {...props}
+  />
+)
 
-function ButtonGroupText({
+const ButtonGroupText = ({
   className,
   render,
   ...props
 }: ComponentProps<"div"> & {
   render?: (props: HTMLAttributes<HTMLElement>) => ReactNode
-}) {
+}) => {
   if (render) {
     const renderProps = {
       className: cn(
@@ -66,18 +64,16 @@ function ButtonGroupText({
   )
 }
 
-function ButtonGroupSeparator({ className, orientation = "vertical", ...props }: ComponentProps<typeof Separator>) {
-  return (
-    <Separator
-      data-slot="button-group-separator"
-      orientation={orientation}
-      className={cn(
-        "relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
+const ButtonGroupSeparator = ({ className, orientation = "vertical", ...props }: ComponentProps<typeof Separator>) => (
+  <Separator
+    data-slot="button-group-separator"
+    orientation={orientation}
+    className={cn(
+      "relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto",
+      className,
+    )}
+    {...props}
+  />
+)
 
 export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants }

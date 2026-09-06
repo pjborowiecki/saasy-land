@@ -1,16 +1,15 @@
 import type { JSX } from "react"
 
-import { createTranslator } from "next-intl"
-import { Body, Button, Container, Head, Heading, Html, pixelBasedPreset, Preview, Section, Tailwind, Text } from "react-email"
+import { Body, Button, Container, Head, Heading, Html, Preview, Section, Tailwind, Text, pixelBasedPreset } from "react-email"
+import { createTranslator } from "use-intl"
 
-import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { I18N, type Locale } from "~/src/integrations/use-intl/i18n.config"
+import { getEmailMessages } from "~/src/integrations/use-intl/i18n.emails"
 
 const TAILWIND_CONFIG = { presets: [pixelBasedPreset] }
 
-export function resetPasswordSubject(locale: Locale): string {
-  return createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.resetPassword" })("subject")
-}
+export const resetPasswordSubject = (locale: Locale): string =>
+  createTranslator({ locale, messages: getEmailMessages(locale), namespace: "emails.resetPassword" })("subject")
 
 interface ResetPasswordEmailProps {
   readonly locale: Locale
@@ -18,8 +17,8 @@ interface ResetPasswordEmailProps {
   readonly resetPasswordUrl: string
 }
 
-export function ResetPasswordEmail({ locale, name, resetPasswordUrl }: Readonly<ResetPasswordEmailProps>): JSX.Element {
-  const t = createTranslator({ locale, messages: loadLocaleMessagesFromDir(locale), namespace: "emails.resetPassword" })
+export const ResetPasswordEmail = ({ locale, name, resetPasswordUrl }: Readonly<ResetPasswordEmailProps>): JSX.Element => {
+  const t = createTranslator({ locale, messages: getEmailMessages(locale), namespace: "emails.resetPassword" })
 
   return (
     <Html lang={locale}>
@@ -49,5 +48,5 @@ export function ResetPasswordEmail({ locale, name, resetPasswordUrl }: Readonly<
 ResetPasswordEmail.PreviewProps = {
   locale: I18N.DEFAULT_LOCALE,
   name: "John Doe",
-  resetPasswordUrl: "https://saasyland.com/en/auth/reset-password?token=12345",
+  resetPasswordUrl: "https://saasyland.com/auth/reset-password?token=12345",
 } satisfies ResetPasswordEmailProps

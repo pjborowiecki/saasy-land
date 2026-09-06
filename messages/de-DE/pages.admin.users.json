@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "Benutzerverwaltung | SaaSy Land",
+    "description": "Verwalten Sie Ihre Teammitglieder, Berechtigungen und Kundenkonten."
+  },
+  "title": "Benutzerverwaltung",
+  "description": "Verwalten Sie Ihre Teammitglieder, Berechtigungen und Kundenkonten.",
+  "actions": {
+    "addUser": "Benutzer hinzufügen",
+    "feedback": {
+      "banSuccess": "Benutzer gesperrt.",
+      "deleteSuccess": "Benutzer gelöscht.",
+      "error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "resetPasswordSuccess": "Passwort erfolgreich zurückgesetzt.",
+      "unbanSuccess": "Benutzer wieder freigeschaltet."
+    },
+    "deleteDialog": {
+      "cancel": "Abbrechen",
+      "confirm": "Benutzer löschen",
+      "description": "{name} und die zugehörigen Kontodaten dauerhaft löschen. Dies kann nicht rückgängig gemacht werden.",
+      "title": "Benutzer löschen?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Abbrechen",
+      "confirm": "Passwort zurücksetzen",
+      "description": "Ein neues Passwort für {name} festlegen.",
+      "password": "Neues Passwort",
+      "title": "Passwort zurücksetzen"
+    },
+    "row": {
+      "ban": "Sperren Sie den Benutzer",
+      "delete": "Benutzer löschen",
+      "edit": "Bearbeiten Sie den Benutzer",
+      "menu": "Aktionen für diese Zeile",
+      "resetPassword": "Passwort zurücksetzen",
+      "unban": "Entsperre Benutzer",
+      "viewProfile": "Profil anzeigen"
+    }
+  },
+  "search": {
+    "placeholder": "Suchen Sie Benutzer nach Name, E-Mail-Adresse oder ID..."
+  },
+  "filters": {
+    "groups": {
+      "identity": "Identität",
+      "access": "Zugang",
+      "activity": "Aktivität"
+    },
+    "role": {
+      "all": "Rolle: Alle",
+      "value": "Rolle: {role}",
+      "options": {
+        "admin": "Verwaltung",
+        "customer": "Kunde"
+      }
+    },
+    "status": {
+      "all": "Status: Alle",
+      "value": "Status: {status}",
+      "options": {
+        "active": "Aktiv",
+        "pending": "Ausstehend",
+        "banned": "Verboten"
+      }
+    }
+  },
+  "tabs": {
+    "allUsers": "Alle Benutzer",
+    "invitations": "Einladungen",
+    "roles": "Rollen und Berechtigungen",
+    "security": "Sicherheit"
+  },
+  "table": {
+    "booleans": {
+      "no": "Nein",
+      "yes": "Ja"
+    },
+    "empty": "Keine Benutzer gefunden.",
+    "emptyValue": "n/a",
+    "headers": {
+      "createdAt": "Erstellt am",
+      "emailVerified": "E-Mail bestätigt",
+      "role": "Rolle",
+      "status": "Status",
+      "timezone": "Bevorzugte Zeitzone",
+      "twoFactorEnabled": "Zwei-Faktor-Authentifizierung aktiviert",
+      "updatedAt": "Aktualisiert am",
+      "user": "Nutzer"
+    },
+    "selectAll": "Alle Zeilen auswählen",
+    "selectRow": "Auswahlzeile",
+    "actionsColumn": "Aktionen für diese Zeile"
+  },
+  "pagination": {
+    "info": "Ergebnisse {start} bis {end} von {total}",
+    "goToPage": "Zu Seite {page}",
+    "nextPage": "Nächste Seite",
+    "previousPage": "Vorherige Seite"
+  },
+  "invitations": {
+    "title": "Einladungen",
+    "description": "Verwalten Sie ausstehende Team-Einladungen und Zugangslinks.",
+    "actions": {
+      "copyLink": "Link kopieren",
+      "sendInvite": "Senden Sie die Einladung"
+    },
+    "search": {
+      "placeholder": "Suchanfragen per E-Mail..."
+    },
+    "filters": {
+      "role": "Rolle: Alle",
+      "status": "Status: Ausstehend"
+    },
+    "table": {
+      "headers": {
+        "email": "E-Mail",
+        "role": "Rolle",
+        "status": "Status",
+        "sentDate": "Versanddatum"
+      }
+    },
+    "pagination": {
+      "info": "Ergebnisse {start} bis {end} von {total}"
+    }
+  },
+  "roles": {
+    "title": "Rollen und Berechtigungen",
+    "description": "Definieren Sie Zugriffsberechtigungen und verwalten Sie Berechtigungen für Ihr gesamtes Unternehmen.",
+    "actions": {
+      "createRole": "Erstellen Sie ein Profil"
+    },
+    "search": {
+      "placeholder": "Suchen Sie nach Stellenangeboten nach Name oder Beschreibung..."
+    },
+    "filters": {
+      "type": "Typ: Alle"
+    },
+    "table": {
+      "headers": {
+        "name": "Rollenname",
+        "description": "Beschreibung",
+        "type": "Typ",
+        "users": "Benutzer"
+      },
+      "usersCount": "{count, plural, one {# Nutzer} other {# Nutzer}}"
+    },
+    "pagination": {
+      "info": "Rollen {start} bis {end} von {total}"
+    }
+  },
+  "security": {
+    "title": "Sicherheit",
+    "empty": {
+      "title": "Keine Sicherheitsereignisse wurden erfasst",
+      "description": "Anmeldeversuche, Sitzungsbeendigungen und Rollenänderungen werden hier angezeigt, sobald Ihr Arbeitsbereich mit der Protokollierung beginnt. Aktivieren Sie das Audit-Protokoll, um mit der Erfassung von Ereignissen zu beginnen.",
+      "action": "Aktivieren Sie das Protokoll"
+    }
+  },
+  "demo": {
+    "roles": {
+      "r1": {
+        "name": "Administrator",
+        "description": "Vollzugriff auf alle Systemfunktionen, Abrechnungen und Einstellungen.",
+        "type": "System"
+      },
+      "r2": {
+        "name": "Editor",
+        "description": "Es können Produkte und Inhalte bearbeitet werden, aber die Benutzerverwaltung ist nicht möglich.",
+        "type": "System"
+      },
+      "r3": {
+        "name": "Support Agent",
+        "description": "Zugriff auf Benutzer-Sitzungen und grundlegende Tools zur Fehlerbehebung.",
+        "type": "Individuell"
+      },
+      "r4": {
+        "name": "Leser",
+        "description": "Nur lesender Zugriff auf Analysen und Dashboards.",
+        "type": "System"
+      },
+      "r5": {
+        "name": "API-Entwickler",
+        "description": "Zugriff auf die Einstellungen für Entwickler, API-Schlüssel und Webhooks.",
+        "type": "Individuell"
+      }
+    },
+    "invitations": {
+      "i1": {
+        "role": "Administrator",
+        "status": "Ausstehend",
+        "sentDate": "Vor 2 Stunden"
+      },
+      "i2": {
+        "role": "Leser",
+        "status": "Ausstehend",
+        "sentDate": "Gestern"
+      },
+      "i3": {
+        "role": "Editor",
+        "status": "Abgelaufen",
+        "sentDate": "10. Oktober 2023"
+      },
+      "i4": {
+        "role": "Abonnent",
+        "status": "Ausstehend",
+        "sentDate": "20. Oktober 2023"
+      },
+      "i5": {
+        "role": "Editor",
+        "status": "Abgelaufen",
+        "sentDate": "28. September 2023"
+      }
+    }
+  }
+}

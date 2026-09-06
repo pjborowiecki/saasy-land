@@ -1,0 +1,16 @@
+---
+title: Fehlerbehebung.
+description: Fehlerbehebung – SaaSy Land
+---
+
+Wenn lokale Abfragen fehlende Tabellen melden, führen Sie `bun run db:migrate:local` aus. Browser-Tests verwenden `db:migrate:test` und eine separate D1-Verbindung. Bei fehlgeschlagener Authentifizierung überprüfen Sie die Umgebung-URL, `AUTH_SECRET`, die Anmeldeinformationen des Anbieters und die Callback-URLs.
+
+Fehlende Übersetzungseinträge weisen in der Regel auf einen fehlenden Namespace in der Route oder auf einen fehlenden Schlüssel in einer bestimmten Lokalisierung hin. Führen Sie `check:i18n` aus. Bei Dokumentations-404-Fehlern überprüfen Sie den lokalisierten MDX-Dateinamen, die Seiteneinstellungen und relative Quellverlinkungen. Bei Problemen beim Vorab-Rendering prüfen Sie die erste fehlgeschlagene URL in der Build-Ausgabe.
+
+Eine abgebrochene Bereitstellung aufgrund von Platzhalter-Bindungen benötigt echte D1- und KV-IDs in der Zielumgebung. Build- und Testoperationen erstellen keine Remote-Ressourcen automatisch.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

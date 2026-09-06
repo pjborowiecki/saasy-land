@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Paiements",
+    "description": "Gérez les revenus, les transactions et les paramètres de paiement."
+  },
+  "title": "Paiements",
+  "description": "Gérez les revenus, les transactions et les paramètres de paiement.",
+  "actions": {
+    "export": "Exporter",
+    "settings": "Paramètres de paiement"
+  },
+  "tabs": {
+    "transactions": "Transactions",
+    "subscriptions": "Abonnements",
+    "payouts": "Versements",
+    "refunds": "Remboursements"
+  },
+  "stats": {
+    "refunded": {
+      "title": "Remboursé (30 jours)",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "Taux de remboursement",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "Approbations en cours",
+      "subtitle": "S'élevant à 407,00 $",
+      "value": "3"
+    },
+    "vsLastMonth": "vs le mois dernier"
+  },
+  "table": {
+    "title": "Remboursements récents",
+    "columns": {
+      "customer": "Client",
+      "amount": "Montant",
+      "item": "Produit acheté",
+      "reason": "Raison",
+      "date": "Date",
+      "status": "Statut",
+      "rowActions": "Actions de la ligne"
+    },
+    "pagination": {
+      "showing": "Affichage de 1 à 4 sur 24 résultats",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "Filtrer les remboursements"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro annuel",
+      "reason": "Renouvellement involontaire",
+      "status": "Traité",
+      "type": "Remboursement intégral"
+    },
+    "p2": {
+      "item": "Pro mensuel",
+      "reason": "Indemnisation en cas d'interruption de service",
+      "status": "Traité",
+      "type": "Remboursement partiel"
+    },
+    "p3": {
+      "item": "Starter mensuel",
+      "reason": "Ne correspond pas aux besoins",
+      "status": "En cours",
+      "type": "Remboursement intégral"
+    },
+    "p4": {
+      "item": "Pro annuel",
+      "reason": "Fraude",
+      "status": "Échec",
+      "type": "Remboursement intégral"
+    }
+  }
+}

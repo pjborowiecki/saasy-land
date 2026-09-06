@@ -1,4 +1,6 @@
-import { DEFAULT_TIMEZONE_CODE, TIMEZONE_CODES, TIMEZONES } from "~/src/modules/_core/constants/timezone"
+import { describe, expect, it } from "vite-plus/test"
+
+import { DEFAULT_TIMEZONE_CODE, TIMEZONES, TIMEZONE_CODES } from "~/src/modules/_core/constants/timezone"
 
 describe("timezone catalog", () => {
   it("derives one code per catalog entry, with no duplicates", () => {

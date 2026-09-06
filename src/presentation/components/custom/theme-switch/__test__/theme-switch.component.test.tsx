@@ -1,17 +1,17 @@
-/** @vitest-environment jsdom */
-
 import { render, screen, waitFor } from "@testing-library/react"
+/** @vitest-environment jsdom */
 import userEvent from "@testing-library/user-event"
-import { NextIntlClientProvider } from "next-intl"
+import { IntlProvider } from "use-intl/react"
+import { describe, expect, it } from "vite-plus/test"
 
 import { selectTriggerNamed } from "~/src/platform/testing/lib/select-trigger-name"
 import { setThemeMock, themeState } from "~/src/platform/testing/mocks/wrksz-themes"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { ThemeSwitch, ThemeSwitchClient } from "~/src/presentation/components/custom/theme-switch"
 
-const themeMessages = loadLocaleMessagesFromDir("en-US").components.custom["theme-switch"]
+const themeMessages = getTestMessages("en-US").components.custom["theme-switch"]
 const emptyMessages = {}
 
 const themeSwitchLabels = {
@@ -28,7 +28,7 @@ describe("theme switch client component", () => {
     themeState.value = "system"
 
     render(
-      <NextIntlClientProvider locale="en-US" messages={emptyMessages}>
+      <IntlProvider locale="en-US" messages={emptyMessages}>
         <ThemeSwitchClient
           darkLabel={themeMessages.dark}
           label={themeMessages.label}
@@ -36,7 +36,7 @@ describe("theme switch client component", () => {
           placeholder={themeMessages.placeholder}
           systemLabel={themeMessages.system}
         />
-      </NextIntlClientProvider>,
+      </IntlProvider>,
     )
 
     await waitFor(() => {
@@ -84,9 +84,9 @@ describe("theme switch component", () => {
     themeState.value = "system"
 
     render(
-      <NextIntlClientProvider locale="en-US" messages={loadLocaleMessagesFromDir("en-US")}>
+      <IntlProvider locale="en-US" messages={getTestMessages("en-US")}>
         <ThemeSwitch />
-      </NextIntlClientProvider>,
+      </IntlProvider>,
     )
 
     await waitFor(() => {

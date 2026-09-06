@@ -1,0 +1,538 @@
+---
+title: "KI-gestützte Programmierassistenten für SaaS-Anwendungen im Jahr 2026: Warum die Code-Repository entscheidend ist."
+description: 84 % der Entwickler nutzen KI-gestützte Programmierwerkzeuge; 33 % vertrauen den Ergebnissen. Entscheidend für das Ergebnis ist jedoch nicht das Modell selbst, sondern Ihr Repository. Zusätzlich bieten wir eine umfassende Bewertung anhand eines 20-Punkte-Checkliste.
+excerpt: "Jede Studie der letzten zwei Jahre deutet auf dasselbe hin, und zwar nicht auf das Modell. Hier sind die Beweise: eine Metrik, die die Qualität der Ergebnisse des Agenten vorhersagt, sowie eine 20-Punkte-Bewertung für Ihren eigenen Code."
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-08-15
+image: /images/blog/ai-coding-agents-repository-readiness.webp
+tags:
+  - ai-agents
+  - architecture
+  - testing
+  - tooling
+faq:
+  - question: Welcher KI-Codierungsagent ist im Jahr 2026 am besten?
+    answer: "Es gibt keinen einzelnen, optimalen Agenten, und die Frage ist weniger wichtig, als sie vielleicht erscheint. Stand Januar 2026 lag GitHub Copilot bei der Nutzung in Unternehmen mit 29 % vor, gefolgt von Cursor und Claude Code, die beide mit 18 % gleichauf lagen. Wählen Sie den Agenten anhand der Integration: verwenden Sie die Terminal-Integration für Arbeiten mit mehreren Dateien, die IDE-Integration für schrittweise Arbeiten. Delegieren Sie die Aufgabe nur, wenn Ihr Repository im Agent-Ready Repository Scorecard eine Punktzahl von 17 oder höher erreicht."
+  - question: Machen KI-basierte Code-Agenten Entwickler tatsächlich schneller?
+    answer: Nicht zuverlässig und nicht unter den Bedingungen, unter denen die meisten Teams arbeiten. Die randomisierte kontrollierte Studie von METR zeigte, dass 16 erfahrene Entwickler bei realen Aufgaben in ihren eigenen, ausgereiften Repositories 19 % langsamer waren, obwohl sie glaubten, 20 % schneller zu sein. Geschwindigkeit tritt erst dann auf, wenn das Repository fehlerhafte Änderungen automatisch ablehnen kann. Fehlt diese Funktionalität, steigt zwar die Ausgabemenge, die Produktivität jedoch nicht.
+  - question: Warum erzeugt mein KI-Codierungsassistent immer wieder Code, der fast richtig ist?
+    answer: Da nichts in Ihrem Repository dies widerlegt. Ein Agent optimiert für das, was er beobachten kann, und wenn das einzige verfügbare Signal darin besteht, dass der Code wie der umliegende Code aussieht, wird er Code erzeugen, der wie der umliegende Code aussieht und dabei das falsche Ergebnis liefert. Dies ist das größte Problem, mit dem 45 % der befragten Entwickler konfrontiert sind. Reduzieren Sie Ihre Zeit bis zur Fehlerfreiheit, und diese Problemkategorie wird kleiner.
+  - question: Was ist AGENTS.md und benötige ich eines?
+    answer: AGENTS.md ist eine Markdown-Datei im Stammverzeichnis Ihres Repositorys, die Programmaktoren (Agents) Ihre Anweisungen, Grenzen und Konventionen mitteilt. Sie wurde im August 2025 als offene Spezifikation formalisiert, im Dezember 2025 der Agentic AI Foundation der Linux Foundation übergeben und wird nun in über 60.000 öffentlichen Repositories verwendet, wo sie von mehr als 30 Agents gelesen wird. Ja, Sie benötigen eine solche Datei, und sie sollte kurz genug sein, um ihre Aussagekraft zu bewahren.
+  - question: Sollte ich eine AGENTS.md- und eine CLAUDE.md-Datei erstellen?
+    answer: Bewahren Sie eine Datei als Original und lassen Sie die anderen auf diese verweisen. Duplizierte Anleitungsdateien weichen innerhalb eines Monats ab, und ein Agent, der eine veraltete Datei verwendet, folgt ihr selbstbewusst. Fügen Sie alles in die Datei AGENTS.md ein und verwenden Sie toolspezifische Dateien nur für wirklich toolspezifisches Verhalten.
+  - question: Spielt eine 100-prozentige Testabdeckung bei der KI-gestützten Entwicklung eine Rolle?
+    answer: "Es ist wichtiger als es vorher war, und das aus einem Grund, der nicht mit der üblichen Diskussion zusammenhängt. Ein Coverage-Schwellenwert, der zu einem fehlgeschlagenen Build führt, ist eine Regel, die ein Agent nicht umgehen kann: er kann kein Verhalten hinzufügen, ohne gleichzeitig einen Test hinzuzufügen. Coverage als Auszeichnung ist wirkungslos. Coverage als Kontrollmechanismus wandelt den Aufwand für die Überprüfung in einen Build-Fehler um, der niemanden unnötig Zeit kostet."
+  - question: Kann ein KI-Agent einfach meine SaaS-Grundgerüst für mich erstellen?
+    answer: Es wird funktionieren, und das Ergebnis wird korrekt aussehen. Was es Ihnen jedoch nicht mitteilen wird, ist, welche Autorisierungsfälle es übersprungen hat, welcher Webhook nicht idempotent ist oder dass die i18n-Paritätsprüfung, die es nie durchgeführt hat, die fehlenden Übersetzungen hätte finden können. Die Aussagekraft eines Agenten hängt lediglich von den Prüfungen ab, die seine Ergebnisse überprüft haben, und in einem leeren Repository gibt es solche Prüfungen nicht.
+  - question: Welcher Agent eignet sich am besten für die Arbeit mit großen Codebasen?
+    answer: Die Frage lässt sich meist auf die Zusammenstellung von Kontext zurückführen, anstatt auf den Agenten selbst. Agenten, die aktiv suchen, indem sie beispielsweise `grep` verwenden, Dateien öffnen und Importe verfolgen, werden Ihre bestehenden Hilfsmittel finden. Agenten, die sich auf den bestehenden Editor-Kontext angewiesen sind, finden lediglich das, was gerade geöffnet ist. In großen Repositories zeigt sich der Unterschied oft in Duplikaten, weshalb es wichtiger wird, für jedes Muster ein einziges, maßgebliches Beispiel zu haben, insbesondere wenn der Codebasis wächst.
+  - question: Wie kann ich verhindern, dass ein Agent Änderungen an Migrationen oder Secrets vornimmt?
+    answer: Benennen Sie die Pfade in AGENTS.md als ausschließlich für menschliche Überprüfung bestimmt und untermauern Sie dies mit Continuous Integration (CI) anstatt auf Vertrauen. Anleitungsdateien definieren die Absicht; Branch-Schutz, erforderliche Prüfer für diese Pfade und ein fehlgeschlagenes Build setzen dies durch. Jeder Bereich, an dem ein Fehler irreversible oder kostspielige Folgen haben könnte, sollte sowohl an diesen Stellen berücksichtigt werden.
+  - question: Lohnt es sich, zu einem anderen Agenten zu wechseln, um bessere Ergebnisse zu erzielen?
+    answer: Der Wechsel ermöglicht Ihnen eine einmalige Verbesserung der Qualität der Angebote, die jedoch zurückgesetzt wird, sobald ein neues Modell verfügbar ist. Durch die Reduzierung der Zeit bis zur ersten Änderung beeinflussen Sie die Anzahl der fehlerhaften Angebote, die Sie erhalten – dies gilt für alle Agenten, die Sie verwenden, und wirkt sich verstärkend aus. Führen Sie diesen Schritt zuerst durch. Anschließend können Sie beliebig oft zwischen verschiedenen Agenten wechseln, da die Kosten für eine falsche Wahl zu diesem Zeitpunkt gering sind.
+---
+
+Zwei Zahlen aus den letzten zwölf Monaten beschreiben den Zustand der KI-gestützten Entwicklung besser als jeder einzelne Test.
+
+Erstens: **84 % der Entwickler nutzen derzeit oder planen, KI-Tools** in ihrem Entwicklungsprozess einzusetzen, gegenüber 76 % im Vorjahr ([Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)).
+
+Der zweite Punkt: In derselben Umfrage **misstrauen inzwischen mehr Entwickler der Genauigkeit von KI-Ausgaben (46 %), als ihr vertrauen (33 %)**. Nur 3 % geben an, ihr stark zu vertrauen. Das Vertrauen in die Genauigkeit ist im Jahresvergleich gesunken, statt zu steigen.
+
+Die Adaptionsrate stieg. Das Vertrauen sank. Die Reaktion der Branche war, nach einem besseren Anbieter zu suchen, weshalb jeder Vergleich, den Sie dieses Jahr gelesen haben, elf Tools in einer Rangliste auflistet – eine Rangliste, die bis zum Ende Ihres Lesens bereits veraltet sein wird.
+
+Dieser Artikel vertritt eine andere Sichtweise und bietet Ihnen anschließend eine Möglichkeit, diese an Ihrem eigenen Code zu testen. Das Modell ist nicht die Variable, die Ihr Ergebnis beeinflusst. **Ihr Repository ist es.** Ein Agent ist eine Schleife: vorschlagen, beobachten, korrigieren. Was er beobachtet, stammt aus Ihrem Code. Wenn Ihr Code eine fehlerhafte Änderung nicht schnell widerlegen kann, hat der Agent nichts, gegen das er korrigieren könnte, und er optimiert stattdessen für das Einzige, was ihm noch zur Verfügung steht: die Wahrscheinlichkeit.
+
+Das ist der gesamte Mechanismus, der zu dem Fehler führt, den alle beschreiben.
+
+<Callout title={"Was Sie in diesem Artikel finden."}>
+
+1. Die Erkenntnisse aus vier unabhängigen Studien zeigen, dass die Qualität der Ergebnisse eines Agenten eher von der Qualität des Repositories abhängt als von den Fähigkeiten des Modells selbst.
+2. **Time to No**, ein Maß dafür, wie schnell Ihr Repository einem Agenten mitteilen kann, dass er falsch liegt, und warum es die Qualität der Ergebnisse besser vorhersagt als ein einzelner Benchmark-Wert.
+3. **Agent-Ready Repository Scorecard**: 10 Prüfpunkte, bewertet auf einer Skala von 20, die Sie in etwa fünfzehn Minuten in Ihrem Codebasis ausführen können.
+4. Eine ehrliche Gegenüberstellung der Agentenlandschaft für das Jahr 2026, geordnet nach der verwendeten Architektur, ohne jegliche Vergleichsliste, sowie die Gründe, warum wir die Veröffentlichung einer solchen Liste ablehnen.
+5. Eine funktionierende `AGENTS.md`-Datei für einen SaaS-Codebasis und der damit ausgelieferte, vierstufige Workflow.
+
+</Callout>
+
+_Aktualisiert am 15. August 2026. Verfasst während des Entwicklungsprozesses und der Auslieferung des Codes, der diese Website verkauft, und während des täglichen Einsatzes von Agenten zur Überprüfung._
+
+## Was ist ein KI-Codierungsagent?
+
+Ein KI-Codierungsagent ist ein Programm, das einen Codebestand analysiert, Änderungen plant, Dateien bearbeitet, Befehle ausführt und auf die Ergebnisse reagiert, ohne dass ein Mensch jeden einzelnen Schritt steuert. Dies unterscheidet ihn von einer automatischen Code-Vervollständigungsfunktion: Der Agent schließt seinen eigenen Regelkreis, indem er Ihre Tests, Ihr Typprüfprogramm und Ihren Build ausführt und anschließend auf Basis der Ergebnisse Anpassungen vornimmt.
+
+Dieser letzte Abschnitt ist das zentrale Thema dieses Artikels. Die Leistungsfähigkeit eines Agenten wird durch die Qualität und die Latenz der Signale bestimmt, die er empfangen kann. Sowohl ein Modell, das bei einem Benchmark gut abschneidet, als auch eines, das schlecht abschneidet, werden in einem System, das keine Rückmeldung gibt, selbstbewussten, plausiblen, aber fehlerhaften Code erzeugen.
+
+## Das Jahr 2026: Die Einführung nimmt zu, das Vertrauen sinkt, die Leistung verschlechtert sich.
+
+Vier unabhängige Studien, die von verschiedenen Organisationen unter Verwendung unterschiedlicher Methoden durchgeführt wurden, kommen zu demselben Ergebnis. Agentenunterstützte Ergebnisse werden schneller erstellt, sind aber teurer zu pflegen.
+
+| Studium.                                                                                                                       | Methode.                                                                                                                                                          | Finden.                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Stack Overflow Entwicklerumfrage 2025](https://survey.stackoverflow.co/2025/ai)                                               | Jahreseinzelstudie von Zehntausenden Entwicklern.                                                                                                                 | 84 % nutzen oder planen, KI-Tools zu verwenden. 46 % sind der Genauigkeit der Ergebnisse skeptisch, während 33 % ihnen vertrauen. Die **häufigste Kritik, genannt von 45 %**, ist: "KI-Lösungen, die fast richtig sind, aber nicht ganz."                                                                                                                                              |
+| [METR randomisierte kontrollierte Studie](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), Juli 2025 | 16 erfahrene Open-Source-Entwickler, 246 konkrete Aufgaben, in ihren eigenen, ausgereiften Repositories (mit über 22.000 Sternen und über 1 Million Zeilen Code). | Entwickler waren mit KI-Tools **19 % langsamer**. Sie waren jedoch der Überzeugung, dass sie 20 % schneller gewesen wären.                                                                                                                                                                                                                                                             |
+| [GitClear Maintainability Gap](https://www.gitclear.com/the_ai_code_quality_maintainability_gap), 2026                         | Analyse von hunderten Millionen geänderten Codezeilen.                                                                                                            | Die Anzahl der Code-Duplikaten stieg von 40,3 auf **73,0 pro eine Million geänderter Zeilen**, was den höchsten Wert seit Beginn der Aufzeichnungen darstellt. Kopierter und eingefügter Code machte im Jahr 2022 9,4 % des neu geschriebenen Codes aus, während dieser Anteil Anfang 2026 auf 15,7 % stieg. Gleichzeitig sank der Anteil des refaktorierten Codes von 21 % auf 3,8 %. |
+| [Google DORA Bericht](https://dora.dev/), 2024                                                                                 | Branchenweite DevOps-Forschung.                                                                                                                                   | Ein Anstieg der KI-Nutzung um 25 % korrelierte mit einem Rückgang der Lieferstabilität um **7,2 %**.                                                                                                                                                                                                                                                                                   |
+
+Lesen Sie diese vier Zeilen noch einmal als eine zusammenhängende Abfolge und nicht als vier einzelne Beschwerden, da sie eine Ursache-Wirkungs-Kette beschreiben.
+
+Das Ergebnis von METR ist das, was die meisten Menschen am schwersten zu glauben finden, und es ist gleichzeitig das aufschlussreichste. Dabei handelte es sich nicht um Junior-Entwickler, die mit unbekanntem Code arbeiteten. Sie verfügten durchschnittlich über fünf Jahre Erfahrung mit den jeweiligen Repositories. Sie waren ohnehin langsamer und konnten das nicht spüren. Eine Diskrepanz von 39 Punkte zwischen der wahrgenommenen und der tatsächlichen Produktivität ist kein Problem der Fähigkeiten. Es ist ein **Feedback-Problem**. Irgendetwas im Prozess vermittelte ihnen das Gefühl, dass alles gut lief, obwohl dies nicht der Fall war.
+
+### Die drei Ausfallarten.
+
+Jede Studie untersucht ein anderes Symptom desselben fehlenden Signals. Ihnen Namen zu geben, erleichtert die Suche.
+
+**Plausible Abweichung.** Der Agent erzeugt Code, der korrekt erscheint, Ihre Namenskonventionen verwendet und dennoch das Falsche tut. Dies ist die Kategorie der "fast richtigen" Lösungen, die 45 % der Entwickler als ihre größte Herausforderung nannten. Sie bleibt bestehen, weil im gesamten Repository nichts mit dem Code im Widerspruch steht. Die Überprüfung dieses Codes ist aufwändiger als die Umsetzung der eigentlichen Änderung, da eine falsche Antwort, die richtig aussieht, schwerer abzulehnen ist als eine falsche Antwort, die eindeutig falsch aussieht.
+
+**Stille Duplizierung.** Der Agent benötigt eine Hilfskraft, kann jedoch die bereits vorhandene nicht finden und erstellt eine zweite. Wenn man dies auf jede Funktion anwendet, erhält man einen Anstieg von 81 % bei duplizierten Code-Blöcken bei GitClear im Jahr 2023. Duplizierte Code-Blöcke stellen keine Frage des Stils dar: Studien zeigen, dass geklonter Code um **15 % bis 50 % mehr Fehler** aufweist. Der Agent hat die Duplizierung nicht bewusst gewählt. Er konnte nicht feststellen, dass der ursprüngliche Code bereits existierte.
+
+**Zuverlässige Regression.** Eine Änderung durchläuft alle vorhandenen Prüfungen, wird integriert und verursacht gleichzeitig ein Problem, das von keiner Prüfung abgedeckt wurde. Das entspricht einem Rückgang der Stabilität von 7,2 %, wie von DORA gemessen, und wird hier als ein einzelner Vorfall dargestellt. Die Ausgabemenge stieg an, die Freigabegate blieb bestehen, wodurch pro Zeiteinheit mehr ungetestete Änderungen in die Produktion gelangten.
+
+Alle drei haben denselben Ursprung. Dem Agenten konnte man nicht schnell genug, oder überhaupt nicht, eine Absage erteilen.
+
+## Zeit bis "Nein": die Metrik, die die Qualität der Ergebnisse von Agenten vorhersagt.
+
+**Time to No** ist die Zeit, die Ihr Repository benötigt, um einem KI-Codierungsagenten mitzuteilen, dass seine Änderung falsch ist. Sie wird ab dem Moment gemessen, in dem der Agent das Schreiben beendet, bis zu dem ein automatisiertes Signal dies widerlegt. Ein Repository mit strengen Typen, einer Coverage-Prüfung und einem Verifikationsbefehl antwortet innerhalb von Sekunden. Ein Repository ohne diese Funktionen antwortet erst bei der Code-Überprüfung, in der Produktion oder möglicherweise gar nicht.
+
+Die Zeit bis zum Nein ist entscheidend, weil die Arbeitsschleife eines Agenten aus Vorschlagen, Beobachten und Korrigieren besteht. Korrekturen sind nur anhand von Beobachtungen möglich, die er **innerhalb seines eigenen Durchlaufs** machen kann. Alles, was länger dauert, ist keine Rückmeldung für den Agenten. Es ist Nacharbeit für dich.
+
+Hier ist die Leiter, wobei die Signale nach ihrer Ankunftsgeschwindigkeit sortiert sind.
+
+| Signal                                    | Was es erfasst.                                                   | Typische Zeit bis zum Erreichen des Nullpunkts. | Erreichen Sie den Agenten? |
+| ----------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------- | :------------------------: |
+| Editor-Sprachserver                       | Falsche Form, fehlendes Feld, fehlerhafter Import.                | Weniger als eine Sekunde.                       |             Ja             |
+| `tsc --strict`                            | Pausen innerhalb des Projekts.                                    | 5 bis 30 Sekunden.                              |             Ja             |
+| Linter und Formatierer.                   | Abweichung von Standards, unsichere Vorgehensweisen.              | 5 bis 20 Sekunden.                              |             Ja             |
+| Einheitstests und Integrationstests.      | Falsches Verhalten auf einem überdachten Weg.                     | 30 Sekunden bis 3 Minuten.                      |             Ja             |
+| Deckungsschwelle                          | Funktionen wurden hinzugefügt, ohne jegliche Tests durchzuführen. | Gleiche Runde.                                  |             Ja             |
+| End-to-End-Tests in einem echten Browser. | Unterbrochener Fluss über verschiedene Ebenen.                    | 2 bis 10 Minuten.                               |       Normalerweise.       |
+| CI für den Pull Request.                  | Alles oben Genannte auf einem frisch eingerichteten Rechner       | 5 bis 15 Minuten.                               |            Nein            |
+| Menschliche Code-Überprüfung.             | Absicht, Gestaltung, Urteil.                                      | Stunden bis Tage.                               |            Nein            |
+| Produktion.                               | Alles, was niemand überprüft hat.                                 | Tage, die niemals kommen werden.                |            Nein            |
+
+Die Grenze zwischen "normalerweise" und "nein" ist die entscheidende. **Der Agent lernt nur aus den Zeilen, die er innerhalb seiner eigenen Schleife erreichen kann.** Alles unterhalb dieser Linie ist Feedback für Sie, nicht für ihn, und jede Stunde, die Sie damit verbringen, die Ergebnisse zu überprüfen, ist eine Stunde, die Sie dafür bezahlen, Ausgaben zu bewerten, die eine Maschine kostenlos hätte ablehnen können.
+
+Das verändert die gesamte Betrachtung des Toolings. Der Wechsel zwischen verschiedenen Agenten beeinflusst die Qualität der Vorschläge. Eine Reduzierung der Zeit bis zur Ablehnung (Time to No) verringert die Anzahl der fehlerhaften Vorschläge, die Sie überhaupt erhalten. Der zweite Hebel hat eine größere Wirkung, er verstärkt sich und wird nicht zurückgesetzt, wenn nächste Monat ein neues Modell veröffentlicht wird.
+
+<Callout type="warn" title={"Die unangenehme Konsequenz."}>
+
+Ein leistungsfähigerer Agent in einem Repository mit einer hohen "Time to No" erzeugt schlechtere Ergebnisse als ein weniger leistungsfähiger Agent in einem Repository mit einer niedrigen "Time to No". Er schreibt mehr Code, schneller, mit dem gleichen Anteil an fehlerhaften Antworten, und jede einzelne davon landet in Ihrer Überprüfungsqueue, anstatt im Entwicklungsprozess zu scheitern.
+
+</Callout>
+
+### Wie man seine eigene Zeit bis zum Erreichen eines Ziels misst.
+
+Sie benötigen keine Instrumentierung. Sie benötigen eine gezielte, absichtliche Änderung.
+
+<Steps>
+
+<Step>
+
+**Wählen Sie eine echte Invariante.** Etwas, von dem Ihr Produkt wirklich abhängt: ein Webhook, das nicht zweimal berechnen darf, eine Berechtigungsprüfung für eine Admin-Route, eine Währungsumrechnung.
+
+</Step>
+
+<Step>
+
+**Teile es so klein wie möglich auf.** Kehre einen booleschen Wert um. Entferne ein `await`. Ändere einen Vergleichsoperator. Achte darauf, die Syntax nicht zu verändern, da Syntaxfehler von allen Systemen erkannt werden und nichts beweisen.
+
+</Step>
+
+<Step>
+
+**Starten Sie ein Stoppuhr und führen Sie Ihren Überprüfungsbefehl aus.** Egal, welchen Befehl ein Agent ausführen würde. Wenn Sie keinen einzigen Befehl haben, den ein Agent ausführen könnte, ist Ihre "Time to No" bereits "manuelle Überprüfung" und Sie können die Übung hier beenden.
+
+</Step>
+
+<Step>
+
+**Protokollieren Sie, wann etwas fehlschlägt und was genau. Nicht erst, wenn Sie es bemerken. Sondern wenn die Maschine eine Meldung ausgibt, die spezifisch genug ist, damit ein Mitarbeiter aufgrund dieser Meldung tätig werden kann.**
+
+</Step>
+
+<Step>
+
+**Wiederholen Sie dies für vier bis fünf unveränderlichen Aspekte über verschiedene Ebenen hinweg.** Authentifizierung, Abrechnung, Datenzugriff, i18n, das Admin-Bereich. Die langsamste Komponente ist Ihre tatsächliche Zeit bis zur Lösung, da dies die Ebene ist, auf der Mitarbeiter am meisten Probleme verursachen können.
+
+</Step>
+
+</Steps>
+
+Die meisten Teams, die dies ehrlich durchführen, stellen mindestens in einer Ebene fest, dass nichts fehlgeschlagen ist. Diese Ebene ist der Bereich, in dem Ihr Agent Fiktionen verfasst hat.
+
+## Das Bewertungssystem für die Agenten-Bereitschaft.
+
+Zehn Prüfungsbereiche, die jeweils mit 0, 1 oder 2 bewertet werden, für eine maximale Punktzahl von 20. Bewerten Sie Ihr eigenes Repository. Es dauert etwa fünfzehn Minuten, und das Ergebnis ist hilfreicher als jeder Vergleich mit Standard-Benchmarks, da es sich um den Code handelt, an dem Sie tatsächlich arbeiten.
+
+### Kann der Agent die Wahrheit herausfinden?
+
+**Eine Agentenanweisungsdatei existiert und ist aktuell.**
+
+`AGENTS.md` wurde im August 2025 zu einer offenen Spezifikation formalisiert, an der OpenAI, Google, Cursor und Factory beteiligt waren. Im Dezember 2025 wurde sie der Agentic AI Foundation der Linux Foundation übergeben und wird nun in mehr als 60.000 öffentlichen Repositories verwendet, die von über 30 Agenten genutzt werden.
+
+- **0**: Es gibt keine Anleitungsdatei. Jeder Agent beginnt bei Null und leitet Ihre Konventionen aus den Dateien ab, die er öffnet.
+- **1**: Eine Datei existiert, aber sie enthält Text, den der Agent interpretieren muss, oder sie weicht von der Realität ab.
+- **2**: Es listet die Befehle, die Grenzen und die Konventionen in weniger als 200 Zeilen auf und kann nicht veralten, da die CI-Umgebung die dort genannten Befehle ausführt.
+
+**Typen sind Verträge, keine Dekoration.**
+
+- **0**: `any` ist üblich. Externe Daten werden ungeprüft in das System eingegeben.
+- **1**: Strikter TypeScript, aber die Grenzen (HTTP-Bodies, Umgebungsvariablen, Webhook-Payloads, Datenbankzeilen) werden als vertrauenswürdig betrachtet anstatt geparst.
+- **2**: Strikter TypeScript ohne `any`, sowie Schema-Validierung an jeder externen Schnittstelle. Eine falsche Struktur schlägt an der Grenze fehl, innerhalb von weniger als einer Sekunde, mit einer Meldung, die das betreffende Feld benennt.
+
+**Es gibt genau ein kanonisches Beispiel für jedes Muster.**
+
+Agenten arbeiten nach dem Prinzip der Nachahmung durch die nächstgelegene Lösung. Sie kopieren das, was sie am ehesten finden können. Wenn Ihr Repository drei verschiedene Möglichkeiten zur Datenabfrage enthält, wählt der Agent zufällig eine davon aus. Sie haben somit eine von drei Chancen, die gewünschte Methode zu erhalten.
+
+- **0**: Mehrere konkurrierende Muster für dieselbe Aufgabe, die alle aktiv im Einsatz sind.
+- **1**: Eine dokumentierte Präferenz, die jedoch keine rechtliche Durchsetzung findet.
+- **2**: Ein implementiertes Beispiel pro Muster, sodass der nächste Nachbar immer der rechte Nachbar ist.
+
+### Verifizierung: Kann das Repository eine Ablehnung ausssprechen?
+
+**Ein Befehl steuert alles.**
+
+- **0**: Ein Abschnitt in der README-Datei, der Schritte in einer bestimmten Reihenfolge beschreibt.
+- **1**: Mehrere Skripte, und Sie müssen wissen, wann welcher ausgeführt werden soll.
+- **2**: Ein einzelner Befehl, der Typüberprüfungen, Linting, Tests durchführt und Berichte erstellt, und mit dem Ergebnis 0 oder 1 beendet. Ein Agent kann ihn ausführen, ohne Anweisungen dazu zu benötigen.
+
+**Die Berichterstattung ist ein Wegweiser, kein Bericht.**
+
+- **0**: Keine Messung der Abdeckung.
+- **1**: Die Abdeckung wird gemessen und auf einem Badge angezeigt, das niemand verwendet, um einen Merge zu blockieren.
+- **2**: Ein Grenzwert, der den Build nicht besteht. Neue Funktionalität ohne Test kann nicht zusammengeführt werden, was bedeutet, dass der Agent auch dann keine nicht getestete Funktionalität hinzufügen kann, selbst wenn er dies möchte.
+
+**Kritische Pfade werden in einem echten Browser ausgeführt.**
+
+- **0**: Keine End-zu-End-Tests.
+- **1**: Nur jsdom oder Mock-Umgebungen, die funktionieren, während die echte Umgebung nicht einwandfrei ist.
+- **2**: Echte Browser-Engines, die Funktionen wie Registrierung, Bezahlung und den Webhook-Pfad testen.
+
+**7. Die Typüberprüfung ist kompromisslos.**
+
+- **0**: Tippfehler sind normale Hintergrundrauschen.
+- **1**: Fehler werden in einem Aufgabenbestand erfasst.
+- **2**: Ein Fehler führt zu einem nicht-Null-Exit und blockiert den Merge. Agenten reagieren auf binäre Signale; eine Zählung, die "etwas gestiegen" ist, stellt kein Signal dar.
+
+### Grenzen: Kann der Vertreter innerhalb dieser Grenzen bleiben?
+
+**Architektonische Regeln werden durch Werkzeuge durchgesetzt.**
+
+- **0**: Konventionen existieren im Kopf eines leitenden Ingenieurs.
+- **1**: Dokumentiert in einem Wiki und durch Überprüfung gewährleistet.
+- **2**: Eine Regel für Importgrenzen führt zu einem Build-Fehler, wenn eine Ebene einen Bereich erreicht, den sie nicht erreichen sollte. Der Agent lernt Ihre Architektur, indem er auf eine Grenze stößt – und nicht, indem er sie liest.
+
+**Gefährliche Bereiche sind ausdrücklich tabu.**
+
+- **0**: Nichts ist markiert. Migrationen, Geheimnisse und Abrechnungslogik sind genauso bearbeitbar wie ein Button-Komponente.
+- **1**: Informelle Warnungen, die ein neuer Agent noch nicht erlebt hat.
+- **2**: Migrationen, Geheimnisse, Abrechnungs-Webhooks und Infrastruktur, die in der Anleitungsdatei als „nur menschliche Prüfung“ gekennzeichnet sind und durch CI-Prozesse geschützt werden, anstatt durch bloße Hoffnung.
+
+### Überprüfbarkeit: Kann es nachträglich von einem Menschen geprüft werden?
+
+**Jede Qualitätsanforderung ist einer Anweisung zugeordnet.**
+
+- **0**: Qualitätsmerkmale werden als Adjektive im README-Dokument aufgeführt.
+- **1**: Einige Behauptungen lassen sich überprüfen, wenn man weiß, wo man suchen muss.
+- **2**: Jede Aussage ist einer Anweisung zugeordnet, die die entsprechenden Beweismittel neu generiert. Genau das ermöglicht die Nachvollziehbarkeit der Arbeit eines Agenten: Sie überprüfen nicht, ob diese sorgfältig gearbeitet hat, sondern ob die Beweismittel weiterhin korrekt generiert werden.
+
+### Bewertung.
+
+<Cards>
+  <Card title={"17 bis 20 — Einsatzbereit."}>
+    Der Ablauf schließt ohne Sie. Fehlerhafte Änderungen werden innerhalb der Agentenlaufzeit zum Aussterben verurteilt, und die Agenten
+    fungieren als Faktor, der die Durchsatzleistung erhöht. Die Überprüfung konzentriert sich dabei auf die Absicht und nicht auf die
+    Korrektheit.
+  </Card>
+  <Card title={"11 bis 16 — agentenfreundlich"}>
+    Agenten leisten Unterstützung auf gut ausgebauten Wegen und sind ansonsten flexibel einsatzbereit. Der Arbeitsaufwand steigt im
+    Verhältnis zur Leistung, was den Großteil des potenziellen Vorteils zunichtemacht.
+  </Card>
+  <Card title={"0 bis 10 – feindselig gegenüber Agenten."}>
+    Der Agent wird schnell reagieren, aber im Fehler liegen, und Sie werden es erst später herausfinden. Hier liegt das Ergebnis von METR.
+  </Card>
+</Cards>
+
+Wenn Sie unter 11 Punkte erreicht haben, ist die derzeit am besten vergütete Aufgabe, die Ihnen zur Verfügung steht, nicht die Bewertung von Agenten. Es sind stattdessen die Optionen 4, 5 und 7, die drei günstigsten Möglichkeiten, um tausende von Sekunden an Zeit zurückzuwerben.
+
+## Wie sich das Agenten-Umfeld im Jahr 2026 tatsächlich entwickelt.
+
+Die Einführung steht an erster Stelle, da dies die einzige Zahl hier ist, die eine verlässliche Quelle hat. Eine von JetBrains AI Pulse durchgeführte Umfrage unter mehr als 10.000 Entwicklern im Januar 2026 ergab, dass **74 % ein spezialisiertes KI-Entwicklungstool eingesetzt haben**. GitHub Copilot führte bei der Nutzung am Arbeitsplatz mit 29 % an, wobei Cursor und Claude Code mit jeweils 18 % gleichauf lagen.
+
+Beachten Sie, was diese Verteilung bedeutet: kein einzelnes Tool hat die Mehrheit, die meisten Teams verwenden zwei oder drei, und der Abstand zwischen dem führenden und dem drittplatzierten Tool ist geringer als der Unterschied zwischen einem guten und einem schlechten Repository.
+
+<Callout type="info" title={"Warum gibt es in diesem Artikel keine Bestenliste?"}>
+
+Wir veröffentlichen keine Vergleichsranglisten, und der Grund dafür ist nicht Höflichkeit.
+
+Die Ergebnisse von Frontier in den Benchmarks SWE-bench Verified und Terminal-Bench haben sich im Laufe dieses Jahres mehrfach geändert, manchmal sogar innerhalb desselben Monats. Jede heute veröffentlichte Tabelle mit Ergebnissen ist eine Momentaufnahme, die zu einem bestimmten Zeitpunkt gültig war. Noch dazu ist diese Zahl kaum hilfreich für Ihre Entscheidung: Die für Benchmarks verwendeten Aufgaben sind mit einem Verifikator versehen, der genau das ist, was in den meisten Produktionsumgebungen fehlt. Ein Benchmark misst die Leistung eines Agenten unter idealen Bedingungen, die Sie in der Praxis nicht nachbilden können.
+
+Die beiden Dinge, auf die man sich mit ausreichend Sicherheit verlassen kann, um zu planen, sind das **Harness** (wie das Werkzeug den Kontext zusammenstellt, wo es ausgeführt wird und wie es Berechtigungen anfordert) und **Ihr Repository**. Diese beiden Aspekte werden in diesem Abschnitt verglichen.
+
+</Callout>
+
+### Terminal-native Agents.
+
+**Claude Code, OpenAI Codex CLI, OpenCode, Aider.**
+
+Diese Prozesse laufen in Ihrer Shell, mit den Berechtigungen Ihrer Shell. Die Kontextauswertung ist aktiv und nicht passiv: der Agent führt `grep` aus, öffnet Dateien, führt Ihren Testbefehl aus und liest die Ergebnisse. Da sie dort ausgeführt werden, wo Ihre Werkzeuge installiert sind, schließen sie die Verifikationsschleife am direktesten. Wenn Sie eine einzelne Verifikationsanweisung haben, wird ein Terminal-Agent diese verwenden, ohne zweimal gefragt werden zu müssen.
+
+- **Am besten geeignet für:** Teams, deren Entwicklungskultur bereits stark auf der Kommandozeile basiert, für umfangreiche Änderungen, die sich über mehrere Dateien erstrecken, und für Projekte, bei denen die Ausführung des Test-Suites das wichtigste Feedback-Signal darstellt.
+- **Kosten Sie:** standardmäßig keine visuelle Überprüfung der Änderungen, sodass die Disziplin bei der Überprüfung von Ihnen oder von einem Continuous Integration (CI)-System kommen muss. Berechtigungsmodelle variieren stark, und eine freizügige Konfiguration in einem Repository ohne klare Grenzen ist genau die Kombination, die zu selbstbewussten Fehlern führen kann.
+- **Wichtig:** Open-Source-Optionen in dieser Gruppe (OpenCode, Aider) bieten Ihnen die Möglichkeit, zwischen verschiedenen Modellen und Anbietern zu wählen, was wichtig ist, wenn Sie datenbezogene Aufenthaltsbestimmungen einhalten müssen oder die Kosten pro Token direkt kontrollieren möchten.
+
+### IDE-integrierte Agenten.
+
+**Cursor, GitHub Copilot, Windsurf, Cline, JetBrains Junie.**
+
+Diese Komponenten sind innerhalb des Editors integriert und erben dessen Kontext: geöffnete Dateien, Cursorposition, der Language Server und der Projektindex. Der Language Server ist ein oft unterschätztes Element. Er ermöglicht die schnellste Reaktion auf Anfragen – eine Rückmeldung im Subsekundenbereich – ohne zusätzliche Prozesse.
+
+- **Am besten geeignet für:** den direkten Programmier-Workflow zu zweit, inkrementelle Arbeit an einer Datei, die Sie bereits bearbeiten, und Teams, die einen einzigen Editor verwenden.
+- **Kosten für Sie:** Der Kontextbereich des Editors entspricht nicht der Architektur Ihres Repositorys. Diese Agenten sehen, was geöffnet ist, was die stille Duplizierung in einem großen Codebestand wahrscheinlicher macht, es sei denn, Ihre Muster sind kanonisch (Scorecard-Prüfung 3).
+- **Wichtig:** Die Akzeptanz von Copilot wird eher durch unternehmensinterne Beschaffungsprozesse bestimmt als durch die eigentliche Funktionalität. Beurteilen Sie es anhand Ihres eigenen Repositorys, nicht anhand des Marktanteils.
+
+### Delegierte und asynchrone Agenten.
+
+**Devin, Google, Jules, Cloud-Aufgabenverwalter, einschließlich gehostetem Codex.**
+
+Sie übergeben ein Problem und erhalten im Gegenzug einen Pull Request. Es gibt keinen interaktiven Prozess, was bedeutet, dass diese Agenten am stärksten von der Qualität des Repositorys beeinflusst werden. Sie haben nur eine Chance, Ihre Konventionen zu verstehen, und das einzige Korrektur-Signal, das ihnen zur Verfügung steht, ist das, was Ihr CI-System ausgibt.
+
+- **Am besten geeignet für:** klar definierte, abgegrenzte und wiederholende Aufgaben in einem Repository, das in der Bewertung sehr gut abschneidet. Aktualisierungen von Abhängigkeiten, Testdaten-Rekonstruktion, automatisierte Migrationen über zahlreiche Dateien.
+- **Kosten Sie:** alles, wenn Ihre Bewertung niedrig ist. Ein delegierter Agent in einem feindseligen Repository ist eine Maschine, die plausible Pull Requests generiert, die ein Mensch vollständig neu erstellen muss.
+- **Faustregel:** Delegieren Sie Aufgaben asynchron erst, wenn Sie 17 Punkte oder mehr erreicht haben. Das gesamte System ist darauf angewiesen, dass die Continuous Integration (CI) in Ihrem Namen ablehnen kann.
+
+### Die entscheidenden Faktoren.
+
+| Achse                     | Warum es Ihr Ergebnis beeinflusst.                                                                                               |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Wo es verläuft.           | Bestimmt, welche Verifikationssignale es ohne zusätzliche Unterstützung erreichen kann.                                          |
+| Kontextzusammenstellung.  | Aktive Suche findet Ihren bereits vorhandenen Assistenten; der Umgebungsbezug kann dies oft nicht.                               |
+| Zulassungsmodell.         | Legt fest, wie viel fehlerhafte Arbeit Sie erhalten, bevor Einwände erhoben werden.                                              |
+| Modell- und Anbieterwahl. | Themen zur Kostenkontrolle, Datenspeicherung und Vermeidung von Anbieterbindung.                                                 |
+| Anleitungssupport.        | `AGENTS.md` unterstützt bedeutet, dass eine einzige Datei die Steuerung für alle Werkzeuge bereitstellt, die Ihr Team verwendet. |
+| Kostenstruktur.           | Die Preismodelle "pro Sitzplatz", "pro Token" und "pro Aufgabe" ermöglichen völlig unterschiedliche Arbeitsabläufe.              |
+
+### Welchen Agenten sollten Sie wählen?
+
+| Wenn Ihre Situation dies ist...                                                | Beginnen Sie mit                                                    | Weil.                                                                                                                                                                               |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Terminal-orientiertes Team, umfangreiche Änderungen in mehreren Dateien.       | Ein nativ integriertes Agentensystem.                               | Es erreicht Ihren Verifizierungsbefehl direkt und führt ihn iterativ aus.                                                                                                           |
+| Team, das den Redakteur in den Mittelpunkt stellt, inkrementelle Arbeitsweise. | Ein nativ in der IDE integriertes Agent.                            | Die schnellste Möglichkeit, Informationen über die Verfügbarkeit zu erhalten, ist die Bereitstellung von Rückmeldungen vom Language Server innerhalb von weniger als einer Sekunde. |
+| Sie benötigen eine Auswahl an Modellen oder eine bessere Kostenkontrolle.      | Ein quelloffener Agent.                                             | Provider-Routing ist eine erstklassige Funktion und kein Projekt in der Planung.                                                                                                    |
+| Abgrenzte, repetitive Aufgaben in großem Umfang.                               | Ein delegierter Vertreter, falls Sie 17 Punkte oder mehr erreichen. | Das CI muss in der Lage sein, im Namen von Ihnen abzulehnen.                                                                                                                        |
+| Sie haben unter 11 Punkte auf dem Ergebnisbogen erreicht.                      | Keiner von ihnen, noch.                                             | Investieren Sie das Quartal stattdessen in die Prüfungen 4, 5 und 7. Der Ertrag ist höher und gilt für jeden Agenten, den Sie danach testen.                                        |
+
+Die letzte Zeile entspricht der ehrlichen Antwort für einen großen Teil der Teams, und es ist die Antwort, die kein Anbieter von Software oder Tools einen Anreiz hat, Ihnen zu geben.
+
+## Anleitungsdateien: Was gehört in AGENTS.md?
+
+`AGENTS.md` ist eine einfache Markdown-Datei im Stammverzeichnis Ihres Repositorys, die jedem Coding-Agenten mitteilt, wie er in Ihrem Codebasis arbeiten soll. Mehr als 30 Agenten lesen sie nativ, darunter Claude Code, Codex, Cursor, Copilot, Aider, Windsurf, Devin, Zed und Gemini CLI, was diese Datei zu dem einen Dokument, das sorgfältig gepflegt werden sollte.
+
+| Datei                             | Gelesen von.                  | Verwenden Sie es für...                                                                            |
+| --------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| `AGENTS.md`                       | Die meisten großen Agenturen. | Die zentrale Anlaufstelle: Befehle, Grenzen, Konventionen.                                         |
+| `CLAUDE.md`                       | Claude Code                   | Nur das, was wirklich spezifisch für Claude ist. Verweisen Sie dafür auf `AGENTS.md` für den Rest. |
+| `.cursor/rules/`                  | Cursor.                       | Regelbereiche, projektspezifische Überschreibungen.                                                |
+| `.github/copilot-instructions.md` | GitHub Copilot.               | Spezifische Formulierungen, die für Copilot gelten und sich davon unterscheiden.                   |
+
+Der Fehlerfall liegt hier in der Duplizierung. Vier Dateien, die dieselben Konventionen beschreiben, werden innerhalb eines Monats voneinander abweichen. Eine abweichende Anweisungsdatei ist schlimmer als gar keine, da der Agent dann die falsche Datei mit Überzeugung befolgt. Behalten Sie eine Datei als die gültige und lassen Sie die anderen auf diese verweisen.
+
+### Was gehört eigentlich dazu?
+
+Notieren Sie, welche Informationen ein Agent nicht aus dem Code ableiten kann, und nichts anderes.
+
+**Enthalten:** den Verifikationsbefehl, die Definition von "erledigt", die architektonischen Grenzen und die Richtung der Abhängigkeiten, die Bereiche, die eine manuelle Überprüfung erfordern, sowie ein kanonisches Beispiel, das für jede typische Aufgabe als Vorlage dienen kann.
+
+**Auslassen:** alles, was das Typsystem bereits festlegt, Wiederholungen der Dokumentation Ihres Frameworks, Konventionen, die der Code nicht einhält, und lange Ausführungen. Eine Anweisungsdatei, die nicht der Wahrheit entspricht, ist ein Problem.
+
+```markdown
+# AGENTS.md
+
+## Verify before you claim done
+
+Run `bun run verify`. It type-checks, lints, tests and enforces
+100% coverage. Exit code 0 means done. Nothing else does.
+
+## Architecture
+
+Dependencies flow one way: presentation -> application -> domain.
+The domain layer imports nothing from the other two. This is
+enforced by an import boundary rule, so a violation fails the build.
+
+## Conventions
+
+- Strict TypeScript. No `any`, no non-null assertions.
+- Validate every external boundary with a Zod schema: HTTP bodies,
+  environment variables, webhook payloads.
+- New behaviour needs a test in the same commit. The coverage
+  gate will reject it otherwise.
+- Copy the nearest existing module. There is exactly one example
+  of each pattern and it is the correct one.
+
+## Human review required (do not edit without asking)
+
+- `drizzle/migrations/**` (destructive and irreversible)
+- Stripe webhook handlers (must stay idempotent)
+- Anything reading a secret or environment variable
+- CI workflow files
+
+## Useful commands
+
+bun run dev # local dev server
+bun run verify # the only gate that matters
+bun run test:coverage # regenerates the coverage report
+bun run check:i18n # fails on a missing translation key
+```
+
+Ungefähr vierzig Zeilen. Jede Aussage wird entweder durch einen Befehl erzwungen oder stellt eine Grenze dar, an der ein Mensch aktiv sein muss. Nichts in diesem Text kann unbemerkt falsch werden, ohne dass ein Build fehlschlägt.
+
+## Der Workflow, der ausgeliefert wird.
+
+<Steps>
+
+<Step>
+
+**Planen Sie, bevor Sie schreiben.** Fragen Sie nach dem Ansatz und den Dateien, die bearbeitet werden sollen, und prüfen Sie dies, bevor Sie Änderungen genehmigen. Ein falscher Plan kostet eine Nachricht zur Korrektur. Eine fehlerhafte Umsetzung kann einen gesamten Review-Zyklus verursachen. Die meisten Agenten unterstützen jetzt einen expliziten Planungsmodus; nutzen Sie diesen für alle Änderungen, die mehr als eine Datei betreffen.
+
+</Step>
+
+<Step>
+
+**Begrenzen Sie den Einflussbereich.** Ein Modul, eine Funktion, ein Pull Request. Agenten sind gut darin, die von Ihnen gewünschte Änderung vorzunehmen, und zeigen keine besondere Reaktion auf die neunzig Dateien, die sie im Prozess verändert haben. Ein kleiner Diff ist hier keine Frage des Stils, sondern die einzige Möglichkeit, wie ein Mensch die Ergebnisse noch bei der Geschwindigkeit der Agenten überprüfen kann.
+
+</Step>
+
+<Step>
+
+**Stellen Sie es zur Überprüfung, nicht zur Behauptung.** "Erledigt" ist der Exit-Code 0, der von Ihrem Überprüfungsbefehl zurückgegeben wird, ausgeführt vom Agenten, wobei die Ausgabe für Sie sichtbar ist. Akzeptieren Sie niemals eine Zusammenfassung als Beweis. Der METR-Erkenntnis entspricht genau dem Gefühl, das man hat, wenn man selbstbewusste Zusammenfassungen akzeptiert: alles liest sich wie Fortschritt.
+
+</Step>
+
+<Step>
+
+**Überprüfen Sie die Absicht, nicht die Syntax.** Der Typprüfer, der Linter und die Testsuite haben die Syntax bereits geprüft. Ihre Überprüfung sollte stattdessen drei Fragen beantworten: Löst dies das eigentliche Problem? Hat es etwas dupliziert, das bereits existiert? Was wurde bewusst nicht getestet?
+
+</Step>
+
+</Steps>
+
+Die dritte Frage ist die, die am häufigsten zu Reaktionen führt. Fragen Sie einen Versicherungsmitarbeiter, welche Risiken er nicht abdeckt, und er wird Ihnen in der Regel präzise Auskunft geben. Diese Antwort enthält oft den Hinweis auf Ihren nächsten Schadenfall.
+
+## Eine ausgezeichnete Möglichkeit, ohne jegliche Kosten.
+
+Stellen Sie sich ein kleines Team vor, das wöchentlich etwa zehn Änderungen mit Unterstützung durch Mitarbeiter ausliefert. Nehmen wir an, dass eine von sechs dieser Änderungen einen Fehler aufweist, den keine automatische Prüfung erkennt – eine konservative Annahme, insbesondere angesichts der Erkenntnisse von GitClear, die zeigen, dass bereits das einfache Kopieren von Code bereits zu 15 bis 50 Prozent mehr Fehler führen kann.
+
+Das entspricht etwa 1,7 Fehlern pro Woche, die eine manuelle Prüfung oder die Produktion erreichen. Bei einer Stundensatz von 80 Euro kostet die Behebung eines Fehlers, der in der Prüfung entdeckt wird, möglicherweise eine Stunde, die zwischen dem Prüfer und dem Entwickler anfällt. Ein Fehler, der die Produktion erreicht, erfordert eine Debugging-Sitzung, eine Fehlerbehebung, eine Bereitstellung und unterbricht alle anderen laufenden Arbeiten, was in der Regel mehr als vier Stunden dauert.
+
+Berücksichtigt man, dass die durchschnittliche Zeit für die Bearbeitung bei drei Stunden liegt, dann werden etwa **400 Dollar pro Woche, oder 20.000 Dollar pro Jahr**, für Fehler ausgegeben, die eine Überprüfungsschleife und eine strenge Typenprüfung in nur neunzig Sekunden kostenlos hätten abweisen können – und das, bevor überhaupt ein Mensch sie gesehen hätte.
+
+Der springende Punkt ist nicht die Genauigkeit dieser Zahl. Ersetzen Sie sie durch Ihre eigene Rate und Ihren eigenen Fehlerquotent; die Form ändert sich nicht. Die Kosten für eine lange "Time to No" sind kontinuierlich, sie steigen mit der Leistung der Agenten und nicht entgegen ihr, und sie sind in jeder aktuellen Analyse nicht sichtbar, da sie als normale Ingenieurtätigkeit erscheinen.
+
+Deshalb ist die Frage „welcher Agent?“ die falsche Eröffnungsfrage. Ein besserer Agent erhöht den Zähler.
+
+## Wo SaaSyLand angesiedelt ist.
+
+Wir entwickeln eine SaaS-Codebasis für die Produktion und verkaufen sie. Täglich setzen wir Agenten gegen diese Codebasis ein, und genau das ist der Grund, warum dieser Artikel existiert. Daher ist es nur fair, diese anhand unserer eigenen Bewertung zu bewerten und Ihnen den Befehl zu zeigen, der jede Antwort beweist, anstatt Sie auf das Ergebnis blind zu vertrauen.
+
+| Überprüfen.                               | Ergebnis. | Überprüfen Sie es selbst.                                                                                                                                |
+| ----------------------------------------- | :-------: | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Anleitungsdatei                           |     2     | `AGENTS.md` im Stammverzeichnis, sowie separate Dateien für jeden Bereich, wobei alle Befehle, die die CI-Prozesse ausführen, entsprechend benannt sind. |
+| 2. Vertragstypen                          |     2     | `tsc --strict`, null `any`, Zod an jeder Grenze.                                                                                                         |
+| 3. Ein klassisches Beispiel.              |     2     | Ein Modulformat, dokumentiert in der Architekturdokumentation.                                                                                           |
+| Ein Befehl.                               |     2     | `bun run verify`                                                                                                                                         |
+| 5. Abdeckung als Sperre.                  |     2     | 100 % der Aussagen, Verzweigungen, Funktionen und Zeilen, durchgesetzt in `.github/workflows/ci.yml`.                                                    |
+| 6. Echte Browser.                         |     2     | 5 Playwright-Testsuiten in Chromium und WebKit                                                                                                           |
+| Nulltoleranz-Anhänger.                    |     2     | `tsc --strict` blockiert den Merge aufgrund eines Fehlers.                                                                                               |
+| 8. Durchgesetzte Grenzen.                 |     2     | Die Layer-Regeln führen zum Abbruch des Builds, nicht der Überprüfung.                                                                                   |
+| 9. Geschützte Flächen.                    |     2     | Migrationen, Geheimnisse und Webhooks mit dem Vermerk „nur menschliche Überprüfung“.                                                                     |
+| 10. Ansprüche werden Befehlen zugeordnet. |     2     | Jede Zahl auf unserer Preisübersicht bezieht sich auf die Datei, die sie erstellt.                                                                       |
+
+Zwanzig von zwanzig ist keine Angeberei, sondern eine Beschreibung dessen, was das Produkt ist. Ein Codebestand mit 140 Testdateien, 5 Playwright-Suiten und einer Abdeckungsprüfung, die den Build abbricht, ist ein Codebestand, der einem Agenten innerhalb von etwa neunzig Sekunden auf allen wichtigen Pfaden mitteilen kann, wo er Fehler hat. Sie können jeden Agenten, der in diesem Artikel beschrieben wird, damit arbeiten lassen – der Prozess schließt sich dabei automatisch, ohne dass Sie eingreifen müssen.
+
+Deshalb veröffentlichen wir auch keine Erfahrungsberichte. Eine Aussage lässt sich nicht überprüfen. Die Dokumentation ist öffentlich zugänglich, der Bericht über die Abdeckung wird von dem Repository generiert, das Sie erwerben möchten, und der CI-Workflow, der diese Abdeckung gewährleistet, befindet sich ebenfalls in diesem Repository. Bitte prüfen Sie die Beweise, bevor Sie dafür bezahlen.
+
+**Für wen dies nicht gedacht ist.** Wenn Sie etwas suchen, das Sie kostenlos erlernen und nutzen können, klonen Sie eine Vorlage und nutzen Sie diese. Wenn Sie zufrieden sind damit, einen gehosteten Anbieter für Ihre Authentifizierung zu nutzen und pro aktivem Nutzer monatlich abgerechnet zu werden, kaufen Sie das stattdessen. Dies ist für diejenigen gedacht, die auch bei fünfzigtausend Nutzern weiterhin die Kontrolle behalten möchten, und die es vorziehen, dass ihr System in neunzig Sekunden an eine Grenze stößt, anstatt im Produktionsbetrieb.
+
+<Callout title={"Beginnen Sie hier."}>
+
+Lesen Sie zunächst [die Dokumentation](/docs) und den Abschnitt zur Architektur. Dann [sehen Sie sich die Preisinformationen](/#pricing) an. Einmalige Zahlung ab 249 $, lebenslange Updates des Kernsystems, keine nutzungsabhängigen Gebühren.
+
+</Callout>
+
+## Häufig gestellte Fragen.
+
+<Accordions>
+
+<Accordion title={"Welcher KI-Codierungsagent ist im Jahr 2026 am besten?"}>
+
+Es gibt keinen einzelnen, besten Agenten, und die ehrliche Antwort ist, dass die Frage weniger wichtig ist, als sie zunächst erscheinen mag. Stand Januar 2026 liegt GitHub Copilot bei der Nutzung in Unternehmen mit 29 % vor, gefolgt von Cursor und Claude Code, die beide bei 18 % liegen. Wählen Sie den Agenten anhand der Integration: verwenden Sie die terminal-native Variante für Arbeiten mit mehreren Dateien, die IDE-native Variante für schrittweise Arbeiten und delegieren Sie nur, wenn Ihr Repository im oben genannten Bewertungssystem eine Punktzahl von 17 oder höher erreicht.
+
+</Accordion>
+
+<Accordion title={"Machen KI-basierte Code-Agenten Entwickler tatsächlich schneller?"}>
+
+Nicht zuverlässig und nicht unter den Bedingungen, unter denen die meisten Teams arbeiten. Die randomisierte kontrollierte Studie von METR zeigte, dass 16 erfahrene Entwickler bei realen Aufgaben in ihren eigenen, ausgereiften Repositories 19 % langsamer waren, obwohl sie glaubten, 20 % schneller zu sein. Geschwindigkeit tritt erst dann auf, wenn das Repository fehlerhafte Änderungen automatisch ablehnen kann. Fehlt diese Funktionalität, steigt zwar die Ausgabemenge, die Produktivität jedoch nicht.
+
+</Accordion>
+
+<Accordion title={"Warum erzeugt mein KI-Codierungsassistent immer wieder Code, der fast richtig ist?"}>
+
+Da nichts in Ihrem Repository dies widerlegt. Ein Agent optimiert für das, was er beobachten kann, und wenn das einzige verfügbare Signal lautet „das sieht aus wie der umliegende Code“, wird er Code erzeugen, der dem umliegenden Code ähnelt und dabei das falsche tut. Dies ist das größte Problem für 45 % der befragten Entwickler. Reduzieren Sie Ihre Zeit bis zur Fehlerfreiheit, und diese Kategorie wird kleiner.
+
+</Accordion>
+
+<Accordion title={"Was ist AGENTS.md und benötige ich eines?"}>
+
+`AGENTS.md` ist eine Markdown-Datei im Stammverzeichnis Ihres Repositorys, die Coding-Agenten Ihre Anweisungen, Grenzen und Konventionen mitteilt. Sie wurde im August 2025 als offene Spezifikation formalisiert, im Dezember 2025 der Agentic AI Foundation der Linux Foundation übergeben und wird nun in über 60.000 öffentlichen Repositories verwendet, die von mehr als 30 Agenten gelesen werden. Ja, Sie benötigen eine solche Datei, und sie sollte kurz genug sein, um ihre Aussagekraft zu bewahren.
+
+</Accordion>
+
+<Accordion title={"Sollte ich eine AGENTS.md- und eine CLAUDE.md-Datei erstellen?"}>
+
+Bewahren Sie eine Datei als echte Datei auf und lassen Sie die anderen auf diese verweisen. Duplizierte Anleitungsdateien weichen innerhalb eines Monats ab, und ein Agent, der eine veraltete Datei verwendet, befolgt diese selbstbewusst. Fügen Sie alles in `AGENTS.md` ein und verwenden Sie toolspezifische Dateien nur für wirklich toolspezifisches Verhalten.
+
+</Accordion>
+
+<Accordion title={"Spielt eine 100-prozentige Testabdeckung bei der KI-gestützten Entwicklung eine Rolle?"}>
+
+Es ist wichtiger als es vorher war, und das aus einem Grund, der nicht mit der üblichen Diskussion zusammenhängt. Ein Coverage-Schwellenwert, der zu einem fehlgeschlagenen Build führt, ist eine Regel, die ein Agent nicht umgehen kann: er kann kein Verhalten hinzufügen, ohne gleichzeitig einen Test hinzuzufügen. Coverage als Auszeichnung ist wirkungslos. Coverage als Kontrollmechanismus wandelt den Aufwand für die Überprüfung in einen Build-Fehler um, der niemanden unnötig Zeit kostet.
+
+</Accordion>
+
+<Accordion title={"Kann ein KI-Agent einfach meine SaaS-Grundgerüst für mich erstellen?"}>
+
+Es wird funktionieren, und das Ergebnis wird korrekt aussehen. Was es Ihnen jedoch nicht mitteilen wird, ist, welche Autorisierungsfälle es übersprungen hat, welcher Webhook nicht idempotent ist oder dass die i18n-Paritätsprüfung, die es nie durchgeführt hat, die fehlenden Übersetzungen hätte finden können. Die Aussagekraft eines Agenten hängt lediglich von den Prüfungen ab, die seine Ergebnisse überprüft haben, und in einem leeren Repository gibt es solche Prüfungen nicht.
+
+</Accordion>
+
+<Accordion title={"Welcher Agent eignet sich am besten für die Arbeit mit großen Codebasen?"}>
+
+Die Frage lässt sich meist auf die Zusammenstellung von Kontexten zurückführen, anstatt auf den Agenten selbst. Agenten, die aktiv suchen (z. B. `grep` ausführen, Dateien öffnen, Importe verfolgen), finden Ihre bereits vorhandenen Helfer. Agenten, die sich auf den bestehenden Editor-Kontext angewiesen sind, finden lediglich das, was gerade geöffnet ist. In einem großen Repository zeigt sich der Unterschied oft in Duplikaten, weshalb Punkt 3 auf der Bewertungsskala, nämlich ein kanonisches Beispiel pro Muster, umso wichtiger wird, je größer die Codebasis ist.
+
+</Accordion>
+
+<Accordion title={"Wie kann ich verhindern, dass ein Agent Änderungen an Migrationen oder Secrets vornimmt?"}>
+
+Benennen Sie die Pfade in `AGENTS.md` als ausschließlich für menschliche Überprüfung bestimmt und untermauern Sie das durch Continuous Integration (CI) anstatt durch bloßes Vertrauen. Anleitungsdateien definieren die Absicht; Branch-Schutz, erforderliche Prüfer für diese Pfade und ein fehlgeschlagenes Build setzen dies durch. Jeder Bereich, an dem ein Fehler irreversible oder kostspielige Folgen haben könnte, sollte sowohl an diesen Stellen berücksichtigt werden.
+
+</Accordion>
+
+<Accordion title={"Lohnt es sich, zu einem anderen Agenten zu wechseln, um bessere Ergebnisse zu erzielen?"}>
+
+Der Wechsel ermöglicht Ihnen eine einmalige Verbesserung der Qualität der Angebote, die jedoch zurückgesetzt wird, sobald ein neues Modell verfügbar ist. Durch die Reduzierung der Zeit bis zur ersten Änderung beeinflussen Sie die Anzahl der fehlerhaften Angebote, die Sie erhalten – dies gilt für alle Agenten, die Sie verwenden, und wirkt sich verstärkend aus. Führen Sie diesen Schritt zuerst durch. Anschließend können Sie beliebig oft zwischen verschiedenen Agenten wechseln, da die Kosten für eine falsche Wahl zu diesem Zeitpunkt gering sind.
+
+</Accordion>
+
+</Accordions>
+
+### Quellen.
+
+- [Stack Overflow Entwicklerumfrage 2025: Bereich Künstliche Intelligenz.](https://survey.stackoverflow.co/2025/ai)
+- [METR, "Messung der Auswirkungen von KI im frühen Jahr 2025 auf die Produktivität erfahrener Open-Source-Entwickler" (Juli 2025).](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)
+- [GitClear, "Die Lücke bei der Wartbarkeit: Forschung zur Qualität von KI-generiertem Code, 2026"](https://www.gitclear.com/the_ai_code_quality_maintainability_gap)
+- [Google DORA, State of DevOps Forschung.](https://dora.dev/)
+- [Agenten.md – offene Spezifikation](https://agents.md/)
+
+_Verfasst von Piotr J. Borowiecki, dem Gründer von SaaSyLand. Jede Aussage über unseren eigenen Code in diesem Artikel lässt sich durch einen entsprechenden Befehl im Repository nachvollziehen, der in der oben genannten Bewertungstabelle aufgeführt ist._

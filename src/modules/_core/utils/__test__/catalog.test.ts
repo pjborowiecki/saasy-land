@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
 
 describe("catalog helpers", () => {

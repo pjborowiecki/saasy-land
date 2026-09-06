@@ -1,8 +1,8 @@
-import "server-only"
+import "@tanstack/react-start/server-only"
+
+import { env } from "cloudflare:workers"
 
 import type { JSX } from "react"
-
-import { env } from "~/src/platform/env"
 
 import { resend } from "~/src/integrations/resend/resend.config"
 
@@ -14,13 +14,13 @@ interface SendEmailOptions {
   readonly to: string
 }
 
-export async function sendEmail({
+export const sendEmail = async ({
   from = env.RESEND_EMAIL_FROM,
   idempotencyKey,
   react,
   subject,
   to,
-}: Readonly<SendEmailOptions>): Promise<string> {
+}: Readonly<SendEmailOptions>): Promise<string> => {
   const { data, error } = await resend.emails.send({ from, react, subject, to }, { idempotencyKey })
 
   if (error) {

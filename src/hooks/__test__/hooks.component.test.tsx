@@ -1,8 +1,7 @@
+import { act, render, renderHook, screen, waitFor } from "@testing-library/react"
 /** @vitest-environment jsdom */
-
-import { render, renderHook, screen, act, waitFor } from "@testing-library/react"
 import type * as CanvasConfetti from "canvas-confetti"
-import { FormProvider, useForm } from "react-hook-form"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 import { useConfetti } from "~/src/hooks/use-confetti"
 import { useIsMobile } from "~/src/hooks/use-mobile"
@@ -15,15 +14,12 @@ const DESKTOP_VIEWPORT_WIDTH = 1024
 
 const confettiMock = vi.hoisted(() => vi.fn<typeof CanvasConfetti.default>())
 
-vi.mock(
-  import("canvas-confetti"),
-  (): Partial<typeof CanvasConfetti> => ({
-    default: confettiMock,
-  }),
-)
+vi.mock(import("canvas-confetti"), (): Partial<typeof CanvasConfetti> => ({
+  default: confettiMock,
+}))
 
-function PasswordRulesProbe() {
-  const rules = usePasswordRules()
+const PasswordRulesProbe = ({ password }: { password?: string }) => {
+  const rules = usePasswordRules(password)
   return (
     <div>
       <span data-testid="min">{String(rules.isMinLength)}</span>
@@ -33,33 +29,25 @@ function PasswordRulesProbe() {
   )
 }
 
-function PasswordRulesWrapper({ password }: Readonly<{ password?: string }>) {
-  const form = useForm({ values: password === undefined ? {} : { password } })
-
-  return (
-    <FormProvider {...form}>
-      <PasswordRulesProbe />
-    </FormProvider>
-  )
-}
+const PasswordRulesWrapper = ({ password }: { password?: string }) => (
+  <PasswordRulesProbe {...(password === undefined ? {} : { password })} />
+)
 
 const mobileChangeListener = { current: () => {} }
 
-function createMatchMedia(query: string) {
-  return {
-    addEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => {
-      if (typeof listener === "function") {
-        mobileChangeListener.current = () => {
-          listener(new Event("change"))
-        }
+const createMatchMedia = (query: string) => ({
+  addEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => {
+    if (typeof listener === "function") {
+      mobileChangeListener.current = () => {
+        listener(new Event("change"))
       }
-    },
-    dispatchEvent: () => false,
-    matches: globalThis.innerWidth < MOBILE_BREAKPOINT,
-    media: query,
-    removeEventListener: vi.fn<() => void>(),
-  }
-}
+    }
+  },
+  dispatchEvent: () => false,
+  matches: globalThis.innerWidth < MOBILE_BREAKPOINT,
+  media: query,
+  removeEventListener: vi.fn<() => void>(),
+})
 
 describe("use confetti component", () => {
   it("fires five confetti bursts", () => {

@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Weryfikacja e-mail",
+    "description": "Zweryfikuj adres e-mail swojego konta {name}."
+  },
+  "form": {
+    "title": "Zweryfikuj e-mail",
+    "description": "Potwierdź adres e-mail, aby dokończyć konfigurację konta.",
+    "verifying": "Weryfikowanie adresu e-mail…",
+    "success": "Twój adres e-mail został zweryfikowany.",
+    "continue": "Kontynuuj",
+    "invalidToken": "Ten link weryfikacyjny jest nieprawidłowy lub wygasł.",
+    "pendingDescription": "Sprawdź skrzynkę odbiorczą i otwórz link weryfikacyjny. Następnie zaloguj się, aby kontynuować.",
+    "email": "E-mail",
+    "emailPlaceholder": "Twój adres e-mail",
+    "emailRequired": "Podaj adres e-mail, aby wysłać link weryfikacyjny ponownie.",
+    "resend": "Wyślij ponownie e-mail weryfikacyjny",
+    "resendSuccess": "Jeśli konto z tym adresem istnieje, wysłaliśmy nowy link weryfikacyjny.",
+    "backToSignIn": "Wróć do logowania",
+    "resending": "Wysyłanie e-maila weryfikacyjnego…"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "title": "Publications",
+  "description": "Create, manage, and analyze your blog content.",
+  "actions": {
+    "categories": "Categories",
+    "writePost": "Write Post",
+    "loadMore": "Load More Articles"
+  },
+  "stats": {
+    "totalViews": "Total Views (30d)",
+    "subscribers": "Subscribers",
+    "publishedPosts": "Published Posts",
+    "draftsPending": "{count} drafts pending"
+  },
+  "filters": {
+    "all": "All Posts",
+    "published": "Published",
+    "drafts": "Drafts",
+    "scheduled": "Scheduled",
+    "search": "Search articles..."
+  },
+  "badges": {
+    "published": "Published",
+    "draft": "Draft",
+    "scheduled": "Scheduled"
+  },
+  "meta": {
+    "readTime": "{minutes} min read",
+    "publishedOn": "{date}",
+    "lastEdited": "Last edited {time}",
+    "publishesTomorrow": "Publishes tomorrow"
+  },
+  "labels": {
+    "gridView": "Grid View",
+    "tableView": "Table View",
+    "moreOptions": "More Options"
+  },
+  "table": {
+    "postDetails": "Post Details",
+    "status": "Status",
+    "category": "Category",
+    "author": "Author",
+    "date": "Date",
+    "views": "Views",
+    "actions": "Actions",
+    "selectRow": "Select row",
+    "emptyValue": "Not set",
+    "rowActions": "Row actions"
+  },
+  "pagination": {
+    "info": "Showing {start} to {end} of {total} posts"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "Scaling Database Architecture for 10x Growth",
+        "description": "An in-depth technical dive into how our engineering team transitioned from a monolithic setup to a distributed architecture.",
+        "category": "Engineering"
+      },
+      "post-2": {
+        "title": "Introducing Advanced Analytics Dashboard 2.0",
+        "description": "We've completely overhauled our reporting tools to give you deeper insights into your customer behavior and revenue metrics.",
+        "category": "Product Update"
+      },
+      "post-3": {
+        "title": "The Evolution of our Design System",
+        "description": "Building a cohesive visual language that scales across web, mobile, and internal administrative tools.",
+        "category": "Design"
+      },
+      "post-4": {
+        "title": "Announcing our Series B Funding Round",
+        "description": "We are thrilled to announce a $25M investment led by top tier venture firms to accelerate our growth.",
+        "category": "Company News"
+      },
+      "post-5": {
+        "title": "Mastering Webhooks for Real-time Data",
+        "description": "Learn how to build resilient webhook systems that handle millions of events securely.",
+        "category": "Tutorial"
+      },
+      "post-6": {
+        "title": "Strategies for Reducing Customer Churn",
+        "description": "Proven retention tactics used by the fastest-growing SaaS companies.",
+        "category": "Marketing"
+      }
+    },
+    "dates": {
+      "draft": "2h ago",
+      "scheduled": "Tomorrow"
+    }
+  }
+}

@@ -19,7 +19,7 @@ const tableHandlers = new WeakMap<SelectableTable, (selected: boolean) => void>(
  * arrows would be recreated on every render. Caching one adapter per instance gives
  * checkbox renderers a referentially stable callback that always acts on live state.
  */
-export function toggleRowSelected(row: SelectableRow): (selected: boolean) => void {
+export const toggleRowSelected = (row: SelectableRow): ((selected: boolean) => void) => {
   let handler = rowHandlers.get(row)
 
   if (handler === undefined) {
@@ -33,7 +33,7 @@ export function toggleRowSelected(row: SelectableRow): (selected: boolean) => vo
 }
 
 /** See {@link toggleRowSelected}; the same contract for the header's select-all. */
-export function toggleAllPageRowsSelected(table: SelectableTable): (selected: boolean) => void {
+export const toggleAllPageRowsSelected = (table: SelectableTable): ((selected: boolean) => void) => {
   let handler = tableHandlers.get(table)
 
   if (handler === undefined) {

@@ -1,8 +1,8 @@
-import { AUTH_ERRORS, authErrorKey, type AuthErrorCode } from "~/src/integrations/better-auth/auth.errors"
+import { describe, expect, it } from "vite-plus/test"
 
-function isAuthErrorCode(code: string): code is AuthErrorCode {
-  return Object.hasOwn(AUTH_ERRORS, code)
-}
+import { AUTH_ERRORS, type AuthErrorCode, authErrorKey } from "~/src/integrations/better-auth/auth.errors"
+
+const isAuthErrorCode = (code: string): code is AuthErrorCode => Object.hasOwn(AUTH_ERRORS, code)
 
 describe("auth error key component", () => {
   it("maps known auth error codes", () => {

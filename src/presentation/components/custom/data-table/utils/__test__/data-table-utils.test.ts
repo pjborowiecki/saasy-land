@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { ariaSort } from "~/src/presentation/components/custom/data-table/utils/data-table-aria"
 import { alignClass } from "~/src/presentation/components/custom/data-table/utils/data-table-column-style"
 import { toggleAllPageRowsSelected, toggleRowSelected } from "~/src/presentation/components/custom/data-table/utils/data-table-selection"

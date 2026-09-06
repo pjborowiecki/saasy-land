@@ -1,0 +1,11 @@
+{
+  "empty": "結果が見つかりませんでした。",
+  "pagination": {
+    "nextPage": "次のページ",
+    "pageIndicator": "{total}ページ中{current}ページ",
+    "previousPage": "前のページ",
+    "rowCount": "{count, plural, =0 {行はありません} other {#行}}",
+    "selectedCount": "{selected, plural, other {#件選択中}}"
+  },
+  "resizeColumn": "列のサイズを変更する"
+}

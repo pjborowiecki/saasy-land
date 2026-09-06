@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Angemeldeten App-Bereich."
+    },
+    "welcome": "App: {name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "Startseite"
+    },
+    "header": {
+      "notifications": "Benachrichtigungen",
+      "searchPlaceholder": "Suchen Sie in der Konsole",
+      "searchEmpty": "Kein passender Abschnitt gefunden."
+    },
+    "userWidget": {
+      "settings": "Einstellungen",
+      "signedInAs": "Angemeldet als <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Abmelden",
+      "signingOut": "Auf Wiedersehen.",
+      "success": "Auf Wiedersehen"
+    }
+  },
+  "labels": {
+    "unknownLocation": "Unbekannter Standort",
+    "gettingStartedSection": "Abschnitt 1: Erste Schritte",
+    "welcomeLesson": "Willkommen zum Kurs",
+    "setupLesson": "Entwicklungsumgebung einrichten",
+    "coreConceptsSection": "Abschnitt 2: Grundlagen",
+    "development": "Entwicklung",
+    "design": "Design",
+    "beginner": "Einsteiger",
+    "intermediate": "Fortgeschritten",
+    "advanced": "Experten",
+    "oneYearAccess": "Zugriff für 1 Jahr",
+    "products": "Produkte",
+    "noCourses": "Keine Kurse gefunden.",
+    "previousPage": "Vorherige Seite",
+    "nextPage": "Nächste Seite",
+    "rowActions": "Aktionen für diese Zeile",
+    "actions": "Aktionen",
+    "saasPlans": "SaaS-Tarife",
+    "addOns": "Erweiterungen",
+    "coreSubscription": "Core-Abonnement",
+    "legacy": "Altbestand",
+    "hidden": "Ausgeblendet",
+    "public": "Öffentlich"
+  }
+}

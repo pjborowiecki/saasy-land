@@ -1,0 +1,14 @@
+---
+title: Regras de dependência.
+description: Regras de dependência... SaaSy Land
+---
+
+Rotas importam apresentações e casos de uso. Apresentação importa opções de consulta/mutação nativas, esquemas e ajudantes compartilhados. Casos de uso importam o banco de dados e adaptadores de fornecedores através de fronteiras somente de servidores. Constantes de módulo e validação devem permanecer utilizáveis por ambas as formas e funções do servidor.
+
+Não importa a vinculação do trabalhador ou a configuração secreta em um componente do navegador. TanStack Start Separações. `createServerFn` Lideradores fora do pacote do navegador. Adaptadores compartilhados que nunca devem ser executados na importação do navegador. `@tanstack/react-start/server-only`.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

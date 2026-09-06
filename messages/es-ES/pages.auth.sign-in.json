@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "Iniciar sesión",
+    "description": "Inicia sesión en tu cuenta de {name}."
+  },
+  "form": {
+    "title": "¡Bienvenido de nuevo!",
+    "description": "Introduce sus datos para acceder a su cuenta.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Continúe",
+    "submitting": "Iniciando sesión...",
+    "success": "¡Inicio de sesión exitoso!",
+    "error": "Correo electrónico o contraseña incorrectos. Por favor, inténtelo de nuevo.",
+    "noAccount": "¿No tiene una cuenta? <signup>Regístrese</signup>",
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "continueWithGithub": "Continúe con GitHub",
+    "continueWithGoogle": "Continúe con Google",
+    "or": "o"
+  }
+}

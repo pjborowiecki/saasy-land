@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "title": "Blog",
+    "description": "Qu'est-ce qui a changé à SaaSy Land, pourquoi, et à quel prix."
+  },
+  "nav": {
+    "docs": "Documentation",
+    "blog": "Blog",
+    "home": "Accueil",
+    "getStarted": "Commencer à créer"
+  },
+  "index": {
+    "title": "Notes de la construction.",
+    "description": "Qu'est-ce qui a changé, pourquoi cela a changé, et quel a été le coût. Rédigé pendant la création du produit que ce site vend — donc chaque article porte sur du code qui a été déployé, et non sur du code qui pourrait l'être.",
+    "empty": "Rien n'a encore été publié."
+  },
+  "post": {
+    "backToBlog": "Tous les articles",
+    "writtenBy": "Écrit par",
+    "dateLabel": "Publié",
+    "contents": "Contenu",
+    "readingTime": "{minutes} min de lecture",
+    "cta": {
+      "label": "SaaSy Land 2.0",
+      "title": "Les trois mois ingrats, déjà écrits.",
+      "body": "Authentification sur votre propre base de données, facturation, e-mails transactionnels, une console d'administration, 9 langues et un seuil de couverture qui fait échouer le build. Généré sous forme de code source qui vous appartient, pas d'une dépendance louée.",
+      "primary": "Voir les tarifs",
+      "secondary": "Lire la documentation"
+    },
+    "share": {
+      "label": "Partagez",
+      "x": "Partager sur X",
+      "linkedin": "Partager sur LinkedIn",
+      "copy": "Copier le lien",
+      "copied": "Lien copié"
+    }
+  }
+}

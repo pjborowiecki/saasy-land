@@ -1,0 +1,14 @@
+---
+title: Caching e RCE
+description: Caching e RCE - SaaSy Land
+---
+
+O QueryClient pertence a uma instância de roteador e está integrado com renderização de servidor. Carregadores pré-carregam dados e espaço de nomes JSON; componentes lêem o mesmo cache com `useSuspenseQuery` ou `useSuspenseQueries`. . Consultas declaram chaves estáveis. Mutações bem-sucedidas invalidam apenas as chaves afetadas.
+
+Documentação pública, blog e landing pages são pré-renderizadas em tempo de construção. Cloudflare KV "Caches públicos" GitHub Metadados. D1 Guarda sessões persistentes e contadores atômicos de limite de velocidade; KV não é usado para decisões de permissão.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

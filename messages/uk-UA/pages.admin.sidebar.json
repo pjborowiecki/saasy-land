@@ -1,0 +1,26 @@
+{
+  "title": "SaaSy Land",
+  "groups": {
+    "overview": "Огляд",
+    "offerings": "Пропозиції",
+    "administration": "Адміністрація",
+    "content": "Зміст"
+  },
+  "links": {
+    "dashboard": "Панель керування",
+    "analytics": "Аналітика",
+    "products": "Продукція",
+    "courses": "Курси",
+    "pricingModels": "Моделі ціноутворення",
+    "contentAccess": "Контент та доступ",
+    "userManagement": "Керування користувачами",
+    "activeSessions": "Активні сесії",
+    "payments": "Оплата та виставлення рахунків",
+    "settings": "Налаштування",
+    "blog": "Блог",
+    "landingPage": "Сторінка привітання"
+  },
+  "badges": {
+    "activeSessionsBadge": "3"
+  }
+}

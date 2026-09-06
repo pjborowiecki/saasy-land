@@ -1,0 +1,14 @@
+---
+title: Cloudflare KV
+description: Cloudflare KV — SaaSy Land
+---
+
+`env.CACHE` stocke public, entrées de cache jetables. L'étoile GitHub d'intégration cache compte avec un TTL et utilise `waitUntil` pour l'écriture du cache. Il revient gracieusement si GitHub ou KV n'est pas disponible.
+
+KV est finalement cohérent. Les sessions d'authentification et les limites de taux sont affichées dans D1. Le limiteur d'action utilise un upsert SQL atomique par clé et fenêtre de temps, de sorte que les requêtes traitées par des instances Worker séparées partagent la même limite. Ne pas utiliser de compteurs KV pour l'autorisation ou les limites sensibles.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

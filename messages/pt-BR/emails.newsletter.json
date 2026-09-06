@@ -1,0 +1,16 @@
+{
+  "confirmation": {
+    "subject": "Só falta um clique",
+    "preview": "Confirme seu endereço para receber o diário de desenvolvimento.",
+    "heading": "Só falta um clique",
+    "body": "Alguém informou este endereço em saasyland.com. Confirme para receber o diário de desenvolvimento: as novidades, as decisões por trás delas e as tentativas que não deram certo. Se você não se inscreveu, basta excluir este e-mail. Não entraremos em contato novamente.",
+    "button": "Quero participar",
+    "footer": "O link só pode ser usado uma vez e expira em 24 horas. Se algo parecer errado, fale com a gente:"
+  },
+  "notification": {
+    "subject": "Nova inscrição na newsletter",
+    "preview": "Uma inscrição na newsletter foi confirmada.",
+    "heading": "Nova inscrição na newsletter",
+    "body": "{email} confirmou uma inscrição pela página inicial em {locale}."
+  }
+}

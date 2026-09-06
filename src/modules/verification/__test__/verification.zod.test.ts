@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { verificationZodSchemas } from "~/src/modules/verification/verification.zod"
 
 describe("verification zod schemas", () => {

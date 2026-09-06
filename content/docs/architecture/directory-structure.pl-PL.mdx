@@ -1,0 +1,28 @@
+---
+title: Struktura katalogów
+description: Struktura katalogów — SaaSy Land
+---
+
+Pliki i katalogi nazywaj w kebab-case. Pliki tras korzystają z konwencji kropek i tras bez segmentu URL w TanStack Router. Wspólny interfejs umieszczaj w `presentation/components/custom`, a komponenty bazowe w `presentation/components/shadcn`. Funkcja może mieć katalogi `components`, `constants`, `hooks` i `types`, jeśli są potrzebne.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

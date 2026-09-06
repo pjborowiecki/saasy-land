@@ -1,12 +1,10 @@
-"use client"
-
-import { createContext, use, useCallback, useEffect, useMemo, useState, type ComponentProps, type KeyboardEvent } from "react"
+import { type ComponentProps, type KeyboardEvent, createContext, use, useCallback, useEffect, useMemo, useState } from "react"
 
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
@@ -33,7 +31,7 @@ interface CarouselContextProps extends CarouselProps {
 
 const CarouselContext = createContext<CarouselContextProps | undefined>(undefined)
 
-function useCarousel() {
+const useCarousel = () => {
   const context = use(CarouselContext)
 
   if (context === undefined) {
@@ -43,7 +41,7 @@ function useCarousel() {
   return context
 }
 
-function Carousel({
+const Carousel = ({
   children,
   className,
   opts,
@@ -51,7 +49,7 @@ function Carousel({
   plugins,
   setApi,
   ...props
-}: ComponentProps<"section"> & CarouselProps) {
+}: ComponentProps<"section"> & CarouselProps) => {
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
 
@@ -95,33 +93,27 @@ function Carousel({
     [scrollNext, scrollPrev],
   )
 
-  useEffect(
-    function syncCarouselApi() {
-      if (api === undefined || setApi === undefined) {
-        return
-      }
+  useEffect(() => {
+    if (api === undefined || setApi === undefined) {
+      return
+    }
 
-      setApi(api)
-    },
-    [api, setApi],
-  )
+    setApi(api)
+  }, [api, setApi])
 
-  useEffect(
-    function subscribeToCarouselSelection() {
-      if (api === undefined) {
-        return
-      }
+  useEffect(() => {
+    if (api === undefined) {
+      return
+    }
 
-      onSelect(api)
-      api.on("reInit", onSelect)
-      api.on("select", onSelect)
+    onSelect(api)
+    api.on("reInit", onSelect)
+    api.on("select", onSelect)
 
-      return function unsubscribeFromCarouselSelection() {
-        api.off("select", onSelect)
-      }
-    },
-    [api, onSelect],
-  )
+    return function unsubscribeFromCarouselSelection() {
+      api.off("select", onSelect)
+    }
+  }, [api, onSelect])
 
   const contextValue = useMemo(
     () => ({
@@ -143,7 +135,7 @@ function Carousel({
     <CarouselContext.Provider value={contextValue}>
       <section
         aria-label={t("carouselLabel")}
-        aria-roledescription="carousel"
+        aria-roledescription={t("carouselLabel")}
         className={cn("relative", className)}
         data-slot="carousel"
         onKeyDownCapture={handleKeyDown}
@@ -155,7 +147,7 @@ function Carousel({
   )
 }
 
-function CarouselContent({ className, ...props }: ComponentProps<"div">) {
+const CarouselContent = ({ className, ...props }: ComponentProps<"div">) => {
   const { carouselRef, orientation } = useCarousel()
 
   return (
@@ -165,12 +157,13 @@ function CarouselContent({ className, ...props }: ComponentProps<"div">) {
   )
 }
 
-function CarouselItem({ className, ...props }: ComponentProps<"fieldset">) {
+const CarouselItem = ({ className, ...props }: ComponentProps<"fieldset">) => {
+  const t = useTranslations("components.shadcn.carousel")
   const { orientation } = useCarousel()
 
   return (
     <fieldset
-      aria-roledescription="slide"
+      aria-roledescription={t("slideLabel")}
       className={cn("m-0 min-w-0 shrink-0 grow-0 basis-full border-0 p-0", orientation === "horizontal" ? "pl-4" : "pt-4", className)}
       data-slot="carousel-item"
       {...props}
@@ -178,7 +171,7 @@ function CarouselItem({ className, ...props }: ComponentProps<"fieldset">) {
   )
 }
 
-function CarouselPrevious({ className, size = "icon-sm", variant = "outline", ...props }: ComponentProps<typeof Button>) {
+const CarouselPrevious = ({ className, size = "icon-sm", variant = "outline", ...props }: ComponentProps<typeof Button>) => {
   const t = useTranslations("components.shadcn.carousel")
   const { canScrollPrev, orientation, scrollPrev } = useCarousel()
 
@@ -202,7 +195,7 @@ function CarouselPrevious({ className, size = "icon-sm", variant = "outline", ..
   )
 }
 
-function CarouselNext({ className, size = "icon-sm", variant = "outline", ...props }: ComponentProps<typeof Button>) {
+const CarouselNext = ({ className, size = "icon-sm", variant = "outline", ...props }: ComponentProps<typeof Button>) => {
   const { canScrollNext, orientation, scrollNext } = useCarousel()
   const t = useTranslations("components.shadcn.carousel")
 
@@ -226,4 +219,4 @@ function CarouselNext({ className, size = "icon-sm", variant = "outline", ...pro
   )
 }
 
-export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel }
+export { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel, type CarouselApi }

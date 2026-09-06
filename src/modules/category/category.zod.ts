@@ -1,27 +1,27 @@
 import { createSchemaFactory } from "drizzle-zod"
-import z from "zod/v4"
+import zod from "zod/v4"
 
 import { MIN_FIELD_LENGTH, userIdField } from "~/src/modules/_core/utils/zod-fields"
 import { category, categoryIconEnum, categoryKindEnum, categoryVisibilityEnum } from "~/src/modules/category/category.schema"
 import { CATEGORY_VALIDATION_MESSAGE } from "~/src/modules/category/category.validations"
 
-const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
+const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: zod })
 
 const CATEGORY_NAME_MAX_LENGTH = 255
 
-const categoryIconSchema = z.enum(categoryIconEnum.enumValues)
-const categoryKindSchema = z.enum(categoryKindEnum.enumValues)
-const categoryVisibilitySchema = z.enum(categoryVisibilityEnum.enumValues)
+const categoryIconSchema = zod.enum(categoryIconEnum.enumValues)
+const categoryKindSchema = zod.enum(categoryKindEnum.enumValues)
+const categoryVisibilitySchema = zod.enum(categoryVisibilityEnum.enumValues)
 
-const categoryIdInput = z.object({
+const categoryIdInput = zod.object({
   categoryId: userIdField,
 })
 
-const createCategory = z.object({
-  description: z.string().optional(),
+const createCategory = zod.object({
+  description: zod.string().optional(),
   icon: categoryIconSchema.optional(),
   kind: categoryKindSchema,
-  name: z
+  name: zod
     .string()
     .min(MIN_FIELD_LENGTH, { message: CATEGORY_VALIDATION_MESSAGE.nameRequired })
     .max(CATEGORY_NAME_MAX_LENGTH, { message: CATEGORY_VALIDATION_MESSAGE.nameMaxLength }),
@@ -32,13 +32,13 @@ const deleteCategory = categoryIdInput
 
 const getCategory = categoryIdInput
 
-const updateCategory = z
+const updateCategory = zod
   .object({
     categoryId: userIdField,
-    description: z.string().optional(),
+    description: zod.string().optional(),
     icon: categoryIconSchema.optional(),
     kind: categoryKindSchema.optional(),
-    name: z
+    name: zod
       .string()
       .min(MIN_FIELD_LENGTH, { message: CATEGORY_VALIDATION_MESSAGE.nameRequired })
       .max(CATEGORY_NAME_MAX_LENGTH, { message: CATEGORY_VALIDATION_MESSAGE.nameMaxLength })

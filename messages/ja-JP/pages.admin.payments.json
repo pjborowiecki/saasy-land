@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "支払い",
+    "description": "収益、取引、および支払い設定を管理します。"
+  },
+  "title": "支払い",
+  "description": "収益、取引、および支払い設定を管理します。",
+  "actions": {
+    "export": "エクスポート",
+    "settings": "支払い設定"
+  },
+  "tabs": {
+    "transactions": "取引",
+    "subscriptions": "サブスクリプション",
+    "payouts": "売上金の振込",
+    "refunds": "返金"
+  },
+  "stats": {
+    "refunded": {
+      "title": "返金済み（30日間）",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "返金率",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "承認待ち",
+      "subtitle": "合計407.00米ドル",
+      "value": "3"
+    },
+    "vsLastMonth": "先月と比較して"
+  },
+  "table": {
+    "title": "最近の返金",
+    "columns": {
+      "customer": "顧客",
+      "amount": "金額",
+      "item": "購入した商品",
+      "reason": "理由",
+      "date": "日付",
+      "status": "ステータス",
+      "rowActions": "行の操作"
+    },
+    "pagination": {
+      "showing": "1～4件中、全24件を表示しています",
+      "previous": "前へ",
+      "next": "次へ",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "払い戻しを絞り込む"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro年間プラン",
+      "reason": "意図しない更新",
+      "status": "処理済み",
+      "type": "全額返金"
+    },
+    "p2": {
+      "item": "Pro月額プラン",
+      "reason": "サービス停止時の補償",
+      "status": "処理済み",
+      "type": "部分払い戻し"
+    },
+    "p3": {
+      "item": "Starter月額プラン",
+      "reason": "ニーズに合わない",
+      "status": "保留中",
+      "type": "全額返金"
+    },
+    "p4": {
+      "item": "Pro年間プラン",
+      "reason": "不正な請求",
+      "status": "失敗しました",
+      "type": "全額返金"
+    }
+  }
+}

@@ -97,10 +97,6 @@ export class AuthPage extends BasePage {
     return this.page.getByTestId("verify-email-resend-button")
   }
 
-  verifyEmailVerifyingState(): Locator {
-    return this.page.getByTestId("verify-email-verifying")
-  }
-
   legalDocumentTitle(): Locator {
     return this.page.getByTestId("legal-document-title")
   }

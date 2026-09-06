@@ -1,0 +1,54 @@
+{
+  "form": {
+    "alreadySubscribed": "Już jesteś z nami. Nic nie musisz robić.",
+    "button": "Zapisz się",
+    "confirmationSent": "Udało się! Sprawdź teraz skrzynkę i potwierdź adres.",
+    "error": "Nie udało się wysłać. Spróbuj ponownie albo napisz na hello@saasyland.com.",
+    "label": "Adres e-mail",
+    "placeholder": "Twój adres e-mail",
+    "submitting": "Zapisywanie..."
+  },
+  "confirm": {
+    "title": "Potwierdź zapis",
+    "description": "Potwierdź zapis na dziennik budowy SaaSy Land.",
+    "confirmed": {
+      "title": "Jesteś z nami.",
+      "body": "Adres jest potwierdzony. Od teraz dostajesz dziennik budowy: co powstało, jakie decyzje za tym stoją i co nie wypaliło.",
+      "note": "W każdym mailu jest link do wypisania się. Jedno kliknięcie i znikasz z listy.",
+      "action": "Zobacz, co powstaje"
+    },
+    "expired": {
+      "title": "Ten link jest już zużyty.",
+      "body": "Linki potwierdzające są ważne 24 godziny i działają raz. Ten wygasł albo został już użyty, więc adres nie jest jeszcze potwierdzony.",
+      "note": "Zapisz się ponownie w stopce, a nowy link trafi do skrzynki w minutę.",
+      "action": "Wróć na stronę"
+    },
+    "pending": {
+      "title": "Potwierdzamy subskrypcję…",
+      "body": "Poczekaj, aż potwierdzimy Twój adres e-mail.",
+      "note": "To potrwa tylko chwilę.",
+      "action": "Wróć na stronę"
+    },
+    "error": {
+      "title": "Nie udało się potwierdzić adresu.",
+      "body": "Odśwież stronę, aby spróbować ponownie.",
+      "note": "Twoja subskrypcja nie została zmieniona.",
+      "action": "Wróć na stronę"
+    }
+  },
+  "unsubscribe": {
+    "title": "Jesteś wypisany.",
+    "description": "Wypisz się z dziennika budowy SaaSy Land.",
+    "body": "Ten adres nie dostanie już kolejnego maila z dziennika budowy. Nie trzeba nic potwierdzać ani nigdzie klikać.",
+    "note": "Maile transakcyjne dotyczące konta albo zakupu to osobna sprawa i nadal przychodzą, bo to poczta, o którą poprosiłeś, kupując.",
+    "resubscribe": "Zmiana zdania? Zapisz się ponownie w stopce",
+    "pending": {
+      "title": "Anulujemy subskrypcję…",
+      "body": "Poczekaj, aż zaktualizujemy Twoją subskrypcję."
+    },
+    "error": {
+      "title": "Nie udało się anulować subskrypcji.",
+      "body": "Otwórz link anulowania subskrypcji z wiadomości e-mail i spróbuj ponownie."
+    }
+  }
+}

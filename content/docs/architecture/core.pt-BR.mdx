@@ -1,0 +1,14 @@
+---
+title: Core kernel compartilhado
+description: Erros de domínio e catálogos compartilhados em módulos/_core.
+---
+
+## Conteúdo
+
+- `constants/errors.ts` — `ERROR_CODES`, `AppError`, `ActionServerError` (O vocabulário de um erro)
+- `constants/` — catálogos locais (e relacionados) usados por i18n e botões de produto
+- `utils/` - puros ajudantes compartilhados entre os módulos
+
+## Por que existe?
+
+Corte transversal. **valores válidos** e... **Códigos de erro** Não deve ser redefinido por recurso. Locais habilitados para aplicativos (subset) ainda vivem em `i18n.config.ts`; o catálogo mais amplo pode viver em `_core`.

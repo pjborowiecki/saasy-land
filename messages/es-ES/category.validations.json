@@ -1,0 +1,5 @@
+{
+  "atLeastOneFieldRequired": "Al menos se debe rellenar un campo.",
+  "nameRequired": "El nombre de la categoría es obligatorio.",
+  "nameMaxLength": "El nombre de la categoría no puede superar los {max} caracteres."
+}

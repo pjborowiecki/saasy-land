@@ -1,0 +1,10 @@
+---
+title: "Legal pages"
+description: "Privacy, terms, refunds, and licence documents in every supported language."
+---
+
+The landing routes expose `/privacy`, `/terms`, `/refunds`, and `/licence` in all nine supported languages. Each route loads its message namespace and composes the shared `LegalPage` component.
+
+Document sections and order belong to `src/presentation/components/custom/legal-page`. Copy belongs to `messages/{locale}/pages.legal.*.json`; the footer links belong to `src/data/marketing-footer.ts`. Update every translation when a policy changes.
+
+The licence page distinguishes the public repository’s MIT licence from separately supplied paid material. The refund policy preserves mandatory consumer rights. Keep the policies aligned with the actual operator, checkout, providers, and data handling when adapting the application.

@@ -18,8 +18,8 @@ import { BAND, BAND_DURATION, FPS, SURFACE, SURFACE_DURATION, TERMINAL, TERMINAL
  * colour so the video edge is invisible, and every one begins and ends on that flat colour so
  * the `loop` attribute has no seam to show.
  */
-export const RemotionRoot: React.FC = () => {
-  return (
+export const RemotionRoot: React.FC = () =>
+  (
     <>
       <Composition
         component={AppTour}
@@ -69,14 +69,7 @@ export const RemotionRoot: React.FC = () => {
         id="page-designer"
         width={SURFACE.width}
       />
-      <Composition
-        component={RecordAudit}
-        durationInFrames={8 * FPS}
-        fps={FPS}
-        height={BAND.height}
-        id="record-audit"
-        width={BAND.width}
-      />
+      <Composition component={RecordAudit} durationInFrames={8 * FPS} fps={FPS} height={BAND.height} id="record-audit" width={BAND.width} />
       <Composition
         component={CoverageRun}
         durationInFrames={TERMINAL_DURATION}
@@ -87,4 +80,3 @@ export const RemotionRoot: React.FC = () => {
       />
     </>
   )
-}

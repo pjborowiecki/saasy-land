@@ -1,0 +1,20 @@
+---
+title: Usuários (admin)
+description: Mesa de usuários ao vivo, tabs, personificação, ban/role/password.
+---
+
+## Rotas
+
+`/admin/users` com TanStack Router Procurem. `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## Módulo
+
+`modules/user/use-cases` - lista/criação/atualização/deletação, ban/unban, definir papel/senha, personificar, atualizar tabela.
+
+## UI.
+
+Tabela de dados abaixo `admin/users/components/all-users-tab`. . Status é **Derivado** (`getUserStatus`: ativo / pendente / banido), não uma coluna DB enum.
+
+## Estado do URL
+
+`admin/users/constants/search-params.ts` - parsers compartilhados. `searchParamsCache`.

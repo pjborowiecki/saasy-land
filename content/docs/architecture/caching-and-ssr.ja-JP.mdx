@@ -1,0 +1,14 @@
+---
+title: キャッシュとSSR
+description: キャッシュとSSR — SaaSy Land
+---
+
+QueryClient はルータインスタンスに属し、サーバーレンダリングと統合されています。 ローダーは、データと名前空間 JSON をプリロードします。コンポーネントは、同じキャッシュを同じキャッシュで読み込みます。 `useSuspenseQuery` または `useSuspenseQueries`. . Queries は安定したキーを宣言します。 成功した突然変異は、影響を受ける機能キーだけを無効化します。
+
+公開文書、ブログ、ランディングページはビルド時に優先されます。 管理者、顧客、auth、ニュースレターのトークンのルートは除外されます。 Cloudflare KV は公開 GitHub メタデータをキャッシュします。 D1 は永続的なセッションとアトミックレートリミットのカウンターを格納します。 KV は許可の決定には使用されません。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

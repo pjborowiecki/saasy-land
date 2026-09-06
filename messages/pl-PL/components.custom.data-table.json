@@ -1,0 +1,11 @@
+{
+  "empty": "Brak wyników.",
+  "pagination": {
+    "nextPage": "Następna strona",
+    "pageIndicator": "Strona {current} z {total}",
+    "previousPage": "Poprzednia strona",
+    "rowCount": "{count, plural, =0 {Brak wierszy} one {# wiersz} few {# wiersze} many {# wierszy} other {# wiersza}}",
+    "selectedCount": "{selected, plural, one {# wybrany} few {# wybrane} many {# wybranych} other {# wybranego}}"
+  },
+  "resizeColumn": "Zmień szerokość kolumny"
+}

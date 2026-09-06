@@ -1,30 +1,30 @@
 import { createSchemaFactory } from "drizzle-zod"
-import z from "zod/v4"
+import zod from "zod/v4"
 
 import { license, licenseStatusEnum, licenseTierEnum } from "~/src/modules/license/license.schema"
 
-const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
+const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: zod })
 
-const startCheckout = z.object({
-  tier: z.enum(licenseTierEnum.enumValues),
+const startCheckout = zod.object({
+  tier: zod.enum(licenseTierEnum.enumValues),
 })
 
-const deactivateLicense = z.object({
-  activationId: z.uuid(),
+const deactivateLicense = zod.object({
+  activationId: zod.uuid(),
 })
 
-const deactivated = z.object({
-  deactivated: z.boolean(),
+const deactivated = zod.object({
+  deactivated: zod.boolean(),
 })
 
-const checkoutSession = z.object({
-  url: z.url(),
+const checkoutSession = zod.object({
+  url: zod.url(),
 })
 
-const licenseSummary = z.object({
-  key: z.string().nullable(),
-  status: z.enum(licenseStatusEnum.enumValues),
-  tier: z.enum(licenseTierEnum.enumValues),
+const licenseSummary = zod.object({
+  key: zod.string().nullable(),
+  status: zod.enum(licenseStatusEnum.enumValues),
+  tier: zod.enum(licenseTierEnum.enumValues),
 })
 
 const insert = createInsertSchema(license)

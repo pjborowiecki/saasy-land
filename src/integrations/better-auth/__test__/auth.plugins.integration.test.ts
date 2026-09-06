@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import {
   createAuthTestInstance,
   createTestUserPayload,
@@ -49,7 +51,10 @@ describe("auth two-factor", () => {
       password: user.password,
     })
 
-    expect(result.data?.totpURI).toContain("otpauth://")
+    // `enable` returns a union discriminated on `method`; only the totp arm carries a URI.
+    const { data } = result
+    expect(data?.method).toBe("totp")
+    expect(data?.method === "totp" ? data.totpURI : undefined).toContain("otpauth://")
   })
 })
 

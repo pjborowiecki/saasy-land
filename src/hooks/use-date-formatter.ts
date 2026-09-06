@@ -1,8 +1,6 @@
-"use client"
-
 import { useMemo, useRef } from "react"
 
-import { useLocale } from "next-intl"
+import { useLocale } from "use-intl/react"
 
 export interface DateOptions extends Intl.DateTimeFormatOptions {
   locale?: string
@@ -19,8 +17,8 @@ interface DateFormatter {
 
 const formatterCache = new Map<string, Intl.DateTimeFormat>()
 
-function getFormatter(locale: string, options: Omit<DateOptions, "locale">): Intl.DateTimeFormat {
-  const optionKeys = Object.keys(options).toSorted((a, b) => a.localeCompare(b))
+const getFormatter = (locale: string, options: Omit<DateOptions, "locale">): Intl.DateTimeFormat => {
+  const optionKeys = Object.keys(options).toSorted((first, second) => first.localeCompare(second))
   const key = `${locale}\0${JSON.stringify(options, optionKeys)}`
 
   let formatter = formatterCache.get(key)
@@ -31,7 +29,7 @@ function getFormatter(locale: string, options: Omit<DateOptions, "locale">): Int
   return formatter
 }
 
-export function useDateFormatter(defaults?: HookDefaults): DateFormatter {
+export const useDateFormatter = (defaults?: HookDefaults): DateFormatter => {
   const routeLocale = useLocale()
 
   const config = useRef(defaults)

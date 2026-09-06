@@ -1,0 +1,14 @@
+---
+title: Ruoli e autorizzazioni
+description: Ruoli e autorizzazioni — SaaSy Land
+---
+
+Ruoli e dichiarazioni vivono in `src/integrations/better-auth/auth.access.ts`. Il ruolo predefinito è il cliente. L'accesso all'amministratore è controllato `requireAdmin`; ogni operazione del server controlla l'affermazione richiesta con `withAuth`.
+
+Mantenere i cambiamenti di ruolo, i divieti, la revoca della sessione e l'impersonazione nei casi di utilizzo dell'utente/sessione. Dedicare l'utente corrente dalla sessione di richiesta e invalidare i gruppi di query colpiti dopo una mutazione. Nascondere un pulsante è il comportamento di presentazione e non sostituisce l'autorizzazione.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

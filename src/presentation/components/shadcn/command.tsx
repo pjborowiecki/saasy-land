@@ -1,35 +1,33 @@
-"use client"
-
-import type { ComponentProps, CSSProperties, HTMLAttributes, ReactNode } from "react"
+import type { CSSProperties, ComponentProps, HTMLAttributes, ReactNode } from "react"
 
 import { CheckIcon, SearchIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
 import {
   Autocomplete,
+  type AutocompleteProps,
   Collection,
-  composeRenderProps,
   Header,
   Input,
+  type InputProps,
   Menu,
   MenuItem,
-  MenuSection,
-  SearchField,
-  Separator,
-  useFilter,
-  type AutocompleteProps,
-  type InputProps,
   type MenuItemProps,
   type MenuProps,
+  MenuSection,
   type MenuSectionProps,
+  SearchField,
+  Separator,
   type SeparatorProps,
+  composeRenderProps,
+  useFilter,
 } from "react-aria-components"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Dialog, DialogDescription, DialogHeader, DialogTitle } from "~/src/presentation/components/shadcn/dialog"
 import { InputGroup, InputGroupAddon } from "~/src/presentation/components/shadcn/input-group"
 
-function Command({
+const Command = ({
   children,
   className,
   dir,
@@ -41,7 +39,7 @@ function Command({
   dir?: HTMLAttributes<HTMLDivElement>["dir"]
   filter?: AutocompleteProps["filter"]
   style?: CSSProperties
-}) {
+}) => {
   const { contains } = useFilter({ sensitivity: "base" })
 
   return (
@@ -58,7 +56,7 @@ function Command({
   )
 }
 
-function CommandDialog({
+const CommandDialog = ({
   children,
   className,
   description,
@@ -71,7 +69,7 @@ function CommandDialog({
   description?: string
   showCloseButton?: boolean
   title?: string
-}) {
+}) => {
   const t = useTranslations("components.shadcn.command")
 
   return (
@@ -85,7 +83,7 @@ function CommandDialog({
   )
 }
 
-function CommandInput({ className, placeholder, ...props }: Readonly<InputProps>) {
+const CommandInput = ({ className, placeholder, ...props }: Readonly<InputProps>) => {
   const t = useTranslations("components.shadcn.command")
   const resolvedPlaceholder = placeholder ?? t("search")
 
@@ -109,49 +107,45 @@ function CommandInput({ className, placeholder, ...props }: Readonly<InputProps>
   )
 }
 
-function CommandList<T extends object>({ className, ...props }: Readonly<MenuProps<T>>) {
-  return (
-    <Menu
-      className={cn("no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none", className)}
-      data-slot="command-list"
-      {...props}
-    />
-  )
-}
+const CommandList = <TValue extends object>({ className, ...props }: Readonly<MenuProps<TValue>>) => (
+  <Menu
+    className={cn("no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none", className)}
+    data-slot="command-list"
+    {...props}
+  />
+)
 
-function CommandEmpty({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("py-6 text-center text-sm", className)} data-slot="command-empty" {...props} />
-}
+const CommandEmpty = ({ className, ...props }: ComponentProps<"div">) => (
+  <div className={cn("py-6 text-center text-sm", className)} data-slot="command-empty" {...props} />
+)
 
-function CommandGroup<T extends object>({
+const CommandGroup = <TValue extends object>({
   children,
   className,
   heading,
   items,
   ...props
-}: MenuSectionProps<T> & {
+}: MenuSectionProps<TValue> & {
   heading?: string
-}) {
-  return (
-    <MenuSection
-      className={cn(
-        "overflow-hidden p-1 text-foreground **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-muted-foreground",
-        className,
-      )}
-      data-slot="command-group"
-      {...props}
-    >
-      {heading !== undefined && heading !== "" ? <Header cmdk-group-heading="">{heading}</Header> : undefined}
-      <Collection {...(items === undefined ? {} : { items })}>{children}</Collection>
-    </MenuSection>
-  )
-}
+}) => (
+  <MenuSection
+    className={cn(
+      "overflow-hidden p-1 text-foreground **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-muted-foreground",
+      className,
+    )}
+    data-slot="command-group"
+    {...props}
+  >
+    {heading !== undefined && heading !== "" ? <Header cmdk-group-heading="">{heading}</Header> : undefined}
+    <Collection {...(items === undefined ? {} : { items })}>{children}</Collection>
+  </MenuSection>
+)
 
-function CommandSeparator({ className, ...props }: Readonly<SeparatorProps>) {
-  return <Separator className={cn("-mx-1 h-px bg-border", className)} data-slot="command-separator" {...props} />
-}
+const CommandSeparator = ({ className, ...props }: Readonly<SeparatorProps>) => (
+  <Separator className={cn("-mx-1 h-px bg-border", className)} data-slot="command-separator" {...props} />
+)
 
-function CommandItem<T extends object>({ children, className, textValue, ...props }: Readonly<MenuItemProps<T>>) {
+const CommandItem = <TValue extends object>({ children, className, textValue, ...props }: Readonly<MenuItemProps<TValue>>) => {
   const resolvedTextValue = textValue ?? (typeof children === "string" ? children : undefined)
 
   return (
@@ -174,17 +168,15 @@ function CommandItem<T extends object>({ children, className, textValue, ...prop
   )
 }
 
-function CommandShortcut({ className, ...props }: ComponentProps<"span">) {
-  return (
-    <span
-      className={cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground group-data-focused/command-item:text-foreground group-data-selected/command-item:text-foreground",
-        className,
-      )}
-      data-slot="command-shortcut"
-      {...props}
-    />
-  )
-}
+const CommandShortcut = ({ className, ...props }: ComponentProps<"span">) => (
+  <span
+    className={cn(
+      "ml-auto text-xs tracking-widest text-muted-foreground group-data-focused/command-item:text-foreground group-data-selected/command-item:text-foreground",
+      className,
+    )}
+    data-slot="command-shortcut"
+    {...props}
+  />
+)
 
 export { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut }

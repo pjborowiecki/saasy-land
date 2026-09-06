@@ -1,0 +1,23 @@
+---
+title: 要求のライフサイクル
+description: ライフサイクルのリクエスト — SaaSy Land
+---
+
+`src/server.ts` locale URL を正規化し、 locale Cookie を同期させる。 `src/router.tsx` ルーターごとに新しいQueryClient を作成し、SSR に接続します。 ネイティブルートファイルは、コンポーネント、ガード、ローダー、検索検証、メタデータを宣言します。
+
+管理者および顧客のレイアウトの使用 `beforeLoad` ガード。 保護されたサーバー関数は、RPCがページを独立して呼び出すことができるため、呼び出し者もチェックします。 共有静的なキャッシュに認証されたレスポンスを置きません。
+
+```text
+Request → Worker locale middleware → TanStack Router
+        → beforeLoad session/permission guard
+        → loader: messages + authorized query data
+        → SSR + hydrated React presentation
+Mutation → validated server function → auth/rate limit → D1 or provider
+         → result/error → scoped query invalidation
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

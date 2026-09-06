@@ -1,0 +1,19 @@
+---
+title: Fügen Sie eine DataTable hinzu.
+description: Nutzen Sie das gemeinsame TanStack DataTable-Toolkit in den Verwaltungsbereichen.
+---
+
+## Gerätestellplatz.
+
+`src/presentation/components/custom/data-table`
+
+## Funktionsmuster (Benutzer)
+
+- `columns.tsx` / `cells.tsx` / `filters.tsx` / `actions.tsx` / `options.tsx`
+- Datenbankzeilen → Tabellenzeilen in `_lib` oder Modul-Utilities
+- Aktualisierung der Symbolleiste → Ungültig machen des relevanten TanStack Query-Schlüssels.
+- Halten Sie Fallback-Mechanismen außerhalb der Laufzeitumgebung der Tabelle.
+
+## Optionen.
+
+Konfigurieren Sie die Symbolleiste (Suche, Filter, Export nach CSV, Abrufen, Einstellungen), die Paginierung, die Auswahl und die Dichte über `options` – siehe UI → DataTable.

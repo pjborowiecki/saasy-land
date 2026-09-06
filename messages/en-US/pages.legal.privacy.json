@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Privacy Policy",
+    "description": "How SaaSy Land handles account, payment, newsletter, and technical data, and how to exercise your privacy rights."
+  },
+  "title": "Privacy Policy",
+  "lastUpdated": "Last updated 6 September 2026",
+  "description": "How SaaSy Land handles account, payment, newsletter, and technical data, and how to exercise your privacy rights.",
+  "sections": {
+    "controller": {
+      "title": "Who is responsible",
+      "body": "SaaSy Land at saasyland.com is operated by Piotr Borowiecki, the controller of personal data described here. Contact hello@saasyland.com for privacy questions or requests."
+    },
+    "collection": {
+      "title": "What we collect",
+      "body": "If you create an account, we store your name, email address, profile image if provided, account settings, and verification status. Passwords are stored as hashes. If you choose Google or GitHub sign-in, we receive the profile and authentication information needed to sign you in. Session records can include your IP address, browser information, and expiry time. Two-factor authentication stores the information needed to secure your account.\n\nPurchases create customer, order, and licence records, including the issued key, its status, and associated activation records. Polar processes licence issuance and activation data; your account displays active machines and lets you release an activation. Card details are handled by the payment provider. Newsletter records contain your email address, selected language, signup source, subscription status, confirmation and unsubscribe tokens, and related timestamps. Requests also generate security and operational logs."
+    },
+    "purposes": {
+      "title": "Why we use it",
+      "body": "We use account and purchase information to provide access, authenticate you, deliver what you bought, provide support, and manage licences. Transactional emails verify addresses, confirm changes, and help recover accounts. Newsletter emails are sent after you confirm your subscription. Technical information helps prevent abuse, investigate errors, and keep the service reliable."
+    },
+    "basis": {
+      "title": "Legal bases",
+      "body": "Processing needed to provide your account and purchases is based on performance of a contract or steps you request before a contract, under GDPR Article 6(1)(b). Newsletter delivery is based on consent, Article 6(1)(a). Security, abuse prevention, and service reliability rely on legitimate interests, Article 6(1)(f). Records required by tax, accounting, or other applicable law are processed to meet legal obligations, Article 6(1)(c). Providing an account email is necessary for account access; joining the newsletter is optional."
+    },
+    "providers": {
+      "title": "Service providers and transfers",
+      "body": "Cloudflare provides hosting, database, caching, and operational infrastructure. Resend delivers email. Polar handles checkout and payments as merchant of record and processes data under its own privacy notice. Google and GitHub are involved only if you choose their sign-in options. We may also disclose information when legally required. We do not sell personal data or share newsletter addresses for another business’s marketing.\n\nThese providers may process data outside your country, including outside the EEA. Where required, transfers rely on an applicable adequacy decision or contractual safeguards such as the European Commission’s standard contractual clauses. Contact us for information about the safeguards relevant to your data."
+    },
+    "retention": {
+      "title": "How long we keep it",
+      "body": "Account data is retained while needed to operate your account and provide support. After an account is deleted, records are removed or anonymised unless retention is required for legal obligations, fraud prevention, or resolving disputes. Payment and accounting records are kept for the legally required period. Session and security records are retained only while needed for their purpose. Expired rate-limit counters are cleared daily.\n\nNewsletter information is kept while your subscription is active. An unsubscribed record may be retained to respect your opt-out and prevent accidental resubscription. You can request deletion. Copies in backups or provider systems may remain until their normal retention periods end."
+    },
+    "cookies": {
+      "title": "Cookies and local storage",
+      "body": "Essential authentication cookies keep you signed in and support account security. The saasyland.com_locale cookie remembers the language associated with the pages you visit. Browser storage may also remember interface preferences such as your theme or sidebar state. These functions support the service and your choices.\n\nThe application does not add advertising trackers or analytics cookies. External sign-in and payment services have their own storage practices. Blocking essential cookies may prevent sign-in or language preferences from working."
+    },
+    "rights": {
+      "title": "Your choices and rights",
+      "body": "Depending on the applicable law, you may request access, correction, deletion, restriction, or a portable copy of your data, and object to processing based on legitimate interests. You can withdraw newsletter consent at any time through the unsubscribe link or by contacting us; this does not affect processing that was lawful before withdrawal. We do not make decisions about you solely through automated processing that produces legal or similarly significant effects.\n\nSend requests to hello@saasyland.com. We may need to verify your identity and will respond within the period required by law, normally one month under the GDPR. You may complain to a data protection authority, including Poland’s President of the Personal Data Protection Office (UODO), or the authority where you live or work."
+    },
+    "changes": {
+      "title": "Changes to this notice",
+      "body": "We update this notice when the service or its data practices change. The date above identifies the current version. Where a change requires a separate notice or your consent, we will provide it before applying that change."
+    }
+  }
+}

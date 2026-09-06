@@ -1,0 +1,50 @@
+---
+title: Documentação
+description: SaaSy Land 2.0 - arquitetura, guias, características, e referência para o arranque de stack full-stack.
+---
+
+Bem-vindos à documentação para **SaaSy Land 2.0**, um full-stack modular SaaS arranque em TanStack Start.
+
+<Callout title={"Como usar esses médicos?"}>
+  De preferência. **Guias** para receitas de tarefas e **Arquitetura** para onde o código vive. **Características** e... **Integrações**
+  descrever superfície de produto e adaptadores de fornecedores, incluindo áreas planejadas como pagamentos.
+</Callout>
+
+## Comece aqui.
+
+<Cards>
+  <Card title={"Projeto"} href="/docs/project/about">
+    Sobre o iniciante, o Changelog, o roteiro e a contribuição.
+  </Card>
+  <Card title={"Começando."} href="/docs/getting-started">
+    Instalar deps Bun, configurar env, migrar o banco de dados, correr localmente.
+  </Card>
+  <Card title={"Arquitetura"} href="/docs/architecture">
+    Módulos, entrega, integrações, plataforma, RCE e fronteiras de segurança.
+  </Card>
+  <Card title={"Guias"} href="/docs/guides">
+    Adicionar recursos, Tabelas de dados, Nuqs URL estado, testes, Auth, e muito mais.
+  </Card>
+</Cards>
+
+## Capítulos
+
+| Capítulo        | Conteúdo                                                        |
+| --------------- | --------------------------------------------------------------- |
+| Projeto         | Sobre, changelog, roteiro, contribuição.                        |
+| Começando.      | Instale, env, primeira execução, scripts, implementação prévia. |
+| Arquitetura     | Camadas, módulos, RCE/cache, fornecedores                       |
+| Guias           | Receitas de recursos (mesas, Nuqs, testes, Auth, ...)           |
+| Características | Auth, usuários, produtos, pagamentos, orgs,...                  |
+| Integrações     | Better Auth, D1, Intl, Fumadocs, Nuqs, Resend, …                |
+| Sistema de UI.  | Shadcn, Tabela de dados, tema, composição                       |
+| Ferramentas.    | Vitest, Playwright, Vite+, habilidades de agente, CI            |
+| Referência      | Rotas, Env, convenções, FAQ                                     |
+
+## Edição local
+
+Arquivos de conteúdo: `content/docs`.
+
+MDX pode usar Fumadocs componentes`<Cards>`, `<Callout>`, `<Steps>`, `<Tabs>`, `<Accordions>`) e selecionou os primitivos shadcn (`<Button>`, `<Badge>`, `<Alert>`, `<Table>`, …).
+
+Depois de adicionar páginas, atualize a pasta. `meta.<locale>.json` `pages` Array (o script do andaime faz isso por você). Pasta `index` Páginas são barras laterais. **Índices de pastas** - Não listar. `index` De novo em `pages`.

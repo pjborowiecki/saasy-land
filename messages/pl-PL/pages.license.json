@@ -1,0 +1,37 @@
+{
+  "title": "Twoja licencja",
+  "description": "Klucz zakupionej licencji CLI i aktywacje urządzeń.",
+  "tier": {
+    "core": "Core",
+    "complete": "Complete"
+  },
+  "issued": "Klucz licencyjny",
+  "pending": "Klucz jest właśnie wydawany. Odśwież za chwilę.",
+  "revoked": "Ta licencja nie jest już aktywna. Napisz do nas, jeśli to pomyłka.",
+  "usage": "Instalacja i korzystanie z CLI wymagają zakupu i ważnego klucza. Uruchom to polecenie i podaj klucz, gdy pojawi się prośba. Zachowaj go w poufności.",
+  "manage": "Faktury i rachunki",
+  "buy": {
+    "title": "Kup licencję",
+    "description": "Kup zastrzeżone CLI, a następnie znajdź tutaj swój klucz. Jedna płatność, nieograniczone projekty w ramach Twojego pakietu.",
+    "core": "Kup Core",
+    "complete": "Kup Complete",
+    "agency": "Kup Agency",
+    "pending": "Otwieram płatność...",
+    "error": "Nie udało się otworzyć płatności. Spróbuj ponownie albo napisz na hello@saasyland.com.",
+    "agreement": "Przechodząc do płatności, akceptujesz <terms>Regulamin</terms> i <licence>Licencję komercyjną</licence>. Przed zakupem przeczytaj <refunds>Zasady zwrotów</refunds>."
+  },
+  "activations": {
+    "title": "Maszyny",
+    "description": "Każda maszyna, na której generujesz projekt, zajmuje jedno miejsce. Zwolnij je, gdy przestajesz z niej korzystać.",
+    "count": "{used} z {limit} w użyciu",
+    "unlimited": "{used} w użyciu",
+    "none": "Żadna maszyna nie użyła jeszcze tego klucza.",
+    "activated": "Aktywowano {date}",
+    "deactivate": "Zwolnij miejsce",
+    "deactivating": "Zwalnianie...",
+    "error": "Nie udało się. Spróbuj ponownie albo napisz na hello@saasyland.com.",
+    "success": "Miejsce zwolnione."
+  },
+  "back": "Wróć do przeglądu",
+  "agreement": "<licence>Licencja komercyjna</licence> określa zasady korzystania z CLI i prawa do wygenerowanych aplikacji."
+}

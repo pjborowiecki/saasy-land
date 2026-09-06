@@ -27,4 +27,3 @@ jobs:
     uses: ./.github/workflows/e2e-reusable.yml
     with:
       browser: ${{ matrix.browser }}
-    secrets: inherit

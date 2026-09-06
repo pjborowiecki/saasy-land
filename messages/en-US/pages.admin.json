@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Signed-in app area."
+    },
+    "welcome": "App: {name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "header": {
+      "notifications": "Notifications",
+      "searchPlaceholder": "Search the console",
+      "searchEmpty": "No matching section."
+    },
+    "userWidget": {
+      "settings": "Settings",
+      "signedInAs": "Signed in as <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Sign Out",
+      "signingOut": "Signing out...",
+      "success": "See you later"
+    }
+  },
+  "labels": {
+    "unknownLocation": "Unknown location",
+    "gettingStartedSection": "Section 1: Getting Started",
+    "welcomeLesson": "Welcome to the Course",
+    "setupLesson": "Setting Up Your Environment",
+    "coreConceptsSection": "Section 2: Core Concepts",
+    "development": "Development",
+    "design": "Design",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "oneYearAccess": "1 Year Access",
+    "products": "products",
+    "noCourses": "No courses found.",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "rowActions": "Row actions",
+    "actions": "Actions",
+    "saasPlans": "SaaS Plans",
+    "addOns": "Add-ons",
+    "coreSubscription": "Core Subscription",
+    "legacy": "Legacy",
+    "hidden": "Hidden",
+    "public": "Public"
+  }
+}

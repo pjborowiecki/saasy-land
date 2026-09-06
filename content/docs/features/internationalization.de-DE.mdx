@@ -1,0 +1,16 @@
+---
+title: Internationalisierung und Ländereinstellungen.
+description: Internationalisierung und Ländereinstellungen — SaaSy Land
+---
+
+Nachrichten werden in `messages/{locale}` für alle neun konfigurierten Sprachen als Dateien mit Punktnotation gespeichert, beispielsweise `pages.admin.users.json`. Die Konfiguration der Sprachen, URL-Hilfsfunktionen, das Laden von Nachrichten, Metadaten und Hilfsfunktionen für die Übersetzung von E-Mails befinden sich in `src/integrations/use-intl`.
+
+Englisch verwendet `/docs`; Polnisch verwendet `/pl-PL/docs`. Veraltete `/en` und `/pl` Links werden zu den kanonischen Weiterleitungen umgeleitet. Die Routendateien deklarieren `staticData.namespaces` und laden dieselben Namespaces im Loader vor. Der `TranslationsProvider` kombiniert die aktiven Route-Namespaces zu einem `IntlProvider`. Gemeinsame Meldungen werden im Root-Verzeichnis geladen; Namespaces, die ausschließlich für E-Mails verwendet werden, verbleiben auf dem Server.
+
+Lesen Sie die Locale serverseitig mit `getCurrentLocale` und clientseitig in Komponenten mit `useLocale`. Die URL bestimmt die Locale des Dokuments. Server-seitige Funktionsaufrufe verwenden das Locale-Cookie. Eine Sprachauswahl behält den Pfad, die Query-Parameter und den Fragment und lädt das Dokument neu, um den entsprechenden Inhalt zu laden. Führen Sie `bun run check:i18n` aus, nachdem Sie Schlüssel geändert haben.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

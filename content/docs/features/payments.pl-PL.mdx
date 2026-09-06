@@ -1,0 +1,20 @@
+---
+title: "Płatności i billing"
+description: "Zamówienia, zwroty i billing Stripe (planowane)."
+---
+
+> Pełna treść jest utrzymywana po angielsku i może być uzupełniana sukcesywnie. Poniżej znajduje się lokalna wersja / mapa tej strony.
+
+## Status
+
+Interfejs `/admin/payments` korzysta dziś z atrap wierszy. Deklaracje `order` w `APP_STATEMENTS` szkicują już odczyt, aktualizację i zwrot środków.
+
+## Planned architecture
+
+- `modules/billing` or `modules/order` use-cases
+- Stripe (or Polar) integration folder
+- Webhooks route handler
+- Customer invoices under `/app`
+- Map Better Auth user ↔ customer id
+
+Implementuj za uprawnieniami; nigdy nie ujawniaj kluczy tajnych po stronie klienta.

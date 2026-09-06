@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "title": "Verificar correo electrónico",
+    "description": "Verifica la dirección de correo electrónico de tu cuenta de {name}."
+  },
+  "form": {
+    "title": "Verifique su correo electrónico",
+    "description": "Confirme su dirección de correo electrónico para finalizar la configuración de su cuenta.",
+    "verifying": "Verificando tu dirección de correo electrónico…",
+    "success": "Su correo electrónico ha sido verificado.",
+    "continue": "Continúe",
+    "invalidToken": "Este enlace de verificación no es válido o ha caducado.",
+    "pendingDescription": "Revisa tu bandeja de entrada y sigue el enlace de verificación. Después, inicia sesión para continuar.",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Tu dirección de correo electrónico",
+    "emailRequired": "Introduce su dirección de correo electrónico para reenviar el enlace de verificación.",
+    "resend": "Reenviar correo de verificación",
+    "resendSuccess": "Si ya existe una cuenta asociada a ese correo electrónico, se ha enviado un nuevo enlace de verificación.",
+    "backToSignIn": "Volver a iniciar sesión",
+    "resending": "Enviando correo de verificación…"
+  }
+}

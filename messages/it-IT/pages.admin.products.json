@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Prodotti | SaaSy Land",
+    "description": "Gestisci i prodotti fisici, i download digitali e gli abbonamenti ai contenuti protetti."
+  },
+  "tabs": {
+    "all": "Tutti i prodotti",
+    "onetime": "Acquisti una tantum",
+    "subscriptions": "Abbonamenti",
+    "drafts": "Bozze",
+    "categories": "Categorie",
+    "collections": "Collezioni",
+    "courses": "Corsi"
+  },
+  "title": "Prodotti",
+  "description": "Gestisci i prodotti fisici, i download digitali e gli abbonamenti ai contenuti protetti.",
+  "actions": {
+    "create": "Crea prodotto"
+  },
+  "search": {
+    "placeholder": "Cerca prodotti per nome o codice articolo..."
+  },
+  "filters": {
+    "type": "Tipo: Tutto",
+    "status": "Stato: Attivo",
+    "category": "Categoria",
+    "collection": "Collezione",
+    "cycle": "Ciclo",
+    "model": "Modello",
+    "visibility": "Visibilità",
+    "sortby": "Ordina per"
+  },
+  "table": {
+    "headers": {
+      "product": "Prodotto",
+      "type": "Tipo",
+      "pricing": "Prezzi",
+      "status": "Stato",
+      "metrics": "Metriche"
+    },
+    "actionsColumn": "Azioni della riga",
+    "emptyValue": "n/a",
+    "rowActions": "Azioni della riga",
+    "selectAll": "Seleziona tutte le righe",
+    "selectRow": "Seleziona la riga",
+    "statusLabels": {
+      "archived": "Archiviato",
+      "draft": "Bozza",
+      "published": "Attivo"
+    },
+    "typeLabels": {
+      "course": "Corso",
+      "one_time": "Una tantum",
+      "subscription": "Abbonamento"
+    },
+    "visibilityLabels": {
+      "hidden": "Nascosta",
+      "public": "Pubblica"
+    }
+  },
+  "pagination": {
+    "info": "Prodotti da {start} a {end} di {total}",
+    "goToPage": "Vai alla pagina {page}",
+    "nextPage": "Pagina successiva",
+    "previousPage": "Pagina precedente"
+  },
+  "onetime": {
+    "title": "Acquisti una tantum",
+    "description": "Gestisci i singoli prodotti, i download digitali e i prodotti fisici."
+  },
+  "subscriptions": {
+    "title": "Abbonamenti",
+    "description": "Gestisci piani di fatturazione ricorrenti, livelli di abbonamento e prezzi basati sull'utilizzo.",
+    "table": {
+      "headers": {
+        "product": "Nome del piano",
+        "model": "Modello",
+        "pricing": "Prezzi",
+        "status": "Stato",
+        "metrics": "Metriche"
+      }
+    }
+  },
+  "categories": {
+    "title": "Categorie",
+    "description": "Organizza i tuoi prodotti, i piani di abbonamento e i prodotti digitali.",
+    "table": {
+      "headers": {
+        "category": "Categoria",
+        "visibility": "Visibilità",
+        "items": "Articoli",
+        "lastUpdated": "Ultimo aggiornamento"
+      }
+    }
+  },
+  "collections": {
+    "title": "Collezioni",
+    "description": "Organizza e raggruppa i tuoi prodotti, i piani di abbonamento e i prodotti digitali.",
+    "table": {
+      "headers": {
+        "collection": "Collezione",
+        "visibility": "Visibilità",
+        "items": "Articoli",
+        "lastUpdated": "Ultimo aggiornamento"
+      }
+    }
+  },
+  "courses": {
+    "empty": {
+      "title": "Nessun corso disponibile per il momento",
+      "description": "I corsi che pubblichi vengono visualizzati qui, insieme alle loro lezioni, ai prezzi e al numero di iscritti. Crea il tuo primo corso per iniziare.",
+      "action": "Crea corso"
+    }
+  }
+}

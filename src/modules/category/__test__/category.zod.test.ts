@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { CATEGORY_VALIDATION_MESSAGE } from "~/src/modules/category/category.validations"
 import { categoryZodSchemas } from "~/src/modules/category/category.zod"
 

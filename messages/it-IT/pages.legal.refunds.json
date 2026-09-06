@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "title": "Rimborsi",
+    "description": "Quando e come richiedere un rimborso SaaSy Land e quali diritti dei consumatori restano tutelati."
+  },
+  "title": "Rimborsi",
+  "lastUpdated": "Ultimo aggiornamento: 6 settembre 2026",
+  "description": "Quando e come richiedere un rimborso SaaSy Land e quali diritti dei consumatori restano tutelati.",
+  "sections": {
+    "delivery": {
+      "title": "Prima della consegna",
+      "body": "È possibile richiedere un rimborso completo prima che la CLI acquistata, i modelli privati o il materiale didattico a pagamento siano stati consegnati o resi accessibili tramite il suo account. Scriva a hello@saasyland.com prima di accedere al prodotto a pagamento. Non è necessaria alcuna motivazione per questa richiesta di rimborso volontario prima della consegna. L'accesso o l'utilizzo del repository del sito web, rilasciato sotto licenza MIT, non sono considerati come la consegna del prodotto commerciale separato."
+    },
+    "afterDelivery": {
+      "title": "Dopo la consegna",
+      "body": "Il materiale digitale non può essere restituito come un oggetto fisico; pertanto la politica volontaria di rimborso prima della consegna termina quando lo ricevi. Ciò non prevale sui diritti di recesso o sui rimedi previsti dalla legge applicabile. Se un contenuto manca, è difettoso o differisce sostanzialmente da quanto promesso, contattaci per consentirci di risolvere il problema."
+    },
+    "consumerRights": {
+      "title": "Diritti legali dei consumatori",
+      "body": "Quando la legge ti riconosce un periodo di recesso, tale diritto continua ad applicarsi. Per i consumatori dell’UE, il termine ordinario di recesso dai contratti a distanza è di 14 giorni. Per i contenuti digitali forniti durante tale periodo, la perdita del diritto di recesso richiede il consenso espresso, la presa d’atto e la conferma prescritti dalla legge. Dichiarare semplicemente che il codice sorgente non è restituibile non elimina questi diritti. Restano inoltre invariati i diritti inderogabili relativi a contenuti non conformi o non consegnati."
+    },
+    "request": {
+      "title": "Come richiedere un rimborso",
+      "body": "Scrivi a hello@saasyland.com dall’indirizzo utilizzato per l’acquisto. Includi il riferimento dell’ordine, se disponibile, e indica che desideri un rimborso. Individueremo l’ordine e confermeremo i passaggi successivi. Non è necessario presentare un modulo specifico."
+    },
+    "processing": {
+      "title": "Come vengono erogati i rimborsi",
+      "body": "I rimborsi approvati vengono elaborati tramite Polar sul metodo di pagamento originale, per l’importo pagato nella valuta della transazione originale. I tempi di elaborazione possono variare. Un rimborso termina l’accesso al prodotto a pagamento rimborsato e revoca la relativa chiave di licenza. La Licenza commerciale spiega quali diritti sulle applicazioni già generate legittimamente rimangono validi. Restano impregiudicati i diritti della licenza MIT del codice pubblico e i rimedi inderogabili dei consumatori."
+    },
+    "freeServices": {
+      "title": "Servizi gratuiti",
+      "body": "Creare un account o iscriversi alla newsletter non genera di per sé un pagamento, quindi non vi è nulla da rimborsare per queste attività. I costi dei servizi di terzi acquistati separatamente sono soggetti alle condizioni di rimborso dei rispettivi fornitori."
+    }
+  }
+}

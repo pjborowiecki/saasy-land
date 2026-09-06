@@ -1,0 +1,537 @@
+---
+title: Al Coding Agentes para SaaS Em 2026, por que o Repositório decide
+description: 84% dos desenvolvedores usam ferramentas de codificação de IA, 33% confiam na saída. O que move os resultados não é o modelo, é o seu repositório. Mais um placar de 20 pontos.
+excerpt: Cada estudo dos últimos dois anos aponta para a mesma coisa, e não é o modelo. Aqui está a evidência, uma métrica que prevê qualidade de saída do agente, e um placar de 20 pontos para sua própria base de código.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-08-15
+image: /images/blog/ai-coding-agents-repository-readiness.webp
+tags:
+  - ai-agents
+  - architecture
+  - testing
+  - tooling
+faq:
+  - question: Qual agente codificador de IA é melhor em 2026?
+    answer: "Não há um único melhor agente, e a pergunta é menos importante do que parece. GitHub O co-piloto liderou a adoção no local de trabalho em 29%, com Cursor e Claude Code empatados em 18%, escolha por arreio: terminal-nativo para trabalho multi-arquivo, IDE-nativo de trabalho incremental, delegada apenas se seu repositório marcar 17 ou mais no Agent-Ready Repository Scorecard."
+  - question: Agentes de codificação de IA realmente fazem desenvolvedores mais rápidos?
+    answer: Não de forma confiável, e não nas condições em que a maioria das equipes trabalha. O ensaio controlado randomizado da METR descobriu que 16 desenvolvedores experientes eram 19% mais lentos em tarefas reais em seus próprios repositórios maduros, enquanto acreditavam que eram 20% mais rápidos. Velocidade aparece quando o repositório pode rejeitar mudanças erradas automaticamente. Sem isso, a saída sobe e o rendimento não.
+  - question: Por que meu agente de codificação de IA continua produzindo código que está quase certo?
+    answer: Porque nada no seu repositório contradiz isso. Um agente otimiza para o que pode observar, e se o único sinal disponível é que o código se parece com o código circundante, ele produzirá código que se parece com código circundante e faz a coisa errada. Esta é a maior frustração para 45% dos desenvolvedores pesquisados. Reduza seu tempo para "Não" e os psiquiatras da categoria.
+  - question: O que é AGENTS.MD e eu preciso de um?
+    answer: AGENTS.MD é um arquivo de marcação no seu repositório que diz aos agentes de codificação seus comandos, limites e convenções. Foi formalizada como uma especificação aberta em agosto de 2025, doada à Fundação Agentic IA da Fundação Linux em dezembro de 2025 e agora envia mais de 60.000 repositórios públicos, lidos por mais de 30 agentes. Sim, você precisa de um, e deve ser curto o suficiente para ser verdade.
+  - question: Devo ter um AGENTS.MD e um CLAUDE.MD?
+    answer: Mantenha um arquivo real e faça os outros apontarem para ele. Arquivos duplicados de instruções discordam em um mês, e um agente seguindo um arquivo velho segue-o confiantemente. Coloque tudo em AGENTS.MD, e use arquivos específicos de ferramentas apenas para um comportamento genuinamente específico.
+  - question: 100% da cobertura do teste é importante para o desenvolvimento assistido por IA?
+    answer: "Importa mais do que antes dos agentes, por uma razão não relacionada com o debate habitual. Um limite de cobertura que falha na construção é uma regra que um agente não pode percorrer: não pode adicionar comportamento sem adicionar um teste. Cobertura como distintivo não faz nada. Cobertura como um portal converte uma carga de revisão em uma falha de construção que não custa ninguém em nenhum momento."
+  - question: Pode um agente de IA apenas construir meu SaaS Caldeira para mim?
+    answer: Vai, e o resultado vai parecer certo. O que não vai te dizer é quais casos de auth edge ele pulou, qual webhook não é idempotente, ou que a verificação de paridade i18n que ele escreveu nunca teria pego as traduções desaparecidas. A saída de um agente é tão confiável quanto os cheques que o revisaram, e em um repositório vazio não há nenhum.
+  - question: Qual agente lida melhor com grandes bases de código?
+    answer: A questão, na maioria das vezes, resolve a montagem de contexto ao invés do agente. Agentes que buscam ativamente executando grep, abrindo arquivos e seguindo as importações acharão seus ajudantes existentes. Agentes confiando no contexto do editor ambiente encontram o que está aberto. Em um grande repositório, a diferença aparece como duplicação, por isso ter um exemplo canônico por padrão importa mais à medida que a base de códigos cresce.
+  - question: Como posso impedir um agente de tocar migrações ou segredos?
+    answer: Nomeie os caminhos em AGENTS.MD como somente humanos, e de volta com CI Qualquer superfície onde um erro seja irreversível ou caro pertence a ambos os lugares.
+  - question: Vale a pena trocar de agente para obter melhores resultados?
+    answer: Trocar dá-lhe uma mudança única na qualidade da proposta que reinicia sempre que o próximo modelo de naves. Baixando seu tempo para não mudar quantas propostas erradas chegam até você, aplica-se a cada agente que você usa, e compostos. Faça o segundo primeiro. Então troque de agente quantas vezes quiser, porque nesse momento o custo de estar errado sobre a escolha é baixo.
+---
+
+Dois números dos últimos 12 meses descrevem o estado de desenvolvimento assistido por IA melhor do que qualquer referência.
+
+O primeiro: **84% dos desenvolvedores agora usam ou planejam usar ferramentas de IA.** em seu processo de desenvolvimento, acima de 76% um ano antes ([Pesquisa de Desenvolvedores Stack Overflow 2025](https://survey.stackoverflow.co/2025/ai)).
+
+A segunda: na mesma pesquisa, **mais desenvolvedores agora ativamente desconfiam da precisão da saída de IA (46%) do que confiam nela (33%)**. . Apenas 3% dizem que confiam muito nele, e a confiança na precisão caiu ano após ano em vez de subir.
+
+Adoção subiu. A confiança caiu. A resposta da indústria tem sido comprar um agente melhor, e é por isso que cada artigo de comparação que você leu este ano classifica onze ferramentas em um leaderboard que estará errado quando você terminar de lê-lo.
+
+Este artigo argumenta algo diferente, e então lhe dá uma maneira de testá-lo em sua própria base de código. O modelo não é a variável que move seu resultado. **Seu repositório é.** Um agente é um loop: propor, observar, correto. O que ele observa vem da sua base de códigos. Se sua base de códigos não pode contradizer uma mudança errada rapidamente, o agente não tem nada contra o que corrigir, então ele otimiza para a única coisa que resta disponível, que é plausibilidade.
+
+Esse é o mecanismo por trás da falha que todos descrevem.
+
+<Callout title={"O que você ganha com este artigo"}>
+
+1. A evidência, de quatro estudos independentes, de que a qualidade da saída do agente rastreia a qualidade do repositório ao invés de capacidade de modelo.
+2. **Hora de não.**, uma métrica para quão rápido seu repositório pode dizer a um agente que está errado, e por que ele prediz qualidade de saída melhor do que uma pontuação de referência.
+3. O **Marcador de Repositório Agente-Pronto.**10 cheques, marcados em 20, que você pode executar em sua base de código em cerca de 15 minutos.
+4. Uma comparação honesta da paisagem de 2026 agrupada por arquitetura de arreios, sem leaderboard, e o motivo pelo qual nos recusamos a publicar uma.
+5. Um trabalho. `AGENTS.md` para uma SaaS Base de código, e o fluxo de trabalho de quatro passos que envia.
+
+</Callout>
+
+_Última atualização em 15 de agosto de 2026. Escrito enquanto construía e enviava a base de códigos que este site vende, e comandava agentes contra ele diariamente._
+
+## O que é um agente codificador de IA?
+
+Um agente codificador de IA é um programa que lê uma base de código, planeja uma mudança, edita arquivos, executa comandos e reage aos resultados sem um humano dirigindo cada passo. Isto é o que o separa de um assistente autocompleto: o agente fecha seu próprio loop executando seus testes, seu tipo de verificador e sua construção, então corrigindo do que eles retornam.
+
+Essa última cláusula é o assunto deste artigo. O teto de um agente é definido pela qualidade e latência dos sinais que ele pode observar. Um modelo que pontua bem em uma referência e um modelo que pontua mal ambos produzirão código confiável, plausível e errado em um repositório que não tem nada a dizer.
+
+## O paradoxo de 2026: adoção para cima, confiança para baixo, saída pior
+
+Quatro estudos independentes, dirigidos por diferentes organizações usando diferentes métodos, convergem para o mesmo achado. Produção assistida por agentes é mais rápida de produzir e mais cara de manter.
+
+| Estude.                                                                                                                       | Método                                                                                                                                | Encontrando                                                                                                                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Pesquisa de Desenvolvedores Stack Overflow 2025](https://survey.stackoverflow.co/2025/ai)                                    | Pesquisa anual de dezenas de milhares de desenvolvedores.                                                                             | 84% usam ou planejam usar ferramentas de IA. 46% desconfiam da precisão da saída contra 33% que confiam nela. O **A melhor frustração, citada por 45%.**, é "soluções de IA que estão quase certas, mas não completamente."                    |
+| [Ensaio controlado randomizado METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/), Julho de 2025 | 16 desenvolvedores de código aberto experientes, 246 tarefas reais, em seus próprios repositórios maduros (22K+ estrelas, 1M+ linhas) | Os desenvolvedores eram... **19% mais lento.** com ferramentas de IA. Eles acreditavam que tinham sido 20% mais rápidos.                                                                                                                       |
+| [Gitclear Manutenção Gap](https://www.gitclear.com/the_ai_code_quality_maintainability_gap), 2026                             | Análise de centenas de milhões de linhas mudadas                                                                                      | A duplicação do bloco subiu de 40,3 para **73,0 por milhão de linhas mudadas.**, o mais alto no registro. O código copiado passou de 9,4% do novo código em 2022 para 15,7% no início de 2026, enquanto o código refato caiu de 21% para 3,8%. |
+| [Google Relatório DORA](https://dora.dev/), 2024                                                                              | Pesquisa de DevOps em toda a indústria                                                                                                | Um aumento de 25% na adoção de IA correlacionou-se com **Diminuição de 7,2% na estabilidade do parto**.                                                                                                                                        |
+
+Leia essas quatro linhas novamente como uma sequência ao invés de como quatro queixas separadas, porque descrevem uma cadeia causal.
+
+O resultado do METR é o que as pessoas acham mais difícil de acreditar, e é o mais instrutivo. Aqueles não eram desenvolvedores júnior em código desconhecido. Eles tinham em média cinco anos de experiência nos repositórios específicos envolvidos. Eles eram mais lentos de qualquer maneira, e eles não conseguiam senti-lo. Uma diferença de 39 pontos entre a percepção e a produtividade não é um problema de habilidade. É um... **Problema de feedback.**. . Algo estava dizendo que as coisas estavam indo bem quando não estavam.
+
+### Os três modos de falha
+
+Cada estudo está medindo um sintoma diferente do mesmo sinal perdido. Nomeá-los torna-os mais fáceis de caçar.
+
+**Vaga plausível.** O agente produz código que lê corretamente, usa suas convenções de nomes, e faz a coisa errada. Esta é a categoria "quase certa" que 45% dos desenvolvedores nomearam como sua maior frustração. Ele sobrevive porque nada no repositório discorda dele. Revisá-lo custa mais do que escrever a mudança teria, porque uma resposta errada que parece certa é mais difícil de rejeitar do que uma resposta errada, que parece errada.
+
+**Duplicação silenciosa.** O agente precisa de um ajudante, não consegue encontrar o que você já tem, e escreve um segundo. Multiplique por cada recurso e você obter Gitclear 81% aumento em blocos duplicados mais de 2023. Blocos duplicados não são uma reclamação de estilo. **15% a 50% mais defeitos.**. . O agente não escolheu duplicar. Não podia observar que o original existia.
+
+**Regressão confiante.** Uma mudança passa por todos os cheques que existem, se funde, e quebra algo que nenhum cheque cobriu. Essa é a queda de 7,2% de estabilidade do DORA expressa como um incidente. A saída subiu, o portão não se moveu, então mais mudanças não testadas atingiram a produção por unidade de tempo.
+
+Todos os três têm a mesma raiz. O agente não poderia ser dito "não"rápido o suficiente, ou em tudo.
+
+## Tempo para Não: a métrica que prevê a qualidade da saída do agente
+
+**Tempo para não é quanto tempo seu repositório leva para dizer a um agente codificador de IA que sua mudança está errada.** Medi-lo desde o momento em que o agente parar de escrever até o momento que um sinal automatizado contradiz. Um repositório com tipos rígidos, uma porta de cobertura e uma resposta de verificação em segundos. Um repositório sem respostas na revisão de código, ou na produção, ou nunca.
+
+Tempo para não importar por causa de como o loop de um agente é estruturado. O agente propõe, observa e corrige. Correção só é possível contra observações que pode alcançar. **dentro de sua própria corrida**. . Qualquer coisa mais lenta que isso não é feedback para o agente. É uma limpeza para você.
+
+Aqui está a escada, com os sinais ordenados pelo quão rápido eles chegam.
+
+| Sinal.                                             | O que ele pega                              | Hora Típica de Não          | Chega ao agente? |
+| -------------------------------------------------- | ------------------------------------------- | --------------------------- | :--------------: |
+| Servidor de idiomas do editor                      | Forma errada, falta de campo, má importação | Menos de 1 segundo.         |       Sim        |
+| `tsc --strict`                                     | Tipo quebras em todo o projeto              | 5 a 30 segundos.            |       Sim        |
+| Linter e formatação                                | Convênio, padrões inseguros.                | 5 a 20 segundos.            |       Sim        |
+| Unidade e testes de integração.                    | Comportamento errado em um caminho coberto  | 30 segundos para 3 minutos. |       Sim        |
+| Limite de cobertura.                               | Comportamento adicionado sem nenhum teste.  | Mesma corrida.              |       Sim        |
+| Testes de ponta a ponta em um navegador de verdade | Fluxo quebrado entre as camadas             | 2 a 10 minutos.             |   Normalmente.   |
+| CI no pedido de retirada.                          | Tudo isso em uma máquina limpa.             | 5 a 15 minutos.             |       Não        |
+| Revisão do código humano                           | Intenção, design, julgamento                | Horas a dias                |       Não        |
+| Produção                                           | Tudo que ninguém verificou.                 | Dias para nunca             |       Não        |
+
+A linha entre "normalmente" e "não" é importante. **O agente só aprende com as linhas que pode alcançar dentro de seu próprio loop.** Tudo abaixo dessa linha é feedback para você, não para ele, e cada hora é uma hora que você está pagando para rever a saída que uma máquina poderia ter rejeitado de graça.
+
+Isso reformula toda a pergunta sobre ferramentas. Mudar de um agente de fronteira para outro muda o quão boas as propostas são. Diminuindo seu tempo para não mudar quantas propostas erradas já chegaram até você. A segunda alavanca é maior, ela se compõe, e não reinicia quando um novo modelo de navios no próximo mês.
+
+<Callout type="warn" title={"A implicação desconfortável."}>
+
+Um agente mais capaz em um repositório com alto tempo para não produz piores resultados do que um agente menos capaz em um depósito com baixo. Escreve mais código, mais rápido, com a mesma proporção de respostas erradas, e cada uma delas chega na sua fila de revisão em vez de morrer no loop.
+
+</Callout>
+
+### Como medir seu próprio tempo para não
+
+Você não precisa de instrumentação. Você precisa de uma mudança deliberadamente quebrada.
+
+<Steps>
+
+<Step>
+
+**Escolha um invariante.** Algo que seu produto realmente depende: um webhook que não deve cobrar duas vezes, uma verificação de permissão em uma rota de administração, uma conversão de moeda.
+
+</Step>
+
+<Step>
+
+**Quebre da menor maneira possível.** Inverta um booleano. Deixe cair um. `await`. . Mude um operador de comparação. Não quebre a sintaxe, porque erros de sintaxe são pegos por tudo e não provam nada.
+
+</Step>
+
+<Step>
+
+**Inicie um cronômetro e execute seu comando de verificação.** O que quer que um agente possa correr. Se você não tem um único comando que um agente possa comandar, seu Time to No já é "revisão humana" e você pode parar o exercício aqui.
+
+</Step>
+
+<Step>
+
+**Grave quando algo falhar, e o quê?** Não quando você percebe. Quando a máquina se opõe, com uma mensagem específica o suficiente para que um agente possa agir sobre ela.
+
+</Step>
+
+<Step>
+
+**Repita para quatro ou cinco invariantes em diferentes camadas.** Auth, faturamento, acesso de dados, I18n, o administrador. O mais lento é seu tempo real para não, porque essa é a camada onde os agentes causarão mais danos.
+
+</Step>
+
+</Steps>
+
+A maioria dos times que dirigem isso honestamente encontram pelo menos uma camada onde a resposta é "nada falhou".
+
+## O placar do Repositório Agente-Pronto.
+
+Dez cheques, pontuação 0, 1 ou 2, para um máximo de 20. Marque seu próprio repositório. Leva cerca de 15 minutos e o resultado é mais útil do que qualquer comparação de benchmark, porque é sobre a base de código em que você realmente trabalha.
+
+### Contexto: o agente pode encontrar a verdade?
+
+**Um. Um arquivo de instruções de agente existe e é atual.**
+
+`AGENTS.md` foi formalizada como uma especificação aberta em agosto de 2025 com participação da OpenAI, Google, Cursor and Factory, doado à Fundação Agentic AI da Fundação Linux em dezembro de 2025, e agora envia em mais de 60.000 repositórios públicos, lidos por mais de 30 agentes.
+
+- **0**Nenhum arquivo de instruções. Todo agente começa do zero e infere suas convenções de qualquer arquivo que possa abrir.
+- **1**Um arquivo existe, mas é prosa que o agente tem que interpretar, ou ele se afastou da realidade.
+- **2**Ele declara os comandos, os limites e as convenções em menos de 200 linhas, e não pode apodrecer, porque CI corre os mesmos comandos que nomeia.
+
+**Dois. Tipos são contratos, não decoração.**
+
+- **0**: `any` É comum. Dados externos entram no sistema sem validação.
+- **1**Estrita. TypeScript, mas limites (corpos de HTP, variáveis de ambiente, cargas úteis de webhook, linhas de banco de dados) são confiáveis em vez de analisados.
+- **2**Estrita. TypeScript com não `any`, mais validação de esquema em cada limite externo. Uma forma errada falha na borda, em menos de um segundo, com uma mensagem nomeando o campo.
+
+**3. Há exatamente um exemplo canônico de cada padrão.**
+
+Agentes trabalham por imitação de vizinhos mais próximos. Eles copiam o mais próximo que podem encontrar. Se seu repositório contém três maneiras de buscar dados, o agente vai escolher um aleatoriamente e você tem uma chance em três do que você queria.
+
+- **0**Múltiplos padrões de competição para o mesmo trabalho, todos em uso ativo.
+- **1**Uma preferência documentada que nada impõe.
+- **2**Um exemplo implementado por padrão, então o vizinho mais próximo é sempre o vizinho certo.
+
+### Verificação: o repositório pode dizer não?
+
+**Quatro. Um comando comanda tudo.**
+
+- **0**Um parágrafo README descrevendo passos em uma ordem específica.
+- **1**Vários roteiros, e você tem que saber quando correr.
+- **2**Um único comando que verifica o tipo, os fiapos, testes e relatórios, saindo de 0 ou 1. Um agente pode executá-lo sem ser informado como.
+
+**Cinco. Cobertura é um portão, não um relatório.**
+
+- **0**Sem medição de cobertura.
+- **1**A cobertura é medida e exibida em um distintivo que ninguém bloqueia uma fusão.
+- **2**Um limiar que falha na construção. Novo comportamento sem um teste não pode se fundir, o que significa que o agente não pode adicionar comportamento não testado, mesmo que queira.
+
+**Seis. Caminhos críticos correm em um navegador de verdade.**
+
+- **0**Sem testes de ponta a ponta.
+- **1**: jsdom ou ambientes ridicularizados apenas, que passam enquanto a coisa real é quebrada.
+- **2**Motores de navegador de verdade fazendo registro, check-out e o caminho do webhook.
+
+**Sete. O tipo de verificação é tolerância zero.**
+
+- **0**Erros de tipo são ruído de fundo normal.
+- **1**Erros são rastreados em um atraso.
+- **2**Um erro sai não-zero e bloqueia a fusão. Agentes respondem a sinais binários, uma contagem que "subiu um pouco"não é um sinal.
+
+### Limites: o agente pode ficar dentro deles?
+
+**Oito. Regras arquitetônicas são impostas por ferramentas.**
+
+- **0**Convenções vivem na cabeça de um engenheiro sênior.
+- **1**Escrito em um wiki, forçado por revisão.
+- **2**Uma regra limitativa de importação falha na construção quando uma camada chega a algum lugar que não deveria. O agente aprende sua arquitetura batendo na parede, em segundos, não lendo sobre ela.
+
+**Nove. Superfícies perigosas estão explicitamente fora dos limites.**
+
+- **0**Nada está marcado. Migrações, segredos e lógica de faturamento são tão editáveis quanto um componente de botão.
+- **1**Avisos informais que uma nova sessão de agentes nunca viu.
+- **2**Migrações, segredos, billing webhooks e infra-estrutura nomeada no arquivo de instruções como humana-revisão-somente, e protegida por CI ao invés de pela esperança.
+
+### Revisão: um humano pode auditá-la depois?
+
+**10. Cada qualidade reivindica mapas para um comando.**
+
+- **0**As alegações de qualidade vivem no README como adjetivos.
+- **1**Algumas alegações podem ser verificadas se souber onde procurar.
+- **2**Cada reivindicação mapeia um comando que regenera as evidências. Isto é o que torna o trabalho de um agente auditável em tudo: você não está verificando se foi cuidadoso, você está verificando se a evidência ainda gera.
+
+### Pontuação
+
+<Cards>
+  <Card title={"17 a 20, agente pronto."}>
+    O laço fecha sem você. Mudanças erradas morrem dentro da corrida do agente, agentes agem como um multiplicador de transferência, e
+    revisão permanece sobre intenção em vez de correção.
+  </Card>
+  <Card title={"11 a 16 - Agente-tolerante"}>
+    Agentes ajudam em caminhos bem cobertos e vagam por todo o lado. A carga de revisão aumenta em proporção à saída, o que cancela a maior
+    parte do ganho.
+  </Card>
+  <Card title={"De 0 a 10, agente-hostil."}>
+    O agente vai se sentir rápido e errado, e você vai descobrir tarde. Aqui é onde o resultado do METR vive.
+  </Card>
+</Cards>
+
+Se você marcou menos de 11, o trabalho de retorno mais alto disponível para você neste trimestre não é avaliar agentes. São os cheques 4, 5 e 7, que são as três maneiras mais baratas de comprar de volta milhares de segundos de Time to No.
+
+## Como o 2026 agente paisagem realmente se compara
+
+Adoção primeiro, porque é o único número aqui com uma fonte sólida. Uma pesquisa do JetBrains AI Pulse de mais de 10.000 desenvolvedores em janeiro de 2026 encontrou **74% adotaram uma ferramenta de desenvolvimento de IA especializada.**. GitHub O co-piloto liderou na adoção do local de trabalho em 29%, com Cursor e Claude Code empatados em 18% cada.
+
+Note o que essa distribuição implica: nenhuma ferramenta detém a maioria, a maioria das equipes executam dois ou três, e o intervalo entre o primeiro e o terceiro é menor do que o intervalo entre um bom repositório e um ruim.
+
+<Callout type="info" title={"Por que não há líder neste artigo?"}>
+
+Não estamos publicando rankings de referência, e a razão não é diplomacia.
+
+As notas da Frontier no banco de dados da SWE Verificado e Terminal Bench mudaram de mãos repetidamente este ano, às vezes dentro do mesmo mês. Qualquer tabela de notas publicada hoje é uma tabela de notas que já foi verdade. Pior, o número é quase inútil para sua decisão: tarefas de referência vêm com um verificador anexado, que é a coisa exata que a maioria dos repositórios de produção estão faltando. Uma referência mede um agente trabalhando em condições ideais que você não reproduziu.
+
+As duas coisas que são estáveis o suficiente para planejar ao redor são o **Arnês** (como a ferramenta monta o contexto, onde ela corre, como ela pede permissão) e **Seu repositório.**. . É o que esta seção compara.
+
+</Callout>
+
+### Agentes terminais nativos.
+
+**Exemplos: Código Claude, Codex OpenAI CLI, OpenCode, Aider.**
+
+Eles funcionam como um processo em sua concha, com as permissões de sua concha. A montagem de contexto está ativa em vez de ambiente: o agente corre. `grep`, abre arquivos, executa seu comando de teste, e lê o que volta. Porque eles vivem onde suas ferramentas vivem, eles fecham o circuito de verificação mais diretamente. Se você tiver um comando, um agente de terminal irá usá-lo sem ser perguntado duas vezes.
+
+- **Melhor para:** Equipes cuja cultura de engenharia já vive no terminal, longas mudanças em vários arquivos, trabalham onde executar a suíte de testes é o principal sinal de feedback.
+- **Custou-lhe:** Nenhuma revisão visual por padrão, então a disciplina de revisão tem que vir de você ou de CI. Modelos de permissão variam muito, e uma configuração permissiva em um repositório sem limites é exatamente a combinação que produz regressões confiantes.
+- **Notável:** Opções de código aberto neste grupo (OpenCode, Aider) dar-lhe modelo e escolha do provedor, que importa se você tem restrições de residência de dados ou quer controlar o custo por token diretamente.
+
+### Agentes nativos de IDE
+
+**Exemplos: GitHub Copiloto, Windsurf, Cline, JetBrains Junie.**
+
+Eles vivem dentro do editor e herdam seu contexto: arquivos abertos, posição do cursor, o servidor de linguagem, o índice do projeto. O servidor de idiomas é a parte subestimada. Dá-lhes o sinal mais rápido em todo o tempo para Sem escada, retroalimentação do tipo sub-segundo, sem executar nada.
+
+- **Melhor para:** Fluxo de programação em par, trabalho incremental em um arquivo que você já está lendo, equipes padronizadas em um editor.
+- **Custou-lhe:** A janela de contexto do editor não é a arquitetura do seu repositório. Esses agentes vêem o que está aberto, o que torna a duplicação silenciosa mais provável em uma grande base de código a menos que seus padrões sejam canônicos (scorecard check 3).
+- **Notável:** A liderança de adoção do copiloto é um fato de aquisição de empresas mais do que um fato de capacidade. Julgue em seu próprio repositório, não em market share.
+
+### Agentes delegados e assíncronos
+
+**Exemplos: Devin, Google Jules, corredores de tarefas na nuvem, incluindo Codex hospedado.**
+
+Não há um loop interativo, o que significa que esses agentes são os mais sensíveis de todos os três grupos à qualidade do repositório. CI Diz.
+
+- **Melhor para:** Trabalho bem especificado, limitado e repetitivo em um repositório que marca alto no placar. Saliências de dependência, recheio de teste, migrações mecânicas em muitos arquivos.
+- **Custou-lhe:** Tudo, se sua pontuação for baixa. Um agente delegado em um repositório agente-hostil é uma máquina para gerar pedidos plausíveis que um humano tem que re-derivar totalmente.
+- **Regra do polegar:** Não delegue assincronicamente até que você marque 17 ou mais. CI ser capaz de dizer não em seu nome.
+
+### Os eixos que importam
+
+| Eixo.                           | Por que decide o seu resultado?                                                                |
+| ------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Onde ele corre                  | Determina quais sinais de verificação podem chegar sem ajuda.                                  |
+| Montagem de contexto.           | Busca ativa encontra seu ajudante; contexto ambiente muitas vezes não.                         |
+| Modelo de aprovação.            | Define o quanto o trabalho errado alcança você antes de algo objetos.                          |
+| Modelo e escolha do fornecedor. | Assuntos para controle de custos, residência de dados e evitando o risco de um único vendedor. |
+| Suporte de arquivo de instrução | `AGENTS.md` Suporte significa que um arquivo governa cada ferramenta que sua equipe usa.       |
+| Estrutura de custos             | Per-seat, per-token e por-task preço recompensa completamente diferentes fluxos de trabalho    |
+
+### Qual agente você deve escolher?
+
+| Se a sua situação é                                         | Comece com                             | Porque...                                                                                                |
+| ----------------------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Primeira equipe de terminais, grandes mudanças de arquivos. | Um agente terminal-nativo.             | Ele atinge o seu comando de verificação diretamente e itera contra ele.                                  |
+| Primeira equipe do editor, trabalho incremental.            | Um agente nativo do IDE.               | Sub-segunda linguagem-server feedback é o mais barato Tempo para Não disponível                          |
+| Você precisa escolher modelo ou controle de custos.         | Um agente de código aberto.            | Roteamento de provedores é uma característica de primeira classe ao invés de um item de roteiro.         |
+| Trabalho forçado e repetitivo em escala.                    | Um agente delegado, se você marcar 17. | CI Tem que ser capaz de rejeitar em seu nome.                                                            |
+| Você marcou menos de 11 no placar.                          | Nenhum deles, ainda.                   | Gastar o quarto em cheques 4, 5 e 7. O retorno é maior e se aplica a cada agente que você tentar depois. |
+
+Essa última linha é a resposta honesta para uma grande parcela de times, e é aquela que nenhum vendedor de ferramentas tem um incentivo para lhe dar.
+
+## Arquivos de instruções: o que pertence a AGENTS.MD.
+
+`AGENTS.md` Mais de 30 agentes o leram nativamente, incluindo Claude Codex, Cursor, Copiloto, Aider, Windsurf, Devin, Zed e Gemini. CLI, o que o torna o único arquivo que vale a pena manter cuidadosamente.
+
+| Arquivo                           | Leia por:                         | Use-o para                                                                               |
+| --------------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------- |
+| `AGENTS.md`                       | A maioria dos agentes principais. | A única fonte da verdade: comandos, limites, convenções.                                 |
+| `CLAUDE.md`                       | Código Claude.                    | Só o que é genuinamente específico de Claude. Aponte para ele. `AGENTS.md` para o resto. |
+| `.cursor/rules/`                  | Cursor                            | Regras do editor, sobreposições específicas do caminho.                                  |
+| `.github/copilot-instructions.md` | GitHub Copiloto.                  | Frases específicas de copiloto onde difere.                                              |
+
+O modo de falha aqui é a duplicação. Quatro arquivos que descrevem as mesmas convenções discordarão em um mês, e um arquivo de instruções discordante é pior do que nenhum, porque o agente segue o errado com confiança. Mantenha um arquivo real, e faça os outros apontarem para ele.
+
+### O que realmente pertence a ele
+
+Escreva as coisas que um agente não pode inferir lendo código, e nada mais.
+
+**Inclua:** o comando de verificação, a definição de feito, limites arquitetônicos e quais dependências de direção fluim, as superfícies que requerem revisão humana, o único exemplo canônico para copiar para cada tarefa comum.
+
+**Deixe de fora:** qualquer coisa que o sistema de tipo já esteja, reafirmações da documentação do seu framework, convenções aspiracionais que a base de códigos não siga, e prosa longa. Um arquivo de instruções que não é verdade é um risco.
+
+```markdown
+# AGENTS.md
+
+## Verify before you claim done
+
+Run `bun run verify`. It type-checks, lints, tests and enforces
+100% coverage. Exit code 0 means done. Nothing else does.
+
+## Architecture
+
+Dependencies flow one way: presentation -> application -> domain.
+The domain layer imports nothing from the other two. This is
+enforced by an import boundary rule, so a violation fails the build.
+
+## Conventions
+
+- Strict TypeScript. No `any`, no non-null assertions.
+- Validate every external boundary with a Zod schema: HTTP bodies,
+  environment variables, webhook payloads.
+- New behaviour needs a test in the same commit. The coverage
+  gate will reject it otherwise.
+- Copy the nearest existing module. There is exactly one example
+  of each pattern and it is the correct one.
+
+## Human review required (do not edit without asking)
+
+- `drizzle/migrations/**` (destructive and irreversible)
+- Stripe webhook handlers (must stay idempotent)
+- Anything reading a secret or environment variable
+- CI workflow files
+
+## Useful commands
+
+bun run dev # local dev server
+bun run verify # the only gate that matters
+bun run test:coverage # regenerates the coverage report
+bun run check:i18n # fails on a missing translation key
+```
+
+Cerca de 40 linhas. Cada declaração nela é imposta por um comando ou é um limite que um humano tem que manter. Nada pode se tornar falso sem que uma construção falhe.
+
+## O fluxo de trabalho que envia
+
+<Steps>
+
+<Step>
+
+**Planeje antes de escrever.** Peça a abordagem e os arquivos que pretende tocar, e leia isso antes de aprovar qualquer edição. Um plano errado custa uma mensagem para consertar. Uma implementação errada custa um ciclo de revisão. A maioria dos agentes agora suporta um modo de planejamento explícito, use-o para qualquer coisa acima de uma mudança de arquivo.
+
+</Step>
+
+<Step>
+
+**Restrinja o raio de explosão.** Um módulo, um recurso, um pedido de tração. Agentes são bons na mudança que pediu e indiferentes aos noventa arquivos que tocaram no caminho. Uma pequena diferença não é uma preferência estilística aqui, é a única maneira que um humano ainda pode auditar a saída a velocidade do agente.
+
+</Step>
+
+<Step>
+
+**Faça-o verificar, não reivindicar.** "Feito" é o código de saída 0 do seu comando de verificação, executado pelo agente, com a saída visível para você. Nunca aceite um resumo como evidência. A descoberta da METR é exatamente o que parece quando você aceita resumos confiantes: tudo parece progresso.
+
+</Step>
+
+<Step>
+
+**Reveja a intenção, não a sintaxe.** O tipo verificador, linter e suíte de testes já revisaram a sintaxe. Sua crítica deveria fazer três perguntas. Isso resolve o problema de verdade? Ele duplicou algo que já existe? O que decidiu não testar?
+
+</Step>
+
+</Steps>
+
+A terceira pergunta é a que mais pega. Pergunte a um agente o que ele escolheu para não cobrir e ele geralmente lhe dirá, com precisão, e essa resposta é onde seu próximo incidente vive.
+
+## Que tempo alto para sem custos, em dinheiro.
+
+Pegue uma equipe modesta enviando dez mudanças de agentes por semana. Suponha que um em cada seis carrega um defeito que nenhum cheque automático pega, o que é conservador contra a descoberta de Gitclear que o código clonado sozinho associa com 15% a 50% mais defeitos.
+
+Isso é cerca de 1,7 defeitos por semana atingindo revisão humana ou produção. A uma taxa de $80 por hora, um defeito pego em revisão custa talvez uma hora entre o revisor e o autor. Um defeito que atinge a produção custa uma sessão de depuração, uma correção, uma implantação e a interrupção de qualquer outra coisa que estava acontecendo, o que é raramente em menos de quatro horas.
+
+Peso em média de três horas e você está gastando cerca de **400 dólares por semana, ou 20 mil dólares por ano.**, sobre defeitos que um portão de cobertura e um rigoroso tipo de verificação teria rejeitado em noventa segundos, de graça, antes que um humano os visse.
+
+A questão não é a precisão desse número. Substitua sua própria taxa e sua própria proporção de defeitos, a forma não muda. O custo de uma alta Time to No é contínuo, ele escala com saída de agente em vez de contra ele, e é invisível em cada painel que você olha atualmente, porque ele aparece como trabalho de engenharia normal.
+
+É por isso que "qual agente" é a pergunta inicial errada. Um agente melhor aumenta o numerador.
+
+## Onde? SaaSyLand Se encaixa.
+
+Nós construímos uma produção. SaaS Codebase e vende-lo, e nós corremos agentes contra ele todos os dias, que é a razão pela qual este artigo existe, então é justo marcar em nosso próprio placar, e mostrar-lhe o comando que prova cada resposta em vez de pedir-lhe para tomar o número em confiança.
+
+| Cheque.                           | Ponto. | Verifique você mesmo.                                                                |
+| --------------------------------- | :----: | ------------------------------------------------------------------------------------ |
+| Um. Arquivo de instruções         |   2    | `AGENTS.md` Na raiz, mais arquivos por área, todos os comandos de nomeação CI Corre. |
+| Dois. Tipos como contratos.       |   2    | `tsc --strict`, zero `any`, Zod em cada limite                                       |
+| 3. Um exemplo canônico.           |   2    | Uma forma de módulo, documentada nos documentos de arquitetura.                      |
+| Quatro. Um comando.               |   2    | `bun run verify`                                                                     |
+| Cinco. Cobertura como um portão   |   2    | 100% de declarações, ramos, funções e linhas, forçadas em `.github/workflows/ci.yml` |
+| Seis. Navegadores de verdade.     |   2    | 5 Playwright Suítes em Chromium e WebKit                                             |
+| Sete. Tipos de tolerância zero.   |   2    | `tsc --strict` Bloqueia a fusão em um erro.                                          |
+| Oito. Limites forçados.           |   2    | As regras da camada falham na construção, não na revisão.                            |
+| Nove. Superfícies protegidas.     |   2    | Migrações, segredos e webhooks marcado humano-review-somente                         |
+| 10. Reivindica mapa para comandos |   2    | Cada número em nossa página de preços nomeia o arquivo que o gera.                   |
+
+Vinte em vinte não é um orgulho, é uma descrição do que é o produto, uma base de código com 140 arquivos de teste, 5 Playwright Suítes e um portão de cobertura que falha a construção é uma base de código que pode dizer a um agente que está errado em cerca de 90 segundos, em cada um dos caminhos que importa.
+
+Também é por isso que não publicamos depoimentos. Não há nada para verificar em uma citação. A documentação é pública, o relatório de cobertura é gerado pelo repositório que você estaria comprando, e o fluxo de trabalho CI que o obriga está nesse repositório. Cheque as provas antes de pagar.
+
+**Para quem não é.** Se quer algo livre para aprender, clone um modelo e aproveite. Se você está feliz por um vendedor hospedado para executar sua autorização e cobrar por usuário ativo mensal, compre isso em vez disso. Isto é para pessoas que ainda pretendem possuir as margens em 50 mil usuários, e que preferem que seu agente atinja uma parede em noventa segundos do que na produção.
+
+<Callout title={"Comece aqui."}>
+
+Leia. [A documentação.](/docs) e a seção de arquitetura primeiro. Então... [Veja quanto custa.](/#pricing). . Um pagamento, de $249, atualizações do núcleo vitalício, sem taxas por usuário.
+
+</Callout>
+
+## Perguntas frequentes.
+
+<Accordions>
+
+<Accordion title={"Qual agente codificador de IA é melhor em 2026?"}>
+
+Não há um único melhor agente, e a resposta honesta é que a pergunta é menos importante do que parece. GitHub O co-piloto liderou a adoção do local de trabalho em 29%, com Cursor e Claude Code empatados em 18%.
+
+</Accordion>
+
+<Accordion title={"Agentes de codificação de IA realmente fazem desenvolvedores mais rápidos?"}>
+
+Não de forma confiável, e não nas condições em que a maioria das equipes trabalha. O ensaio controlado randomizado da METR descobriu que 16 desenvolvedores experientes eram 19% mais lentos em tarefas reais em seus próprios repositórios maduros, enquanto acreditavam que eram 20% mais rápidos. Velocidade aparece quando o repositório pode rejeitar mudanças erradas automaticamente. Sem isso, a saída sobe e o rendimento não.
+
+</Accordion>
+
+<Accordion title={"Por que meu agente de codificação de IA continua produzindo código que está quase certo?"}>
+
+Porque nada no seu repositório contradiz isso. Um agente otimiza para o que pode observar, e se o único sinal disponível é "este parece o código circundante", ele produzirá código que se parece com o código circundante e faz a coisa errada. Esta é a maior frustração para 45% dos desenvolvedores pesquisados. Reduza seu tempo para "Não" e os psiquiatras da categoria.
+
+</Accordion>
+
+<Accordion title={"O que é AGENTS.MD e eu preciso de um?"}>
+
+`AGENTS.md` É um arquivo de marcação no seu repositório que diz aos agentes de codificação seus comandos, limites e convenções. Foi formalizada como uma especificação aberta em agosto de 2025, doada à Fundação Agentic IA da Fundação Linux em dezembro de 2025 e agora envia mais de 60.000 repositórios públicos, lidos por mais de 30 agentes. Sim, você precisa de um, e deve ser curto o suficiente para ser verdade.
+
+</Accordion>
+
+<Accordion title={"Devo ter um AGENTS.MD e um CLAUDE.MD?"}>
+
+Mantenha um arquivo real e faça os outros apontarem para ele. Arquivos duplicados de instruções discordam em um mês, e um agente seguindo um arquivo velho segue-o confiantemente. Coloque tudo dentro `AGENTS.md`, e usar arquivos específicos de ferramentas apenas para o comportamento genuinamente específico de ferramentas.
+
+</Accordion>
+
+<Accordion title={"100% da cobertura do teste é importante para o desenvolvimento assistido por IA?"}>
+
+Importa mais do que antes dos agentes, por uma razão não relacionada com o debate habitual. Um limite de cobertura que falha na construção é uma regra que um agente não pode percorrer: não pode adicionar comportamento sem adicionar um teste. Cobertura como distintivo não faz nada. Cobertura como um portal converte uma carga de revisão em uma falha de construção que não custa ninguém em nenhum momento.
+
+</Accordion>
+
+<Accordion title={"Pode um agente de IA apenas construir meu SaaS Caldeira para mim?"}>
+
+Vai, e o resultado vai parecer certo. O que não vai te dizer é quais casos de auth edge ele pulou, qual webhook não é idempotente, ou que a verificação de paridade i18n que ele escreveu nunca teria pego as traduções desaparecidas. A saída de um agente é tão confiável quanto os cheques que o revisaram, e em um repositório vazio não há nenhum.
+
+</Accordion>
+
+<Accordion title={"Qual agente lida melhor com grandes bases de código?"}>
+
+A questão, na maioria das vezes, resolve a montagem de contexto ao invés do agente. Agentes que buscam ativamente `grep`, abrindo arquivos, após importações) encontrar seus ajudantes existentes. Agentes confiando no contexto do editor ambiente encontram o que está aberto. Em um grande repositório, a diferença aparece como duplicação, por isso verifique 3 no placar, um exemplo canônico por padrão, importa mais à medida que a base de códigos cresce.
+
+</Accordion>
+
+<Accordion title={"Como posso impedir um agente de tocar migrações ou segredos?"}>
+
+Diga os caminhos. `AGENTS.md` Como um homem-revisão-somente, e de volta com CI Qualquer superfície onde um erro seja irreversível ou caro pertence a ambos os lugares.
+
+</Accordion>
+
+<Accordion title={"Vale a pena trocar de agente para obter melhores resultados?"}>
+
+Trocar dá-lhe uma mudança única na qualidade da proposta que reinicia sempre que o próximo modelo de naves. Baixando seu tempo para não mudar quantas propostas erradas chegam até você, aplica-se a cada agente que você usa, e compostos. Faça o segundo primeiro. Então troque de agente quantas vezes quiser, porque nesse momento o custo de estar errado sobre a escolha é baixo.
+
+</Accordion>
+
+</Accordions>
+
+### Fontes
+
+- [Stack Overflow Developer Survey 2025, seção IA](https://survey.stackoverflow.co/2025/ai)
+- [METR, "Medindo o impacto da IA Early-2025 na produtividade de desenvolvedores com fonte aberta experiente" (julho de 2025)](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)
+- [Gitclear, "The Mantenebility Gap: 2026 AI Code Quality Research"](https://www.gitclear.com/the_ai_code_quality_maintainability_gap)
+- [Google DORA, Pesquisa do Estado de DevOps](https://dora.dev/)
+- [AGENTES.MD especificação aberta](https://agents.md/)
+
+_Escrito por Piotr J. Borowiecki, que constrói SaaSyLand Cada reclamação sobre nossa própria base de código neste artigo mapeia para um comando no repositório, listado na tabela de pontuação acima._

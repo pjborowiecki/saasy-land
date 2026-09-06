@@ -1,4 +1,4 @@
-import type { CategoryValidationMessageKey } from "~/src/integrations/next-intl/i18n.types"
+import type { CategoryValidationMessageKey } from "~/src/integrations/use-intl/i18n.types"
 
 const CATEGORY_NAME_MAX_LENGTH = 255
 

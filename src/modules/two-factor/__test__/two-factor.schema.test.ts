@@ -1,5 +1,6 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
-import { getTableConfig } from "drizzle-orm/pg-core"
+import { getTableConfig } from "drizzle-orm/sqlite-core"
+import { describe, expect, it } from "vite-plus/test"
 
 import { twoFactor, twoFactorRelations } from "~/src/modules/two-factor/two-factor.schema"
 import { user } from "~/src/modules/user/user.schema"

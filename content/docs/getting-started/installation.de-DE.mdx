@@ -1,0 +1,23 @@
+---
+title: Regionale Entwicklung.
+description: Lokale Entwicklung – SaaSy Land
+---
+
+Installieren Sie Bun 1.4 und Node 24 oder eine neuere Version, und installieren Sie anschließend die Abhängigkeiten. Kopieren Sie `.env.example` in `.env.development` und konfigurieren Sie ein langes, zufälliges `AUTH_SECRET`, die öffentliche `VITE_APP_URL` sowie alle externen Integrationen, die Sie testen möchten.
+
+Der Entwicklungsserver nutzt die Preview-D1- und KV-Ressourcen über Cloudflare’s Remote Bindings, und entspricht damit den React-Projekten. Melden Sie sich mit Wrangler an und führen Sie die in das Repository eingecheckten SQLite-Migrationen im Entwicklungsumfeld aus, bevor Sie beginnen. Der Entwicklungskommando erzeugt Inhalte für Fumadocs und führt Vite+ mit dem Cloudflare-Plugin aus. Browser-Tests verwenden separaten lokalen Speicher unter `.wrangler/test`.
+
+OAuth, E-Mail und Abrechnung erfordern Anmeldeinformationen des Anbieters. Verwenden Sie Testanmeldeinformationen und die Polar-Sandbox während der Entwicklung. Tests verwenden vordefinierte Dummy-Werte und Mock-Objekte anstelle des Versendens echter Nachrichten oder des Belastens eines Kunden.
+
+```sh
+bun install
+cp .env.example .env.development
+bun run db:migrate:development
+bun run dev
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

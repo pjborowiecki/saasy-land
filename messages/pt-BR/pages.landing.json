@@ -1,0 +1,652 @@
+{
+  "metadata": {
+    "description": "Um comando gera uma base SaaS com TanStack Start pronta para produção: autenticação no seu próprio banco de dados, cobrança com Polar, painel administrativo e cobertura de testes obrigatória de 100%. A partir de US$ 249, em pagamento único."
+  },
+  "hero": {
+    "title": "A <accent>vantagem de mais de 300 horas</accent> para quem desenvolve com qualidade.",
+    "description": "Um comando gera um <strong>kit inicial full-stack</strong> escalável, preparado para o edge, com autenticação, cobrança e um editor visual de páginas. Limites claros entre os módulos e uma cobertura de testes obrigatória de 100% permitem que seus agentes de programação avancem rápido sem comprometer a arquitetura. A base está pronta: concentre-se no seu produto.",
+    "ctaPrimary": "Começar a criar",
+    "ctaSecondary": "Ver o que está incluído",
+    "surface": {
+      "copied": "Copiado",
+      "copy": "Copiar o comando de instalação",
+      "imageAlt": "O painel administrativo do SaaSyLand: receita, usuários ativos e novos cadastros no topo, um gráfico de receita abaixo e a tabela dos usuários mais recentes ao final",
+      "runner": "Gerenciador de pacotes"
+    }
+  },
+  "proof": {
+    "facts": {
+      "admin": {
+        "label": "Seções de administração",
+        "value": "13",
+        "note": "Usuários, pagamentos, análises, blog e o editor de páginas."
+      },
+      "components": {
+        "label": "Componentes de interface do usuário",
+        "value": "56",
+        "note": "No seu repositório, prontos para editar. Sem barreiras de pacotes."
+      },
+      "coverage": {
+        "label": "Cobertura de testes",
+        "value": "100%",
+        "note": "Uma exigência da CI, não uma captura de tela para impressionar."
+      },
+      "locales": {
+        "label": "Mercados globais",
+        "value": "156",
+        "note": "Moedas configuradas com 195 fusos horários. Adicionar um idioma exige arquivos de tradução, não uma reescrita."
+      },
+      "mau": {
+        "label": "Custo de autenticação",
+        "value": "$0",
+        "note": "Seu banco de dados, seus usuários, suas margens. Para sempre."
+      },
+      "stars": {
+        "label": "Estrelas no GitHub",
+        "note": "No código público deste site. Avalie a qualidade antes de comprar."
+      },
+      "tables": {
+        "label": "Tabelas de dados",
+        "value": "TanStack v9",
+        "note": "Classificação, paginação, redimensionamento e seleção, já implementados."
+      },
+      "tests": {
+        "label": "Arquivos de teste",
+        "value": "176",
+        "note": "Unidades, integração e 8 suítes de testes Playwright em navegadores reais."
+      },
+      "types": {
+        "label": "Segurança de tipos",
+        "value": "Rigorosa",
+        "note": "Nenhum any, índices verificados. Um erro bloqueia o merge."
+      },
+      "upkeep": {
+        "label": "Tecnologias principais",
+        "value": "React 19",
+        "note": "Versões principais atuais, qualquer que seja o framework. Atualizadas semanalmente."
+      }
+    }
+  },
+  "manifesto": {
+    "p1": "Você sabe construir isso. Só não deveria precisar refazer.",
+    "p2": "Todo SaaS precisa da mesma base: autenticação, cobrança, suporte a vários tenants e administração. Essas primeiras 300 horas ou mais não são o que torna seu produto valioso. Esse trabalho já está escrito e testado. Resta a parte que só você pode criar.",
+    "p3": "Comece na hora trezentos"
+  },
+  "cli": {
+    "title": "Escolha seu stack. Execute um comando.",
+    "lead": "A maioria dos kits iniciais inclui todas as combinações possíveis e deixa você apagar o que não pediu. Este faz doze perguntas e gera apenas o que você escolheu. Um projeto para um único tenant não carrega código para vários, e nada no repositório já nasce sem uso.",
+    "copy": "Copie o comando",
+    "copied": "Copiado",
+    "run": {
+      "green": "Todos os testes estão aprovados",
+      "modules": "módulos configurados",
+      "label": "Saída"
+    },
+    "choices": {
+      "architecture": {
+        "label": "Arquitetura",
+        "options": {
+          "monolith": "Monólito",
+          "split": "API separada",
+          "microservices": "Microsserviços"
+        }
+      },
+      "api": {
+        "label": "API",
+        "options": {
+          "hono": "Hono",
+          "elysia": "Elysia"
+        },
+        "unavailable": {
+          "elysia": "O Elysia usa Bun. Implante na Vercel, use hospedagem própria ou escolha Hono."
+        }
+      },
+      "auth": {
+        "label": "Autenticação",
+        "options": {
+          "better-auth": "Better Auth",
+          "none": "Nenhum"
+        }
+      },
+      "billing": {
+        "label": "Cobrança",
+        "options": {
+          "stripe": "Stripe",
+          "polar": "Polar",
+          "lemonsqueezy": "Lemon Squeezy",
+          "none": "Nenhum"
+        }
+      },
+      "content": {
+        "label": "Conteúdo",
+        "options": {
+          "mdx": "Blog e documentação MDX",
+          "none": "Nenhum"
+        }
+      },
+      "database": {
+        "label": "Banco de dados",
+        "options": {
+          "postgres": "Postgres",
+          "sqlite": "SQLite"
+        },
+        "unavailable": {
+          "sqlite": "O SQLite precisa de um sistema de arquivos persistente ou de um binding D1. Implante na Cloudflare ou use hospedagem própria."
+        }
+      },
+      "deployment": {
+        "label": "Implantação",
+        "options": {
+          "vercel": "Vercel",
+          "cloudflare": "Cloudflare",
+          "self": "Auto-hospedado"
+        }
+      },
+      "runtime": {
+        "label": "Ambiente de execução",
+        "options": {
+          "node": "Node",
+          "bun": "Bun"
+        },
+        "unavailable": {
+          "bun": "A Cloudflare executa Workers, não Bun. Implante na Vercel ou use hospedagem própria."
+        }
+      },
+      "email": {
+        "label": "E-mail",
+        "options": {
+          "resend": "Resend",
+          "plunk": "Plunk",
+          "none": "Nenhum"
+        }
+      },
+      "framework": {
+        "label": "Framework",
+        "options": {
+          "next": "Next.js",
+          "tanstack": "TanStack Start",
+          "react-router": "React Router"
+        }
+      },
+      "orm": {
+        "label": "ORM",
+        "options": {
+          "drizzle": "Drizzle",
+          "prisma": "Prisma"
+        }
+      },
+      "provider": {
+        "label": "Fornecedor",
+        "options": {
+          "neon": "Neon",
+          "supabase": "Supabase",
+          "self-postgres": "Seu próprio",
+          "d1": "Cloudflare D1",
+          "turso": "Turso",
+          "file": "Arquivo local"
+        },
+        "unavailable": {
+          "d1": "D1 é uma integração com a Cloudflare. Implante-o na Cloudflare para utilizá-lo.",
+          "file": "Um arquivo local precisa de um disco que mantenha os dados entre implantações. Use hospedagem própria para essa opção."
+        }
+      },
+      "tenancy": {
+        "label": "Modelo de tenants",
+        "options": {
+          "multi": "Multitenant",
+          "single": "Tenant único"
+        }
+      },
+      "extras": {
+        "label": "Recursos",
+        "options": {
+          "commerce": "Loja com produtos de demonstração",
+          "courses": "Curso por assinatura",
+          "page-builder": "Construtor visual de páginas",
+          "post-editor": "Editor visual de posts"
+        },
+        "unavailable": {
+          "commerce": "Uma loja precisa receber pagamentos. Escolha primeiro um provedor de cobrança.",
+          "courses": "Um curso por assinatura precisa receber pagamentos. Escolha primeiro um provedor de cobrança.",
+          "post-editor": "Sem conteúdo MDX, não há o que editar. Ative o conteúdo primeiro."
+        }
+      }
+    },
+    "choicesLabel": "Cada resposta atualiza as opções. Copie o comando quando ele corresponder à sua arquitetura.",
+    "reuse": {
+      "title": "O segundo projeto não custa nada.",
+      "body": "Execute a CLI novamente com outras respostas. O stack muda; a suíte de testes, a arquitetura clara e as <accent>atualizações vitalícias</accent> já pagas continuam."
+    },
+    "runner": "Gerenciador de pacotes",
+    "groups": {
+      "platform": "Plataforma",
+      "data": "Dados",
+      "product": "Produto",
+      "extras": "Extras"
+    },
+    "commandLabel": "Seu comando",
+    "nextLabel": "Então"
+  },
+  "line": {
+    "title": "Uma base sólida",
+    "description": "Quatro coisas de que todo SaaS precisa desde o primeiro dia. Todas já funcionam e todas são trabalho que você não precisa refazer.",
+    "stations": {
+      "auth": {
+        "title": "Mantenha seus dados. Proteja suas margens.",
+        "body": "O Better Auth funciona no seu banco de dados, sem uma tarifa por usuário que cresça contra você. Sua tabela de usuários, suas sessões, suas margens. Com 50.000 usuários ativos por mês, a conta é a mesma de quando você tem 50: zero.",
+        "spec": "R$ 0 por usuário ativo mensal, para sempre"
+      },
+      "tests": {
+        "title": "Saiba que funciona antes do merge.",
+        "body": "Não é código improvisado em um fim de semana. Cada pull request executa 176 arquivos de teste e 8 suítes Playwright. A verificação de cobertura interrompe o build antes que código defeituoso seja integrado. Faça o deploy na sexta-feira e aproveite de verdade o fim de semana.",
+        "spec": "Cobertura de teste de 100%"
+      },
+      "i18n": {
+        "title": "Publique em 9 idiomas sem reescrever.",
+        "body": "Rotas por idioma, traduções, fusos horários e formatação de moedas fazem parte do código desde o início. Antes da primeira linha, já estão configurados nove idiomas, 195 fusos horários e 156 moedas. A verificação de integridade interrompe o build assim que falta uma tradução.",
+        "spec": "9 idiomas, 156 moedas"
+      },
+      "edge": {
+        "title": "Sua arquitetura, de acordo com suas necessidades.",
+        "body": "A CLI pergunta o que você está construindo e gera a estrutura adequada, sem impor um formato contra o qual lutar. Por baixo estão Vite+ e TanStack Start: HMR imediato e tipos rigorosos durante o desenvolvimento, com um ambiente de execução projetado para a edge quando você publica.",
+        "spec": "Vite+ e TanStack Start, feitos para o edge"
+      }
+    }
+  },
+  "stack": {
+    "title": "Desenvolvido com"
+  },
+  "quality": {
+    "title": "Controle de qualidade",
+    "lead": "Se foi integrado, funciona.",
+    "body": "Os caminhos unitários, de integração e de ponta a ponta são verificados antes do merge. São 176 arquivos de teste, 8 suítes Playwright em Chromium e WebKit reais e uma verificação obrigatória de cobertura em cada pull request e push para main.",
+    "consequence": "Assim, seu agente de programação pode trabalhar com segurança. Ele pode escrever na velocidade que quiser: o código que quebrar alguma coisa não chega à main. Você descobre o problema na pull request, antes da produção.",
+    "cta": "Ver preços",
+    "terminalTitle": "Saasyland: teste piloto",
+    "specs": {
+      "vitest": "vitest: Limites de 100%, aplicados em todas as execuções",
+      "playwright": "playwright: compatível com Chromium e WebKit, navegadores reais",
+      "typescript": "tsc --strict: zero erros, zero problemas"
+    }
+  },
+  "rally": {
+    "title": "Ninguém paga você pela sua tela de login.",
+    "body": "Autenticação, cobrança, e-mail, administração e testes representam três meses que não voltam. Nenhum desses itens é o motivo pelo qual um cliente escolhe você. Eles já estão escritos, testados e funcionando. Comece pela parte que é realmente sua.",
+    "ctaPrimary": "Começar a criar",
+    "ctaSecondary": "Ver preços"
+  },
+  "manifest": {
+    "title": "O que está incluído",
+    "lead": "Tudo o que está abaixo está contido nas aplicações que a CLI gera. Não há complementos, módulos pagos ou um segundo processo de finalização. Tudo foi digitado, testado e é suficientemente claro para que você ou seu agente possam começar a utilizá-lo imediatamente.",
+    "items": {
+      "auth": {
+        "label": "Autenticação",
+        "body": "Better Auth com e-mail e senha, OAuth, verificação de e-mail, redefinição de senha, dois fatores e acesso do administrador como outro usuário, no seu banco de dados."
+      },
+      "data": {
+        "label": "Banco de dados",
+        "body": "Drizzle ORM com Cloudflare D1, tipado de ponta a ponta. Os scripts de geração, migração, push e Studio já estão configurados para os ambientes local, de prévia e de produção."
+      },
+      "billing": {
+        "label": "Cobrança",
+        "body": "Checkout da Polar, portal do cliente e webhooks. Produtos e modelos de preço são gerenciados pela administração, sem ficarem fixos no código do aplicativo."
+      },
+      "email": {
+        "label": "E-mail",
+        "body": "Modelos React Email enviados pelo Resend, com fluxos de autenticação que mandam e-mails reais desde o primeiro dia."
+      },
+      "admin": {
+        "label": "Painel de administração",
+        "body": "Dez seções construídas e com visual pronto: painel, usuários, produtos, pagamentos, análises, blog, cursos, modelos de preço, editor de páginas e configurações."
+      },
+      "ui": {
+        "label": "Interface",
+        "body": "56 componentes com Tailwind e shadcn/ui, diretamente no seu repositório e editáveis por você, sem depender de um pacote que não pode modificar."
+      },
+      "i18n": {
+        "label": "Internacionalização",
+        "body": "Rotas por idioma com nove idiomas, 195 fusos horários, 156 moedas e 248 países. Uma verificação de integridade interrompe o build quando falta uma tradução."
+      },
+      "content": {
+        "label": "Conteúdo",
+        "body": "Um blog MDX e um site de documentação com Fumadocs, ambos editáveis pela administração, indexados e localizados como o restante do aplicativo."
+      },
+      "tests": {
+        "label": "Testes",
+        "body": "176 arquivos de testes unitários e de integração, 8 suítes Playwright e cobertura de 100 % de instruções, ramificações, funções e linhas, exigida pela CI."
+      },
+      "tooling": {
+        "label": "Ferramentas de desenvolvimento",
+        "body": "Vite+, TanStack Start, TypeScript rigoroso, esquemas Zod e limitação de requisições no D1. Formatação, lint e verificação de tipos são executados antes de cada merge."
+      }
+    }
+  },
+  "studio": {
+    "title": "Tudo o que outros kits iniciais deixam de fora.",
+    "description": "Duas coisas em especial: um site de marketing que sua equipe pode editar sem outra assinatura, e a pessoa que escreveu o código explicando cada decisão, inclusive as que tomaria de outra forma hoje.",
+    "builder": {
+      "title": "Um editor de páginas incluído.",
+      "body": "Páginas iniciais, páginas de preços e um blog que sua equipe de marketing pode editar visualmente, na sua própria administração e com seus componentes. Sem assinatura do Framer, sem Webflow e sem repasses entre ferramentas.",
+      "imageAlt": "O editor de páginas na administração: biblioteca de seções à esquerda, prévia com a seção principal selecionada ao centro e painel de alinhamento, espaçamento e conteúdo à direita",
+      "spec": "8 tipos de seções, seus próprios componentes"
+    },
+    "masterclass": {
+      "title": "Veja o produto ser construído do início ao fim.",
+      "body": "Dois cursos, ambos incluídos no Complete. Um percorre o código que você recebe para mostrar onde está tudo. O outro reconstrói o produto inteiro, incluindo a CLI, a partir de uma pasta vazia. Nada fica como uma caixa-preta.",
+      "previewLabel": "Visualização gratuita",
+      "previewTitle": "Lição 01 — A fronteira do módulo, antes de qualquer funcionalidade",
+      "previewNote": "Assista à primeira aula antes de decidir. Sem conta e sem e-mail.",
+      "lockedLabel": "Incluído no Complete",
+      "tracks": {
+        "walkthrough": {
+          "label": "O guia passo a passo",
+          "note": "Como o código que você recebe funciona, sistema por sistema.",
+          "lessons": {
+            "l1": "Arquitetura e limites de módulos",
+            "l2": "Autenticação e segurança da sessão",
+            "l3": "Cobrança, webhooks e modelos de preços",
+            "l4": "Estratégia de testes e o critério de cobertura",
+            "l5": "Internacionalização de ponta a ponta",
+            "l6": "Implantação, migrações e reversão"
+          }
+        },
+        "build": {
+          "label": "A construção",
+          "note": "O mesmo produto novamente, proveniente de uma pasta vazia, em ordem.",
+          "lessons": {
+            "l1": "A CLI: prompts, templates e o que o comando \"init\" escreve",
+            "l2": "O primeiro módulo, e o limite que não deve ser ultrapassado",
+            "l3": "Autentique seus dados no seu próprio banco de dados, incluindo os casos mais específicos",
+            "l4": "O webhook que não deve cobrar duas vezes",
+            "l5": "A área administrativa e a tabela de dados associada",
+            "l6": "Cobertura, seguida de implantação, migração e reversão"
+          }
+        }
+      }
+    }
+  },
+  "record": {
+    "ariaLabel": "O registro",
+    "title": "Verifique todas as alegações",
+    "lead": "Não há depoimentos, pois não há nada a ser verificado em uma cotação. Todos os números apresentados nesta página são gerados por este repositório público, e é aqui que você pode encontrá-los.",
+    "columns": {
+      "claim": "Afirmação",
+      "evidence": "Onde verificar isso"
+    },
+    "items": {
+      "coverage": {
+        "claim": "Cobertura de teste de 100%",
+        "evidence": "coverage/coverage-summary.json, gerado por bun run test:coverage"
+      },
+      "gate": {
+        "claim": "Exigido, não apenas informado",
+        "evidence": ".github/workflows/ci.yml, em cada solicitação de pull e em todo envio para a branch principal"
+      },
+      "suites": {
+        "claim": "Navegadores reais, não jsdom",
+        "evidence": "e2e/specs, 8 suítes de testes Playwright para Chromium e WebKit"
+      },
+      "locales": {
+        "claim": "9 idiomas, 156 moedas",
+        "evidence": "messages/, verificado com bun run check:i18n"
+      },
+      "auth": {
+        "claim": "R$ 0 por usuário ativo mensal, para sempre",
+        "evidence": "src/integrações/better-auth, seu banco de dados, sem provedor com cobrança por uso"
+      },
+      "author": {
+        "claim": "Desenvolvido por um profissional",
+        "evidence": "Cada commit é assinado e está disponível publicamente no histórico do repositório"
+      }
+    }
+  },
+  "cases": {
+    "title": "Produtos reais que você pode verificar.",
+    "description": "Esta página não tem citações de clientes porque elas não provam nada verificável. Estes são produtos publicados, construídos com a CLI desta página, com os módulos que utilizam e um link para você visitar.",
+    "statusLive": "No ar",
+    "statusSoon": "Disponível no lançamento",
+    "modulesLabel": "Módulos",
+    "items": {
+      "reactprojects": {
+        "name": "reactprojects.com",
+        "kind": "Plataforma de cursos",
+        "body": "Uma plataforma de cursos de React com 6 projetos avançados e mais de 60 horas de vídeo, vendida com acesso por pagamento único e sem assinatura. A CLI gerou a estrutura inicial; autenticação, checkout, camada de conteúdo e administração vieram dos módulos desta página.",
+        "modules": "autenticação · cobrança · conteúdo · administração · e-mail"
+      },
+      "marte": {
+        "name": "marte-bizuteria.pl",
+        "kind": "Loja de joias, Polônia",
+        "body": "Uma loja real que vende joias reais para clientes na Polônia. Ela usa o módulo de comércio sem os produtos de exemplo, a administração para estoque e pedidos e a camada de internacionalização para o texto em polonês e a formatação em złoty. Não é uma demonstração.",
+        "modules": "comércio · administração · internacionalização · e-mail · conteúdo"
+      }
+    },
+    "invite": "Expedi algo por ele? Envie o link e adicionarei à esta lista.",
+    "inviteCta": "Destaque seu produto"
+  },
+  "compare": {
+    "title": "O restante do mercado",
+    "description": "Três maneiras de iniciar uma empresa SaaS, e o que cada uma implica em termos de dívidas.",
+    "options": {
+      "free": {
+        "title": "Projetos-base de CLIs gratuitas",
+        "body": "Uma base e nada mais. Autenticação, cobrança, internacionalização, testes e site de marketing ainda ficam por sua conta. É aí que entram aqueles três meses."
+      },
+      "weekend": {
+        "title": "Boilerplates para projetos de fim de semana",
+        "body": "Rápido até os primeiros 100 dólares. Depois, as APIs de terceiros começam a cobrar sobre sua receita, e o código de integração sem testes falha às duas da manhã."
+      },
+      "heavyweights": {
+        "title": "Soluções premium completas",
+        "body": "Recursos robustos por um preço elevado. Sem cobertura obrigatória de testes, sem editor de páginas e sem alguém para explicar a arquitetura que você acabou de comprar."
+      }
+    },
+    "columns": {
+      "market": "O mercado",
+      "saasyland": "SaaSyLand"
+    },
+    "dimensions": {
+      "model": {
+        "label": "O que você paga",
+        "market": "Uma vez, e depois os vendedores te cobram",
+        "ours": "249 USD uma vez, sem cobranças posteriores"
+      },
+      "coverage": {
+        "label": "Cobertura de testes",
+        "market": "Há testes, mas passar neles não é obrigatório.",
+        "ours": "100%, aplicado em CI"
+      },
+      "designer": {
+        "label": "Designer de páginas",
+        "market": "Uma assinatura individual",
+        "ours": "Incluído"
+      },
+      "mau": {
+        "label": "Custo de autenticação",
+        "market": "Medido, caso a autenticação seja hospedada",
+        "ours": "R$ 0 por usuário ativo mensal, sempre"
+      },
+      "course": {
+        "label": "Complete",
+        "market": "Geralmente, é uma compra separada",
+        "ours": "Na mesma compra"
+      },
+      "license": {
+        "label": "Projetos de clientes",
+        "market": "Depende do nível",
+        "ours": "Licença ilimitada, uma unidade"
+      }
+    },
+    "close": "Um template entrega uma pasta. Aqui você recebe código com testes passando, tipos rigorosos e decisões sobre fornecedores tomadas a seu favor. Um pagamento, e nada disso volta a cobrar você.",
+    "notFor": {
+      "title": "Quem este produto não é para",
+      "body": "Se você quer aprender de graça, clone um template e aproveite. Se prefere que outra empresa cuide da autenticação e cobre por usuário, escolha esse serviço. Este kit é para quem quer ter o próprio código, ler tudo e continuar usando a base daqui a três anos."
+    },
+    "cta": "Ver preços"
+  },
+  "pricing": {
+    "title": "Compre uma vez",
+    "description": "Um pagamento, atualizações vitalícias do núcleo e nenhuma tarifa por usuário. A mesma estrutura de custos que esta base de código pretende ajudar você a oferecer aos seus clientes.",
+    "mostPopular": "Mais popular",
+    "ledger": {
+      "lead": "Você está recuperando, acima de tudo, seu tempo.",
+      "body": "Converta o preço em horas de trabalho. A 150 dólares por hora, 249 dólares são menos de duas horas do seu tempo. O trabalho economizado leva muito mais: autenticação com dois fatores e OAuth, camada de dados tipada, cobrança com webhooks, e-mails transacionais, dez seções de administração, internacionalização em nove idiomas e testes que realmente bloqueiam um build defeituoso. São problemas já resolvidos que você resolveria de novo. Nenhum é o motivo pelo qual alguém pagará você."
+    },
+    "assurance": "Leia a documentação e o relatório de cobertura antes de efetuar o pagamento. Cada número nesta página é gerado por este repositório público, portanto, você pode verificar os produtos e nos responsabilizar pelo que encontrar.",
+    "tiers": {
+      "core": {
+        "name": "Core",
+        "price": "$249",
+        "period": "única vez",
+        "tagline": "A CLI, o código-fonte gerado e os testes.",
+        "whoFor": "Para o fundador que trabalha sozinho e analisa cada detalhe.",
+        "cta": "Comprar Core",
+        "features": {
+          "f1": "CLI e código-fonte do aplicativo gerado, de propriedade exclusiva",
+          "f2": "Cada módulo que a CLI pode gerar",
+          "f3": "Better Auth, Polar e Resend integrados",
+          "f4": "O conjunto completo de testes e sua garantia de 100%",
+          "f5": "Projetos ilimitados, licença comercial",
+          "f6": "Atualizações vitalícias do código-base"
+        }
+      },
+      "complete": {
+        "name": "Complete",
+        "price": "$399",
+        "period": "única vez",
+        "tagline": "A fonte, e tudo o que a explica.",
+        "whoFor": "Para o engenheiro que busca o raciocínio, e não apenas o resultado.",
+        "cta": "Comprar Complete",
+        "features": {
+          "f1": "Tudo em Core",
+          "f2": "O curso em vídeo: da pasta vazia à produção",
+          "f3": "Análise completa do código, módulo por módulo",
+          "f4": "Acesso vitalício e gratuito a reactprojects.com",
+          "f5": "Mais de 6 projetos avançados em React, mais de 60 horas de vídeo",
+          "f6": "Suporte prioritário, com resposta em até um dia útil"
+        }
+      },
+      "agency": {
+        "name": "Agency",
+        "price": "$899",
+        "period": "única vez",
+        "tagline": "A fonte, para cada cliente que você fatura.",
+        "whoFor": "Para a loja que cobra dos clientes pelos serviços que presta.",
+        "cta": "Comprar Agency",
+        "features": {
+          "f1": "Tudo em Complete",
+          "f2": "Projetos de clientes ilimitados, prontos para uso com sua marca",
+          "f3": "Assentos para a equipe e reactprojects.com",
+          "f4": "Canal privado no Discord, acesso direto ao autor",
+          "f5": "Uma ligação de arquitetura de 60 minutos está incluída",
+          "f6": "Arquivos Figma para o designer de páginas"
+        }
+      }
+    },
+    "consulting": {
+      "label": "Consultoria",
+      "title": "Você pode falar com o desenvolvedor.",
+      "body": "Uma revisão de arquitetura, uma dúvida sobre escala, uma migração que você quer acertar ou uma hora percorrendo seu próprio repositório. Sessenta minutos, individualmente, com quem escreveu e mantém esta base de código. Uma sessão incluída no Agency.",
+      "price": "$149",
+      "period": "por hora",
+      "cta": "Agende uma ligação"
+    },
+    "pppActive": "Preço regional aplicado para o seu país."
+  },
+  "notes": {
+    "title": "Os argumentos técnicos, em público.",
+    "description": "Comparações técnicas com as alternativas, escritas como uma revisão de código. Cada afirmação sobre um concorrente aponta para a documentação dele. Cada número sobre o SaaSy Land vem da suíte de testes.",
+    "cta": "Todas as publicações"
+  },
+  "faq": {
+    "title": "Respostas diretas",
+    "lead": "Respostas completas às perguntas que os compradores realmente fazem. Se a sua não estiver aqui, escreva para nós.",
+    "contact": "Pergunte ao engenheiro que o construiu",
+    "contactNote": "olá@saasyland.com. Uma pessoa o lê.",
+    "items": {
+      "q1": {
+        "question": "Exatamente o que eu recebo?",
+        "answer": "Uma licença para a CLI proprietária, que gera uma aplicação SaaS com TanStack Start, React, Vite+, Better Auth, Drizzle com Cloudflare D1, Polar, Resend e use-intl. Você recebe o código-fonte da aplicação, que pode ser editado, testes, o designer visual de páginas e documentação. Após a compra, faça login para obter a chave necessária para instalar e usar a CLI. As versões \"Complete\" e \"Agency\" incluem o material de aprendizado e design anunciado; a versão \"Agency\" também abrange projetos para clientes."
+      },
+      "q2": {
+        "question": "Por que escolher Better Auth em vez de Clerk ou Auth0?",
+        "answer": "Para manter o controle. A autenticação hospedada cobra por usuário ativo mensal, de modo que seus custos crescem justamente quando suas margens deveriam aumentar. O Better Auth vive no seu código e no seu banco de dados. Seus usuários são registros que pertencem a você, não itens na fatura de outra empresa."
+      },
+      "q3": {
+        "question": "Será que realmente temos 100% de cobertura de testes?",
+        "answer": "Sim. Testes, módulos, funções e linhas, tudo sob Vitest, além de suítes de testes end-to-end com Playwright, executados em Chromium e WebKit reais. A cobertura de código é obrigatória como um filtro no processo de integração contínua (CI) para cada solicitação de alteração (pull request), e não é apresentada como uma captura de tela. O resumo da cobertura é gerado por este repositório de site público."
+      },
+      "q4": {
+        "question": "Como posso ter certeza de que esta página apresenta o que ela afirma?",
+        "answer": "Examine a documentação pública e o repositório antes de comprar. Você pode solicitar um reembolso antes da entrega dos materiais pagos fornecidos separadamente; a página «Reembolsos» explica o processo. Os direitos obrigatórios de desistência e as medidas de reparação por conteúdo defeituoso ou não entregue permanecem protegidos."
+      },
+      "q5": {
+        "question": "Por que não simplesmente usar um agente de IA para construir isso?",
+        "answer": "Um agente pode construir, e o resultado parecerá correto. Mas ele não dirá quais casos especiais de autenticação deixou de fora, qual webhook não é idempotente ou qual chave ausente teria sido detectada por uma verificação de traduções que nunca escreveu. Gerar código já é barato. O trabalho caro é provar que está correto. É isso que este repositório oferece: seu agente herda 176 arquivos de teste, tipos rigorosos e um build que falha quando algo está errado."
+      },
+      "q6": {
+        "question": "Preciso do plano Complete?",
+        "answer": "Core entrega a base. Complete acrescenta as explicações e o apoio: o curso completo da pasta vazia à produção, um passeio por cada módulo, respostas prioritárias em até um dia útil e acesso gratuito vitalício ao reactprojects.com. A maioria escolhe Complete porque o código, sozinho, é a parte barata."
+      },
+      "q7": {
+        "question": "Algum(s) item(ns) disso(s) é(m) um(a) assinatura?",
+        "answer": "Não. Você paga uma vez. As atualizações vitalícias do núcleo estão incluídas, o código fica no seu repositório e não há contagem de assentos, medidor de usuários ativos mensais nem data de renovação."
+      },
+      "q8": {
+        "question": "O que \"atualizações vitalícias\" abrangem?",
+        "answer": "Todas as atualizações da base principal de código, incluindo atualizações de frameworks, novos módulos e correções de segurança, enquanto o SaaSyLand existir. Você compra uma vez e a base continua melhorando."
+      },
+      "q9": {
+        "question": "Posso utilizá-lo para trabalhos com clientes?",
+        "answer": "Core e Complete cobrem aplicativos gerados ilimitados para seus próprios produtos; Agency também cobre projetos para clientes. A CLI privada exige uma compra e uma chave válida e não pode ser modificada nem redistribuída, ressalvadas as exceções legais obrigatórias. Você pode editar e implantar os aplicativos gerados. Este site público e as versões MIT anteriores continuam sob licença MIT."
+      },
+      "q10": {
+        "question": "Por que confiar em um kit inicial desenvolvido por um único engenheiro?",
+        "answer": "Porque você pode verificar as afirmações. O repositório gera o relatório de cobertura e contém o workflow de CI que a exige. Quem escreveu o código desenvolve software de produção profissionalmente. Leia a documentação antes de pagar e confira se esta página corresponde a ela."
+      },
+      "q11": {
+        "question": "Preciso saber sobre Vite+ e TanStack Start?",
+        "answer": "Não. Se você conhece React e TypeScript, consegue ler o código desde o primeiro dia. O TanStack Start cuida das rotas e funções de servidor, o Vite+ fornece as ferramentas de desenvolvimento e o aplicativo roda na Cloudflare Workers. A masterclass explica o fluxo completo passo a passo."
+      }
+    }
+  },
+  "gate": {
+    "title": "Comece na hora trezentos",
+    "description": "Autenticação, cobrança, e-mail, administração e testes estão prontos. Resta a parte que ninguém pode construir por você, aquela que você ainda não começou.",
+    "price": "$249",
+    "terms": "Um pagamento, atualizações vitalícias",
+    "assurance": "Pague uma vez, ative a interface de linha de comando (CLI) e crie seu produto. Edite e implante o código-fonte gerado sob sua licença comercial. Não há necessidade de assinatura ou chave de licença de tempo de execução para o seu aplicativo.",
+    "ctaPrimary": "Começar a criar",
+    "ctaSecondary": "Leia a documentação",
+    "badges": {
+      "projects": "Projetos ilimitados",
+      "license": "Licença comercial",
+      "fees": "Sem taxas por usuário"
+    }
+  },
+  "components": {
+    "footer": {
+      "tagline": "O kit inicial pronto para produção que é inteiramente seu.",
+      "product": "Produto",
+      "legal": "Informações legais",
+      "language": "Idioma",
+      "rights": "Todos os direitos reservados.",
+      "buildLog": {
+        "title": "O diário de desenvolvimento",
+        "body": "Notas ocasionais sobre o que estamos desenvolvendo, quando há algo que vale a pena compartilhar. Sem calendário fixo nem contagens regressivas para lançamentos."
+      },
+      "links": {
+        "blog": "Blog",
+        "docs": "Documentação",
+        "faq": "FAQ",
+        "foundation": "Fundação",
+        "github": "GitHub",
+        "pricing": "Preços",
+        "privacy": "Política de privacidade",
+        "terms": "Termos de serviço",
+        "signIn": "Entrar",
+        "refunds": "Reembolsos",
+        "licence": "Licença"
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
-/** @vitest-environment jsdom */
-
 import { render, screen, waitFor } from "@testing-library/react"
+/** @vitest-environment jsdom */
 import userEvent from "@testing-library/user-event"
+import { describe, expect, it } from "vite-plus/test"
 
 import { selectTriggerNamed } from "~/src/platform/testing/lib/select-trigger-name"
 import { setThemeMock, themeState } from "~/src/platform/testing/mocks/wrksz-themes"

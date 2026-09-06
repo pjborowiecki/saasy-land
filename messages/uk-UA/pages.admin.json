@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Область входу в додаток."
+    },
+    "welcome": "Застосунок: {name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "Дім"
+    },
+    "header": {
+      "notifications": "Сповіщення",
+      "searchPlaceholder": "Пошук у консолі",
+      "searchEmpty": "Не знайдено відповідного розділу."
+    },
+    "userWidget": {
+      "settings": "Налаштування",
+      "signedInAs": "Увійшов(-ла) як <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Вийти",
+      "signingOut": "Виходжу з облікового запису...",
+      "success": "До побачення"
+    }
+  },
+  "labels": {
+    "unknownLocation": "Невідоме розташування",
+    "gettingStartedSection": "Розділ 1: Перші кроки",
+    "welcomeLesson": "Ласкаво просимо на курс",
+    "setupLesson": "Налаштування середовища",
+    "coreConceptsSection": "Розділ 2: Основні поняття",
+    "development": "Розробка",
+    "design": "Дизайн",
+    "beginner": "Початковий",
+    "intermediate": "Середній",
+    "advanced": "Поглиблений",
+    "oneYearAccess": "Доступ на 1 рік",
+    "products": "товарів",
+    "noCourses": "Курсів не знайдено.",
+    "previousPage": "Попередня сторінка",
+    "nextPage": "Наступна сторінка",
+    "rowActions": "Дії для рядка",
+    "actions": "Дії",
+    "saasPlans": "Плани SaaS",
+    "addOns": "Доповнення",
+    "coreSubscription": "Підписка Core",
+    "legacy": "Попередня версія",
+    "hidden": "Прихована",
+    "public": "Публічна"
+  }
+}

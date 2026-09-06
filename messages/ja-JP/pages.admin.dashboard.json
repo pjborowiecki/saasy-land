@@ -1,0 +1,62 @@
+{
+  "title": "概要",
+  "description": "ただいま、本日の予定をお知らせします。",
+  "actions": {
+    "last30Days": "過去30日間",
+    "addProduct": "製品を追加する"
+  },
+  "stats": {
+    "activeUsers": {
+      "title": "登録ユーザー"
+    },
+    "totalProducts": {
+      "title": "カタログ掲載商品"
+    },
+    "pendingVerification": {
+      "title": "メールアドレスの確認が必要です"
+    }
+  },
+  "chart": {
+    "title": "売上概要",
+    "description": "過去12ヶ月間の月次定期収入",
+    "placeholder": "試用シリーズです。請求処理が完了すると、ここに実際の収益が表示されます。",
+    "filters": {
+      "12m": "12M",
+      "30d": "30D",
+      "7d": "7D"
+    }
+  },
+  "users": {
+    "title": "ユーザー管理",
+    "description": "この場所で、チームメンバーとそのアカウント権限を管理できます。",
+    "search": "ユーザーを絞り込む...",
+    "filters": {
+      "role": "ロール",
+      "status": "ステータス"
+    },
+    "export": "エクスポート",
+    "table": {
+      "columns": {
+        "user": "ユーザー",
+        "role": "ロール",
+        "status": "ステータス",
+        "lastActive": "最終操作日",
+        "actions": "操作"
+      },
+      "status": {
+        "active": "有効",
+        "banned": "利用停止",
+        "pending": "保留中"
+      },
+      "rowActions": {
+        "edit": "ユーザーを編集する",
+        "delete": "ユーザーを削除する"
+      },
+      "pagination": {
+        "showing": "全{total}人のうち{from}〜{to}人を表示",
+        "previous": "前へ",
+        "viewAll": "全ユーザーを表示"
+      }
+    }
+  }
+}

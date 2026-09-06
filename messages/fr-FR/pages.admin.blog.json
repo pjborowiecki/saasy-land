@@ -1,0 +1,91 @@
+{
+  "title": "Publications",
+  "description": "Créez, gérez et analysez le contenu de votre blog.",
+  "actions": {
+    "categories": "Catégories",
+    "writePost": "Écrire un article",
+    "loadMore": "Charger plus d'articles"
+  },
+  "stats": {
+    "totalViews": "Vues totales (30 jours)",
+    "subscribers": "Abonnés",
+    "publishedPosts": "Articles publiés",
+    "draftsPending": "{count} brouillons en attente"
+  },
+  "filters": {
+    "all": "Tous les articles",
+    "published": "Publié",
+    "drafts": "Brouillons",
+    "scheduled": "Planifié",
+    "search": "Rechercher des articles..."
+  },
+  "badges": {
+    "published": "Publié",
+    "draft": "Brouillon",
+    "scheduled": "Planifié"
+  },
+  "meta": {
+    "readTime": "{minutes} min de lecture",
+    "publishedOn": "{date}",
+    "lastEdited": "Dernière modification : {time}",
+    "publishesTomorrow": "Publié demain"
+  },
+  "labels": {
+    "gridView": "Vue en grille",
+    "tableView": "Vue tableau",
+    "moreOptions": "Plus d'options"
+  },
+  "table": {
+    "postDetails": "Détails de l'article",
+    "status": "Statut",
+    "category": "Catégorie",
+    "author": "Auteur",
+    "date": "Date",
+    "views": "Vues",
+    "actions": "Actions",
+    "selectRow": "Sélectionner la ligne",
+    "emptyValue": "Pas défini",
+    "rowActions": "Actions de la ligne"
+  },
+  "pagination": {
+    "info": "Articles {start} à {end} sur {total}"
+  },
+  "demo": {
+    "posts": {
+      "post-1": {
+        "title": "Optimisation de l'architecture de la base de données pour une croissance multipliée par 10",
+        "description": "Une analyse technique approfondie expliquant comment notre équipe d'ingénierie est passée d'une architecture monolithique à une architecture distribuée.",
+        "category": "Ingénierie"
+      },
+      "post-2": {
+        "title": "Présentation du Tableau de Bord d'Analyse Avancée 2.0",
+        "description": "Nous avons entièrement repensé nos outils de reporting afin de vous fournir des informations plus approfondies sur le comportement de vos clients et vos indicateurs de revenus.",
+        "category": "Mise à jour du produit"
+      },
+      "post-3": {
+        "title": "L'évolution de notre système de conception",
+        "description": "Créer un langage visuel cohérent qui s'adapte à l'ensemble des plateformes, notamment le web, les applications mobiles et les outils d'administration interne.",
+        "category": "Design"
+      },
+      "post-4": {
+        "title": "Annonce de notre tour de financement de Série B",
+        "description": "Nous sommes ravis d'annoncer un investissement de 25 millions de dollars, mené par des sociétés de capital-risque de premier plan, afin d'accélérer notre croissance.",
+        "category": "Actualités de l'entreprise"
+      },
+      "post-5": {
+        "title": "Maîtriser les webhooks pour les données en temps réel",
+        "description": "Apprenez à créer des systèmes de webhooks robustes, capables de gérer des millions d'événements de manière sécurisée.",
+        "category": "Tutoriel"
+      },
+      "post-6": {
+        "title": "Stratégies pour réduire le taux de désabonnement client",
+        "description": "Stratégies éprouvées de fidélisation utilisées par les entreprises SaaS à la croissance la plus rapide.",
+        "category": "Marketing"
+      }
+    },
+    "dates": {
+      "draft": "Il y a 2 heures",
+      "scheduled": "Demain"
+    }
+  }
+}

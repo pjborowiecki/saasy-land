@@ -1,0 +1,14 @@
+---
+title: "Providers"
+description: "Providers — SaaSy Land"
+---
+
+`src/routes/__root.tsx` owns the document and application-wide provider composition. The router creates a QueryClient and connects its cache to SSR. The translation provider loads the active route namespaces into `IntlProvider`. Theme, motion, React Aria routing, tooltips, notifications and the offline indicator retain the existing presentation behavior.
+
+Fumadocs uses its TanStack provider and the native Router link adapter. Shared providers belong under `src/providers`; page-only contexts stay beside their feature.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

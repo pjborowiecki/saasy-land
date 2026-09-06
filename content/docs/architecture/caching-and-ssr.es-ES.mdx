@@ -1,0 +1,14 @@
+---
+title: Almacenamiento en caché y SSR
+description: Almacenamiento en caché y SSR — SaaSy Land
+---
+
+El QueryClient pertenece a una instancia de router y está integrado con el renderizado del servidor. Los loaders cargan los datos y los namespaces JSON; los componentes leen la misma caché. `useSuspenseQuery` No se proporcionó ningún texto para traducir. Por favor, proporcione el texto en inglés. `useSuspenseQueries`Las consultas declaran claves estables. Las mutaciones exitosas invalidan únicamente las claves de las características afectadas.
+
+La documentación pública, las páginas del blog y las páginas de aterrizaje se generan (pre-renderizan) durante la compilación. Se excluyen las rutas de tokens de administrador, cliente, autenticación y boletín informativo. Cloudflare KV almacena los metadatos públicos de GitHub. D1 almacena las sesiones persistentes y los contadores de límites de velocidad atómicos; KV no se utiliza para las decisiones de permisos.
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

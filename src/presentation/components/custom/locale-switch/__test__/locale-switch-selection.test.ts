@@ -1,3 +1,5 @@
+import { describe, expect, it, vi } from "vite-plus/test"
+
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 
 import {
@@ -22,22 +24,30 @@ describe("locale selection parsing", () => {
 })
 
 describe("locale navigation side effects", () => {
-  it("calls router.replace for valid locales", () => {
+  it("calls document navigation for valid locales", () => {
     expect.hasAssertions()
     const replace = vi.fn<Parameters<typeof applyLocaleNavigation>[2]>()
 
     applyLocaleNavigation("pl-PL", "/about", replace)
 
-    expect(replace).toHaveBeenCalledWith("/about", { locale: "pl-PL" })
+    expect(replace).toHaveBeenCalledWith("/pl-PL/about")
   })
 
-  it("skips router.replace for invalid locales", () => {
+  it("skips document navigation for invalid locales", () => {
     expect.hasAssertions()
     const replace = vi.fn<Parameters<typeof applyLocaleNavigation>[2]>()
 
     applyLocaleNavigation("not-a-locale", "/about", replace)
 
     expect(replace).not.toHaveBeenCalled()
+  })
+
+  it("removes the previous locale while preserving nested paths, query parameters, and fragments", () => {
+    const replace = vi.fn<Parameters<typeof applyLocaleNavigation>[2]>()
+
+    applyLocaleNavigation("en-US", "/pl-PL/docs/getting-started?section=auth&query=a%20b#installation", replace)
+
+    expect(replace).toHaveBeenCalledWith("/docs/getting-started?section=auth&query=a%20b#installation")
   })
 })
 

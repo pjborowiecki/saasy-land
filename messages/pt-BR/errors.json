@@ -1,0 +1,32 @@
+{
+  "boundary": {
+    "title": "Algo deu errado",
+    "description": "Esta seção não carregou. Você pode tentar novamente sem sair da página.",
+    "retry": "Tente novamente"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "A página que você está procurando não existe ou foi movida.",
+    "backHome": "Voltar para a página inicial"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Autenticação falhou. Por favor, tente novamente.",
+    "CONFLICT": "Isso já existe.",
+    "FORBIDDEN": "Você não tem permissão para fazer isso.",
+    "INTERNAL_ERROR": "Algo deu errado. Por favor, tente novamente.",
+    "NOT_FOUND": "Não encontrado.",
+    "TOO_MANY_REQUESTS": "Demasiadas tentativas. Por favor, tente novamente em breve.",
+    "UNAUTHORIZED": "É necessário estar conectado para continuar.",
+    "VALIDATION": "Por favor, verifique o formulário e tente novamente."
+  },
+  "unauthorized": {
+    "title": "Login obrigatório",
+    "description": "Sua sessão expirou ou você não está conectado. Faça login para continuar.",
+    "signIn": "Entrar"
+  },
+  "forbidden": {
+    "title": "Acesso negado",
+    "description": "Sua conta não tem permissão para visualizar esta página.",
+    "backToApp": "Retornar ao aplicativo"
+  }
+}

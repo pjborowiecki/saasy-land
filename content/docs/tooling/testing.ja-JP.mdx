@@ -1,0 +1,26 @@
+---
+title: テストとCI
+description: テストとCI — SaaSy Land
+---
+
+Vite+ は 3 つのプロジェクトで Vitest を実行します。ノードのテスト、統合テスト、jsdom コンポーネントのテスト。 既存の振る舞いのテストは、演習中のコードの横に保つ `__test__`. . インポートテスト API から `vite-plus/test`. . ブラウザのフルフローとレンダリングチェックに Playwright を使用します。
+
+共有セットアップはローカル D1 と KV のモックを供給します。 D1 は SQLite に対するチェックイン SQL のマイグレーションを実行します。 サーバ機能 RPC ブリッジは、TanStack の真のミドルウェアと検証パイプラインを維持します。 コンポーネント レンダー ヘルパーは、実際の QueryClient と Router のコンテキストを提供します。 外部メール、OAuth、支払いコールはテストでモックされます。
+
+編集中に集中したプロジェクトを実行し、完全なスイート、カバレッジゲート、チェック、プレビュービルドを実行します。 ブラウザテストでは、パブリックページ、authリダイレクト、SSRなしJavaScript、およびクライアントナビゲーションを確認します。 CIはローカルバインディングを使用し、ライブデータベースやプロバイダシークレットを必要としません。
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

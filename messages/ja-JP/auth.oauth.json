@@ -1,0 +1,6 @@
+{
+  "google": "Google でログインする",
+  "github": "GitHubアカウントでサインインします",
+  "success": "ログインに成功しました！",
+  "continueWith": "{provider} で続行"
+}

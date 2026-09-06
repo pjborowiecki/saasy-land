@@ -1,0 +1,14 @@
+---
+title: Zwischenspeicherung und serverseitiges Rendering.
+description: Caching und SSR – SaaSy Land
+---
+
+Der QueryClient gehört zu einer Router-Instanz und ist in das serverseitige Rendering eingebunden. Loader laden Daten und die JSON-Dateien der Übersetzungsnamensräume vor; Komponenten lesen denselben Cache mit `useSuspenseQuery` oder `useSuspenseQueries`. Abfragen definieren stabile Schlüssel. Erfolgreiche Mutationen invalidieren nur die Schlüssel des betroffenen Funktionsbereichs.
+
+Öffentliche Dokumentationen, Blogs und Landing Pages werden während des Build-Prozesses vorab gerendert. Admin-, Kunden-, Authentifizierungs- und Newsletter-Token-Routen sind ausgeschlossen. Cloudflare KV speichert öffentliche GitHub-Metadaten. D1 speichert persistente Sessions und atomare Zählmechanismen für Ratenbegrenzungen; KV wird nicht für Entscheidungen bezüglich Berechtigungen verwendet.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

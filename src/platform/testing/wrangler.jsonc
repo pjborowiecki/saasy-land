@@ -1,0 +1,30 @@
+{
+  "name": "saasyland-test",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "saasyland_test",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+      "migrations_dir": "../../integrations/drizzle-orm/migrations",
+    },
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+      "id": "00000000000000000000000000000001",
+    },
+  ],
+  "main": "./worker.ts",
+  "$schema": "../../../node_modules/wrangler/config-schema.json",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "../../../public",
+    "binding": "ASSETS",
+    "html_handling": "drop-trailing-slash",
+    "run_worker_first": ["/*", "!/assets/*", "!/fonts/*", "!/motion/*"],
+  },
+  "secrets": {
+    "required": [],
+  },
+}

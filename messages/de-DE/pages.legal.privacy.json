@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Datenschutzerklärung",
+    "description": "Wie SaaSy Land Konto-, Zahlungs-, Newsletter- und technische Daten verarbeitet und wie Sie Ihre Datenschutzrechte ausüben können."
+  },
+  "title": "Datenschutzerklärung",
+  "lastUpdated": "Zuletzt aktualisiert am 6. September 2026",
+  "description": "Wie SaaSy Land Konto-, Zahlungs-, Newsletter- und technische Daten verarbeitet und wie Sie Ihre Datenschutzrechte ausüben können.",
+  "sections": {
+    "controller": {
+      "title": "Wer verantwortlich ist",
+      "body": "SaaSy Land unter saasyland.com wird von Piotr Borowiecki betrieben, dem Verantwortlichen für die hier beschriebene Verarbeitung personenbezogener Daten. Fragen und Anfragen zum Datenschutz richten Sie bitte an hello@saasyland.com."
+    },
+    "collection": {
+      "title": "Welche Daten wir erheben",
+      "body": "Wenn Sie ein Konto erstellen, speichern wir Ihren Namen, Ihre E-Mail-Adresse, Ihr Profilbild (falls angegeben), Ihre Kontoeinstellungen und Ihren Verifizierungsstatus. Passwörter werden als Hashes gespeichert. Wenn Sie sich über Google oder GitHub anmelden, erhalten wir die Profil- und Authentifizierungsinformationen, die für die Anmeldung benötigt werden. Sitzungsdaten können Ihre IP-Adresse, Browserinformationen und Ablaufzeit enthalten. Bei der Zwei-Faktor-Authentifizierung werden die Informationen gespeichert, die zur Sicherung Ihres Kontos benötigt werden.\n\nKäufe erstellen Datensätze zu Kunden, Bestellungen und Lizenzen, einschließlich des ausgegebenen Schlüssels, seines Status und zugehöriger Aktivierungsdaten. Polar verarbeitet die Daten zur Lizenzvergabe und -aktivierung; Ihr Konto zeigt aktive Geräte an und ermöglicht Ihnen, eine Aktivierung aufzuheben. Kreditkartendetails werden vom Zahlungsanbieter verwaltet. Newsletter-Einträge enthalten Ihre E-Mail-Adresse, die ausgewählte Sprache, die Quelle der Anmeldung, den Abonnementsstatus, Bestätigungs- und Abmeldungen sowie zugehörige Zeitstempel. Anfragen generieren ebenfalls Sicherheits- und Betriebsprotokolle."
+    },
+    "purposes": {
+      "title": "Wofür wir die Daten verwenden",
+      "body": "Wir verwenden Konto- und Kaufdaten, um Zugang bereitzustellen, Sie zu authentifizieren, gekaufte Leistungen zu liefern, Support anzubieten und Lizenzen zu verwalten. Transaktionsbezogene E-Mails dienen der Verifizierung von Adressen, der Bestätigung von Änderungen und der Wiederherstellung von Konten. Newsletter versenden wir erst nach Ihrer Anmeldebestätigung. Technische Informationen helfen uns, Missbrauch zu verhindern, Fehler zu untersuchen und den Dienst zuverlässig zu betreiben."
+    },
+    "basis": {
+      "title": "Rechtsgrundlagen",
+      "body": "Die für Ihr Konto und Ihre Käufe erforderliche Verarbeitung beruht auf der Erfüllung eines Vertrags oder auf vorvertraglichen Maßnahmen auf Ihre Anfrage gemäß Artikel 6 Absatz 1 Buchstabe b DSGVO. Der Newsletterversand beruht auf Ihrer Einwilligung gemäß Buchstabe a. Sicherheit, Missbrauchsprävention und Zuverlässigkeit des Dienstes beruhen auf berechtigten Interessen gemäß Buchstabe f. Gesetzlich vorgeschriebene Steuer-, Buchführungs- oder andere Unterlagen verarbeiten wir zur Erfüllung rechtlicher Verpflichtungen gemäß Buchstabe c. Eine E-Mail-Adresse ist für den Kontozugang erforderlich; die Newsletteranmeldung ist freiwillig."
+    },
+    "providers": {
+      "title": "Dienstleister und Datenübermittlungen",
+      "body": "Cloudflare stellt Hosting, Datenbank, Caching und Betriebsinfrastruktur bereit. Resend übernimmt den E-Mail-Versand. Polar wickelt den Checkout und Zahlungen als Merchant of Record ab und verarbeitet Daten nach seiner eigenen Datenschutzerklärung. Google und GitHub sind nur beteiligt, wenn Sie deren Anmeldeoptionen wählen. Wir können Informationen außerdem offenlegen, wenn dies gesetzlich erforderlich ist. Wir verkaufen keine personenbezogenen Daten und geben Newsletteradressen nicht für die Werbung anderer Unternehmen weiter.\n\nDiese Anbieter können Daten außerhalb Ihres Landes, einschließlich außerhalb des EWR, verarbeiten. Soweit erforderlich, beruhen Übermittlungen auf einem anwendbaren Angemessenheitsbeschluss oder vertraglichen Garantien wie den Standardvertragsklauseln der Europäischen Kommission. Informationen zu den für Ihre Daten geltenden Garantien erhalten Sie auf Anfrage."
+    },
+    "retention": {
+      "title": "Wie lange wir Daten speichern",
+      "body": "Kontodaten werden so lange aufbewahrt, wie sie für den Betrieb Ihres Kontos und den Support benötigt werden. Nach der Löschung eines Kontos werden Datensätze entfernt oder anonymisiert, sofern ihre Aufbewahrung nicht zur Erfüllung rechtlicher Pflichten, zur Betrugsprävention oder zur Beilegung von Streitigkeiten erforderlich ist. Zahlungs- und Buchführungsunterlagen werden für die gesetzlich vorgeschriebene Dauer aufbewahrt. Sitzungs- und Sicherheitsdaten werden nur so lange gespeichert, wie es ihr Zweck erfordert. Abgelaufene Zähler zur Ratenbegrenzung werden täglich gelöscht.\n\nNewsletterdaten werden während Ihres aktiven Abonnements gespeichert. Nach einer Abmeldung kann ein Datensatz erhalten bleiben, um Ihren Widerspruch zu beachten und eine versehentliche erneute Anmeldung zu verhindern. Sie können die Löschung verlangen. Kopien in Sicherungen oder Anbietersystemen können bis zum Ablauf ihrer üblichen Aufbewahrungsfristen bestehen bleiben."
+    },
+    "cookies": {
+      "title": "Cookies und lokaler Speicher",
+      "body": "Notwendige Authentifizierungscookies halten Sie angemeldet und unterstützen die Kontosicherheit. Das Cookie saasyland.com_locale merkt sich die Sprache der von Ihnen besuchten Seiten. Der Browserspeicher kann außerdem Einstellungen wie das Farbschema oder den Zustand der Seitenleiste speichern. Diese Funktionen unterstützen den Dienst und Ihre gewählten Einstellungen.\n\nDie Anwendung setzt keine Werbetracker oder Analysecookies ein. Externe Anmelde- und Zahlungsdienste haben eigene Speicherpraktiken. Das Blockieren notwendiger Cookies kann die Anmeldung oder das Speichern der Spracheinstellung verhindern."
+    },
+    "rights": {
+      "title": "Ihre Wahlmöglichkeiten und Rechte",
+      "body": "Je nach anwendbarem Recht können Sie Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung oder eine übertragbare Kopie Ihrer Daten verlangen und einer Verarbeitung aufgrund berechtigter Interessen widersprechen. Sie können Ihre Newslettereinwilligung jederzeit über den Abmeldelink oder durch Kontaktaufnahme widerrufen; die Rechtmäßigkeit der Verarbeitung vor dem Widerruf bleibt unberührt. Wir treffen keine ausschließlich automatisierten Entscheidungen über Sie, die rechtliche oder ähnlich erhebliche Auswirkungen haben.\n\nRichten Sie Anfragen an hello@saasyland.com. Möglicherweise müssen wir Ihre Identität überprüfen. Wir antworten innerhalb der gesetzlich vorgesehenen Frist, nach der DSGVO normalerweise innerhalb eines Monats. Sie können sich bei einer Datenschutzaufsichtsbehörde beschweren, etwa beim Präsidenten des polnischen Amts für den Schutz personenbezogener Daten (UODO) oder bei der Behörde an Ihrem Wohn- oder Arbeitsort."
+    },
+    "changes": {
+      "title": "Änderungen dieser Erklärung",
+      "body": "Wir aktualisieren diese Erklärung, wenn sich der Dienst oder der Umgang mit Daten ändert. Das oben angegebene Datum kennzeichnet die aktuelle Fassung. Erfordert eine Änderung eine gesonderte Mitteilung oder Ihre Einwilligung, holen wir diese ein beziehungsweise stellen die Mitteilung bereit, bevor wir die Änderung anwenden."
+    }
+  }
+}

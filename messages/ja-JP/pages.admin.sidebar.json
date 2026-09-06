@@ -1,0 +1,26 @@
+{
+  "title": "SaaSy Land",
+  "groups": {
+    "overview": "概要",
+    "offerings": "商品・サービス",
+    "administration": "管理",
+    "content": "コンテンツ"
+  },
+  "links": {
+    "dashboard": "ダッシュボード",
+    "analytics": "分析",
+    "products": "製品",
+    "courses": "コース",
+    "pricingModels": "価格モデル",
+    "contentAccess": "コンテンツとアクセス",
+    "userManagement": "ユーザー管理",
+    "activeSessions": "有効なセッション",
+    "payments": "支払いと請求",
+    "settings": "設定",
+    "blog": "ブログ",
+    "landingPage": "ランディングページ"
+  },
+  "badges": {
+    "activeSessionsBadge": "3"
+  }
+}

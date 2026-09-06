@@ -87,9 +87,9 @@ export function ScaffoldCli() {
           style={{
             columnGap: 72,
             display: "grid",
+            gridAutoFlow: "column",
             gridTemplateColumns: `repeat(${COLUMNS}, max-content)`,
             gridTemplateRows: `repeat(${Math.ceil(TREE.length / COLUMNS)}, ${LINE_HEIGHT}px)`,
-            gridAutoFlow: "column",
             marginTop: 24,
           }}
         >

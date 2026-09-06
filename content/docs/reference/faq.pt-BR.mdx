@@ -1,0 +1,26 @@
+---
+title: Perguntas frequentes.
+description: Perguntas frequentes... SaaSy Land
+---
+
+## Que tempo de execução o aplicativo usa?
+
+Cloudflare Workers. Bun gerencia pacotes e scripts, enquanto Vite+ Constrói e testa a aplicação.
+
+## Os testes locais precisam de um... Cloudflare Conta?
+
+Unidade e testes de integração usam SQLite Testes de navegador usam um trabalhador local dedicado e D1 A implantação precisa de ligações reais.
+
+## Onde deve viver uma nova operação?
+
+Em seu módulo de características `use-cases` Diretório. A função do servidor valida e autoriza a operação.
+
+## Como as línguas são organizadas?
+
+Inglês usa URLs não prefixadas, polonês usa `/pl-PL`, e cada idioma tem os mesmos arquivos no espaço de nomes pontilhados sob `messages`.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

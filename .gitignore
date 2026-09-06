@@ -1,67 +1,33 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependencies and generated output
 /node_modules
 /.pnp
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# bun
 .bun-cache
-
-# testing
-/coverage
-/playwright-report
-/test-results
-/blob-report
-
-# next.js
-/.next/
-/.next-prod/
-/out/
-
-# content
 /.source/
+/.tanstack/
+/.wrangler/
+/dist/
+/build/
+/coverage/
+/playwright-report/
+/test-results/
+/blob-report/
+*.tsbuildinfo
 
-# production
-/build
-/dist
-
-# next-intl (generated types are committed; see check:i18n)
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
+# Local configuration and secrets
 .env*
-.env*.local
 !.env.example
 !.env.test
+.dev.vars*
+*.pem
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# AI
+# Logs and editor output
+*-debug.log*
+.DS_Store
+._*
 .agents/
 .claude/
 .codex/
 .cursor/
 graphify-out/
-
-# misc
-.DS_Store
-*.pem
-._*
-
-# roadmap
 ROADMAP.md

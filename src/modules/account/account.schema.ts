@@ -1,31 +1,33 @@
-import { relations } from "drizzle-orm"
-import { index, pgTable, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core"
+import { relations, sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core"
 
 import { user } from "~/src/modules/user/user.schema"
 
-export const account = pgTable(
+export const account = sqliteTable(
   "account",
   {
-    accessToken: varchar("access_token", { length: 16_384 }),
-    accessTokenExpiresAt: timestamp("access_token_expires_at", { withTimezone: true }),
-    accountId: varchar("account_id", { length: 1024 }).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    id: uuid("id").primaryKey(),
-    idToken: varchar("id_token", { length: 16_384 }),
-    password: varchar("password", { length: 1024 }),
-    providerId: varchar("provider_id", { length: 128 }).notNull(),
-    refreshToken: varchar("refresh_token", { length: 16_384 }),
-    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", { withTimezone: true }),
-    scope: varchar("scope", { length: 8192 }),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    accessToken: text("access_token", { length: 16_384 }),
+    accessTokenExpiresAt: integer("access_token_expires_at", { mode: "timestamp_ms" }),
+    accountId: text("account_id", { length: 1024 }).notNull(),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
+    id: text("id").primaryKey(),
+    idToken: text("id_token", { length: 16_384 }),
+    password: text("password", { length: 1024 }),
+    providerId: text("provider_id", { length: 128 }).notNull(),
+    refreshToken: text("refresh_token", { length: 16_384 }),
+    refreshTokenExpiresAt: integer("refresh_token_expires_at", { mode: "timestamp_ms" }),
+    scope: text("scope", { length: 8192 }),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */
           new Date(),
       )
       .notNull(),
-    userId: uuid("user_id")
+    userId: text("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
   },

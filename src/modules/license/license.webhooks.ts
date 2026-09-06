@@ -1,9 +1,9 @@
-import "server-only"
+import "@tanstack/react-start/server-only"
 
 import { licenseTierForProduct } from "~/src/modules/license/license.utils"
-import { attachLicenseKey } from "~/src/modules/license/use-cases/attach-license-key.use-case"
-import { grantLicense } from "~/src/modules/license/use-cases/grant-license.use-case"
-import { revokeLicense } from "~/src/modules/license/use-cases/revoke-license.use-case"
+import { attachLicenseKey } from "~/src/modules/license/use-cases/attach-license-key"
+import { grantLicense } from "~/src/modules/license/use-cases/grant-license"
+import { revokeLicense } from "~/src/modules/license/use-cases/revoke-license"
 
 interface PolarCustomer {
   readonly externalId?: string | null | undefined
@@ -35,7 +35,7 @@ export const licenseWebhookHandlers = {
       return
     }
 
-    if (!externalId) {
+    if (typeof externalId !== "string" || externalId.length === 0) {
       console.error(`[license] benefit grant ${data.id} has no external customer`)
       return
     }
@@ -46,7 +46,7 @@ export const licenseWebhookHandlers = {
   onBenefitGrantRevoked: async ({ data }: BenefitGrantEvent): Promise<void> => {
     const { externalId } = data.customer
 
-    if (externalId) {
+    if (typeof externalId === "string" && externalId.length > 0) {
       await revokeLicense(externalId)
     }
   },
@@ -55,7 +55,7 @@ export const licenseWebhookHandlers = {
     const { externalId } = data.customer
     const tier = data.productId === null ? undefined : licenseTierForProduct(data.productId)
 
-    if (!externalId || tier === undefined) {
+    if (typeof externalId !== "string" || externalId.length === 0 || tier === undefined) {
       console.error(`[license] order ${data.id} does not map to a known user and tier`)
       return
     }
@@ -66,7 +66,7 @@ export const licenseWebhookHandlers = {
   onOrderRefunded: async ({ data }: OrderEvent): Promise<void> => {
     const { externalId } = data.customer
 
-    if (externalId) {
+    if (typeof externalId === "string" && externalId.length > 0) {
       await revokeLicense(externalId)
     }
   },

@@ -1,0 +1,14 @@
+---
+title: Piattaforma e test
+description: Piattaforma e test — SaaSy Land
+---
+
+Cloudflare fornisce il runtime attraverso l'esplicito D1, KV e gli binding di asset. Le dichiarazioni generate vivono sotto `src/types`. La configurazione specifica del fornitore appartiene a `src/integrations`. La directory rimanente della piattaforma detiene l'infrastruttura di prova: mocks vincolanti, fixture di richiesta, il ponte RPC e render helper.
+
+Mantenere le impostazioni di distribuzione specifiche dell'ambiente in `wrangler.jsonc` e il corrispondente file di ambiente ignorato. Tenere le credenziali di prova in `.env.test` e non sostituirli mai con le credenziali di produzione.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

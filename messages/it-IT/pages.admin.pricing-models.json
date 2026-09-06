@@ -1,0 +1,58 @@
+{
+  "title": "Modelli di prezzi",
+  "description": "Gestisci i piani di abbonamento e le opzioni di pagamento una tantum.",
+  "actions": {
+    "allTypes": "Tutti i tipi",
+    "createModel": "Crea modello"
+  },
+  "stats": {
+    "monthlyRecurring": "Mensile, con rinnovo automatico",
+    "activeSubscribers": "Abbonati attivi",
+    "activeModels": "Modelli attivi"
+  },
+  "tags": {
+    "subscription": "Abbonamento",
+    "oneTime": "Una tantum",
+    "mostPopular": "Più apprezzato"
+  },
+  "models": {
+    "monthly": {
+      "title": "Abbonamento mensile",
+      "price": "$29",
+      "interval": "/ mese",
+      "description": "Addebitato mensilmente. Puoi cancellare in qualsiasi momento."
+    },
+    "annual": {
+      "title": "Abbonamento annuale",
+      "price": "$290",
+      "interval": "/ anno",
+      "description": "Risparmia 58 euro rispetto all'abbonamento mensile."
+    },
+    "lifetime": {
+      "title": "Licenza del corso",
+      "price": "$99",
+      "interval": "durata di vita",
+      "description": "Prezzi standard per articoli singoli."
+    }
+  },
+  "labels": {
+    "includedAccess": "Accesso incluso",
+    "activeUsers": "{count} attivi",
+    "inactive": "Inattivo",
+    "editModel": "Modifica modello",
+    "moreOptions": "Altre opzioni",
+    "deleteModel": "Elimina modello",
+    "toggleStatus": "Attiva/Disattiva stato"
+  },
+  "features": {
+    "allCourses": "Tutti i corsi attualmente disponibili",
+    "discord": "Comunità Discord esclusiva",
+    "qa": "Sessioni mensili di domande e risposte in diretta",
+    "everythingInMonthly": "Tutto incluso nell'abbonamento mensile",
+    "sourceFiles": "File sorgente scaricabili",
+    "portfolioReview": "Colloquio annuale di revisione del portfolio",
+    "standaloneCourse": "Corso autonomo selezionato",
+    "lifetimeUpdates": "Aggiornamenti a vita per il materiale",
+    "guarantee": "Garanzia di rimborso di 30 giorni"
+  }
+}

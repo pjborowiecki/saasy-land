@@ -1,0 +1,30 @@
+---
+title: "Funkcje serwerowe i przypadki użycia"
+description: "Funkcje serwerowe i przypadki użycia — SaaSy Land"
+---
+
+Operacje funkcji znajdują się w `src/modules/{feature}/use-cases/{operation}.ts`. Eksportuj natywne `createServerFn` ze schematem wejścia, middleware autoryzacji lub limitów oraz handlerem wywołującym D1 albo adapter usługodawcy. Mutacja zwraca bezpośrednio dane i rzuca bezpieczny `AppError`; nie zwraca dodatkowej struktury odpowiedzi akcji frameworka.
+
+Obok mutacji eksportuj `mutationOptions`, a obok odczytów `queryOptions`. Komponenty korzystają z TanStack Query i tłumaczą błędy przez `useActionError`. Udane mutacje odświeżają klucze zapytań swojej funkcji. Nie ufaj ID przesłanemu przez klienta, gdy operacja powinna działać na `context.auth.user.id`.
+
+Chronione operacje używają `withAuth`, a wrażliwe operacje publiczne `withRateLimit`. Walidacja odbywa się przed handlerem. Błędy usługodawców i wewnętrzne szczegóły nie powinny trafiać do publicznych odpowiedzi.
+
+```ts
+import { createServerFn } from "@tanstack/react-start"
+import { mutationOptions } from "@tanstack/react-query"
+import type * as zod from "zod"
+import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { categoryZodSchemas } from "~/src/modules/category/category.zod"
+
+// Follow the complete implementation in modules/category/use-cases/create-category.ts.
+const schema = categoryZodSchemas.createCategory
+const validate = (input: zod.input<typeof schema>) => schema.parse(input)
+```
+
+Istniejąca operacja `createCategory` pokazuje walidację, kontrolę uprawnień, zapis do D1 oraz eksportowane opcje mutacji.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

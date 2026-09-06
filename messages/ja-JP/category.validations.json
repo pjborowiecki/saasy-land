@@ -1,0 +1,5 @@
+{
+  "atLeastOneFieldRequired": "少なくとも一つ以上の項目を入力してください。",
+  "nameRequired": "カテゴリ名が必要です。",
+  "nameMaxLength": "カテゴリ名は{max}文字以内で入力してください。"
+}

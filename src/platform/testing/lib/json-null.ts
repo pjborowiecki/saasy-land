@@ -7,6 +7,4 @@ if (jsonNullValue !== null) {
 /** Nullable DB column value for tests (avoids `null` literals under unicorn/no-null). */
 export const JSON_NULL: null = jsonNullValue
 
-export function readJsonNull(): null {
-  return JSON_NULL
-}
+export const readJsonNull = (): null => JSON_NULL

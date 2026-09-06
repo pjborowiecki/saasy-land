@@ -1,28 +1,26 @@
+import type { JSX, ReactNode } from "react"
 /** @vitest-environment jsdom */
 
-import type { JSX, ReactNode } from "react"
-
 import { act, render, screen, waitFor } from "@testing-library/react"
-import { NextIntlClientProvider } from "next-intl"
+import { IntlProvider } from "use-intl/react"
+import { describe, expect, it, vi } from "vite-plus/test"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { OfflineBanner } from "~/src/presentation/components/custom/offline-banner"
 
-function setNavigatorOnline(value: boolean): void {
+const setNavigatorOnline = (value: boolean): void => {
   Object.defineProperty(globalThis.navigator, "onLine", { configurable: true, value })
 }
 
-function renderBanner(): void {
-  const messages = loadLocaleMessagesFromDir("en-US")
+const renderBanner = (): void => {
+  const messages = getTestMessages("en-US")
 
-  function Wrapper({ children }: { children: ReactNode }): JSX.Element {
-    return (
-      <NextIntlClientProvider locale="en-US" messages={messages}>
-        {children}
-      </NextIntlClientProvider>
-    )
-  }
+  const Wrapper = ({ children }: { children: ReactNode }): JSX.Element => (
+    <IntlProvider locale="en-US" messages={messages}>
+      {children}
+    </IntlProvider>
+  )
 
   render(<OfflineBanner />, { wrapper: Wrapper })
 }

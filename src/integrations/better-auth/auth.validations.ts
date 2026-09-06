@@ -6,7 +6,7 @@ import {
   PASSWORD_MIN_LENGTH,
   TWO_FACTOR_CODE_LENGTH,
 } from "~/src/integrations/better-auth/auth.constraints"
-import type { AuthValidationMessageKey } from "~/src/integrations/next-intl/i18n.types"
+import type { AuthValidationMessageKey } from "~/src/integrations/use-intl/i18n.types"
 
 /** Keys under `auth.validations` — translate at the UI with `useTranslations("auth.validations")`. */
 export const AUTH_VALIDATION_MESSAGE = {

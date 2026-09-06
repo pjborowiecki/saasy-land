@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { sessionZodSchemas } from "~/src/modules/session/session.zod"
 
 const USER_ID = "00000000-0000-7000-8000-000000000001"

@@ -1,0 +1,14 @@
+---
+title: Règles de dépendance
+description: Règles de dépendance — SaaSy Land
+---
+
+Les itinéraires importent des cas de présentation et d'utilisation. Présentation importe les options de requête/mutation natives, les schémas et les aides partagées. Les cas d'utilisation importent les adaptateurs de la base de données et des fournisseurs à travers les limites uniquement du serveur. Les constantes de module et la validation doivent rester utilisables tant par les formulaires que par les fonctions du serveur.
+
+N'importez pas de fixations Worker ou de configuration contenant des secrets dans un composant du navigateur. TanStack Start scissions `createServerFn` les gestionnaires hors du paquet navigateur. Adaptateurs partagés qui ne doivent jamais exécuter dans l'importation du navigateur `@tanstack/react-start/server-only`.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

@@ -1,0 +1,24 @@
+---
+title: Scripts de proyecto
+description: Scripts de proyecto — SaaSy Land
+---
+
+Scripts en `package.json` Utiliza Vite+ para el desarrollo, formato, linting, tipos, Vitest y builds. `content` genera colecciones MDX. `cf-typegen` Genera tipos de enlace para Worker. `db:generate` crea migraciones SQL `db:migrate:local` Se aplican a la instancia local de D1. Los comandos de migración remota y despliegue deben nombrar su entorno de forma explícita.
+
+`build:preview` y `build:production` Construir el Worker, prerenderizar las páginas públicas y verificar los artefactos de despliegue. `clean` Elimina la salida generada y el estado de vinculación local, así que exporta cualquier dato local que quieras conservar primero.
+
+```sh
+bun run test:unit
+bun run test:integration
+bun run test:component
+bun run test:coverage
+bun run check
+bun run build:preview
+bun run test:e2e
+```
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

@@ -1,14 +1,12 @@
-"use client"
 // TanStack Table v9 keeps header/cell/column instances stable and hides state reads
-// behind their methods (`getSize`, `getIsPinned`, …). The React Compiler memoizes on
-// those stable identities, freezing derived values like column widths after a resize,
-// so this renderer opts out. See the table-state guide on React Compiler subscriptions.
+// Behind their methods (`getSize`, `getIsPinned`, …). The React Compiler memoizes on
+// Those stable identities, freezing derived values like column widths after a resize,
+// So this renderer opts out. See the table-state guide on React Compiler subscriptions.
 "use no memo"
 
-import { createContext, use, useCallback, useMemo, type CSSProperties, type JSX } from "react"
+import { type CSSProperties, type JSX, createContext, use, useCallback, useMemo } from "react"
 
 import {
-  useTable,
   type Cell,
   type Column,
   type Header,
@@ -16,28 +14,29 @@ import {
   type ReactTable,
   type Row,
   type RowData,
+  useTable,
 } from "@tanstack/react-table"
 import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, ChevronsUpDown } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Skeleton } from "~/src/presentation/components/shadcn/skeleton"
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "~/src/presentation/components/shadcn/table"
 
 import {
-  dataTableFeatures,
   type DataTableColumnDef,
   type DataTableFeatures,
   type DataTableOptions,
+  dataTableFeatures,
 } from "~/src/presentation/components/custom/data-table/features"
-import { ariaSort, type SortDirection } from "~/src/presentation/components/custom/data-table/utils/data-table-aria"
+import { type SortDirection, ariaSort } from "~/src/presentation/components/custom/data-table/utils/data-table-aria"
 import { alignClass } from "~/src/presentation/components/custom/data-table/utils/data-table-column-style"
 
 const DEFAULT_PAGINATION: PaginationState = { pageIndex: 0, pageSize: 10 }
 // Stable module-scope fallback: a fresh array every render would invalidate the row
-// models each time.
+// Models each time.
 const EMPTY_DATA: never[] = []
 
 // Rows are keyed by their database id, so selection survives sorting and paging.
@@ -58,12 +57,11 @@ type DataTableHeaderCell<TData extends RowData> = Header<DataTableFeatures, TDat
 
 const DataTableContext = createContext<unknown>(undefined)
 
-function isDataTableInstance<TData extends RowData>(value: unknown): value is DataTableInstance<TData> {
-  return typeof value === "object" && value !== null && "getRowModel" in value
-}
+const isDataTableInstance = <TData extends RowData>(value: unknown): value is DataTableInstance<TData> =>
+  typeof value === "object" && value !== null && "getRowModel" in value
 
 /** The table instance for the surrounding `<DataTable>`. */
-export function useDataTable<TData extends RowData>(): DataTableInstance<TData> {
+export const useDataTable = <TData extends RowData>(): DataTableInstance<TData> => {
   const context = use(DataTableContext)
 
   if (!isDataTableInstance<TData>(context)) {
@@ -78,7 +76,7 @@ export function useDataTable<TData extends RowData>(): DataTableInstance<TData> 
  * and `getTotalSize()` depend on. The memo is keyed on the primitive values, never on
  * the stable column instance, so a resize or pin change recomputes it.
  */
-function useColumnCellStyle<TData extends RowData>(column: DataTableColumn<TData>): CSSProperties {
+const useColumnCellStyle = <TData extends RowData>(column: DataTableColumn<TData>): CSSProperties => {
   const size = column.getSize()
   const pinned = column.getIsPinned()
   const startInset = column.getStart("start")
@@ -98,7 +96,7 @@ function useColumnCellStyle<TData extends RowData>(column: DataTableColumn<TData
 }
 
 /** Sticky pinned cells need their own background or scrolled content shows through. */
-function pinnedCellClass(pinned: "start" | "end" | false): string | undefined {
+const pinnedCellClass = (pinned: "start" | "end" | false): string | undefined => {
   if (pinned === "start") {
     return "sticky z-10 border-r border-border bg-inherit"
   }
@@ -116,13 +114,13 @@ function pinnedCellClass(pinned: "start" | "end" | false): string | undefined {
  * width the sized columns leave, keeping the table full width while every column holds
  * its exact model size — and end-pinned columns stay against the table's edge.
  */
-function splitBeforeEndRegion<T>(items: readonly T[], isEndPinned: (item: T) => boolean): [T[], T[]] {
+const splitBeforeEndRegion = <TValue,>(items: readonly TValue[], isEndPinned: (item: TValue) => boolean): [TValue[], TValue[]] => {
   const index = items.findIndex((item) => isEndPinned(item))
 
   return index === NOT_FOUND ? [[...items], []] : [items.slice(0, index), items.slice(index)]
 }
 
-function ResizeHandle<TData extends RowData>({ header }: Readonly<{ header: DataTableHeaderCell<TData> }>): JSX.Element | undefined {
+const ResizeHandle = <TData extends RowData>({ header }: Readonly<{ header: DataTableHeaderCell<TData> }>): JSX.Element | undefined => {
   const t = useTranslations("components.custom.data-table")
 
   if (!header.column.getCanResize()) {
@@ -133,7 +131,7 @@ function ResizeHandle<TData extends RowData>({ header }: Readonly<{ header: Data
   const isResizing = header.column.getIsResizing()
 
   // The grab area stays generous while the visible line is a single pixel — a 1px
-  // target would be almost impossible to hit with a mouse.
+  // Target would be almost impossible to hit with a mouse.
   return (
     <button
       type="button"
@@ -154,7 +152,7 @@ function ResizeHandle<TData extends RowData>({ header }: Readonly<{ header: Data
   )
 }
 
-function SortIcon({ sorted }: Readonly<{ sorted: SortDirection }>): JSX.Element {
+const SortIcon = ({ sorted }: Readonly<{ sorted: SortDirection }>): JSX.Element => {
   if (sorted === "asc") {
     return <ArrowUp aria-hidden className="size-3.5 shrink-0 text-ring" />
   }
@@ -166,12 +164,12 @@ function SortIcon({ sorted }: Readonly<{ sorted: SortDirection }>): JSX.Element 
   return <ChevronsUpDown aria-hidden className="size-3.5 shrink-0 text-muted-foreground/60" />
 }
 
-function HeaderCell<TData extends RowData>({ header }: Readonly<{ header: DataTableHeaderCell<TData> }>): JSX.Element {
+const HeaderCell = <TData extends RowData>({ header }: Readonly<{ header: DataTableHeaderCell<TData> }>): JSX.Element => {
   const table = useDataTable<TData>()
   const { column } = header
   const style = useColumnCellStyle(column)
   // A sticky cell is its own positioning context for the resize handle; an unpinned
-  // header needs `relative` for the same job.
+  // Header needs `relative` for the same job.
   const headClass = cn(pinnedCellClass(column.getIsPinned()) ?? "relative", "bg-background", alignClass(column.columnDef.meta?.align))
   const sorted = column.getIsSorted()
 
@@ -180,7 +178,7 @@ function HeaderCell<TData extends RowData>({ header }: Readonly<{ header: DataTa
   }
 
   // Only sortable headers become buttons: wrapping every one would nest the select-all
-  // checkbox inside a disabled button, which swallows its clicks.
+  // Checkbox inside a disabled button, which swallows its clicks.
   if (!column.getCanSort()) {
     return (
       <TableHead className={headClass} style={style}>
@@ -205,7 +203,7 @@ function HeaderCell<TData extends RowData>({ header }: Readonly<{ header: DataTa
   )
 }
 
-function DataTableHead(): JSX.Element {
+const DataTableHead = (): JSX.Element => {
   const table = useDataTable()
   const classNames = table.options.meta?.classNames
 
@@ -230,7 +228,7 @@ function DataTableHead(): JSX.Element {
   )
 }
 
-function SkeletonCell<TData extends RowData>({ column }: Readonly<{ column: DataTableColumn<TData> }>): JSX.Element {
+const SkeletonCell = <TData extends RowData>({ column }: Readonly<{ column: DataTableColumn<TData> }>): JSX.Element => {
   const style = useColumnCellStyle(column)
 
   return (
@@ -240,7 +238,7 @@ function SkeletonCell<TData extends RowData>({ column }: Readonly<{ column: Data
   )
 }
 
-function DataTableSkeletonRows(): JSX.Element {
+const DataTableSkeletonRows = (): JSX.Element => {
   const table = useDataTable()
   const classNames = table.options.meta?.classNames
   const [leading, endPinned] = splitBeforeEndRegion(table.getVisibleLeafColumns(), (column) => column.getIsPinned() === "end")
@@ -262,7 +260,7 @@ function DataTableSkeletonRows(): JSX.Element {
   )
 }
 
-function DataTableBodyCell<TData extends RowData>({ cell }: Readonly<{ cell: DataTableCell<TData> }>): JSX.Element {
+const DataTableBodyCell = <TData extends RowData>({ cell }: Readonly<{ cell: DataTableCell<TData> }>): JSX.Element => {
   const table = useDataTable<TData>()
   const style = useColumnCellStyle(cell.column)
 
@@ -273,14 +271,14 @@ function DataTableBodyCell<TData extends RowData>({ cell }: Readonly<{ cell: Dat
   )
 }
 
-function DataTableBodyRow<TData extends RowData>({ row }: Readonly<{ row: Row<DataTableFeatures, TData> }>): JSX.Element {
+const DataTableBodyRow = <TData extends RowData>({ row }: Readonly<{ row: Row<DataTableFeatures, TData> }>): JSX.Element => {
   const table = useDataTable<TData>()
   const classNames = table.options.meta?.classNames
   const [leading, endPinned] = splitBeforeEndRegion(row.getVisibleCells(), (cell) => cell.column.getIsPinned() === "end")
 
   return (
     // The hover tint must be opaque: pinned cells inherit the row background, and a
-    // translucent one lets scrolled content show through them.
+    // Translucent one lets scrolled content show through them.
     <TableRow data-state={row.getIsSelected() ? "selected" : undefined} className={cn("bg-background hover:bg-accent", classNames?.row)}>
       {leading.map((cell) => (
         <DataTableBodyCell key={cell.id} cell={cell} />
@@ -293,7 +291,7 @@ function DataTableBodyRow<TData extends RowData>({ row }: Readonly<{ row: Row<Da
   )
 }
 
-function DataTableRows(): JSX.Element {
+const DataTableRows = (): JSX.Element => {
   const t = useTranslations("components.custom.data-table")
   const table = useDataTable()
   const classNames = table.options.meta?.classNames
@@ -327,7 +325,7 @@ function DataTableRows(): JSX.Element {
   )
 }
 
-function DataTablePagination(): JSX.Element {
+const DataTablePagination = (): JSX.Element => {
   const t = useTranslations("components.custom.data-table.pagination")
   const table = useDataTable()
   const classNames = table.options.meta?.classNames
@@ -383,12 +381,12 @@ export interface DataTableProps<TData extends { id: string }> {
  * the leftover container space. When columns outgrow the container, `minWidth` keeps
  * rendered widths equal to the model and the container scrolls horizontally.
  */
-export function DataTable<TData extends { id: string }>({
+export const DataTable = <TData extends { id: string }>({
   columns,
   data = EMPTY_DATA,
   isLoading = false,
   options,
-}: Readonly<DataTableProps<TData>>): JSX.Element {
+}: Readonly<DataTableProps<TData>>): JSX.Element => {
   const table = useTable({
     columnResizeMode: "onChange",
     columns,

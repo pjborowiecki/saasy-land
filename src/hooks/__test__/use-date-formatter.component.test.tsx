@@ -1,11 +1,11 @@
+import { type ReactNode } from "react"
 /** @vitest-environment jsdom */
 
-import { type ReactNode } from "react"
-
 import { renderHook } from "@testing-library/react"
-import { NextIntlClientProvider } from "next-intl"
+import { IntlProvider } from "use-intl/react"
+import { describe, expect, it } from "vite-plus/test"
 
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
 import { useDateFormatter } from "~/src/hooks/use-date-formatter"
 
@@ -17,14 +17,14 @@ const SAMPLE_MINUTE = 0
 const SAMPLE_SECOND = 0
 const SAMPLE_UTC = new Date(Date.UTC(SAMPLE_YEAR, SAMPLE_MONTH, SAMPLE_DAY, SAMPLE_HOUR, SAMPLE_MINUTE, SAMPLE_SECOND))
 
-function createWrapper(locale: "en-US" | "pl-PL" = "en-US") {
-  const messages = loadLocaleMessagesFromDir(locale)
+const createWrapper = (locale: "en-US" | "pl-PL" = "en-US") => {
+  const messages = getTestMessages(locale)
 
   return function Wrapper({ children }: { children: ReactNode }) {
     return (
-      <NextIntlClientProvider locale={locale} messages={messages}>
+      <IntlProvider locale={locale} messages={messages}>
         {children}
-      </NextIntlClientProvider>
+      </IntlProvider>
     )
   }
 }

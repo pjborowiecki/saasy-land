@@ -1,0 +1,30 @@
+---
+title: "Architecture"
+description: "Architecture — SaaSy Land"
+---
+
+SaaSy Land runs as one TanStack Start application on Cloudflare Workers. Routes coordinate rendering and data loading. Feature modules own validation, authorization and operations. Integrations configure external services. Presentation owns the existing UI.
+
+There is no dependency injection container. Import the concrete collaborator at its owning layer. Keep shared helpers small and keep feature-only helpers beside the feature.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

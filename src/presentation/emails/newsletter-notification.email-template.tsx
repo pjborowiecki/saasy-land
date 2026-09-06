@@ -1,30 +1,29 @@
 import type { JSX } from "react"
 
-import { createTranslator } from "next-intl"
-import { Body, Container, Head, Heading, Html, pixelBasedPreset, Preview, Section, Tailwind, Text } from "react-email"
+import { Body, Container, Head, Heading, Html, Preview, Section, Tailwind, Text, pixelBasedPreset } from "react-email"
+import { createTranslator } from "use-intl"
 
-import { I18N, type Locale } from "~/src/integrations/next-intl/i18n.config"
-import { loadLocaleMessagesFromDir } from "~/src/integrations/next-intl/i18n.utils"
+import { I18N, type Locale } from "~/src/integrations/use-intl/i18n.config"
+import { getEmailMessages } from "~/src/integrations/use-intl/i18n.emails"
 
 const TAILWIND_CONFIG = { presets: [pixelBasedPreset] }
 
-export function newsletterNotificationSubject(): string {
-  return createTranslator({
+export const newsletterNotificationSubject = (): string =>
+  createTranslator({
     locale: I18N.DEFAULT_LOCALE,
-    messages: loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE),
+    messages: getEmailMessages(I18N.DEFAULT_LOCALE),
     namespace: "emails.newsletter.notification",
   })("subject")
-}
 
 interface NewsletterNotificationEmailProps {
   readonly email: string
   readonly locale: Locale
 }
 
-export function NewsletterNotificationEmail({ email, locale }: Readonly<NewsletterNotificationEmailProps>): JSX.Element {
+export const NewsletterNotificationEmail = ({ email, locale }: Readonly<NewsletterNotificationEmailProps>): JSX.Element => {
   const t = createTranslator({
     locale: I18N.DEFAULT_LOCALE,
-    messages: loadLocaleMessagesFromDir(I18N.DEFAULT_LOCALE),
+    messages: getEmailMessages(I18N.DEFAULT_LOCALE),
     namespace: "emails.newsletter.notification",
   })
 

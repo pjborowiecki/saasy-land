@@ -1,4 +1,5 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import { describe, expect, it } from "vite-plus/test"
 
 import { category, categoryIconEnum, categoryKindEnum, categoryVisibilityEnum } from "~/src/modules/category/category.schema"
 

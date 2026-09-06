@@ -1,15 +1,13 @@
-"use client"
-
-import { createContext, use, useMemo, type ComponentProps, type CSSProperties, type ReactNode } from "react"
+import { type CSSProperties, type ComponentProps, type ReactNode, createContext, use, useMemo } from "react"
 
 import {
   Label as LabelPrimitive,
-  ProgressBar as ProgressPrimitive,
   type LabelProps,
+  ProgressBar as ProgressPrimitive,
   type ProgressBarProps as ProgressPrimitiveProps,
 } from "react-aria-components"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 const PROGRESS_FULL_PERCENT = 100
 const PROGRESS_WIDTH_STEPS = 101
@@ -26,7 +24,7 @@ interface ProgressContextValue {
 
 const ProgressContext = createContext<ProgressContextValue | undefined>(undefined)
 
-function useProgress(): ProgressContextValue {
+const useProgress = (): ProgressContextValue => {
   const context = use(ProgressContext)
 
   if (context === undefined) {
@@ -36,14 +34,14 @@ function useProgress(): ProgressContextValue {
   return context
 }
 
-function ProgressContent({
+const ProgressContent = ({
   children,
   isIndeterminate,
   percentage,
   valueText,
 }: ProgressContextValue & {
   children?: ReactNode
-}) {
+}) => {
   const context = useMemo(
     () => ({
       isIndeterminate,
@@ -63,40 +61,36 @@ function ProgressContent({
   )
 }
 
-function Progress({
+const Progress = ({
   children,
   className,
   ...props
 }: Omit<ProgressPrimitiveProps, "children" | "className"> & {
   children?: ReactNode
   className?: string
-}) {
-  return (
-    <ProgressPrimitive className={cn("flex flex-wrap gap-3", className)} data-slot="progress" {...props}>
-      {({ isIndeterminate, percentage, valueText }) => (
-        <ProgressContent
-          isIndeterminate={isIndeterminate}
-          {...(percentage === undefined ? {} : { percentage })}
-          {...(valueText === undefined ? {} : { valueText })}
-        >
-          {children}
-        </ProgressContent>
-      )}
-    </ProgressPrimitive>
-  )
-}
+}) => (
+  <ProgressPrimitive className={cn("flex flex-wrap gap-3", className)} data-slot="progress" {...props}>
+    {({ isIndeterminate, percentage, valueText }) => (
+      <ProgressContent
+        isIndeterminate={isIndeterminate}
+        {...(percentage === undefined ? {} : { percentage })}
+        {...(valueText === undefined ? {} : { valueText })}
+      >
+        {children}
+      </ProgressContent>
+    )}
+  </ProgressPrimitive>
+)
 
-function ProgressTrack({ className, ...props }: ComponentProps<"span">) {
-  return (
-    <span
-      className={cn("relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted", className)}
-      data-slot="progress-track"
-      {...props}
-    />
-  )
-}
+const ProgressTrack = ({ className, ...props }: ComponentProps<"span">) => (
+  <span
+    className={cn("relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted", className)}
+    data-slot="progress-track"
+    {...props}
+  />
+)
 
-function ProgressIndicator({ className, ...props }: Omit<ComponentProps<"span">, "style">) {
+const ProgressIndicator = ({ className, ...props }: Omit<ComponentProps<"span">, "style">) => {
   const { isIndeterminate, percentage } = useProgress()
   const widthPercent = isIndeterminate ? PROGRESS_FULL_PERCENT : Math.min(PROGRESS_FULL_PERCENT, Math.max(0, Math.round(percentage ?? 0)))
 
@@ -110,17 +104,17 @@ function ProgressIndicator({ className, ...props }: Omit<ComponentProps<"span">,
   )
 }
 
-function ProgressLabel({ className, ...props }: Readonly<LabelProps>) {
-  return <LabelPrimitive className={cn("text-sm font-medium", className)} data-slot="progress-label" {...props} />
-}
+const ProgressLabel = ({ className, ...props }: Readonly<LabelProps>) => (
+  <LabelPrimitive className={cn("text-sm font-medium", className)} data-slot="progress-label" {...props} />
+)
 
-function ProgressValue({
+const ProgressValue = ({
   children,
   className,
   ...props
 }: Omit<ComponentProps<"span">, "children"> & {
   children?: (value: string) => ReactNode
-}) {
+}) => {
   const { valueText } = useProgress()
 
   return (

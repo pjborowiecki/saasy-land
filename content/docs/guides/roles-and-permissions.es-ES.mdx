@@ -1,0 +1,14 @@
+---
+title: Roles y permisos.
+description: Roles y permisos — SaaSy Land
+---
+
+Los roles y las declaraciones se encuentran en `src/integrations/better-auth/auth.access.ts`. El rol predeterminado es "cliente". El acceso de administrador se verifica mediante `requireAdmin`; cada operación del servidor comprueba la declaración necesaria con `withAuth`.
+
+Mantenimiento de cambios de roles, prohibiciones, revocación de sesiones e intentos de suplantación en los casos de uso de usuarios/sesiones. Derivar al usuario actual de la sesión de la solicitud y anular los grupos de consultas afectados tras una mutación. Ocultar un botón es un comportamiento de presentación y no sustituye a la autorización.
+
+## Guías relacionadas.
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local.](/docs/getting-started/first-run)
+- [Prueba.](/docs/tooling/testing)

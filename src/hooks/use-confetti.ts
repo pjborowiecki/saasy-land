@@ -1,5 +1,3 @@
-"use client"
-
 import { useCallback } from "react"
 
 import confetti, { type Options } from "canvas-confetti"
@@ -20,7 +18,7 @@ const BURSTS: FireConfig[] = [
   { opts: { spread: 120, startVelocity: 45 }, particleRatio: 0.1 },
 ]
 
-export function useConfetti(): { triggerConfetti: () => void } {
+export const useConfetti = (): { triggerConfetti: () => void } => {
   const fire = useCallback((particleRatio: number, opts?: Partial<Options>) => {
     void confetti({
       origin: DEFAULT_ORIGIN,

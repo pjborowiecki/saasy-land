@@ -1,0 +1,52 @@
+{
+  "page": {
+    "metadata": {
+      "description": "Zone de connexion des applications."
+    },
+    "welcome": "Application : {name}"
+  },
+  "components": {
+    "breadcrumbs": {
+      "home": "Accueil"
+    },
+    "header": {
+      "notifications": "Notifications",
+      "searchPlaceholder": "Rechercher dans la console",
+      "searchEmpty": "Pas de section correspondante."
+    },
+    "userWidget": {
+      "settings": "Paramètres",
+      "signedInAs": "Connecté(e) en tant que <user>{name}</user>"
+    },
+    "signOutButton": {
+      "signOut": "Déconnexion",
+      "signingOut": "Déconnexion...",
+      "success": "À plus tard"
+    }
+  },
+  "labels": {
+    "unknownLocation": "Localisation inconnue",
+    "gettingStartedSection": "Section 1 : Premiers pas",
+    "welcomeLesson": "Bienvenue dans le cours",
+    "setupLesson": "Configurer votre environnement",
+    "coreConceptsSection": "Section 2 : Concepts fondamentaux",
+    "development": "Développement",
+    "design": "Design",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé",
+    "oneYearAccess": "Accès pendant 1 an",
+    "products": "produits",
+    "noCourses": "Aucun cours trouvé.",
+    "previousPage": "Page précédente",
+    "nextPage": "Page suivante",
+    "rowActions": "Actions de la ligne",
+    "actions": "Actions",
+    "saasPlans": "Offres SaaS",
+    "addOns": "Modules complémentaires",
+    "coreSubscription": "Abonnement Core",
+    "legacy": "Ancienne version",
+    "hidden": "Masquée",
+    "public": "Publique"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "atLeastOneFieldRequired": "Mindestens ein Feld muss ausgefüllt sein.",
+  "nameRequired": "Der Kategorie Name ist erforderlich.",
+  "nameMaxLength": "Der Kategoriename darf höchstens {max} Zeichen lang sein."
+}

@@ -1,4 +1,5 @@
-import { getTableConfig } from "drizzle-orm/pg-core"
+import { getTableConfig } from "drizzle-orm/sqlite-core"
+import { describe, expect, it } from "vite-plus/test"
 
 import { account, accountRelations } from "~/src/modules/account/account.schema"
 import { user } from "~/src/modules/user/user.schema"

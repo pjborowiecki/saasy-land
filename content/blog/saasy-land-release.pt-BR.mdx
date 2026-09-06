@@ -1,0 +1,258 @@
+---
+title: "SaaSy Land 2.0: o Next.js SaaS Caldeira com uma cobertura de 100%"
+description: Uma produção. Next.js SaaS Começar. Bun e... ElysiaAuth em seu próprio banco de dados, faturamento, 54 locais, um designer de página, e um portão de cobertura que falha na construção.
+excerpt: Um andaime de comando auth, faturamento, e-mail, um administrador e um site de marketing, com 141 arquivos de teste e um portão de cobertura já forçando-os. Aqui está exatamente o que navios, e como verificar cada número antes de pagar.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+updated: 2026-08-15
+image: /images/blog/saasy-land-release.webp
+tags:
+  - saas
+  - boilerplate
+  - nextjs
+  - release
+faq:
+  - question: O que é isso? SaaSy Land?
+    answer: "SaaSy Land é uma produção. Next.js SaaS Kit de arranque. CLI Faz cinco perguntas e andaimes apenas o que você respondeu: autenticação em seu próprio banco de dados, faturamento, e-mail transacional, um console de administração, internacionalização 54-locale e um designer de página visual, com 141 arquivos de teste e uma porta de cobertura 100% já forçando-os em CIUm pagamento de $249, sem taxas por usuário."
+  - question: Quanto custa? SaaSy Land Custo?
+    answer: A base de códigos é de 249 dólares e inclui a fonte completa. CLI Masterclass é de 399 dólares e adiciona o curso completo de vídeo. Agency É $899 e acrescenta uma licença de cliente ilimitada, prioridade. Discord Apoio e... Figma Não há assinatura, contagem de assentos e medidor de usuário ativo mensal.
+  - question: É SaaSy Land 100% de cobertura de teste?
+    answer: "Sim, em declarações, filiais, funções e linhas, e é um portão em vez de um crachá. 141 Vitest arquivos mais 5 Playwright suites em funcionamento em Chromium real e WebKit, com o limite aplicado em cada pedido de puxar por .github / fluxo de trabalho / ci.yml. Faça o teste de corrida de bun: cobertura contra o repositório e o relatório regenera-se."
+  - question: O que a tecnologia faz SaaSy Land Uso 2.0?
+    answer: Next.js 16 e React 19 em Bun, com Elysia para o... API, Better Auth para autenticação, Drizzle ORM contra Neon Postgres, Zod para validação de limites, Stripe, Polar ou Lemon Squeezy para faturar, Resend Por e-mail, next-intl para localização, Tailwind CSS 4 com shadcn/ui, e Fumadocs Para o blog e documentação. TypeScript Por toda parte.
+  - question: Por quê? Better Auth Em vez de... Clerk ou Auth0?
+    answer: Proprietário e margem, cobrados por usuário ativo mensal, então seu custo aumenta exatamente quando sua receita deveria. Better Auth vive em sua base de códigos e seu banco de dados, o que significa que seus usuários são linhas que você possui, sua lógica de autenticação é a fonte que você pode ler e estender, e a conta em 50.000 usuários é a mesma que a conta em 50.
+  - question: Posso usar? SaaSy Land para projetos de clientes?
+    answer: O Agency O nível de $899 inclui uma licença de cliente comercial ilimitada, para que você possa enviá-la para quantos clientes você cobrar.
+  - question: Eu tenho que usar cada parte dela?
+    answer: Não. O CLI faz cinco perguntas e escreve apenas o que você respondeu, então faturar, conteúdo e e-mail podem ser deixados de fora com uma - sem-billing, - sem-conteúdo ou - sem-e-mail bandeira. Sete módulos são incondicionais e três são escritos apenas se você pedir por eles.
+  - question: É SaaSy Land Open source?
+    answer: O código é MIT O que os US$ 249 compram é o que você quer. CLI Não há verificação de licença de execução, nenhum retorno de vendas e nenhuma assinatura.
+  - question: Como vou saber se é o que esta página diz?
+    answer: Cheque antes de pagar. A documentação é pública, o relatório de cobertura é gerado pelo próprio repositório em vez de ser fotografado, e o fluxo de trabalho CI que obriga o portal é um arquivo nesse repositório. Cada número nesta página mapeia um comando ou um caminho, listado na tabela de verificação.
+  - question: Por que não mandar um agente de IA construir isso?
+    answer: Vai, e o resultado vai parecer certo. O que não vai te dizer é quais casos de auth edge ele pulou, qual webhook não é idempotente, ou que a verificação de paridade de tradução que ele nunca escreveu teria pego as chaves desaparecidas. A saída de um agente é tão confiável quanto os cheques que a revisaram, e em um repositório vazio não há nenhum.
+---
+
+Os três meses no início de cada SaaS São sempre os mesmos três meses, autenticação com os casos de vantagem, faturação com o webhook que não deve cobrar duas vezes, e-mail transacional, um administrador que ninguém fora da empresa jamais verá, traduções, fusos horários, moedas, um site de marketing.
+
+Nada disso é seu produto. Tudo foi resolvido.
+
+**SaaSy Land 2.0 é uma produção. Next.js SaaS starter que envia esses três meses como fonte você possui**, com uma suíte de teste já cobrindo-os e um portão de cobertura que falha a construção se algo cair abaixo de 100%. Um andaime de comando. Um pagamento compra. Nada conta você por usuário depois.
+
+Este post é a especificação: o que está na caixa, o que mudou em 2.0, o que custa, e o comando que prova cada reivindicação.
+
+<Callout title={"A versão curta."}>
+
+- **Stack**: Next.js 16 e React 19 em Bun, Elysia, Better Auth, Drizzle com Neon Postgres, Zod, Stripe, Resend, next-intl, Tailwind 4, shadcn/ui, Fumadocs, rigoroso TypeScript.
+- **Testes**: 141 Vitest Arquivos, 5 Playwright Suítes em Chromium e WebKit reais, 100% de cobertura forçada como um CI Portão.
+- **Alcance.**54 locais, 156 moedas, 195 fusos horários, 248 países, com uma verificação de paridade que falha na construção de uma tradução desaparecida.
+- **Custo**- $249 uma vez. `$0` por usuário ativo mensal, para sempre.
+
+</Callout>
+
+_Versão 2.0 substituiu Hono por Elysia, NextAuth com Better Auth e Coleções de Conteúdo com Fumadocs Tudo abaixo descreve o que está no repositório hoje, e cada número é gerado por ele._
+
+## O que é isso? SaaSy Land?
+
+SaaSy Land é um comercial. Next.js SaaS Kit de arranque. CLI Ele chega com 141 arquivos de teste e uma porta de cobertura já os obrigando, então o código que você recebe é verificado em vez de meramente presente.
+
+O código é MIT Licenciado e público, então você pode ler antes de decidir. CLI, os modelos e atualizações do núcleo vitalício, e não há verificação de licença em tempo de execução, nenhum retorno de vendas e nenhuma assinatura.
+
+## O que está na caixa?
+
+Dez módulos. Sete estão sempre escritos, três dependem de como você respondeu o CLI.
+
+| Módulo                       | Que navios?                                                                                                                                                                |     Sempre.     |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------: |
+| **Autenticação**             | Better Auth com e-mail e senha, OAuth, verificação, redefinição de senha, imitação de dois fatores e administrador, em seu banco de dados                                  |       Sim       |
+| **Banco de dados**           | Drizzle ORM contra Neon Postgres, datilografado ponta a ponta, com gerar, migrar, empurrar e scripts de estúdio ligados para local, pré-visualização e produção            |       Sim       |
+| **Billing.**                 | Checkout, portal de clientes e webhooks, com produtos e preços gerenciados pelo administrador em vez de codificados no aplicativo.                                         | Se perguntarem. |
+| **E-mail**                   | React E-mail templates através de Resend, com os fluxos de auth já enviando correio real no primeiro dia                                                                   | Se perguntarem. |
+| **Console de administração** | Treze seções construídas e com estilo: usuários, produtos, pagamentos, análise, blog, cursos, modelos de preços, designer de páginas, configurações e muito mais           |       Sim       |
+| **Interface**                | 56 componentes em Tailwind 4 e shadcn/ui, em seu repositório em vez de atrás de um limite de pacote que você não pode editar                                               |       Sim       |
+| **Internacionalização**      | 54 locais, 195 fusos horários, 156 moedas, 248 países, mais uma verificação de paridade que falha na construção de uma chave desaparecida.                                 |       Sim       |
+| **Conteúdo**                 | Um blog MDX e um site de documentação em Fumadocs, ambos editáveis do administrador, ambos indexados e localizados                                                         | Se perguntarem. |
+| **Testes**                   | 141 Vitest Arquivos, 5 Playwright Suítes, e 100% de declaração, ramificação, função e cobertura de linha como um CI Portão                                                 |       Sim       |
+| **Ferramentas.**             | Bun, Elysia, rigoroso TypeScript, Zod Esquemas, Redis Limitação de taxa, e uma verificação de formatação, linter e tipo que tudo funciona antes de qualquer coisa se funde |       Sim       |
+
+Sem acréscimos. Sem módulos pagos. Sem segunda saída.
+
+## Escolha sua pilha, execute um comando.
+
+O CLI Ele pergunta o que você está construindo e escreve exatamente isso, então o mesmo andaime de ferramentas é um projeto paralelo de um único inquilino e um produto multi-doente com um comerciante de recordes.
+
+```bash
+bunx saasyland@latest init my-app \
+  --framework tanstack \
+  --tenancy multi \
+  --billing polar \
+  --content mdx \
+  --email resend
+```
+
+Cinco perguntas, com bandeiras deliberadamente chatas para que o comando sobreviva a ser colado em um roteiro ao invés de em um prompt:
+
+| Pergunta     | Opções                                            | Por que é uma pergunta?                                                                                                                                      |
+| ------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Quadro.      | `next`, `tanstack`                                | Ambos são apoiados, escolha o que sua equipe já conhece.                                                                                                     |
+| Arrendamento | `multi`, `single`                                 | Reconstruindo organizações mais tarde toca cada consulta que você escreveu.                                                                                  |
+| Billing.     | `stripe`, `polar`, `lemonsqueezy`, `--no-billing` | Polar e... Lemon Squeezy são comerciantes de recorde e carregam IVA da UE e imposto de venda dos EUA para você. Stripe Um fundador faz essa ligação uma vez. |
+| Conteúdo     | `mdx`, `--no-content`                             | Um blog e documentos, ou nenhum.                                                                                                                             |
+| E-mail       | `resend`, `--no-email`                            | Correspondência transacional ligada aos fluxos de autenticação, ou nenhum.                                                                                   |
+
+Mude uma resposta e o comando muda com ela. CLI e as atualizações da vida não.
+
+## As quatro coisas que são realmente diferentes
+
+Muitos iniciadores enviam autorização e faturamento. Estas são as partes que são difíceis de copiar, e cada uma é controlável.
+
+<Cards>
+  <Card title={"Um portão de cobertura, não um distintivo."}>
+    100% das declarações, filiais, funções e linhas, aplicadas em cada pedido de pull. Comportamento não testado não pode se fundir, o que é
+    uma promessa diferente dos testes existentes em algum lugar no repositório.
+  </Card>
+  <Card title={"$0 por usuário ativo mensal"}>
+    Better Auth Sua tabela de usuários, suas sessões, suas margens, a conta de 50.000 usuários é a conta de 50.
+  </Card>
+  <Card title={"Um designer de página na caixa"}>
+    Páginas de pouso, páginas de preços e um blogue que sua equipe de marketing edita visualmente dentro de seu próprio administrador,
+    renderizando seus próprios componentes. Sem segunda assinatura.
+  </Card>
+  <Card title={"O engenheiro, em vídeo."}>
+    Dois cursos na categoria Masterclass. Um caminha na base de códigos que você recebe, subsistema por subsistema. O outro constrói todo o
+    produto novamente de uma pasta vazia.
+  </Card>
+</Cards>
+
+### Por que o portão de cobertura importa mais agora do que no lançamento
+
+Quando o 2.0 foi enviado, o número de cobertura foi um argumento de qualidade. SaaS A base de códigos agora é escrita por um agente.
+
+Na [2025 Stack Overflow Pesquisa de Desenvolvedores](https://survey.stackoverflow.co/2025/ai)84% dos desenvolvedores relataram usar ou planejar usar ferramentas de IA, enquanto a frustração mais citada, nomeada por 45%, foi a saída de IA que é "quase certa, mas não exatamente." Um limite que falha na construção é a resposta mais barata disponível para isso: um agente não pode adicionar comportamento sem adicionar um teste, e qualquer coisa que quebra superfícies no pedido de tração ao invés de um cliente.
+
+Nós escrevemos isso longamente em [Por que seu repositório decide a qualidade de saída do agente](/blog/ai-coding-agents-repository-readiness) e em [Como escolher uma pilha para agentes codificadores de IA](/blog/choosing-a-saas-stack-for-ai-coding-agents). . A versão curta é que este repositório marca 20 de 20 em nosso próprio placar de prontidão, por construção em vez de por esforço.
+
+## O que mudou em 2.0
+
+| Área              | Antes.                | Agora.                               | Por quê                                                                     |
+| ----------------- | --------------------- | ------------------------------------ | --------------------------------------------------------------------------- |
+| API camada        | Hono.                 | Elysia Em frente. Bun                | Tipos de ponta a ponta mais apertados e HMR instantâneo                     |
+| Autenticação      | PróximoAuth           | Better Auth                          | Multi-dotação, organizações, RBAC, e nenhum preço por usuário               |
+| Conteúdo          | Coleções de Conteúdo  | Fumadocs                             | Um sistema para o blog e os médicos, ambos localizados.                     |
+| Localização       | 8 línguas.            | 54 locais.                           | Mais 195 fusos horários, 156 moedas e uma verificação de paridade falhante. |
+| Interface         | Componentes variados. | 56 shadcn/ui componentes em seu repo | Fonte editável ao invés de um limite de pacotes                             |
+| Testes            | Presente.             | 100%, forçado em CI                  | O portão, não o número.                                                     |
+| Site de Marketing | Nenhum.               | Um designer de página visual         | Envie o marketing, não só o aplicativo.                                     |
+
+Tudo está no repositório hoje. Atualizações do núcleo vitalício estão incluídas, então a próxima rodada cai em seu repositório também.
+
+## O que $249 realmente compra
+
+Você não está comprando código. Você está comprando de volta o calendário.
+
+A $150 por hora, $249 é cerca de três horas do seu tempo. O trabalho que substitui não é três horas. É autenticação com dois fatores e OAuth, uma camada de dados digitados, faturamento com webhooks que sobrevivem a uma repetição, um console de administração, um catálogo de 54 locais, um site de marketing que sua equipe pode editar, e uma suíte de testes que prova que tudo ainda funciona após a próxima mudança.
+
+| Tier.                | Preço                | Pelo...                                                     | Adiciona.                                                                                              |
+| -------------------- | -------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Base de códigos.** | 249 dólares uma vez. | O fundador que navega sozinho e lê cada linha               | Fonte completa, CLI, todos os modelos, o conjunto completo de testes, atualizações do núcleo vitalício |
+| **Masterclass.**     | $399 uma vez.        | O engenheiro que quer o raciocínio, não apenas o resultado. | Tudo acima, além de todo o curso de vídeo, arquitetura mergulha fundo e jogos de implantação           |
+| **Agency**           | $899 uma vez.        | A loja que cobra clientes pelo que constrói.                | Tudo acima, além de uma licença de cliente ilimitada, prioridade. Discord e... Figma Arquivos          |
+
+Pagamento único em USD. Sem assinatura, sem contagem de assentos, sem medidor de usuário ativo mensal, sem data de renovação.
+
+## Cheque cada reclamação antes de pagar.
+
+Sem depoimentos, porque não há nada para verificar em uma citação. Cada número nesta página é gerado pelo repositório que você estaria comprando, e aqui é onde encontrá-lo.
+
+| Reivindicação                      | Onde verificar?                                                                 |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| 100% de cobertura de teste.        | `coverage/coverage-summary.json`, gerado por `bun run test:coverage`            |
+| Forçado, não relatado.             | `.github/workflows/ci.yml`, em cada pedido de puxar e empurrar para o principal |
+| Navegadores de verdade, não jsdom. | `e2e/specs`, 5 Playwright Suítes em Chromium e WebKit                           |
+| 54 locais, 156 moedas.             | `src/modules/_core/constants`, verificado por `bun run check:i18n`              |
+| Tipos rígidos, zero. `any`         | `tsc --strict`, que bloqueia a fusão em um único erro                           |
+| 56 componentes, em seu repo        | `src/presentation/components`, fonte editável                                   |
+
+## Para quem este não é
+
+Se quer algo livre para aprender, clone um modelo e aproveite. Se você prefere um vendedor hospedado executar sua autenticação e cobrar você por usuário ativo mensal para o privilégio, compre isso em vez disso.
+
+Isto é para pessoas que pretendem ainda possuir suas margens a 50 mil usuários, e que preferem descobrir a pedido do que na produção.
+
+<Callout title={"Comece aqui."}>
+
+Leia. [A documentação.](/docs) e a seção de arquitetura, então execute o relatório de cobertura contra o repositório. Quando os números forem verificados, [Veja quanto custa.](/#pricing).
+
+</Callout>
+
+## Perguntas frequentes.
+
+<Accordions>
+
+<Accordion title={"O que é isso? SaaSy Land?"}>
+
+SaaSy Land é uma produção. Next.js SaaS Kit de arranque. CLI Faz cinco perguntas e andaimes apenas o que você respondeu: autenticação em seu próprio banco de dados, faturamento, e-mail transacional, um console de administração, internacionalização 54-locale e um designer de página visual, com 141 arquivos de teste e uma porta de cobertura 100% já forçando-os em CIUm pagamento de $249, sem taxas por usuário.
+
+</Accordion>
+
+<Accordion title={"Quanto custa? SaaSy Land Custo?"}>
+
+A base de códigos é de 249 dólares e inclui a fonte completa. CLI Masterclass é de 399 dólares e adiciona o curso completo de vídeo. Agency É $899 e acrescenta uma licença de cliente ilimitada, prioridade. Discord Apoio e... Figma Não há assinatura, contagem de assentos e medidor de usuário ativo mensal.
+
+</Accordion>
+
+<Accordion title={"É SaaSy Land 100% de cobertura de teste?"}>
+
+Sim, em declarações, filiais, funções e linhas, e é um portão em vez de um distintivo. 141 Vitest arquivos mais 5 Playwright suites em funcionamento em Chromium real e WebKit, com o limite aplicado em cada pedido de puxar por `.github/workflows/ci.yml`. . Corra. `bun run test:coverage` contra o repositório e o relatório regenera-se.
+
+</Accordion>
+
+<Accordion title={"O que a tecnologia faz SaaSy Land Uso 2.0?"}>
+
+Next.js 16 e React 19 em Bun, com Elysia para o... API, Better Auth para autenticação, Drizzle ORM contra Neon Postgres, Zod para validação de limites, Stripe, Polar ou Lemon Squeezy para faturar, Resend Por e-mail, next-intl para localização, Tailwind CSS 4 com shadcn/ui, e Fumadocs Para o blog e documentação. TypeScript Por toda parte.
+
+</Accordion>
+
+<Accordion title={"Por quê? Better Auth Em vez de... Clerk ou Auth0?"}>
+
+Proprietário e margem, cobrados por usuário ativo mensal, então seu custo aumenta exatamente quando sua receita deveria. Better Auth vive em sua base de códigos e seu banco de dados, o que significa que seus usuários são linhas que você possui, sua lógica de autenticação é a fonte que você pode ler e estender, e a conta em 50.000 usuários é a mesma que a conta em 50.
+
+</Accordion>
+
+<Accordion title={"Posso usar? SaaSy Land para projetos de clientes?"}>
+
+O Agency O nível de $899 inclui uma licença de cliente comercial ilimitada, para que você possa enviá-la para quantos clientes você cobrar.
+
+</Accordion>
+
+<Accordion title={"Eu tenho que usar cada parte dela?"}>
+
+Não. O CLI faz cinco perguntas e escreve apenas o que você respondeu, então faturar, conteúdo e e-mail podem ser deixados de fora com um `--no-billing`, `--no-content` ou `--no-email` Bandeira. Sete módulos são incondicionais e três são escritos apenas se você pedir por eles.
+
+</Accordion>
+
+<Accordion title={"É SaaSy Land Open source?"}>
+
+O código é MIT O que os US$ 249 compram é o que você quer. CLI Não há verificação de licença de execução, nenhum retorno de vendas e nenhuma assinatura.
+
+</Accordion>
+
+<Accordion title={"Como vou saber se é o que esta página diz?"}>
+
+Cheque antes de pagar. A documentação é pública, o relatório de cobertura é gerado pelo próprio repositório em vez de ser fotografado, e o fluxo de trabalho CI que obriga o portal é um arquivo nesse repositório. Cada número nesta página mapeia um comando ou um caminho, listado na tabela de verificação acima.
+
+</Accordion>
+
+<Accordion title={"Por que não mandar um agente de IA construir isso?"}>
+
+Vai, e o resultado vai parecer certo. O que não vai te dizer é quais casos de auth edge ele pulou, qual webhook não é idempotente, ou que a verificação de paridade de tradução que ele nunca escreveu teria pego as chaves desaparecidas. A saída de um agente é tão confiável quanto os cheques que a revisaram, e em um repositório vazio não há nenhum.
+
+</Accordion>
+
+</Accordions>
+
+---
+
+_Construído por um desenvolvedor profissional para os padrões de produção. As perguntas vão para hello@saasyland.com, e uma pessoa os lê._

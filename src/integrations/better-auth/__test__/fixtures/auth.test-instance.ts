@@ -4,7 +4,7 @@ import { getTestInstance } from "better-auth/test"
 
 import { TEST_APP_URL } from "~/src/platform/testing/lib/test-request"
 
-import { ac, DEFAULT_ROLE_CODE, ROLE_CODES, ROLES } from "~/src/integrations/better-auth/auth.access"
+import { DEFAULT_ROLE_CODE, ROLES, ROLE_CODES, ac } from "~/src/integrations/better-auth/auth.access"
 
 import { APP_NAME } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
@@ -33,29 +33,25 @@ export interface AuthEmailCapture {
   verification: AuthEmailPayload[]
 }
 
-export function createEmptyEmailCapture(): AuthEmailCapture {
-  return {
-    changeEmail: [],
-    resetPassword: [],
-    verification: [],
-  }
-}
+export const createEmptyEmailCapture = (): AuthEmailCapture => ({
+  changeEmail: [],
+  resetPassword: [],
+  verification: [],
+})
 
-export function createTestUserPayload(overrides?: Partial<{ email: string; name: string; password: string }>): {
+export const createTestUserPayload = (
+  overrides?: Partial<{ email: string; name: string; password: string }>,
+): {
   email: string
   name: string
   password: string
-} {
-  return {
-    email: overrides?.email ?? `user-${globalThis.crypto.randomUUID()}@example.com`,
-    name: overrides?.name ?? "Test User",
-    password: overrides?.password ?? STRONG_TEST_PASSWORD,
-  }
-}
+} => ({
+  email: overrides?.email ?? `user-${globalThis.crypto.randomUUID()}@example.com`,
+  name: overrides?.name ?? "Test User",
+  password: overrides?.password ?? STRONG_TEST_PASSWORD,
+})
 
-export function extractQueryParam(url: string, key: string): string | undefined {
-  return new URL(url).searchParams.get(key) ?? undefined
-}
+export const extractQueryParam = (url: string, key: string): string | undefined => new URL(url).searchParams.get(key) ?? undefined
 
 type AuthTestContext = Awaited<ReturnType<typeof createAuthTestInstance>>
 
@@ -78,11 +74,10 @@ interface AdminAuthApiExtension {
 
 type ExtendedAuthApi = AuthTestContext["auth"]["api"] & AdminAuthApiExtension
 
-function hasAdminAuthApiExtension(api: AuthTestContext["auth"]["api"]): api is ExtendedAuthApi {
-  return "setRole" in api && typeof api.setRole === "function" && "userHasPermission" in api && typeof api.userHasPermission === "function"
-}
+const hasAdminAuthApiExtension = (api: AuthTestContext["auth"]["api"]): api is ExtendedAuthApi =>
+  "setRole" in api && typeof api.setRole === "function" && "userHasPermission" in api && typeof api.userHasPermission === "function"
 
-function isAuthTestUserRecord(record: unknown): record is AuthTestUserRecord {
+const isAuthTestUserRecord = (record: unknown): record is AuthTestUserRecord => {
   if (typeof record !== "object" || record === null) {
     return false
   }
@@ -106,7 +101,7 @@ function isAuthTestUserRecord(record: unknown): record is AuthTestUserRecord {
   return true
 }
 
-function readOptionalRole(user: unknown): string | undefined {
+const readOptionalRole = (user: unknown): string | undefined => {
   if (typeof user !== "object" || user === null || !("role" in user)) {
     return undefined
   }
@@ -120,7 +115,7 @@ function readOptionalRole(user: unknown): string | undefined {
   return undefined
 }
 
-export function getExtendedAuthApi(context: AuthTestContext): ExtendedAuthApi {
+export const getExtendedAuthApi = (context: AuthTestContext): ExtendedAuthApi => {
   const { api } = context.auth
 
   if (!hasAdminAuthApiExtension(api)) {
@@ -130,7 +125,7 @@ export function getExtendedAuthApi(context: AuthTestContext): ExtendedAuthApi {
   return api
 }
 
-export function readSignUpRole(user: Record<string, unknown>): string {
+export const readSignUpRole = (user: Record<string, unknown>): string => {
   const { role } = user
 
   if (typeof role === "string") {
@@ -140,7 +135,7 @@ export function readSignUpRole(user: Record<string, unknown>): string {
   return DEFAULT_ROLE_CODE
 }
 
-export async function findAuthTestUser(context: AuthTestContext, email: string): Promise<AuthTestUserRecord> {
+export const findAuthTestUser = async (context: AuthTestContext, email: string): Promise<AuthTestUserRecord> => {
   const record = await context.db.findOne({
     model: "user",
     where: [{ field: "email", value: email }],
@@ -153,7 +148,7 @@ export async function findAuthTestUser(context: AuthTestContext, email: string):
   return record
 }
 
-export async function getSessionUserRole(context: AuthTestContext, headers: Headers): Promise<string> {
+export const getSessionUserRole = async (context: AuthTestContext, headers: Headers): Promise<string> => {
   const session = await context.auth.api.getSession({ headers })
   const role = readOptionalRole(session?.user)
 
@@ -164,7 +159,7 @@ export async function getSessionUserRole(context: AuthTestContext, headers: Head
   return DEFAULT_ROLE_CODE
 }
 
-export async function requireSessionUserId(context: AuthTestContext, headers: Headers): Promise<string> {
+export const requireSessionUserId = async (context: AuthTestContext, headers: Headers): Promise<string> => {
   const session = await context.auth.api.getSession({ headers })
 
   if (session?.user.id === undefined) {
@@ -174,10 +169,10 @@ export async function requireSessionUserId(context: AuthTestContext, headers: He
   return session.user.id
 }
 
-export async function signUpVerifyAndSignIn(
+export const signUpVerifyAndSignIn = async (
   context: AuthTestContext,
   user: { email: string; name: string; password: string } = createTestUserPayload(),
-): Promise<{ headers: Headers; user: { email: string; name: string; password: string } }> {
+): Promise<{ headers: Headers; user: { email: string; name: string; password: string } }> => {
   await context.auth.api.signUpEmail({ body: user })
 
   const verification = context.emailCapture.verification.find((entry) => entry.user.email === user.email)
@@ -194,7 +189,7 @@ export async function signUpVerifyAndSignIn(
   return { headers, user }
 }
 
-export async function promoteUserToAdmin(context: AuthTestContext, userId: string): Promise<void> {
+export const promoteUserToAdmin = async (context: AuthTestContext, userId: string): Promise<void> => {
   await context.db.update({
     model: "user",
     update: { role: ROLE_CODES.ADMIN },
@@ -202,7 +197,7 @@ export async function promoteUserToAdmin(context: AuthTestContext, userId: strin
   })
 }
 
-export async function completeChangeEmailFlow(context: AuthTestContext, headers: Headers, newEmail: string): Promise<void> {
+export const completeChangeEmailFlow = async (context: AuthTestContext, headers: Headers, newEmail: string): Promise<void> => {
   const verificationCountBefore = context.emailCapture.verification.length
 
   await context.auth.api.changeEmail({
@@ -242,7 +237,7 @@ interface CreateAuthTestInstanceOptions {
   rateLimitWindow?: number
 }
 
-export function createAuthTestInstance(options?: CreateAuthTestInstanceOptions) {
+export const createAuthTestInstance = (options?: CreateAuthTestInstanceOptions) => {
   const emailCapture = options?.emailCapture ?? createEmptyEmailCapture()
   const rateLimitEnabled = options?.rateLimitEnabled ?? false
 

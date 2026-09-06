@@ -1,0 +1,74 @@
+{
+  "title": "Criar produto",
+  "actions": {
+    "cancel": "Cancelar",
+    "save": "Salvar produto"
+  },
+  "sections": {
+    "general": {
+      "title": "Informações Gerais",
+      "name": {
+        "label": "Nome do Produto",
+        "placeholder": "Pro Plan, E-book..."
+      },
+      "description": {
+        "label": "Descrição",
+        "placeholder": "Descreva brevemente o que este produto inclui...",
+        "help": "Será exibido nas páginas de finalização de compra e no portal do cliente."
+      }
+    },
+    "pricing": {
+      "title": "Precificação e Faturamento",
+      "model": {
+        "label": "Modelo de cobrança",
+        "subscription": "Assinatura",
+        "oneTime": "Único"
+      },
+      "price": {
+        "label": "Preço",
+        "placeholder": "0.00",
+        "currencySymbol": "$"
+      },
+      "period": {
+        "label": "Período de faturamento",
+        "monthly": "Mensalmente",
+        "yearly": "Anual"
+      }
+    },
+    "media": {
+      "title": "Mídia e Imagens",
+      "upload": "Clique para enviar ou arraste e solte",
+      "help": "SVG, PNG, JPG ou GIF (máx. 800x400px)"
+    },
+    "status": {
+      "title": "Status",
+      "publish": {
+        "label": "Publicar produto",
+        "description": "Torne visível aos clientes"
+      },
+      "requireLogin": {
+        "label": "Necessário efetuar login",
+        "description": "O usuário deve estar autenticado"
+      }
+    },
+    "organization": {
+      "title": "Organização",
+      "category": {
+        "label": "Categoria",
+        "placeholder": "Selecione a categoria...",
+        "options": {
+          "addons": "Complementos",
+          "saas": "Planos de assinatura SaaS"
+        }
+      },
+      "collection": {
+        "label": "Coleção",
+        "placeholder": "Adicionar à coleção...",
+        "options": {
+          "core": "Assinatura Core",
+          "legacy": "Versão anterior"
+        }
+      }
+    }
+  }
+}

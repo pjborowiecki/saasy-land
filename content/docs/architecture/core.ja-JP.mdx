@@ -1,0 +1,14 @@
+---
+title: Core 共有カーネル
+description: モジュール/_core のドメインエラーと共有カタログ。
+---
+
+## コンテンツ
+
+- `constants/errors.ts` — `ERROR_CODES`, `AppError`, `ActionServerError` (1つのエラー語彙)
+- `constants/` — i18nおよびプロダクトノブによって使用されるlocale (および関連した)カタログ
+- `utils/` — モジュール間で共有される純粋なヘルパー
+
+## なぜ存在しているのか
+
+クロスカット **有効な値** そして、 **エラーコード** 機能ごとに再定義されるべきではありません。 App-enabled locales (サブセット) はまだライブ中 `i18n.config.ts`;より広いカタログはで生きることができます `_core`.

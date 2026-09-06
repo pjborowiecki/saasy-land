@@ -1,0 +1,14 @@
+---
+title: Cloudflare KV
+description: Cloudflare KV — SaaSy Land
+---
+
+`env.CACHE` almacena entradas de caché públicas y desechables. La integración con GitHub almacena los recuentos de estrellas con un TTL y utiliza `waitUntil` para la escritura en la caché. Se recupera de forma elegante si GitHub o KV no están disponibles.
+
+KV eventualmente alcanza la consistencia. Las sesiones de autenticación y los límites de velocidad residen en D1. El limitador de solicitudes utiliza una operación SQL upsert atómica por clave y ventana de tiempo, por lo que las solicitudes gestionadas por instancias de Worker separadas comparten el mismo límite. No se deben utilizar los contadores de KV para la autorización o límites sensibles.
+
+## Guías relacionadas.
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local.](/docs/getting-started/first-run)
+- [Prueba.](/docs/tooling/testing)

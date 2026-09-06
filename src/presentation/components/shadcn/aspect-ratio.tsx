@@ -1,13 +1,11 @@
-import type { ComponentProps, CSSProperties } from "react"
+import type { CSSProperties, ComponentProps } from "react"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
-function aspectRatioStyle(ratio: number): CSSProperties {
-  return { aspectRatio: ratio }
-}
+const aspectRatioStyle = (ratio: number): CSSProperties => ({ aspectRatio: ratio })
 
-function AspectRatio({ ratio, className, ...props }: ComponentProps<"div"> & { ratio: number }) {
-  return <div data-slot="aspect-ratio" style={aspectRatioStyle(ratio)} className={cn("relative", className)} {...props} />
-}
+const AspectRatio = ({ ratio, className, ...props }: ComponentProps<"div"> & { ratio: number }) => (
+  <div data-slot="aspect-ratio" style={aspectRatioStyle(ratio)} className={cn("relative", className)} {...props} />
+)
 
 export { AspectRatio }

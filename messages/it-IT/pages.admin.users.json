@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "Gestione degli utenti | SaaSy Land",
+    "description": "Gestisci i membri del team, le autorizzazioni e gli account dei clienti."
+  },
+  "title": "Gestione degli utenti",
+  "description": "Gestisci i membri del team, le autorizzazioni e gli account dei clienti.",
+  "actions": {
+    "addUser": "Aggiungi Utente",
+    "feedback": {
+      "banSuccess": "Utente bloccato.",
+      "deleteSuccess": "Utente eliminato.",
+      "error": "Qualcosa è andato storto. Si prega di riprovare.",
+      "resetPasswordSuccess": "La password è stata reimpostata correttamente.",
+      "unbanSuccess": "Utente sbloccato."
+    },
+    "deleteDialog": {
+      "cancel": "Annulla",
+      "confirm": "Elimina utente",
+      "description": "Eliminare definitivamente {name} e i dati del suo account. Questa operazione non può essere annullata.",
+      "title": "Eliminare l'utente?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Annulla",
+      "confirm": "Reimposta la password",
+      "description": "Imposta una nuova password per {name}.",
+      "password": "Nuova password",
+      "title": "Reimposta la password"
+    },
+    "row": {
+      "ban": "Blocca utente",
+      "delete": "Elimina utente",
+      "edit": "Modifica utente",
+      "menu": "Azioni della riga",
+      "resetPassword": "Reimposta la password",
+      "unban": "Rimuovere il divieto all'utente",
+      "viewProfile": "Visualizza il profilo"
+    }
+  },
+  "search": {
+    "placeholder": "Cerca utenti per nome, indirizzo email o ID."
+  },
+  "filters": {
+    "groups": {
+      "identity": "Identità",
+      "access": "Accesso",
+      "activity": "Attività"
+    },
+    "role": {
+      "all": "Ruolo: Tutti",
+      "value": "Ruolo: {role}",
+      "options": {
+        "admin": "Amministratore",
+        "customer": "Cliente"
+      }
+    },
+    "status": {
+      "all": "Stato: Tutto",
+      "value": "Stato: {status}",
+      "options": {
+        "active": "Attivo",
+        "pending": "In attesa",
+        "banned": "Vietato"
+      }
+    }
+  },
+  "tabs": {
+    "allUsers": "Tutti gli utenti",
+    "invitations": "Inviti",
+    "roles": "Ruoli e autorizzazioni",
+    "security": "Sicurezza"
+  },
+  "table": {
+    "booleans": {
+      "no": "No",
+      "yes": "Sì"
+    },
+    "empty": "Nessun utente trovato.",
+    "emptyValue": "n/a",
+    "headers": {
+      "createdAt": "Creato il",
+      "emailVerified": "Email verificato",
+      "role": "Ruolo",
+      "status": "Stato",
+      "timezone": "Fuso orario preferito",
+      "twoFactorEnabled": "Autenticazione a due fattori abilitata",
+      "updatedAt": "Aggiornato il",
+      "user": "Utente"
+    },
+    "selectAll": "Seleziona tutte le righe",
+    "selectRow": "Seleziona la riga",
+    "actionsColumn": "Azioni della riga"
+  },
+  "pagination": {
+    "info": "Risultati da {start} a {end} di {total}",
+    "goToPage": "Vai alla pagina {page}",
+    "nextPage": "Pagina successiva",
+    "previousPage": "Pagina precedente"
+  },
+  "invitations": {
+    "title": "Inviti",
+    "description": "Gestisci gli inviti e i link di accesso in sospeso per il team.",
+    "actions": {
+      "copyLink": "Copia il link",
+      "sendInvite": "Invia l'invito"
+    },
+    "search": {
+      "placeholder": "Cerca inviti via email..."
+    },
+    "filters": {
+      "role": "Ruolo: Tutti",
+      "status": "Stato: In sospeso"
+    },
+    "table": {
+      "headers": {
+        "email": "Email",
+        "role": "Ruolo",
+        "status": "Stato",
+        "sentDate": "Data di invio"
+      }
+    },
+    "pagination": {
+      "info": "Risultati da {start} a {end} di {total}"
+    }
+  },
+  "roles": {
+    "title": "Ruoli e autorizzazioni",
+    "description": "Definisci i livelli di accesso e gestisci le autorizzazioni in tutta la tua organizzazione.",
+    "actions": {
+      "createRole": "Crea ruolo"
+    },
+    "search": {
+      "placeholder": "Cerca posizioni per nome o descrizione..."
+    },
+    "filters": {
+      "type": "Tipo: Tutto"
+    },
+    "table": {
+      "headers": {
+        "name": "Nome del ruolo",
+        "description": "Descrizione",
+        "type": "Tipo",
+        "users": "Utenti"
+      },
+      "usersCount": "{count, plural, one {# utente} other {# utenti}}"
+    },
+    "pagination": {
+      "info": "Ruoli da {start} a {end} di {total}"
+    }
+  },
+  "security": {
+    "title": "Sicurezza",
+    "empty": {
+      "title": "Nessun evento di sicurezza registrato",
+      "description": "Le attività di accesso, le revoche di sessione e le modifiche di ruolo verranno visualizzate qui non appena l'area di lavoro inizierà a registrarle. Attivate il registro di controllo per iniziare a raccogliere gli eventi.",
+      "action": "Abilita il registro di controllo"
+    }
+  },
+  "demo": {
+    "roles": {
+      "r1": {
+        "name": "Amministratore",
+        "description": "Accesso completo a tutte le funzionalità del sistema, alla gestione dei pagamenti e alle impostazioni.",
+        "type": "Sistema"
+      },
+      "r2": {
+        "name": "Editor",
+        "description": "È possibile modificare i prodotti e i contenuti, ma non è possibile gestire gli utenti.",
+        "type": "Sistema"
+      },
+      "r3": {
+        "name": "Agente di assistenza",
+        "description": "Accesso alle sessioni utente e strumenti di risoluzione problemi di base.",
+        "type": "Personalizzato"
+      },
+      "r4": {
+        "name": "Lettore",
+        "description": "Accesso in sola lettura per gli analytics e i dashboard.",
+        "type": "Sistema"
+      },
+      "r5": {
+        "name": "Sviluppatore API",
+        "description": "Accesso alle impostazioni per sviluppatori, alle chiavi API e ai webhook.",
+        "type": "Personalizzato"
+      }
+    },
+    "invitations": {
+      "i1": {
+        "role": "Amministratore",
+        "status": "In attesa",
+        "sentDate": "2 ore fa"
+      },
+      "i2": {
+        "role": "Lettore",
+        "status": "In attesa",
+        "sentDate": "Ieri"
+      },
+      "i3": {
+        "role": "Editor",
+        "status": "Scaduto",
+        "sentDate": "10 ottobre 2023"
+      },
+      "i4": {
+        "role": "Abbonato",
+        "status": "In attesa",
+        "sentDate": "20 ottobre 2023"
+      },
+      "i5": {
+        "role": "Editor",
+        "status": "Scaduto",
+        "sentDate": "28 settembre 2023"
+      }
+    }
+  }
+}

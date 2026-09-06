@@ -1,0 +1,9 @@
+{
+  "hidePassword": "Masquer le mot de passe",
+  "placeholderPassword": "••••••••",
+  "placeholders": {
+    "email": "john@example.com",
+    "name": "John Doe"
+  },
+  "showPassword": "Afficher le mot de passe"
+}

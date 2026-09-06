@@ -1,10 +1,8 @@
-"use client"
-
 import { type JSX } from "react"
 
-import { useTranslations } from "next-intl"
+import { useTranslations } from "use-intl/react"
 
-import { translateValidationMessage } from "~/src/integrations/next-intl/validation-messages"
+import { translateValidationMessage } from "~/src/integrations/use-intl/validation-messages"
 
 import { FieldError } from "~/src/presentation/components/shadcn/field"
 
@@ -14,7 +12,7 @@ interface ValidationFieldErrorProps {
   readonly paramsByKey?: Readonly<Record<string, Readonly<Record<string, string | number>>>>
 }
 
-export function ValidationFieldError({ message, namespace, paramsByKey }: ValidationFieldErrorProps): JSX.Element | undefined {
+export const ValidationFieldError = ({ message, namespace, paramsByKey }: ValidationFieldErrorProps): JSX.Element | undefined => {
   const t = useTranslations(namespace)
 
   if (message === undefined || message === "") {

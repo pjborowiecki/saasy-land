@@ -1,0 +1,16 @@
+---
+title: Authentifizierung und Sicherheit.
+description: Authentifizierung und Sicherheit — SaaSy Land
+---
+
+Die Autorisierung wird zweimal durchgesetzt: Die `beforeLoad`-Routen schützen sowohl das Admin- als auch das Kunden-Layout, und jede geschützte Serverfunktion überprüft den Aufrufer unabhängig. Verwenden Sie `requireAdmin` oder `requireSession` für Layouts und `withAuth(permission)` für Operationen. Kundenoperationen leiten die Eigentumsrechte aus der Sitzung ab.
+
+Better Auth speichert Sitzungen in D1 und verwaltet Anmeldeinformationen, OAuth, Verifizierung, Passwortzurücksetzung, Zwei-Faktor-Authentifizierung, Identitätsübernahme und Widerruf. Die Cookie-Zwischenspeicherung wird umgangen, wenn eine geschützte Serverfunktion überprüft wird. Das finale Authentifizierungs-Plugin ist `tanstackStartCookies`, welches Authentifizierungs-Cookies über Serverfunktionsantworten weiterleitet.
+
+D1-Ratenbegrenzungen verwenden atomare Schreibvorgänge und den Cloudflare-Client-IP-Header. Sensible öffentliche Operationen verwenden separate Limit-Schlüssel. Eingaben werden mit dem Zod-Schema validiert, unerwartete Fehler werden ausgeblendet, die Signatur von Zahlungs-Webhooks wird überprüft und alle Zugangsdaten werden innerhalb von serverseitigen Bereichen verwahrt. Private Routen und Token-Änderungen werden nicht vorab gerendert.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

@@ -1,0 +1,58 @@
+{
+  "title": "Modelos de Precificação",
+  "description": "Gerencie os níveis de assinatura e as opções de pagamento único.",
+  "actions": {
+    "allTypes": "Todos os tipos",
+    "createModel": "Criar modelo"
+  },
+  "stats": {
+    "monthlyRecurring": "Mensal e renovável",
+    "activeSubscribers": "Assinantes ativos",
+    "activeModels": "Modelos Ativos"
+  },
+  "tags": {
+    "subscription": "Assinatura",
+    "oneTime": "Único",
+    "mostPopular": "Mais populares"
+  },
+  "models": {
+    "monthly": {
+      "title": "Passe Mensal",
+      "price": "$29",
+      "interval": "/ mês",
+      "description": "Cobrado mensalmente. Você pode cancelar a qualquer momento."
+    },
+    "annual": {
+      "title": "Anuidade",
+      "price": "$290",
+      "interval": "/ ano",
+      "description": "Economize R$ 58 em comparação com o pagamento mensal."
+    },
+    "lifetime": {
+      "title": "Licença do Curso",
+      "price": "$99",
+      "interval": "vida inteira",
+      "description": "Preços padrão para itens individuais."
+    }
+  },
+  "labels": {
+    "includedAccess": "Acesso incluso",
+    "activeUsers": "{count} ativos",
+    "inactive": "Inativo",
+    "editModel": "Editar Modelo",
+    "moreOptions": "Mais opções",
+    "deleteModel": "Excluir modelo",
+    "toggleStatus": "Alternar status"
+  },
+  "features": {
+    "allCourses": "Todos os cursos atualmente disponíveis",
+    "discord": "Comunidade exclusiva no Discord",
+    "qa": "Sessões mensais de perguntas e respostas ao vivo",
+    "everythingInMonthly": "Tudo incluso no Passe Mensal",
+    "sourceFiles": "Arquivos de origem disponíveis para download",
+    "portfolioReview": "Avaliação anual individual do portfólio",
+    "standaloneCourse": "Curso independente selecionado",
+    "lifetimeUpdates": "Atualizações vitalícias para o material",
+    "guarantee": "Garantia de reembolso em 30 dias"
+  }
+}

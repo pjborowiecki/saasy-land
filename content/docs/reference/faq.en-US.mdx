@@ -1,0 +1,26 @@
+---
+title: "Frequently asked questions"
+description: "Frequently asked questions — SaaSy Land"
+---
+
+## Which runtime does the application use?
+
+Cloudflare Workers. Bun manages packages and scripts, while Vite+ builds and tests the application.
+
+## Do local tests need a Cloudflare account?
+
+No. Unit and integration tests use SQLite and binding mocks. Browser tests use a dedicated local Worker and D1 database. Deployment needs real bindings.
+
+## Where should a new operation live?
+
+In its feature module’s `use-cases` directory. The route coordinates loading; the server function validates and authorizes the operation.
+
+## How are languages organized?
+
+English uses unprefixed URLs, Polish uses `/pl-PL`, and each language has the same dotted namespace files under `messages`.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

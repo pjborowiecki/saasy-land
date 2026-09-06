@@ -1,0 +1,14 @@
+---
+title: Formulaires et validation
+description: Formulaires et validation — SaaSy Land
+---
+
+Utilisation `useForm` et `form.Field` de `@tanstack/react-form`C'est vrai. Conservez les schémas traduits Zod dans les fichiers de validation de la fonctionnalité et réutilisez-les à la limite du serveur. Lire l'état de soumission avec `useSelector(form.store, selector)`; rendre les champs accessibles avec les primitifs de présentation existants.
+
+Les composants du champ d'auth acceptent les petits `StringField` contrat de `integrations/tanstack-form/form.fields.ts`C'est vrai. Ils préservent les étiquettes, le comportement de focus, les toggles de mot de passe et les messages d'erreur. Soumettre par l'intermédiaire des options de mutation exportées, gérer les erreurs de sécurité, et garder le bouton soumettre désactivé pendant qu'il est en attente. Consultez les formulaires d'inscription, d'inscription et de réinitialisation du mot de passe et les formulaires à deux facteurs pour obtenir des exemples complets.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

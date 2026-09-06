@@ -1,0 +1,19 @@
+---
+title: Adicione uma tabela de dados.
+description: Use o conjunto de dados TanStack compartilhado em telas de administração.
+---
+
+## Localização do kit
+
+`src/presentation/components/custom/data-table`
+
+## Padrão de recursos (usuários)
+
+- `columns.tsx` / `cells.tsx` / `filters.tsx` / `actions.tsx` / `options.tsx`
+- Mapa DB linhas → tabela linhas em `_lib` Ou módulo utils.
+- Barra de atualização → invalidar a chave relevante TanStack Query
+- Mantenha o suspense livre do tempo da mesa.
+
+## Opções
+
+Configurar barra de ferramentas (pesquisa, filtros, exportar CSV, buscar, configurações), paginação, seleção e densidade via `options` - Veja UI → Tabela de dados.

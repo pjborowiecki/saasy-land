@@ -1,0 +1,76 @@
+{
+  "title": "Editor de página de destino",
+  "description": "Componha a página seção por seção, e publique quando estiver tudo correto.",
+  "actions": {
+    "preview": "Prévia",
+    "saveChanges": "Salvar alterações",
+    "publish": "Publicar"
+  },
+  "sidebar": {
+    "addSection": "Adicionar seção",
+    "sections": {
+      "hero": "Seção de destaque",
+      "features": "Grade de recursos",
+      "video": "Mostra de vídeos",
+      "testimonials": "Depoimentos",
+      "pricing": "Tabela de Preços",
+      "gallery": "Galeria de imagens",
+      "faq": "FAQ Acordeão",
+      "contact": "Formulário de Contato"
+    }
+  },
+  "canvas": {
+    "label": "Tela",
+    "viewport": {
+      "desktop": "Largura da área de trabalho",
+      "tablet": "Largura do tablet",
+      "mobile": "Largura para dispositivos móveis"
+    },
+    "sectionActions": {
+      "edit": "Edite esta seção",
+      "duplicate": "Duplicar seção",
+      "delete": "Remover seção"
+    },
+    "badge": "Desenvolvido para equipes de armazém",
+    "headingLead": "Monitore cada palete desde...",
+    "headingAccent": "armazenar até a prateleira",
+    "description": "Leitura de códigos de barras, contagem cíclica e alertas de reposição, tudo em um só lugar. Funciona offline no chão e sincroniza quando o turno retorna à rede Wi-Fi.",
+    "getStarted": "Experimente grátis",
+    "bookDemo": "Agende uma demonstração",
+    "addSectionHere": "Adicione uma seção aqui",
+    "featuresHeading": "O que está incluído",
+    "featuresSubheading": "Três ferramentas que a equipe de limpeza utiliza em cada turno.",
+    "feature1": "Leitura de códigos de barras",
+    "feature2": "Contagens cíclicas de estoque",
+    "feature3": "Alertas de reposição de estoque"
+  },
+  "properties": {
+    "title": "Propriedades da Seção",
+    "description": "Personalize o elemento selecionado",
+    "layout": "Alinhamento",
+    "alignLeft": "Alinhar à esquerda",
+    "alignCenter": "Centralizar",
+    "alignRight": "Alinhar à direita",
+    "spacing": "Espaçamento",
+    "paddingTop": "Preenchimento superior",
+    "paddingBot": "Espaçamento inferior",
+    "unit": "px",
+    "background": "Estilo de fundo",
+    "backgroundOptions": {
+      "page": "Superfície da página",
+      "panel": "Superfície do painel",
+      "raised": "Superfície elevada",
+      "image": "Carregar uma imagem"
+    },
+    "content": "Conteúdo",
+    "generateAI": "Gere com IA",
+    "badgeText": "Texto do distintivo",
+    "heading": "Título",
+    "subheading": "Subtítulo",
+    "buttonActions": "Ações",
+    "primaryButton": "Botão principal",
+    "secondaryButton": "Botão secundário",
+    "buttonEnabled": "O botão está visível",
+    "label": "Etiqueta"
+  }
+}

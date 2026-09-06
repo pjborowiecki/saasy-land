@@ -6,7 +6,7 @@ type GetSessionResult = Awaited<ReturnType<typeof auth.api.getSession>>
 type SessionResult = NonNullable<GetSessionResult>
 type BanUserResult = Awaited<ReturnType<typeof auth.api.banUser>>
 
-function readJsonNull(): null {
+const readJsonNull = (): null => {
   const value: unknown = JSON.parse("null")
 
   if (value !== null) {
@@ -16,34 +16,28 @@ function readJsonNull(): null {
   return value
 }
 
-export function createMissingAuthSessionResult(): GetSessionResult {
-  return readJsonNull()
-}
+export const createMissingAuthSessionResult = (): GetSessionResult => readJsonNull()
 
-export function createNullableStringNull(): string | null {
-  return readJsonNull()
-}
+export const createNullableStringNull = (): string | null => readJsonNull()
 
-function createFixtureUserCore(overrides: { role?: string }): Omit<SessionResult["user"], "id"> {
-  return {
-    banned: false,
-    createdAt: FIXTURE_DATE,
-    email: "test@example.com",
-    emailVerified: true,
-    name: "Test User",
-    role: overrides.role ?? "customer",
-    timezone: "Europe/Warsaw",
-    twoFactorEnabled: false,
-    updatedAt: FIXTURE_DATE,
-  }
-}
+const createFixtureUserCore = (overrides: { role?: string }): Omit<SessionResult["user"], "id"> => ({
+  banned: false,
+  createdAt: FIXTURE_DATE,
+  email: "test@example.com",
+  emailVerified: true,
+  name: "Test User",
+  role: overrides.role ?? "customer",
+  timezone: "Europe/Warsaw",
+  twoFactorEnabled: false,
+  updatedAt: FIXTURE_DATE,
+})
 
-export function createAuthSessionFixture(
+export const createAuthSessionFixture = (
   overrides: {
     role?: string
     userId?: string
   } = {},
-): SessionResult {
+): SessionResult => {
   const userId = overrides.userId ?? "01900000-0000-7000-8000-000000000001"
 
   return {
@@ -62,12 +56,12 @@ export function createAuthSessionFixture(
   }
 }
 
-export function createAuthUserMutationResult(
+export const createAuthUserMutationResult = (
   overrides: {
     role?: string
     userId?: string
   } = {},
-): BanUserResult {
+): BanUserResult => {
   const userId = overrides.userId ?? "01900000-0000-7000-8000-000000000001"
   const user: BanUserResult["user"] = {
     ...createFixtureUserCore(overrides),

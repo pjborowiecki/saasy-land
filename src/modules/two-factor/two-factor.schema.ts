@@ -1,31 +1,33 @@
-import { relations } from "drizzle-orm"
-import { boolean, integer, pgTable, timestamp, uniqueIndex, uuid, varchar } from "drizzle-orm/pg-core"
+import { relations, sql } from "drizzle-orm"
+import { integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core"
 
 import { user } from "~/src/modules/user/user.schema"
 
 const DEFAULT_FAILED_VERIFICATION_COUNT = 0
 
-export const twoFactor = pgTable(
+export const twoFactor = sqliteTable(
   "two_factor",
   {
-    backupCodes: varchar("backup_codes", { length: 8192 }).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    backupCodes: text("backup_codes", { length: 8192 }).notNull(),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
     failedVerificationCount: integer("failed_verification_count").default(DEFAULT_FAILED_VERIFICATION_COUNT).notNull(),
-    id: uuid("id").primaryKey(),
-    lockedUntil: timestamp("locked_until", { withTimezone: true }),
-    secret: varchar("secret", { length: 1024 }).notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    id: text("id").primaryKey(),
+    lockedUntil: integer("locked_until", { mode: "timestamp_ms" }),
+    secret: text("secret", { length: 1024 }).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */
           new Date(),
       )
       .notNull(),
-    userId: uuid("user_id")
+    userId: text("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
-    verified: boolean("verified").default(true).notNull(),
+    verified: integer("verified", { mode: "boolean" }).default(true).notNull(),
   },
   (table) => [uniqueIndex("twoFactor_userId_uidx").on(table.userId)],
 )

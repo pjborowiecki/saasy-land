@@ -1,0 +1,20 @@
+---
+title: Користувачі (адміністрування)
+description: Живі таблиці користувачів, вкладки, імпераментація, заборона / обхідний слово.
+---
+
+## Маршрути
+
+`/admin/users` з TanStack Router пошук `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## Модуль
+
+`modules/user/use-cases` — список/create/update/delete, ban/unban, встановити роль/password, знеособлення, освіження таблиці.
+
+## УІ
+
+Вимкнено дані `admin/users/components/all-users-tab`. . Статус на сервери **Одержаний** (`getUserStatus`: активний / прикінчення / заборонений, не стовпець DB.
+
+## Статус на сервери
+
+`admin/users/constants/search-params.ts` — загальний парсер + `searchParamsCache`.

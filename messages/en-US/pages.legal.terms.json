@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Terms of Service",
+    "description": "Terms for using saasyland.com, purchasing the proprietary SaaSy Land CLI, and managing your account and licence key."
+  },
+  "title": "Terms of Service",
+  "lastUpdated": "Last updated 6 September 2026",
+  "description": "Terms for using saasyland.com, purchasing the proprietary SaaSy Land CLI, and managing your account and licence key.",
+  "sections": {
+    "operator": {
+      "title": "The service and its operator",
+      "body": "SaaSy Land is operated by Piotr Borowiecki. Contact hello@saasyland.com. These terms apply to the website, accounts, and purchases. The product description and checkout information explain the specific package you buy."
+    },
+    "accounts": {
+      "title": "Accounts and security",
+      "body": "Provide accurate account details, keep your credentials secure, and tell us if you suspect unauthorised access. Do not share an account to bypass paid access or another person’s licence. You remain responsible for activity you authorise through your account. Your account provides access to the licence key issued after purchase and its machine activations. Keep that key confidential as well."
+    },
+    "purchases": {
+      "title": "Purchases and access",
+      "body": "Core, Complete, and Agency are one-time packages with the contents described on the pricing page and at checkout. Complete adds the advertised learning material; Agency adds the advertised client-work package and support. Lifetime core updates means updates to the core codebase for as long as SaaSy Land continues to provide them. It is not a promise that every service, integration, or future separate product will be available indefinitely.\n\nA newsletter subscription is free and does not create an obligation to buy. Services you connect to your own deployment can charge their own fees."
+    },
+    "payments": {
+      "title": "Payments and taxes",
+      "body": "Checkout is handled by Polar as merchant of record. The checkout shows the final price, currency, and applicable tax treatment before payment. Your payment confirmation identifies the transaction. The relevant payment provider’s terms also apply to payment processing."
+    },
+    "licence": {
+      "title": "Public website and proprietary CLI",
+      "body": "The public website and previous MIT releases remain governed by LICENSE.md. The separately supplied CLI and private templates are proprietary, governed by the Commercial Licence on the Licence page. A purchase and valid key are required to install and use the CLI. You may modify and commercially use generated applications within your package; you may not modify or redistribute the proprietary CLI or resell private templates as a starter kit, subject to mandatory legal exceptions. Purchasing does not transfer ownership of the CLI or provide private-repository access."
+    },
+    "conduct": {
+      "title": "Acceptable use",
+      "body": "Do not attack the service, send spam, attempt unauthorised access, misuse another person’s data, or bypass access controls. Do not redistribute paid material where its licence does not permit it. We may restrict access when reasonably necessary to investigate abuse or protect the service, subject to applicable law and your statutory rights."
+    },
+    "refunds": {
+      "title": "Refunds and consumer rights",
+      "body": "The Refunds page explains how to request a refund before delivery of paid material and how mandatory consumer rights apply. Nothing in these terms excludes rights that cannot lawfully be excluded, including remedies for digital content that is not supplied or does not conform to the contract."
+    },
+    "responsibility": {
+      "title": "Your deployments and our responsibility",
+      "body": "Review and test code before deploying it. You choose your hosting, credentials, configuration, providers, and how your application processes data. We do not guarantee a particular business result, uninterrupted third-party services, or suitability for every use. Any limitation of liability applies only to the extent permitted by law and does not exclude liability that cannot lawfully be limited. The MIT licence’s warranty terms apply to the code it covers."
+    },
+    "law": {
+      "title": "Law, complaints, and changes",
+      "body": "Polish law governs these terms, without taking away mandatory consumer protections available in your country of residence. Contact hello@saasyland.com with a complaint, order reference, and a description of the issue so we can investigate.\n\nWe may update these terms for future use and purchases. Changes do not retrospectively remove rights attached to a purchase. Material changes affecting an ongoing service will be communicated as required by law."
+    }
+  }
+}

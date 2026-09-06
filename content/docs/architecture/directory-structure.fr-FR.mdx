@@ -1,0 +1,28 @@
+---
+title: Structure du répertoire
+description: Structure du répertoire — SaaSy Land
+---
+
+Utilisez kebab-case pour les fichiers et les dossiers. Les fichiers d'itinéraires utilisent TanStack Router="s dot and pathless-route conventions. L'assurance-chômage réutilisable fait partie des régimes d'assurance-emploi `presentation/components/custom`; les primitifs générés appartiennent sous `presentation/components/shadcn`C'est vrai. Une fonctionnalité peut contenir `components`, `constants`, `hooks`et `types` quand il en a besoin.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

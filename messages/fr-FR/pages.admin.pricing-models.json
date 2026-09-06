@@ -1,0 +1,58 @@
+{
+  "title": "Modèles de tarification",
+  "description": "Gérez les niveaux d'abonnement et les options de paiement unique.",
+  "actions": {
+    "allTypes": "Tous les types",
+    "createModel": "Créer le modèle"
+  },
+  "stats": {
+    "monthlyRecurring": "Mensuel (par abonnement)",
+    "activeSubscribers": "Abonnés actifs",
+    "activeModels": "Modèles actifs"
+  },
+  "tags": {
+    "subscription": "Abonnement",
+    "oneTime": "Unique",
+    "mostPopular": "Plus populaires"
+  },
+  "models": {
+    "monthly": {
+      "title": "Abonnement mensuel",
+      "price": "$29",
+      "interval": "/ mois",
+      "description": "Facturation mensuelle. Possibilité de résilier à tout moment."
+    },
+    "annual": {
+      "title": "Abonnement annuel",
+      "price": "$290",
+      "interval": "/ an",
+      "description": "Économisez 58 $ par rapport à l'abonnement mensuel."
+    },
+    "lifetime": {
+      "title": "Licence du cours",
+      "price": "$99",
+      "interval": "/ durée de vie",
+      "description": "Tarifs standard pour les articles vendus à l'unité."
+    }
+  },
+  "labels": {
+    "includedAccess": "Accès inclus",
+    "activeUsers": "{count} actifs",
+    "inactive": "Inactif",
+    "editModel": "Modifier le modèle",
+    "moreOptions": "Plus d'options",
+    "deleteModel": "Supprimer le modèle",
+    "toggleStatus": "Basculer l'état"
+  },
+  "features": {
+    "allCourses": "Tous les cours actuellement publiés",
+    "discord": "Serveur Discord communautaire exclusif",
+    "qa": "Séances mensuelles de questions-réponses en direct",
+    "everythingInMonthly": "Tout est inclus dans l'abonnement mensuel",
+    "sourceFiles": "Fichiers sources téléchargeables",
+    "portfolioReview": "Évaluation annuelle individuelle du portefeuille",
+    "standaloneCourse": "Cours autonome sélectionné",
+    "lifetimeUpdates": "Mises à jour à vie pour le matériel",
+    "guarantee": "Garantie de remboursement sous 30 jours"
+  }
+}

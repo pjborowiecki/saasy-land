@@ -1,0 +1,26 @@
+---
+title: Domande frequenti
+description: Domande frequenti — SaaSy Land
+---
+
+## Quale runtime utilizza l'applicazione?
+
+Cloudflare Workers. Bun gestisce pacchetti e script, mentre Vite+ costruisce e testa l'applicazione.
+
+## I test locali hanno bisogno di un account Cloudflare?
+
+No. I test unitari e di integrazione utilizzano SQLite e i mock rileganti. I test del browser utilizzano un database locale dedicato Worker e D1. Il dispiegamento ha bisogno di legami reali.
+
+## Dove dovrebbe vivere una nuova operazione?
+
+Nel suo modulo di funzionalità `use-cases` directory. Il percorso coordina il caricamento; la funzione server convalida e autorizza l'operazione.
+
+## Come vengono organizzate le lingue?
+
+Inglese utilizza URL non prefissati, usi polacchi `/pl-PL`, e ogni lingua ha gli stessi file tratteggiati namespace sotto `messages`.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

@@ -1,0 +1,6 @@
+{
+  "google": "Entrar com o Google",
+  "github": "Entrar com o GitHub",
+  "success": "Conectado(a) com sucesso!",
+  "continueWith": "Continuar com {provider}"
+}

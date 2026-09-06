@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import { COUNTRIES, type CountryCode } from "~/src/modules/_core/constants/country"
 import { CURRENCIES } from "~/src/modules/_core/constants/currency"
 

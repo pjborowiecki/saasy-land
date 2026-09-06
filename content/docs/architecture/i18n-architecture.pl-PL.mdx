@@ -1,0 +1,16 @@
+---
+title: Tłumaczenia i języki
+description: Tłumaczenia i języki — SaaSy Land
+---
+
+Tłumaczenia znajdują się w `messages/{locale}` dla wszystkich dziewięciu skonfigurowanych języków, w plikach namespace takich jak `pages.admin.users.json`. Konfiguracja języków, funkcje URL, ładowanie wiadomości, metadane i tłumaczenia e-maili znajdują się w `src/integrations/use-intl`.
+
+Angielski używa `/docs`, a polski `/pl-PL/docs`. Starsze linki `/en` i `/pl` są kanonizowane. Plik trasy deklaruje `staticData.namespaces` i ładuje te same namespace w loaderze. `TranslationsProvider` składa wiadomości aktywnych tras dla `IntlProvider`. Wspólne wiadomości ładowane są na poziomie root, a namespace e-maili pozostają na serwerze.
+
+Na serwerze odczytuj język przez `getCurrentLocale`, a w komponentach przez `useLocale`. URL określa język dokumentu. Funkcje serwerowe korzystają z cookie języka. Zmiana języka zachowuje ścieżkę, parametry i fragment oraz przeładowuje dokument. Po zmianie kluczy uruchom `bun run check:i18n`.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

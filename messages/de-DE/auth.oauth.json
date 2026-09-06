@@ -1,0 +1,6 @@
+{
+  "google": "Anmelden mit Google",
+  "github": "Anmelden mit GitHub",
+  "success": "Anmeldung erfolgreich!",
+  "continueWith": "Mit {provider} fortfahren"
+}

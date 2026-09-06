@@ -1,16 +1,14 @@
-"use client"
-
-import { createContext, use, useMemo, type CSSProperties, type ReactNode } from "react"
+import { type CSSProperties, type ReactNode, createContext, use, useMemo } from "react"
 
 import { type VariantProps } from "class-variance-authority"
 import {
-  ToggleButton as TogglePrimitive,
-  ToggleButtonGroup as ToggleGroupPrimitive,
   type ToggleButtonGroupProps,
   type ToggleButtonProps,
+  ToggleButtonGroup as ToggleGroupPrimitive,
+  ToggleButton as TogglePrimitive,
 } from "react-aria-components"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 import { toggleVariants } from "~/src/presentation/components/shadcn/toggle"
 
@@ -28,7 +26,7 @@ const ToggleGroupContext = createContext<ToggleGroupContextValue>({
   variant: "default",
 })
 
-function ToggleGroup({
+const ToggleGroup = ({
   children,
   className,
   orientation = "horizontal",
@@ -41,7 +39,7 @@ function ToggleGroup({
     children?: ReactNode
     orientation?: "horizontal" | "vertical"
     spacing?: number
-  }) {
+  }) => {
   const contextValue = useMemo(
     (): ToggleGroupContextValue => ({
       orientation,
@@ -78,13 +76,13 @@ function ToggleGroup({
   )
 }
 
-function ToggleGroupItem({
+const ToggleGroupItem = ({
   children,
   className,
   size = "default",
   variant = "default",
   ...props
-}: ToggleButtonProps & VariantProps<typeof toggleVariants>) {
+}: ToggleButtonProps & VariantProps<typeof toggleVariants>) => {
   const context = use(ToggleGroupContext)
   const resolvedSize = context.size ?? size
   const resolvedVariant = context.variant ?? variant

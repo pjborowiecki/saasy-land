@@ -1,0 +1,9 @@
+{
+  "hidePassword": "パスワードを隠す",
+  "placeholderPassword": "••••••••",
+  "placeholders": {
+    "email": "john@example.com",
+    "name": "山田 太郎"
+  },
+  "showPassword": "パスワードを表示"
+}

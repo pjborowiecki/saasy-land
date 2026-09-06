@@ -1,0 +1,26 @@
+---
+title: Preguntas frecuentes.
+description: Preguntas frecuentes — SaaSy Land
+---
+
+## ¿Qué entorno de ejecución utiliza la aplicación?
+
+Cloudflare Workers. Bun gestiona los paquetes y scripts, mientras que Vite+ se encarga de la construcción y las pruebas de la aplicación.
+
+## ¿Es necesario tener una cuenta de Cloudflare para realizar pruebas locales?
+
+No. Las pruebas unitarias y de integración utilizan SQLite y \*mocks\* de vinculación. Las pruebas del navegador utilizan un \*worker\* y una base de datos D1 locales dedicados. La implementación requiere vinculaciones reales.
+
+## ¿Dónde debería ubicarse una nueva operación?
+
+Dentro del directorio `use-cases` de su módulo de características. La ruta coordina la carga; la función del servidor valida y autoriza la operación.
+
+## ¿Cómo se organizan los idiomas?
+
+El inglés utiliza URLs sin prefijos, el polaco utiliza `/pl-PL`, y cada idioma tiene los mismos archivos de espacio de nombres con puntos dentro de la carpeta `messages`.
+
+## Guías relacionadas.
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local.](/docs/getting-started/first-run)
+- [Prueba.](/docs/tooling/testing)

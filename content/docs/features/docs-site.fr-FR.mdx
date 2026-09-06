@@ -1,0 +1,16 @@
+---
+title: Site des docs
+description: Comment cette documentation est construite et étendue.
+---
+
+## Racine de contenu
+
+`content/docs`
+
+- MDX pages & #160;: `*.{locale}.mdx` pour les neuf langues configurées (analyseur de points)
+- Dossier `meta.<locale>.json` pour titres/commande/icônes
+- `fallbackLanguage: en-US` pour les traductions manquantes
+
+## Câble de l'application
+
+`fumadocs.source.ts`, mise en page des documents, recherche API. Ajouter des pages → mettre à jour meta `pages` tableaux → reconstruire.

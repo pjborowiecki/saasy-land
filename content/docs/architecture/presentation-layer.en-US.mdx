@@ -1,0 +1,14 @@
+---
+title: "Presentation"
+description: "Presentation — SaaSy Land"
+---
+
+The presentation layer owns the existing typography, layout, colors and interactions. Shared primitives are in `presentation/components/shadcn`; feature components are in `presentation/components/custom`. Keep section-only components, hooks and constants near their section.
+
+Routes provide loading and navigation context. Components consume translated messages and native query/mutation options. Local Geist font files are served from `public/fonts`. The `cn` helper in `src/lib/cn.ts` preserves the custom type ramp while merging Tailwind classes.
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

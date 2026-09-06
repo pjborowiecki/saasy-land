@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "title": "Blog",
+    "description": "What changed in SaaSy Land, why, and what it cost."
+  },
+  "nav": {
+    "docs": "Docs",
+    "blog": "Blog",
+    "home": "Home",
+    "getStarted": "Start building"
+  },
+  "index": {
+    "title": "Notes from the build.",
+    "description": "What changed, why it changed, and what it cost. Written while building the thing this site sells — so every post is about code that shipped, not code that might.",
+    "empty": "Nothing published yet."
+  },
+  "post": {
+    "backToBlog": "All posts",
+    "writtenBy": "Written by",
+    "dateLabel": "Published",
+    "contents": "Contents",
+    "readingTime": "{minutes} min read",
+    "cta": {
+      "label": "SaaSy Land 2.0",
+      "title": "The boring three months, already written.",
+      "body": "Auth on your own database, billing, transactional email, an admin console, 9 locales and a coverage gate that fails the build. Generated as source you own, not a dependency you rent.",
+      "primary": "See pricing",
+      "secondary": "Read the docs"
+    },
+    "share": {
+      "label": "Share",
+      "x": "Share on X",
+      "linkedin": "Share on LinkedIn",
+      "copy": "Copy link",
+      "copied": "Link copied"
+    }
+  }
+}

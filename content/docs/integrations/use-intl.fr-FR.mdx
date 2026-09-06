@@ -1,0 +1,16 @@
+---
+title: L'internationalisation et les lieux
+description: Internationalisation et localisations — SaaSy Land
+---
+
+Les messages vivent dans `messages/{locale}` pour les neuf langues configurées comme des fichiers d'espace de noms pointillés, par exemple `pages.admin.users.json`C'est vrai. Configuration locale, helpers d'URL, chargement de messages, métadonnées et helper de traduction d'email vivent dans `src/integrations/use-intl`.
+
+Utilisations en anglais `/docs`; Utilisations polonaises `/pl-PL/docs`C'est vrai. Héritage `/en` et `/pl` les liens sont canonicisés. Les fichiers d'itinéraire déclarent `staticData.namespaces` et préchargez les mêmes espaces de noms dans leur chargeur. `TranslationsProvider` assemble les espaces de noms de route actifs dans un `IntlProvider`C'est vrai. Les messages partagés sont chargés à la racine ; les espaces de noms uniquement par courriel restent sur le serveur.
+
+Lire le local avec `getCurrentLocale` sur le serveur et `useLocale` dans les composants. L'URL choisit la locale du document. Les requêtes de fonction serveur utilisent le cookie local. Un changement de langue maintient le chemin, la requête et le fragment et recharge le document pour charger le contenu correspondant. Courir `bun run check:i18n` après avoir changé les clés.
+
+## Guides connexes
+
+- [Architecture](/docs/architecture)
+- [Développement local](/docs/getting-started/first-run)
+- [Essais](/docs/tooling/testing)

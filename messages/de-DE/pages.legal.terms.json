@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Nutzungsbedingungen",
+    "description": "Bedingungen für die Nutzung von saasyland.com, den Kauf der proprietären SaaSy Land CLI sowie die Verwaltung Ihres Kontos und Ihres Lizenzschlüssels."
+  },
+  "title": "Nutzungsbedingungen",
+  "lastUpdated": "Zuletzt aktualisiert am 6. September 2026",
+  "description": "Bedingungen für die Nutzung von saasyland.com, den Kauf der proprietären SaaSy Land CLI sowie die Verwaltung Ihres Kontos und Ihres Lizenzschlüssels.",
+  "sections": {
+    "operator": {
+      "title": "Der Dienst und sein Betreiber",
+      "body": "SaaSy Land wird von Piotr Borowiecki betrieben. Sie erreichen uns unter hello@saasyland.com. Diese Bedingungen gelten für die Website, Konten und Käufe. Die Produktbeschreibung und die Angaben im Checkout erläutern das jeweils erworbene Paket."
+    },
+    "accounts": {
+      "title": "Konten und Sicherheit",
+      "body": "Bitte geben Sie korrekte Kontodaten an, bewahren Sie Ihre Zugangsdaten sicher auf und informieren Sie uns, wenn Sie unbefugten Zugriff vermuten. Teilen Sie kein Konto, um kostenlosen Zugang zu erhalten oder die Lizenz einer anderen Person zu umgehen. Sie sind weiterhin für alle Aktivitäten verantwortlich, die Sie über Ihr Konto autorisieren. Ihr Konto ermöglicht den Zugriff auf den Ihnen nach dem Kauf ausgestellten Lizenzschlüssel und dessen Maschinenaktivierungen. Bewahren Sie diesen Schlüssel ebenfalls vertraulich auf."
+    },
+    "purchases": {
+      "title": "Käufe und Zugang",
+      "body": "Core, Complete und Agency sind einmalig bezahlte Pakete mit den auf der Preisseite und im Checkout beschriebenen Inhalten. Complete ergänzt die beworbenen Lernmaterialien; Agency ergänzt das beworbene Paket für Kundenprojekte und den Support. Lebenslange Core-Updates bedeuten Aktualisierungen des Kerncodes, solange SaaSy Land diese weiterhin bereitstellt. Dies ist keine Zusage, dass jeder Dienst, jede Integration oder jedes künftige eigenständige Produkt unbegrenzt verfügbar bleibt.\n\nEin Newsletterabonnement ist kostenlos und verpflichtet nicht zum Kauf. Dienste, die Sie mit Ihrer eigenen Bereitstellung verbinden, können eigene Gebühren erheben."
+    },
+    "payments": {
+      "title": "Zahlungen und Steuern",
+      "body": "Der Checkout wird von Polar als Merchant of Record abgewickelt. Vor der Zahlung werden der endgültige Preis, die Währung und die geltende steuerliche Behandlung angezeigt. Ihre Zahlungsbestätigung identifiziert die Transaktion. Für die Zahlungsabwicklung gelten außerdem die Bedingungen des jeweiligen Zahlungsanbieters."
+    },
+    "licence": {
+      "title": "Öffentliche Webseite und proprietäre Befehlszeilenschnittstelle",
+      "body": "Die öffentliche Website und frühere MIT-Versionen unterliegen weiterhin LICENSE.md. Die separat bereitgestellte CLI und private Vorlagen sind proprietär und unterliegen der kommerziellen Lizenz auf der Lizenzseite. Installation und Nutzung der CLI erfordern einen Kauf und einen gültigen Schlüssel. Sie dürfen generierte Anwendungen im Rahmen Ihres Pakets ändern und kommerziell nutzen; die proprietäre CLI dürfen Sie vorbehaltlich zwingender gesetzlicher Ausnahmen weder ändern noch weiterverbreiten und private Vorlagen nicht als Starterkit weiterverkaufen. Der Kauf überträgt kein Eigentum an der CLI und gewährt keinen Zugang zum privaten Repository."
+    },
+    "conduct": {
+      "title": "Zulässige Nutzung",
+      "body": "Greifen Sie den Dienst nicht an, versenden Sie keinen Spam, versuchen Sie keinen unbefugten Zugriff, missbrauchen Sie keine Daten anderer Personen und umgehen Sie keine Zugangskontrollen. Verbreiten Sie kostenpflichtige Materialien nicht weiter, soweit ihre Lizenz dies nicht erlaubt. Wir können den Zugang einschränken, wenn dies zur Untersuchung von Missbrauch oder zum Schutz des Dienstes angemessen erforderlich ist, unter Beachtung des geltenden Rechts und Ihrer gesetzlichen Rechte."
+    },
+    "refunds": {
+      "title": "Erstattungen und Verbraucherrechte",
+      "body": "Die Seite „Rückerstattungen“ erklärt, wie Sie vor der Bereitstellung kostenpflichtiger Materialien eine Erstattung beantragen können und wie zwingende Verbraucherrechte gelten. Diese Bedingungen schließen keine Rechte aus, die rechtlich nicht ausgeschlossen werden dürfen, einschließlich der Rechtsbehelfe bei nicht bereitgestellten oder nicht vertragsgemäßen digitalen Inhalten."
+    },
+    "responsibility": {
+      "title": "Ihre Bereitstellungen und unsere Verantwortung",
+      "body": "Prüfen und testen Sie den Code vor der Bereitstellung. Sie wählen Hosting, Zugangsdaten, Konfiguration und Anbieter sowie die Art, wie Ihre Anwendung Daten verarbeitet. Wir garantieren kein bestimmtes Geschäftsergebnis, keine unterbrechungsfreien Dienste Dritter und keine Eignung für jeden Zweck. Haftungsbeschränkungen gelten nur im gesetzlich zulässigen Umfang und schließen keine Haftung aus, die rechtlich nicht beschränkt werden darf. Für den von der MIT-Lizenz erfassten Code gelten deren Gewährleistungsbedingungen."
+    },
+    "law": {
+      "title": "Recht, Beschwerden und Änderungen",
+      "body": "Diese Bedingungen unterliegen polnischem Recht, ohne Ihnen zwingende Verbraucherschutzrechte Ihres Wohnsitzlandes zu entziehen. Senden Sie Beschwerden mit Bestellnummer und einer Beschreibung des Problems an hello@saasyland.com, damit wir sie untersuchen können.\n\nWir können diese Bedingungen für die künftige Nutzung und künftige Käufe aktualisieren. Änderungen heben mit einem Kauf verbundene Rechte nicht rückwirkend auf. Wesentliche Änderungen, die einen laufenden Dienst betreffen, werden im gesetzlich erforderlichen Umfang mitgeteilt."
+    }
+  }
+}

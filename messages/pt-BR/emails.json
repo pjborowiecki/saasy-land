@@ -1,0 +1,26 @@
+{
+  "resetPassword": {
+    "subject": "Redefina sua senha",
+    "preview": "Redefina sua senha do SaaSy Land",
+    "heading": "Redefina sua senha",
+    "body": "Olá, {name}. Recebemos uma solicitação para redefinir sua senha. Clique no botão abaixo para escolher uma nova.",
+    "button": "Redefinir senha",
+    "footer": "Se você não fez essa solicitação, pode ignorar este e-mail."
+  },
+  "verifyEmail": {
+    "subject": "Verifique seu endereço de e-mail",
+    "preview": "Verifique seu e-mail para o SaaSy Land",
+    "heading": "Verifique seu e-mail",
+    "body": "Olá, {name}. Obrigado por se cadastrar. Confirme seu endereço de e-mail para concluir a configuração da sua conta.",
+    "button": "Verificar e-mail",
+    "footer": "Se você não criou uma conta, pode ignorar este e-mail."
+  },
+  "changeEmailConfirmation": {
+    "subject": "Confirme seu novo endereço de e-mail",
+    "preview": "Confirme a alteração de e-mail do SaaSy Land",
+    "heading": "Confirme a alteração de e-mail",
+    "body": "Olá, {name}. Recebemos uma solicitação para alterar seu endereço de e-mail para {newEmail}. Clique no botão abaixo para confirmar a alteração.",
+    "button": "Confirmar alteração de e-mail",
+    "footer": "Se você não solicitou essa alteração, pode ignorar este e-mail."
+  }
+}

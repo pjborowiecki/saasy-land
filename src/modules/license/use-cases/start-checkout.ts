@@ -1,0 +1,27 @@
+import { mutationOptions } from "@tanstack/react-query"
+import { createServerFn } from "@tanstack/react-start"
+import type * as zod from "zod"
+
+import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+
+import { pppDiscountId } from "~/src/modules/license/license.ppp"
+import { licenseZodSchemas } from "~/src/modules/license/license.zod"
+
+export const startCheckout = createServerFn({ method: "POST" })
+  .middleware([withAuth()])
+  .validator((input: zod.input<typeof licenseZodSchemas.startCheckout>) => licenseZodSchemas.startCheckout.parse(input))
+  .handler(async ({ context, data: { tier } }) => {
+    const discountId = await pppDiscountId(context.requestHeaders)
+    const { url } = await auth.api.checkout({
+      body: { allowDiscountCodes: false, slug: tier, ...(discountId === undefined ? {} : { discountId }) },
+      headers: context.requestHeaders,
+    })
+
+    return { url }
+  })
+
+export const startCheckoutMutation = mutationOptions({
+  mutationFn: (data: Parameters<typeof startCheckout>[0]["data"]) => startCheckout({ data }),
+  mutationKey: ["license", "startCheckout"],
+})

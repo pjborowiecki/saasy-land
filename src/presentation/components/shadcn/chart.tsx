@@ -1,11 +1,9 @@
-"use client"
+import { type CSSProperties, type ComponentProps, type ComponentType, type ReactNode, createContext, use, useId, useMemo } from "react"
 
-import { createContext, use, useMemo, useId, type ComponentProps, type ComponentType, type CSSProperties, type ReactNode } from "react"
-
-import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
+import * as RechartsPrimitive from "recharts"
 
-import { cn } from "~/src/utils"
+import { cn } from "~/src/lib/cn"
 
 const THEME_ENTRIES = [
   { name: "dark", prefix: ".dark" },
@@ -33,7 +31,7 @@ interface ChartContextProps {
 
 const ChartContext = createContext<ChartContextProps | undefined>(undefined)
 
-function useChart() {
+const useChart = () => {
   const context = use(ChartContext)
 
   if (context === undefined) {
@@ -43,16 +41,14 @@ function useChart() {
   return context
 }
 
-function isNonNullObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && Boolean(value)
-}
+const isNonNullObject = (value: unknown): value is Record<string, unknown> => typeof value === "object" && Boolean(value)
 
-function getStringProp(record: Record<string, unknown>, key: string): string | undefined {
+const getStringProp = (record: Record<string, unknown>, key: string): string | undefined => {
   const value = record[key]
   return typeof value === "string" ? value : undefined
 }
 
-function toDisplayKey(value: unknown): string {
+const toDisplayKey = (value: unknown): string => {
   if (typeof value === "string" || typeof value === "number") {
     return String(value)
   }
@@ -60,7 +56,7 @@ function toDisplayKey(value: unknown): string {
   return "value"
 }
 
-function ChartContainer({
+const ChartContainer = ({
   children,
   className,
   config,
@@ -74,7 +70,7 @@ function ChartContainer({
     height: number
     width: number
   }
-}) {
+}) => {
   const uniqueId = useId()
   const chartId = `chart-${id ?? uniqueId.replaceAll(":", "")}`
   const contextValue = useMemo(() => ({ config }), [config])
@@ -97,7 +93,7 @@ function ChartContainer({
   )
 }
 
-function buildChartStyleHtml(id: string, config: ChartConfig): string {
+const buildChartStyleHtml = (id: string, config: ChartConfig): string => {
   const colorConfig = Object.entries(config).filter(([, itemConfig]) => itemConfig.theme !== undefined || itemConfig.color !== undefined)
 
   if (colorConfig.length === 0) {
@@ -121,7 +117,7 @@ function buildChartStyleHtml(id: string, config: ChartConfig): string {
   }).join("\n")
 }
 
-function ChartStyle({ config, id }: Readonly<{ config: ChartConfig; id: string }>) {
+const ChartStyle = ({ config, id }: Readonly<{ config: ChartConfig; id: string }>) => {
   const html = useMemo(() => buildChartStyleHtml(id, config), [config, id])
   const styleContent = useMemo(() => ({ __html: html }), [html])
 
@@ -134,7 +130,7 @@ function ChartStyle({ config, id }: Readonly<{ config: ChartConfig; id: string }
 
 const ChartTooltip = RechartsPrimitive.Tooltip
 
-function ChartTooltipIndicator({
+const ChartTooltipIndicator = ({
   indicator,
   indicatorColor,
   nestLabel,
@@ -142,7 +138,7 @@ function ChartTooltipIndicator({
   indicator: "line" | "dot" | "dashed"
   indicatorColor: string | undefined
   nestLabel: boolean
-}>) {
+}>) => {
   const style = useMemo(() => {
     if (indicatorColor === undefined) {
       return
@@ -171,7 +167,7 @@ function ChartTooltipIndicator({
 
 type TooltipPayloadItem = NonNullable<RechartsPrimitive.DefaultTooltipContentProps<TooltipValueType, TooltipNameType>["payload"]>[number]
 
-function ChartTooltipItem({
+const ChartTooltipItem = ({
   formatter,
   hideIndicator,
   index,
@@ -193,7 +189,7 @@ function ChartTooltipItem({
   payload: readonly TooltipPayloadItem[]
   payloadColor: string | undefined
   tooltipLabel: ReactNode
-}>) {
+}>) => {
   const { config } = useChart()
   const key = toDisplayKey(nameKey ?? item.name ?? item.dataKey)
   const itemConfig = getPayloadConfigFromPayload(config, item, key)
@@ -253,7 +249,7 @@ function ChartTooltipItem({
   )
 }
 
-function ChartTooltipContent({
+const ChartTooltipContent = ({
   active,
   className,
   color,
@@ -274,7 +270,7 @@ function ChartTooltipContent({
     indicator?: "line" | "dot" | "dashed" | undefined
     labelKey?: string | undefined
     nameKey?: string | undefined
-  } & Omit<RechartsPrimitive.DefaultTooltipContentProps<TooltipValueType, TooltipNameType>, "accessibilityLayer">) {
+  } & Omit<RechartsPrimitive.DefaultTooltipContentProps<TooltipValueType, TooltipNameType>, "accessibilityLayer">) => {
   const { config } = useChart()
 
   const tooltipLabel = useMemo(() => {
@@ -338,7 +334,7 @@ function ChartTooltipContent({
 
 const ChartLegend = RechartsPrimitive.Legend
 
-function LegendSwatch({ color }: Readonly<{ color: string | undefined }>) {
+const LegendSwatch = ({ color }: Readonly<{ color: string | undefined }>) => {
   const style = useMemo((): CSSProperties | undefined => {
     if (color === undefined) {
       return
@@ -350,7 +346,7 @@ function LegendSwatch({ color }: Readonly<{ color: string | undefined }>) {
   return <div className="h-2 w-2 shrink-0 rounded-[2px]" style={style} />
 }
 
-function isTopLegendPosition(position: string | undefined): boolean {
+const isTopLegendPosition = (position: string | undefined): boolean => {
   if (position === undefined) {
     return false
   }
@@ -358,7 +354,7 @@ function isTopLegendPosition(position: string | undefined): boolean {
   return position === "top" || position.startsWith("insideTop")
 }
 
-function ChartLegendContent({
+const ChartLegendContent = ({
   className,
   hideIcon = false,
   nameKey,
@@ -373,7 +369,7 @@ function ChartLegendContent({
   position?: string | undefined
   /** Still injected by Recharts when `Legend` uses the legacy prop. */
   verticalAlign?: "bottom" | "middle" | "top" | undefined
-}) {
+}) => {
   const { config } = useChart()
   const legendPosition = position ?? verticalAlign ?? "bottom"
 
@@ -404,7 +400,7 @@ function ChartLegendContent({
   )
 }
 
-function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key: string) {
+const getPayloadConfigFromPayload = (config: ChartConfig, payload: unknown, key: string) => {
   if (!isNonNullObject(payload)) {
     return
   }
@@ -421,4 +417,4 @@ function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key:
   return config[key]
 }
 
-export { type ChartConfig, ChartContainer, ChartLegend, ChartLegendContent, ChartStyle, ChartTooltip, ChartTooltipContent }
+export { ChartContainer, ChartLegend, ChartLegendContent, ChartStyle, ChartTooltip, ChartTooltipContent, type ChartConfig }

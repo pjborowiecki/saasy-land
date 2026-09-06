@@ -1,7 +1,7 @@
 {
   "biome.enabled": false,
   "biome.requireConfiguration": true,
-    "editor.codeActionsOnSave": {
+  "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit"
   },
   "editor.defaultFormatter": "oxc.oxc-vscode",
@@ -12,15 +12,21 @@
   "i18n-ally.displayLanguage": "en-US",
   "i18n-ally.enabledFrameworks": ["next-intl", "general"],
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": ["./src/integrations/next-intl/messages"],
+  "i18n-ally.localesPaths": ["./messages"],
   "i18n-ally.namespace": true,
-  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
+  "i18n-ally.pathMatcher": "{locale}/{namespace}.json",
   "i18n-ally.sourceLanguage": "en-US",
+  "json.schemaDownload.enable": true,
+  "json.schemaDownload.trustedDomains": {
+    "https://ui.shadcn.com/": true
+  },
   "npm.scriptRunner": "bun",
   "oxc.fmt.configPath": "./vite.config.ts",
   "oxc.path.oxfmt": "./node_modules/vite-plus/bin/oxfmt",
   "oxc.path.oxlint": "./node_modules/vite-plus/bin/oxlint",
   "oxc.typeAware": true,
+  "tailwindCSS.classAttributes": ["class", "className", "classList"],
+  "tailwindCSS.experimental.configFile": "src/presentation/styles/globals.css",
   "[javascript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
@@ -32,5 +38,5 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
-  },
+  }
 }

@@ -1,0 +1,16 @@
+---
+title: Internacionalização e locais
+description: Internacionalização e locais... SaaSy Land
+---
+
+Mensagens ao vivo `messages/{locale}` para todos os nove idiomas configurados como arquivos de espaço de nomes pontilhados, por exemplo `pages.admin.users.json`. . Configuração local, assistentes de URL, carregamento de mensagens, metadados e assistentes de tradução de e-mail ao vivo `src/integrations/use-intl`.
+
+Inglês usa `/docs`- O que é isso? `/pl-PL/docs`. . Legado `/en` e... `/pl` As ligações são canônicas. Arquivos de rota declaram `staticData.namespaces` e pré-carregar os mesmos espaços de nomes em seu carregador. `TranslationsProvider` montar os espaços de nomes de rota ativa em um `IntlProvider`. . Mensagens compartilhadas são carregadas no root; os espaços de nomes somente por e-mail ficam no servidor.
+
+Leia o local com `getCurrentLocale` no servidor e `useLocale` em componentes. O URL escolhe o local do documento. Pedidos de função do servidor usam o cookie local. Uma mudança de idioma mantém o caminho, consulta e fragmento e recarrega o documento para carregar o conteúdo correspondente. Corra. `bun run check:i18n` Depois de trocar as chaves.
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

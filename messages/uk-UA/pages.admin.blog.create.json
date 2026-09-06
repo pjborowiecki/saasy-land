@@ -1,0 +1,36 @@
+{
+  "title": "Написати публікацію",
+  "description": "Створіть новий допис у блозі у форматі Markdown з розширеними налаштуваннями.",
+  "actions": {
+    "preview": "Перегляд",
+    "saveDraft": "Зберегти чернетку",
+    "publish": "Опублікувати"
+  },
+  "editor": {
+    "title": "Назва публікації",
+    "titlePlaceholder": "Введіть назву публікації тут...",
+    "slug": "URL-адрес",
+    "slugPlaceholder": "Заголовок тут",
+    "contentPlaceholder": "Напишіть текст вашого допису тут... Ви можете використовувати Markdown.",
+    "fullscreen": "Повноцінний екран"
+  },
+  "settings": {
+    "featuredImage": "Зображення (або: Основне зображення)",
+    "upload": "Натисніть, щоб завантажити",
+    "uploadHelp": "SVG, PNG, JPG або GIF (максимальний розмір: 5 МБ)",
+    "publishing": "Видання",
+    "status": "Статус",
+    "statusDraft": "Чернетка",
+    "statusPublished": "Опубліковано",
+    "statusScheduled": "Заплановано",
+    "category": "Категорія",
+    "categorySelect": "Виберіть категорію",
+    "categoryUpdates": "Оновлення продукту",
+    "categoryTutorials": "Посібники",
+    "categoryCompany": "Новини компанії",
+    "tags": "Теги",
+    "tagsPlaceholder": "Додайте теги, розділяючи їх коми.",
+    "excerpt": "Уривок",
+    "excerptPlaceholder": "Короткий огляд публікації..."
+  }
+}

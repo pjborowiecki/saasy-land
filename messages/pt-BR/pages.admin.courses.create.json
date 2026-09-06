@@ -1,0 +1,71 @@
+{
+  "title": "Criar curso",
+  "actions": {
+    "cancel": "Cancelar",
+    "save": "Salvar curso"
+  },
+  "sections": {
+    "general": {
+      "title": "Informações Gerais",
+      "name": {
+        "label": "Título do Curso",
+        "placeholder": "Padrões avançados de design de interface do usuário..."
+      },
+      "description": {
+        "label": "Descrição",
+        "placeholder": "Descreva brevemente o que os alunos aprenderão...",
+        "help": "Será exibido na página principal do curso."
+      }
+    },
+    "curriculum": {
+      "title": "Currículo",
+      "description": "Estruture seu curso em seções e aulas.",
+      "expandAll": "Expandir tudo",
+      "addSection": "Adicionar nova seção",
+      "addLesson": "Adicionar Lição"
+    },
+    "pricing": {
+      "title": "Precificação e Acesso",
+      "model": {
+        "label": "Modelo de cobrança",
+        "oneTime": "Compra única",
+        "subscription": "Assinatura"
+      },
+      "price": {
+        "label": "Preço",
+        "placeholder": "0.00"
+      },
+      "duration": {
+        "label": "Duração do acesso",
+        "lifetime": "Acesso vitalício"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "publish": {
+        "label": "Publicar curso",
+        "description": "Torne isso visível aos alunos"
+      },
+      "certificate": {
+        "label": "Emitir certificado",
+        "description": "Após a conclusão de 100%"
+      }
+    },
+    "media": {
+      "title": "Miniatura do curso",
+      "upload": "Carregar imagem",
+      "help": "Recomendado: 1920x1080 pixels"
+    },
+    "organization": {
+      "title": "Organização",
+      "category": {
+        "label": "Categoria",
+        "placeholder": "Selecione a categoria..."
+      },
+      "difficulty": {
+        "label": "Nível de Dificuldade",
+        "placeholder": "Inicie, Avançado..."
+      }
+    }
+  }
+}

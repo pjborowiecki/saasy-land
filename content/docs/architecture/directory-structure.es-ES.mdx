@@ -1,0 +1,28 @@
+---
+title: Estructura de directorios
+description: Estructura de directorios – SaaSy Land
+---
+
+Utilice las convenciones de rutas con puntos y rutas sin rutas de TanStack Router. Las interfaces de usuario reutilizables se ubican en… `presentation/components/custom`; los elementos generados pertenecen a `presentation/components/shadcn`Una funcionalidad puede contener `components`, `constants`, `hooks`, y `types` cuando los necesiten.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Guías relacionadas
+
+- [Arquitectura](/docs/architecture)
+- [Desarrollo local](/docs/getting-started/first-run)
+- [Pruebas](/docs/tooling/testing)

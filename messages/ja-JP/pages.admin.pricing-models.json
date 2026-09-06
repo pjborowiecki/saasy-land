@@ -1,0 +1,58 @@
+{
+  "title": "価格モデル",
+  "description": "プランの管理と、一度だけの支払いオプションを設定できます。",
+  "actions": {
+    "allTypes": "全種類",
+    "createModel": "モデルを作成する"
+  },
+  "stats": {
+    "monthlyRecurring": "毎月の定期課金",
+    "activeSubscribers": "アクティブ購読者数",
+    "activeModels": "有効な料金モデル"
+  },
+  "tags": {
+    "subscription": "サブスクリプション",
+    "oneTime": "一度限り",
+    "mostPopular": "最も人気があります"
+  },
+  "models": {
+    "monthly": {
+      "title": "月額パス",
+      "price": "$29",
+      "interval": "/ ヶ月",
+      "description": "月額請求となります。いつでも解約可能です。"
+    },
+    "annual": {
+      "title": "年間パス",
+      "price": "$290",
+      "interval": "/年",
+      "description": "月額プランと比較して、58ドルお得です。"
+    },
+    "lifetime": {
+      "title": "コースライセンス",
+      "price": "$99",
+      "interval": "一生",
+      "description": "単品商品の標準価格です。"
+    }
+  },
+  "labels": {
+    "includedAccess": "含まれるアクセス権",
+    "activeUsers": "有効：{count}件",
+    "inactive": "非アクティブ",
+    "editModel": "モデルの編集",
+    "moreOptions": "さらにオプション",
+    "deleteModel": "モデルを削除します",
+    "toggleStatus": "状況を切り替え"
+  },
+  "features": {
+    "allCourses": "現在公開されているすべてのコース",
+    "discord": "特別なコミュニティDiscordサーバー",
+    "qa": "毎月のオンライン質疑応答セッション",
+    "everythingInMonthly": "月額パスに含まれるすべて",
+    "sourceFiles": "ダウンロード可能なソースファイル",
+    "portfolioReview": "個別年次ポートフォリオレビュー",
+    "standaloneCourse": "選定された独立コース",
+    "lifetimeUpdates": "素材の生涯サポート",
+    "guarantee": "30日間の返金保証"
+  }
+}

@@ -1,0 +1,19 @@
+---
+title: Añadir una tabla DataTable.
+description: Utilice el kit TanStack DataTable compartido en las pantallas de administración.
+---
+
+## Ubicación del kit.
+
+`src/presentation/components/custom/data-table`
+
+## Característica de patrón (usuarios).
+
+- `columns.tsx` / `cells.tsx` / `filters.tsx` / `actions.tsx` / `options.tsx`
+- Mapear filas de la base de datos a filas de la tabla en `_lib` o en el módulo utils.
+- Barra de herramientas: invalidar la clave relevante de TanStack Query.
+- Mantenga las soluciones alternativas de "Suspense" fuera del entorno de ejecución de la tabla.
+
+## Opciones.
+
+Configure la barra de herramientas (búsqueda, filtros, exportar CSV, obtener, ajustes), la paginación, la selección y la densidad a través de `options` — consulte UI → DataTable.

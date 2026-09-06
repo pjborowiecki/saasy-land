@@ -1,27 +1,29 @@
-import { relations } from "drizzle-orm"
-import { index, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { relations, sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
 import { user } from "~/src/modules/user/user.schema"
 
-export const session = pgTable(
+export const session = sqliteTable(
   "session",
   {
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
-    id: uuid("id").primaryKey(),
-    impersonatedBy: uuid("impersonated_by"),
-    ipAddress: varchar("ip_address", { length: 45 }),
-    token: varchar("token", { length: 16_384 }).notNull().unique(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
+    expiresAt: integer("expires_at", { mode: "timestamp_ms" }).notNull(),
+    id: text("id").primaryKey(),
+    impersonatedBy: text("impersonated_by"),
+    ipAddress: text("ip_address", { length: 45 }),
+    token: text("token", { length: 16_384 }).notNull().unique(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */
           new Date(),
       )
       .notNull(),
-    userAgent: varchar("user_agent", { length: 4096 }),
-    userId: uuid("user_id")
+    userAgent: text("user_agent", { length: 4096 }),
+    userId: text("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
   },

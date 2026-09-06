@@ -1,0 +1,28 @@
+---
+title: ディレクトリ構造
+description: ディレクトリ構造 — SaaSy Land
+---
+
+ファイルやフォルダのkebab-caseを使用してください。 ルートファイルでは、TanStack Routerのドットとパスレスルートの慣行を使用します。 再使用可能なUIは下にあります `presentation/components/custom`; 生成されたプリミティブは下にあります `presentation/components/shadcn`. . 機能が含まれている場合があります。 `components`, `constants`, `hooks`, と `types` 必要なとき。
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

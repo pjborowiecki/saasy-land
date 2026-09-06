@@ -1,4 +1,4 @@
-import type { SessionValidationMessageKey } from "~/src/integrations/next-intl/i18n.types"
+import type { SessionValidationMessageKey } from "~/src/integrations/use-intl/i18n.types"
 
 /** Keys under `session.validations` — translate at the UI with `useTranslations("session.validations")`. */
 export const SESSION_VALIDATION_MESSAGE = {

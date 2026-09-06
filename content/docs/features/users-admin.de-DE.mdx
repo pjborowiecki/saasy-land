@@ -1,0 +1,20 @@
+---
+title: Benutzer (Administrator/en)
+description: Aktuelle Benutzerliste, Registerkarten, Rollenspiel, Sperren/Rollen/Passwörter.
+---
+
+## Routen.
+
+`/admin/users` mit TanStack Router Suche nach `tab` (`allUsers` | `invitations` | `roles` | `security`).
+
+## Modul
+
+`modules/user/use-cases` — Auflisten/Erstellen/Aktualisieren/Löschen, sperren/entsperren, Rolle/Passwort festlegen, Benutzer imitieren, Tabelle aktualisieren.
+
+## Benutzeroberfläche.
+
+DataTable unter `admin/users/components/all-users-tab`. Der Status wird **abgeleitet** (`getUserStatus`: aktiv / ausstehend / gesperrt) und ist keine Spalte in der Datenbank, sondern ein berechneter Wert.
+
+## Zustand der URL.
+
+`admin/users/constants/search-params.ts` — gemeinsame Parser + `searchParamsCache`.

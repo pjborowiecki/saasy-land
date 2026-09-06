@@ -1,0 +1,11 @@
+{
+  "empty": "Nessun risultato.",
+  "pagination": {
+    "nextPage": "Pagina successiva",
+    "pageIndicator": "Pagina {current} di {total}",
+    "previousPage": "Pagina precedente",
+    "rowCount": "{count, plural, =0 {Nessuna riga} one {# riga} other {# righe}}",
+    "selectedCount": "{selected, plural, one {# selezionata} other {# selezionate}}"
+  },
+  "resizeColumn": "Ridimensiona la colonna"
+}

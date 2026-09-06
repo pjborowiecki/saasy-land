@@ -1,0 +1,36 @@
+{
+  "title": "Scrivi un post",
+  "description": "Crea un nuovo articolo per il blog, utilizzando impostazioni avanzate.",
+  "actions": {
+    "preview": "Anteprima",
+    "saveDraft": "Salva bozza",
+    "publish": "Pubblica"
+  },
+  "editor": {
+    "title": "Titolo dell’articolo",
+    "titlePlaceholder": "Inserisci qui il titolo del post...",
+    "slug": "Slug dell’URL",
+    "slugPlaceholder": "titolo-del-post",
+    "contentPlaceholder": "Scrivi il contenuto del tuo post qui... Puoi usare il Markdown.",
+    "fullscreen": "Schermo intero"
+  },
+  "settings": {
+    "featuredImage": "Immagine in primo piano",
+    "upload": "Clicca per caricare",
+    "uploadHelp": "SVG, PNG, JPG o GIF (max. 5 MB)",
+    "publishing": "Pubblicazione",
+    "status": "Stato",
+    "statusDraft": "Bozza",
+    "statusPublished": "Pubblicato",
+    "statusScheduled": "Pianificato",
+    "category": "Categoria",
+    "categorySelect": "Seleziona la categoria",
+    "categoryUpdates": "Aggiornamenti del prodotto",
+    "categoryTutorials": "Tutorial",
+    "categoryCompany": "Notizie aziendali",
+    "tags": "Tag",
+    "tagsPlaceholder": "Aggiungi tag separati da virgole...",
+    "excerpt": "Estratto",
+    "excerptPlaceholder": "Breve riassunto del post..."
+  }
+}

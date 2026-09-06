@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from "class-variance-authority"
+import { type VariantProps, cva } from "class-variance-authority"
 
 /*
  * The transition is enumerated, not `transition-all`, and it runs on the system's own easing.

@@ -1,0 +1,28 @@
+---
+title: Verzeichnisstruktur.
+description: Verzeichnisstruktur — SaaSy Land
+---
+
+Verwenden Sie kebab-case für Dateien und Ordner. Dateirouten verwenden die Konventionen von TanStack Router mit Punkten und Routen ohne Pfad. Wiederverwendbare UI-Elemente gehören unter `presentation/components/custom`; generierte Basiselemente gehören unter `presentation/components/shadcn`. Eine Funktion kann `components`, `constants`, `hooks` und `types` enthalten, falls erforderlich.
+
+```text
+content/                         Localized MDX
+messages/{locale}/           Translation namespaces
+src/routes/                      Flat file routes
+src/router.tsx                   Router and per-request query cache
+src/server.ts                    Cloudflare Worker entry
+src/modules/{feature}/           Schemas, constants, validation
+src/modules/{feature}/use-cases/  Server functions and query/mutation options
+src/integrations/{vendor}/       Vendor adapters and setup
+src/presentation/                Components, styles, branding, emails
+src/providers/                   Application providers
+src/hooks/                       Shared hooks
+src/lib/                         Shared utilities
+src/platform/testing/            Binding mocks and test helpers
+```
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

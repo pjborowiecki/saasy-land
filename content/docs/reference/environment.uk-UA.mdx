@@ -1,0 +1,16 @@
+---
+title: Навколишнє середовище та обов'язки
+description: Навколишнє середовище та обов’язки — SaaSy Land
+---
+
+Зареєструватися `.env.development`, `.env.preview`й `.env.production` для відповідного середовища Vite і Cloudflare. Ці файли ігноруються; `.env.example` документи, необхідні ключі. `VITE_APP_URL` є громадським і заміненим на час будівництва. Секрети працівника не мають `VITE_` Префікс і доступ до них через `env` з `cloudflare:workers`.
+
+Настроювання `AUTH_SECRET`, `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`Налаштування Resend та налаштування Polar для вашої установки. Ніколи не керуйте реальними обліковими записами. В'язка IDs належить до відповідного `wrangler.jsonc` середовище; сформовані робочі декларації описують їх види.
+
+Тільки Drizzle Студії та інтроспектування `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID` і `CLOUDFLARE_ACCESS_TOKEN`. . Місцева D1 не використовує віддалені облікові дані. CI копії `.env.test` до локальних файлів середовища і працює з місцевими зв'язками.
+
+## Схожі посібники
+
+- [Архітектор](/docs/architecture)
+- [Місцевий розвиток](/docs/getting-started/first-run)
+- [Тестування](/docs/tooling/testing)

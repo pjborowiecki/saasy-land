@@ -1,0 +1,14 @@
+---
+title: "Cloudflare KV"
+description: "Cloudflare KV — SaaSy Land"
+---
+
+`env.CACHE` przechowuje publiczne, odtwarzalne dane cache. Integracja GitHuba zapisuje liczbę gwiazdek z TTL i używa `waitUntil` do zapisu. Przy niedostępności GitHuba lub KV zwraca wartość zastępczą.
+
+KV ma spójność ostateczną. Sesje uwierzytelniania i limity są przechowywane w D1. Limiter akcji używa jednego atomowego upsertu SQL dla klucza i okna czasu, dzięki czemu osobne instancje Workera dzielą limit. Nie używaj liczników KV do autoryzacji ani wrażliwych limitów.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

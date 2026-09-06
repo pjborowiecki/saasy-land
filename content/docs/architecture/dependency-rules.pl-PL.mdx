@@ -1,0 +1,14 @@
+---
+title: Reguły zależności
+description: Reguły zależności — SaaSy Land
+---
+
+Trasy importują prezentację i przypadki użycia. Prezentacja korzysta z opcji zapytań i mutacji, schematów oraz wspólnych narzędzi. Przypadki użycia importują bazę i adaptery usług wewnątrz granicy serwera. Stałe modułów i walidacja pozostają dostępne dla formularzy i funkcji serwerowych.
+
+Nie importuj bindingów Workera ani konfiguracji sekretów do komponentu przeglądarki. TanStack Start usuwa handlery `createServerFn` z pakietu przeglądarki. Adaptery przeznaczone wyłącznie dla serwera importują `@tanstack/react-start/server-only`.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

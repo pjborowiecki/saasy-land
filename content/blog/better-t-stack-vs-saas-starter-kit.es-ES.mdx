@@ -1,0 +1,306 @@
+---
+title: "Comparación de Better-T-Stack frente a un Kit de Inicio SaaS de Pago: Una Evaluación Detallada."
+description: "Better-T-Stack es gratuito, con licencia MIT y el mejor generador de proyectos TypeScript disponible. Su propio README lo explica: plantillas básicas con cero sobrecarga. Aquí está el trabajo que se encuentra entre esto y un SaaS que se puede monetizar."
+excerpt: Un CLI gratuito crea una pila. Un kit de inicio de pago crea un producto. Son tareas distintas, y confundirlas es el error más costoso en esta categoría. Este es el desglose de la factura, línea por línea, con una recomendación honesta de utilizar el gratuito.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+featured: true
+updated: 2026-08-15
+image: /images/blog/better-t-stack-vs-saas-starter-kit.webp
+tags:
+  - comparison
+  - boilerplate
+  - architecture
+  - typescript
+faq:
+  - question: ¿Es Better-T-Stack gratuito?
+    answer: 'Sí. Está licenciado con MIT y su archivo README se compromete con "libre y de código abierto: para siempre". Al momento de redactar, cuenta con 5.636 estrellas en GitHub y aproximadamente 2.476 descargas semanales en npm. Ninguna de las partes de este artículo argumenta que no deban utilizarlo, y para una gran parte de los lectores, es la opción correcta.'
+  - question: ¿Qué es exactamente lo que genera Better-T-Stack?
+    answer: Una pila. React, Next.js, Nuxt, Svelte, Solid, Astro o React Nativo; backend de Hono, Express, Fastify, Elysia o Convex; tRPC o o oRPC; Bun, Nodo o Cloudflare Workers; SQLite, Postgres, MySQL o MongoDB; Drizzle, Prisma o Mongoose; opcionalmente Better Auth o ClerkLos conecta correctamente y con seguridad de tipo, que es un trabajo real y difícil.
+  - question: ¿Qué no incluye Better-T-Stack?
+    answer: 'Facturación, correo electrónico transaccional, un panel de administración, roles y permisos, multi-alojamiento, internacionalización, una biblioteca de componentes y una suite de pruebas. Esto es intencional, no un error: la filosofía declarada del proyecto es "plantillas mínimas: estructuras básicas con cero sobrecarga", y los únicos ejemplos entregados son una aplicación "Todo" y un chatbot de IA.'
+  - question: ¿Vale la pena utilizar un *boilerplate* SaaS de pago cuando existe una CLI gratuita?
+    answer: Sólo si el trabajo que elimina es el trabajo que usted haría de otro modo. Si te gusta construir flujos de auth, o tu producto no necesita facturación, o ya tienes una biblioteca interna para todo, el libre CLI es estrictamente mejor. Si usted estaría reconstruyendo organizaciones, roles, webhooks y un administrador por tercera vez, unos pocos cientos de dólares contra 200 o más horas no es una llamada cercana.
+  - question: ¿Cuánto tiempo tarda en añadir la funcionalidad de facturación a un proyecto que ha sido "escaffoldizado"?
+    answer: "El proceso de facturación lleva una tarde. La facturación completa requiere entre 25 y 40 horas, ya que el proceso de facturación es la parte fácil: el resto consiste en proraciones, actualizaciones, downgrades, gestión de deudas, historial de facturas, manejo idempotente de webhooks y el trabajo de conciliación que detecta el webhook que no se recibió. Conseguir el primer pago no es lo mismo que poder facturar de manera fiable."
+  - question: ¿Puedo utilizar Better-T-Stack y un paquete de inicio de pago juntos?
+    answer: No es útil dentro del mismo proyecto, ya que ambos generan la base y solo obtienes una base. Son para proyectos diferentes. Muchos desarrolladores utilizan un scaffolder gratuito para prototipos y herramientas internas, y una “foundation” de pago para el producto que debe generar ingresos, lo cual es una asignación sensata en lugar de un conflicto.
+  - question: ¿Incluye Better-T-Stack la autenticación?
+    answer: "Opcionalmente, como paso de configuración: puede configurar Better Auth o Clerk. Esto le permite configurar correctamente el inicio de sesión y el cierre de sesión. Sin embargo, no le proporciona las funcionalidades de organizaciones, invitaciones, conteo de usuarios, acciones con control de roles, autenticación de dos factores obligatoria, o la posibilidad de imitación para soporte o revocación de sesiones, todas ellas funciones separadas que se añaden a la librería."
+  - question: ¿Cuál es mejor para los agentes de codificación de IA?
+    answer: "Ambos son buenos puntos de partida, por diferentes razones. Un scaffold mínimo proporciona al agente un contexto reducido y nada que le confunda. Un fundamento más grande con límites definidos ofrece ejemplos de funcionamiento y un build que falla cuando se desvía. La peor opción es la que ninguna ofrece: un gran codebase cuyas reglas solo existen en un README."
+  - question: ¿Cuántas horas de tiempo ahorra realmente un paquete de inicio de pago?
+    answer: Para un SaaS multi-inquilino con facturación, roles y un administrador, el rango especificado en este artículo es de 280 a 465 horas de trabajo competente. Para una herramienta de usuario único con un único procesamiento de Stripe, se acerca más a 20. El número real depende completamente de lo que estés construyendo, por eso la tabla se presenta en detalle en lugar de sumada.
+  - question: ¿Debería hacerlo yo mismo?
+    answer: Construylo tú mismo cuando quieras aprender sobre lo que necesitas, cuando tu producto es lo suficientemente peculiar que las suposiciones de un principiante te dificulten, o cuando realmente no tienes margen de tiempo. Compra cuando ya lo has construido una vez y recuerda exactamente cuánto tiempo le costaron los tres primeros trimestres.
+---
+
+<Callout title={"Lo que aborda este artículo es…"}>
+
+Una comparación honesta entre una herramienta gratuita y una de pago, redactada por la persona que vende la de pago. Cubre:
+
+1. ¿Qué es Better-T-Stack, tal como se describe en su propio README, en lugar de serlo definido?
+2. La diferencia entre generar un stack (con \`scaffold\`) y generar un producto (con \`scaffold\`).
+3. La factura detallada: lo que se crea después de que el scaffolder haya finalizado, incluyendo estimaciones por hora y la justificación.
+4. La parte que no se mide en horas, que es precisamente la razón por la que existe esta categoría.
+5. Cuando Better-T-Stack es la solución adecuada, y lo decimos con sinceridad.
+
+</Callout>
+
+_Actualizado por última vez: 15 de agosto de 2026. Cada afirmación sobre Better-T-Stack se extrae de su README, su sitio web y los datos públicos de GitHub y npm, todos enlazados en la parte inferior._
+
+## Comienza aquí: es excelente, y probablemente deberías utilizarlo.
+
+[Better-T-Stack](https://better-t-stack.dev/) Es una CLI para la creación de plantillas de proyectos TypeScript de tipo seguro para pruebas de extremo a extremo. Está licenciado bajo MIT, su README promete "libre y de código abierto: para siempre", y cuenta con… **5.636 estrellas en GitHub** y se extrae aproximadamente **2,476 veces por semana** de npm.
+
+La opción de matriz es la mejor del ecosistema, y no se acerca.
+
+| Capa                              | Lo que ofrece                                                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend                          | React con TanStack Router, React Router o TanStack Start, Next.js, Nuxt, Svelte, Solid, Astro, React Native, o ninguno.          |
+| Backend                           | Hono, Express, Fastify, Elysia, auto-alojado fullstack, Convex, o ninguno.                                                       |
+| API                               | tRPC, oRPC, o bien ninguno.                                                                                                      |
+| Tiempo de ejecución               | Bun, Node.js, Cloudflare Workers                                                                                                 |
+| Base de datos                     | SQLite, PostgreSQL, MySQL, MongoDB, o ninguno.                                                                                   |
+| ORM                               | Drizzle, Prisma, Mongoose, o ninguno.                                                                                            |
+| Autenticación                     | Mejor Auth o Clerk, opcional                                                                                                     |
+| Configuración de la base de datos | Turso, Neon, Supabase, Prisma Postgres, MongoDB Atlas, Cloudflare D1, Docker                                                     |
+| Complementos                      | Turborepo, Nx, PWA, Tauri, Electrobun, Biome, Lefthook, Husky, Starlight, Fumadocs, Ultracite, Oxlint, MCP, OpenTUI, WXT, Skills |
+| Ejemplos                          | Todo, IA                                                                                                                         |
+
+Lograr tantas combinaciones para producir un proyecto que pase las comprobaciones de tipo y se ejecute, es un desafío de ingeniería realmente complejo. Además, se entrega como un complemento de Claude Code con un servidor MCP, para que un agente pueda planificar y generar un stack válido, en lugar de tener que crear manualmente plantillas, lo cual es un trabajo bien pensado.
+
+**Si estás desarrollando un prototipo, una herramienta interna, un proyecto de portafolio, una aplicación no SaaS, o cualquier cosa donde quieras entender el funcionamiento interno, deja de leer y ejecuta: `bun create better-t-stack@latest`.** Es gratuito, es excelente, y nada más lo demuestra.
+
+La siguiente parte es para un lector específico: la persona que está evaluando si la CLI gratuita es suficiente para un SaaS que planea monetizar.
+
+¿La CLI gratuita de SaaSy Land es adecuada para tu SaaS, que planeas ofrecer como un producto de pago? Para determinarlo, te recomendamos explorar las funcionalidades de la CLI, incluyendo la generación de plantillas (scaffold) con el comando \`saasy land scaffold \<nombre_proyecto\>\` y la posibilidad de automatizar el envío de correos (Resend) con la opción \`--dry-run\`. Puedes verificar si la CLI permite la creación de pruebas obligatorias (test gate) utilizando el flag \`--test-gate \<ruta_archivo\>\` para asegurar la calidad del código. Además, evalúa si la CLI facilita la integración con edge computing, permitiendo la ejecución de tareas en el borde de la red, como se muestra en la configuración de la URL: \`\<URL_de_edge_computing\>\`. Analiza la capacidad de la CLI para gestionar archivos y directorios, como \`\<ruta_archivo_principal\>\` y \`\<ruta_archivo_de_configuración\>\`, y verifica si la integración con el Core de SaaSy Land es posible a través de la función \`\<comando_core\>\`. Finalmente, comprueba si la CLI permite la gestión de las ICU placeholders y las etiquetas XML: \`\<placeholder_icu\>\` y \`\<etiqueta_xml\>\`.
+
+## Una pila no es un producto.
+
+El README de Better-T-Stack describe su filosofía en cuatro líneas, y la segunda línea es la comparación completa:
+
+> Construye tu propia solución: elige solo las funcionalidades que necesitas, sin nada adicional.
+> **Plantillas mínimas: estructuras básicas con cero "bloat".**
+> Las últimas dependencias: siempre utilizar las versiones más recientes y estables de forma predeterminada.
+> Código abierto y gratuito: forever.
+
+No se trata de una limitación oculta. Es el diseño, expresado de manera clara, y el proyecto entrega exactamente lo que promete. La evidencia se encuentra en la última fila de la tabla anterior: los ejemplos entregados son… **Todo** y **IA**Una lista de tareas y un chat. Estos son las demostraciones canónicas que muestran que la conexión funciona, y son los ejemplos perfectos para una herramienta cuyo objetivo es conectar.
+
+La descripción honesta no es "herramienta gratuita con funcionalidades limitadas". Es:
+
+**Better-T-Stack crea un stack. Un kit de inicio para SaaS crea un producto.**
+
+Ambos son scaffolders. Se detienen en diferentes puntos. Better-T-Stack se detiene cuando la interfaz de usuario puede llamar al backend y el backend puede acceder a la base de datos, de forma segura, con una de tus nueve interfaces de usuario y seis backends. Es un punto sólido donde la mayoría de los scaffolders deberían detenerse.
+
+Una solución SaaS se detiene en otro punto: cuando una persona puede registrarse, unirse a una organización, recibir una función, ser facturada mensualmente, recibir un correo electrónico al respecto, y ser revisada por ti en un panel de administración cuando escriben de forma confusa. Todo lo que haya entre esas dos líneas es la factura.
+
+## La factura detallada
+
+Aquí está lo que se encuentra en medio. `bun create better-t-stack@latest` y un producto que se puede monetizar. Las estimaciones asumen que un desarrollador competente crea cada elemento según los estándares que emplearía al entregarlo a una empresa de pago, y excluyen el tiempo dedicado a decidir cómo hacerlo, lo cual, en varios casos, es mayor que el tiempo de implementación.
+
+| Element de la lista                            | Better-T-Stack | ¿Qué significa realmente "done"?                                                                                                                               | Horas    |
+| ---------------------------------------------- | :------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Conexión de pila segura de tipos               |       Sí       | Interfaz de usuario, API, entorno de ejecución, base de datos y ORM, todo en el nivel de tipo.                                                                 | 0        |
+| Biblioteca de autenticación configurada.       |    Opcional    | Configuración optimizada para Better Auth o Clerk: inicio de sesión, cierre de sesión, sesiones.                                                               | 0        |
+| Organizaciones e invitaciones                  |       No       | Esquema, tokens de invitación, fecha de expiración, conteo de asientos, transferencia de propiedad, el caso de los miembros que abandonan.                     | 25 a 40  |
+| Roles y permisos                               |       No       | Una capa de políticas que se aplica a cada consulta y ruta, junto con la interfaz de usuario que la refleja.                                                   | 20 a 30  |
+| Aislamiento multi-inquilino                    |       No       | Se aplica en la capa de consulta, no en la capa de visualización, y se prueba contra un segundo inquilino.                                                     | 15 a 25  |
+| Facturación                                    |       No       | No realizar el proceso de checkout. Proración, actualizaciones, retrocesos, gestión de deudas, facturas, webhooks idempotentes, conciliación.                  | 25 a 40  |
+| Correo electrónico transaccional               |       No       | Plantillas, vistas previas, copia por localización, entregabilidad, cancelación de suscripción, cumplimiento.                                                  | 15 a 25  |
+| Panel de administración                        |       No       | Diez secciones que nadie más que tú necesita para operar, pero que no se pueden omitir: usuarios, organizaciones, suscripciones, reembolsos, registros, flags. | 40 a 60  |
+| Biblioteca de componentes                      |       No       | Accesible, con temas, probado y listo para editar, en lugar de estar bloqueado en un paquete.                                                                  | 30 a 50  |
+| Internacionalización                           |       No       | Ruteo, formatadores, reglas de pluralidad y una comprobación de paridad de clave que falla la compilación.                                                     | 20 a 35  |
+| Conjunto de pruebas con una puerta de control. |       No       | Las pruebas, los fixtures, la configuración de CI y la disciplina de nunca fusionar código rojo.                                                               | 60 a 100 |
+| Ejemplo de comercio o curso.                   |       No       | Una implementación funcional de la solución que ofrecemos, con datos semilla.                                                                                  | 30 a 60  |
+
+| **Total
+En total** | | | **280 a 465** |
+
+A $150 por hora, eso es. **De 42.000 $ a 69.750 $**Aquí tienes tu tarifa y el número cambia, pero no la conclusión. A un precio único de 249 dólares, la comparación no se acerca para nadie cuyo tiempo tiene un valor.
+
+Pero lo que realmente importa son los detalles, y preferiría centrarme en los aspectos más interesantes.
+
+## La parte que no corresponde a horas.
+
+Observe las cuatro filas en esa tabla: **aislamiento multi-inquilino, roles y permisos, idempotencia de webhooks, y revocación de sesiones.**
+
+Comparten una propiedad que ninguna de las otras filas posee. **La implementación incorrecta pasa la revisión, funciona en el entorno de desarrollo y se demuestra correctamente.**
+
+Un filtro de tenant aplicado en la capa de visualización funciona perfectamente con un único tenant. Funciona a la perfección en tus pruebas, ya que tus fixtures utilizan un único tenant. Sin embargo, falla cuando los datos de tu segundo cliente empiezan a aparecer en el panel de control de tu primer cliente, y esto no es un reporte de error, sino una llamada telefónica.
+
+Un manejador de webhook sin una clave de idempotencia funciona cada vez que lo pruebas, ya que nunca se envía el mismo evento dos veces. Stripe, en caso de reintento, provoca que alguien sea facturado o se le asigne un plan dos veces.
+
+Una comprobación de permisos que lee el rol de la sesión en lugar de volver a leerlo desde la base de datos funciona hasta que alguien es degradado y mantiene su sesión anterior.
+
+Estas no son problemas complejos. Son problemas donde… **Ser incorrecto es invisible hasta que tiene un costo.**, lo cual presenta un perfil de riesgo completamente diferente a "esto lleva 40 horas". No se puede "comprar" una solución con más horas, ya que no sabes que las necesitas. Se evitan mediante un punto de partida donde alguien ya cometió el error y lo solucionó, y donde ahora existe una prueba que falla si vuelve a ocurrir.
+
+Lo que realmente está destinado a un \*starter kit\* de pago, no es la cantidad de horas, sino aquello.
+
+## ¿Cómo se ve la funcionalidad de pago concretamente?
+
+Para ser más específico en lugar de ser abstracto, esto es lo que significa "ya resuelto" en este código, mostrando los números leídos durante la ejecución de las pruebas, en lugar de introducirlos en un archivo de marketing.
+
+**Una puerta de cobertura en lugar de una insignia de cobertura.** 141 archivos de prueba, 472 pruebas y cuatro umbrales en la configuración:
+
+```ts
+coverage: {
+  thresholds: { branches: 100, functions: 100, lines: 100, statements: 100 },
+}
+```
+
+Los errores que se identificaron en la sección anterior son precisamente lo que obliga una puerta de cobertura de ramas al 100 a que se pruebe. Ese es el mecanismo, no el número.
+
+**La arquitectura es compatible con el compilador.** Tres reglas de lint aseguran que los límites del módulo sean ejecutables:
+
+```ts
+// vite.config.ts, abridged
+lint: {
+  options: { typeAware: true, typeCheck: true },
+}
+```
+
+No se puede incluir una consulta a la base de datos en un componente de React. La compilación falla y te indica la razón.
+
+**Rigidez sin salida.** `strict`, más `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, `noPropertyAccessFromIndexSignature` y `verbatimModuleSyntax`. `typescript/no-explicit-any` Este es un error, y el linter se ejecuta con `denyWarnings: true`, por lo que no hay ninguna advertencia que no puedas aprender a ignorar.
+
+**Características opcionales, no un modelo predefinido.** El [configurator
+Configurador](/#cli) plantea doce preguntas y ofrece cuatro extras: una tienda con productos de ejemplo, un curso de suscripción, un constructor de páginas visual y un editor de publicaciones visual. Activar uno añade un módulo. Desactivarlo significa que el código no existe en tu repositorio.
+
+Ninguna de esto es una crítica dirigida contra Better-T-Stack. Es una descripción de dónde dejan de coincidir los dos productos.
+
+## Cuando Better-T-Stack es la solución adecuada.
+
+Expresado correctamente, ya que una comparación que siempre recomienda la opción de pago es una publicidad, no una comparación.
+
+**Utiliza Better-T-Stack si:**
+
+- Estás en fase de prototipado, y es posible que esta funcionalidad no esté lista en un mes.
+- Estás aprendiendo, y el objetivo es asegurar la autenticación una sola vez. Lograr una autenticación completa es una inversión educativa realmente valiosa, y nadie debería ser persuadido de no hacerlo.
+- Su producto no es un SaaS. No hay organizaciones, ni suscripciones, ni administración. Es una herramienta, un juego, un panel interno, un sitio de cliente.
+- Ya dispones de una biblioteca interna para los tres trimestres "aburridos", algo que muchas agencias y equipos experimentados ya utilizan.
+- Tu pila va más allá de lo que ofrecen cualquier paquete de pago. Nuxt, Svelte, Solid, Astro, React Native, Convex, tRPC. “Better-T-Stack” abarca todo eso, y ningún paquete de inicio de pago cubre la mayoría de estas tecnologías.
+- Su presupuesto es realmente cero. Esto es una restricción legítima y no hay que avergonzarse por ello. Better-T-Stack es una opción gratuita que supera a cualquier producto de pago en su nivel gratuito.
+
+**Considere pagar si:**
+
+- Estás desarrollando un producto que planeas ofrecer a empresas, con funcionalidades como asientos, roles, facturas y un cuestionario de seguridad para el futuro.
+- Ya has creado organizaciones y facturación una vez, y recuerdas exactamente cuánto tiempo duraron las partes aburridas.
+- Quieren una puerta de pruebas que no tengan que crear, porque escribir un conjunto de pruebas de cobertura desde cero es la tarea que nadie llega a realizar.
+- Quieren que se hagan cumplir los límites arquitectónicos, en lugar de los que se pretenden.
+- Tu tiempo tiene un coste, y 280 a 465 horas equivalen a más de varios cientos de dólares.
+
+## No son realmente competidores.
+
+La cosa más útil que puedo decirte es que no se trata de una competencia entre dos opciones.
+
+Better-T-Stack es un generador de proyectos. _cualquier_ Proyecto de TypeScript, que abarca nueve frontends y seis backends. Un kit de inicio para SaaS es una base para… _Uno._ En el ámbito de los negocios. La superposición son esos diez minutos al inicio, donde ambos crean un proyecto. Después de eso, realizan tareas diferentes.
+
+El error de evitar no es "elegir al libre". Es elegir uno sin saber cuál de los dos trabajos que necesitó hacer. Un fundador que recorre una hermosa pila de seguridad de tipo y luego pasa seis meses construyendo organizaciones y facturación no ha ahorrado dinero. Han pagado la factura en la moneda que no aparece en una factura.
+
+## Lecturas relacionadas
+
+<Cards>
+
+<Card title={"La alternativa ShipFast"} href="/blog/shipfast-alternative-for-engineers">
+  El otro extremo del mercado: ¿cuánto cuesta ahorrar 22 horas?
+</Card>
+
+<Card title={"Supastarter contra SaaSy Land"} href="/blog/supastarter-alternative">
+  El competidor de pago más cercano, comparado en la decisión que se produce antes de que se introduzca un comando.
+</Card>
+
+<Card title={"Seleccionar una pila SaaS para agentes de codificación de IA"} href="/blog/choosing-a-saas-stack-for-ai-coding-agents">
+  Una prueba de cuatro preguntas para cualquier dependencia, aplicada por capas a un entorno de producción.
+</Card>
+
+<Card title={"Preparación del repositorio para los agentes de codificación de IA."} href="/blog/ai-coding-agents-repository-readiness">
+  ¿Cómo aprenden los agentes su arquitectura a partir de lo que falla, y no de la documentación (readme)?
+</Card>
+
+</Cards>
+
+<Callout title={"Verifícalo antes de pagar por él."}>
+
+Ejecute la versión gratuita primero. Si la factura mostrada anteriormente es una factura que preferiría no pagar, la [documentación](/docs) es-ES: es público y el [configurator
+Configurador](/#cli) Está disponible en la página de inicio. Cada número aquí se obtiene de la suite de pruebas, no de un archivo de marketing. [Mira cuánto cuesta](/#pricing)Un único pago de 249 $, proyectos ilimitados, actualizaciones Core de por vida, sin tarifas por usuario.
+
+</Callout>
+
+## Preguntas frecuentes
+
+<Accordions>
+
+<Accordion title={"¿Es Better-T-Stack gratuito?"}>
+
+Sí. Está licenciado con MIT y su archivo README se compromete con "libre y de código abierto: para siempre". Al momento de redactar, cuenta con 5.636 estrellas en GitHub y aproximadamente 2.476 descargas semanales en npm. Ninguna de las partes de este artículo argumenta que no deban utilizarlo, y para una gran parte de los lectores, es la opción correcta.
+
+</Accordion>
+
+<Accordion title={"¿Qué es exactamente lo que genera Better-T-Stack?"}>
+
+Una pila. React, Next.js, Nuxt, Svelte, Solid, Astro o React Nativo; backend de Hono, Express, Fastify, Elysia o Convex; tRPC o o oRPC; Bun, Nodo o Cloudflare Workers; SQLite, Postgres, MySQL o MongoDB; Drizzle, Prisma o Mongoose; opcionalmente Better Auth o ClerkLos conecta correctamente y con seguridad de tipo, que es un trabajo real y difícil.
+
+</Accordion>
+
+<Accordion title={"¿Qué no incluye Better-T-Stack?"}>
+
+Facturación, correo electrónico transaccional, un panel de administración, roles y permisos, multi-alojamiento, internacionalización, una biblioteca de componentes y una suite de pruebas. Esto es intencional, no un error: la filosofía declarada del proyecto es "plantillas mínimas: estructuras básicas con cero sobrecarga", y los únicos ejemplos entregados son una aplicación "Todo" y un chatbot de IA.
+
+</Accordion>
+
+<Accordion title={"¿Vale la pena utilizar un *boilerplate* SaaS de pago cuando existe una CLI gratuita?"}>
+
+Sólo si el trabajo que elimina es el trabajo que usted haría de otro modo. Si te gusta construir flujos de auth, o tu producto no necesita facturación, o ya tienes una biblioteca interna para todo, el libre CLI es estrictamente mejor. Si usted estaría reconstruyendo organizaciones, roles, webhooks y un administrador por tercera vez, unos pocos cientos de dólares contra 200 o más horas no es una llamada cercana.
+
+</Accordion>
+
+<Accordion title={"¿Cuánto tiempo tarda en añadir la funcionalidad de facturación a un proyecto que ha sido \"escaffoldizado\"?"}>
+
+El proceso de facturación lleva una tarde. La facturación completa requiere entre 25 y 40 horas, ya que el proceso de facturación es la parte fácil: el resto consiste en proraciones, actualizaciones, downgrades, gestión de deudas, historial de facturas, manejo idempotente de webhooks y el trabajo de conciliación que detecta el webhook que no se recibió. Conseguir el primer pago no es lo mismo que poder facturar de manera fiable.
+
+</Accordion>
+
+<Accordion title={"¿Puedo utilizar Better-T-Stack y un paquete de inicio de pago juntos?"}>
+
+No es útil dentro del mismo proyecto, ya que ambos generan la base y solo obtienes una base. Son para proyectos diferentes. Muchos desarrolladores utilizan un scaffolder gratuito para prototipos y herramientas internas, y una “foundation” de pago para el producto que debe generar ingresos, lo cual es una asignación sensata en lugar de un conflicto.
+
+</Accordion>
+
+<Accordion title={"¿Incluye Better-T-Stack la autenticación?"}>
+
+Opcionalmente, como paso de configuración: puede configurar Better Auth o Clerk. Esto le permite configurar correctamente el inicio de sesión y el cierre de sesión. Sin embargo, no le proporciona las funcionalidades de organizaciones, invitaciones, conteo de usuarios, acciones con control de roles, autenticación de dos factores obligatoria, o la posibilidad de imitación para soporte o revocación de sesiones, todas ellas funciones separadas que se añaden a la librería.
+
+</Accordion>
+
+<Accordion title={"¿Cuál es mejor para los agentes de codificación de IA?"}>
+
+Ambos son buenos puntos de partida, por diferentes razones. Un scaffold mínimo proporciona al agente un contexto reducido y nada que le confunda. Un fundamento más grande con límites definidos ofrece ejemplos de funcionamiento y un build que falla cuando se desvía. La peor opción es la que ninguna ofrece: un gran codebase cuyas reglas solo existen en un README.
+
+</Accordion>
+
+<Accordion title={"¿Cuántas horas de tiempo ahorra realmente un paquete de inicio de pago?"}>
+
+Para un SaaS multi-inquilino con facturación, roles y un administrador, el rango especificado en este artículo es de 280 a 465 horas de trabajo competente. Para una herramienta de usuario único con un único procesamiento de Stripe, se acerca más a 20. El número real depende completamente de lo que estés construyendo, por eso la tabla se presenta en detalle en lugar de sumada.
+
+</Accordion>
+
+<Accordion title={"¿Debería hacerlo yo mismo?"}>
+
+Construylo tú mismo cuando quieras aprender sobre lo que necesitas, cuando tu producto es lo suficientemente peculiar que las suposiciones de un principiante te dificulten, o cuando realmente no tienes margen de tiempo. Compra cuando ya lo has construido una vez y recuerda exactamente cuánto tiempo le costaron los tres primeros trimestres.
+
+</Accordion>
+
+</Accordions>
+
+### Fuentes
+
+- [Better-T-Stack](https://better-t-stack.dev/)Para la descripción del producto y el comando de instalación.
+- [crear-mejor-t-stack en GitHub](https://github.com/AmanVarshney01/create-better-t-stack), para el archivo README, la filosofía mencionada anteriormente, la lista completa de opciones, la licencia MIT y el número de estrellas.
+- [crear-mejor-t-stack en npm](https://www.npmjs.com/package/create-better-t-stack), para las cifras de descarga semanales
+- [Documentación de SaaSy Land](/docs) y... [configurator
+  Configurador](/#cli), para la lista de módulos y las preguntas de scaffolding.
+- Este repositorio's `vite.config.ts` y `tsconfig.json`Para los umbrales de cobertura, las reglas de lint y las banderas del compilador indicadas anteriormente.
+
+_Escrito por Piotr J. Borowiecki, quien desarrolla SaaSy Land y, por lo tanto, tiene un interés evidente en esta comparación. Los datos para Better-T-Stack se obtuvieron de su repositorio público y npm el 15 de agosto de 2026. La recomendación de utilizarlo para prototipos, proyectos de aprendizaje y trabajos no relacionados con SaaS es literal._

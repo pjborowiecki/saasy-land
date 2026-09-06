@@ -1,0 +1,14 @@
+---
+title: Regole di dipendenza
+description: Regole di dipendenza — SaaSy Land
+---
+
+Percorsi importare la presentazione e i casi di utilizzo. Presentazione importa opzioni di query/mutazione nativo, schemi e helper condivisi. Utilizzare i casi importare il database e gli adattatori del fornitore attraverso i limiti solo del server. Le costanti del modulo e la validazione devono rimanere utilizzabili sia da forme che da funzioni del server.
+
+Non importare i binding di Worker o la configurazione portante segreta in un componente del browser. TanStack Start divide `createServerFn` i gestori fuori dal pacchetto del browser. Adattatori condivisi che non devono mai eseguire nell'importazione del browser `@tanstack/react-start/server-only`.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

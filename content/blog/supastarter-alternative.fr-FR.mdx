@@ -1,0 +1,321 @@
+---
+title: "Supastarter vs SaaSy Land: Supprimer ce que vous n'avez pas besoin, ou ne jamais le générer"
+description: "Deux kits de démarrage sérieusement payés Next.js, comparés à la décision qui se produit avant de taper une commande : cloner le monorepo entier et le tailler, ou répondre à douze questions et générer seulement les réponses."
+excerpt: Supastarter est le concurrent le plus payé de cette catégorie et mérite une audience équitable. La différence entre les deux produits est une seule décision architecturale prise avant votre premier engagement, et il décide de ce que chaque mise à jour pour les deux prochaines années se sent.
+authorName: Piotr J. Borowiecki
+authorImage: https://avatars.githubusercontent.com/u/27385980?s=96&v=4
+date: 2026-08-15
+featured: true
+updated: 2026-08-15
+image: /images/blog/supastarter-alternative.webp
+tags:
+  - comparison
+  - boilerplate
+  - architecture
+  - nextjs
+faq:
+  - question: Quelle est la meilleure alternative Supastarter?
+    answer: "Pour la plupart des gens évaluant Supastarter, la réponse honnête est Supastarter. C'est un produit sérieux, bien entretenu avec 1.460 développeurs derrière lui. Regardez ailleurs si trois choses spécifiques comptent pour vous : un générateur qui n'écrit que les modules que vous avez choisis plutôt qu'un clone complet que vous prunez, une porte de couverture forcée plutôt que des tests E2E seuls, et un prix qui couvre toute votre équipe plutôt qu'une licence par siège."
+  - question: Comment Supastarter est-il livré et installé?
+    answer: Par un CLI qui clone le dépôt. Sa documentation donne `npx Supastarter new my-awesome-project`, qui clone, configure et installe, avec un manuel `git clone` comme le retour. L'installation ajoute ensuite le dépôt Supastarter comme une télécommande git en amont afin que les versions futures arrivent comme fusions dans votre projet.
+  - question: Qu'est-ce qui ne va pas avec le modèle de mise à jour git amont ?
+    answer: "Rien, jusqu'à ce que vous personnalisez. La surface de conflit d'une fusion est l'intersection de leurs changements et de la vôtre, et elle ne fait que croître. Pire, les suppressions ne se rappellent pas : code que vous avez supprimé parce que vous n'aviez pas besoin qu'il soit encore en amont, donc chaque fusion future le propose à nouveau et vous refait la même question pour toujours."
+  - question: Combien coûte Supastarter par rapport à SaaSy Land?
+    answer: Supastarter liste $299 pour un siège développeur, $799 pour jusqu'à cinq et $1,499 pour jusqu ́à dix. SaaSy Land est $249 une fois pour des projets illimités sous une licence commerciale, sans nombre de sièges. Pour un fondateur solo, l'écart est de cinquante dollars. Pour une équipe de cinq personnes, il s'agit de 550 $, et pour une agence de dix personnes, il est de 1 250 $.
+  - question: Est-ce que Supastarter a des tests ?
+    answer: "Sa documentation énumère les tests E2E avec Playwright, ce qui est réel et utile. Ce que la documentation publique ne décrit pas, c'est une unité ou une suite de tests d'intégration avec un seuil de couverture obligatoire. C'est la distinction qui compte : les tests E2E prouvent que le chemin heureux fonctionne aujourd'hui, une porte de couverture empêche la branche non testée d'être jamais fusionnée."
+  - question: Un monorepo avec quatre applications est une bonne chose ?
+    answer: C'est un véritable avantage si vous voulez le site marketing, l'application, les docs et l'aperçu du courrier déployé séparément à partir du premier jour. C'est un coût si vous vouliez un déployable, parce que vous maintenez maintenant quatre fichiers package.json, quatre tsconfigs et quatre pipelines de construction pour un produit qu'une personne écrit.
+  - question: Puis-je utiliser Supastarter pour les projets clients ?
+    answer: Oui, sur le niveau Agency à 1 499 $ pour un maximum de dix sièges, ce qui est explicitement prêt en blanc. La comparaison qui vaut la peine d'être faite est contre une licence commerciale sans nombre de sièges du tout, où le onzième développeur et le cinquantième projet client ne coûtent rien de plus.
+  - question: Lequel est le meilleur pour les agents de codage de l'IA?
+    answer: Celui dont les limites sont exécutables. Un agent lit la structure de ce qui échoue, pas d'une lecture. Une base de code où le code de domaine ne peut pas importer physiquement l'ORM enseigne son architecture dans un seul message d'erreur. Une base de code où cette règle est une convention donne à un agent plus d'endroits pour mettre le code correct dans le mauvais paquet.
+  - question: Les deux produits vous donnent-ils des mises à jour à vie?
+    answer: Tous deux annoncent l'accès à vie sans abonnement. La différence n'est pas le droit, c'est la livraison. Fusionner un monorepo en amont dans un projet que vous avez personnalisé est une activité différente de prendre un diff pour les modules que vous avez réellement générés, et les composés de différence chaque mois que vous continuez à travailler.
+  - question: Devrais-je changer si j'ai déjà acheté Supastarter ?
+    answer: Probablement pas, si ça marche et que vous l'avez expédié. Les coûts de commutation sont réels et "meilleure architecture"vaut rarement une réécriture seule. Changez quand vous commencez le prochain projet de toute façon, ce qui est le seul moment où la comparaison est libre.
+---
+
+<Callout title={"Ce que cet article est"}>
+
+Une comparaison équitable des deux starters les plus sérieux payés Next.js SaaS, écrits pour quelqu'un avec une décision d'achat à prendre. Il couvre:
+
+1. Ce que Supastarter fait vraiment mieux, dit d'abord et sans se couvrir.
+2. La seule décision architecturale qui les sépare, faite avant de taper une commande.
+3. Pourquoi le modèle de mise à jour git en amont devient plus difficile que plus facile sur deux ans.
+4. Tests E2E par rapport à une porte de couverture forcée, et pourquoi ils ne sont pas la même revendication.
+5. Coût total pour un fondateur solo, une équipe de cinq personnes et une agence.
+
+</Callout>
+
+_Dernière mise à jour 15 août 2026. Chaque revendication au sujet de Supastarter est tirée de son site public et de la documentation et liée en bas. Chaque numéro de cette base de code provient de sa propre suite de test._
+
+## Commencez par la partie qui n'est pas une critique
+
+Si vous avez sélectionné Supastarter, vous avez un goût. C'est le concurrent payé le plus sérieux dans cette catégorie et ce n'est rien comme les modèles de week-end qui dominent les résultats de recherche. **1 460 développeurs** l'ont acheté. Il a été maintenu correctement pendant des années. Son auteur est un ingénieur plutôt qu'un marketeur, qui apparaît dans le code et dans la documentation.
+
+Quatre choses qu'il fait que la plupart de la catégorie ne fait pas du tout:
+
+**Un vrai monorepo, divisé quatre façons.** `apps/marketing`, `apps/saas`, `apps/docs` et `apps/mail-preview`, chacun avec ses propres `package.json`, `next.config.ts`, `tsconfig.json`, mises en page et configuration Playwright. Si vous voulez que le site de marketing se déploie indépendamment de l'application, cela est déjà fait et c'est vraiment un bon défaut pour une entreprise qui aura finalement une équipe de marketing.
+
+**Les options de paiement, personne d'autre ne s'ennuie.** Stripe, Lemon Squeezy, Polar, Paiements Creem et Dodo. Creem et Dodo en particulier sont des fournisseurs d'enregistrements qu'un fondateur européen peut vouloir spécifiquement pour des raisons de TVA, et les trouver soutenus hors de la boîte est rare.
+
+**Auth qui est en fait fini.** Mot de passe, mots de passe, liens magiques, deux facteurs, OAuth, écoulements oubliés et réinitialisés, rôles et permissions, super admin et imitation. Cette liste n'est pas du marketing. L'impersonnation en particulier est la caractéristique que chaque équipe de soutien demande le jour 40 et personne ne construit le jour 1.
+
+**Le choix de l'Orm.** Prisma ou Drizzle, votre appel. Beaucoup d'acheteurs ont une forte préférence ici et on leur dit lequel utiliser est une véritable irritation.
+
+N'importe qui qui vous dit Supastarter est gonflé code week-end n'a pas lu. Le reste de cet article est une comparaison entre deux options crédibles, et non un retrait.
+
+## En un coup d'oeil
+
+| Dimension                         | Supastarter                                                   | SaaSy Land                                                                                  |
+| --------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Livraison                         | CLI clones le monorepo complet, vous prunez                   | CLI ne génère que les modules que vous avez sélectionnés                                    |
+| Forme du projet                   | Quatre applications, toujours                                 | Monolithe, split API ou microservices, choisis à l'échafaudage                              |
+| Mises à jour                      | `git remote add upstream` et fusionner                        | Diff contre les modules que vous avez réellement générés                                    |
+| Cadre                             | Next.js                                                       | Next.js, TanStack Start ou React Routeur                                                    |
+| Temps d'exécution                 | Noeud                                                         | Noeud ou Bun                                                                                |
+| Base de données                   | Postgres, via Prisma ou Drizzle                               | Postgres ou SQLite, Neon, Supabase, Turso, D1 ou votre propre                               |
+| Resp.: Ministère de l'Agriculture | Mots de passe, mots de passe, lien magique, 2FA, OAuth, rôles | Better Auth dans votre dépôt, 2FA, OAuth, les rôles, les sessions que vous pouvez lire      |
+| Paiements                         | Stripe, Lemon Squeezy, Polar, Creem, Dodo                     | Stripe, Polar, Lemon Squeezy                                                                |
+| Essais                            | E2E avec Playwright                                           | 141 fichiers de test, 472 tests, 100% portail sur les branches, les fonctions et les lignes |
+| Règles d'architecture             | Convention et structure                                       | Lint règles qui échouent la construction                                                    |
+| Type de rigueur                   | TypeScript                                                    | `strict` Plus `exactOptionalPropertyTypes` et `noUncheckedIndexedAccess`, non `any`         |
+| i18n                              | Inclus, avec commutateur de langue                            | Inclus, parité clé mise en œuvre par une vérification qui échoue la construction            |
+| Échantillon de produits           | Non listé                                                     | Stock avec exemples de produits, cours d'abonnement, à la fois optionnel                    |
+| Édition visuelle                  | Non listé                                                     | Constructeur de page et éditeur de poste, à la fois optionnel                               |
+| Licence                           | Par siège: 1, 5 ou 10 développeurs                            | Projets commerciaux, illimités, sans nombre de sièges                                       |
+| Prix                              | $299 / $799 / $1,499                                          | $249 / $399 / $899                                                                          |
+
+## La décision qui se produit avant que vous tapiez une commande
+
+Chaque trousse de démarrage répond à une question avant qu'elle ne réponde à une autre : **que reçoit l'acheteur?**
+
+Il y a exactement deux réponses, et elles produisent des expériences entièrement différentes de deux ans.
+
+**Répondez : tout, et vous supprimez.** Vous clonez un dépôt qui contient chaque fonctionnalité prise en charge par le produit. Organisations, les cinq fournisseurs de paiement, l'application docs, l'app de prévisualisation du courrier, le module AI. Ensuite, vous supprimez ce dont vous n'avez pas besoin. Supastarter's documented start is `npx supastarter new my-awesome-project`, que les docs décrivent comme clonage, configuration et installation.
+
+**Réponse deux : seulement les réponses.** On vous pose des questions. Le générateur écrit les modules correspondant à vos réponses et rien d'autre. Un projet d'un seul locataire n'a aucun code d'organisation. Un projet sans facturation n'a pas de gestionnaire de webhook Stripe pour lire le passé. C'est ce que [Configurateur CLI](/#cli) sur notre page d'accueil fait, live, devant vous: douze questions, quatre fonctionnalités optionnelles, et une commande qui change quand vous répondez.
+
+Les deux sont légitimes. La réponse vous donne une mise en œuvre de référence complète que vous pouvez étudier, et il ya des jours où avoir le code dont vous n'avez pas besoin est mieux que de ne pas l'avoir. La deuxième réponse vous donne un dépôt plus petit, ce qui compte plus qu'il ne semble le faire.
+
+C'est pourquoi il importe plus qu'il n'y paraît qu'il devrait.
+
+**Le code non utilisé n'est pas libre.** Il est lu par tous les développeurs qui se joignent. Il est fouillé par chaque grep. Il apparaît dans chaque "usage de la recherche". Il est marché par votre bundler. Il est chargé dans la fenêtre contextuelle de chaque agent de codage que vous pointez au dépôt, qui est maintenant un budget réel plutôt qu'une métaphore. Et surtout, **c'est le code dont vous êtes responsable et qui n'a pas écrit**, qui est la pire combinaison dans le logiciel.
+
+La version la plus claire de l'argument : si vous échafaudez un seul titulaire, à quel point êtes-vous confiant qu'aucune requête d'organisation-scoped n'est toujours en cours quelque part ? Avec la réponse deux, la question n'a pas de sens, parce que le code n'existe pas.
+
+## Pourquoi les fusions en amont deviennent plus difficiles que plus faciles
+
+C'est la partie de la comparaison que je voudrais m'expliquer avant d'acheter quoi que ce soit, et il est rarement discuté.
+
+La documentation de Supastarter est explicite et, à son crédit, honnête au sujet du mécanisme. Vous « définissez le dépôt supastarter comme l'origine en amont de votre projet, afin que vous puissiez tirer des mises à jour à l'avenir », avec `git remote add upstream https://github.com/supastarter/supastarter-nextjs.git`C'est vrai. Trouvez, fusionnez, résolvez.
+
+Le premier jour, ça marche magnifiquement. Vous n'avez presque rien changé, donc la fusion est rapide.
+
+Considérez le mois 18. Vous avez réécrit le tableau de bord, restructuré l'interface utilisateur de facturation, changé le schéma d'utilisateur et supprimé deux applications que vous n'avez jamais utilisées. Maintenant une nouvelle version atterrit.
+
+Trois choses sont maintenant vraies, et elles sont structurelles plutôt que la faute de n'importe qui:
+
+**La surface de conflit est l'intersection de leurs changements et les vôtres, et il ne fait que grandir.** Chaque fichier que vous avez touché est un fichier qui peut entrer en conflit. Votre productivité en tant que constructeur est précisément ce qui rend la mise à niveau plus difficile, ce qui est une incitation que personne ne veut.
+
+**On ne se souvient pas des suppressions.** Vous avez enlevé. `apps/docs` parce que vous utilisez un produit docs hébergé. L'amont l'a encore. Chaque fusion future le propose à nouveau. Vous re-faire la même décision indéfiniment, et un jour vous l'acceptez par accident lors d'une grande fusion et découvrez une application docs en production.
+
+**Une fusion est tout-ou rien au niveau de commit.** La mise à jour contient un correctif de sécurité pour auth et une refonte de la page de paramètres que vous avez déjà redessiné. Vous voulez le premier et non le second, et git ne vous aidera pas à les séparer.
+
+L'alternative n'est pas la magie, et je veux être précis à ce sujet. Un générateur n'élimine pas le travail de mise à niveau. Ce qu'il change, c'est la forme de celui-ci : parce que l'outil enregistré quels modules vous avez générés, une mise à jour peut être exprimée en diff pour exactement ces modules, par rapport à une base de référence qui correspond à ce que vous avez réellement pris. Vous pouvez régénérer un projet propre avec les mêmes réponses et le differer contre le vôtre. C'est une opération lisible. Fusionner une fourchette de dix-huit mois d'un monorepo à quatre apps ne l'est pas.
+
+<Callout type="info" title={"La mise en garde honnête"}>
+
+Aucun kit de démarrage ne résout complètement les mises à jour. Une fois que vous modifiez un fichier, quelqu'un doit le réconcilier avec deux versions. La revendication ici est plus étroite et, je pense, défendable: concilier un module que vous avez choisi avec une base de référence que vous pouvez régénérer est un travail plus petit, mieux défini que la fusion d'un amont qui contient encore tout ce que vous avez supprimé.
+
+</Callout>
+
+## Les tests E2E et une barrière de couverture sont des réclamations différentes
+
+La documentation de Supastarter énumère les tests E2E avec Playwright. C'est vrai, c'est plus que ce que la plupart des concurrents offrent, et je ne vais pas prétendre le contraire.
+
+C'est aussi une revendication différente de celle que cette base de codes fait, et la différence vaut la peine d'être comprise parce que les deux se font déposer sous «a des tests».
+
+**Une suite E2E prouve que les chemins que vous avez écrits pour le travail aujourd'hui.** Il exécute un navigateur à travers l'inscription, la caisse, et quelques flux. Il est excellent pour attraper le catastrophique et inutile pour attraper le spécifique.
+
+**Une porte de couverture empêche une branche non testée d'être fusionnée.** Voici la configuration réelle, de ce dépôt `vite.config.ts`:
+
+```ts
+coverage: {
+  thresholds: {
+    branches: 100,
+    functions: 100,
+    lines: 100,
+    statements: 100,
+  },
+}
+```
+
+Quatre nombres, tous 100, tous appliqués. Aujourd'hui, cette porte traverse **141 dossiers de test et 472 tests**C'est vrai. Les `src/app/**` La couche de route et le code d'intégration généré sont exclus, ce qui est indiqué dans la configuration plutôt que caché, parce que le gant sur la colle framework produit des tests qui n'affirment rien.
+
+La différence pratique apparaît dans un endroit précis : la branche d'erreur. Votre gestionnaire webhook a un chemin pour une signature qui ne vérifie pas. Votre flux d'invitation a un chemin pour un jeton qui a expiré. Votre vérification d'autorisation a un chemin qui renvoie faux. **Une suite E2E presque jamais les exercices**, parce que la configuration d'une signature défaillante dans un test de navigateur est fastidieux et tout le monde la saute. Une porte de couverture de branche à 100 ne vous permettra pas de les fusionner non testés.
+
+Et ces branches sont exactement où SaaS produits échouent, parce qu'ils sont ceux que personne ne court à la main avant l'expédition.
+
+## Quatre applications que vous pourriez ne pas vouloir
+
+Le monorepo quatre-app est listé ci-dessus comme un avantage Supastarter, et pour le bon acheteur il est. Il vaut aussi la peine de nommer le coût, parce que "monorepo" est un mot que les gens acceptent comme étant automatiquement bon.
+
+Quatre applications signifie quatre `package.json` fichiers, quatre `tsconfig.json` fichiers, quatre configs Next, quatre pipelines de construction et quatre ensembles de mises à niveau de dépendance. Si vous êtes une personne qui construit un produit, vous exploitez maintenant une structure d'équipe de plate-forme avec un temps de fondateur solo.
+
+L'alternative n'est pas "pas de monorepo". **décider, plutôt que d'hériter.** Les [Configurateur CLI](/#cli) pose directement la question de forme : monolithe, split API, ou microservices. Choisissez un monolithe et vous obtenez un arbre déployable et une dépendance. Choisissez scission et vous obtenez un frontend et un API séparé. L'architecture est votre réponse à une question plutôt qu'une propriété du produit que vous avez acheté.
+
+## Architecture exécutable
+
+Les deux produits ont une architecture. La différence est de savoir si le compilateur est au courant.
+
+Les limites du module de cette base de code sont des règles de lint, pas de documentation :
+
+```ts
+// vite.config.ts, abridged
+lint: {
+  options: { typeAware: true, typeCheck: true },
+}
+```
+
+Trois règles, dans le même dossier. Le code de domaine ne peut pas importer React, Ensuite, le code ORM, infrastructure ou application. Le code d'application ne peut pas importer d'infrastructure. Le code de présentation ne peut pas importer Drizzle et doit passer par un cas d'utilisation de l'application.
+
+Résultat: **vous ne pouvez pas accidentellement mettre une requête de base de données dans un composant React.** La construction échoue, avec un message expliquant pourquoi. C'est la différence entre une architecture propre et une base de code qui en avait une.
+
+Cela compte plus chaque mois, pour une raison qui n'a rien à voir avec les développeurs humains. Les agents de codage apprennent les règles d'une base de code de ce qui échoue, pas de la lecture. Une limite qui échoue à la construction est une limite qu'un agent respecte lors de sa deuxième tentative. Une frontière qui est une convention est une qu'elle violera poliment et à plusieurs reprises. Nous avons écrit à ce sujet dans [préparation du dépôt pour les agents de codage de l'IA](/blog/ai-coding-agents-repository-readiness).
+
+## Ce que chaque produit coûte réellement
+
+Les niveaux de Supastarter sont Solo à **$299** pour un siège développeur, Startup à **$799** jusqu'à cinq sièges avec un appel de consultation et un soutien prioritaire, et Agency à **$1,499** pour jusqu'à dix sièges, label blanc prêt, avec un canal privé Discord.
+
+SaaSy Land est **$249** pour la base de code, **$399** avec la masterclass vidéo, et **$899** pour le niveau de l'agence. Une seule fois. Tous les projets illimités. Aucun siège ne compte sur eux.
+
+| Acheteur                  | Supastarter    | SaaSy Land | Différence |
+| ------------------------- | -------------- | ---------- | ---------- |
+| Fondateur solo            | $299           | $249       | $50        |
+| Équipe de trois personnes | $799           | $249       | $550       |
+| Équipe de cinq personnes  | $799           | $249       | $550       |
+| Équipe de huit personnes  | $1,499         | $249       | $1,250     |
+| Agency, dix développeurs  | $1,499         | $899       | $600       |
+| Onzième développeur       | Niveau suivant | $0         | Variantes  |
+
+Pour être juste à ce sujet : les niveaux Startup et Agency incluent des choses réelles au-delà des sièges. Un appel conseil de soixante minutes avec l'auteur a de la valeur. Le soutien prioritaire a de la valeur. L'accès au Fondateur dans un Discord privé a de la valeur. Si c'est ce que vous voulez, le prix est défendable et vous devriez acheter la chose que vous voulez.
+
+Mais si ce que vous voulez est le code source, le nombre de sièges est une décision de licence plutôt qu'une décision de produit, et c'est le genre de décision qui devient irritant précisément lorsque votre entreprise va bien.
+
+## Qui devrait acheter Supastarter
+
+Achetez Supastarter si vous voulez un monorepo quatre-app hors de la boîte et construire un de toute façon. Si vous avez besoin de paiements Creem ou Dodo spécifiquement, parce que presque personne d'autre ne les soutient. Si vous évaluez une implémentation de référence complète, vous pouvez lire et vous tailler sur un générateur qui décide pour vous. Si un appel de soixante minutes avec l'auteur vaut plusieurs centaines de dollars pour vous, ce que pour certains acheteurs il est clairement. Si vous êtes sur Prisma et avez l'intention de rester là.
+
+C'est un bon produit avec de vrais clients et il ne vous embarrassera pas.
+
+## Qui devrait acheter ça à la place
+
+Achetez cela si vous voulez un dépôt contenant seulement le code que vous avez demandé. Si une porte de protection à 100% est quelque chose que vous pourriez réellement maintenir, parce qu'elle est inutile pour quelqu'un qui va la désactiver au cours de la deuxième semaine. Si votre architecture compte suffisamment que vous voulez qu'elle soit appliquée par l'inter. Si votre équipe est plus grande qu'une et que vous préférez ne pas compter les sièges. Si vous ne voulez pas Next.js, puisque TanStack Start et React Router sont des options ici. Si vous voulez un magasin avec des exemples de produits, un cours d'abonnement, un constructeur de page ou un éditeur de poste visuel, qui sont des extras optionnels ici et non offerts là.
+
+Et achetez ceci si vous passez une grande partie de votre journée à travailler avec des agents de codage, parce que tout au-dessus des limites imposées et un dépôt plus petit vaut plus pour un agent qu'il ne l'est pour vous.
+
+## Lecture connexe
+
+<Cards>
+
+<Card title={"L'alternative ShipFast"} href="/blog/shipfast-alternative-for-engineers">
+  L'autre extrémité du marché : ce que vous avez économisé 22 heures vous coûte à l'heure 300.
+</Card>
+
+<Card title={"Better-T-Stack vs un kit de démarrage payant"} href="/blog/better-t-stack-vs-saas-starter-kit">
+  Le meilleur échafaudage libre dans TypeScript, et un compte-rendu détaillé de ce qu'il laisse délibérément.
+</Card>
+
+<Card title={"Choisir une pile SaaS pour les agents de codage AI"} href="/blog/choosing-a-saas-stack-for-ai-coding-agents">
+  Un test à quatre questions pour toute dépendance, couche par couche appliquée à cette pile.
+</Card>
+
+<Card title={"Préparation au dépôt pour les agents de codage de l'IA"} href="/blog/ai-coding-agents-repository-readiness">
+  Pourquoi les agents apprennent votre architecture de ce qui échoue, pas de votre lecture.
+</Card>
+
+</Cards>
+
+<Callout title={"Vérifiez-le avant de le payer"}>
+
+Les [la documentation](/docs) est public, le [configurateur](/#cli) est en direct sur la page d'accueil, et chaque numéro ici sort de la suite de test plutôt qu'un fichier de marketing. Lisez-le d'abord, puis [voir ce qu'il coûte](/#pricing): un paiement à partir de 249 $, mises à jour de base à vie, projets illimités, pas de nombre de sièges.
+
+</Callout>
+
+## Foire aux questions
+
+<Accordions>
+
+<Accordion title={"Quelle est la meilleure alternative Supastarter?"}>
+
+Pour la plupart des gens évaluant Supastarter, la réponse honnête est Supastarter. C'est un produit sérieux, bien entretenu avec 1.460 développeurs derrière lui. Regardez ailleurs si trois choses spécifiques comptent pour vous : un générateur qui n'écrit que les modules que vous avez choisis plutôt qu'un clone complet que vous prunez, une porte de couverture forcée plutôt que des tests E2E seuls, et un prix qui couvre toute votre équipe plutôt qu'une licence par siège.
+
+</Accordion>
+
+<Accordion title={"Comment Supastarter est-il livré et installé?"}>
+
+Par un CLI qui clone le dépôt. Sa documentation donne `npx supastarter new my-awesome-project`, qui clone, configure et installe, avec un manuel `git clone` comme le recul. L'installation ajoute ensuite le dépôt Supastarter comme une télécommande git en amont afin que les versions futures arrivent comme fusions dans votre projet.
+
+</Accordion>
+
+<Accordion title={"Qu'est-ce qui ne va pas avec le modèle de mise à jour git amont ?"}>
+
+Rien, jusqu'à ce que vous personnalisez. La surface de conflit d'une fusion est l'intersection de leurs changements et de la vôtre, et elle ne fait que croître. Pire, les suppressions ne se rappellent pas : code que vous avez supprimé parce que vous n'aviez pas besoin qu'il soit encore en amont, donc chaque fusion future le propose à nouveau et vous refait la même question pour toujours.
+
+</Accordion>
+
+<Accordion title={"Combien coûte Supastarter par rapport à SaaSy Land?"}>
+
+Supastarter liste $299 pour un siège développeur, $799 pour jusqu'à cinq et $1,499 pour jusqu ́à dix. SaaSy Land est $249 une fois pour des projets illimités sous une licence commerciale, sans nombre de sièges. Pour un fondateur solo, l'écart est de cinquante dollars. Pour une équipe de cinq personnes, il s'agit de 550 $, et pour une agence de dix personnes, il est de 1 250 $.
+
+</Accordion>
+
+<Accordion title={"Est-ce que Supastarter a des tests ?"}>
+
+Sa documentation énumère les tests E2E avec Playwright, ce qui est réel et utile. Ce que la documentation publique ne décrit pas, c'est une unité ou une suite de tests d'intégration avec un seuil de couverture obligatoire. C'est la distinction qui compte : les tests E2E prouvent que le chemin heureux fonctionne aujourd'hui, une porte de couverture empêche la branche non testée d'être jamais fusionnée.
+
+</Accordion>
+
+<Accordion title={"Un monorepo avec quatre applications est une bonne chose ?"}>
+
+C'est un véritable avantage si vous voulez le site marketing, l'application, les docs et l'aperçu du courrier déployé séparément à partir du premier jour. C'est un coût si vous vouliez un déployable, parce que vous maintenez maintenant quatre fichiers package.json, quatre tsconfigs et quatre pipelines de construction pour un produit qu'une personne écrit.
+
+</Accordion>
+
+<Accordion title={"Puis-je utiliser Supastarter pour les projets clients ?"}>
+
+Oui, sur le niveau Agency à 1 499 $ pour un maximum de dix sièges, ce qui est explicitement prêt en blanc. La comparaison qui vaut la peine d'être faite est contre une licence commerciale sans nombre de sièges du tout, où le onzième développeur et le cinquantième projet client ne coûtent rien de plus.
+
+</Accordion>
+
+<Accordion title={"Lequel est le meilleur pour les agents de codage de l'IA?"}>
+
+Celui dont les limites sont exécutables. Un agent lit la structure de ce qui échoue, pas d'une lecture. Une base de code où le code de domaine ne peut pas importer physiquement l'ORM enseigne son architecture dans un seul message d'erreur. Une base de code où cette règle est une convention donne à un agent plus d'endroits pour mettre le code correct dans le mauvais paquet.
+
+</Accordion>
+
+<Accordion title={"Les deux produits vous donnent-ils des mises à jour à vie?"}>
+
+Tous deux annoncent l'accès à vie sans abonnement. La différence n'est pas le droit, c'est la livraison. Fusionner un monorepo en amont dans un projet que vous avez personnalisé est une activité différente de prendre un diff pour les modules que vous avez réellement générés, et les composés de différence chaque mois que vous continuez à travailler.
+
+</Accordion>
+
+<Accordion title={"Devrais-je changer si j'ai déjà acheté Supastarter ?"}>
+
+Probablement pas, si ça marche et que vous l'avez expédié. Les coûts de commutation sont réels et une meilleure architecture vaut rarement une réécriture seule. Changez quand vous commencez le prochain projet de toute façon, ce qui est le seul moment où la comparaison est libre.
+
+</Accordion>
+
+</Accordions>
+
+### Sources
+
+- [page d'accueil Supastarter](https://supastarter.dev/), pour les niveaux de prix, le nombre de sièges, la liste des caractéristiques et le nombre de clients
+- [Supastarter documentation](https://supastarter.dev/docs/nextjs), pour la structure monorepo et les quatre applications
+- [Supastarter documentation de configuration](https://supastarter.dev/docs/nextjs/setup), pour la commande CLI et le modèle de mise à jour git en amont
+- [SaaSy Land documentation](/docs) et les [configurateur](/#cli), pour la liste des modules et les questions d'échafaudage
+- Ce dépôt est `vite.config.ts`, pour les seuils de couverture et les règles d'architecture citées ci-dessus
+
+_Écrit par Piotr J. Borowiecki, qui construit SaaSy Land. Les chiffres pour Supastarter ont été lus à partir de ses pages publiques le 15 août 2026 et peuvent avoir changé depuis; les liens vont à la source plutôt qu'à une capture d'écran. Si quelque chose ici est hors de date ou mal, dites-le moi et je vais le corriger._

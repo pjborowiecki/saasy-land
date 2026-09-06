@@ -1,33 +1,35 @@
-import { relations } from "drizzle-orm"
-import { boolean, index, pgEnum, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core"
+import { relations, sql } from "drizzle-orm"
+import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+
+import { DEFAULT_ROLE_CODE, ROLE_VALUES } from "~/src/integrations/better-auth/auth.access"
 
 import { DEFAULT_TIMEZONE_CODE, TIMEZONE_CODES } from "~/src/modules/_core/constants/timezone"
 import { account } from "~/src/modules/account/account.schema"
 import { session } from "~/src/modules/session/session.schema"
 import { twoFactor } from "~/src/modules/two-factor/two-factor.schema"
 
-import { DEFAULT_ROLE_CODE, ROLE_VALUES } from "~/src/integrations/better-auth/auth.access"
+export const userRoleEnum = { enumValues: ROLE_VALUES } as const
+export const userTimezoneEnum = { enumValues: TIMEZONE_CODES } as const
 
-export const userRoleEnum = pgEnum("user_role", ROLE_VALUES)
-export const userTimezoneEnum = pgEnum("user_timezone", TIMEZONE_CODES)
-
-export const user = pgTable(
+export const user = sqliteTable(
   "user",
   {
-    banExpires: timestamp("ban_expires", { withTimezone: true }),
-    banReason: varchar("ban_reason", { length: 255 }),
-    banned: boolean("banned").default(false).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-    email: varchar("email", { length: 64 }).notNull().unique(),
-    emailVerified: boolean("email_verified").default(false).notNull(),
-    id: uuid("id").primaryKey(),
-    image: varchar("image", { length: 2048 }),
-    name: varchar("name", { length: 32 }).notNull(),
-    role: userRoleEnum().default(DEFAULT_ROLE_CODE).notNull(),
-    timezone: userTimezoneEnum().default(DEFAULT_TIMEZONE_CODE).notNull(),
-    twoFactorEnabled: boolean("two_factor_enabled").default(false).notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
+    banExpires: integer("ban_expires", { mode: "timestamp_ms" }),
+    banReason: text("ban_reason", { length: 255 }),
+    banned: integer("banned", { mode: "boolean" }).default(false).notNull(),
+    createdAt: integer("created_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
+      .notNull(),
+    email: text("email", { length: 64 }).notNull().unique(),
+    emailVerified: integer("email_verified", { mode: "boolean" }).default(false).notNull(),
+    id: text("id").primaryKey(),
+    image: text("image", { length: 2048 }),
+    name: text("name", { length: 32 }).notNull(),
+    role: text("role", { enum: userRoleEnum.enumValues }).default(DEFAULT_ROLE_CODE).notNull(),
+    timezone: text("timezone", { enum: userTimezoneEnum.enumValues }).default(DEFAULT_TIMEZONE_CODE).notNull(),
+    twoFactorEnabled: integer("two_factor_enabled", { mode: "boolean" }).default(false).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+      .default(sql`(unixepoch() * 1000)`)
       .$onUpdate(
         () =>
           /* @__PURE__ */

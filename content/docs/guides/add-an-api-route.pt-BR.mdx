@@ -1,0 +1,28 @@
+---
+title: TanStack Start Comutadores HTTP
+description: TanStack Start HTTP manipuladores - SaaSy Land
+---
+
+Os terminais HTTP usam nativos. TanStack Start O servidor está no servidor. `src/routes`. Better Auth É dono de GET e POST. `/api/auth/$`; Fumadocs A busca usa `/api/search`. . Operações de produto são funções de servidor nativas em módulos de recursos.
+
+Declare os encarregados. `createFileRoute` com `server.handlers`. . Use o fornecido. `request`, validar a entrada, forçar a verificação de permissão, e devolver uma Web `Response`. . Mantenha a verificação do webhook na integração do provedor. Não exponha um endpoint REST duplicado para uma operação que só é usada pelo cliente RPC desse aplicativo.
+
+```ts
+import { createFileRoute } from "@tanstack/react-router"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+
+export const Route = createFileRoute("/api/auth/$")({
+  server: {
+    handlers: {
+      GET: ({ request }) => auth.handler(request),
+      POST: ({ request }) => auth.handler(request),
+    },
+  },
+})
+```
+
+## Guias relacionados
+
+- [Arquitetura](/docs/architecture)
+- [Desenvolvimento local](/docs/getting-started/first-run)
+- [Testando.](/docs/tooling/testing)

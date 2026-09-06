@@ -1,0 +1,23 @@
+---
+title: "Local development"
+description: "Local development — SaaSy Land"
+---
+
+Install Bun 1.4 and Node 24 or newer, then install dependencies. Copy `.env.example` to `.env.development` and configure a long random `AUTH_SECRET`, the public `VITE_APP_URL`, and any external integrations you will exercise.
+
+The development server uses the preview D1 and KV resources through Cloudflare’s remote bindings, matching React Projects. Sign in with Wrangler and apply the checked-in SQLite migrations to development before starting. The development command generates Fumadocs content and runs Vite+ with the Cloudflare plugin. Browser tests use separate local storage under `.wrangler/test`.
+
+OAuth, email and billing require provider credentials; use test credentials and Polar sandbox when developing. Tests use committed dummy values and mocks instead of sending real messages or charging a customer.
+
+```sh
+bun install
+cp .env.example .env.development
+bun run db:migrate:development
+bun run dev
+```
+
+## Related guides
+
+- [Architecture](/docs/architecture)
+- [Local development](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)

@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "Zarządzanie użytkownikami | SaaSy Land",
+    "description": "Zarządzaj członkami zespołu, uprawnieniami i kontami klientów."
+  },
+  "title": "Zarządzanie użytkownikami",
+  "description": "Zarządzaj członkami zespołu, uprawnieniami i kontami klientów.",
+  "actions": {
+    "addUser": "Dodaj użytkownika",
+    "feedback": {
+      "banSuccess": "Użytkownik został zablokowany.",
+      "deleteSuccess": "Użytkownik został usunięty.",
+      "error": "Coś poszło nie tak. Spróbuj ponownie.",
+      "resetPasswordSuccess": "Hasło zostało zresetowane.",
+      "unbanSuccess": "Użytkownik został odblokowany."
+    },
+    "deleteDialog": {
+      "cancel": "Anuluj",
+      "confirm": "Usuń użytkownika",
+      "description": "Trwale usuń {name} i dane konta. Tej operacji nie można cofnąć.",
+      "title": "Usunąć użytkownika?"
+    },
+    "resetPasswordDialog": {
+      "cancel": "Anuluj",
+      "confirm": "Resetuj hasło",
+      "description": "Ustaw nowe hasło dla {name}.",
+      "password": "Nowe hasło",
+      "title": "Resetuj hasło"
+    },
+    "row": {
+      "ban": "Zablokuj użytkownika",
+      "delete": "Usuń użytkownika",
+      "edit": "Edytuj użytkownika",
+      "menu": "Akcje wiersza",
+      "resetPassword": "Resetuj hasło",
+      "unban": "Odblokuj użytkownika",
+      "viewProfile": "Zobacz profil"
+    }
+  },
+  "search": {
+    "placeholder": "Szukaj użytkowników po nazwie, e-mailu lub ID..."
+  },
+  "filters": {
+    "groups": {
+      "identity": "Tożsamość",
+      "access": "Dostęp",
+      "activity": "Aktywność"
+    },
+    "role": {
+      "all": "Rola: Wszystkie",
+      "value": "Rola: {role}",
+      "options": {
+        "admin": "Administrator",
+        "customer": "Klient"
+      }
+    },
+    "status": {
+      "all": "Status: Wszystkie",
+      "value": "Status: {status}",
+      "options": {
+        "active": "Aktywny",
+        "pending": "Oczekujący",
+        "banned": "Zablokowany"
+      }
+    }
+  },
+  "tabs": {
+    "allUsers": "Wszyscy użytkownicy",
+    "invitations": "Zaproszenia",
+    "roles": "Role i uprawnienia",
+    "security": "Bezpieczeństwo"
+  },
+  "table": {
+    "booleans": {
+      "no": "Nie",
+      "yes": "Tak"
+    },
+    "empty": "Nie znaleziono użytkowników.",
+    "emptyValue": "n/d",
+    "headers": {
+      "createdAt": "Data utworzenia",
+      "emailVerified": "E-mail zweryfikowany",
+      "role": "Rola",
+      "status": "Status",
+      "timezone": "Preferowana strefa czasowa",
+      "twoFactorEnabled": "2FA włączone",
+      "updatedAt": "Data aktualizacji",
+      "user": "Użytkownik"
+    },
+    "selectAll": "Zaznacz wszystkie wiersze",
+    "selectRow": "Zaznacz wiersz",
+    "actionsColumn": "Akcje wiersza"
+  },
+  "pagination": {
+    "info": "Wyświetlanie {start} do {end} z {total} wyników",
+    "goToPage": "Przejdź do strony {page}",
+    "nextPage": "Następna strona",
+    "previousPage": "Poprzednia strona"
+  },
+  "invitations": {
+    "title": "Zaproszenia",
+    "description": "Zarządzaj oczekującymi zaproszeniami do zespołu i linkami dostępu.",
+    "actions": {
+      "copyLink": "Kopiuj link",
+      "sendInvite": "Wyślij zaproszenie"
+    },
+    "search": {
+      "placeholder": "Szukaj zaproszeń po e-mailu..."
+    },
+    "filters": {
+      "role": "Rola: Wszystkie",
+      "status": "Status: Oczekujące"
+    },
+    "table": {
+      "headers": {
+        "email": "E-mail",
+        "role": "Rola",
+        "status": "Status",
+        "sentDate": "Data wysłania"
+      }
+    },
+    "pagination": {
+      "info": "Wyświetlanie {start} do {end} z {total} wyników"
+    }
+  },
+  "roles": {
+    "title": "Role i uprawnienia",
+    "description": "Definiuj poziomy dostępu i zarządzaj uprawnieniami w organizacji.",
+    "actions": {
+      "createRole": "Utwórz rolę"
+    },
+    "search": {
+      "placeholder": "Szukaj ról po nazwie lub opisie..."
+    },
+    "filters": {
+      "type": "Typ: Wszystkie"
+    },
+    "table": {
+      "headers": {
+        "name": "Nazwa roli",
+        "description": "Opis",
+        "type": "Typ",
+        "users": "Użytkownicy"
+      },
+      "usersCount": "{count, plural, one {# użytkownik} few {# użytkowników} many {# użytkowników} other {# użytkownika}}"
+    },
+    "pagination": {
+      "info": "Wyświetlanie {start} do {end} z {total} ról"
+    }
+  },
+  "security": {
+    "title": "Bezpieczeństwo",
+    "empty": {
+      "title": "Brak zapisanych zdarzeń bezpieczeństwa",
+      "description": "Próby logowania, unieważnienia sesji i zmiany ról pojawią się tutaj, gdy przestrzeń robocza zacznie je rejestrować. Włącz dziennik audytu, aby rozpocząć zbieranie zdarzeń.",
+      "action": "Włącz dziennik audytu"
+    }
+  },
+  "demo": {
+    "roles": {
+      "r1": {
+        "name": "Administrator",
+        "description": "Pełny dostęp do wszystkich funkcji systemu, rozliczeń i ustawień.",
+        "type": "Systemowa"
+      },
+      "r2": {
+        "name": "Redaktor",
+        "description": "Może edytować produkty i treści, ale nie może zarządzać użytkownikami.",
+        "type": "Systemowa"
+      },
+      "r3": {
+        "name": "Konsultant wsparcia",
+        "description": "Dostęp do sesji użytkowników i podstawowych narzędzi diagnostycznych.",
+        "type": "Niestandardowa"
+      },
+      "r4": {
+        "name": "Obserwator",
+        "description": "Dostęp tylko do odczytu do analityki i paneli.",
+        "type": "Systemowa"
+      },
+      "r5": {
+        "name": "Programista API",
+        "description": "Dostęp do ustawień programistycznych, kluczy API i webhooków.",
+        "type": "Niestandardowa"
+      }
+    },
+    "invitations": {
+      "i1": {
+        "role": "Administrator",
+        "status": "Oczekuje",
+        "sentDate": "2 godziny temu"
+      },
+      "i2": {
+        "role": "Obserwator",
+        "status": "Oczekuje",
+        "sentDate": "Wczoraj"
+      },
+      "i3": {
+        "role": "Redaktor",
+        "status": "Wygasło",
+        "sentDate": "10 paź 2023"
+      },
+      "i4": {
+        "role": "Subskrybent",
+        "status": "Oczekuje",
+        "sentDate": "20 paź 2023"
+      },
+      "i5": {
+        "role": "Redaktor",
+        "status": "Wygasło",
+        "sentDate": "28 wrz 2023"
+      }
+    }
+  }
+}

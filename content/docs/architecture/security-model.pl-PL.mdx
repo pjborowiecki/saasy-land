@@ -1,0 +1,16 @@
+---
+title: Uwierzytelnianie i bezpieczeństwo
+description: Uwierzytelnianie i bezpieczeństwo — SaaSy Land
+---
+
+Autoryzacja działa na dwóch poziomach: strażnicy `beforeLoad` chronią układy panelu i aplikacji klienta, a każda chroniona funkcja serwerowa niezależnie sprawdza użytkownika. Używaj `requireAdmin` lub `requireSession` dla układów i `withAuth(permission)` dla operacji. Operacje klienta wyprowadzają własność danych z sesji.
+
+Better Auth przechowuje sesje w D1 i obsługuje hasła, OAuth, weryfikację, reset hasła, 2FA, impersonację i unieważnianie sesji. Przy sprawdzaniu chronionej funkcji pomijany jest cache cookie. Ostatnim pluginem auth jest `tanstackStartCookies`, który przekazuje ciasteczka uwierzytelniania przez odpowiedzi funkcji serwerowych.
+
+Limity w D1 używają atomowych zapisów i nagłówka IP Cloudflare. Wrażliwe operacje publiczne mają osobne klucze limitu. Waliduj wejście schematem Zod modułu, maskuj nieoczekiwane błędy, weryfikuj podpisy webhooków płatności i trzymaj sekrety za granicą serwera. Prywatne trasy i mutacje tokenów są wykluczone z prerenderingu.
+
+## Powiązane przewodniki
+
+- [Architektura](/docs/architecture)
+- [Środowisko lokalne](/docs/getting-started/first-run)
+- [Testy](/docs/tooling/testing)

@@ -1,0 +1,74 @@
+{
+  "title": "製品を作成する",
+  "actions": {
+    "cancel": "キャンセル",
+    "save": "製品を保存する"
+  },
+  "sections": {
+    "general": {
+      "title": "一般的な情報",
+      "name": {
+        "label": "製品名",
+        "placeholder": "例：Proプラン、電子書籍…"
+      },
+      "description": {
+        "label": "説明",
+        "placeholder": "この製品には何が含まれているか、簡単に説明してください。",
+        "help": "決済ページおよび顧客ポータルページに表示されます。"
+      }
+    },
+    "pricing": {
+      "title": "料金と請求について",
+      "model": {
+        "label": "料金体系",
+        "subscription": "サブスクリプション",
+        "oneTime": "一度限り"
+      },
+      "price": {
+        "label": "価格",
+        "placeholder": "0.00",
+        "currencySymbol": "$"
+      },
+      "period": {
+        "label": "請求期間",
+        "monthly": "月次",
+        "yearly": "年間"
+      }
+    },
+    "media": {
+      "title": "メディアと画像",
+      "upload": "クリックしてアップロード、またはここにドラッグ＆ドロップしてください",
+      "help": "SVG、PNG、JPG、またはGIF形式（最大800x400ピクセル）"
+    },
+    "status": {
+      "title": "ステータス",
+      "publish": {
+        "label": "製品を公開する",
+        "description": "お客様に分かりやすく表示してください"
+      },
+      "requireLogin": {
+        "label": "ログインが必要です",
+        "description": "ユーザーは認証済みである必要があります"
+      }
+    },
+    "organization": {
+      "title": "組織",
+      "category": {
+        "label": "カテゴリ",
+        "placeholder": "カテゴリを選択してください。",
+        "options": {
+          "addons": "アドオン",
+          "saas": "SaaSプラン"
+        }
+      },
+      "collection": {
+        "label": "コレクション",
+        "placeholder": "コレクションに追加...",
+        "options": {
+          "core": "Coreサブスクリプション",
+          "legacy": "旧バージョン"
+        }
+      }
+    }
+  }
+}

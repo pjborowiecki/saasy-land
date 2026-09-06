@@ -1,0 +1,9 @@
+{
+  "headline": "Wróć do tej części, którą tylko Ty zbudujesz.",
+  "assurances": {
+    "coverage": "100% pokrycia testami, wymuszane w CI",
+    "ownership": "W pełni Twoje, bez vendor lock-in",
+    "pricing": "0 USD za MAU, na zawsze"
+  },
+  "signUpHeadline": "Zacznij tworzyć to, co tylko Ty możesz zbudować."
+}

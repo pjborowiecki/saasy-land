@@ -1,0 +1,16 @@
+---
+title: 国際化とローカライズ
+description: 国際化とローカライズ — SaaSy Land
+---
+
+メッセージは、 `messages/{locale}` たとえば、ドットネームスペースファイルとして9つの構成された言語として、 `pages.admin.users.json`. . ローカル設定、URLヘルパー、メッセージの読み込み、メタデータ、メールの翻訳ヘルパーは、 `src/integrations/use-intl`.
+
+英語対応 `/docs`;ポーランドの使用 `/pl-PL/docs`. . レガシー `/en` そして、 `/pl` リンクは正規化されます。 ルートファイル宣言 `staticData.namespaces` 同じ名前空間を loader にプリロードします。 `TranslationsProvider` アクティブ・ルート名空間を組み込む `IntlProvider`. . 共有メッセージは root で読み込まれます。メールのみの名前空間はサーバーに滞在します。
+
+ロケールを読んでください。 `getCurrentLocale` サーバ上で `useLocale` コンポーネント。 URL は、ドキュメントのロケールを選択します。 Server-function リクエストは locale Cookie を使用します。 言語変更は、パス、クエリ、フラグメントを保ち、ドキュメントをリロードして、対応するコンテンツをロードします。 ログイン `bun run check:i18n` キーを変更した後。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

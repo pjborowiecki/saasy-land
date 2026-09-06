@@ -1,6 +1,6 @@
 import type { TwoFactorEnableData } from "~/src/modules/two-factor/two-factor.types"
 
-export function parseTwoFactorEnableData(data: unknown): TwoFactorEnableData | undefined {
+export const parseTwoFactorEnableData = (data: unknown): TwoFactorEnableData | undefined => {
   if (typeof data !== "object" || data === null) {
     return undefined
   }
@@ -22,7 +22,7 @@ export function parseTwoFactorEnableData(data: unknown): TwoFactorEnableData | u
   return { backupCodes, totpURI }
 }
 
-export function extractTotpSecret(totpUri: string): string {
+export const extractTotpSecret = (totpUri: string): string => {
   try {
     const url = new URL(totpUri)
     return url.searchParams.get("secret") ?? totpUri
@@ -31,6 +31,4 @@ export function extractTotpSecret(totpUri: string): string {
   }
 }
 
-export function createOtpSlotIndices(length: number): number[] {
-  return Array.from({ length }, (_, index) => index)
-}
+export const createOtpSlotIndices = (length: number): number[] => Array.from({ length }, (_, index) => index)

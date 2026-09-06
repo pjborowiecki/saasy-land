@@ -1,0 +1,26 @@
+{
+  "resetPassword": {
+    "subject": "Passwort zurücksetzen",
+    "preview": "Setze dein Passwort für SaaSy Land zurück",
+    "heading": "Passwort zurücksetzen",
+    "body": "Hallo {name}, wir haben eine Anfrage zum Zurücksetzen deines Passworts erhalten. Klicke auf die Schaltfläche unten, um ein neues festzulegen.",
+    "button": "Passwort zurücksetzen",
+    "footer": "Falls du dies nicht angefordert hast, kannst du diese E-Mail ignorieren."
+  },
+  "verifyEmail": {
+    "subject": "E-Mail-Adresse bestätigen",
+    "preview": "Bestätige deine E-Mail-Adresse für SaaSy Land",
+    "heading": "E-Mail-Adresse bestätigen",
+    "body": "Hallo {name}, danke für deine Registrierung. Bestätige deine E-Mail-Adresse, um die Einrichtung deines Kontos abzuschließen.",
+    "button": "E-Mail-Adresse bestätigen",
+    "footer": "Falls du kein Konto erstellt hast, kannst du diese E-Mail ignorieren."
+  },
+  "changeEmailConfirmation": {
+    "subject": "Neue E-Mail-Adresse bestätigen",
+    "preview": "Bestätige die Änderung deiner E-Mail-Adresse für SaaSy Land",
+    "heading": "Änderung bestätigen",
+    "body": "Hallo {name}, wir haben eine Anfrage erhalten, deine E-Mail-Adresse in {newEmail} zu ändern. Klicke auf die Schaltfläche unten, um die Änderung zu bestätigen.",
+    "button": "Änderung bestätigen",
+    "footer": "Falls du diese Änderung nicht angefordert hast, kannst du diese E-Mail ignorieren."
+  }
+}

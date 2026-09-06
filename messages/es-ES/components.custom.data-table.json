@@ -1,0 +1,11 @@
+{
+  "empty": "No se encontraron resultados.",
+  "pagination": {
+    "nextPage": "Página siguiente",
+    "pageIndicator": "Página {current} de {total}",
+    "previousPage": "Página anterior",
+    "rowCount": "{count, plural, =0 {No hay filas} one {# fila} other {# filas}}",
+    "selectedCount": "{selected, plural, one {# seleccionada} other {# seleccionadas}}"
+  },
+  "resizeColumn": "Redimensionar columna"
+}

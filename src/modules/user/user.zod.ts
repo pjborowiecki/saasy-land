@@ -1,33 +1,33 @@
 import { createSchemaFactory } from "drizzle-zod"
-import z from "zod/v4"
+import zod from "zod/v4"
+
+import { ROLE_VALUES } from "~/src/integrations/better-auth/auth.access"
+import { emailSchema, nameSchema, strictPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 
 import { TIMEZONE_CODES } from "~/src/modules/_core/constants/timezone"
 import { userIdField } from "~/src/modules/_core/utils/zod-fields"
 import { user } from "~/src/modules/user/user.schema"
 import { USER_VALIDATION_MESSAGE } from "~/src/modules/user/user.validations"
 
-import { ROLE_VALUES } from "~/src/integrations/better-auth/auth.access"
-import { emailSchema, nameSchema, strictPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
-
-const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: z })
+const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSchemaFactory({ zodInstance: zod })
 
 const USER_IMAGE_MAX_LENGTH = 2048
 
-const userIdInput = z.object({
+const userIdInput = zod.object({
   userId: userIdField,
 })
 
-const banUser = z.object({
-  banExpiresIn: z.number().optional(),
-  banReason: z.string().optional(),
+const banUser = zod.object({
+  banExpiresIn: zod.number().optional(),
+  banReason: zod.string().optional(),
   userId: userIdField,
 })
 
-const createUser = z.object({
+const createUser = zod.object({
   email: emailSchema,
   name: nameSchema,
   password: strictPasswordSchema.optional(),
-  role: z.enum(ROLE_VALUES).optional(),
+  role: zod.enum(ROLE_VALUES).optional(),
 })
 
 const deleteUser = userIdInput
@@ -36,27 +36,27 @@ const getUser = userIdInput
 
 const impersonateUser = userIdInput
 
-const setUserPassword = z.object({
+const setUserPassword = zod.object({
   newPassword: strictPasswordSchema,
   userId: userIdField,
 })
 
-const setUserPasswordForm = z.object({
+const setUserPasswordForm = zod.object({
   newPassword: strictPasswordSchema,
 })
 
-const setUserRole = z.object({
-  role: z.enum(ROLE_VALUES),
+const setUserRole = zod.object({
+  role: zod.enum(ROLE_VALUES),
   userId: userIdField,
 })
 
 const unbanUser = userIdInput
 
-const updateUser = z
+const updateUser = zod
   .object({
-    image: z.string().max(USER_IMAGE_MAX_LENGTH).nullable().optional(),
+    image: zod.string().max(USER_IMAGE_MAX_LENGTH).nullable().optional(),
     name: nameSchema.optional(),
-    timezone: z.enum(TIMEZONE_CODES).optional(),
+    timezone: zod.enum(TIMEZONE_CODES).optional(),
     userId: userIdField,
   })
   .refine(({ userId: _userId, ...fields }) => Object.values(fields).some((val) => val !== undefined), {

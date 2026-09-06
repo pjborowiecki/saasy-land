@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vite-plus/test"
+
 import {
   AUTH_TEST_BASE_URL,
   createAuthTestInstance,
@@ -14,15 +16,14 @@ const SIGN_IN_URL = `${AUTH_TEST_BASE_URL}/api/auth/sign-in/email`
 const FAILED_SIGN_IN_STATUS = 401
 const RATE_LIMITED_STATUS = 429
 
-function signInWithWrongPassword(email: string): Promise<Response> {
-  return rateLimitContext.auth.handler(
+const signInWithWrongPassword = (email: string): Promise<Response> =>
+  rateLimitContext.auth.handler(
     new Request(SIGN_IN_URL, {
       body: JSON.stringify({ email, password: "WrongPass1!" }),
       headers: { "Content-Type": "application/json" },
       method: "POST",
     }),
   )
-}
 
 describe("auth rate limiting", () => {
   it("blocks repeated failed sign-in attempts at the HTTP handler", async () => {

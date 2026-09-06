@@ -1,0 +1,83 @@
+{
+  "metadata": {
+    "title": "Pagos",
+    "description": "Gestionar los ingresos, las transacciones y la configuración de pagos."
+  },
+  "title": "Pagos",
+  "description": "Gestionar los ingresos, las transacciones y la configuración de pagos.",
+  "actions": {
+    "export": "Exportar",
+    "settings": "Configuración de pagos"
+  },
+  "tabs": {
+    "transactions": "Transacciones",
+    "subscriptions": "Suscripciones",
+    "payouts": "Desembolsos",
+    "refunds": "Reembolsos"
+  },
+  "stats": {
+    "refunded": {
+      "title": "Reembolsado (30 días)",
+      "value": "$1,240.00",
+      "trend": "-12.4%"
+    },
+    "refundRate": {
+      "title": "Tasa de reembolso",
+      "value": "1.2%",
+      "trend": "-0.2%"
+    },
+    "pending": {
+      "title": "Aprobaciones pendientes",
+      "subtitle": "Ascendiendo a 407,00 $",
+      "value": "3"
+    },
+    "vsLastMonth": "vs. el mes pasado"
+  },
+  "table": {
+    "title": "Soles recientes reembolsados",
+    "columns": {
+      "customer": "Cliente",
+      "amount": "Cantidad",
+      "item": "Producto comprado",
+      "reason": "Razón",
+      "date": "Fecha",
+      "status": "Estado",
+      "rowActions": "Acciones de la fila"
+    },
+    "pagination": {
+      "showing": "Mostrando del 1 al 4 de 24 resultados",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "page1": "1",
+      "page2": "2",
+      "ellipsis": "..."
+    },
+    "filter": "Filtrar reembolsos"
+  },
+  "demo": {
+    "p1": {
+      "item": "Pro anual",
+      "reason": "Renovación involuntaria",
+      "status": "Procesado",
+      "type": "Reembolso completo"
+    },
+    "p2": {
+      "item": "Pro mensual",
+      "reason": "Compensación por tiempo de inactividad",
+      "status": "Procesado",
+      "type": "Reembolso parcial"
+    },
+    "p3": {
+      "item": "Starter mensual",
+      "reason": "No se ajusta a las necesidades",
+      "status": "Pendiente",
+      "type": "Reembolso completo"
+    },
+    "p4": {
+      "item": "Pro anual",
+      "reason": "Cargo fraudulento",
+      "status": "Fallido",
+      "type": "Reembolso completo"
+    }
+  }
+}

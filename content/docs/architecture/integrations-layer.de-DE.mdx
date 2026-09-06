@@ -1,0 +1,14 @@
+---
+title: Integrationsverantwortung.
+description: Integrationsmanagement – SaaSy Land
+---
+
+Jede externe Bibliothek oder jeder Anbieter verwaltet ein Verzeichnis unter `src/integrations`: Better Auth, Drizzle, Fumadocs, use-intl, Polar, Resend und GitHub. Konfigurationsdateien initialisieren Clients. Gemeinsame Adapter normalisieren die Ergebnisse der Anbieter und schützen Anmeldeinformationen innerhalb der Servergrenzen.
+
+Geschäftliche Entscheidungen bleiben weiterhin in Funktionsmodulen enthalten. Beispielsweise aktualisieren die Polar-Webhook-Handler Lizenzdaten über Modulfunktionen; die Integration selbst konfiguriert das SDK und überprüft eingehende Webhooks.
+
+## Verwandte Anleitungen.
+
+- [Architektur](/docs/architecture)
+- [Regionale Entwicklung.](/docs/getting-started/first-run)
+- [Testen.](/docs/tooling/testing)

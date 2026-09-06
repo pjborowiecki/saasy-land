@@ -1,0 +1,32 @@
+{
+  "boundary": {
+    "title": "Etwas ist fehlgeschlagen",
+    "description": "Dieser Abschnitt konnte nicht geladen werden. Sie können es erneut versuchen, ohne die Seite zu verlassen.",
+    "retry": "Versuchen Sie es erneut"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die Seite, die Sie suchen, existiert nicht oder wurde verschoben.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "action": {
+    "AUTH_API_ERROR": "Authentifizierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "CONFLICT": "Das existiert bereits.",
+    "FORBIDDEN": "Sie haben keine Berechtigung dafür.",
+    "INTERNAL_ERROR": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "NOT_FOUND": "Nicht gefunden.",
+    "TOO_MANY_REQUESTS": "Zu viele Versuche. Bitte versuchen Sie es in Kürze erneut.",
+    "UNAUTHORIZED": "Bitte melden Sie sich an, um fortzufahren.",
+    "VALIDATION": "Bitte überprüfen Sie das Formular und versuchen Sie es erneut."
+  },
+  "unauthorized": {
+    "title": "Anmeldung erforderlich",
+    "description": "Ihre Sitzung ist beendet oder Sie sind nicht angemeldet. Bitte melden Sie sich an, um fortzufahren.",
+    "signIn": "Anmelden"
+  },
+  "forbidden": {
+    "title": "Zugriff verweigert",
+    "description": "Ihr Konto hat keine Berechtigung, diese Seite anzuzeigen.",
+    "backToApp": "Zurück zur App"
+  }
+}

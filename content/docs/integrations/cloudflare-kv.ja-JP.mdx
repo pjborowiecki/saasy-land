@@ -1,0 +1,14 @@
+---
+title: Cloudflare KV
+description: Cloudflare KV — SaaSy Land Cloudflare} {0_}} {}}}} {1 {}} {{{}}} }}}} = Cloudflare = SaaSy Land}}
+---
+
+`env.CACHE` パブリック、使い捨てのキャッシュエントリを保存します。 GitHub インテグレーションは、スターカウントをTTLでキャッシュし、使用する `waitUntil` キャッシュの書き込みのために。 GitHub や KV が利用できなくなった場合は、上品に落ちます。
+
+KV は、最終的に一貫した状態です。 認証セッションとレートの制限は D1 で動作します。 アクションリミッタは、キーとタイムウィンドウごとに1つの原子SQL upsertを使用します。そのため、別々のワーカーインスタンスによって処理されたリクエストは同じ制限を共有します。 許可または機密制限のためにKVカウンターを使用しないでください。
+
+## 関連ガイド
+
+- [建築設計](/docs/architecture)
+- [ローカル開発](/docs/getting-started/first-run)
+- [試験結果](/docs/tooling/testing)

@@ -1,0 +1,74 @@
+{
+  "title": "Crea prodotto",
+  "actions": {
+    "cancel": "Annulla",
+    "save": "Salva prodotto"
+  },
+  "sections": {
+    "general": {
+      "title": "Informazioni generali",
+      "name": {
+        "label": "Prodotto",
+        "placeholder": "Pro Plan, E-book..."
+      },
+      "description": {
+        "label": "Descrizione",
+        "placeholder": "Descriva brevemente cosa include questo prodotto...",
+        "help": "Sarà visualizzato nelle pagine di checkout e nel portale clienti."
+      }
+    },
+    "pricing": {
+      "title": "Prezzi e fatturazione",
+      "model": {
+        "label": "Modello di fatturazione",
+        "subscription": "Abbonamento",
+        "oneTime": "Una tantum"
+      },
+      "price": {
+        "label": "Prezzo",
+        "placeholder": "0.00",
+        "currencySymbol": "$"
+      },
+      "period": {
+        "label": "Periodo di fatturazione",
+        "monthly": "Mensile",
+        "yearly": "Annuale"
+      }
+    },
+    "media": {
+      "title": "Media e immagini",
+      "upload": "Clicca per caricare o trascina e rilascia",
+      "help": "SVG, PNG, JPG o GIF (max. 800x400 pixel)"
+    },
+    "status": {
+      "title": "Stato",
+      "publish": {
+        "label": "Pubblica il prodotto",
+        "description": "Rendilo visibile ai clienti"
+      },
+      "requireLogin": {
+        "label": "Richiedi accesso",
+        "description": "L'utente deve essere autenticato"
+      }
+    },
+    "organization": {
+      "title": "Organizzazione",
+      "category": {
+        "label": "Categoria",
+        "placeholder": "Seleziona la categoria...",
+        "options": {
+          "addons": "Componenti aggiuntivi",
+          "saas": "Piani di abbonamento SaaS"
+        }
+      },
+      "collection": {
+        "label": "Collezione",
+        "placeholder": "Aggiungi alla collezione...",
+        "options": {
+          "core": "Abbonamento Core",
+          "legacy": "Versione precedente"
+        }
+      }
+    }
+  }
+}

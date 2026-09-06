@@ -1,9 +1,7 @@
-import { env } from "~/src/platform/env"
+import type { Locale } from "~/src/integrations/use-intl/i18n.config"
+import { localizePathname } from "~/src/integrations/use-intl/i18n.paths"
 
 import { CONFIRMATION_WINDOW_IN_HOURS, NEWSLETTER_TOKEN_LENGTH } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
-
-import type { Locale } from "~/src/integrations/next-intl/i18n.config"
-import { getPathname } from "~/src/integrations/next-intl/i18n.navigation"
 
 import { ROUTES } from "~/src/routes"
 
@@ -13,19 +11,25 @@ const MILLISECONDS_PER_HOUR = 3_600_000
 
 const HEX_BYTES = NEWSLETTER_TOKEN_LENGTH / HEX_CHARS_PER_BYTE
 
-export function createToken(): string {
+export const createToken = (): string => {
   const bytes = crypto.getRandomValues(new Uint8Array(HEX_BYTES))
   return [...bytes].map((byte) => byte.toString(HEX_RADIX).padStart(HEX_CHARS_PER_BYTE, "0")).join("")
 }
 
-export function confirmationExpiry(): Date {
-  return new Date(Date.now() + CONFIRMATION_WINDOW_IN_HOURS * MILLISECONDS_PER_HOUR)
+export const confirmationExpiry = (): Date => new Date(Date.now() + CONFIRMATION_WINDOW_IN_HOURS * MILLISECONDS_PER_HOUR)
+
+interface NewsletterTokenUrlOptions {
+  readonly locale: Locale
+  readonly origin: string
+  readonly token: string
 }
 
-export function confirmationUrl(locale: Locale, token: string): string {
-  return new URL(`${getPathname({ href: ROUTES.NEWSLETTER_CONFIRM, locale })}?token=${token}`, env.NEXT_PUBLIC_APP_URL).toString()
+const newsletterTokenUrl = (pathname: string, { locale, origin, token }: NewsletterTokenUrlOptions): string => {
+  const url = new URL(localizePathname({ locale, pathname }), origin)
+  url.searchParams.set("token", token)
+  return url.toString()
 }
 
-export function unsubscribeUrl(locale: Locale, token: string): string {
-  return new URL(`${getPathname({ href: ROUTES.NEWSLETTER_UNSUBSCRIBE, locale })}?token=${token}`, env.NEXT_PUBLIC_APP_URL).toString()
-}
+export const confirmationUrl = (options: NewsletterTokenUrlOptions): string => newsletterTokenUrl(ROUTES.NEWSLETTER_CONFIRM, options)
+
+export const unsubscribeUrl = (options: NewsletterTokenUrlOptions): string => newsletterTokenUrl(ROUTES.NEWSLETTER_UNSUBSCRIBE, options)

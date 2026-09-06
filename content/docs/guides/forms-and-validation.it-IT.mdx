@@ -1,0 +1,14 @@
+---
+title: Forme e validazione
+description: Forme e validazione — SaaSy Land
+---
+
+Uso `useForm` e `form.Field` da `@tanstack/react-form`. Tenere tradotto Zod schemi nei file di validazione della funzione e riutilizzarli al limite del server. Leggi lo stato di presentazione con `useSelector(form.store, selector)`; rendere i campi accessibili con i primitivi di presentazione esistenti.
+
+I componenti del campo auth accettano il piccolo `StringField` contratto da `integrations/tanstack-form/form.fields.ts`. Conservano etichette, comportamento di messa a fuoco, password toggles e messaggi di errore. Inviare attraverso le opzioni di mutazione esportate, gestire errori sicuri, e mantenere il pulsante di invio disattivato durante l'attesa. Consultare le forme di accesso, di registrazione, di risistemazione delle password e di due fattori per esempi completi.
+
+## Guide correlate
+
+- [Architettura](/docs/architecture)
+- [Sviluppo locale](/docs/getting-started/first-run)
+- [Testing](/docs/tooling/testing)
