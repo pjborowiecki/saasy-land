@@ -3,10 +3,9 @@ import type { Resend } from "resend"
 import { describe, expect, it, vi } from "vite-plus/test"
 
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
-import { executeMutation } from "~/src/platform/testing/lib/query"
 
 import { NEWSLETTER_TOKEN_LENGTH } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
-import { confirmNewsletterSubscriptionMutation } from "~/src/modules/newsletter-subscriber/use-cases/confirm-newsletter-subscription"
+import { confirmNewsletterSubscription } from "~/src/modules/newsletter-subscriber/use-cases/confirm-newsletter-subscription"
 
 import { CONTACT_EMAIL, NOTIFICATIONS_EMAIL } from "~/src/presentation/branding"
 
@@ -56,7 +55,7 @@ describe("confirm-newsletter-subscription", () => {
     expect.hasAssertions()
     mockMatchingToken()
 
-    await expect(executeMutation(confirmNewsletterSubscriptionMutation, { token: TOKEN })).resolves.toMatchObject({ confirmed: true })
+    await expect(confirmNewsletterSubscription({ data: { token: TOKEN } })).resolves.toMatchObject({ confirmed: true })
 
     expect(dbMocks.set).toHaveBeenCalledWith(expect.objectContaining({ status: "subscribed" }))
     expect(resendSendMock).toHaveBeenCalledWith(expect.objectContaining({ from: NOTIFICATIONS_EMAIL, to: CONTACT_EMAIL }), {
@@ -68,7 +67,7 @@ describe("confirm-newsletter-subscription", () => {
     expect.hasAssertions()
     mockMatchingToken()
 
-    await executeMutation(confirmNewsletterSubscriptionMutation, { token: TOKEN })
+    await confirmNewsletterSubscription({ data: { token: TOKEN } })
 
     const [update] = dbMocks.set.mock.calls.map(([value]) => value)
 
@@ -81,7 +80,7 @@ describe("confirm-newsletter-subscription", () => {
     mockMatchingToken()
     dbMocks.returning.mockResolvedValue([])
 
-    await expect(executeMutation(confirmNewsletterSubscriptionMutation, { token: TOKEN })).resolves.toMatchObject({ confirmed: false })
+    await expect(confirmNewsletterSubscription({ data: { token: TOKEN } })).resolves.toMatchObject({ confirmed: false })
 
     expect(resendSendMock).not.toHaveBeenCalled()
   })
@@ -96,7 +95,7 @@ describe("confirm-newsletter-subscription", () => {
       headers: JSON_NULL,
     })
 
-    await expect(executeMutation(confirmNewsletterSubscriptionMutation, { token: TOKEN })).resolves.toMatchObject({ confirmed: true })
+    await expect(confirmNewsletterSubscription({ data: { token: TOKEN } })).resolves.toMatchObject({ confirmed: true })
 
     expect(consoleError).toHaveBeenCalledTimes(SINGLE_CALL)
     consoleError.mockRestore()
@@ -106,7 +105,7 @@ describe("confirm-newsletter-subscription", () => {
     expect.hasAssertions()
     mockMatchingToken()
 
-    await expect(executeMutation(confirmNewsletterSubscriptionMutation, { token: "short" })).rejects.toThrow("VALIDATION")
+    await expect(confirmNewsletterSubscription({ data: { token: "short" } })).rejects.toThrow("VALIDATION")
     expect(dbMocks.updateMock).not.toHaveBeenCalled()
   })
 })

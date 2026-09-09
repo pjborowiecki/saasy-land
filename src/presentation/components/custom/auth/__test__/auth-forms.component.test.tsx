@@ -13,14 +13,15 @@ import { describe, expect, it, vi } from "vite-plus/test"
 import { createTestRouter, renderWithRouter as render } from "~/src/platform/testing/lib/render"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type * as AuthClient from "~/src/integrations/better-auth/auth.client"
-import type * as AuthSession from "~/src/integrations/better-auth/auth.session"
+import { getCurrentSessionQuery } from "~/src/integrations/better-auth/auth.session"
 import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
+import { ACCOUNT_MUTATION_KEYS } from "~/src/modules/account/account.constants"
 import type * as SignOutUseCase from "~/src/modules/account/use-cases/sign-out-user"
 import type * as RequestPasswordResetUseCase from "~/src/modules/verification/use-cases/request-password-reset"
 import type * as ResetPasswordUseCase from "~/src/modules/verification/use-cases/reset-password"
+import { VERIFICATION_MUTATION_KEYS } from "~/src/modules/verification/verification.constants"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { DropdownMenu, DropdownMenuTrigger } from "~/src/presentation/components/shadcn/dropdown-menu"
@@ -48,7 +49,6 @@ const router = createTestRouter()
 const pushMock = vi.spyOn(router, "navigate").mockResolvedValue()
 const signInEmailMock = vi.hoisted(() => vi.fn<typeof AuthClient.signIn.email>())
 const signUpEmailMock = vi.hoisted(() => vi.fn<typeof AuthClient.signUp.email>())
-const getSessionMock = vi.hoisted(() => vi.fn<typeof AuthSession.getCurrentSession>())
 const settingsSignOutUserMock = vi.hoisted(() => vi.fn<NonNullable<typeof SignOutUseCase.settingsSignOutUserMutation.mutationFn>>())
 const requestPasswordResetMock = vi.hoisted(() =>
   vi.fn<NonNullable<typeof RequestPasswordResetUseCase.requestPasswordResetMutation.mutationFn>>(),
@@ -97,7 +97,6 @@ const getPasswordInput = (id: string): HTMLInputElement => {
 const setupSignInWithPasswordFormMocks = (): void => {
   pushMock.mockClear()
   signInEmailMock.mockClear()
-  getSessionMock.mockClear()
   toastSuccessMock.mockClear()
   toastErrorMock.mockClear()
 
@@ -105,7 +104,6 @@ const setupSignInWithPasswordFormMocks = (): void => {
     data: { redirect: false, token: "test-token", user: createAuthSessionFixture().user },
     error: null,
   })
-  getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER }))
 }
 
 const HEADERS = new Headers()
@@ -113,14 +111,12 @@ const HEADERS = new Headers()
 const setupSignUpWithPasswordFormMocks = (): void => {
   pushMock.mockClear()
   signUpEmailMock.mockClear()
-  getSessionMock.mockClear()
   triggerConfettiMock.mockClear()
   toastSuccessMock.mockClear()
 
   signUpEmailMock.mockImplementation(async ({ fetchOptions }) => {
     await invokeFetchOnSuccess(fetchOptions)
   })
-  getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.CUSTOMER }))
 }
 
 const setupForgotPasswordFormMocks = (): void => {
@@ -176,6 +172,7 @@ vi.mock(import("~/src/integrations/resend/resend.config"), () => ({
 
 // @ts-expect-error Vitest module mock factory is not inferred for module export.
 vi.mock(import("~/src/integrations/better-auth/auth.server"), () => ({
+  TRUSTED_IP_HEADERS: ["CF-Connecting-IP", "x-forwarded-for"],
   auth: {
     api: {
       signUpEmail: signUpEmailMock,
@@ -197,15 +194,15 @@ vi.mock(import("sonner"), async (importOriginal): Promise<Partial<typeof Sonner>
 })
 
 vi.mock(import("~/src/modules/account/use-cases/sign-out-user"), () => ({
-  settingsSignOutUserMutation: { mutationFn: settingsSignOutUserMock, mutationKey: ["test", "settingsSignOutUserMutation"] },
+  settingsSignOutUserMutation: { mutationFn: settingsSignOutUserMock, mutationKey: ACCOUNT_MUTATION_KEYS.SIGN_OUT },
 }))
 
 vi.mock(import("~/src/modules/verification/use-cases/request-password-reset"), () => ({
-  requestPasswordResetMutation: { mutationFn: requestPasswordResetMock, mutationKey: ["test", "requestPasswordResetMutation"] },
+  requestPasswordResetMutation: { mutationFn: requestPasswordResetMock, mutationKey: VERIFICATION_MUTATION_KEYS.REQUEST_PASSWORD_RESET },
 }))
 
 vi.mock(import("~/src/modules/verification/use-cases/reset-password"), () => ({
-  resetPasswordMutation: { mutationFn: resetPasswordMock, mutationKey: ["test", "resetPasswordMutation"] },
+  resetPasswordMutation: { mutationFn: resetPasswordMock, mutationKey: VERIFICATION_MUTATION_KEYS.RESET_PASSWORD },
 }))
 
 vi.mock(import("~/src/integrations/better-auth/auth.client"), async (importOriginal): Promise<Partial<typeof AuthClient>> => {
@@ -245,7 +242,7 @@ describe("sign in with password form component", () => {
     expect(signInEmailMock).not.toHaveBeenCalled()
   })
 
-  it("signs in and redirects to the app area", async () => {
+  it("signs in and delegates to the guarded auth callback", async () => {
     expect.hasAssertions()
     setupSignInWithPasswordFormMocks()
     const user = userEvent.setup()
@@ -263,7 +260,7 @@ describe("sign in with password form component", () => {
         }),
       )
     })
-    expect(pushMock).toHaveBeenCalledWith({ to: ROUTES.APP })
+    expect(pushMock).toHaveBeenCalledWith({ replace: true, to: ROUTES.AUTH_CALLBACK })
     expect(toastSuccessMock).toHaveBeenCalledWith(enMessages.pages.auth["sign-in"].form.success)
   })
 })
@@ -327,7 +324,8 @@ describe("forgot password form component", () => {
     expect.hasAssertions()
     setupForgotPasswordFormMocks()
     const user = userEvent.setup()
-    renderWithAuthMessages(<ForgotPasswordForm />)
+    const { queryClient } = renderWithAuthMessages(<ForgotPasswordForm />)
+    queryClient.setQueryData(getCurrentSessionQuery.queryKey, createAuthSessionFixture())
 
     await user.type(screen.getByLabelText(/email/iu), TEST_EMAIL)
     await user.click(screen.getByTestId("forgot-password-form-submit-button"))
@@ -343,6 +341,7 @@ describe("forgot password form component", () => {
     expect(resetRequest?.redirectTo).toContain(ROUTES.RESET_PASSWORD)
     expect(toastSuccessMock).toHaveBeenCalledWith(enMessages.pages.auth["forgot-password"].form.success)
     expect(screen.getByTestId("forgot-password-form-submit-button")).toBeDisabled()
+    expect(queryClient.getQueryState(getCurrentSessionQuery.queryKey)?.isInvalidated).toBe(false)
   })
 })
 
@@ -412,7 +411,7 @@ describe("o auth button component", () => {
 })
 
 describe("sign out button component", () => {
-  it("signs out and returns home", async () => {
+  it("signs out and returns to sign-in", async () => {
     expect.hasAssertions()
     setupSignOutButtonMocks()
     const user = userEvent.setup()
@@ -431,9 +430,7 @@ describe("sign out button component", () => {
     await waitFor(() => {
       expect(settingsSignOutUserMock).toHaveBeenCalled()
     })
-    expect(pushMock).toHaveBeenCalledWith({ to: ROUTES.HOME })
+    expect(pushMock).toHaveBeenCalledWith({ replace: true, to: ROUTES.SIGN_IN })
     expect(toastSuccessMock).toHaveBeenCalledWith(enMessages.pages.admin.components.signOutButton.success)
   })
 })
-
-vi.mock(import("~/src/integrations/better-auth/auth.session"), () => ({ getCurrentSession: getSessionMock }))

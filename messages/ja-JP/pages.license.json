@@ -3,7 +3,8 @@
   "description": "購入済みCLIのライセンスキーと端末の有効化状況。",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "ライセンスキー",
   "pending": "キーを発行中です。少し待ってからページを更新してください。",

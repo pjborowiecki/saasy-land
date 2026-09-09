@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { useTranslations } from "use-intl/react"
 
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { resetPasswordMutation } from "~/src/modules/verification/use-cases/reset-password"
 import { verificationZodSchemas } from "~/src/modules/verification/verification.zod"
 
@@ -32,7 +33,7 @@ export const ResetPasswordForm = ({ token }: Readonly<ResetPasswordFormProps>): 
   const queryClient = useQueryClient()
   const resetPasswordRequest = useMutation({
     ...resetPasswordMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const router = useRouter()
   const t = useTranslations()

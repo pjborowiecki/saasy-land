@@ -1,19 +1,17 @@
 import { useCallback } from "react"
 
+import { useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "@tanstack/react-router"
-
-import { hasPermission } from "~/src/integrations/better-auth/auth.access"
-import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
 import { ROUTES } from "~/src/routes"
 
 export const usePostAuthRedirect = (): (() => Promise<void>) => {
+  const queryClient = useQueryClient()
   const router = useRouter()
 
   return useCallback(async () => {
-    const session = await getCurrentSession()
-    const href = hasPermission(session?.user.role, { admin: ["access"] }) ? ROUTES.ADMIN : ROUTES.APP
-
-    await router.navigate({ to: href })
-  }, [router])
+    queryClient.clear()
+    router.clearCache()
+    await router.navigate({ replace: true, to: ROUTES.AUTH_CALLBACK })
+  }, [queryClient, router])
 }

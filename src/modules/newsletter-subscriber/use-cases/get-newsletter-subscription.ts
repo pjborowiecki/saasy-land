@@ -2,15 +2,16 @@ import { queryOptions } from "@tanstack/react-query"
 import { createServerFn } from "@tanstack/react-start"
 import { eq } from "drizzle-orm"
 
-import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { authorized } from "~/src/integrations/better-auth/auth.middleware"
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 
+import { NEWSLETTER_SUBSCRIBER_QUERY_KEYS } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import { newsletterSubscriber } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
 
 const SINGLE_ROW = 1
 
 export const getNewsletterSubscription = createServerFn({ method: "GET" })
-  .middleware([withAuth()])
+  .middleware([authorized()])
   .handler(async ({ context }) => {
     const address = context.auth.user.email.toLowerCase()
 
@@ -25,5 +26,5 @@ export const getNewsletterSubscription = createServerFn({ method: "GET" })
 
 export const getNewsletterSubscriptionQuery = queryOptions({
   queryFn: () => getNewsletterSubscription(),
-  queryKey: ["newsletter-subscriber", "getNewsletterSubscription"],
+  queryKey: NEWSLETTER_SUBSCRIBER_QUERY_KEYS.SUBSCRIPTION,
 })

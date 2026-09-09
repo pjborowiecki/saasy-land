@@ -8,6 +8,7 @@ import { useTranslations } from "use-intl/react"
 
 import type { AuthActiveSession } from "~/src/integrations/better-auth/auth.types"
 
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { settingsRevokeOtherSessionsMutation } from "~/src/modules/session/use-cases/revoke-other-sessions"
 import { settingsRevokeSessionMutation } from "~/src/modules/session/use-cases/revoke-session"
 
@@ -27,11 +28,11 @@ export const SettingsSessionsCardClient = ({ currentSessionId, sessions }: Setti
   const queryClient = useQueryClient()
   const settingsRevokeSessionRequest = useMutation({
     ...settingsRevokeSessionMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const settingsRevokeOtherSessionsRequest = useMutation({
     ...settingsRevokeOtherSessionsMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const [isPending, startTransition] = useTransition()
   const router = useRouter()

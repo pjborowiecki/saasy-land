@@ -8,6 +8,7 @@ import { useTranslations } from "use-intl/react"
 
 import { fieldErrorMessage } from "~/src/integrations/tanstack-form/form.fields"
 
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { parseTwoFactorEnableData } from "~/src/modules/two-factor/two-factor.utils"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { enableTwoFactorMutation } from "~/src/modules/two-factor/use-cases/enable-two-factor"
@@ -31,7 +32,7 @@ export const SettingsTwoFactorPasswordStep = ({ onEnabled }: Readonly<SettingsTw
   const queryClient = useQueryClient()
   const enableTwoFactorRequest = useMutation({
     ...enableTwoFactorMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const t = useTranslations("pages.admin.settings")
   const actionError = useActionError()

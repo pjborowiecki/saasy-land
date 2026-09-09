@@ -3,7 +3,8 @@
   "description": "Your purchased CLI licence key and machine activations.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "License key",
   "pending": "Your key is being issued. Refresh in a moment.",

@@ -30,7 +30,7 @@ const COOKIE_CACHE_MAX_AGE_IN_SECONDS = 300
 const MAX_CONCURRENT_SESSIONS = 10
 
 const TRUSTED_AUTH_PROVIDERS = ["github", "google"]
-const TRUSTED_IP_HEADERS = ["CF-Connecting-IP", "x-forwarded-for"]
+export const TRUSTED_IP_HEADERS = ["CF-Connecting-IP", "x-forwarded-for"] as const
 
 export const auth = betterAuth({
   account: {
@@ -39,7 +39,7 @@ export const auth = betterAuth({
   },
   advanced: {
     database: { generateId: () => v7() },
-    ipAddress: { ipAddressHeaders: TRUSTED_IP_HEADERS },
+    ipAddress: { ipAddressHeaders: [...TRUSTED_IP_HEADERS] },
   },
   appName: APP_NAME,
   baseURL: { allowedHosts: APP_HOSTS },

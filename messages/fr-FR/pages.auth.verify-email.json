@@ -6,9 +6,6 @@
   "form": {
     "title": "Vérifiez votre adresse e-mail",
     "description": "Veuillez confirmer votre adresse e-mail pour finaliser la configuration de votre compte.",
-    "verifying": "Vérification de votre adresse e-mail…",
-    "success": "Votre adresse e-mail a été vérifiée.",
-    "continue": "Continuer",
     "invalidToken": "Ce lien de vérification est invalide ou a expiré.",
     "pendingDescription": "Consultez votre boîte de réception et suivez le lien de vérification. Connectez-vous ensuite pour continuer.",
     "email": "E-mail",

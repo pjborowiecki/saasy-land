@@ -3,6 +3,7 @@ import { type JSX, type ReactNode, Suspense } from "react"
 import { Link, createFileRoute } from "@tanstack/react-router"
 import { useTranslations } from "use-intl/react"
 
+import { redirectIfSignedIn } from "~/src/integrations/better-auth/auth.routes"
 import { loadRouteMessages, routeHead } from "~/src/integrations/use-intl/i18n.metadata"
 
 import { AuthPageFallback } from "~/src/presentation/components/custom/auth/components/auth-page-fallback"
@@ -48,6 +49,7 @@ const SignInPageContent = (): JSX.Element => {
 }
 
 export const Route = createFileRoute("/auth/sign-in")({
+  beforeLoad: redirectIfSignedIn,
   component: SignInPage,
   head: routeHead,
   loader: ({ context }) =>

@@ -1,5 +1,3 @@
-import { useMemo, useRef } from "react"
-
 import { useLocale } from "use-intl/react"
 
 export interface DateOptions extends Intl.DateTimeFormatOptions {
@@ -32,35 +30,30 @@ const getFormatter = (locale: string, options: Omit<DateOptions, "locale">): Int
 export const useDateFormatter = (defaults?: HookDefaults): DateFormatter => {
   const routeLocale = useLocale()
 
-  const config = useRef(defaults)
-  config.current = defaults
+  const resolve = (args: { value: DateValue } & Partial<DateOptions>) => {
+    const { value, locale: localeArg, ...callOptions } = args
 
-  return useMemo((): DateFormatter => {
-    const resolve = (args: { value: DateValue } & Partial<DateOptions>) => {
-      const { value, locale: localeArg, ...callOptions } = args
+    const { locale: _defaultLocale, ...defaultIntlOptions } = defaults ?? {}
 
-      const { locale: _defaultLocale, ...defaultIntlOptions } = config.current ?? {}
+    const locale = localeArg ?? defaults?.locale ?? routeLocale
+    const options = { ...defaultIntlOptions, ...callOptions }
 
-      const locale = localeArg ?? config.current?.locale ?? routeLocale
-      const options = { ...defaultIntlOptions, ...callOptions }
-
-      const dateValue = value instanceof Date ? value : new Date(value)
-
-      return {
-        dateValue,
-        formatter: getFormatter(locale, options),
-      }
-    }
+    const dateValue = value instanceof Date ? value : new Date(value)
 
     return {
-      formatDate: (args: { value: DateValue } & Partial<DateOptions>) => {
-        const { formatter, dateValue } = resolve(args)
-        return formatter.format(dateValue)
-      },
-      formatDateToParts: (args: { value: DateValue } & Partial<DateOptions>) => {
-        const { formatter, dateValue } = resolve(args)
-        return formatter.formatToParts(dateValue)
-      },
+      dateValue,
+      formatter: getFormatter(locale, options),
     }
-  }, [routeLocale])
+  }
+
+  return {
+    formatDate: (args) => {
+      const { formatter, dateValue } = resolve(args)
+      return formatter.format(dateValue)
+    },
+    formatDateToParts: (args) => {
+      const { formatter, dateValue } = resolve(args)
+      return formatter.formatToParts(dateValue)
+    },
+  }
 }

@@ -5,6 +5,7 @@ import type * as zod from "zod"
 import { RATE_LIMITS, withRateLimit } from "~/src/integrations/better-auth/auth.middleware"
 import { auth } from "~/src/integrations/better-auth/auth.server"
 
+import { VERIFICATION_MUTATION_KEYS } from "~/src/modules/verification/verification.constants"
 import { verificationZodSchemas } from "~/src/modules/verification/verification.zod"
 
 export const requestPasswordReset = createServerFn({ method: "POST" })
@@ -16,5 +17,5 @@ export const requestPasswordReset = createServerFn({ method: "POST" })
 
 export const requestPasswordResetMutation = mutationOptions({
   mutationFn: (data: Parameters<typeof requestPasswordReset>[0]["data"]) => requestPasswordReset({ data }),
-  mutationKey: ["verification", "requestPasswordReset"],
+  mutationKey: VERIFICATION_MUTATION_KEYS.REQUEST_PASSWORD_RESET,
 })

@@ -1,20 +1,13 @@
 import { queryOptions } from "@tanstack/react-query"
 import { createServerFn } from "@tanstack/react-start"
-import { getRequest } from "@tanstack/react-start/server"
 
+import { authorized } from "~/src/integrations/better-auth/auth.middleware"
 import { auth } from "~/src/integrations/better-auth/auth.server"
-import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
-import { AppError, ERROR_CODES } from "~/src/modules/_core/constants/errors"
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 
-export const getActiveSessions = createServerFn({ method: "GET" }).handler(async () => {
-  const session = await getCurrentSession()
+export const getActiveSessions = createServerFn({ method: "GET" })
+  .middleware([authorized()])
+  .handler(({ context }) => auth.api.listSessions({ headers: context.requestHeaders }))
 
-  if (!session) {
-    throw new AppError(ERROR_CODES.UNAUTHORIZED)
-  }
-
-  return auth.api.listSessions({ headers: getRequest().headers })
-})
-
-export const getActiveSessionsQuery = queryOptions({ queryFn: () => getActiveSessions(), queryKey: ["session", "getActiveSessions"] })
+export const getActiveSessionsQuery = queryOptions({ queryFn: () => getActiveSessions(), queryKey: SESSION_QUERY_KEYS.ACTIVE })

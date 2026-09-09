@@ -1,4 +1,3 @@
-import { mutationOptions } from "@tanstack/react-query"
 import { createServerFn } from "@tanstack/react-start"
 import { eq } from "drizzle-orm"
 import type * as zod from "zod"
@@ -22,8 +21,3 @@ export const unsubscribeFromNewsletter = createServerFn({ method: "POST" })
 
     return { unsubscribed: true }
   })
-
-export const unsubscribeFromNewsletterMutation = mutationOptions({
-  mutationFn: (data: Parameters<typeof unsubscribeFromNewsletter>[0]["data"]) => unsubscribeFromNewsletter({ data }),
-  mutationKey: ["newsletter-subscriber", "unsubscribeFromNewsletter"],
-})

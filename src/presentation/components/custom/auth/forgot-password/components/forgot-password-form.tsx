@@ -1,7 +1,7 @@
 import { type JSX, useState } from "react"
 
 import { useForm, useSelector } from "@tanstack/react-form"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { useLocale, useTranslations } from "use-intl/react"
@@ -25,11 +25,7 @@ import { ROUTES } from "~/src/routes"
 const forgotPasswordSchema = verificationZodSchemas.forgotPassword
 
 export const ForgotPasswordForm = (): JSX.Element => {
-  const queryClient = useQueryClient()
-  const requestPasswordResetRequest = useMutation({
-    ...requestPasswordResetMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
-  })
+  const requestPasswordResetRequest = useMutation(requestPasswordResetMutation)
   const [submitted, setSubmitted] = useState<boolean>(false)
 
   const locale = useLocale()

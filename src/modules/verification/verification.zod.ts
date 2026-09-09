@@ -38,10 +38,6 @@ const sendVerificationEmail = zod.object({
   email: emailSchema,
 })
 
-const verifyEmail = zod.object({
-  token: tokenField,
-})
-
 const insert = createInsertSchema(verification)
 const select = createSelectSchema(verification)
 const update = createUpdateSchema(verification)
@@ -55,5 +51,4 @@ export const verificationZodSchemas = {
   select,
   sendVerificationEmail,
   update,
-  verifyEmail,
 }

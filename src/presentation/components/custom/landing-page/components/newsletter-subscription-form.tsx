@@ -10,6 +10,7 @@ import { useLocale, useTranslations } from "use-intl/react"
 import { AUTH_VALIDATION_PARAMS } from "~/src/integrations/better-auth/auth.validations"
 import { fieldErrorMessage } from "~/src/integrations/tanstack-form/form.fields"
 
+import { NEWSLETTER_SUBSCRIBER_QUERY_KEYS } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import { newsletterSubscriberZodSchemas } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.zod"
 import { subscribeToNewsletterMutation } from "~/src/modules/newsletter-subscriber/use-cases/subscribe-to-newsletter"
 
@@ -31,7 +32,7 @@ export const NewsletterSubscriptionForm = (): JSX.Element => {
   const queryClient = useQueryClient()
   const subscribeToNewsletterRequest = useMutation({
     ...subscribeToNewsletterMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: NEWSLETTER_SUBSCRIBER_QUERY_KEYS.ALL }),
   })
 
   const locale = useLocale()

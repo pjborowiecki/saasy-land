@@ -11,6 +11,7 @@ import { fieldErrorMessage } from "~/src/integrations/tanstack-form/form.fields"
 
 import { accountZodSchemas } from "~/src/modules/account/account.zod"
 import { settingsChangePasswordMutation } from "~/src/modules/account/use-cases/change-password"
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 
 import { useActionError } from "~/src/hooks/use-action-error"
 
@@ -28,7 +29,7 @@ export const SettingsPasswordFormClient = (): JSX.Element => {
   const queryClient = useQueryClient()
   const settingsChangePasswordRequest = useMutation({
     ...settingsChangePasswordMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
 
   const router = useRouter()

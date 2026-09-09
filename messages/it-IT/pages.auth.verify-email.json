@@ -6,9 +6,6 @@
   "form": {
     "title": "Verifica il tuo indirizzo email",
     "description": "Conferma il tuo indirizzo email per completare la configurazione del tuo account.",
-    "verifying": "Verifichiamo il tuo indirizzo email…",
-    "success": "La sua email è stata verificata.",
-    "continue": "Continua",
     "invalidToken": "Questo link di verifica non è valido o è scaduto.",
     "pendingDescription": "Controlla la posta in arrivo e segui il link di verifica. Poi accedi per continuare.",
     "email": "Email",

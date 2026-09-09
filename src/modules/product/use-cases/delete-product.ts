@@ -3,15 +3,16 @@ import { createServerFn } from "@tanstack/react-start"
 import { eq } from "drizzle-orm"
 import type * as zod from "zod"
 
-import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { authorized } from "~/src/integrations/better-auth/auth.middleware"
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 
 import { AppError, ERROR_CODES } from "~/src/modules/_core/constants/errors"
+import { PRODUCT_MUTATION_KEYS } from "~/src/modules/product/product.constants"
 import { product } from "~/src/modules/product/product.schema"
 import { productZodSchemas } from "~/src/modules/product/product.zod"
 
 export const deleteProduct = createServerFn({ method: "POST" })
-  .middleware([withAuth({ product: ["delete"] })])
+  .middleware([authorized({ product: ["delete"] })])
   .validator((input: zod.input<typeof productZodSchemas.deleteProduct>) => productZodSchemas.deleteProduct.parse(input))
   .handler(async ({ data }) => {
     const [row] = await db.delete(product).where(eq(product.id, data.productId)).returning({ id: product.id })
@@ -25,5 +26,5 @@ export const deleteProduct = createServerFn({ method: "POST" })
 
 export const deleteProductMutation = mutationOptions({
   mutationFn: (data: Parameters<typeof deleteProduct>[0]["data"]) => deleteProduct({ data }),
-  mutationKey: ["product", "deleteProduct"],
+  mutationKey: PRODUCT_MUTATION_KEYS.DELETE,
 })

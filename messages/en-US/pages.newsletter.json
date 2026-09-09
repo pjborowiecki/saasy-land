@@ -23,12 +23,6 @@
       "note": "Sign up again from the footer and a fresh link lands in your inbox in about a minute.",
       "action": "Back to the site"
     },
-    "pending": {
-      "title": "Confirming your subscription…",
-      "body": "Please wait while we confirm your email address.",
-      "note": "This will only take a moment.",
-      "action": "Back to the site"
-    },
     "error": {
       "title": "We could not confirm your address.",
       "body": "Please reload this page to try again.",
@@ -42,10 +36,6 @@
     "body": "That address will not get another build log email. No confirmation needed and nothing else to click.",
     "note": "Transactional email about an account or a purchase is separate and still arrives, because that is mail you asked for by buying something.",
     "resubscribe": "Changed your mind? Sign up again from the footer",
-    "pending": {
-      "title": "Unsubscribing…",
-      "body": "Please wait while we update your subscription."
-    },
     "error": {
       "title": "We could not unsubscribe this address.",
       "body": "Open the unsubscribe link from your email and try again."

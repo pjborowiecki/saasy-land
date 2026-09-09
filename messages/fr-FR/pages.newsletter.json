@@ -23,12 +23,6 @@
       "note": "Inscrivez-vous à nouveau depuis le pied de page, et un nouveau lien arrivera dans votre boîte de réception en environ une minute.",
       "action": "Retour au site"
     },
-    "pending": {
-      "title": "Confirmation de votre abonnement…",
-      "body": "Veuillez patienter pendant que nous vérifions votre adresse e-mail.",
-      "note": "Cela ne prendra que quelques instants.",
-      "action": "Retour au site"
-    },
     "error": {
       "title": "Nous n'avons pas pu confirmer votre adresse.",
       "body": "Veuillez recharger cette page pour réessayer.",
@@ -42,10 +36,6 @@
     "body": "Cette adresse ne recevra plus de courriel concernant les rapports de construction. Aucune confirmation n'est nécessaire, et il ne faut cliquer sur aucun lien.",
     "note": "Les emails transactionnels concernant un compte ou un achat sont envoyés séparément et parviennent toujours, car il s'agit de courriers que vous avez demandés en effectuant un achat.",
     "resubscribe": "Vous avez changé d'avis ? Inscrivez-vous à nouveau depuis le pied de page",
-    "pending": {
-      "title": "Se désinscrire…",
-      "body": "Veuillez patienter pendant que nous mettons à jour votre abonnement."
-    },
     "error": {
       "title": "Nous n'avons pas pu supprimer cette adresse.",
       "body": "Ouvrez le lien de désinscription dans votre email et réessayez."

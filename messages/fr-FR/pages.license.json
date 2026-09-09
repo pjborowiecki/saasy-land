@@ -3,7 +3,8 @@
   "description": "Votre clé de licence CLI achetée et les activations de vos appareils.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "Clé de licence",
   "pending": "Votre clé est en cours d’émission. Actualisez la page dans un instant.",

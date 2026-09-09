@@ -3,15 +3,19 @@ import { env } from "cloudflare:workers"
 import { createServerFn } from "@tanstack/react-start"
 import { getRequest } from "@tanstack/react-start/server"
 import { APIError } from "better-auth/api"
-import { afterEach, describe, expect, it, vi } from "vite-plus/test"
+import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test"
 import { z as zod } from "zod"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
-import { RATE_LIMITS, withAuth, withRateLimit, withRequest } from "~/src/integrations/better-auth/auth.middleware"
+import { RATE_LIMITS, authorized, withRateLimit, withRequest } from "~/src/integrations/better-auth/auth.middleware"
 import { auth } from "~/src/integrations/better-auth/auth.server"
+import { getCurrentSession } from "~/src/integrations/better-auth/auth.session"
 
 import { AppError, ERROR_CODES } from "~/src/modules/_core/constants/errors"
 
+beforeEach(() => {
+  vi.mocked(getRequest).mockImplementation(() => new Request("http://localhost/app"))
+})
 afterEach(() => vi.restoreAllMocks())
 
 describe("server function request middleware", () => {
@@ -21,13 +25,13 @@ describe("server function request middleware", () => {
       .handler(() => "done")
     await expect(action()).resolves.toBe("done")
   })
-  it("preserves domain error codes", async () => {
+  it("preserves domain error codes without exposing private details", async () => {
     const action = createServerFn()
       .middleware([withRequest])
       .handler(() => {
         throw new AppError(ERROR_CODES.FORBIDDEN, "details")
       })
-    await expect(action()).rejects.toThrow("FORBIDDEN")
+    await expect(action()).rejects.toMatchObject({ code: ERROR_CODES.FORBIDDEN, message: "FORBIDDEN" })
   })
   it("maps Better Auth errors to their translation key", async () => {
     const action = createServerFn()
@@ -46,6 +50,25 @@ describe("server function request middleware", () => {
       })
     await expect(action()).rejects.toThrow("INTERNAL_ERROR")
   })
+  it("masks asynchronous failures and logs the original error only on the server", async () => {
+    const error = new Error("private database details")
+    const log = vi.spyOn(console, "error").mockImplementation(() => {})
+    const action = createServerFn()
+      .middleware([withRequest])
+      .handler(() => Promise.reject(error))
+
+    await expect(action()).rejects.toMatchObject({ code: ERROR_CODES.INTERNAL_ERROR, message: "INTERNAL_ERROR" })
+    expect(log).toHaveBeenCalledExactlyOnceWith("Server function failed", error)
+  })
+  it("preserves request headers through the middleware", async () => {
+    const headers = new Headers({ "X-Request-ID": "request-123" })
+    vi.mocked(getRequest).mockReturnValue(new Request("http://localhost/", { headers }))
+    const action = createServerFn()
+      .middleware([withRequest])
+      .handler(({ context }) => context.requestHeaders.get("X-Request-ID"))
+
+    await expect(action()).resolves.toBe("request-123")
+  })
   it("rejects invalid input before the handler runs", async () => {
     const handler = vi.fn(() => "done")
     const schema = zod.object({ email: zod.email() })
@@ -58,11 +81,23 @@ describe("server function request middleware", () => {
   })
 })
 describe("authorization middleware", () => {
+  it("shares one session read across the route and multiple permission checks in the same request", async () => {
+    vi.mocked(getRequest).mockReturnValue(new Request("http://localhost/admin"))
+    const session = createAuthSessionFixture({ role: "admin" })
+    const getSession = vi.spyOn(auth.api, "getSession").mockResolvedValue(session)
+    await getCurrentSession()
+    const action = createServerFn()
+      .middleware([authorized({ user: ["list"] }), authorized({ product: ["read"] })])
+      .handler(({ context }) => context.auth.user.id)
+    await expect(action()).resolves.toBe(session.user.id)
+    expect(getSession).toHaveBeenCalledOnce()
+  })
+
   it("rejects signed-out callers", async () => {
     vi.spyOn(auth.api, "getSession").mockResolvedValue(null)
     await expect(
       createServerFn()
-        .middleware([withAuth()])
+        .middleware([authorized()])
         .handler(() => "secret")(),
     ).rejects.toThrow("UNAUTHORIZED")
   })
@@ -70,7 +105,7 @@ describe("authorization middleware", () => {
     vi.spyOn(auth.api, "getSession").mockResolvedValue(createAuthSessionFixture({ role: "customer" }))
     await expect(
       createServerFn()
-        .middleware([withAuth({ user: ["list"] })])
+        .middleware([authorized({ user: ["list"] })])
         .handler(() => "secret")(),
     ).rejects.toThrow("FORBIDDEN")
   })
@@ -78,7 +113,7 @@ describe("authorization middleware", () => {
     const session = createAuthSessionFixture({ role: "admin" })
     vi.spyOn(auth.api, "getSession").mockResolvedValue(session)
     const action = createServerFn()
-      .middleware([withAuth({ user: ["list"] })])
+      .middleware([authorized({ user: ["list"] })])
       .handler(({ context }) => context.auth.user.id)
     await expect(action()).resolves.toBe(session.user.id)
   })
@@ -86,7 +121,7 @@ describe("authorization middleware", () => {
     vi.spyOn(auth.api, "getSession").mockResolvedValue(createAuthSessionFixture({ role: "customer" }))
     await expect(
       createServerFn()
-        .middleware([withAuth()])
+        .middleware([authorized()])
         .handler(() => "secret")(),
     ).resolves.toBe("secret")
   })

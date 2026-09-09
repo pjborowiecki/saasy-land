@@ -4,15 +4,16 @@ import { eq, sql } from "drizzle-orm"
 import { v7 } from "uuid"
 import type * as zod from "zod"
 
-import { withAuth } from "~/src/integrations/better-auth/auth.middleware"
+import { authorized } from "~/src/integrations/better-auth/auth.middleware"
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 
+import { NEWSLETTER_SUBSCRIBER_MUTATION_KEYS } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import { newsletterSubscriber } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
 import { createToken } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.utils"
 import { newsletterSubscriberZodSchemas } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.zod"
 
 export const setNewsletterSubscription = createServerFn({ method: "POST" })
-  .middleware([withAuth()])
+  .middleware([authorized()])
   .validator((input: zod.input<typeof newsletterSubscriberZodSchemas.setNewsletterSubscription>) =>
     newsletterSubscriberZodSchemas.setNewsletterSubscription.parse(input),
   )
@@ -56,5 +57,5 @@ export const setNewsletterSubscription = createServerFn({ method: "POST" })
 
 export const setNewsletterSubscriptionMutation = mutationOptions({
   mutationFn: (data: Parameters<typeof setNewsletterSubscription>[0]["data"]) => setNewsletterSubscription({ data }),
-  mutationKey: ["newsletter-subscriber", "setNewsletterSubscription"],
+  mutationKey: NEWSLETTER_SUBSCRIBER_MUTATION_KEYS.SET_SUBSCRIPTION,
 })

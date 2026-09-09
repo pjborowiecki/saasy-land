@@ -10,6 +10,7 @@ import { useTranslations } from "use-intl/react"
 import { banUserMutation } from "~/src/modules/user/use-cases/ban-user"
 import { deleteUserMutation } from "~/src/modules/user/use-cases/delete-user"
 import { unbanUserMutation } from "~/src/modules/user/use-cases/unban-user"
+import { USER_QUERY_KEYS } from "~/src/modules/user/user.constants"
 import type { User } from "~/src/modules/user/user.types"
 
 import { useActionError } from "~/src/hooks/use-action-error"
@@ -50,15 +51,15 @@ export const UserRowActions = ({ row }: Readonly<CellContext<DataTableFeatures, 
   const queryClient = useQueryClient()
   const unbanUserRequest = useMutation({
     ...unbanUserMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: USER_QUERY_KEYS.ALL }),
   })
   const banUserRequest = useMutation({
     ...banUserMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: USER_QUERY_KEYS.ALL }),
   })
   const deleteUserRequest = useMutation({
     ...deleteUserMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: USER_QUERY_KEYS.ALL }),
   })
   const [isPending, startTransition] = useTransition()
 

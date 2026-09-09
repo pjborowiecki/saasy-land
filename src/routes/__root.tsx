@@ -1,6 +1,7 @@
 import { type ReactNode, Suspense } from "react"
 
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router"
+import { ThemeScript } from "@wrksz/themes/script"
 
 import { AppRouterProvider } from "~/src/providers/app-router-provider"
 import { ThemeProvider } from "~/src/providers/theme-provider"
@@ -9,6 +10,8 @@ import { TranslationsProvider } from "~/src/providers/translations-provider"
 
 import { ROOT_NAMESPACES, preloadNamespaces } from "~/src/integrations/use-intl/i18n.messages"
 import { getCurrentLocale } from "~/src/integrations/use-intl/i18n.utils"
+
+import { THEME } from "~/src/presentation/theme"
 
 import { Toaster } from "~/src/presentation/components/shadcn/sonner"
 
@@ -44,6 +47,7 @@ const RootDocument = ({ children }: Readonly<{ children: ReactNode }>) => (
   >
     <head>
       <meta charSet="utf-8" />
+      <ThemeScript defaultTheme={THEME.DEFAULT_THEME} storage="localStorage" storageKey={THEME.STORAGE_KEY} />
       <HeadContent />
     </head>
     <body className="flex min-h-full flex-col" suppressHydrationWarning>

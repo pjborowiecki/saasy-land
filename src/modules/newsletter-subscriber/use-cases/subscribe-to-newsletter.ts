@@ -9,7 +9,10 @@ import { RATE_LIMITS, withRateLimit } from "~/src/integrations/better-auth/auth.
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 import { sendEmail } from "~/src/integrations/resend/resend.utils"
 
-import { SUBSCRIPTION_RESULT } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
+import {
+  NEWSLETTER_SUBSCRIBER_MUTATION_KEYS,
+  SUBSCRIPTION_RESULT,
+} from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import { newsletterSubscriber } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
 import { newsletterRequestOrigin } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.server"
 import { confirmationExpiry, confirmationUrl, createToken } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.utils"
@@ -71,5 +74,5 @@ export const subscribeToNewsletter = createServerFn({ method: "POST" })
 
 export const subscribeToNewsletterMutation = mutationOptions({
   mutationFn: (data: Parameters<typeof subscribeToNewsletter>[0]["data"]) => subscribeToNewsletter({ data }),
-  mutationKey: ["newsletter-subscriber", "subscribeToNewsletter"],
+  mutationKey: NEWSLETTER_SUBSCRIBER_MUTATION_KEYS.SUBSCRIBE,
 })

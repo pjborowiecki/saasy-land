@@ -1,4 +1,3 @@
-import { mutationOptions } from "@tanstack/react-query"
 import { createServerFn } from "@tanstack/react-start"
 import { and, eq, gt, sql } from "drizzle-orm"
 import type * as zod from "zod"
@@ -54,8 +53,3 @@ export const confirmNewsletterSubscription = createServerFn({ method: "POST" })
 
     return { confirmed: true }
   })
-
-export const confirmNewsletterSubscriptionMutation = mutationOptions({
-  mutationFn: (data: Parameters<typeof confirmNewsletterSubscription>[0]["data"]) => confirmNewsletterSubscription({ data }),
-  mutationKey: ["newsletter-subscriber", "confirmNewsletterSubscription"],
-})

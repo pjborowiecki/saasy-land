@@ -1,5 +1,3 @@
-import { useMemo, useRef } from "react"
-
 import { useLocale } from "use-intl/react"
 
 export interface CurrencyOptions extends Omit<Intl.NumberFormatOptions, "style"> {
@@ -35,38 +33,33 @@ const getFormatter = (locale: string, options: Omit<CurrencyOptions, "locale">):
 export const useCurrencyFormatter = <const TData extends HookDefaults>(defaults?: TData): CurrencyFormatter<TData> => {
   const routeLocale = useLocale()
 
-  const config = useRef(defaults)
-  config.current = defaults
+  const resolve = (args: { value: number } & RequiresCurrency<TData>) => {
+    const { value, locale: localeArg, currency: currencyArg, ...callOptions } = args
 
-  return useMemo((): CurrencyFormatter<TData> => {
-    const resolve = (args: { value: number } & RequiresCurrency<TData>) => {
-      const { value, locale: localeArg, currency: currencyArg, ...callOptions } = args
-
-      const currency = currencyArg ?? config.current?.currency
-      if (currency === undefined || currency.length === 0) {
-        throw new Error("formatCurrency requires a currency code")
-      }
-
-      const { locale: _defaultLocale, ...defaultIntlOptions } = config.current ?? {}
-
-      const locale = localeArg ?? config.current?.locale ?? routeLocale
-      const options = { ...defaultIntlOptions, ...callOptions, currency }
-
-      return {
-        formatter: getFormatter(locale, options),
-        value,
-      }
+    const currency = currencyArg ?? defaults?.currency
+    if (currency === undefined || currency.length === 0) {
+      throw new Error("formatCurrency requires a currency code")
     }
+
+    const { locale: _defaultLocale, ...defaultIntlOptions } = defaults ?? {}
+
+    const locale = localeArg ?? defaults?.locale ?? routeLocale
+    const options = { ...defaultIntlOptions, ...callOptions, currency }
 
     return {
-      formatCurrency: (args: { value: number } & RequiresCurrency<TData>) => {
-        const { formatter, value } = resolve(args)
-        return formatter.format(value)
-      },
-      formatCurrencyToParts: (args: { value: number } & RequiresCurrency<TData>) => {
-        const { formatter, value } = resolve(args)
-        return formatter.formatToParts(value)
-      },
+      formatter: getFormatter(locale, options),
+      value,
     }
-  }, [routeLocale])
+  }
+
+  return {
+    formatCurrency: (args) => {
+      const { formatter, value } = resolve(args)
+      return formatter.format(value)
+    },
+    formatCurrencyToParts: (args) => {
+      const { formatter, value } = resolve(args)
+      return formatter.formatToParts(value)
+    },
+  }
 }

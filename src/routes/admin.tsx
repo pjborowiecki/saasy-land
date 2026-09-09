@@ -2,8 +2,7 @@ import { type JSX, Suspense } from "react"
 
 import { Outlet, createFileRoute } from "@tanstack/react-router"
 
-import { requireAdmin } from "~/src/integrations/better-auth/auth.guards"
-import { getCurrentSessionQuery } from "~/src/integrations/better-auth/auth.session"
+import { requireAdmin } from "~/src/integrations/better-auth/auth.routes"
 import { preloadNamespaces } from "~/src/integrations/use-intl/i18n.messages"
 import { getCurrentLocale } from "~/src/integrations/use-intl/i18n.utils"
 
@@ -48,11 +47,7 @@ const AdminLayout = (): JSX.Element => (
 )
 
 export const Route = createFileRoute("/admin")({
-  beforeLoad: async ({ context }) => {
-    const result = await requireAdmin()
-    context.queryClient.setQueryData(getCurrentSessionQuery.queryKey, result.session)
-    return result
-  },
+  beforeLoad: requireAdmin,
   component: AdminLayout,
   loader: ({ context }) =>
     preloadNamespaces({

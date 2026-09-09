@@ -23,12 +23,6 @@
       "note": "Inscreva-se novamente no rodapé e um novo link será enviado para sua caixa de entrada em aproximadamente um minuto.",
       "action": "Retornar ao site"
     },
-    "pending": {
-      "title": "Confirmando sua assinatura...",
-      "body": "Por favor, aguarde enquanto confirmamos o seu endereço de e-mail.",
-      "note": "Isso levará apenas um instante.",
-      "action": "Retornar ao site"
-    },
     "error": {
       "title": "Não foi possível confirmar o seu endereço.",
       "body": "Por favor, recarregue esta página para tentar novamente.",
@@ -42,10 +36,6 @@
     "body": "Aquele endereço não receberá mais e-mails com registros de construção. Não é necessária confirmação e não há mais nada para clicar.",
     "note": "E-mails transacionais referentes a sua conta ou a uma compra são enviados separadamente e ainda chegam, pois se trata de correspondência que você solicitou ao realizar uma compra.",
     "resubscribe": "Mudou de ideia? Inscreva-se novamente no rodapé",
-    "pending": {
-      "title": "Descadastrando...",
-      "body": "Por favor, aguarde enquanto atualizamos sua assinatura."
-    },
     "error": {
       "title": "Não foi possível remover este endereço.",
       "body": "Abra o link de cancelamento de inscrição que você recebeu no seu e-mail e tente novamente."

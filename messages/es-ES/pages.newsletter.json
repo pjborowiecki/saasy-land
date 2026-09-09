@@ -23,12 +23,6 @@
       "note": "Regístrese de nuevo desde el pie de página y un nuevo enlace llegará a su bandeja de entrada en aproximadamente un minuto.",
       "action": "Regreso al sitio"
     },
-    "pending": {
-      "title": "Confirmando su suscripción…",
-      "body": "Por favor, espere mientras confirmamos su dirección de correo electrónico.",
-      "note": "Esto solo tomará un momento.",
-      "action": "Regreso al sitio"
-    },
     "error": {
       "title": "No pudimos confirmar su dirección.",
       "body": "Por favor, recargue esta página para volver a intentarlo.",
@@ -42,10 +36,6 @@
     "body": "Esa dirección no recibirá más correos electrónicos con registros de compilación. No se necesita confirmación y no hay nada más que hacer clic.",
     "note": "El correo electrónico relacionado con una cuenta o una compra se envía por separado y sigue llegando, ya que es un correo que solicitó al realizar una compra.",
     "resubscribe": "¿Cambiaste de opinión? Regístrate de nuevo desde el pie de página",
-    "pending": {
-      "title": "Desuscripción…",
-      "body": "Por favor, espere mientras actualizamos su suscripción."
-    },
     "error": {
       "title": "No pudimos dar de baja esta dirección.",
       "body": "Abra el enlace de cancelar la suscripción que encontrará en su correo electrónico e inténtelo de nuevo."

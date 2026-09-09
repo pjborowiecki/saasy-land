@@ -4,13 +4,18 @@ import { queryOptions } from "@tanstack/react-query"
 import { notFound } from "@tanstack/react-router"
 import { createServerFn } from "@tanstack/react-start"
 import browserCollections from "collections/browser"
+import { z } from "zod"
 
 import { blogSource } from "~/src/integrations/fumadocs/fumadocs.source"
 import { getMDXComponents } from "~/src/integrations/fumadocs/mdx"
+import { I18N, type SupportedLocale } from "~/src/integrations/use-intl/i18n.config"
 import { localizePathname } from "~/src/integrations/use-intl/i18n.paths"
 import { getCurrentLocale } from "~/src/integrations/use-intl/i18n.utils"
 
 import { readingTimeMinutes } from "~/src/lib/blog"
+
+const BLOG_QUERY_KEYS = { ALL: ["blog"] } as const
+const blogLocaleSchema = z.enum(I18N.SUPPORTED_LOCALES)
 
 /**
  * Flatten one table-of-contents heading to plain text.
@@ -32,10 +37,9 @@ const tocItemTitle = (title: ReactNode): string =>
     })
     .join("")
 
-const serializePost = (page: ReturnType<typeof blogSource.getPages>[number]) => {
+const serializePost = (page: ReturnType<typeof blogSource.getPages>[number], locale: SupportedLocale) => {
   const { authorImage, authorName, date, description, excerpt, faq, featured, image, published, tags, updated, title, structuredData } =
     page.data
-  const locale = getCurrentLocale()
 
   return {
     data: {
@@ -58,18 +62,20 @@ const serializePost = (page: ReturnType<typeof blogSource.getPages>[number]) => 
   }
 }
 
-export const getBlogPosts = createServerFn({ method: "GET" }).handler(() =>
-  blogSource
-    .getPages(getCurrentLocale())
-    .filter((page) => page.data.published)
-    .map((page) => serializePost(page)),
-)
+export const getBlogPosts = createServerFn({ method: "GET" })
+  .validator((locale: SupportedLocale) => blogLocaleSchema.parse(locale))
+  .handler(({ data: locale }) =>
+    blogSource
+      .getPages(locale)
+      .filter((page) => page.data.published)
+      .map((page) => serializePost(page, locale)),
+  )
 
 export type BlogPostSummary = Awaited<ReturnType<typeof getBlogPosts>>[number]
 export const blogPostsQuery = (locale = getCurrentLocale()) =>
   queryOptions({
-    queryFn: () => getBlogPosts(),
-    queryKey: ["blog", locale],
+    queryFn: () => getBlogPosts({ data: locale }),
+    queryKey: [...BLOG_QUERY_KEYS.ALL, locale],
     staleTime: Infinity,
   })
 
@@ -81,7 +87,7 @@ export const getBlogPost = createServerFn({ method: "GET" })
       throw notFound()
     }
     return {
-      ...serializePost(page),
+      ...serializePost(page, getCurrentLocale()),
       toc: page.data.toc.map((item) => ({ depth: item.depth, title: tocItemTitle(item.title), url: item.url })),
     }
   })

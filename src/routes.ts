@@ -29,6 +29,7 @@ export const ROUTES = {
     TWO_FACTOR: "/two-factor/*",
   },
   API_AUTH_CUSTOMER_PORTAL: "/api/auth/customer/portal",
+  API_AUTH_VERIFY_EMAIL: "/api/auth/verify-email",
   APP: "/app",
   APP_LICENSE: "/app/license",
   AUTH_CALLBACK: "/auth/callback",

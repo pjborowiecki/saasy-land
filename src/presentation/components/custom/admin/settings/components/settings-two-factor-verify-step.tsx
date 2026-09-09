@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useTranslations } from "use-intl/react"
 
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { createOtpSlotIndices, extractTotpSecret } from "~/src/modules/two-factor/two-factor.utils"
 import { verifyTotpMutation } from "~/src/modules/two-factor/use-cases/verify-totp"
 
@@ -26,7 +27,7 @@ export const SettingsTwoFactorVerifyStep = ({ onVerified, totpUri }: Readonly<Se
   const queryClient = useQueryClient()
   const verifyTotpRequest = useMutation({
     ...verifyTotpMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const t = useTranslations("pages.admin.settings")
   const actionError = useActionError()

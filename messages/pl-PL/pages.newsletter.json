@@ -23,12 +23,6 @@
       "note": "Zapisz się ponownie w stopce, a nowy link trafi do skrzynki w minutę.",
       "action": "Wróć na stronę"
     },
-    "pending": {
-      "title": "Potwierdzamy subskrypcję…",
-      "body": "Poczekaj, aż potwierdzimy Twój adres e-mail.",
-      "note": "To potrwa tylko chwilę.",
-      "action": "Wróć na stronę"
-    },
     "error": {
       "title": "Nie udało się potwierdzić adresu.",
       "body": "Odśwież stronę, aby spróbować ponownie.",
@@ -42,10 +36,6 @@
     "body": "Ten adres nie dostanie już kolejnego maila z dziennika budowy. Nie trzeba nic potwierdzać ani nigdzie klikać.",
     "note": "Maile transakcyjne dotyczące konta albo zakupu to osobna sprawa i nadal przychodzą, bo to poczta, o którą poprosiłeś, kupując.",
     "resubscribe": "Zmiana zdania? Zapisz się ponownie w stopce",
-    "pending": {
-      "title": "Anulujemy subskrypcję…",
-      "body": "Poczekaj, aż zaktualizujemy Twoją subskrypcję."
-    },
     "error": {
       "title": "Nie udało się anulować subskrypcji.",
       "body": "Otwórz link anulowania subskrypcji z wiadomości e-mail i spróbuj ponownie."

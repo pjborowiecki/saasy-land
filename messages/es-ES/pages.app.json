@@ -1,5 +1,39 @@
 {
-  "title": "Página de la aplicación",
-  "description": "Bienvenido a la página de la aplicación.",
-  "license": "Administre su licencia"
+  "title": "Resumen",
+  "description": "Tu cuenta de SaaSy Land, tu licencia y los siguientes pasos.",
+  "license": "Gestionar tu licencia",
+  "navigation": {
+    "label": "Navegación de la aplicación",
+    "overview": "Resumen",
+    "license": "Licencia",
+    "resources": "Recursos",
+    "documentation": "Documentación",
+    "support": "Contactar con soporte",
+    "website": "Volver al sitio web"
+  },
+  "account": {
+    "label": "Tu cuenta",
+    "signOut": "Cerrar sesión",
+    "signingOut": "Cerrando sesión...",
+    "signedOut": "Has cerrado sesión."
+  },
+  "overview": {
+    "license": {
+      "title": "Tu licencia",
+      "description": "Consulta tu clave de licencia y gestiona los equipos que has activado.",
+      "active": "Activa",
+      "revoked": "Inactiva",
+      "pending": "Generando la clave"
+    },
+    "docs": {
+      "title": "Empieza a crear",
+      "description": "Sigue la documentación para instalar la CLI y crear tu primer proyecto.",
+      "action": "Leer la documentación"
+    },
+    "support": {
+      "title": "¿Necesitas ayuda?",
+      "description": "Obtén ayuda con tu compra, tu licencia o los primeros pasos.",
+      "action": "Contactar con soporte"
+    }
+  }
 }

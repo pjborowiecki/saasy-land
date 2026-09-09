@@ -5,6 +5,7 @@ import type * as zod from "zod"
 import { RATE_LIMITS, withRateLimit } from "~/src/integrations/better-auth/auth.middleware"
 import { auth } from "~/src/integrations/better-auth/auth.server"
 
+import { TWO_FACTOR_MUTATION_KEYS } from "~/src/modules/two-factor/two-factor.constants"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 
 export const verifyTotp = createServerFn({ method: "POST" })
@@ -19,5 +20,5 @@ export const verifyTotp = createServerFn({ method: "POST" })
 
 export const verifyTotpMutation = mutationOptions({
   mutationFn: (data: Parameters<typeof verifyTotp>[0]["data"]) => verifyTotp({ data }),
-  mutationKey: ["two-factor", "verifyTotp"],
+  mutationKey: TWO_FACTOR_MUTATION_KEYS.VERIFY_TOTP,
 })

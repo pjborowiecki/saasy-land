@@ -1,10 +1,8 @@
 import type * as StartServerModule from "@tanstack/react-start/server"
 import { describe, expect, it, vi } from "vite-plus/test"
 
-import { executeMutation } from "~/src/platform/testing/lib/query"
-
 import { NEWSLETTER_TOKEN_LENGTH } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
-import { unsubscribeFromNewsletterMutation } from "~/src/modules/newsletter-subscriber/use-cases/unsubscribe-from-newsletter"
+import { unsubscribeFromNewsletter } from "~/src/modules/newsletter-subscriber/use-cases/unsubscribe-from-newsletter"
 
 const HEADERS = new Headers()
 const TOKEN = "b".repeat(NEWSLETTER_TOKEN_LENGTH)
@@ -34,7 +32,7 @@ describe("unsubscribe-from-newsletter", () => {
     expect.hasAssertions()
     dbMocks.updateMock.mockClear()
 
-    await expect(executeMutation(unsubscribeFromNewsletterMutation, { token: TOKEN })).resolves.toMatchObject({ unsubscribed: true })
+    await expect(unsubscribeFromNewsletter({ data: { token: TOKEN } })).resolves.toMatchObject({ unsubscribed: true })
 
     expect(dbMocks.updateMock).toHaveBeenCalledTimes(SINGLE_CALL)
     expect(dbMocks.set).toHaveBeenCalledWith(expect.objectContaining({ status: "unsubscribed" }))
@@ -44,18 +42,16 @@ describe("unsubscribe-from-newsletter", () => {
     expect.hasAssertions()
     dbMocks.updateMock.mockClear()
 
-    await expect(executeMutation(unsubscribeFromNewsletterMutation, { token: "c".repeat(NEWSLETTER_TOKEN_LENGTH) })).resolves.toMatchObject(
-      {
-        unsubscribed: true,
-      },
-    )
+    await expect(unsubscribeFromNewsletter({ data: { token: "c".repeat(NEWSLETTER_TOKEN_LENGTH) } })).resolves.toMatchObject({
+      unsubscribed: true,
+    })
   })
 
   it("rejects a token of the wrong length before it reaches a query", async () => {
     expect.hasAssertions()
     dbMocks.updateMock.mockClear()
 
-    await expect(executeMutation(unsubscribeFromNewsletterMutation, { token: "short" })).rejects.toThrow("VALIDATION")
+    await expect(unsubscribeFromNewsletter({ data: { token: "short" } })).rejects.toThrow("VALIDATION")
     expect(dbMocks.updateMock).not.toHaveBeenCalled()
   })
 })
