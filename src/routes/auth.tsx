@@ -11,21 +11,6 @@ import { AuthHeader, AuthHeaderFallback } from "~/src/presentation/components/cu
 
 import { ROUTES } from "~/src/routes"
 
-/*
- * AUTH SHELL — the seam between the marketing site and the console.
- *
- * The landing commits to dark inside a `.dark` wrapper; so does this, for the same
- * reason: the visitor clicked a CTA on the dark ground and must not land somewhere
- * else. The composition is a split. One half restates why they are here, drawn on the
- * same measured field as the marketing hero; the other is the form; a single hairline
- * states the seam. Below `lg` the left half drops out entirely and the form takes the
- * full width, because a 390px sliver of it is decoration, not context.
- *
- * The form column owns the vertical centering, so the short pages (two-factor,
- * verify-email) and the tall ones (sign-up) share one shell rather than two.
- * `py-28` clears the 5rem chrome row on both edges when the content is short and
- * simply grows into a scroll when it is not.
- */
 const authHeaderFallback = <AuthHeaderFallback />
 
 const AuthLayout = (): JSX.Element => {

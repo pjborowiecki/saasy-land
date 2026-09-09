@@ -16,5 +16,4 @@ const SUPPORTED_LOCALES = [
 const [DEFAULT_LOCALE] = SUPPORTED_LOCALES
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number]
 export type Locale = SupportedLocale
-export type DefaultLocale = typeof DEFAULT_LOCALE
 export const I18N = { COOKIE_NAME: `${APP_DOMAIN}_locale`, DEFAULT_LOCALE, SUPPORTED_LOCALES } as const

@@ -77,6 +77,26 @@ it("leaves API requests and their cookies to the handler", async () => {
   expect(response.headers.get("set-cookie")).toBe("session=kept")
 })
 
+it.each([
+  ["/@id/virtual:tanstack-start-dev-client-entry", "script", "application/javascript"],
+  ["/src/presentation/styles/globals.css", "style", "text/css"],
+  ["/@tanstack-start/styles.css?routes=__root__", "style", "text/css"],
+])("serves %s without resetting the visitor's locale cookie", async (pathname, destination, contentType) => {
+  vi.spyOn(env.ASSETS, "fetch").mockResolvedValueOnce(new Response("asset contents", { headers: { "Content-Type": contentType } }))
+  const response = await worker.fetch(
+    new Request(`http://localhost${pathname}`, {
+      headers: { accept: "*/*", cookie: `${I18N.COOKIE_NAME}=pl-PL`, "sec-fetch-dest": destination },
+    }),
+    env,
+    context,
+  )
+
+  expect(response.headers.get("set-cookie")).toBeNull()
+  expect(response.headers.get("content-type")).toBe(contentType)
+  expect(await response.text()).toBe("asset contents")
+  expect(fetchHandler).not.toHaveBeenCalled()
+})
+
 it("serves prerendered HTML through the locale middleware without rerendering", async () => {
   const assets = vi.spyOn(env.ASSETS, "fetch").mockResolvedValueOnce(new Response("static Polish page"))
   const response = await worker.fetch(new Request("http://localhost/pl-PL/docs"), env, context)

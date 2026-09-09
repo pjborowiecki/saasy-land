@@ -3,7 +3,7 @@ import "@tanstack/react-start/server-only"
 import { eq } from "drizzle-orm"
 
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
-import { fetchLicenseKey } from "~/src/integrations/polar/polar.utils"
+import { polar } from "~/src/integrations/polar/polar.config"
 
 import { license } from "~/src/modules/license/license.schema"
 
@@ -13,7 +13,7 @@ interface AttachLicenseKeyInput {
 }
 
 export const attachLicenseKey = async ({ polarLicenseKeyId, userId }: Readonly<AttachLicenseKeyInput>): Promise<void> => {
-  const key = await fetchLicenseKey(polarLicenseKeyId)
+  const { key } = await polar.licenseKeys.get({ id: polarLicenseKeyId })
 
   const attached = await db.update(license).set({ key, polarLicenseKeyId }).where(eq(license.userId, userId)).returning({ id: license.id })
 

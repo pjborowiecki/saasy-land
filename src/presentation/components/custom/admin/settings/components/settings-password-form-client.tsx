@@ -40,10 +40,9 @@ export const SettingsPasswordFormClient = (): JSX.Element => {
     defaultValues: { confirmNewPassword: "", currentPassword: "", newPassword: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
         await settingsChangePasswordRequest.mutateAsync({
-          currentPassword: data.currentPassword,
-          newPassword: data.newPassword,
+          currentPassword: value.currentPassword,
+          newPassword: value.newPassword,
         })
         toast.success(t("security.password.feedback.updateSuccess"))
         form.reset()

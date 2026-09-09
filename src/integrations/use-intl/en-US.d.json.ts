@@ -1666,15 +1666,12 @@ declare const messages: {
           "pricingModels": "Pricing Models",
           "contentAccess": "Content & Access",
           "userManagement": "User Management",
-          "activeSessions": "Active Sessions",
           "payments": "Payments & Billing",
           "settings": "Settings",
           "blog": "Blog",
           "landingPage": "Landing Page"
         },
-        "badges": {
-          "activeSessionsBadge": "3"
-        }
+        "badges": {}
       },
       "users": {
         "metadata": {

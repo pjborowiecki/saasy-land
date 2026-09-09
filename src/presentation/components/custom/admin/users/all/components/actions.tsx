@@ -1,4 +1,4 @@
-import { type JSX, useCallback, useState, useTransition } from "react"
+import { type JSX, useState, useTransition } from "react"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "@tanstack/react-router"
@@ -72,15 +72,15 @@ export const UserRowActions = ({ row }: Readonly<CellContext<DataTableFeatures, 
 
   const user = row.original
 
-  const openResetPassword = useCallback(() => {
+  const openResetPassword = () => {
     setResetPasswordOpen(true)
-  }, [])
+  }
 
-  const openDelete = useCallback(() => {
+  const openDelete = () => {
     setDeleteOpen(true)
-  }, [])
+  }
 
-  const handleBanToggle = useCallback(() => {
+  const handleBanToggle = () => {
     startTransition(async () => {
       try {
         const mutation = user.banned ? unbanUserRequest : banUserRequest
@@ -91,9 +91,9 @@ export const UserRowActions = ({ row }: Readonly<CellContext<DataTableFeatures, 
         toast.error(actionError(error))
       }
     })
-  }, [actionError, router, t, user.banned, user.id])
+  }
 
-  const handleDelete = useCallback(() => {
+  const handleDelete = () => {
     startTransition(async () => {
       try {
         await deleteUserRequest.mutateAsync({ userId: user.id })
@@ -104,7 +104,7 @@ export const UserRowActions = ({ row }: Readonly<CellContext<DataTableFeatures, 
         toast.error(actionError(error))
       }
     })
-  }, [actionError, router, t, user.id])
+  }
 
   return (
     <>

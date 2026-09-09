@@ -2,17 +2,9 @@ import { readdirSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import type { AbstractIntlMessages } from "use-intl"
 
-import type enMessages from "~/src/integrations/use-intl/en-US.d.json.ts"
-
-export type Messages = typeof enMessages
-
 type MessageTree = Record<string, unknown>
 
-export function resolveMessagesDir(): string {
-  return join(process.cwd(), "messages")
-}
-
-const MESSAGES_DIR = resolveMessagesDir()
+const MESSAGES_DIR = join(import.meta.dirname, "../messages")
 const LAST_SEGMENT_OFFSET = 1
 
 function isPlainObject(value: unknown): value is MessageTree {
@@ -73,29 +65,8 @@ function insertMessageFile(tree: MessageTree, filename: string, content: Message
   }
 }
 
-function isLocaleMessages(value: MessageTree): value is Messages {
-  return isIntlMessages(value)
-}
-
-function assertLocaleMessages(messages: MessageTree, locale: string): Messages {
-  if (!isLocaleMessages(messages)) {
-    throw new Error(`Invalid merged messages for locale "${locale}"`)
-  }
-
-  return messages
-}
-
-export function getLocaleMessagesDir(): string {
-  return MESSAGES_DIR
-}
-
-/**
- * Reads and merges every namespace file for a locale. Request-path callers get memoization from
- * the `"use cache"` wrapper in `i18n.request.ts`; out-of-request callers (email templates) pay
- * one fresh read per send, which keeps edited messages hot in development.
- */
-export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES_DIR): Messages {
-  const localeDir = join(messagesDir, locale)
+export function loadLocaleMessages(locale: string): AbstractIntlMessages {
+  const localeDir = join(MESSAGES_DIR, locale)
   const files = readdirSync(localeDir)
     .filter((file) => file.endsWith(".json"))
     .toSorted((a, b) => a.localeCompare(b))
@@ -108,5 +79,8 @@ export function loadLocaleMessagesFromDir(locale: string, messagesDir = MESSAGES
     insertMessageFile(messages, file, parseMessageTree(parsed, filePath))
   }
 
-  return assertLocaleMessages(messages, locale)
+  if (!isIntlMessages(messages)) {
+    throw new Error(`Invalid merged messages for locale "${locale}"`)
+  }
+  return messages
 }

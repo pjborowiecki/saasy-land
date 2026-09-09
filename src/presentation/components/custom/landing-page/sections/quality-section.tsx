@@ -12,13 +12,7 @@ const SPEC_KEYS = ["vitest", "playwright", "typescript"] as const
 
 const TERMINAL_DELAY_MS = 120
 
-/**
- * Real output from the repository being sold, quoted verbatim.
- *
- * Terminal text is code, not copy, so it is hardcoded English by design and never translated: a
- * localised test summary would be a fabricated one. The four coverage figures are what
- * `bun run test:coverage` prints, which is the whole point of showing them.
- */
+// Preserve command output in its original language.
 const TERMINAL_LINES = [
   { kind: "command", text: "bun run test:coverage" },
   { kind: "output", text: "Test Files  140 passed (140)" },
@@ -32,7 +26,6 @@ const TERMINAL_LINES = [
 
 type TerminalLine = (typeof TERMINAL_LINES)[number]
 
-/** One printed line. The prompt and the tick are `select-none`, so copying the block copies code. */
 const TerminalRow = ({ line }: Readonly<{ line: TerminalLine }>): JSX.Element => {
   if (line.kind === "command") {
     return (
@@ -59,23 +52,10 @@ const TerminalRow = ({ line }: Readonly<{ line: TerminalLine }>): JSX.Element =>
   return <div className="whitespace-pre text-muted-foreground">{line.text}</div>
 }
 
-/**
- * The terminal, running.
- *
- * The card chrome is real DOM; only the printed body is video, rendered on `--card` so the seam
- * between the header row and the output is invisible. The loop prints exactly what the static
- * block used to show, in the order the runner prints it, and the four coverage figures count up
- * rather than appearing: the claim is that a gate reaches a threshold, and a number that arrives
- * already at 100 shows the result without the assertion.
- *
- * The `<pre>` stays in the markup as `sr-only`. Screen readers get the real, selectable output at
- * all times, and under reduced motion it becomes the visible element while the video is removed:
- * the same information either way, minus nothing but movement.
- */
+// Keep static output for screen readers and reduced-motion preferences.
 const QualityTerminal = ({ title }: Readonly<{ title: string }>): JSX.Element => (
   <div className="overflow-hidden rounded-xl border border-border bg-card">
     <div className="flex items-center gap-2.5 border-b border-border bg-background/40 px-4 py-2.5">
-      {/* A live dot, on the one element that is genuinely reporting a state. */}
       <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-ring" />
       <span className="font-mono text-spec text-muted-foreground">{title}</span>
     </div>
@@ -97,17 +77,6 @@ const QualitySpec = ({ label }: Readonly<{ label: string }>): JSX.Element => (
   </li>
 )
 
-/**
- * The evidence beat.
- *
- * The left column argues; the right column shows. The terminal is the one place on the page
- * where the product speaks for itself, so it gets a real bezel and real output rather than a
- * paragraph claiming the same thing. It is a `<pre>` with `aria-hidden` prose beside it, not an
- * image, so the figures stay selectable and searchable.
- *
- * `lg:sticky` on the terminal: the left column is four paragraphs and a CTA, and on a tall
- * viewport the evidence should stay in frame for the whole argument that depends on it.
- */
 export const QualitySection = (): JSX.Element => {
   const t = useTranslations("pages.landing.quality")
 

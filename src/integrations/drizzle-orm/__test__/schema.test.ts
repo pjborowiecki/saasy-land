@@ -16,7 +16,7 @@ describe("platform db schema barrel", () => {
       drizzleAdapter(
         {},
         {
-          provider: "pg",
+          provider: "sqlite",
           schema,
         },
       ),
@@ -29,7 +29,7 @@ describe("platform db schema barrel", () => {
       drizzleAdapter(
         {},
         {
-          provider: "pg",
+          provider: "sqlite",
           schema: { account, session, twoFactor, user, verification },
         },
       ),

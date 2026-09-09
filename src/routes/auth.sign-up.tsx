@@ -1,4 +1,4 @@
-import { type JSX, type ReactNode, Suspense } from "react"
+import { type JSX, type ReactNode } from "react"
 
 import { Link, createFileRoute } from "@tanstack/react-router"
 import { useTranslations } from "use-intl/react"
@@ -6,7 +6,6 @@ import { useTranslations } from "use-intl/react"
 import { redirectIfSignedIn } from "~/src/integrations/better-auth/auth.routes"
 import { loadRouteMessages, routeHead } from "~/src/integrations/use-intl/i18n.metadata"
 
-import { AuthPageFallback } from "~/src/presentation/components/custom/auth/components/auth-page-fallback"
 import { AuthPageShell } from "~/src/presentation/components/custom/auth/components/auth-page-shell"
 import { AuthSeparator } from "~/src/presentation/components/custom/auth/components/auth-separator"
 import { OAuthButtons } from "~/src/presentation/components/custom/auth/components/oauth-buttons"
@@ -38,15 +37,7 @@ const renderPrivacyLink = (chunks: ReactNode) => (
   </Link>
 )
 
-const authPageFallback = <AuthPageFallback />
-
-const SignUpPage = (): JSX.Element => (
-  <Suspense fallback={authPageFallback}>
-    <SignUpPageContent />
-  </Suspense>
-)
-
-const SignUpPageContent = (): JSX.Element => {
+const SignUpPage = (): JSX.Element => {
   const t = useTranslations("pages.auth.sign-up")
 
   return (

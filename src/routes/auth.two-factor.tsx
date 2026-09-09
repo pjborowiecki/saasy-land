@@ -1,23 +1,14 @@
-import { type JSX, Suspense } from "react"
+import { type JSX } from "react"
 
 import { createFileRoute } from "@tanstack/react-router"
 import { useTranslations } from "use-intl/react"
 
 import { loadRouteMessages, routeHead } from "~/src/integrations/use-intl/i18n.metadata"
 
-import { AuthPageFallback } from "~/src/presentation/components/custom/auth/components/auth-page-fallback"
 import { AuthPageShell } from "~/src/presentation/components/custom/auth/components/auth-page-shell"
 import { TwoFactorForm } from "~/src/presentation/components/custom/auth/two-factor/components/two-factor-form"
 
-const authPageFallback = <AuthPageFallback />
-
-const TwoFactorPage = (): JSX.Element => (
-  <Suspense fallback={authPageFallback}>
-    <TwoFactorPageContent />
-  </Suspense>
-)
-
-const TwoFactorPageContent = (): JSX.Element => {
+const TwoFactorPage = (): JSX.Element => {
   const t = useTranslations("pages.auth.two-factor")
 
   return (

@@ -5,16 +5,6 @@ import { useTranslations } from "use-intl/react"
 import { Reveal } from "~/src/presentation/components/custom/landing-page/components/reveal"
 import { StationCell, StationGrid } from "~/src/presentation/components/custom/landing-page/components/station-grid"
 
-/**
- * Four stations between an empty folder and a company, in the order you meet them, each paired
- * with the loop that draws its claim.
- *
- * The pairing is the point: every one of these four cells asserts something a sentence can only
- * state, and a loop can demonstrate. Metered pricing is a curve, so it is drawn as one. A gate
- * either stops a bad commit or it does not, so it is shown stopping one. Locale formatting is
- * `Intl` output, so it is real `Intl` output. Nothing here is an abstract shape standing in for
- * an idea.
- */
 const STATIONS = [
   { id: "auth", loop: "cost-curve", offsetSeconds: 0 },
   { id: "tests", loop: "merge-gate", offsetSeconds: 2 },
@@ -24,14 +14,6 @@ const STATIONS = [
 
 const GRID_DELAY_MS = 100
 
-/**
- * The four things that already run.
- *
- * A two-by-two lattice rather than a row of four cards: four equal columns turns the copy into
- * captions, and the argument in each cell is a paragraph long. The lattice is drawn with `gap-px`
- * over a hairline ground so the same markup produces correct rules at one, two and four columns
- * without a breakpoint-specific set of border utilities.
- */
 export const LineSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.line")
 

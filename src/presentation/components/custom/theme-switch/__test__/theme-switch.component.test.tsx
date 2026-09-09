@@ -1,96 +1,100 @@
-import { render, screen, waitFor } from "@testing-library/react"
 /** @vitest-environment jsdom */
+import { renderToString } from "react-dom/server"
+
+import { fireEvent, render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { IntlProvider } from "use-intl/react"
-import { describe, expect, it } from "vite-plus/test"
+import { beforeEach, describe, expect, it, vi } from "vite-plus/test"
 
 import { selectTriggerNamed } from "~/src/platform/testing/lib/select-trigger-name"
 import { setThemeMock, themeState } from "~/src/platform/testing/mocks/wrksz-themes"
 
 import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
-import { ThemeSwitch, ThemeSwitchClient } from "~/src/presentation/components/custom/theme-switch"
+import { ThemeSwitch } from "~/src/presentation/components/custom/theme-switch"
 
-const themeMessages = getTestMessages("en-US").components.custom["theme-switch"]
-const emptyMessages = {}
+const messages = getTestMessages("en-US")
+const labels = messages.components.custom["theme-switch"]
 
-const themeSwitchLabels = {
-  darkLabel: "Dark",
-  label: "Theme",
-  lightLabel: "Light",
-  placeholder: "Select",
-  systemLabel: "System",
-} as const
+const renderThemeSwitch = () =>
+  render(
+    <IntlProvider locale="en-US" messages={messages}>
+      <ThemeSwitch />
+    </IntlProvider>,
+  )
 
-describe("theme switch client component", () => {
-  it("renders translated theme options after mount", async () => {
-    expect.hasAssertions()
-    themeState.value = "system"
-
-    render(
-      <IntlProvider locale="en-US" messages={emptyMessages}>
-        <ThemeSwitchClient
-          darkLabel={themeMessages.dark}
-          label={themeMessages.label}
-          lightLabel={themeMessages.light}
-          placeholder={themeMessages.placeholder}
-          systemLabel={themeMessages.system}
-        />
-      </IntlProvider>,
-    )
-
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: selectTriggerNamed(themeMessages.system) })).toBeInTheDocument()
-    })
-  })
-
-  it("does not update theme when the select is opened without a selection", async () => {
-    expect.hasAssertions()
+describe("theme switch", () => {
+  beforeEach(() => {
     setThemeMock.mockClear()
     themeState.value = "system"
-    const user = userEvent.setup()
+  })
 
-    render(<ThemeSwitchClient {...themeSwitchLabels} />)
+  it("hydrates the server placeholder into the saved browser theme without a mismatch", async () => {
+    themeState.value = undefined
+    const element = (
+      <IntlProvider locale="en-US" messages={messages}>
+        <ThemeSwitch />
+      </IntlProvider>
+    )
+    document.body.innerHTML = `<div data-testid="theme-hydration-root">${renderToString(element)}</div>`
+    const container = screen.getByTestId("theme-hydration-root")
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: selectTriggerNamed(themeSwitchLabels.systemLabel) })).toBeInTheDocument()
-    })
+    expect(container.querySelector('[data-slot="skeleton"]')).not.toBeNull()
+    expect(within(container).queryByRole("button")).toBeNull()
 
-    await user.click(screen.getByRole("button", { name: selectTriggerNamed(themeSwitchLabels.systemLabel) }))
+    themeState.value = "dark"
+    const onRecoverableError = vi.fn<(error: unknown) => void>()
+    render(element, { container, hydrate: true, onRecoverableError })
+
+    expect(await within(container).findByRole("button", { name: selectTriggerNamed(labels.dark) })).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="skeleton"]')).toBeNull()
+    expect(onRecoverableError).not.toHaveBeenCalled()
     expect(setThemeMock).not.toHaveBeenCalled()
   })
 
-  it("updates theme for valid selection", async () => {
-    expect.hasAssertions()
-    setThemeMock.mockClear()
-    themeState.value = "system"
-    const user = userEvent.setup()
+  it("keeps the saved theme when the native select receives an empty value", async () => {
+    renderThemeSwitch()
+    await screen.findByRole("button", { name: selectTriggerNamed(labels.system) })
 
-    render(<ThemeSwitchClient {...themeSwitchLabels} />)
+    fireEvent.change(screen.getByRole("combobox", { hidden: true }), { target: { value: "" } })
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: selectTriggerNamed(themeSwitchLabels.systemLabel) })).toBeInTheDocument()
-    })
-
-    await user.click(screen.getByRole("button", { name: selectTriggerNamed(themeSwitchLabels.systemLabel) }))
-    await user.click(await screen.findByRole("option", { name: themeSwitchLabels.darkLabel }))
-    expect(setThemeMock).toHaveBeenCalledWith("dark")
+    expect(setThemeMock).not.toHaveBeenCalled()
+    expect(screen.getByRole("button", { name: selectTriggerNamed(labels.system) })).toBeInTheDocument()
   })
-})
 
-describe("theme switch component", () => {
-  it("loads labels from translations", async () => {
+  it("renders the translated current theme after hydration", async () => {
     expect.hasAssertions()
-    themeState.value = "system"
+    renderThemeSwitch()
 
-    render(
-      <IntlProvider locale="en-US" messages={getTestMessages("en-US")}>
-        <ThemeSwitch />
-      </IntlProvider>,
-    )
+    expect(await screen.findByRole("button", { name: selectTriggerNamed(labels.system) })).toBeInTheDocument()
+  })
 
-    await waitFor(() => {
-      expect(screen.getByRole("button", { name: selectTriggerNamed(themeMessages.system) })).toBeInTheDocument()
-    })
+  it("shows the placeholder when no theme is selected", async () => {
+    expect.hasAssertions()
+    themeState.value = undefined
+    renderThemeSwitch()
+
+    expect(await screen.findByRole("button", { name: selectTriggerNamed(labels.placeholder) })).toBeInTheDocument()
+  })
+
+  it("keeps the current theme when opening without selecting an option", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderThemeSwitch()
+
+    await user.click(await screen.findByRole("button", { name: selectTriggerNamed(labels.system) }))
+
+    expect(setThemeMock).not.toHaveBeenCalled()
+  })
+
+  it("updates the theme when an option is selected", async () => {
+    expect.hasAssertions()
+    const user = userEvent.setup()
+    renderThemeSwitch()
+
+    await user.click(await screen.findByRole("button", { name: selectTriggerNamed(labels.system) }))
+    await user.click(await screen.findByRole("option", { name: labels.dark }))
+
+    expect(setThemeMock).toHaveBeenCalledWith("dark")
   })
 })

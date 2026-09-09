@@ -18,7 +18,6 @@ import { ROUTES } from "~/src/routes"
 const CARD_COUNT = 3
 const GRID_DELAY_MS = 100
 
-/** One post, as a card. Its own component so the grid's nesting does not stack on the section's. */
 const NoteCard = ({ post }: Readonly<{ post: BlogPost }>): JSX.Element => {
   const format = useFormatter()
   const t = useTranslations("pages.blog")
@@ -51,20 +50,7 @@ const NoteCard = ({ post }: Readonly<{ post: BlogPost }>): JSX.Element => {
   )
 }
 
-/**
- * THE ARGUMENTS.
- *
- * Sits between the FAQ and the close, which is the only place it can go. A visitor reading the FAQ
- * is working through the objections that survived the whole page, and the objections that survive
- * longest are the comparative ones: why not the cheaper kit, why not the free CLI, why not the
- * other paid one. Those are exactly the posts linked here, so this is a continuation of the FAQ
- * rather than an exit from the funnel. Any earlier and it would be an exit.
- *
- * `featured: true` in the frontmatter decides what appears, topped up with the newest posts so the
- * band is never short. The homepage is the highest-authority page on the site, so a direct link
- * from here is worth more to a post than the two-hop path through the index, and it is what an
- * agent fetching this domain reads before it answers a question about us.
- */
+// Show featured posts first, then fill remaining slots with the newest posts.
 export const NotesSection = (): JSX.Element => {
   const locale = getCurrentLocale()
   const t = useTranslations("pages.landing.notes")

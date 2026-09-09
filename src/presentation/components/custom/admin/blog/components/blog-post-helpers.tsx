@@ -5,10 +5,9 @@ import { useTranslations } from "use-intl/react"
 
 import type { DummyPost } from "~/src/data/admin-blog"
 
-import { EMPTY_PATH_PARTS_LENGTH } from "~/src/presentation/components/custom/admin/constants/constants"
 import type { BlogPostStatus } from "~/src/presentation/components/custom/admin/constants/status-colors"
 
-export const hasPostViews = (views: string | undefined): views is string => views !== undefined && views.length > EMPTY_PATH_PARTS_LENGTH
+export const hasPostViews = (views: string | undefined): views is string => views !== undefined && views.length > 0
 
 export const getGridMetaTextClass = (status: BlogPostStatus): string => {
   if (status === "scheduled") {

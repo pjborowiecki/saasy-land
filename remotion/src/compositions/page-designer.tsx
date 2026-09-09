@@ -9,40 +9,16 @@ const PAD = 28
 const LIBRARY = ["Hero Section", "Features Grid", "Video Showcase", "Testimonials", "Pricing Table", "FAQ Accordion"] as const
 const ALIGNMENTS = ["Left", "Center", "Right"] as const
 
-/*
- * THE LOOP BEGINS AND ENDS ON THE SAME FRAME.
- *
- * The first version faded the panes in, selected a section, then snapped every property back to
- * its starting value at the loop point. Fading a whole editor in once every ten seconds reads as
- * the page reloading, so the editor is simply always there, and the motion is now a cycle that
- * returns to where it started on its own: alignment steps left, centre, right and back to left,
- * with the padding easing out and back in step with it. Both are real controls, and the canvas
- * answers each one.
- */
 const CYCLE = 2.5 * FPS
 const ALIGN_SEQUENCE = [0, 1, 2, 0] as const
 const PADDING_SEQUENCE = [96, 128, 112, 96] as const
 
-/**
- * THE PAGE DESIGNER — the studio section's claim, drawn.
- *
- * The section promises marketing pages your own team can edit, inside your own admin, rendering
- * your own components. A screenshot can show that the editor exists; only motion can show it
- * being used, so the loop selects a section, changes two properties and watches the canvas
- * respond, which is the entire argument in nine seconds.
- *
- * The three panes, the section library and the property groups are the ones in
- * `admin/landing-page`. The canvas copy is the placeholder that ships with it.
- */
 export function PageDesigner() {
   const frame = useCurrentFrame()
 
   const step = Math.min(ALIGN_SEQUENCE.length - 1, Math.floor(frame / CYCLE))
   const alignIndex = ALIGN_SEQUENCE[step] ?? 0
-  const selected = true
 
-  // The padding eases between the sequence's stops rather than jumping, so the canvas grows and
-  // Settles the way a dragged control would move it.
   const paddingValue = Math.round(
     interpolate(
       frame,
@@ -55,10 +31,7 @@ export function PageDesigner() {
       },
     ),
   )
-  const panes = 1
 
-  // The field lights while the value is actually moving, and is dark at both ends of the cycle,
-  // So the frame the loop wraps to is identical to the frame it wraps from.
   const editing =
     interpolate(frame % CYCLE, [0, 0.08 * CYCLE, 0.5 * CYCLE, 0.7 * CYCLE], [0, 1, 1, 0], {
       extrapolateLeft: "clamp",
@@ -70,7 +43,7 @@ export function PageDesigner() {
       <AbsoluteFill style={{ flexDirection: "column" }}>
         <Header crumb="Landing Page" opacity={1} />
 
-        <div style={{ display: "flex", flexGrow: 1, gap: 0, opacity: panes, padding: PAD }}>
+        <div style={{ display: "flex", flexGrow: 1, gap: 0, padding: PAD }}>
           <Panel style={{ borderBottomRightRadius: 0, borderRight: "none", borderTopRightRadius: 0, flexShrink: 0, width: 300 }}>
             <div
               style={{
@@ -90,9 +63,9 @@ export function PageDesigner() {
                 key={item}
                 style={{
                   alignItems: "center",
-                  backgroundColor: selected && index === 0 ? THEME.muted : "transparent",
+                  backgroundColor: index === 0 ? THEME.muted : "transparent",
                   borderBottom: `1px solid ${THEME.hairline}`,
-                  color: selected && index === 0 ? THEME.foreground : THEME.mutedForeground,
+                  color: index === 0 ? THEME.foreground : THEME.mutedForeground,
                   display: "flex",
                   fontFamily: SANS,
                   fontSize: 16,
@@ -102,10 +75,10 @@ export function PageDesigner() {
               >
                 <span
                   style={{
-                    backgroundColor: selected && index === 0 ? THEME.accent : THEME.mutedForeground,
+                    backgroundColor: index === 0 ? THEME.accent : THEME.mutedForeground,
                     borderRadius: 3,
                     height: 11,
-                    opacity: selected && index === 0 ? 1 : 0.5,
+                    opacity: index === 0 ? 1 : 0.5,
                     width: 11,
                   }}
                 />
@@ -114,39 +87,34 @@ export function PageDesigner() {
             ))}
           </Panel>
 
-          {/* The canvas. Its hero is the thing being edited, so it is the only element that moves
-              when a property changes. */}
           <Panel style={{ borderRadius: 0, flexGrow: 1, minWidth: 0, padding: 26 }}>
             <div
               style={{
-                border: `1px solid ${selected ? THEME.accent : THEME.hairline}`,
+                border: `1px solid ${THEME.accent}`,
                 borderRadius: 10,
                 paddingBottom: paddingValue,
                 paddingTop: paddingValue,
                 position: "relative",
                 textAlign: alignIndex === 1 ? "center" : "left",
-                transition: "none",
               }}
             >
-              {selected ? (
-                <span
-                  style={{
-                    backgroundColor: THEME.foreground,
-                    borderRadius: 5,
-                    color: THEME.background,
-                    fontFamily: MONO,
-                    fontSize: 12,
-                    left: -1,
-                    letterSpacing: "0.08em",
-                    padding: "4px 9px",
-                    position: "absolute",
-                    textTransform: "uppercase",
-                    top: -1,
-                  }}
-                >
-                  Hero section
-                </span>
-              ) : undefined}
+              <span
+                style={{
+                  backgroundColor: THEME.foreground,
+                  borderRadius: 5,
+                  color: THEME.background,
+                  fontFamily: MONO,
+                  fontSize: 12,
+                  left: -1,
+                  letterSpacing: "0.08em",
+                  padding: "4px 9px",
+                  position: "absolute",
+                  textTransform: "uppercase",
+                  top: -1,
+                }}
+              >
+                Hero section
+              </span>
               <div style={{ padding: "0 40px" }}>
                 <div
                   style={{

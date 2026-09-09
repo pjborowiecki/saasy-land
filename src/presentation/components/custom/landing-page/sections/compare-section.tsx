@@ -23,13 +23,6 @@ interface CompareRowProps {
   readonly oursLabel: string
 }
 
-/**
- * One dimension.
- *
- * Below `md` the three cells stack and each value carries its own small label; from `md` up they
- * sit on one line and the labels are the column headers instead. Nothing is hidden at any width,
- * which is the whole reason this is a grid and not a table with a horizontal scrollbar.
- */
 const CompareRow = ({ id, label, market, marketLabel, ours, oursLabel }: CompareRowProps): JSX.Element => (
   <HighlightItem contentClassName="grid gap-y-2 px-4 py-5 md:grid-cols-[1.1fr_1fr_1fr] md:items-baseline md:gap-x-0 md:py-0" id={id}>
     <dt className="text-body-sm font-medium text-foreground md:py-4 md:pr-6">{label}</dt>
@@ -51,18 +44,6 @@ const CompareOption = ({ body, id, title }: Readonly<{ body: string; id: string;
   </HighlightItem>
 )
 
-/**
- * The market, and what each way in leaves you owing.
- *
- * Two movements. First the three alternatives as hairline rows, because they are prose and prose
- * in three equal cards becomes three captions. Then the actual comparison as a real table, since
- * that is what a six-by-two matrix is, and a table is the only structure a screen reader can
- * navigate cell by cell.
- *
- * The table keeps its columns at every width and scrolls horizontally under `md` rather than
- * reflowing into stacked blocks. A comparison that has been folded into a single column is no
- * longer a comparison: the whole value is that the two answers sit on the same line.
- */
 export const CompareSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.compare")
 
@@ -81,20 +62,7 @@ export const CompareSection = (): JSX.Element => {
             ))}
           </HighlightGroup>
 
-          {/*
-           * A responsive grid, not a scrolling table.
-           *
-           * As a `<table>` this needed a 608px minimum to keep three columns, so on a phone it
-           * opened scrolled to the left and the only column that matters, the one about this
-           * product, sat off-screen until the visitor thought to swipe a table sideways. Below
-           * `md` the three columns become three stacked lines per dimension, each carrying its
-           * own small label, and nothing is hidden.
-           *
-           * The winning column is marked by fill, never by a badge, a scale-up or a glow.
-           */}
           <div className="mt-14 border-y border-border md:mt-16">
-            {/* Bled and padded by the same 4, so the header tracks stay aligned with the rows now that
-                the rows bleed for their hover ground. */}
             <div className="-mx-4 hidden border-b border-border px-4 md:grid md:grid-cols-[1.1fr_1fr_1fr]">
               <span />
               <span className="py-3 font-mono text-label text-muted-foreground uppercase">{t("columns.market")}</span>

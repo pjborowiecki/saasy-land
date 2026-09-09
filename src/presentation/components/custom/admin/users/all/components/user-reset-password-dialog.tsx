@@ -1,4 +1,4 @@
-import { type JSX, useCallback } from "react"
+import { type JSX } from "react"
 
 import { useForm, useSelector } from "@tanstack/react-form"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -48,8 +48,7 @@ export const UserResetPasswordDialog = ({
     defaultValues: { newPassword: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
-        await setUserPasswordRequest.mutateAsync({ newPassword: data.newPassword, userId })
+        await setUserPasswordRequest.mutateAsync({ newPassword: value.newPassword, userId })
         toast.success(t("actions.feedback.resetPasswordSuccess"))
         form.reset()
         onOpenChange(false)
@@ -62,9 +61,9 @@ export const UserResetPasswordDialog = ({
   })
   const isPending = useSelector(form.store, (state) => state.isSubmitting)
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = () => {
     onOpenChange(false)
-  }, [onOpenChange])
+  }
 
   return (
     <Dialog isOpen={isOpen} onOpenChange={onOpenChange}>

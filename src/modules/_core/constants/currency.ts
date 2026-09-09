@@ -1,5 +1,3 @@
-import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
-
 export interface IsoCurrency {
   readonly numeric: string
   readonly exponent: number
@@ -168,6 +166,6 @@ export type CurrencyCode = keyof typeof CURRENCIES
 
 const isCurrencyCode = (value: string): value is CurrencyCode => value in CURRENCIES
 
-export const CURRENCY_CODES = nonEmptyTuple(Object.keys(CURRENCIES).filter((code) => isCurrencyCode(code)))
+export const CURRENCY_CODES = Object.keys(CURRENCIES).filter((code) => isCurrencyCode(code))
 
 export const DEFAULT_CURRENCY_CODE: CurrencyCode = "USD"

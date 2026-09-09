@@ -4,7 +4,6 @@ import zod from "zod/v4"
 import { emailSchema } from "~/src/integrations/better-auth/auth.zod"
 import { I18N } from "~/src/integrations/use-intl/i18n.config"
 
-import { SUBSCRIPTION_RESULT } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.constants"
 import {
   NEWSLETTER_TOKEN_LENGTH,
   newsletterSourceEnum,
@@ -37,31 +36,16 @@ const setNewsletterSubscription = zod.object({
   locale: localeField,
 })
 
-const subscriptionStatus = zod.object({
-  isSubscribed: zod.boolean(),
-})
-
-const subscribeResult = zod.object({
-  status: zod.enum(SUBSCRIPTION_RESULT),
-})
-
-const confirmResult = zod.object({
-  confirmed: zod.boolean(),
-})
-
 const insert = createInsertSchema(newsletterSubscriber)
 const select = createSelectSchema(newsletterSubscriber)
 const update = createUpdateSchema(newsletterSubscriber)
 
 export const newsletterSubscriberZodSchemas = {
   confirmNewsletterSubscription,
-  confirmResult,
   insert,
   select,
   setNewsletterSubscription,
-  subscribeResult,
   subscribeToNewsletter,
-  subscriptionStatus,
   unsubscribeFromNewsletter,
   update,
 }

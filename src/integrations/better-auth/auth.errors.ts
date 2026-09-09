@@ -32,7 +32,7 @@ export const AUTH_ERRORS = {
 export type AuthErrorCode = keyof typeof AUTH_ERRORS
 export type AuthErrorMessageKey = (typeof AUTH_ERRORS)[AuthErrorCode]
 
-const AUTH_ERROR_BY_CODE: Record<string, AuthErrorMessageKey> = AUTH_ERRORS
+const AUTH_ERROR_BY_CODE = new Map<string, AuthErrorMessageKey>(Object.entries(AUTH_ERRORS))
 
 const readErrorCode = (value: unknown): string | undefined => {
   if (typeof value !== "object" || value === null || !("code" in value)) {
@@ -43,21 +43,14 @@ const readErrorCode = (value: unknown): string | undefined => {
   return typeof code === "string" ? code : undefined
 }
 
-const readErrorBody = (value: unknown): unknown => {
-  if (typeof value !== "object" || value === null || !("body" in value)) {
-    return undefined
-  }
-
-  return value.body
-}
-
 /** Maps a Better Auth error — client result or thrown `APIError` (code on `body`) — to its i18n key. */
 export const authErrorKey = (error: unknown): AuthErrorMessageKey => {
-  const code = readErrorCode(error) ?? readErrorCode(readErrorBody(error))
+  const body = typeof error === "object" && error !== null && "body" in error ? error.body : undefined
+  const code = readErrorCode(error) ?? readErrorCode(body)
 
   if (code === undefined) {
     return AUTH_ERRORS.UNKNOWN_ERROR
   }
 
-  return AUTH_ERROR_BY_CODE[code] ?? AUTH_ERRORS.UNKNOWN_ERROR
+  return AUTH_ERROR_BY_CODE.get(code) ?? AUTH_ERRORS.UNKNOWN_ERROR
 }

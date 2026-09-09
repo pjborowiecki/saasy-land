@@ -21,18 +21,6 @@ const RecordRow = ({ claim, evidence, id }: Readonly<{ claim: string; evidence: 
   </HighlightItem>
 )
 
-/**
- * The receipt.
- *
- * This section is the reason the rest of the page is allowed to state numbers. Every figure the
- * page quotes is listed here beside the file that generates it, so the claims are checkable
- * before anyone pays. It replaces the testimonial block, which is the correct trade for this
- * audience: there is nothing to verify in a quote.
- *
- * A description list, not a table. The mapping really is term to definition, the evidence column
- * is long enough that a two-column table would need a horizontal scroll on a phone, and a `<dl>`
- * reflows to a single stack without any of the cells losing their pairing.
- */
 export const RecordSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.record")
 
@@ -56,14 +44,6 @@ export const RecordSection = (): JSX.Element => {
             ))}
           </HighlightGroup>
 
-          {/*
-           * The list says where to look; the loop shows the looking. It sits under the receipt
-           * because it is a worked example of the rows above it, not a summary of them.
-           *
-           * Width-capped. This is a band drawn for a ~600px cell, and the Record section runs the
-           * full measure, so left unconstrained it rendered at 1:1 and its labels came out twice
-           * the size of the rows they are illustrating.
-           */}
           <ConceptLoop className="mt-12 max-w-2xl max-sm:hidden" name="record-audit" />
         </Reveal>
       </div>

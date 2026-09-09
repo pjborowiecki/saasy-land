@@ -6,12 +6,6 @@ import { useTranslations } from "use-intl/react"
 
 import { Wordmark } from "~/src/presentation/components/custom/wordmark"
 
-/*
- * The chrome spans the whole split: the wordmark sits at the left gutter over the gate frame,
- * the way out sits at the right gutter. Below `lg` the frame is gone and both land on the
- * ground. The lockup is the marketing site's exactly, so the visitor arrives on the mark they
- * clicked.
- */
 const HEADER_CLASS = "absolute inset-x-0 top-0 z-10 flex h-20 items-center justify-between gap-6 px-6 md:px-10"
 
 const BACK_LINK_CLASS =

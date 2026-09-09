@@ -1,4 +1,4 @@
-import { type JSX, useCallback } from "react"
+import { type JSX } from "react"
 
 import { useTranslations } from "use-intl/react"
 
@@ -12,10 +12,6 @@ interface SettingsTwoFactorConfirmStepProps {
 export const SettingsTwoFactorConfirmStep = ({ backupCodes, onDone }: Readonly<SettingsTwoFactorConfirmStepProps>): JSX.Element => {
   const t = useTranslations("pages.admin.settings")
 
-  const handleDone = useCallback(() => {
-    onDone()
-  }, [onDone])
-
   return (
     <div className="flex flex-col gap-4">
       <p className="text-sm text-muted-foreground">{t("security.twoFactor.backupCodesDescription")}</p>
@@ -24,7 +20,7 @@ export const SettingsTwoFactorConfirmStep = ({ backupCodes, onDone }: Readonly<S
           <li key={code}>{code}</li>
         ))}
       </ul>
-      <Button onPress={handleDone} type="button">
+      <Button onPress={onDone} type="button">
         {t("security.twoFactor.done")}
       </Button>
     </div>

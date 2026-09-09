@@ -20,8 +20,3 @@ export class AppError extends Error {
     this.code = code
   }
 }
-
-export interface ActionServerError {
-  code: ErrorCode
-  message: string
-}

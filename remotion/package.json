@@ -1,18 +1,14 @@
 {
-  "name": "remotion",
+  "name": "@saasyland/motion",
   "version": "1.0.0",
   "private": true,
-  "description": "My Remotion video",
+  "description": "Source for SaaSy Land's landing page videos",
   "license": "UNLICENSED",
-  "repository": {},
-  "sideEffects": [
-    "*.css"
-  ],
   "scripts": {
-    "dev": "remotion studio",
-    "build": "remotion bundle",
-    "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "dev": "remotion studio --port=3001",
+    "bundle": "remotion bundle",
+    "check": "prettier --check . && eslint . && tsc",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@remotion/cli": "4.0.508",

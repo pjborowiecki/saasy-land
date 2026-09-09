@@ -8,17 +8,6 @@ import { localizePathname } from "~/src/integrations/use-intl/i18n.paths"
 
 import { ROUTES } from "~/src/routes"
 
-/**
- * The ask, at the end of the argument.
- *
- * A post earns the right to sell only after it has said something, so this sits below the article
- * rather than floating beside it, and it carries no price: the figure lives on the pricing section
- * in one place, and a second copy in nine locales would be stale the first time a tier moves.
- *
- * The primary link is a plain anchor because `#pricing` is a fragment on another document and the
- * router would otherwise treat it as an in-page jump; the docs link is a real route, so it stays a
- * `<Link>` and keeps the client-side navigation the rest of the site uses.
- */
 export const PostCta = (): JSX.Element => {
   const t = useTranslations("pages.blog.post.cta")
   const locale = useLocale()

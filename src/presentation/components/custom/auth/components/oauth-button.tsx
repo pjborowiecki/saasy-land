@@ -1,4 +1,4 @@
-import { type JSX, useCallback, useTransition } from "react"
+import { type JSX, useTransition } from "react"
 
 import { createClientOnlyFn } from "@tanstack/react-start"
 import { Loader2 } from "lucide-react"
@@ -19,12 +19,6 @@ import { AUTH_SECONDARY_BUTTON_CLASS } from "~/src/presentation/components/custo
 
 import { ROUTES } from "~/src/routes"
 
-/*
- * Hairline, never a fill: the one filled surface on each page belongs to the submit.
- * The marks keep their own brand colours because Google and GitHub are identity, not
- * decoration, and they lead the label from the left edge so both buttons align on one
- * vertical.
- */
 const OAUTH_BUTTON_STYLES = "justify-start px-4"
 const OAUTH_PROVIDER_NAMES = { github: "GitHub", google: "Google" } as const
 
@@ -42,7 +36,7 @@ export const OAuthButton = ({ provider, Icon, className, intent = "sign-in", ...
   const label =
     intent === "sign-up" ? tAuth("oauth.continueWith", { provider: OAUTH_PROVIDER_NAMES[provider] }) : tAuth(`oauth.${provider}`)
 
-  const handleSignIn = useCallback(() => {
+  const handleSignIn = () => {
     startTransition(async () => {
       await signInSocial({
         callbackURL: localizePathname({ locale: getCurrentLocale(), pathname: ROUTES.AUTH_CALLBACK }),
@@ -57,7 +51,7 @@ export const OAuthButton = ({ provider, Icon, className, intent = "sign-in", ...
         provider,
       })
     })
-  }, [provider, startTransition, tAuth])
+  }
 
   return (
     <Button

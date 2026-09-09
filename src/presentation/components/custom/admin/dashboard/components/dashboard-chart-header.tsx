@@ -4,11 +4,6 @@ import { useTranslations } from "use-intl/react"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 
-/**
- * A segmented control, not three loose buttons. The selected range is filled and the other two
- * are transparent inside one bordered track, so the group reads as one control with a state
- * rather than as three actions of unequal importance.
- */
 export const DashboardChartHeader = (): JSX.Element => {
   const t = useTranslations("pages.admin.dashboard")
 

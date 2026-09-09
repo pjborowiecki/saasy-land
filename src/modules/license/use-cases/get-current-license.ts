@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query"
 import { createServerFn } from "@tanstack/react-start"
 
 import { authorized } from "~/src/integrations/better-auth/auth.middleware"
-import { fetchLicenseActivations } from "~/src/integrations/polar/polar.utils"
+import { polar } from "~/src/integrations/polar/polar.config"
 
 import { LICENSE_QUERY_KEYS } from "~/src/modules/license/license.constants"
 import { getLicense } from "~/src/modules/license/use-cases/get-license"
@@ -24,7 +24,8 @@ export const getCurrentLicenseActivations = createServerFn({ method: "GET" })
     if (typeof license?.polarLicenseKeyId !== "string" || license.polarLicenseKeyId.length === 0) {
       return { activations: [], limitActivations: 0 }
     }
-    return fetchLicenseActivations(license.polarLicenseKeyId)
+    const { activations, limitActivations } = await polar.licenseKeys.get({ id: license.polarLicenseKeyId })
+    return { activations, limitActivations }
   })
 
 export const licenseActivationsQuery = queryOptions({

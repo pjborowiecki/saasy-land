@@ -1,40 +1,8 @@
 import { describe, expect, it } from "vite-plus/test"
 
-import { createOtpSlotIndices, extractTotpSecret, parseTwoFactorEnableData } from "~/src/modules/two-factor/two-factor.utils"
+import { createOtpSlotIndices, extractTotpSecret } from "~/src/modules/two-factor/two-factor.utils"
 
 const OTP_SLOT_COUNT = 6
-const INVALID_NUMERIC_BACKUP_CODE = 1
-
-describe("parse two factor enable data", () => {
-  it("returns undefined for non-object payloads", () => {
-    expect.hasAssertions()
-
-    expect(parseTwoFactorEnableData(JSON.parse("null"))).toBeUndefined()
-    expect(parseTwoFactorEnableData("invalid")).toBeUndefined()
-    expect(parseTwoFactorEnableData({})).toBeUndefined()
-  })
-
-  it("returns undefined when required fields are missing or invalid", () => {
-    expect.hasAssertions()
-
-    expect(parseTwoFactorEnableData({ backupCodes: ["code"] })).toBeUndefined()
-    expect(parseTwoFactorEnableData({ totpURI: "uri" })).toBeUndefined()
-    expect(parseTwoFactorEnableData({ backupCodes: "codes", totpURI: "uri" })).toBeUndefined()
-    expect(parseTwoFactorEnableData({ backupCodes: [INVALID_NUMERIC_BACKUP_CODE], totpURI: "uri" })).toBeUndefined()
-  })
-
-  it("returns parsed data for valid payloads", () => {
-    expect.hasAssertions()
-
-    const payload = {
-      backupCodes: ["backup-one", "backup-two"],
-      totpURI: "otpauth://totp/App?secret=ABC123",
-    }
-
-    expect(parseTwoFactorEnableData(payload)).toStrictEqual(payload)
-  })
-})
-
 describe("extract totp secret", () => {
   it("extracts the secret query parameter from a totp uri", () => {
     expect.hasAssertions()

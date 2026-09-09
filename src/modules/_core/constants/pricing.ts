@@ -40,7 +40,3 @@ export const PPP_KEYS: readonly number[] = [
 ]
 
 export const pppMultiplierKey = (countryCode: string | undefined): number => Math.round(getPppMultiplier(countryCode) * PPP_PERCENT)
-
-export const PPP_COUNTRIES_BY_PERCENT_OFF: ReadonlyMap<number, readonly string[]> = new Map(
-  PPP_TIERS.map(({ countries, multiplier }) => [Math.round((FULL_PRICE_MULTIPLIER - multiplier) * PPP_PERCENT), countries]),
-)

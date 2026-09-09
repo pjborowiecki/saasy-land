@@ -11,8 +11,6 @@ import { readCookie } from "~/src/lib/cookie"
 
 import { APP_URL } from "~/src/presentation/branding"
 
-export const isLocale = (value?: string): value is SupportedLocale => value !== undefined && isSupportedLocale(value)
-
 export const localeFromPathname = (pathname: string): SupportedLocale | undefined => {
   const canonical = canonicalizePathname(pathname)
   return shouldIgnorePath(canonical) ? undefined : (extractLocaleFromPath(canonical) ?? I18N.DEFAULT_LOCALE)
@@ -20,10 +18,8 @@ export const localeFromPathname = (pathname: string): SupportedLocale | undefine
 
 export const localeFromCookie = (cookieHeader?: string | null): SupportedLocale | undefined => {
   const value = readCookie({ header: cookieHeader, name: I18N.COOKIE_NAME })
-  return isLocale(value) ? value : undefined
+  return value !== undefined && isSupportedLocale(value) ? value : undefined
 }
-
-export const localizedPathname = (locale: SupportedLocale, pathname: string): string => localizePathname({ locale, pathname })
 
 export const redirectPathname = (sourcePathname: string, targetPath: string, cookieHeader?: string | null): string =>
   localizePathname({ locale: resolveLocaleFromRequest(sourcePathname, cookieHeader), pathname: targetPath })

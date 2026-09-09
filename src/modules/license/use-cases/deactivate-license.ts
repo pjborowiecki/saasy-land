@@ -1,3 +1,5 @@
+import { env } from "cloudflare:workers"
+
 import { mutationOptions } from "@tanstack/react-query"
 import { createServerFn } from "@tanstack/react-start"
 import { eq } from "drizzle-orm"
@@ -5,7 +7,7 @@ import type * as zod from "zod"
 
 import { RATE_LIMITS, authorized, withRateLimit } from "~/src/integrations/better-auth/auth.middleware"
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
-import { deactivateLicense as deactivateWithPolar } from "~/src/integrations/polar/polar.utils"
+import { polar } from "~/src/integrations/polar/polar.config"
 
 import { AppError, ERROR_CODES } from "~/src/modules/_core/constants/errors"
 import { LICENSE_MUTATION_KEYS } from "~/src/modules/license/license.constants"
@@ -24,7 +26,7 @@ export const deactivateLicense = createServerFn({ method: "POST" })
       throw new AppError(ERROR_CODES.NOT_FOUND)
     }
 
-    await deactivateWithPolar({ activationId, key: row.key })
+    await polar.licenseKeys.deactivate({ activationId, key: row.key, organizationId: env.POLAR_ORGANIZATION_ID })
 
     return { deactivated: true }
   })

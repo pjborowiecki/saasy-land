@@ -9,10 +9,8 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 import { getStatusBadgeClass } from "~/src/presentation/components/custom/admin/constants/status-colors"
 import type { AdminInvitationRow } from "~/src/presentation/components/custom/admin/types"
 
-type InvitationRow = AdminInvitationRow
-
 interface AdminUsersInvitationRowProps {
-  readonly invite: InvitationRow
+  readonly invite: AdminInvitationRow
 }
 
 export const AdminUsersInvitationRow = ({ invite }: AdminUsersInvitationRowProps): JSX.Element => {

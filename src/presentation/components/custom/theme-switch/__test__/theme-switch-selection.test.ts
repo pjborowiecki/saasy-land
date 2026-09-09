@@ -1,8 +1,8 @@
-import { describe, expect, it, vi } from "vite-plus/test"
+import { describe, expect, it } from "vite-plus/test"
 
 import { JSON_NULL } from "~/src/platform/testing/lib/json-null"
 
-import { applyThemeSelection, isThemeValue } from "~/src/presentation/components/custom/theme-switch"
+import { isThemeValue } from "~/src/presentation/components/custom/theme-switch"
 
 describe("theme value guard", () => {
   it("accepts known theme keys", () => {
@@ -17,25 +17,5 @@ describe("theme value guard", () => {
     expect(isThemeValue(Number.NaN)).toBe(false)
     expect(isThemeValue("invalid-theme")).toBe(false)
     expect(isThemeValue(JSON_NULL)).toBe(false)
-  })
-})
-
-describe("theme selection side effects", () => {
-  it("calls setTheme for valid theme keys", () => {
-    expect.hasAssertions()
-    const setTheme = vi.fn<Parameters<typeof applyThemeSelection>[1]>()
-
-    applyThemeSelection("dark", setTheme)
-
-    expect(setTheme).toHaveBeenCalledWith("dark")
-  })
-
-  it("skips setTheme for invalid theme keys", () => {
-    expect.hasAssertions()
-    const setTheme = vi.fn<Parameters<typeof applyThemeSelection>[1]>()
-
-    applyThemeSelection("invalid-theme", setTheme)
-
-    expect(setTheme).not.toHaveBeenCalled()
   })
 })

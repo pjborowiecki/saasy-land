@@ -1,7 +1,7 @@
 import { createSchemaFactory } from "drizzle-zod"
 import zod from "zod/v4"
 
-import { MIN_FIELD_LENGTH, userIdField } from "~/src/modules/_core/utils/zod-fields"
+import { MIN_FIELD_LENGTH, idField } from "~/src/modules/_core/utils/zod-fields"
 import { category, categoryIconEnum, categoryKindEnum, categoryVisibilityEnum } from "~/src/modules/category/category.schema"
 import { CATEGORY_VALIDATION_MESSAGE } from "~/src/modules/category/category.validations"
 
@@ -14,7 +14,7 @@ const categoryKindSchema = zod.enum(categoryKindEnum.enumValues)
 const categoryVisibilitySchema = zod.enum(categoryVisibilityEnum.enumValues)
 
 const categoryIdInput = zod.object({
-  categoryId: userIdField,
+  categoryId: idField,
 })
 
 const createCategory = zod.object({
@@ -32,24 +32,14 @@ const deleteCategory = categoryIdInput
 
 const getCategory = categoryIdInput
 
-const updateCategory = zod
-  .object({
-    categoryId: userIdField,
-    description: zod.string().optional(),
-    icon: categoryIconSchema.optional(),
-    kind: categoryKindSchema.optional(),
-    name: zod
-      .string()
-      .min(MIN_FIELD_LENGTH, { message: CATEGORY_VALIDATION_MESSAGE.nameRequired })
-      .max(CATEGORY_NAME_MAX_LENGTH, { message: CATEGORY_VALIDATION_MESSAGE.nameMaxLength })
-      .optional(),
-    visibility: categoryVisibilitySchema.optional(),
+const updateCategory = createCategory
+  .partial()
+  .extend({
+    categoryId: idField,
   })
-  .refine(
-    ({ description, icon, kind, name, visibility }) =>
-      description !== undefined || icon !== undefined || kind !== undefined || name !== undefined || visibility !== undefined,
-    { message: CATEGORY_VALIDATION_MESSAGE.atLeastOneFieldRequired },
-  )
+  .refine(({ categoryId: _categoryId, ...fields }) => Object.values(fields).some((value) => value !== undefined), {
+    message: CATEGORY_VALIDATION_MESSAGE.atLeastOneFieldRequired,
+  })
 
 const insert = createInsertSchema(category)
 const select = createSelectSchema(category)

@@ -10,7 +10,7 @@ describe("verification schema", () => {
       drizzleAdapter(
         {},
         {
-          provider: "pg",
+          provider: "sqlite",
           schema: { verification },
         },
       ),

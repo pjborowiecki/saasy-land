@@ -2,6 +2,7 @@ import type { JSX } from "react"
 
 import { createFileRoute } from "@tanstack/react-router"
 
+import { blogPostsQuery } from "~/src/integrations/fumadocs/fumadocs.blog"
 import { starCountQuery } from "~/src/integrations/github/github.queries"
 import { loadRouteMessages, routeHead } from "~/src/integrations/use-intl/i18n.metadata"
 
@@ -68,6 +69,7 @@ export const Route = createFileRoute("/_landing/")({
         pathname: "/",
         queryClient: context.queryClient,
       }),
+      context.queryClient.query(blogPostsQuery()),
       context.queryClient.query(starCountQuery).catch(() => {}),
     ])
     return metadata

@@ -5,10 +5,6 @@ export const categoryIconEnum = { enumValues: ["Archive", "FolderOpen", "Puzzle"
 export const categoryKindEnum = { enumValues: ["category", "collection"] } as const
 export const categoryVisibilityEnum = { enumValues: ["public", "hidden"] } as const
 
-export type CategoryIcon = (typeof categoryIconEnum.enumValues)[number]
-export type CategoryKind = (typeof categoryKindEnum.enumValues)[number]
-export type CategoryVisibility = (typeof categoryVisibilityEnum.enumValues)[number]
-
 export const category = sqliteTable(
   "category",
   {

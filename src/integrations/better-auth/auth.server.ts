@@ -16,9 +16,8 @@ import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from "~/src/integrations/bet
 import { authEmailHandlers } from "~/src/integrations/better-auth/auth.emails"
 import { db } from "~/src/integrations/drizzle-orm/drizzle.database"
 import * as schema from "~/src/integrations/drizzle-orm/drizzle.schemas"
-import { polar } from "~/src/integrations/polar/polar.config"
+import { POLAR_PRODUCT_IDS, polar } from "~/src/integrations/polar/polar.config"
 
-import { LICENSE_TIER } from "~/src/modules/license/license.constants"
 import { licenseWebhookHandlers } from "~/src/modules/license/license.webhooks"
 
 import { APP_NAME } from "~/src/presentation/branding"
@@ -31,6 +30,8 @@ const MAX_CONCURRENT_SESSIONS = 10
 
 const TRUSTED_AUTH_PROVIDERS = ["github", "google"]
 export const TRUSTED_IP_HEADERS = ["CF-Connecting-IP", "x-forwarded-for"] as const
+
+const CHECKOUT_PRODUCTS = Object.entries(POLAR_PRODUCT_IDS).map(([slug, productId]) => ({ productId, slug }))
 
 export const auth = betterAuth({
   account: {
@@ -72,11 +73,7 @@ export const auth = betterAuth({
       use: [
         checkout({
           authenticatedUsersOnly: true,
-          products: [
-            { productId: env.POLAR_PRODUCT_ID_CORE, slug: LICENSE_TIER.CORE },
-            { productId: env.POLAR_PRODUCT_ID_COMPLETE, slug: LICENSE_TIER.COMPLETE },
-            { productId: env.POLAR_PRODUCT_ID_AGENCY, slug: LICENSE_TIER.AGENCY },
-          ],
+          products: CHECKOUT_PRODUCTS,
           successUrl: ROUTES.APP,
         }),
         portal(),

@@ -1,4 +1,4 @@
-import { type JSX, useCallback } from "react"
+import { type JSX } from "react"
 
 import { Laptop, Loader2, Smartphone } from "lucide-react"
 import { useTranslations } from "use-intl/react"
@@ -66,9 +66,9 @@ export const AdminActiveSessionRowClient = ({
 
   const activeAgo = isCurrent ? undefined : formatRelativeActiveTime(session.updatedAt, new Date())
 
-  const handleRevoke = useCallback(() => {
+  const handleRevoke = () => {
     onRevoke(session.token)
-  }, [onRevoke, session.token])
+  }
 
   return (
     <div className="group flex items-center justify-between gap-4 p-5 transition-colors hover:bg-muted/40">

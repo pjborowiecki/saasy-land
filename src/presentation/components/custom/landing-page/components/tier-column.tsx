@@ -47,8 +47,6 @@ export const TierColumn = ({ mostPopular, tier }: Readonly<{ mostPopular: string
         ))}
       </ul>
 
-      {/* The CTA is pinned to the foot of the column by a spacer, so the three buttons form
-            one horizontal line whatever the feature copy does above. */}
       <div className="mt-auto pt-10 md:pt-12">
         <Link
           className={cn(

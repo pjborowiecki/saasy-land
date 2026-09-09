@@ -8,9 +8,6 @@ export const newsletterStatusEnum = { enumValues: ["subscribed", "unsubscribed",
 export const newsletterSourceEnum = { enumValues: ["footer", "blog", "app"] } as const
 export const newsletterLocaleEnum = { enumValues: I18N.SUPPORTED_LOCALES } as const
 
-export type NewsletterStatus = (typeof newsletterStatusEnum.enumValues)[number]
-export type NewsletterSource = (typeof newsletterSourceEnum.enumValues)[number]
-
 export const NEWSLETTER_TOKEN_LENGTH = 64
 
 export const CONFIRMATION_WINDOW_IN_HOURS = 24

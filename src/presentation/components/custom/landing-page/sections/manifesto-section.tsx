@@ -8,18 +8,9 @@ import { Reveal } from "~/src/presentation/components/custom/landing-page/compon
 
 import { ROUTES } from "~/src/routes"
 
-/** Each line lands a beat after the one above it. Four lines, three hundred and sixty ms total. */
 const LINE_STEP_MS = 120
 const SECOND_LINE_DELAY_MS = 240
 
-/**
- * The argument, in four sentences and nothing else.
- *
- * No heading, no lead, no illustration, no card. This is the one place on the page where the
- * layout's job is to get out of the way, so the section is a single measure of type on the
- * ground with the first three lines recessed and the conclusion in full strength. The stagger is
- * the only thing doing work: the lines arrive in the order you would say them.
- */
 export const ManifestoSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.manifesto")
 

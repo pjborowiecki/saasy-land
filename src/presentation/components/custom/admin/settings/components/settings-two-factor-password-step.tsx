@@ -9,7 +9,6 @@ import { useTranslations } from "use-intl/react"
 import { fieldErrorMessage } from "~/src/integrations/tanstack-form/form.fields"
 
 import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
-import { parseTwoFactorEnableData } from "~/src/modules/two-factor/two-factor.utils"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { enableTwoFactorMutation } from "~/src/modules/two-factor/use-cases/enable-two-factor"
 
@@ -41,14 +40,18 @@ export const SettingsTwoFactorPasswordStep = ({ onEnabled }: Readonly<SettingsTw
     defaultValues: { password: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
-        const result = await enableTwoFactorRequest.mutateAsync({ password: data.password })
-        const enableData = parseTwoFactorEnableData(result)
-        if (enableData === undefined) {
-          toast.error(t("security.twoFactor.setupError"))
-          return
-        }
-        onEnabled(enableData.totpURI, enableData.backupCodes)
+        await enableTwoFactorRequest.mutateAsync(
+          { password: value.password },
+          {
+            onSuccess: (result) => {
+              if (result.method !== "totp") {
+                toast.error(t("security.twoFactor.setupError"))
+                return
+              }
+              onEnabled(result.totpURI, result.backupCodes)
+            },
+          },
+        )
       } catch (error) {
         toast.error(actionError(error))
       }

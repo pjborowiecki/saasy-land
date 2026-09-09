@@ -43,7 +43,7 @@ const withoutReactErrorLogging = (run: () => void): void => {
   }
 }
 
-const renderBoundary = (children: ReactNode, title?: string): void => {
+const renderBoundary = (children: ReactNode): void => {
   const messages = getTestMessages("en-US")
 
   const Wrapper = ({ children: wrapped }: { children: ReactNode }): JSX.Element => (
@@ -52,7 +52,7 @@ const renderBoundary = (children: ReactNode, title?: string): void => {
     </IntlProvider>
   )
 
-  render(<SectionErrorBoundary {...(title === undefined ? {} : { title })}>{children}</SectionErrorBoundary>, { wrapper: Wrapper })
+  render(<SectionErrorBoundary>{children}</SectionErrorBoundary>, { wrapper: Wrapper })
 }
 
 describe("section error boundary component", () => {
@@ -66,22 +66,13 @@ describe("section error boundary component", () => {
     expect(screen.queryByRole("alert")).not.toBeInTheDocument()
   })
 
-  it("falls back to the translated heading when no title is given", () => {
+  it("renders the translated error heading", () => {
     expect.hasAssertions()
     withoutReactErrorLogging(() => {
       renderBoundary(<Boom />)
     })
 
     expect(screen.getByRole("alert")).toHaveTextContent("Something went wrong")
-  })
-
-  it("prefers a caller-supplied title", () => {
-    expect.hasAssertions()
-    withoutReactErrorLogging(() => {
-      renderBoundary(<Boom />, "Users failed to load")
-    })
-
-    expect(screen.getByText("Users failed to load")).toBeInTheDocument()
   })
 
   it("hides the raw error message outside development", () => {

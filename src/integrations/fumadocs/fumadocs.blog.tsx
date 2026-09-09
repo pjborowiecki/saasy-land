@@ -17,13 +17,7 @@ import { readingTimeMinutes } from "~/src/lib/blog"
 const BLOG_QUERY_KEYS = { ALL: ["blog"] } as const
 const blogLocaleSchema = z.enum(I18N.SUPPORTED_LOCALES)
 
-/**
- * Flatten one table-of-contents heading to plain text.
- *
- * Fumadocs builds the TOC with `rehypeToc`, which exports every heading as a JSX fragment rather
- * than a string — so a `typeof title === "string"` check never matches, and the titles have to be
- * walked before they can cross the server-function boundary as JSON.
- */
+// Fumadocs headings contain JSX; serialize their text for the server function response.
 const tocItemTitle = (title: ReactNode): string =>
   Children.toArray(title)
     .map((child) => {

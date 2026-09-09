@@ -10,7 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/src/presentation/components/shadcn/select"
 import { Switch } from "~/src/presentation/components/shadcn/switch"
 
-/** Common preference options from the shared-kernel timezone catalog (not the full IANA set). */
 const PREFERENCE_TIMEZONES = [
   "UTC",
   "America/New_York",

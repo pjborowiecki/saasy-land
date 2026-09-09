@@ -1,8 +1,12 @@
-import { type JSX, useCallback, useState } from "react"
+import { type JSX, useState } from "react"
 
+import { useIsMutating } from "@tanstack/react-query"
 import { useRouter } from "@tanstack/react-router"
+import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { useTranslations } from "use-intl/react"
+
+import { TWO_FACTOR_MUTATION_KEYS } from "~/src/modules/two-factor/two-factor.constants"
 
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/src/presentation/components/shadcn/card"
@@ -13,7 +17,10 @@ import { SettingsTwoFactorDisableStep } from "~/src/presentation/components/cust
 import { SettingsTwoFactorPasswordStep } from "~/src/presentation/components/custom/admin/settings/components/settings-two-factor-password-step"
 import { SettingsTwoFactorVerifyStep } from "~/src/presentation/components/custom/admin/settings/components/settings-two-factor-verify-step"
 
-type DialogStep = "confirm" | "disable" | "password" | "verify"
+type TwoFactorDialog =
+  | { step: "disable" | "password" }
+  | { step: "verify"; totpUri: string; backupCodes: readonly string[] }
+  | { step: "confirm"; backupCodes: readonly string[] }
 
 interface SettingsTwoFactorCardProps {
   readonly twoFactorEnabled: boolean
@@ -22,52 +29,13 @@ interface SettingsTwoFactorCardProps {
 export const SettingsTwoFactorCard = ({ twoFactorEnabled }: Readonly<SettingsTwoFactorCardProps>): JSX.Element => {
   const t = useTranslations("pages.admin.settings")
   const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [step, setStep] = useState<DialogStep>("password")
-  const [totpUri, setTotpUri] = useState<string>("")
-  const [backupCodes, setBackupCodes] = useState<readonly string[]>([])
+  const [dialog, setDialog] = useState<TwoFactorDialog>()
+  const isPending = useIsMutating({ mutationKey: TWO_FACTOR_MUTATION_KEYS.ALL }) > 0
 
-  const resetDialog = useCallback(() => {
-    setStep("password")
-    setTotpUri("")
-    setBackupCodes([])
-  }, [])
-
-  const handleOpenChange = useCallback(
-    (nextOpen: boolean) => {
-      setOpen(nextOpen)
-      if (!nextOpen) {
-        resetDialog()
-      }
-    },
-    [resetDialog],
-  )
-
-  const handleEnableOpen = useCallback(() => {
-    setStep(twoFactorEnabled ? "disable" : "password")
-    setOpen(true)
-  }, [twoFactorEnabled])
-
-  const handleEnabled = useCallback((nextTotpUri: string, codes: readonly string[]) => {
-    setTotpUri(nextTotpUri)
-    setBackupCodes(codes)
-    setStep("verify")
-  }, [])
-
-  const handleVerified = useCallback(() => {
-    setStep("confirm")
-  }, [])
-
-  const handleDone = useCallback(() => {
-    handleOpenChange(false)
+  const closeDialog = () => {
+    setDialog(undefined)
     void router.invalidate()
-  }, [handleOpenChange, router])
-
-  const handleDisabled = useCallback(() => {
-    handleOpenChange(false)
-    toast.success(t("security.twoFactor.disabledSuccess"))
-    void router.invalidate()
-  }, [handleOpenChange, router, t])
+  }
 
   return (
     <>
@@ -82,25 +50,64 @@ export const SettingsTwoFactorCard = ({ twoFactorEnabled }: Readonly<SettingsTwo
               <p className="text-sm font-medium text-foreground">{t("security.twoFactor.app")}</p>
               <p className="mt-1 text-xs text-muted-foreground">{t("security.twoFactor.appDescription")}</p>
             </div>
-            <Button className="h-8 shrink-0 px-4 text-xs" onPress={handleEnableOpen} size="sm" variant="outline">
+            <Button
+              className="h-8 shrink-0 px-4 text-xs"
+              isDisabled={isPending}
+              onPress={() => {
+                setDialog({ step: twoFactorEnabled ? "disable" : "password" })
+              }}
+              size="sm"
+              variant="outline"
+            >
+              {isPending && <Loader2 aria-hidden="true" className="size-4 animate-spin" />}
               {twoFactorEnabled ? t("security.twoFactor.disable") : t("security.twoFactor.enable")}
             </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Dialog className="max-w-md" isOpen={open} onOpenChange={handleOpenChange}>
+      <Dialog
+        className="max-w-md"
+        isOpen={Boolean(dialog)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setDialog(undefined)
+          }
+        }}
+      >
         <DialogHeader>
-          <DialogTitle>{step === "disable" ? t("security.twoFactor.disableDialogTitle") : t("security.twoFactor.dialogTitle")}</DialogTitle>
+          <DialogTitle>
+            {dialog?.step === "disable" ? t("security.twoFactor.disableDialogTitle") : t("security.twoFactor.dialogTitle")}
+          </DialogTitle>
           <DialogDescription>
-            {step === "disable" ? t("security.twoFactor.disableDialogDescription") : t("security.twoFactor.dialogDescription")}
+            {dialog?.step === "disable" ? t("security.twoFactor.disableDialogDescription") : t("security.twoFactor.dialogDescription")}
           </DialogDescription>
         </DialogHeader>
 
-        {step === "password" ? <SettingsTwoFactorPasswordStep onEnabled={handleEnabled} /> : undefined}
-        {step === "verify" ? <SettingsTwoFactorVerifyStep onVerified={handleVerified} totpUri={totpUri} /> : undefined}
-        {step === "confirm" ? <SettingsTwoFactorConfirmStep backupCodes={backupCodes} onDone={handleDone} /> : undefined}
-        {step === "disable" ? <SettingsTwoFactorDisableStep onDisabled={handleDisabled} /> : undefined}
+        {dialog?.step === "password" ? (
+          <SettingsTwoFactorPasswordStep
+            onEnabled={(totpUri, backupCodes) => {
+              setDialog({ backupCodes, step: "verify", totpUri })
+            }}
+          />
+        ) : undefined}
+        {dialog?.step === "verify" ? (
+          <SettingsTwoFactorVerifyStep
+            onVerified={() => {
+              setDialog({ backupCodes: dialog.backupCodes, step: "confirm" })
+            }}
+            totpUri={dialog.totpUri}
+          />
+        ) : undefined}
+        {dialog?.step === "confirm" ? <SettingsTwoFactorConfirmStep backupCodes={dialog.backupCodes} onDone={closeDialog} /> : undefined}
+        {dialog?.step === "disable" ? (
+          <SettingsTwoFactorDisableStep
+            onDisabled={() => {
+              closeDialog()
+              toast.success(t("security.twoFactor.disabledSuccess"))
+            }}
+          />
+        ) : undefined}
       </Dialog>
     </>
   )

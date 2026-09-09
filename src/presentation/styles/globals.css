@@ -10,20 +10,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * GRAPHITE — one near-neutral ramp, hue-locked to 265 (a cold blue-grey), plus one
- * chromatic token. Two rules generate the whole palette:
- *
- *   1. PRIMARY IS MONOCHROME. The primary action is the highest-contrast thing on the
- *      page: near-black on light, near-white on dark. It is loud because of contrast,
- *      not because of colour, which is why it stays loud in both modes and never dates.
- *   2. COLOUR IS STATE. `--ring` carries the only chroma in the system: a cold signal
- *      cyan. It marks focus, liveness, verification and progress. It is never a
- *      background, never a gradient, never decoration. If something is cyan, it is
- *      because the interface is telling you a fact about right now.
- *
- * Token NAMES are frozen. Values may be retuned. No token may be added.
- */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.17 0.005 265);
@@ -43,8 +29,7 @@
   --border: oklch(0.17 0.02 265 / 11%);
   --input: oklch(0.17 0.02 265 / 14%);
   --ring: oklch(0.58 0.106 208);
-  /* Instrument ramp: cyan leads, the rest recede into the neutral so a chart never
-   * turns into a fruit salad. Ordered by prominence, not by hue wheel. */
+
   --chart-1: oklch(0.58 0.106 208);
   --chart-2: oklch(0.46 0.055 245);
   --chart-3: oklch(0.66 0.07 200);
@@ -63,18 +48,6 @@
   --fd-layout-width: 2000px;
 }
 
-/*
- * The dark ramp is the landing's committed world and the app's dark theme.
- *
- * Surfaces climb in even ~0.035 L steps from the ground (background -> card -> muted),
- * small enough that no surface announces itself and large enough that a nested panel is
- * legible as nested without a border doing all the work. The ground itself sits at
- * L 0.168 rather than at black: pure black has no room underneath it, so a modal scrim,
- * an inset well or a pressed state has nowhere to go.
- *
- * Hairlines are white-alpha, not a solid grey, so they hold their relationship to every
- * surface they cross instead of vanishing on the light ones and glowing on the dark.
- */
 .dark {
   --background: oklch(0.168 0.005 265);
   --foreground: oklch(0.977 0.002 265);
@@ -110,13 +83,6 @@
 }
 
 @theme inline {
-  /*
-   * Two families, not three. The display face was a condensed grotesk set against Geist,
-   * and two voices meant every heading had to decide which one it was. One family across
-   * the whole ramp makes size, weight and tracking carry the hierarchy instead, which is
-   * the only way 15px body and 72px display can read as the same document. `--font-heading`
-   * survives as a role so a display face can return later without touching a call site.
-   */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -159,24 +125,6 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /*
-   * TYPE RAMP — thirteen roles, two families, one class per role.
-   *
-   * Each size token carries its own line-height, letter-spacing and weight, so a role
-   * cannot drift between sections: `text-headline-peak` is the whole headline, not a
-   * size to be re-decorated. A `leading-*`, `tracking-*` or `font-<weight>` utility
-   * still overrides cleanly when one call site truly needs it, but treat that as an
-   * exception worth a comment, not a default.
-   *
-   * OPTICAL TRACKING. Tracking tightens as size grows and loosens as it shrinks, which
-   * is what keeps 72px and 12px looking like the same typeface rather than two. Display
-   * runs to -0.035em; body sits near zero; only mono opens up, because monospace glyphs
-   * already carry their own sidebearings and letterspacing them further is the one place
-   * positive tracking earns its keep.
-   *
-   * Family stays explicit at the call site: everything is `font-sans` except `text-spec`
-   * and `text-label`, which are `font-mono` and are reserved for real measurements.
-   */
   --text-display-hero: clamp(2.75rem, 5.8vw, 4.5rem);
   --text-display-hero--font-weight: 600;
   --text-display-hero--letter-spacing: -0.038em;
@@ -187,7 +135,6 @@
   --text-display-gate--letter-spacing: -0.035em;
   --text-display-gate--line-height: 1.06;
 
-  /* The page's one oversized pull statement. Used once, in the pricing ledger. */
   --text-display-blast: clamp(1.75rem, 3.1vw, 2.375rem);
   --text-display-blast--font-weight: 600;
   --text-display-blast--letter-spacing: -0.03em;
@@ -203,7 +150,6 @@
   --text-headline-support--letter-spacing: -0.027em;
   --text-headline-support--line-height: 1.2;
 
-  /* Pricing figures and dashboard metrics. Always paired with `tabular-nums`. */
   --text-price: clamp(2.125rem, 2.9vw, 2.625rem);
   --text-price--font-weight: 600;
   --text-price--letter-spacing: -0.035em;
@@ -235,16 +181,10 @@
   --text-spec--letter-spacing: 0.01em;
   --text-spec--line-height: 1.55;
 
-  /*
-   * The micro-label. 0.08em, not the 0.2em an eyebrow usually gets: at 0.2em the label
-   * stops being a label and becomes a decoration, and the page has a budget of three of
-   * these in total.
-   */
   --text-label: 0.6875rem;
   --text-label--letter-spacing: 0.08em;
   --text-label--line-height: 1.45;
 
-  /* Exponential ease-out: the page's only authored easing for state changes. */
   --ease-exp: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 30s linear infinite;
@@ -265,11 +205,7 @@
   }
   body {
     @apply bg-background font-sans text-foreground;
-    /*
-     * Browser surfaces belong to the design system too: the root scrollbar is
-     * themed from the palette rather than shipping the OS default. Derived from
-     * a token via color-mix so it tracks both themes.
-     */
+
     scrollbar-color: color-mix(in oklab, var(--foreground) 20%, transparent) transparent;
     scrollbar-width: thin;
   }
@@ -282,30 +218,21 @@
   textarea {
     caret-color: var(--primary);
   }
-  /* Underlines sit off the baseline and take their weight from the face. */
+
   :where(a) {
     text-decoration-thickness: from-font;
     text-underline-offset: 0.2em;
   }
-  /*
-   * Focus is an accessibility requirement, not a component opt-in. Bare anchors,
-   * summaries and roving-tabindex nodes get a visible ember outline. Zero
-   * specificity via :where(), and @layer base loses to @layer utilities, so any
-   * component that draws its own focus-visible ring still wins.
-   */
+
   :where(a[href], area[href], summary, [tabindex]:not([tabindex="-1"])):focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 3px;
   }
-  /* Anchored sections must land clear of the 4rem fixed nav. */
+
   section[id] {
     scroll-margin-top: 6rem;
   }
-  /*
-   * Anchor jumps glide rather than teleport, which is the whole reason the nav's in-page
-   * links are worth having: the visitor keeps their place in the document. Reduced motion
-   * gets the teleport back, because for some people the glide is the problem.
-   */
+
   html {
     scroll-behavior: smooth;
   }
@@ -346,33 +273,10 @@
   line-height: 1.35;
 }
 
-/*
- * Code blocks: one surface, one elevation.
- *
- * Fumadocs ships the figure with a border, a `shadow-sm` and `bg-fd-card`, then paints the `pre`
- * inside it a different shade with its own radius. On a dark ground that reads as a panel inside a
- * panel with a halo around it — nested cards plus a ghost card, two things the craft floor names
- * outright. The hairline is the elevation; the figure is the surface; the `pre` is just text.
- */
 .typeset figure.shiki {
   box-shadow: none;
 }
 
-/*
- * ...and one box model. Fumadocs already owns this figure end to end: it pads the scroll
- * viewport (`py-3.5`), pads each line through `.shiki .line`, and sizes the text at 13px.
- * `.typeset pre` then lands on the same element and adds its own padding, its own
- * `margin-block-start` and another `0.875em` of font scaling on top.
- *
- * All three stack. The margin is the loud one — 19.5px of dead space trapped *inside* the
- * viewport, above the first line, which is what made the block top-heavy and twice the
- * height of the code in it. The font scaling compounds the other way, shrinking a 13px
- * snippet to 11.375px.
- *
- * So `.typeset` is the interloper on this box: hand every one of those properties back to
- * Fumadocs, then set the two gutters that remain. The right gutter stays wide because the
- * copy button is parked in that corner and long lines scroll under it.
- */
 .typeset figure.shiki pre {
   background-color: transparent;
   border-radius: 0;
@@ -390,11 +294,6 @@
   --padding-right: 2rem;
 }
 
-/*
- * Docs sidebar: Fumadocs sets nested padding via inline styles. Boost chapter
- * pages under an open folder so hierarchy is obvious next to the guide rail.
- * Depth-1 items use calc(5 * var(--spacing)) by default (~1.25rem).
- */
 #nd-docs-layout aside [class*="before:inset-s-2.5"] > a {
   padding-inline-start: calc(8 * var(--spacing)) !important;
 }
@@ -439,24 +338,6 @@
     display: inline;
   }
 
-  /*
-   * THE FIELD — the page's only background texture, and the reason the dark ground
-   * reads as a surface rather than as an absence.
-   *
-   * A 1px grid drawn from the hairline token, faded out radially so it is dense where
-   * the eye is not (the margins) and gone where the type is. Both layers are painted
-   * on one fixed, pointer-events-none element per section, never on a scrolling
-   * container: a masked gradient that scrolls is a repaint every frame.
-   *
-   * `--field-size` is a local variable of this utility, not a design token: it exists
-   * only to keep the two gradients from disagreeing about the cell.
-   *
-   * `var(--border)`, never `var(--color-border)`. Tailwind's `@theme inline` declares
-   * `--color-border: var(--border)` on `:root`, and a custom property that references
-   * another resolves at the element it is declared on, so `--color-border` computes once
-   * against the light palette and every `.dark` descendant inherits that already-resolved
-   * value. Reading the semantic token directly is the only form that follows the theme.
-   */
   .field-grid {
     --field-size: 64px;
     background-image:
@@ -465,17 +346,10 @@
     mask-image: radial-gradient(ellipse 78% 62% at 50% 42%, #000 5%, transparent 72%);
   }
 
-  /*
-   * The signal. One cold wash of the accent hue behind the hero and the closing CTA,
-   * at an alpha low enough that it registers as depth rather than as a colour. This is
-   * the only place `--ring` is allowed to touch a surface, and it is why the hero reads
-   * as lit from somewhere rather than flat.
-   */
   .field-signal {
     background-image: radial-gradient(ellipse 62% 46% at 50% 0%, color-mix(in oklab, var(--ring) 15%, transparent), transparent 68%);
   }
 
-  /* Bottom-fades a block into the ground so a texture never ends on a visible edge. */
   .field-taper {
     mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
   }

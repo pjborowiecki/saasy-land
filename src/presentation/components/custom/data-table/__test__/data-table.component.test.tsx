@@ -13,7 +13,6 @@ import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 
 import { DataTable, useDataTable } from "~/src/presentation/components/custom/data-table/data-table"
 import type { DataTableColumnDef, DataTableFeatures, DataTableOptions } from "~/src/presentation/components/custom/data-table/features"
-import { toggleAllPageRowsSelected, toggleRowSelected } from "~/src/presentation/components/custom/data-table/utils/data-table-selection"
 
 interface Person {
   id: string
@@ -30,7 +29,15 @@ const columnHelper = createColumnHelper<DataTableFeatures, Person>()
 
 const COLUMNS: DataTableColumnDef<Person>[] = columnHelper.columns([
   columnHelper.display({
-    cell: ({ row }) => <Checkbox aria-label="Select row" isSelected={row.getIsSelected()} onChange={toggleRowSelected(row)} />,
+    cell: ({ row }) => (
+      <Checkbox
+        aria-label="Select row"
+        isSelected={row.getIsSelected()}
+        onChange={(selected) => {
+          row.toggleSelected(selected)
+        }}
+      />
+    ),
     enableHiding: false,
     enableSorting: false,
     header: ({ table }) => (
@@ -38,7 +45,9 @@ const COLUMNS: DataTableColumnDef<Person>[] = columnHelper.columns([
         aria-label="Select all rows"
         isIndeterminate={!table.getIsAllPageRowsSelected() && table.getIsSomePageRowsSelected()}
         isSelected={table.getIsAllPageRowsSelected()}
-        onChange={toggleAllPageRowsSelected(table)}
+        onChange={(selected) => {
+          table.toggleAllPageRowsSelected(selected)
+        }}
       />
     ),
     id: "select",

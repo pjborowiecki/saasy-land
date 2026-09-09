@@ -5,10 +5,6 @@ import { useTranslations } from "use-intl/react"
 import { Input } from "~/src/presentation/components/shadcn/input"
 import { Label } from "~/src/presentation/components/shadcn/label"
 
-/**
- * A compact switch: a filled track and knob when the action is on, hairline when it is off.
- * The hit area is widened past the 20x36 mark with a pseudo-element so it clears 44x44.
- */
 const SWITCH_CLASSNAME =
   "relative flex h-5 w-9 shrink-0 items-center justify-end border border-foreground bg-foreground p-0.5 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 after:absolute after:-inset-x-1 after:-inset-y-3"
 

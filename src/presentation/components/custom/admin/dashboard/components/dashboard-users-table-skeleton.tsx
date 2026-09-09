@@ -2,7 +2,6 @@ import type { JSX } from "react"
 
 const SKELETON_ROW_COUNT = 5
 
-/** Header band, toolbar band, five rows, footer band: the same four bands the table renders. */
 export const DashboardUsersTableSkeleton = (): JSX.Element => (
   <div aria-busy className="flex flex-col overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10">
     <div className="border-b border-border px-5 py-4">

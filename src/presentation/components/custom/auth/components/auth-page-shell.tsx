@@ -1,14 +1,5 @@
 import type { JSX, ReactNode } from "react"
 
-/**
- * Every auth page is the same column: a heading, one line of sub-copy, the work, then the way
- * onward. No card. The split already frames the form, and a floating panel inside a framed
- * column is a second bezel.
- *
- * The heading breathes upward into the column padding and sits tight to its
- * sub-copy (`mt-4`); the work is pushed clear of both (`mt-10`) so the eye reads
- * heading, then task, and never treats the two as one block.
- */
 interface AuthPageShellProps {
   readonly children: ReactNode
   readonly description: string

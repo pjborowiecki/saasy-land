@@ -18,7 +18,6 @@ import {
   UserCell,
 } from "~/src/presentation/components/custom/admin/users/all/components/cells"
 import type { DataTableColumnDef, DataTableFeatures } from "~/src/presentation/components/custom/data-table/features"
-import { toggleAllPageRowsSelected, toggleRowSelected } from "~/src/presentation/components/custom/data-table/utils/data-table-selection"
 
 const columnHelper = createColumnHelper<DataTableFeatures, User["select"]>()
 
@@ -35,7 +34,9 @@ export const useAllUsersColumns = (): DataTableColumnDef<User["select"]>[] => {
               aria-label={t("table.selectRow")}
               isDisabled={!row.getCanSelect()}
               isSelected={row.getIsSelected()}
-              onChange={toggleRowSelected(row)}
+              onChange={(selected) => {
+                row.toggleSelected(selected)
+              }}
             />
           ),
           enableHiding: false,
@@ -47,7 +48,9 @@ export const useAllUsersColumns = (): DataTableColumnDef<User["select"]>[] => {
               aria-label={t("table.selectAll")}
               isIndeterminate={!table.getIsAllPageRowsSelected() && table.getIsSomePageRowsSelected()}
               isSelected={table.getIsAllPageRowsSelected()}
-              onChange={toggleAllPageRowsSelected(table)}
+              onChange={(selected) => {
+                table.toggleAllPageRowsSelected(selected)
+              }}
             />
           ),
           id: "select",

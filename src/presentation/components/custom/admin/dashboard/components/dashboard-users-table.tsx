@@ -20,11 +20,6 @@ import { ROUTES } from "~/src/routes"
 const DASHBOARD_USER_PREVIEW_LIMIT = 5
 const FIRST_PREVIEW_INDEX = 1
 
-/**
- * Header, toolbar, rows, footer: four bands inside one card, separated by hairlines and nothing
- * else. `gap-0 py-0` overrides the Card's default vertical rhythm, because a card whose contents
- * are full-bleed bands must not also pad them apart.
- */
 export const DashboardUsersTable = (): JSX.Element => {
   const userRows = useSuspenseQuery(getUsersQuery).data
   const t = useTranslations("pages.admin.dashboard")

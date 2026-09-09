@@ -31,7 +31,6 @@ import {
 } from "~/src/presentation/components/custom/auth/constants/auth-styles"
 import { useTwoFactorRedirect } from "~/src/presentation/components/custom/auth/two-factor/hooks/use-two-factor-redirect"
 
-/** A backup code is a code, so it is set in mono like the OTP it stands in for. */
 const BACKUP_CODE_INPUT_CLASS = "font-mono tracking-wider"
 
 const BACKUP_CODE_ERROR_ID = `${AUTH_FORM_IDS.TWO_FACTOR}-backup-code-error`
@@ -58,8 +57,7 @@ export const TwoFactorBackupForm = ({ onToggleMode }: Readonly<TwoFactorBackupFo
     defaultValues: { code: "", trustDevice: true },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
-        await verifyBackupCodeRequest.mutateAsync(data)
+        await verifyBackupCodeRequest.mutateAsync(value)
         await redirectAfterVerification()
       } catch (error) {
         toast.error(actionError(error))

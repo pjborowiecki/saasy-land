@@ -9,18 +9,17 @@ import { AUTH_PRIMARY_BUTTON_CLASS } from "~/src/presentation/components/custom/
 
 export const SignUpSubmitButton = ({ isPending = false }: Readonly<{ isPending?: boolean }>): JSX.Element => {
   const t = useTranslations("pages.auth.sign-up")
-  const isLoading = isPending
 
   return (
     <Button
       aria-label={t("form.submit")}
       className={AUTH_PRIMARY_BUTTON_CLASS}
-      isDisabled={isLoading}
+      isDisabled={isPending}
       id="sign-up-form-submit-button"
       type="submit"
     >
-      {isLoading && <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />}
-      {isLoading ? t("form.submitting") : t("form.submit")}
+      {isPending && <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />}
+      {isPending ? t("form.submitting") : t("form.submit")}
     </Button>
   )
 }

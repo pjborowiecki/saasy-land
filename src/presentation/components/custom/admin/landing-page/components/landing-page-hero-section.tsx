@@ -21,10 +21,6 @@ const LandingPageHeroActions = (): JSX.Element => {
   )
 }
 
-/**
- * The selected section on the canvas. Selection is a state, so it is drawn in the accent: a 1px
- * hairline in `--ring` plus a high-contrast chip, never a glow or a raised card.
- */
 export const LandingPageHeroSection = (): JSX.Element => {
   const t = useTranslations("pages.admin.landing-page")
 

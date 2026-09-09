@@ -1,3 +1,5 @@
+import { I18N } from "../../../src/integrations/use-intl/i18n.config"
+
 import { AbsoluteFill, Easing, Interactive, interpolate, useCurrentFrame } from "remotion"
 
 import { Plate } from "../components/plate"
@@ -6,12 +8,6 @@ import { FPS, THEME, TYPE } from "../theme"
 
 const PAD = 52
 
-/**
- * Three of the page's claims and the file each one is read out of. Every path exists in this
- * repository, and every quoted fragment is what that file actually contains: the section's whole
- * promise is that the numbers can be checked, so a loop that invented a source would break the
- * one thing it is there to demonstrate.
- */
 const AUDITS = [
   {
     claim: "100% test coverage",
@@ -19,28 +15,20 @@ const AUDITS = [
     path: "coverage/coverage-summary.json",
   },
   {
-    claim: "Enforced, not reported",
+    claim: "Coverage enforced in CI",
     line: "run: bun run test:coverage",
     path: ".github/workflows/ci.yml",
   },
   {
-    claim: "54 locales, 156 currencies",
-    line: "LOCALES: 54 message catalogs",
-    path: "src/integrations/next-intl/messages",
+    claim: `${I18N.SUPPORTED_LOCALES.length} supported languages`,
+    line: '"en-US", "de-DE", "es-ES", …',
+    path: "src/integrations/use-intl/i18n.config.ts",
   },
 ] as const
 
 const HOLD = 2.6 * FPS
 const RESOLVE = 0.55 * FPS
 
-/**
- * THE AUDIT — the Record section's claim, drawn.
- *
- * A claim on the left, the file it comes from on the right, and the moment between them where the
- * page stops asserting and starts citing. The tick only lands once the line has resolved, because
- * the order is the argument: the number is not true because the page says so, it is true because
- * the file says so.
- */
 export function RecordAudit() {
   const frame = useCurrentFrame()
   const index = Math.min(AUDITS.length - 1, Math.floor(frame / HOLD))
@@ -88,7 +76,6 @@ export function RecordAudit() {
             <span style={{ ...TYPE.readoutSmall, color: THEME.foreground, fontFamily: SANS }}>{audit.claim}</span>
           </div>
 
-          {/* The file, with the scan sweeping the quoted line as it resolves. */}
           <div
             style={{
               border: `1px solid ${THEME.hairline}`,

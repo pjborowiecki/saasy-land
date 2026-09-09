@@ -12,7 +12,7 @@ const AdminUsersLayout = (): JSX.Element => {
   const t = useTranslations("pages.admin.users")
 
   return (
-    // Negative margins mirror the padding in `admin/layout.tsx`; change the two together.
+    // Negative margins mirror the padding in `admin.tsx`; change the two together.
     <div className="-mx-4 -mt-5 -mb-6 flex min-h-0 w-[calc(100%+2rem)] flex-1 flex-col overflow-hidden md:-mx-6 md:-mt-7 md:-mb-8 md:w-[calc(100%+3rem)]">
       <div className="shrink-0 border-b border-border bg-muted/30 px-4 pt-5 md:px-6 md:pt-7">
         <div className="mb-6">

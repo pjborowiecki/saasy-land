@@ -4,22 +4,12 @@ import {
   getBlogPostStatusBadgeClass,
   getBlogPostStatusDotClass,
   getDashboardStatusDotClass,
-  getProductIconClass,
-  getRoleIconClass,
-  getRoleTypeBadgeClass,
   getStatusBadgeClass,
   getStatusDotClass,
-  getTagBadgeClass,
   getVisibilityBadgeClass,
   getVisibilityMarkClass,
 } from "~/src/presentation/components/custom/admin/constants/status-colors"
 
-/*
- * The assertions check the token a status resolves to, not a Tailwind palette name, because the
- * point of this module is that positive states are the accent and neutral states are the muted
- * foreground. A test that asserted "emerald" would have passed happily while the console drifted
- * back to five hues.
- */
 describe("admin status color helpers", () => {
   it("maps the three meaningful states onto badge tokens", () => {
     expect.hasAssertions()
@@ -54,15 +44,6 @@ describe("admin status color helpers", () => {
     expect(getBlogPostStatusDotClass("draft")).toContain("muted-foreground")
     expect(getBlogPostStatusBadgeClass("published")).toContain("text-ring")
     expect(getBlogPostStatusBadgeClass("draft")).toContain("text-muted-foreground")
-  })
-
-  it("gives identity-only variants the neutral treatment", () => {
-    expect.hasAssertions()
-
-    expect(getRoleTypeBadgeClass()).toContain("text-muted-foreground")
-    expect(getRoleIconClass()).toBe("text-muted-foreground")
-    expect(getTagBadgeClass()).toContain("text-muted-foreground")
-    expect(getProductIconClass()).toBe("text-muted-foreground")
   })
 
   it("marks visibility as a state", () => {

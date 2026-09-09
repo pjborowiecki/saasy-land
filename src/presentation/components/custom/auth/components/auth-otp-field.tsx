@@ -11,12 +11,6 @@ import { AuthFieldError } from "~/src/presentation/components/custom/auth/compon
 import { type AuthFormId } from "~/src/presentation/components/custom/auth/constants/auth-form-ids"
 import { AUTH_FIELD_CONTENT_CLASS, AUTH_LABEL_CLASS } from "~/src/presentation/components/custom/auth/constants/auth-styles"
 
-/*
- * The one place mono is earned on this surface: the digits are a code, and a code is
- * read character by character. Slots are 48px so each is its own touch target, share
- * their hairlines, and take the control radius only at the two outer corners so the run
- * reads as a single field.
- */
 const OTP_SLOT_CLASS =
   "size-12 border-input font-mono text-lead tabular-nums transition-[border-color,box-shadow] duration-200 ease-exp data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50"
 

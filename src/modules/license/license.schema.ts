@@ -8,7 +8,6 @@ export const licenseTierEnum = { enumValues: [LICENSE_TIER.CORE, LICENSE_TIER.CO
 export const licenseStatusEnum = { enumValues: [LICENSE_STATUS.ACTIVE, LICENSE_STATUS.REVOKED] } as const
 
 export type LicenseTier = (typeof licenseTierEnum.enumValues)[number]
-export type LicenseStatus = (typeof licenseStatusEnum.enumValues)[number]
 
 export const POLAR_ID_MAX_LENGTH = 64
 export const LICENSE_KEY_MAX_LENGTH = 128

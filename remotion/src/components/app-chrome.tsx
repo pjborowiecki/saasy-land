@@ -3,15 +3,6 @@ import type { ReactNode } from "react"
 import { MONO, SANS } from "../fonts"
 import { THEME } from "../theme"
 
-/**
- * The console's chrome, rebuilt at video scale.
- *
- * This is a reconstruction of the real admin shell in `src/app/[locale]/(admin)`, not a generic
- * dashboard drawing: the same rail width, the same group labels, the same twelve destinations,
- * the same 3.5rem header with a command-palette trigger on the right. Anything that appears here
- * has to exist in the product, because the hero's entire job is to show what the buyer receives.
- */
-
 export const RAIL_WIDTH = 300
 export const HEADER_HEIGHT = 84
 
