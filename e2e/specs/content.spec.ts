@@ -6,9 +6,11 @@ test("documentation loads MDX and follows a sidebar link through the router", as
   await page.goto("/docs/getting-started")
   await appPage.waitForAppReady()
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
+  await page.evaluate(() => (document.documentElement.dataset["docsNavigation"] = "same-document"))
   await page.locator('a[href="/docs/getting-started/installation"]').first().click()
   await expect(page).toHaveURL(/\/docs\/getting-started\/installation$/u)
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Local development")
+  await expect(page.locator("html")).toHaveAttribute("data-docs-navigation", "same-document")
   expect(errors).toEqual([])
 })
 

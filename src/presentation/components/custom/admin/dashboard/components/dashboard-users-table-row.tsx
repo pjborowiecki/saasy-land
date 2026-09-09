@@ -8,7 +8,7 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 import { Checkbox } from "~/src/presentation/components/shadcn/checkbox"
 import { TableCell, TableRow } from "~/src/presentation/components/shadcn/table"
 
-import { AVATAR_INITIALS_LENGTH, AVATAR_INITIALS_START } from "~/src/presentation/components/custom/admin/constants/constants"
+import { AVATAR_INITIALS_LENGTH } from "~/src/presentation/components/custom/admin/constants/constants"
 import { getDashboardStatusDotClass } from "~/src/presentation/components/custom/admin/constants/status-colors"
 import type { DashboardUserRow } from "~/src/presentation/components/custom/admin/types"
 
@@ -46,7 +46,7 @@ const DashboardUsersTableUserCell = ({ row }: DashboardUsersTableRowProps): JSX.
     <Avatar className="size-8 rounded-md border border-border">
       <AvatarImage src={row.avatar} alt={row.name} />
       <AvatarFallback className="rounded-md bg-muted text-[0.6875rem] font-semibold text-foreground">
-        {row.initials ?? row.name.slice(AVATAR_INITIALS_START, AVATAR_INITIALS_LENGTH).toUpperCase()}
+        {row.initials ?? row.name.slice(AVATAR_INITIALS_LENGTH).toUpperCase()}
       </AvatarFallback>
     </Avatar>
     <div>

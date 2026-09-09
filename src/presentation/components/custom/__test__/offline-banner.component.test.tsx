@@ -1,7 +1,7 @@
 import type { JSX, ReactNode } from "react"
 /** @vitest-environment jsdom */
 
-import { act, render, screen, waitFor } from "@testing-library/react"
+import { act, render, screen } from "@testing-library/react"
 import { IntlProvider } from "use-intl/react"
 import { describe, expect, it, vi } from "vite-plus/test"
 
@@ -62,44 +62,21 @@ describe("offline banner component", () => {
     expect(screen.queryByRole("status")).not.toBeInTheDocument()
   })
 
-  it("unregisters service workers and clears caches once on mount", async () => {
+  it("leaves browser caches and service workers alone", () => {
     expect.hasAssertions()
-    setNavigatorOnline(true)
+    const getRegistrations = vi.fn()
+    const cacheKeys = vi.fn()
+    vi.stubGlobal("navigator", { onLine: true, serviceWorker: { getRegistrations } })
+    vi.stubGlobal("caches", { keys: cacheKeys })
 
-    const unregister = vi.fn<() => Promise<boolean>>().mockResolvedValue(true)
-    Object.defineProperty(globalThis.navigator, "serviceWorker", {
-      configurable: true,
-      value: { getRegistrations: vi.fn<() => Promise<{ unregister: () => Promise<boolean> }[]>>().mockResolvedValue([{ unregister }]) },
-    })
-    const deleteCache = vi.fn<() => Promise<boolean>>().mockResolvedValue(true)
-    Object.defineProperty(globalThis, "caches", {
-      configurable: true,
-      value: { delete: deleteCache, keys: vi.fn<() => Promise<string[]>>().mockResolvedValue(["retired-offline-cache"]) },
-    })
+    try {
+      renderBanner()
 
-    renderBanner()
-
-    await waitFor(() => {
-      expect(unregister).toHaveBeenCalledWith()
-    })
-    expect(deleteCache).toHaveBeenCalledWith("retired-offline-cache")
-  })
-
-  it("stays quiet when recovery fails", async () => {
-    expect.hasAssertions()
-    setNavigatorOnline(true)
-
-    const getRegistrations = vi.fn<() => Promise<never>>().mockRejectedValue(new Error("sw registry unavailable"))
-    Object.defineProperty(globalThis.navigator, "serviceWorker", {
-      configurable: true,
-      value: { getRegistrations },
-    })
-
-    renderBanner()
-
-    await waitFor(() => {
-      expect(getRegistrations).toHaveBeenCalledWith()
-    })
-    expect(screen.queryByRole("status")).not.toBeInTheDocument()
+      expect(getRegistrations).not.toHaveBeenCalled()
+      expect(cacheKeys).not.toHaveBeenCalled()
+      expect(screen.queryByRole("status")).not.toBeInTheDocument()
+    } finally {
+      vi.unstubAllGlobals()
+    }
   })
 })

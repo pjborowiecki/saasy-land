@@ -8,22 +8,13 @@ import { Reveal } from "~/src/presentation/components/custom/landing-page/compon
 
 const GRID_DELAY_MS = 100
 
-/** Until there is a submission form, the invitation is an email the author actually reads. */
 const FEATURE_HREF = "mailto:hello@saasyland.com?subject=Built%20on%20SaaSy%20Land"
 
-/**
- * The two products, and whether each one is reachable yet.
- *
- * `href` is `undefined` until a domain actually answers. A case study linking to a site that does
- * not resolve is worse than no case study, because the one thing this section is selling is that
- * every claim on the page can be checked by clicking it.
- */
 const CASES = [
   { href: "https://reactprojects.com", id: "reactprojects", isLive: true },
   { href: undefined, id: "marte", isLive: false },
 ] as const
 
-/** Plain text until the domain answers, a link the moment it does. Two shapes, so two returns. */
 const CaseName = ({ href, name }: Readonly<{ href: string | undefined; name: string }>): JSX.Element | string => {
   if (href === undefined) {
     return name
@@ -84,18 +75,6 @@ const CaseCard = ({ body, href, isLive, kind, modules, modulesLabel, name, statu
   </HighlightItem>
 )
 
-/**
- * WHAT IT HAS ACTUALLY BUILT.
- *
- * Placed after the claim audit and before the market comparison, which is the one slot where it
- * carries weight: the section above has just told you how to verify every number, so the natural
- * next question is whether anything real has been built with it. Answering that immediately before
- * the comparison means the reader arrives at the alternatives already holding evidence.
- *
- * Deliberately not testimonials. A quote is unfalsifiable and every competitor has a wall of them,
- * which is precisely why nobody reads them. Two URLs, the modules each one uses, and a link are
- * worth more than twenty five-star cards, because a visitor can disagree with them.
- */
 export const CasesSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.cases")
 

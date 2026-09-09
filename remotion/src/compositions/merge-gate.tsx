@@ -11,11 +11,6 @@ const GATE_WIDTH = 132
 const ENTRY_X = PAD + 10
 const EXIT_X = BAND.width - PAD - 10
 
-/**
- * Five commits, one of which does not compile. The failing one is fourth, late enough that the
- * viewer has learned what "passing" looks like before they are shown what happens when it does
- * not, and early enough that the loop still ends on a merge.
- */
 const COMMITS = [
   { enters: 0.35 * FPS, passes: true, sha: "4f1c9ab" },
   { enters: 1.5 * FPS, passes: true, sha: "b0e72d4" },
@@ -24,7 +19,6 @@ const COMMITS = [
   { enters: 5.3 * FPS, passes: true, sha: "77e0c52" },
 ] as const
 
-/** Frames from entering the track to reaching the gate, and from the gate to main. */
 const TO_GATE = 1.15 * FPS
 const AT_GATE = 0.75 * FPS
 const TO_MAIN = 1 * FPS
@@ -35,13 +29,6 @@ interface CommitState {
   readonly x: number
 }
 
-/**
- * Where a commit is, and what colour it has earned.
- *
- * A passing commit runs entry to gate, holds while the gate checks it, then continues into main.
- * A failing one stops at the gate, turns to `--destructive` and fades: the gate is the whole
- * point of the station, so the failure has to be visibly *stopped* rather than merely marked.
- */
 function commitState(commit: (typeof COMMITS)[number], frame: number): CommitState {
   const local = frame - commit.enters
   const gateArrival = TO_GATE
@@ -86,7 +73,6 @@ function commitState(commit: (typeof COMMITS)[number], frame: number): CommitSta
   }
 }
 
-/** True while any commit is being examined, which is when the gate should look busy. */
 function activeCommit(frame: number) {
   return COMMITS.find((commit) => {
     const local = frame - commit.enters
@@ -94,23 +80,11 @@ function activeCommit(frame: number) {
   })
 }
 
-/**
- * True only once the gate has actually returned a verdict on a failing commit. The heading used
- * to flip the moment a bad commit *arrived*, so it announced a rejection while the checks were
- * still running and the square was still neutral.
- */
 function isRejecting(frame: number): boolean {
   const commit = activeCommit(frame)
   return commit !== undefined && !commit.passes && frame - commit.enters >= TO_GATE + AT_GATE
 }
 
-/**
- * THE MERGE GATE — the tests station's claim, drawn.
- *
- * Commits travel a track toward a gate that runs the suite. Green ones continue into main; the
- * one that breaks something is stopped at the gate and never reaches it. The gate is labelled
- * with what it actually enforces, and the counter underneath is the real suite size.
- */
 export function MergeGate() {
   const frame = useCurrentFrame()
   const examining = activeCommit(frame)
@@ -128,13 +102,11 @@ export function MergeGate() {
           <line stroke={THEME.hairline} strokeWidth={2} x1={ENTRY_X} x2={EXIT_X} y1={TRACK_Y} y2={TRACK_Y} />
           <line stroke={THEME.accentMuted} strokeWidth={2} x1={GATE_X + GATE_WIDTH / 2} x2={EXIT_X} y1={TRACK_Y} y2={TRACK_Y} />
 
-          {/* The gate. Its edge takes the accent while it is working and the alarm when it stops
-              something, because the border is the only part of it that ever changes. */}
           <rect
             fill={THEME.card}
             height={112}
             rx={14}
-            stroke={examining === undefined ? THEME.hairlineLit : (failing ? THEME.destructive : THEME.accent)}
+            stroke={examining === undefined ? THEME.hairlineLit : failing ? THEME.destructive : THEME.accent}
             strokeWidth={2}
             width={GATE_WIDTH}
             x={GATE_X - GATE_WIDTH / 2}
@@ -175,7 +147,7 @@ export function MergeGate() {
 
       <AbsoluteFill name="Track labels" style={{ justifyContent: "flex-end", padding: PAD }}>
         <div style={{ display: "flex", justifyContent: "space-between", ...TYPE.mono, fontFamily: MONO }}>
-          <span style={{ color: THEME.mutedForeground }}>140 test files &middot; 5 suites</span>
+          <span style={{ color: THEME.mutedForeground }}>Unit &middot; Integration &middot; Component</span>
           <span style={{ color: THEME.accent }}>main</span>
         </div>
       </AbsoluteFill>

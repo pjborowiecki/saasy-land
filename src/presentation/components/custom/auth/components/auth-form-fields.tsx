@@ -1,4 +1,4 @@
-import { type JSX, type ReactNode, useCallback, useState } from "react"
+import { type JSX, type ReactNode, useState } from "react"
 
 import { Eye, EyeOff } from "lucide-react"
 import { useTranslations } from "use-intl/react"
@@ -20,7 +20,6 @@ import {
   AUTH_LABEL_CLASS,
 } from "~/src/presentation/components/custom/auth/constants/auth-styles"
 
-/** The reveal toggle fills the field's height so its hit box clears the touch floor. */
 const PASSWORD_TOGGLE_CLASS =
   "size-11 rounded-none rounded-r-lg text-muted-foreground transition-[background-color,color] duration-200 ease-exp hover:bg-muted hover:text-foreground"
 
@@ -113,9 +112,9 @@ export const AuthPasswordField = ({
 
   const message = field.state.meta.isTouched === false ? undefined : fieldErrorMessage(field.state.meta.errors)
 
-  const toggleVisible = useCallback(() => {
+  const toggleVisible = () => {
     setVisible((current) => !current)
-  }, [])
+  }
 
   const fieldId = authFieldId(formId, name)
   const errorId = authErrorId(fieldId)

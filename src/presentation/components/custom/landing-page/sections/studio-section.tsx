@@ -8,7 +8,6 @@ import { cn } from "~/src/lib/cn"
 import { ConceptLoop } from "~/src/presentation/components/custom/landing-page/components/concept-loop"
 import { Reveal } from "~/src/presentation/components/custom/landing-page/components/reveal"
 
-/** Six each. The two tracks are the same length because they cover the same product twice. */
 const LESSONS = ["l1", "l2", "l3", "l4", "l5", "l6"] as const
 const TRACKS = ["walkthrough", "build"] as const
 
@@ -24,28 +23,8 @@ interface BuilderCardProps {
   readonly title: string
 }
 
-/**
- * The page designer, being used rather than photographed: a section is selected, its padding and
- * alignment change, the canvas responds, and the page publishes. A screenshot can only show that
- * the editor exists; the claim this card makes is that a marketing team can drive it.
- *
- * The loop sits beside its copy rather than above it. Stacked, the reader met a wide silent
- * screenshot and had to travel to the bottom of it to learn what they were looking at; abreast,
- * the claim is legible at the same moment as the evidence for it. The rule between them is the
- * card's own divider, so the two halves still read as one exhibit rather than two cards.
- */
 const BuilderCard = ({ body, imageAlt, spec, title }: BuilderCardProps): JSX.Element => (
   <article className="grid overflow-hidden rounded-xl border border-border bg-card lg:grid-cols-[1.35fr_1fr] lg:divide-x lg:divide-border">
-    {/*
-     * The loop is a framed panel in a padded well, not a flush fill.
-     *
-     * Flush, it looked like a mistake. The composition draws the console inset by its own
-     * padding on its own `--card` ground, and with the cell painted the same colour that inset
-     * became an unexplained sliver of space between the console and the card's hard border —
-     * while the copy opposite sat a deliberate 36px off the divider. Matching the padding and
-     * giving the video a hairline of its own turns an accident into a frame, and matches how
-     * the preview slot in the masterclass card below treats its own media.
-     */}
     <div className="flex items-center border-b border-border p-7 md:p-9 lg:border-b-0">
       <ConceptLoop className="overflow-hidden rounded-lg border border-border" label={imageAlt} name="page-designer" />
     </div>
@@ -67,14 +46,6 @@ interface LessonRowProps {
   readonly title: string
 }
 
-/**
- * One lesson, and its state.
- *
- * The lock says what unlocks it, not that you are shut out. "Included with Masterclass" is the
- * same fact as a padlock and a paywall message, told as an inclusion rather than an exclusion,
- * which is the difference between a page that sells and a page that nags.
- */
-/** Play or lock. Two different glyphs carrying two different meanings, so two returns. */
 const LessonMarker = ({ isPreview, lockedLabel }: Readonly<{ isPreview: boolean; lockedLabel: string }>): JSX.Element => {
   if (isPreview) {
     return <Play aria-hidden className="size-3 shrink-0 translate-y-0.5 fill-current text-ring" strokeWidth={0} />
@@ -97,19 +68,6 @@ const LessonRow = ({ index, isPreview, lockedLabel, title }: LessonRowProps): JS
   </li>
 )
 
-/**
- * THE COURSES — proof of quality, not a list of promises.
- *
- * This was an accordion of six chapter titles. An accordion answers "what is covered", which is
- * the second question a buyer has; the first is "is any of it any good", and a list of headings
- * cannot answer that at any length. So the first lesson plays, free, right here. The page already
- * tells people to read the docs and the coverage report before paying — the course should be
- * checkable on the same terms, and one watchable lesson outsells six accurate summaries.
- *
- * Two tracks side by side, because they are two different promises: the walkthrough is orientation
- * in something you now own, the build is the thing being made from nothing. Stacked, the second
- * would read as an appendix to the first.
- */
 const MasterclassCard = ({ body, title }: Readonly<{ body: string; title: string }>): JSX.Element => {
   const t = useTranslations("pages.landing.studio.masterclass")
 
@@ -120,8 +78,6 @@ const MasterclassCard = ({ body, title }: Readonly<{ body: string; title: string
         <p className="mt-3 max-w-[68ch] text-body text-pretty text-muted-foreground">{body}</p>
       </div>
 
-      {/* The player slot. A still frame and a play mark until the first lesson is cut; swap the
-          inner content for the real thing and nothing around it has to move. */}
       <div className="border-y border-border bg-background px-7 py-8 md:px-9 md:py-10">
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-8">
           <div className="flex aspect-video w-full shrink-0 items-center justify-center rounded-lg border border-border bg-card md:w-80">
@@ -163,18 +119,6 @@ const MasterclassCard = ({ body, title }: Readonly<{ body: string; title: string
   )
 }
 
-/**
- * The two things a starter kit almost never includes.
- *
- * Stacked, not paired. These are two separate claims — a tool, and an education — and standing
- * them side by side asked the reader to hold both at once while a tall accordion fought a wide
- * screenshot for the same vertical run. Each now gets the full measure and its own turn: the page
- * designer states its case beside its own footage, and only then does the course begin.
- *
- * The screenshot is the actual page designer running inside the admin. There is no browser chrome
- * drawn around it and no laptop mock under it, because both would be decoration around an image
- * that is already the evidence.
- */
 export const StudioSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.studio")
 

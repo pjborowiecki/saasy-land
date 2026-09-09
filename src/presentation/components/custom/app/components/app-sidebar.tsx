@@ -1,4 +1,4 @@
-import { type JSX, type ReactNode, useCallback } from "react"
+import { type JSX, type ReactNode } from "react"
 
 import { Link, useRouterState } from "@tanstack/react-router"
 import { BookOpen, Mail } from "lucide-react"
@@ -32,9 +32,9 @@ export const AppSidebar = ({ children }: AppSidebarProps): JSX.Element => {
   const locale = useLocale()
   const pathname = useRouterState({ select: (state) => state.location.pathname })
   const { setOpenMobile } = useSidebar()
-  const closeMobile = useCallback(() => {
+  const closeMobile = () => {
     setOpenMobile(false)
-  }, [setOpenMobile])
+  }
 
   return (
     <Sidebar>

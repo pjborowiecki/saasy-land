@@ -4,7 +4,6 @@ import { ChevronsUpDown } from "lucide-react"
 
 import { SidebarMenuButton } from "~/src/presentation/components/shadcn/sidebar"
 
-const FIRST_CHARACTER = 0
 const INITIALS_LENGTH = 2
 
 interface UserWidgetTriggerProps {
@@ -12,17 +11,10 @@ interface UserWidgetTriggerProps {
   readonly name: string
 }
 
-/**
- * Initials, not a generic person glyph.
- *
- * Every account in the console got the same lucide `User2` icon, which is the avatar equivalent
- * of "John Doe": it identifies nobody. Two characters off the real name identify the account
- * that is actually signed in, cost nothing to render and never 404.
- */
 const initialsOf = (name: string): string => {
   const words = name.trim().split(/\s+/u)
-  const letters = words.map((word) => word.charAt(FIRST_CHARACTER))
-  return letters.slice(FIRST_CHARACTER, INITIALS_LENGTH).join("").toUpperCase()
+  const letters = words.map((word) => word.charAt(0))
+  return letters.slice(0, INITIALS_LENGTH).join("").toUpperCase()
 }
 
 export const UserWidgetTrigger = ({

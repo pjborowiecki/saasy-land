@@ -1,4 +1,4 @@
-import { BarChart, BookOpen, CreditCard, Home, MonitorSmartphone, Package, Settings, ShieldAlert, Tags, Users } from "lucide-react"
+import { BarChart, BookOpen, CreditCard, Home, MonitorSmartphone, Package, Settings, Tags, Users } from "lucide-react"
 
 import { ROUTES } from "~/src/routes"
 
@@ -27,7 +27,6 @@ export const SIDEBAR_CONFIG = [
   {
     items: [
       { icon: Users, titleKey: "userManagement", url: ROUTES.ADMIN_USERS },
-      { badgeKey: "activeSessionsBadge", icon: ShieldAlert, titleKey: "activeSessions", url: ROUTES.ADMIN_SESSIONS },
       { icon: CreditCard, titleKey: "payments", url: ROUTES.ADMIN_PAYMENTS },
       { icon: Settings, titleKey: "settings", url: ROUTES.ADMIN_SETTINGS },
     ],

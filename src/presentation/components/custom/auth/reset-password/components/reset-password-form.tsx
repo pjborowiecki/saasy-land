@@ -43,10 +43,9 @@ export const ResetPasswordForm = ({ token }: Readonly<ResetPasswordFormProps>): 
     defaultValues: { confirmPassword: "", password: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
         await resetPasswordRequest.mutateAsync({
-          confirmPassword: data.confirmPassword,
-          password: data.password,
+          confirmPassword: value.confirmPassword,
+          password: value.password,
           token,
         })
         toast.success(t("pages.auth.reset-password.form.success"))

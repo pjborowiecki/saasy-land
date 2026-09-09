@@ -7,16 +7,10 @@ import { FPS, THEME } from "../theme"
 const PAD = 52
 const COMMAND = "bunx saasyland@latest init"
 
-/** The prompt the CLI actually asks first, and the answer this run gives it. */
 const PROMPT = "What are you building?"
 const ANSWER = "A multi-tenant SaaS"
 
-/**
- * What the scaffold writes, in the order it writes it. These are real top-level paths in this
- * repository, so the band is a picture of the tree the buyer receives rather than an invented
- * project shape.
- */
-const TREE = ["src/app", "src/modules", "src/integrations", "src/presentation", "src/platform", "e2e"] as const
+const TREE = ["src/routes", "src/modules", "src/integrations", "src/presentation", "src/platform", "e2e"] as const
 
 const TYPE_START = 0.35 * FPS
 const TYPE_END = 2.1 * FPS
@@ -28,14 +22,6 @@ const TREE_STEP = 0.32 * FPS
 const LINE_HEIGHT = 40
 const COLUMNS = 2
 
-/**
- * THE SCAFFOLD — the edge station's claim, drawn.
- *
- * The CLI asks what you are building and writes that. The band types the same command the hero
- * puts a copy button on, answers one prompt, and then writes the repository's real top-level
- * directories one at a time. It stops when the tree is written: how long a scaffold takes is not
- * a number this page has measured, so it is not a number this band prints.
- */
 export function ScaffoldCli() {
   const frame = useCurrentFrame()
 

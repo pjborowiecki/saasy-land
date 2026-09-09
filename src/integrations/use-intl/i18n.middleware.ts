@@ -1,10 +1,11 @@
 import "@tanstack/react-start/server-only"
 
 import { I18N } from "~/src/integrations/use-intl/i18n.config"
+import { localeFromCookie } from "~/src/integrations/use-intl/i18n.locale"
 import { canonicalizePathname, extractLocaleFromPath, shouldIgnorePath } from "~/src/integrations/use-intl/i18n.paths"
-import { parseLocaleCookie } from "~/src/integrations/use-intl/i18n.utils"
 
 const HTTP_STATUS = { PERMANENT_REDIRECT: 308 } as const
+const HTML_ACCEPT_PATTERN = /(?:^|,)\s*(?:text\/html|application\/xhtml\+xml)(?:\s*;|,|$)/iu
 
 export interface LocaleMiddlewareResponse {
   readonly redirect?: Response
@@ -14,8 +15,14 @@ export interface LocaleMiddlewareResponse {
 export const handleLocaleMiddleware = (request: Request): LocaleMiddlewareResponse => {
   const url = new URL(request.url)
   const { pathname } = url
+  const destination = request.headers.get("sec-fetch-dest")
+  const accept = request.headers.get("accept")
+  const isDocument =
+    destination === null
+      ? accept === null || HTML_ACCEPT_PATTERN.test(accept)
+      : destination === "document" || destination === "iframe" || destination === "frame"
 
-  if (shouldIgnorePath(pathname)) {
+  if ((request.method !== "GET" && request.method !== "HEAD") || !isDocument || shouldIgnorePath(pathname)) {
     return {}
   }
 
@@ -28,7 +35,7 @@ export const handleLocaleMiddleware = (request: Request): LocaleMiddlewareRespon
   }
 
   const urlLocale = extractLocaleFromPath(pathname) ?? I18N.DEFAULT_LOCALE
-  const cookieLocale = parseLocaleCookie(request.headers.get("cookie")) ?? I18N.DEFAULT_LOCALE
+  const cookieLocale = localeFromCookie(request.headers.get("cookie")) ?? I18N.DEFAULT_LOCALE
 
   if (urlLocale === cookieLocale) {
     return {}

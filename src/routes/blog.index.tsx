@@ -12,15 +12,13 @@ import { isPublished, sortPostsByDateDesc } from "~/src/lib/blog"
 
 import { PostLedger, PostRow } from "~/src/presentation/components/custom/blog/components/post-ledger"
 
-const NO_POSTS = 0
-
 const PostList = (): JSX.Element => {
   const locale = getCurrentLocale()
   const t = useTranslations("pages.blog")
 
   const posts = sortPostsByDateDesc(useSuspenseQuery(blogPostsQuery(locale)).data.filter((page) => isPublished(page.data)))
 
-  if (posts.length === NO_POSTS) {
+  if (posts.length === 0) {
     return <p className="border-y border-border py-10 text-body text-muted-foreground">{t("index.empty")}</p>
   }
 
@@ -53,12 +51,17 @@ const BlogIndexPage = (): JSX.Element => {
 export const Route = createFileRoute("/blog/")({
   component: BlogIndexPage,
   head: routeHead,
-  loader: ({ context }) =>
-    loadRouteMessages({
-      metadataNamespace: "pages.blog",
-      namespaces: ["pages.blog", "pages.landing"],
-      pathname: "/blog",
-      queryClient: context.queryClient,
-    }),
+  loader: async ({ context }) => {
+    const [metadata] = await Promise.all([
+      loadRouteMessages({
+        metadataNamespace: "pages.blog",
+        namespaces: ["pages.blog", "pages.landing"],
+        pathname: "/blog",
+        queryClient: context.queryClient,
+      }),
+      context.queryClient.query(blogPostsQuery()),
+    ])
+    return metadata
+  },
   staticData: { namespaces: ["pages.blog", "pages.landing"] },
 })

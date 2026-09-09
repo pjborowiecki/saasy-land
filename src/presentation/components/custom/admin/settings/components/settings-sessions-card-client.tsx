@@ -1,4 +1,4 @@
-import { type JSX, useCallback, useTransition } from "react"
+import { type JSX, useTransition } from "react"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "@tanstack/react-router"
@@ -39,22 +39,19 @@ export const SettingsSessionsCardClient = ({ currentSessionId, sessions }: Setti
   const t = useTranslations("pages.admin.settings")
   const actionError = useActionError()
 
-  const handleRevokeSession = useCallback(
-    (token: string) => {
-      startTransition(async () => {
-        try {
-          await settingsRevokeSessionRequest.mutateAsync({ token })
-          toast.success(t("security.sessions.feedback.revokeSuccess"))
-          void router.invalidate()
-        } catch (error) {
-          toast.error(actionError(error))
-        }
-      })
-    },
-    [actionError, router, t],
-  )
+  const handleRevokeSession = (token: string) => {
+    startTransition(async () => {
+      try {
+        await settingsRevokeSessionRequest.mutateAsync({ token })
+        toast.success(t("security.sessions.feedback.revokeSuccess"))
+        void router.invalidate()
+      } catch (error) {
+        toast.error(actionError(error))
+      }
+    })
+  }
 
-  const handleRevokeOtherSessions = useCallback(() => {
+  const handleRevokeOtherSessions = () => {
     startTransition(async () => {
       try {
         await settingsRevokeOtherSessionsRequest.mutateAsync()
@@ -64,7 +61,7 @@ export const SettingsSessionsCardClient = ({ currentSessionId, sessions }: Setti
         toast.error(actionError(error))
       }
     })
-  }, [actionError, router, t])
+  }
 
   return (
     <Card className="overflow-hidden">

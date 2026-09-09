@@ -180,8 +180,8 @@ vi.mock(import("~/src/integrations/better-auth/auth.server"), () => ({
   },
 }))
 
-vi.mock(import("~/src/hooks/use-confetti"), () => ({
-  useConfetti: () => ({ triggerConfetti: triggerConfettiMock }),
+vi.mock(import("~/src/lib/confetti"), () => ({
+  triggerConfetti: triggerConfettiMock,
 }))
 
 vi.mock(import("sonner"), async (importOriginal): Promise<Partial<typeof Sonner>> => {
@@ -320,6 +320,31 @@ describe("sign up with password form component", () => {
 })
 
 describe("forgot password form component", () => {
+  it("allows retry after a failed request and disables the form only after success", async () => {
+    setupForgotPasswordFormMocks()
+    requestPasswordResetMock.mockRejectedValueOnce(new Error("Email delivery failed"))
+    const user = userEvent.setup()
+    renderWithAuthMessages(<ForgotPasswordForm />)
+    const email = screen.getByLabelText(/email/iu)
+    const submit = screen.getByTestId("forgot-password-form-submit-button")
+
+    await user.type(email, TEST_EMAIL)
+    await user.click(submit)
+    await waitFor(() => {
+      expect(toastErrorMock).toHaveBeenCalledOnce()
+    })
+    expect(email).toBeEnabled()
+    expect(submit).toBeEnabled()
+
+    await user.click(submit)
+    await waitFor(() => {
+      expect(toastSuccessMock).toHaveBeenCalledOnce()
+    })
+    expect(email).toBeDisabled()
+    expect(submit).toBeDisabled()
+    expect(requestPasswordResetMock).toHaveBeenCalledTimes(2)
+  })
+
   it("requests a password reset email", async () => {
     expect.hasAssertions()
     setupForgotPasswordFormMocks()

@@ -47,3 +47,19 @@ for (const preference of PREFERENCES) {
     }
   })
 }
+
+test("documentation theme selector changes and persists the selected theme", async ({ appPage, page }) => {
+  await page.addInitScript(() => {
+    if (!localStorage.getItem("SaaSy Land-theme")) localStorage.setItem("SaaSy Land-theme", "dark")
+  })
+  await page.goto("/docs/getting-started")
+  await appPage.waitForAppReady()
+  await page.getByRole("button", { name: /Dark/u }).click()
+  await page.getByRole("option", { name: "Light", exact: true }).click()
+  await expect(page.locator("html")).toHaveClass(/\blight\b/u)
+  expect(await page.evaluate(() => localStorage.getItem("SaaSy Land-theme"))).toBe("light")
+  await page.reload()
+  await appPage.waitForAppReady()
+  await expect(page.getByRole("button", { name: /Light/u })).toBeVisible()
+  await expect(page.locator("html")).toHaveClass(/\blight\b/u)
+})

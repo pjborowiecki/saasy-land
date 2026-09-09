@@ -55,8 +55,6 @@ export const NewsletterSubscriptionForm = (): JSX.Element => {
   })
   const isPending = useSelector(form.store, (state) => state.isSubmitting)
 
-  const isLoading = isPending
-
   return (
     <form
       className="mt-6"
@@ -93,19 +91,19 @@ export const NewsletterSubscriptionForm = (): JSX.Element => {
                   aria-invalid={message !== undefined}
                   autoComplete="email"
                   className="h-11 w-full min-w-0 bg-transparent px-3 font-sans text-body-sm font-medium text-foreground placeholder:text-muted-foreground focus-visible:outline-none disabled:opacity-50"
-                  disabled={isLoading}
+                  disabled={isPending}
                   id={INPUT_ID}
                   placeholder={t("placeholder")}
                   type="email"
                 />
                 <button
                   className="group flex h-11 shrink-0 items-center gap-2 font-sans text-body-sm font-semibold whitespace-nowrap text-foreground transition-[color,opacity] duration-200 ease-exp hover:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50"
-                  disabled={isLoading}
+                  disabled={isPending}
                   type="submit"
                 >
-                  {isLoading && <Spinner />}
-                  {isLoading ? t("submitting") : t("button")}
-                  {!isLoading && (
+                  {isPending && <Spinner />}
+                  {isPending ? t("submitting") : t("button")}
+                  {!isPending && (
                     <ArrowRight
                       aria-hidden
                       className="size-4 transition-transform duration-200 ease-exp group-hover:translate-x-0.5"

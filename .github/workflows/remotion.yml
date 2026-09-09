@@ -1,0 +1,47 @@
+name: Landing video source
+
+on:
+  pull_request:
+    paths:
+      - "remotion/**"
+      - "src/integrations/use-intl/i18n.config.ts"
+      - "src/modules/_core/constants/**"
+      - "src/presentation/branding/constants.ts"
+      - ".github/workflows/remotion.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "remotion/**"
+      - "src/integrations/use-intl/i18n.config.ts"
+      - "src/modules/_core/constants/**"
+      - "src/presentation/branding/constants.ts"
+      - ".github/workflows/remotion.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Format, lint, types, bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: remotion
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: remotion/package-lock.json
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - run: npm run bundle

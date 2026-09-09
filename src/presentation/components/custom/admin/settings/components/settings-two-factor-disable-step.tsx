@@ -40,9 +40,7 @@ export const SettingsTwoFactorDisableStep = ({ onDisabled }: Readonly<SettingsTw
     defaultValues: { password: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
-        await disableTwoFactorRequest.mutateAsync({ password: data.password })
-        onDisabled()
+        await disableTwoFactorRequest.mutateAsync({ password: value.password }, { onSuccess: onDisabled })
       } catch (error) {
         toast.error(actionError(error))
       }

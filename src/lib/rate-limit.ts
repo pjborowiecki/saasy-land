@@ -2,9 +2,7 @@ import "@tanstack/react-start/server-only"
 
 import { env } from "cloudflare:workers"
 
-const FIRST_ATTEMPT = 1
-const RADIX = 10
-const NONE = "0"
+const SINGLE_REQUEST = 1
 
 export const withinRateLimit = async ({
   key,
@@ -16,13 +14,13 @@ export const withinRateLimit = async ({
   windowSeconds: number
 }): Promise<boolean> => {
   try {
-    const seen = Number.parseInt((await env.CACHE.get(key)) ?? NONE, RADIX)
+    const seen = Math.trunc(Number((await env.CACHE.get(key)) ?? "0"))
 
     if (seen >= limit) {
       return false
     }
 
-    await env.CACHE.put(key, String(seen + FIRST_ATTEMPT), { expirationTtl: windowSeconds })
+    await env.CACHE.put(key, String(seen + SINGLE_REQUEST), { expirationTtl: windowSeconds })
 
     return true
   } catch {

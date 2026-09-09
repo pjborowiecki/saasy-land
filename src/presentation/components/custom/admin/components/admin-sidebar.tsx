@@ -13,14 +13,6 @@ interface AdminSidebarProps {
   readonly children: ReactNode
 }
 
-/**
- * Four groups, twelve destinations, one hairline.
- *
- * Group labels are set in the monospace micro-label, the same role the marketing site uses for
- * column headings, and they are the only uppercase text in the console. They carry a lot of
- * structure for very little ink, which is what lets the rail stay at 16rem without the rows
- * feeling crowded.
- */
 export const AdminSidebar = ({ children }: AdminSidebarProps): JSX.Element => {
   const t = useTranslations("pages.admin.sidebar")
   const pathname = useRouterState({ select: (state) => state.location.pathname })

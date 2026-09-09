@@ -42,8 +42,7 @@ export const TwoFactorTotpForm = ({ onToggleMode }: Readonly<TwoFactorTotpFormPr
     defaultValues: { code: "", trustDevice: true },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
-        await verifyTotpRequest.mutateAsync(data)
+        await verifyTotpRequest.mutateAsync(value)
         await redirectAfterVerification()
       } catch (error) {
         toast.error(actionError(error))

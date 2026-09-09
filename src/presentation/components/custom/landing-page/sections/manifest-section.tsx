@@ -5,25 +5,10 @@ import { useTranslations } from "use-intl/react"
 import { HighlightGroup, HighlightItem } from "~/src/presentation/components/custom/landing-page/components/hover-highlight"
 import { Reveal } from "~/src/presentation/components/custom/landing-page/components/reveal"
 
-/** The ten parts, in assembly order: the door first, then what it opens onto, then the proof. */
 const MANIFEST_ITEMS = ["auth", "data", "billing", "email", "admin", "ui", "i18n", "content", "tests", "tooling"] as const
 
 const LEDGER_DELAY_MS = 100
 
-/**
- * A ledger, not a grid of tiles.
- *
- * Ten identical bordered cards with an icon in the corner is the shape that makes the middle of
- * a landing page read as a template: same box, same glyph, same weight, ten times, with nothing
- * in the layout saying which parts are load bearing. A hairline-divided ledger has no box to
- * repeat, so the only rhythm left is the one the copy sets.
- *
- * The row under the cursor is the one being read, so it lights: the ground warms one step and
- * the description resolves to full strength. Both properties are composited and both run on the
- * page's own easing, so ten of these cost nothing and none of them shift layout. The warm ground
- * bleeds past the gutter, which is what makes it read as the ledger lighting up rather than as a
- * card appearing under the pointer.
- */
 export const ManifestSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.manifest")
 
@@ -36,15 +21,6 @@ export const ManifestSection = (): JSX.Element => {
         </Reveal>
 
         <Reveal className="mt-14 md:mt-20" delay={LEDGER_DELAY_MS}>
-          {/*
-           * The rules and the highlight bleed past the text measure, together.
-           *
-           * Flush with the text, a lit row had its label touching the edge of its own highlight,
-           * which reads as cramped; bleeding only the highlight made it wider than the hairlines
-           * above and below it, which reads as a card escaping the ledger. Pulling the list out
-           * and padding the rows back in keeps the rule and the highlight identical to each other
-           * while giving the copy room, and the labels stay on the measure the heading is set to.
-           */}
           <HighlightGroup className="-mx-4 divide-y divide-border border-y border-border md:-mx-6" element="dl" name="manifest-highlight">
             {MANIFEST_ITEMS.map((item) => (
               <HighlightItem

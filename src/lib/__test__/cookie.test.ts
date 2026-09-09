@@ -1,7 +1,6 @@
-import { getRequest } from "@tanstack/react-start/server"
 import { afterEach, expect, it, vi } from "vite-plus/test"
 
-import { getCookie, readCookie, serializeCookie } from "~/src/lib/cookie"
+import { readCookie, serializeCookie } from "~/src/lib/cookie"
 
 afterEach(() => vi.unstubAllEnvs())
 it.each([undefined, null, "", "other=one", "broken", "=empty-key", "locale=%E0%A4%A"])(
@@ -12,10 +11,6 @@ it.each([undefined, null, "", "other=one", "broken", "=empty-key", "locale=%E0%A
 )
 it("decodes the matching cookie and ignores surrounding whitespace", () => {
   expect(readCookie({ header: "other=one; locale= pl%2DPL ; third=x", name: "locale" })).toBe("pl-PL")
-})
-it("reads cookies from the active server request", () => {
-  vi.mocked(getRequest).mockReturnValue(new Request("http://localhost/", { headers: { cookie: "locale=pl-PL" } }))
-  expect(getCookie("locale")).toBe("pl-PL")
 })
 it("serializes defaults in development", () => {
   vi.stubEnv("PROD", false)

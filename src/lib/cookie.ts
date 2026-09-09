@@ -1,7 +1,6 @@
-import { createIsomorphicFn } from "@tanstack/react-start"
-import { getRequest } from "@tanstack/react-start/server"
-
 type SameSite = "Lax" | "None" | "Strict"
+
+const VALUE_OFFSET = 1
 
 export interface CookieOptions {
   httpOnly?: boolean
@@ -15,14 +14,6 @@ const ONE_YEAR_IN_SECONDS = 31_536_000
 const DEFAULT_PATH = "/"
 const DEFAULT_SAME_SITE: SameSite = "Lax"
 
-const ENTRY_DELIMITER = ";"
-const ATTRIBUTE_DELIMITER = `${ENTRY_DELIMITER} `
-const KEY_VALUE_DELIMITER = "="
-
-const KEY_VALUE_DELIMITER_LENGTH = KEY_VALUE_DELIMITER.length
-
-const ENTRY_START_INDEX = 0
-
 const decodeCookieValue = (value: string): string | undefined => {
   try {
     return decodeURIComponent(value)
@@ -32,11 +23,11 @@ const decodeCookieValue = (value: string): string | undefined => {
 }
 
 export const readCookie = ({ header, name }: { header: string | null | undefined; name: string }): string | undefined => {
-  for (const entry of header?.split(ENTRY_DELIMITER) ?? []) {
-    const separator = entry.indexOf(KEY_VALUE_DELIMITER)
+  for (const entry of header?.split(";") ?? []) {
+    const separator = entry.indexOf("=")
 
-    if (separator > ENTRY_START_INDEX && entry.slice(ENTRY_START_INDEX, separator).trim() === name) {
-      return decodeCookieValue(entry.slice(separator + KEY_VALUE_DELIMITER_LENGTH).trim())
+    if (separator > 0 && entry.slice(0, separator).trim() === name) {
+      return decodeCookieValue(entry.slice(separator + VALUE_OFFSET).trim())
     }
   }
 
@@ -57,9 +48,5 @@ export const serializeCookie = ({ name, options = {}, value }: { name: string; o
     attributes.push("HttpOnly")
   }
 
-  return attributes.join(ATTRIBUTE_DELIMITER)
+  return attributes.join("; ")
 }
-
-export const getCookie = createIsomorphicFn()
-  .server((name: string) => readCookie({ header: getRequest().headers.get("cookie"), name }))
-  .client((name: string) => readCookie({ header: globalThis.document.cookie, name }))

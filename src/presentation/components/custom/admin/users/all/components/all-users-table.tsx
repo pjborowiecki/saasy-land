@@ -7,7 +7,6 @@ import { DATA_TABLE_OPTIONS } from "~/src/presentation/components/custom/admin/u
 import { DataTable } from "~/src/presentation/components/custom/data-table/data-table"
 
 export interface AllUsersTableProps {
-  /** Omitted while pending: the table renders its skeleton rows instead. */
   readonly users?: Awaited<ReturnType<typeof getUsers>> | undefined
 }
 

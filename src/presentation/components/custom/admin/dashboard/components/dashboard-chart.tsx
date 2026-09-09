@@ -15,12 +15,6 @@ interface DashboardChartProps {
   readonly chartYAxis?: readonly string[]
 }
 
-/**
- * Axis labels are monospace and tabular, because they are measurements. Gridlines are the
- * hairline token at a single weight, not two weights of grey, and there is no gradient wash
- * over the plot: the series is the only thing in the card carrying colour, which is what makes
- * a single accent line readable at a glance.
- */
 export const DashboardChart = ({
   chartXAxis = CHART_X_AXIS_LABELS,
   chartYAxis = CHART_Y_AXIS_LABELS,

@@ -14,20 +14,6 @@ import { type Tier, TierColumn } from "~/src/presentation/components/custom/land
 
 const GRID_DELAY_MS = 100
 
-/**
- * One frame, three tiers, hairlines between them.
- *
- * Not three floating cards. Three cards means three shadows, three borders and three chances for
- * the middle one to be scaled up and rotated into a "recommended" pose; one frame divided by
- * rules says the tiers are three readings of the same offer, which is what they are.
- *
- * The featured tier is marked by fill and a chip. It is not taller, not scaled and not glowing.
- *
- * EVERY ROW STARTS ON THE SAME LINE. `whoFor`, `tagline` and the price sit in min-height blocks
- * so the three feature lists begin at one Y position and the three CTAs end at another, whatever
- * the copy does in a given locale. Ragged baselines across priced columns is the fastest way to
- * make a pricing table look unfinished.
- */
 export const PricingSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.pricing")
 
@@ -81,11 +67,6 @@ export const PricingSection = (): JSX.Element => {
           />
         </Reveal>
 
-        {/*
-         * The ledger closes the section rather than opening it: the price is the objection, so
-         * the arithmetic that answers it belongs after the number, not before it. This is the
-         * page's single use of `text-display-blast`.
-         */}
         <Reveal className="mt-20 border-t border-border pt-14 md:mt-28 md:pt-16" delay={GRID_DELAY_MS}>
           <div className="grid gap-x-16 gap-y-6 md:grid-cols-[1fr_1fr] md:items-start">
             <p className="text-display-blast text-balance text-foreground">{t("ledger.lead")}</p>

@@ -6,11 +6,6 @@ import { useTranslations } from "use-intl/react"
 import { Button } from "~/src/presentation/components/shadcn/button"
 import { Input } from "~/src/presentation/components/shadcn/input"
 
-/**
- * The toolbar sits on the card ground, not on a tinted band. A filled strip between the header
- * and the header row of the table added a third surface to a card that already has two, and the
- * hairline above and below already says where the toolbar starts and stops.
- */
 export const DashboardUsersTableToolbar = (): JSX.Element => {
   const t = useTranslations("pages.admin.dashboard")
 

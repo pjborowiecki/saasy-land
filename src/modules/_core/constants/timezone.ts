@@ -1,5 +1,4 @@
 import type { CountryCode } from "~/src/modules/_core/constants/country"
-import { nonEmptyTuple } from "~/src/modules/_core/utils/catalog"
 
 export interface IsoTimeZone {
   readonly iana: string
@@ -208,6 +207,8 @@ export const TIMEZONES = [
 
 export type TimezoneCode = (typeof TIMEZONES)[number]["iana"]
 
-export const TIMEZONE_CODES = nonEmptyTuple(TIMEZONES.map((timezone) => timezone.iana))
+const AFTER_FIRST_TIMEZONE = 1
+
+export const TIMEZONE_CODES = [TIMEZONES[0].iana, ...TIMEZONES.slice(AFTER_FIRST_TIMEZONE).map((timezone) => timezone.iana)] as const
 
 export const DEFAULT_TIMEZONE_CODE: TimezoneCode = "UTC"

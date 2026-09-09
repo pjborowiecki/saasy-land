@@ -7,6 +7,7 @@ import { describe, expect, it } from "vite-plus/test"
 
 import { getTestMessages } from "~/src/integrations/use-intl/__test__/fixtures/messages"
 
+import { AnalyticsChartBar } from "~/src/presentation/components/custom/admin/analytics/components/analytics-chart-bar"
 import { RegionProgressBar } from "~/src/presentation/components/custom/admin/analytics/components/region-progress-bar"
 import { ProductStatusBadge } from "~/src/presentation/components/custom/admin/products/components/product-status-badge"
 import { AuthGateFrame } from "~/src/presentation/components/custom/auth/components/auth-gate-frame"
@@ -36,6 +37,18 @@ describe("region progress bar component", () => {
     const { container } = render(<RegionProgressBar percentage={42} />)
 
     expect(container.firstElementChild).toHaveStyle({ width: "42%" })
+  })
+})
+
+describe("analytics chart bar", () => {
+  it("renders incoming measurements without requiring a predefined bar ID", () => {
+    const { container, rerender } = render(<AnalyticsChartBar bar={{ height1: "24%", height2: "12%", id: "new-measurement" }} />)
+    expect(container.firstElementChild?.children[0]).toHaveStyle({ height: "24%" })
+    expect(container.firstElementChild?.children[1]).toHaveStyle({ height: "12%" })
+
+    rerender(<AnalyticsChartBar bar={{ height1: "35%", height2: "18%", id: "new-measurement" }} />)
+    expect(container.firstElementChild?.children[0]).toHaveStyle({ height: "35%" })
+    expect(container.firstElementChild?.children[1]).toHaveStyle({ height: "18%" })
   })
 })
 

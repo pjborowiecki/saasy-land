@@ -7,10 +7,15 @@
     "strict": true,
     "noEmit": true,
     "lib": ["es2015"],
+    "types": ["node", "react", "web"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "~/*": ["../*"]
+    },
+    "allowImportingTsExtensions": true
   },
-  "exclude": ["remotion.config.ts"]
+  "include": ["src", "remotion.config.ts"]
 }

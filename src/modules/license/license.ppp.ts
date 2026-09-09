@@ -12,42 +12,57 @@ export const COUNTRY_HEADER = "cf-ipcountry"
 
 const BASIS_POINTS_PER_PERCENT = 100
 const DISCOUNT_PAGE_SIZE = 100
-const NO_DISCOUNT = 0
+const DISCOUNT_CACHE_MINUTES = 5
+const SECONDS_PER_MINUTE = 60
+const MILLISECONDS_PER_SECOND = 1000
+const DISCOUNT_CACHE_MS = DISCOUNT_CACHE_MINUTES * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
 
 type PercentageDiscount = Extract<Discount, { basisPoints: number }>
 
 const isAutomaticPercentage = (discount: Discount): discount is PercentageDiscount =>
   discount.type === "percentage" && discount.code === null
 
-const cache: { byPercentOff?: Promise<ReadonlyMap<number, string>> } = {}
+const cache: { discounts?: Promise<readonly PercentageDiscount[]>; expiresAt: number } = { expiresAt: 0 }
 
-const loadDiscounts = async (): Promise<ReadonlyMap<number, string>> => {
-  const found = new Map<number, string>()
+const loadDiscounts = async (): Promise<readonly PercentageDiscount[]> => {
+  const found: PercentageDiscount[] = []
 
   try {
     const pages = await polar.discounts.list({ limit: DISCOUNT_PAGE_SIZE, organizationId: env.POLAR_ORGANIZATION_ID })
 
     for await (const page of pages) {
-      for (const discount of page.result.items.filter((item) => isAutomaticPercentage(item))) {
-        found.set(discount.basisPoints / BASIS_POINTS_PER_PERCENT, discount.id)
-      }
+      found.push(...page.result.items.filter(isAutomaticPercentage))
     }
   } catch {
+    cache.expiresAt = 0
     return found
   }
 
+  cache.expiresAt = Date.now() + DISCOUNT_CACHE_MS
   return found
 }
 
-export const pppDiscountId = async (headers: Headers): Promise<string | undefined> => {
+export const pppDiscountId = async (headers: Headers, productId: string): Promise<string | undefined> => {
   const percentOff = getPppPercentOff(headers.get(COUNTRY_HEADER) ?? undefined)
 
-  if (percentOff === NO_DISCOUNT) {
+  if (percentOff === 0) {
     return undefined
   }
 
-  cache.byPercentOff ??= loadDiscounts()
-  const discounts = await cache.byPercentOff
+  if (!cache.discounts || cache.expiresAt <= Date.now()) {
+    // Pending requests share this lookup until it settles.
+    cache.expiresAt = Infinity
+    cache.discounts = loadDiscounts()
+  }
+  const discounts = await cache.discounts
+  const now = Date.now()
 
-  return discounts.get(percentOff)
+  return discounts.findLast(
+    (discount) =>
+      discount.basisPoints === percentOff * BASIS_POINTS_PER_PERCENT &&
+      (discount.startsAt === null || discount.startsAt.getTime() <= now) &&
+      (discount.endsAt === null || discount.endsAt.getTime() > now) &&
+      (discount.maxRedemptions === null || discount.redemptionsCount < discount.maxRedemptions) &&
+      (discount.products.length === 0 || discount.products.some((product) => product.id === productId)),
+  )?.id
 }

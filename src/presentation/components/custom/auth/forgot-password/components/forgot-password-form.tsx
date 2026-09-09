@@ -1,4 +1,4 @@
-import { type JSX, useState } from "react"
+import { type JSX } from "react"
 
 import { useForm, useSelector } from "@tanstack/react-form"
 import { useMutation } from "@tanstack/react-query"
@@ -26,7 +26,6 @@ const forgotPasswordSchema = verificationZodSchemas.forgotPassword
 
 export const ForgotPasswordForm = (): JSX.Element => {
   const requestPasswordResetRequest = useMutation(requestPasswordResetMutation)
-  const [submitted, setSubmitted] = useState<boolean>(false)
 
   const locale = useLocale()
   const t = useTranslations()
@@ -36,16 +35,14 @@ export const ForgotPasswordForm = (): JSX.Element => {
     defaultValues: { email: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
         const redirectTo = localizePathname({
           locale,
           pathname: ROUTES.RESET_PASSWORD,
         })
         await requestPasswordResetRequest.mutateAsync({
-          email: data.email,
+          email: value.email,
           redirectTo,
         })
-        setSubmitted(true)
         toast.success(t("pages.auth.forgot-password.form.success"))
       } catch (error) {
         toast.error(actionError(error))
@@ -69,7 +66,7 @@ export const ForgotPasswordForm = (): JSX.Element => {
         <form.Field name="email">
           {(field) => (
             <AuthTextField
-              disabled={submitted}
+              disabled={requestPasswordResetRequest.isSuccess}
               formId={AUTH_FORM_IDS.FORGOT_PASSWORD}
               label={t("pages.auth.forgot-password.form.email")}
               name="email"
@@ -83,7 +80,7 @@ export const ForgotPasswordForm = (): JSX.Element => {
         aria-label={t("pages.auth.forgot-password.form.submit")}
         className={AUTH_PRIMARY_BUTTON_CLASS}
         data-testid="forgot-password-form-submit-button"
-        isDisabled={isPending || submitted}
+        isDisabled={isPending || requestPasswordResetRequest.isSuccess}
         type="submit"
       >
         {isPending && <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} />}

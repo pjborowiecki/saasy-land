@@ -17,8 +17,6 @@ import { PostToc, PostTocItem } from "~/src/presentation/components/custom/blog/
 import { APP_URL } from "~/src/presentation/branding"
 import { ROUTES } from "~/src/routes"
 
-const EMPTY_TAGS_LENGTH = 0
-
 const hasNonEmptyString = (value: string | undefined): value is string => typeof value === "string" && value.trim().length > 0
 
 const BlogPostPage = (): JSX.Element => {
@@ -39,7 +37,7 @@ const BlogPostPage = (): JSX.Element => {
   const metaTail = [
     hasNonEmptyString(data.authorName) ? data.authorName : undefined,
     minutes === undefined ? undefined : t("post.readingTime", { minutes }),
-    data.tags !== undefined && data.tags.length > EMPTY_TAGS_LENGTH ? data.tags.join(", ") : undefined,
+    data.tags !== undefined && data.tags.length > 0 ? data.tags.join(", ") : undefined,
   ].filter((item) => hasNonEmptyString(item))
 
   const structuredDataHtml = buildPostStructuredDataHtml({

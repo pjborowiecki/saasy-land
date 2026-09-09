@@ -4,7 +4,8 @@ import { executeQuery } from "~/src/platform/testing/lib/query"
 
 import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
 import { auth } from "~/src/integrations/better-auth/auth.server"
-import * as polar from "~/src/integrations/polar/polar.utils"
+import { POLAR_LICENSE_KEY } from "~/src/integrations/polar/__test__/fixtures/license-key"
+import { polar } from "~/src/integrations/polar/polar.config"
 
 import { currentLicenseQuery, licenseActivationsQuery } from "~/src/modules/license/use-cases/get-current-license"
 import * as licenses from "~/src/modules/license/use-cases/get-license"
@@ -38,16 +39,16 @@ it("returns a defined empty result for an account without a license", async () =
 it("does not call Polar before a license key is attached", async () => {
   vi.spyOn(auth.api, "getSession").mockResolvedValue(session)
   vi.spyOn(licenses, "getLicense").mockResolvedValue({ ...ownedLicense, polarLicenseKeyId: "" })
-  const fetch = vi.spyOn(polar, "fetchLicenseActivations")
+  const fetch = vi.spyOn(polar.licenseKeys, "get")
   expect(await executeQuery(licenseActivationsQuery)).toEqual({ activations: [], limitActivations: 0 })
   expect(fetch).not.toHaveBeenCalled()
 })
 it("fetches activations for the owned Polar license", async () => {
   vi.spyOn(auth.api, "getSession").mockResolvedValue(session)
   vi.spyOn(licenses, "getLicense").mockResolvedValue(ownedLicense)
-  const fetch = vi.spyOn(polar, "fetchLicenseActivations").mockResolvedValue({ activations: [], limitActivations: 3 })
+  const fetch = vi.spyOn(polar.licenseKeys, "get").mockResolvedValue({ ...POLAR_LICENSE_KEY, limitActivations: 3 })
   expect(await executeQuery(licenseActivationsQuery)).toEqual({ activations: [], limitActivations: 3 })
-  expect(fetch).toHaveBeenCalledWith("polar-license")
+  expect(fetch).toHaveBeenCalledWith({ id: "polar-license" })
 })
 it("rejects a signed-out caller before querying a license", async () => {
   vi.spyOn(auth.api, "getSession").mockResolvedValue(null)

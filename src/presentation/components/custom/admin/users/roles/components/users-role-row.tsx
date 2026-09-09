@@ -6,13 +6,11 @@ import { useTranslations } from "use-intl/react"
 import { Badge } from "~/src/presentation/components/shadcn/badge"
 import { Button } from "~/src/presentation/components/shadcn/button"
 
-import { getRoleTypeBadgeClass } from "~/src/presentation/components/custom/admin/constants/status-colors"
+import { getStatusBadgeClass } from "~/src/presentation/components/custom/admin/constants/status-colors"
 import type { AdminRoleRow } from "~/src/presentation/components/custom/admin/types"
 
-type RoleRow = AdminRoleRow
-
 interface AdminUsersRoleRowProps {
-  readonly role: RoleRow
+  readonly role: AdminRoleRow
 }
 
 export const AdminUsersRoleRow = ({ role }: AdminUsersRoleRowProps): JSX.Element => {
@@ -25,7 +23,7 @@ export const AdminUsersRoleRow = ({ role }: AdminUsersRoleRowProps): JSX.Element
       </td>
       <td className="max-w-sm truncate p-4 text-sm text-muted-foreground">{role.description}</td>
       <td className="p-4">
-        <Badge variant="outline" className={`px-2 py-1 text-xs font-medium ${getRoleTypeBadgeClass()}`}>
+        <Badge variant="outline" className={`px-2 py-1 text-xs font-medium ${getStatusBadgeClass("neutral")}`}>
           {role.type}
         </Badge>
       </td>

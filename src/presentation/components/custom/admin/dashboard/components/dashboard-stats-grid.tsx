@@ -6,18 +6,6 @@ import { useTranslations } from "use-intl/react"
 import { getProductsQuery } from "~/src/modules/product/use-cases/get-products"
 import { getUsersQuery } from "~/src/modules/user/use-cases/get-users"
 
-/**
- * One plate, three readings, hairlines between them.
- *
- * Three separate cards, each with its own border, its own icon in its own bordered tile and its
- * own gradient wash that faded on hover, made three objects out of one instrument panel. The
- * icons in particular were doing nothing: a person, a box and a warning triangle repeated the
- * label directly underneath them in a less precise form.
- *
- * The figures are `tabular-nums`, so the columns stay in place while the numbers change, and the
- * labels are set in the monospace micro-label, the same role the marketing site's measured facts
- * use. A number and its unit look the same in both places, which is the point.
- */
 export const DashboardStatsGrid = (): JSX.Element => {
   const userRows = useSuspenseQuery(getUsersQuery).data
   const products = useSuspenseQuery(getProductsQuery).data

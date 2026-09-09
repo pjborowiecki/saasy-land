@@ -14,13 +14,10 @@
     "pricingModels": "Modele cenowe",
     "contentAccess": "Treść i dostęp",
     "userManagement": "Użytkownicy",
-    "activeSessions": "Aktywne sesje",
     "payments": "Płatności i rozliczenia",
     "settings": "Ustawienia",
     "blog": "Blog",
     "landingPage": "Landing page"
   },
-  "badges": {
-    "activeSessionsBadge": "3"
-  }
+  "badges": {}
 }

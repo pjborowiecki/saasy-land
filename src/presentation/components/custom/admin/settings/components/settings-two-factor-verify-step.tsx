@@ -1,8 +1,10 @@
-import { type JSX, useCallback, useState, useTransition } from "react"
+import { type JSX, useState } from "react"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useTranslations } from "use-intl/react"
+
+import { TWO_FACTOR_CODE_LENGTH } from "~/src/integrations/better-auth/auth.constraints"
 
 import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { createOtpSlotIndices, extractTotpSecret } from "~/src/modules/two-factor/two-factor.utils"
@@ -16,8 +18,6 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "~/src/presentation/compon
 
 import { AUTH_FORM_IDS } from "~/src/presentation/components/custom/auth/constants/auth-form-ids"
 
-const TOTP_CODE_LENGTH = 6
-
 interface SettingsTwoFactorVerifyStepProps {
   readonly onVerified: () => void
   readonly totpUri: string
@@ -25,34 +25,17 @@ interface SettingsTwoFactorVerifyStepProps {
 
 export const SettingsTwoFactorVerifyStep = ({ onVerified, totpUri }: Readonly<SettingsTwoFactorVerifyStepProps>): JSX.Element => {
   const queryClient = useQueryClient()
-  const verifyTotpRequest = useMutation({
-    ...verifyTotpMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
-  })
   const t = useTranslations("pages.admin.settings")
   const actionError = useActionError()
-  const [isPending, startTransition] = useTransition()
   const [verificationCode, setVerificationCode] = useState("")
-
-  const handleVerificationCodeChange = useCallback((value: string) => {
-    setVerificationCode(value)
-  }, [])
-
-  const onVerifySetup = useCallback(() => {
-    startTransition(async () => {
-      try {
-        await verifyTotpRequest.mutateAsync({ code: verificationCode })
-        onVerified()
-        toast.success(t("security.twoFactor.enabledSuccess"))
-      } catch (error) {
-        toast.error(actionError(error))
-      }
-    })
-  }, [actionError, onVerified, t, verificationCode])
-
-  const handleVerifyClick = useCallback(() => {
-    onVerifySetup()
-  }, [onVerifySetup])
+  const verifyTotpRequest = useMutation({
+    ...verifyTotpMutation,
+    onError: (error) => toast.error(actionError(error)),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL })
+      toast.success(t("security.twoFactor.enabledSuccess"))
+    },
+  })
 
   return (
     <div className="flex flex-col gap-4">
@@ -64,12 +47,12 @@ export const SettingsTwoFactorVerifyStep = ({ onVerified, totpUri }: Readonly<Se
         <FieldContent>
           <InputOTP
             id={`${AUTH_FORM_IDS.TWO_FACTOR}-setup-code`}
-            maxLength={TOTP_CODE_LENGTH}
-            onChange={handleVerificationCodeChange}
+            maxLength={TWO_FACTOR_CODE_LENGTH}
+            onChange={setVerificationCode}
             value={verificationCode}
           >
             <InputOTPGroup>
-              {createOtpSlotIndices(TOTP_CODE_LENGTH).map((index) => (
+              {createOtpSlotIndices(TWO_FACTOR_CODE_LENGTH).map((index) => (
                 <InputOTPSlot index={index} key={index} />
               ))}
             </InputOTPGroup>
@@ -77,7 +60,13 @@ export const SettingsTwoFactorVerifyStep = ({ onVerified, totpUri }: Readonly<Se
         </FieldContent>
       </Field>
 
-      <Button isDisabled={isPending || verificationCode.length !== TOTP_CODE_LENGTH} onPress={handleVerifyClick} type="button">
+      <Button
+        isDisabled={verifyTotpRequest.isPending || verificationCode.length !== TWO_FACTOR_CODE_LENGTH}
+        onPress={() => {
+          verifyTotpRequest.mutate({ code: verificationCode }, { onSuccess: onVerified })
+        }}
+        type="button"
+      >
         {t("security.twoFactor.verifyAndEnable")}
       </Button>
     </div>

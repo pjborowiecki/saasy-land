@@ -17,7 +17,6 @@ const FRAME_DELAY_MS = 100
 
 const EXTRAS_GROUP = "extras"
 
-/** One band of questions. Its own component so the matrix's nesting does not stack on the frame's. */
 const CliGroup = ({ group }: Readonly<{ group: string }>): JSX.Element => {
   const t = useTranslations("pages.landing.cli")
 
@@ -55,26 +54,6 @@ const CliGroup = ({ group }: Readonly<{ group: string }>): JSX.Element => {
 
 const REUSE_TAGS = { accent: (chunks: ReactNode) => <strong className="font-medium text-foreground">{chunks}</strong> }
 
-/**
- * THE CLI.
- *
- * Sits between the manifesto and the line for a reason. The manifesto has just argued that the
- * first three months are wasted; the line is about to list what already runs. Between the two, the
- * visitor needs to know how they get from one to the other, and the honest answer is one command
- * and five questions.
- *
- * One frame with two halves that do different jobs. The matrix is a working control: it is the
- * option space, it is what a buyer uses to decide whether their project is one this tool can make,
- * and every answer rewrites the command in the frame's header so the thing they copy is the thing
- * they configured. The run beside it is the consequence of having chosen, which is the part that
- * carries the speed. Neither would be convincing alone, and either one repeating the other would
- * be worse than either alone.
- *
- * The flags, the defaults and the state belong to the client component; this one only translates.
- * `pages.landing` is withheld from the client provider, so the rows are composed here with the
- * labels already resolved and handed across as children rather than shipping the whole landing
- * catalogue to the browser for ten nouns.
- */
 export const CliSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.cli")
 

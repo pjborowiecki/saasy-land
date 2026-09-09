@@ -14,13 +14,10 @@
     "pricingModels": "価格モデル",
     "contentAccess": "コンテンツとアクセス",
     "userManagement": "ユーザー管理",
-    "activeSessions": "有効なセッション",
     "payments": "支払いと請求",
     "settings": "設定",
     "blog": "ブログ",
     "landingPage": "ランディングページ"
   },
-  "badges": {
-    "activeSessionsBadge": "3"
-  }
+  "badges": {}
 }

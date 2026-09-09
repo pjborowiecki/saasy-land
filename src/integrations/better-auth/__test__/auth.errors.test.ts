@@ -37,4 +37,9 @@ describe("auth error key component", () => {
     expect(authErrorKey({ code: 404 })).toBe(AUTH_ERRORS.UNKNOWN_ERROR)
     expect(authErrorKey({ code: "NOT_A_REAL_CODE" })).toBe(AUTH_ERRORS.UNKNOWN_ERROR)
   })
+
+  it.each(["constructor", "toString", "__proto__"])("rejects inherited object keys: %s", (code) => {
+    expect(authErrorKey({ code })).toBe(AUTH_ERRORS.UNKNOWN_ERROR)
+    expect(authErrorKey({ body: { code } })).toBe(AUTH_ERRORS.UNKNOWN_ERROR)
+  })
 })

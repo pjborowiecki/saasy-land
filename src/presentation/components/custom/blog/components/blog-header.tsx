@@ -13,14 +13,6 @@ const LINK_CLASSNAME =
 const CTA_CLASSNAME =
   "inline-flex h-9 items-center rounded-lg bg-primary px-4 text-body-sm font-semibold text-primary-foreground transition-[background-color,transform] duration-200 ease-exp hover:bg-primary/88 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring active:translate-y-px"
 
-/**
- * The blog's own bar, rather than the landing page's.
- *
- * The landing navigation is built from bare `#section` anchors and an IntersectionObserver watching
- * ids that exist only on that page; rendered here, every one of its links would be dead. This keeps
- * the same measure, height and wordmark so the two read as one site, and points only at places
- * that exist from anywhere.
- */
 export const BlogHeader = (): JSX.Element => {
   const t = useTranslations("pages.blog")
 

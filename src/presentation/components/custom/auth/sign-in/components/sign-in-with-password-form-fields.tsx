@@ -2,9 +2,7 @@ import { type JSX } from "react"
 
 import { Link } from "@tanstack/react-router"
 import { useTranslations } from "use-intl/react"
-import type zod from "zod/v4"
 
-import type { signInWithPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 import type { StringField } from "~/src/integrations/tanstack-form/form.fields"
 
 import { FieldGroup } from "~/src/presentation/components/shadcn/field"
@@ -15,13 +13,6 @@ import { AUTH_FIELD_GROUP_CLASS } from "~/src/presentation/components/custom/aut
 
 import { ROUTES } from "~/src/routes"
 
-export type SignInFormValues = zod.infer<typeof signInWithPasswordSchema>
-
-/*
- * The recovery link rides the password label rather than hiding under the form. The
- * negative block margin keeps the label row tight while the anchor's own box stays a
- * 44px target.
- */
 const FORGOT_LINK_CLASS =
   "-my-3 inline-flex h-11 items-center font-normal text-muted-foreground transition-colors duration-200 ease-exp hover:text-foreground"
 

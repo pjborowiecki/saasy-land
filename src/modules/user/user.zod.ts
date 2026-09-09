@@ -5,7 +5,7 @@ import { ROLE_VALUES } from "~/src/integrations/better-auth/auth.access"
 import { emailSchema, nameSchema, strictPasswordSchema } from "~/src/integrations/better-auth/auth.zod"
 
 import { TIMEZONE_CODES } from "~/src/modules/_core/constants/timezone"
-import { userIdField } from "~/src/modules/_core/utils/zod-fields"
+import { idField } from "~/src/modules/_core/utils/zod-fields"
 import { user } from "~/src/modules/user/user.schema"
 import { USER_VALIDATION_MESSAGE } from "~/src/modules/user/user.validations"
 
@@ -14,13 +14,13 @@ const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSch
 const USER_IMAGE_MAX_LENGTH = 2048
 
 const userIdInput = zod.object({
-  userId: userIdField,
+  userId: idField,
 })
 
 const banUser = zod.object({
   banExpiresIn: zod.number().optional(),
   banReason: zod.string().optional(),
-  userId: userIdField,
+  userId: idField,
 })
 
 const createUser = zod.object({
@@ -38,7 +38,7 @@ const impersonateUser = userIdInput
 
 const setUserPassword = zod.object({
   newPassword: strictPasswordSchema,
-  userId: userIdField,
+  userId: idField,
 })
 
 const setUserPasswordForm = zod.object({
@@ -47,7 +47,7 @@ const setUserPasswordForm = zod.object({
 
 const setUserRole = zod.object({
   role: zod.enum(ROLE_VALUES),
-  userId: userIdField,
+  userId: idField,
 })
 
 const unbanUser = userIdInput
@@ -57,7 +57,7 @@ const updateUser = zod
     image: zod.string().max(USER_IMAGE_MAX_LENGTH).nullable().optional(),
     name: nameSchema.optional(),
     timezone: zod.enum(TIMEZONE_CODES).optional(),
-    userId: userIdField,
+    userId: idField,
   })
   .refine(({ userId: _userId, ...fields }) => Object.values(fields).some((val) => val !== undefined), {
     message: USER_VALIDATION_MESSAGE.atLeastOneFieldRequired,

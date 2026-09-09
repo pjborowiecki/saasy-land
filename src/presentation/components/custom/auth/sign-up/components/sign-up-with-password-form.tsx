@@ -13,7 +13,8 @@ import { signUpWithPasswordMutation } from "~/src/modules/account/use-cases/sign
 import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 
 import { useActionError } from "~/src/hooks/use-action-error"
-import { useConfetti } from "~/src/hooks/use-confetti"
+
+import { triggerConfetti } from "~/src/lib/confetti"
 
 import { PasswordRequirements } from "~/src/presentation/components/custom/auth/components/password-requirements"
 import { AUTH_FORM_IDS } from "~/src/presentation/components/custom/auth/constants/auth-form-ids"
@@ -29,8 +30,6 @@ export const SignUpWithPasswordForm = (): JSX.Element => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
 
-  const { triggerConfetti } = useConfetti()
-
   const router = useRouter()
   const locale = useLocale()
   const t = useTranslations()
@@ -40,11 +39,10 @@ export const SignUpWithPasswordForm = (): JSX.Element => {
     defaultValues: { confirmPassword: "", email: "", name: "", password: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
         const callbackURL = localizePathname({ locale, pathname: ROUTES.APP })
-        await signUpWithPasswordRequest.mutateAsync({ ...data, callbackURL })
+        await signUpWithPasswordRequest.mutateAsync({ ...value, callbackURL })
         await router.navigate({
-          search: { email: data.email },
+          search: { email: value.email },
           to: localizePathname({ locale, pathname: ROUTES.VERIFY_EMAIL }),
         })
         triggerConfetti()

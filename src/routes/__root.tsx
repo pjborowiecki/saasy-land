@@ -1,11 +1,11 @@
 import { type ReactNode, Suspense } from "react"
 
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router"
 import { ThemeScript } from "@wrksz/themes/script"
 
 import { AppRouterProvider } from "~/src/providers/app-router-provider"
 import { ThemeProvider } from "~/src/providers/theme-provider"
-import { TooltipProvider } from "~/src/providers/tooltip-provider"
 import { TranslationsProvider } from "~/src/providers/translations-provider"
 
 import { ROOT_NAMESPACES, preloadNamespaces } from "~/src/integrations/use-intl/i18n.messages"
@@ -26,13 +26,13 @@ const RootComponent = () => (
   <TranslationsProvider>
     <AppRouterProvider>
       <ThemeProvider>
-        <TooltipProvider>
+        <TooltipPrimitive.Provider data-slot="tooltip-provider" delay={0}>
           <OfflineBanner />
           <Suspense>
             <Outlet />
           </Suspense>
           <Toaster />
-        </TooltipProvider>
+        </TooltipPrimitive.Provider>
       </ThemeProvider>
     </AppRouterProvider>
   </TranslationsProvider>

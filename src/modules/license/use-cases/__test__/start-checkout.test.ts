@@ -8,6 +8,7 @@ import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test_
 import { ROLE_CODES } from "~/src/integrations/better-auth/auth.access"
 import type { auth } from "~/src/integrations/better-auth/auth.server"
 import * as authServer from "~/src/integrations/better-auth/auth.server"
+import { POLAR_PRODUCT_IDS } from "~/src/integrations/polar/polar.config"
 
 import { ERROR_CODES } from "~/src/modules/_core/constants/errors"
 import * as ppp from "~/src/modules/license/license.ppp"
@@ -49,7 +50,7 @@ describe("start-checkout", () => {
 
     await expect(executeMutation(startCheckoutMutation, { tier: "agency" })).resolves.toEqual({ url: CHECKOUT_URL })
 
-    expect(discount).toHaveBeenCalledExactlyOnceWith(HEADERS)
+    expect(discount).toHaveBeenCalledExactlyOnceWith(HEADERS, POLAR_PRODUCT_IDS.agency)
     expect(checkoutMock).toHaveBeenCalledWith({
       body: { allowDiscountCodes: false, discountId: "regional-discount-30", slug: "agency" },
       headers: HEADERS,

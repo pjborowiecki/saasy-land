@@ -7,14 +7,9 @@ import { FPS, THEME } from "../theme"
 const PAD = 52
 const COMMAND = "bun run test:coverage"
 
-/**
- * Real output from this repository, in the order the runner prints it. The four coverage rows
- * count up rather than appearing, because the claim the section makes is about the gate reaching
- * a threshold, and a number that arrives already at 100 shows the result without the assertion.
- */
 const SUITE_LINES = [
-  { label: "Test Files", value: "140 passed (140)" },
-  { label: "     Tests", value: "1284 passed (1284)" },
+  { label: "Test Files", value: "all passed" },
+  { label: "     Tests", value: "all passed" },
 ] as const
 
 const COVERAGE_ROWS = ["% Stmts", "% Branch", "% Funcs", "% Lines"] as const
@@ -28,16 +23,9 @@ const COVERAGE_STEP = 0.5 * FPS
 const COUNT_DURATION = 1 * FPS
 const GATE_AT = 8.6 * FPS
 
-const LINE_HEIGHT = 48
+const LINE_HEIGHT = 40
 const DOTS = 46
 
-/**
- * THE COVERAGE RUN — the Quality Control terminal, running.
- *
- * The static card printed the same figures; this prints them the way the runner does. The dots
- * that stream while the suite executes are the runner's own dot reporter, the counts are the
- * repository's real suite size, and the gate line at the end is what CI actually enforces.
- */
 export function CoverageRun() {
   const frame = useCurrentFrame()
 
@@ -133,12 +121,12 @@ export function CoverageRun() {
             color: THEME.accent,
             display: "flex",
             gap: 14,
-            marginTop: 22,
+            marginTop: 16,
             opacity: interpolate(frame, [GATE_AT, GATE_AT + 0.35 * FPS], [0, 1], {
               extrapolateLeft: "clamp",
               extrapolateRight: "clamp",
             }),
-            paddingTop: 22,
+            paddingTop: 16,
           }}
         >
           <span aria-hidden style={{ backgroundColor: THEME.accent, borderRadius: 2, height: 10, width: 10 }} />

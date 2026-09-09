@@ -1,7 +1,7 @@
 import { createSchemaFactory } from "drizzle-zod"
 import zod from "zod/v4"
 
-import { MIN_FIELD_LENGTH, userIdField } from "~/src/modules/_core/utils/zod-fields"
+import { MIN_FIELD_LENGTH, idField } from "~/src/modules/_core/utils/zod-fields"
 import { session } from "~/src/modules/session/session.schema"
 import { SESSION_VALIDATION_MESSAGE } from "~/src/modules/session/session.validations"
 
@@ -9,10 +9,8 @@ const { createInsertSchema, createSelectSchema, createUpdateSchema } = createSch
 
 const tokenField = zod.string().min(MIN_FIELD_LENGTH, { message: SESSION_VALIDATION_MESSAGE.tokenRequired })
 
-const sessionTokenField = zod.string().min(MIN_FIELD_LENGTH, { message: SESSION_VALIDATION_MESSAGE.tokenRequired })
-
 const userIdInput = zod.object({
-  userId: userIdField,
+  userId: idField,
 })
 
 const listUserSessions = userIdInput
@@ -22,7 +20,7 @@ const revokeSession = zod.object({
 })
 
 const revokeUserSession = zod.object({
-  sessionToken: sessionTokenField,
+  sessionToken: tokenField,
 })
 
 const revokeUserSessions = userIdInput

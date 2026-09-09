@@ -1,12 +1,4 @@
-/*
- * Tokens are read raw (`--foreground`), never through Tailwind's `@theme inline` aliases
- * (`--color-foreground`).
- *
- * `@theme inline` declares `--color-foreground: var(--foreground)` on `:root`. A custom property
- * that references another resolves at the element it is *declared* on, so inside `.dark` the alias
- * still yields the light value. Prose set that way is near-black text on a near-black ground —
- * which is exactly how the blog rendered once it moved onto the dark surface.
- */
+/* Use raw theme tokens so prose inherits the active light/dark palette. */
 /*
  * shadcn/typeset
  * https://ui.shadcn.com/docs/typeset.

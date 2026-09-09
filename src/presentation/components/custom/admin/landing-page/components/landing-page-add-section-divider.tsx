@@ -7,11 +7,6 @@ import { Button } from "~/src/presentation/components/shadcn/button"
 
 const ICON_STROKE_WIDTH = 1.5
 
-/**
- * The insertion point between two sections. It used to be revealed on hover only, which put the
- * one control that adds a section out of reach of touch and keyboard entirely; it is a hairline
- * rule with the control sitting on it now, always present.
- */
 export const LandingPageAddSectionDivider = (): JSX.Element => {
   const t = useTranslations("pages.admin.landing-page")
 

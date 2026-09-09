@@ -6,9 +6,7 @@ export const summaryFromFrontmatter = (data: { excerpt?: string | undefined; des
 export const isPublished = (data: { published?: boolean }): boolean => data.published !== false
 
 export const sortPostsByDateDesc = <TValue extends { data: { date: string | Date } }>(pages: TValue[]): TValue[] =>
-  [...pages].toSorted((first, second) => new Date(second.data.date).getTime() - new Date(first.data.date).getTime())
-
-const EMPTY_LIST_LENGTH = 0
+  pages.toSorted((first, second) => new Date(second.data.date).getTime() - new Date(first.data.date).getTime())
 
 const WORDS_PER_MINUTE = 220
 const SHORTEST_READ_MINUTES = 1
@@ -17,7 +15,7 @@ type ExtractedProse = Readonly<{ contents?: readonly { content: string }[] | und
 
 export const readingTimeMinutes = (structuredData?: ExtractedProse, locale: SupportedLocale = I18N.DEFAULT_LOCALE): number | undefined => {
   const contents = structuredData?.contents
-  if (contents === undefined || contents.length === EMPTY_LIST_LENGTH) {
+  if (contents === undefined || contents.length === 0) {
     return undefined
   }
 
@@ -26,7 +24,7 @@ export const readingTimeMinutes = (structuredData?: ExtractedProse, locale: Supp
     (total, entry) => total + [...segmenter.segment(entry.content)].filter((segment) => segment.isWordLike === true).length,
     0,
   )
-  if (words === EMPTY_LIST_LENGTH) {
+  if (words === 0) {
     return undefined
   }
 
@@ -91,7 +89,7 @@ export const buildPostStructuredData = (input: PostStructuredDataInput): PostStr
     },
   ]
 
-  if (input.faq !== undefined && input.faq.length > EMPTY_LIST_LENGTH) {
+  if (input.faq !== undefined && input.faq.length > 0) {
     graph.push({
       "@type": "FAQPage",
       mainEntity: input.faq.map((entry) => ({

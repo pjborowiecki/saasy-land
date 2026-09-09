@@ -10,11 +10,6 @@ import { Reveal } from "~/src/presentation/components/custom/landing-page/compon
 
 import { CONTACT_EMAIL } from "~/src/presentation/branding"
 
-/**
- * Ordered by what a buyer asks first, not by topic. "What do I get" opens, the AI question and
- * the coverage question follow because they are the two objections this product exists to answer,
- * and the licensing details sit at the back where someone already convinced will look for them.
- */
 const FAQ_ITEM_IDS = ["q1", "q5", "q3", "q2", "q4", "q11", "q6", "q7", "q8", "q9", "q10"] as const
 
 const FAQ_DEFAULT_OPEN: string[] = ["q1"]
@@ -31,14 +26,6 @@ const FaqRow = ({ answer, id, question }: Readonly<{ answer: string; id: string;
   </AccordionItem>
 )
 
-/**
- * A sticky intro beside a scrolling list.
- *
- * The split is earned: the right column carries an interactive control, not a floating explainer
- * paragraph. Eleven questions is a long enough list that the section heading would otherwise be
- * a viewport and a half behind the answer being read, and the "ask the engineer" exit needs to
- * stay reachable for the whole list rather than only at the bottom of it.
- */
 export const FaqSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.faq")
 

@@ -11,20 +11,13 @@ const CHART_LEFT = PAD
 const CHART_RIGHT = BAND.width - PAD
 const CHART_HEIGHT = CHART_BOTTOM - CHART_TOP
 
-/** The claim being drawn: fifty thousand monthly actives, and the bill that does not move. */
 const PEAK_USERS = 50_000
 
 const DRAW_START = 0.6 * FPS
 const DRAW_END = 5.4 * FPS
 
-/** Enough points that the curve reads as a curve and few enough that the path stays legible. */
 const SAMPLES = 64
 
-/**
- * Metered pricing is superlinear against a free tier: nothing until the tier is used up, then a
- * climb that steepens as the multiplier compounds. `t ** 1.7` past the tier is the shape, not a
- * quote of anybody's price sheet, which is why no figure is ever printed against this line.
- */
 function meteredCost(t: number): number {
   const FREE_TIER = 0.18
   if (t <= FREE_TIER) {
@@ -44,15 +37,6 @@ function meteredPath(progress: number): string {
   return points.join(" ")
 }
 
-/**
- * THE COST CURVE — the auth station's claim, drawn.
- *
- * Two series over the same axis of monthly active users: metered per-user pricing, which is a
- * curve by definition, and a bill that owns its own database, which is a straight line at zero.
- * The metered series is deliberately unlabelled and unscaled. Putting a dollar figure on it would
- * mean quoting a competitor's price sheet from memory, and the argument does not need it: the
- * shape is the argument.
- */
 export function CostCurve() {
   const frame = useCurrentFrame()
   const progress = interpolate(frame, [DRAW_START, DRAW_END], [0, 1], {
@@ -106,7 +90,6 @@ export function CostCurve() {
           />
           <path d={meteredPath(progress)} fill="none" stroke={THEME.series} strokeLinecap="round" strokeWidth={3} />
 
-          {/* The flat line is drawn last and thicker: it is the one the section is about. */}
           <line
             stroke={THEME.accent}
             strokeLinecap="round"

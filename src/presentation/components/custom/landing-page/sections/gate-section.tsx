@@ -13,16 +13,6 @@ const TERMS_DELAY_MS = 200
 
 const BADGES = ["projects", "license", "fees"] as const
 
-/**
- * The close.
- *
- * The field and the signal come back, and this is the only other place on the page they appear:
- * the ambient marks the two moments where the page is asking rather than explaining, so the
- * closing screen answers the opening one. Everything between them is on the bare ground.
- *
- * Centred, and deliberately: the whole page is left-aligned to a visible measure, so the one
- * section that abandons the measure is the one that reads as an ending.
- */
 export const GateSection = (): JSX.Element => {
   const t = useTranslations("pages.landing.gate")
 
@@ -62,9 +52,7 @@ export const GateSection = (): JSX.Element => {
             <span className="text-price text-foreground tabular-nums">{t("price")}</span>
             <span className="font-mono text-spec text-muted-foreground">{t("terms")}</span>
           </p>
-          {/* The three terms a buyer at this price is actually asking about, and the two the line
-              above has no room for. Dots rather than a list, because three short nouns stacked
-              read as a feature table and this is a receipt. */}
+
           <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1.5 font-mono text-label text-muted-foreground/70 uppercase">
             {BADGES.map((badge) => (
               <li

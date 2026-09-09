@@ -1,4 +1,4 @@
-import { type JSX, useCallback } from "react"
+import { type JSX } from "react"
 
 import { useRouter } from "@tanstack/react-router"
 import { Settings } from "lucide-react"
@@ -21,9 +21,9 @@ export const UserWidgetClient = ({ email, name }: UserWidgetClientProps): JSX.El
   const router = useRouter()
   const t = useTranslations("pages.admin.components.userWidget")
 
-  const handleOpenSettings = useCallback(() => {
+  const handleOpenSettings = () => {
     void router.navigate({ to: ROUTES.ADMIN_SETTINGS })
-  }, [router])
+  }
 
   return (
     <SidebarMenu>

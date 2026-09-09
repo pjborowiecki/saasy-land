@@ -10,7 +10,7 @@ describe("product schema", () => {
       drizzleAdapter(
         {},
         {
-          provider: "pg",
+          provider: "sqlite",
           schema: { product },
         },
       ),

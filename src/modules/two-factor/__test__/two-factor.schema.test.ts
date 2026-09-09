@@ -12,7 +12,7 @@ describe("two-factor schema", () => {
       drizzleAdapter(
         {},
         {
-          provider: "pg",
+          provider: "sqlite",
           schema: { twoFactor },
         },
       ),

@@ -14,13 +14,10 @@
     "pricingModels": "Моделі ціноутворення",
     "contentAccess": "Контент та доступ",
     "userManagement": "Керування користувачами",
-    "activeSessions": "Активні сесії",
     "payments": "Оплата та виставлення рахунків",
     "settings": "Налаштування",
     "blog": "Блог",
     "landingPage": "Сторінка привітання"
   },
-  "badges": {
-    "activeSessionsBadge": "3"
-  }
+  "badges": {}
 }

@@ -5,14 +5,6 @@ import { useTranslations } from "use-intl/react"
 import { AUTH_VALIDATION_PARAMS } from "~/src/integrations/better-auth/auth.validations"
 import { translateValidationMessage } from "~/src/integrations/use-intl/validation-messages"
 
-/**
- * The field error carries its own id so the control can name it through
- * `aria-describedby`, and `role="alert"` so it is announced the moment validation
- * writes it. `--destructive` is the only place this surface leaves the neutral ramp.
- *
- * `id` stays optional because this component is also consumed by the admin settings
- * forms, which own their own describedby wiring.
- */
 export const AuthFieldError = ({
   id,
   message,

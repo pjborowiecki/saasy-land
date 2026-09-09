@@ -31,11 +31,9 @@ export const SignInWithPasswordForm = (): JSX.Element => {
     defaultValues: { email: "", password: "" },
     onSubmit: async ({ value }): Promise<void> => {
       try {
-        const data = value
-
         const res = await signInEmail({
-          email: data.email,
-          password: data.password,
+          email: value.email,
+          password: value.password,
         })
 
         if (res.error) {
@@ -46,7 +44,7 @@ export const SignInWithPasswordForm = (): JSX.Element => {
             void router.navigate({
               to: localizePathname({
                 locale,
-                pathname: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(data.email)}`,
+                pathname: `${ROUTES.VERIFY_EMAIL}?email=${encodeURIComponent(value.email)}`,
               }),
             })
           }

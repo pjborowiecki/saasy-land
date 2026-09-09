@@ -4,10 +4,8 @@ import { TEST_APP_URL, createAuthActionUrl, createCookieHeader, createTestReques
 
 import { I18N } from "~/src/integrations/use-intl/i18n.config"
 import {
-  isLocale,
   localeFromCookie,
   localeFromPathname,
-  localizedPathname,
   redirectPathname,
   resolveLocaleFromAuthRequest,
   resolveLocaleFromRequest,
@@ -15,20 +13,6 @@ import {
 
 import { ROUTES } from "~/src/routes"
 
-describe("is locale component", () => {
-  it("accepts configured locales", () => {
-    expect.hasAssertions()
-    for (const locale of I18N.SUPPORTED_LOCALES) {
-      expect(isLocale(locale)).toBe(true)
-    }
-  })
-
-  it("rejects unknown locales", () => {
-    expect.hasAssertions()
-    expect(isLocale("zz-ZZ")).toBe(false)
-    expect(isLocale()).toBe(false)
-  })
-})
 describe("locale from pathname component", () => {
   it("detects prefixed locales", () => {
     expect.hasAssertions()
@@ -60,17 +44,6 @@ describe("locale from cookie component", () => {
     expect.hasAssertions()
     expect(localeFromCookie()).toBeUndefined()
     expect(localeFromCookie(createCookieHeader(I18N.COOKIE_NAME, "invalid"))).toBeUndefined()
-  })
-})
-describe("localized pathname component", () => {
-  it("omits the prefix for the default locale", () => {
-    expect.hasAssertions()
-    expect(localizedPathname("en-US", "/admin")).toBe("/admin")
-  })
-
-  it("adds the prefix for non-default locales", () => {
-    expect.hasAssertions()
-    expect(localizedPathname("pl-PL", "/admin")).toBe("/pl-PL/admin")
   })
 })
 describe("redirect pathname component", () => {

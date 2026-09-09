@@ -9,22 +9,6 @@ import { ROUTES } from "~/src/routes"
 
 const CTA_DELAY_MS = 100
 
-/**
- * THE RALLY.
- *
- * Placed straight after the coverage gate, because that is where conviction peaks: the visitor has
- * just watched the one claim on this page that no competitor makes, and the next five sections are
- * an unbroken run of prose, tables and inventories. A page that argues for that long without once
- * asking for the sale is a whitepaper.
- *
- * It carries the ambient field, which until now marked only the hero and the close. That is the
- * rule rather than an exception to it: the texture marks the moments where the page is asking
- * instead of explaining, and there are now three of them. It stays left-aligned on the measure,
- * because centring is what makes the closing screen read as an ending, and spending that here
- * would cost the close more than it gains this band.
- *
- * Shorter than a full section on purpose. It is a breath between two arguments, not a third one.
- */
 export const RallySection = (): JSX.Element => {
   const t = useTranslations("pages.landing.rally")
 

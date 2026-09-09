@@ -7,7 +7,6 @@ import { cn } from "~/src/lib/cn"
 
 const ICON_STROKE_WIDTH = 1.5
 
-/** The canvas renders the page at a fixed desktop width; this is that measurement, not a label. */
 const CANVAS_VIEWPORT_WIDTH = "1200px"
 
 const VIEWPORT_BUTTON_BASE =

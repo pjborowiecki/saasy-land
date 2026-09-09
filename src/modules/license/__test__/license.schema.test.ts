@@ -9,7 +9,7 @@ import { user } from "~/src/modules/user/user.schema"
 describe("license schema", () => {
   it("materializes through drizzle adapter", () => {
     expect.hasAssertions()
-    expect(drizzleAdapter({}, { provider: "pg", schema: { license } })).toBeDefined()
+    expect(drizzleAdapter({}, { provider: "sqlite", schema: { license } })).toBeDefined()
   })
 
   it("ties a license to the user who bought it", () => {
@@ -31,11 +31,5 @@ describe("license schema", () => {
     expect.hasAssertions()
     expect(licenseZodSchemas.startCheckout.safeParse({ tier: "complete" }).success).toBe(true)
     expect(licenseZodSchemas.startCheckout.safeParse({ tier: "enterprise" }).success).toBe(false)
-  })
-
-  it("requires a real checkout url", () => {
-    expect.hasAssertions()
-    expect(licenseZodSchemas.checkoutSession.safeParse({ url: "https://polar.sh/checkout/1" }).success).toBe(true)
-    expect(licenseZodSchemas.checkoutSession.safeParse({ url: "not-a-url" }).success).toBe(false)
   })
 })

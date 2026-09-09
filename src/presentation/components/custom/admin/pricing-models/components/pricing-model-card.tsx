@@ -39,9 +39,6 @@ export const PricingModelCard = ({
 }: PricingModelCardProps): JSX.Element => {
   const t = useTranslations("pages.admin.pricing-models")
   return (
-    // The Card clips its children (`overflow-hidden`, so images meet its radius), which sliced
-    // The top half off a badge hung on `-top-3`. The marker now sits inside the card as a band
-    // Across the head of the column, which also means the three cards stay the same height.
     <Card className={`group relative flex h-full flex-col gap-0 py-0 ${cardClassName ?? ""}`}>
       {popularBadge ? (
         <p className="flex items-center gap-2 border-b border-border bg-muted/50 px-5 py-2 font-mono text-label text-foreground uppercase sm:px-6">
