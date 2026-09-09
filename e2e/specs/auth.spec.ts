@@ -99,7 +99,7 @@ test.describe("auth", () => {
   test("signup sends a verification email whose link signs the new account into the app", async ({ authPage, page, request }) => {
     const id = crypto.randomUUID()
     const email = `signup.${id}@example.test`
-    await page.setExtraHTTPHeaders({ "CF-Connecting-IP": `2001:db8::${id.slice(0, 4)}` })
+    await page.setExtraHTTPHeaders({ "CF-Connecting-IP": `2001:db8:${id.slice(0, 4)}::` })
     await completeSignUp(authPage, email)
 
     await expect(page).toHaveURL(new RegExp(`\/auth\/verify-email\\?email=${encodeURIComponent(email)}`, "u"))
@@ -108,19 +108,29 @@ test.describe("auth", () => {
     const verificationUrl = await expectVerificationEmail(request, email)
     expect(verificationUrl.origin).toBe(new URL(page.url()).origin)
 
-    await page.getByRole("button", { name: "Back to sign in", exact: true }).click()
+    await page.getByRole("link", { name: "Back to sign in", exact: true }).click()
     await expect(page).toHaveURL(/\/auth\/sign-in$/u)
+    await expect(authPage.signInSubmitButton()).toBeVisible()
 
     await page.goto(verificationUrl.toString())
     await expect(page).toHaveURL(/\/app\/?$/u)
     const session = await page.request.get("/api/auth/get-session")
     expect(await session.json()).toMatchObject({ user: { email, emailVerified: true } })
+
+    await authPage.waitForAppReady()
+    await page.getByRole("button", { exact: true, name: "Sign out" }).click()
+    await expect(page).toHaveURL(/\/auth\/sign-in$/u)
+    await expect(authPage.signInSubmitButton()).toBeVisible()
+    await page.goto(verificationUrl.toString())
+    await expect(page).toHaveURL(/\/auth\/sign-in$/u)
+    const replaySession = await page.request.get("/api/auth/get-session")
+    expect(await replaySession.json()).toBeNull()
   })
 
   test("repeating signup for an unverified email sends another verification email and resend still works", async ({ authPage, page, request }) => {
     const id = crypto.randomUUID()
     const email = `repeat-signup.${id}@example.test`
-    await page.setExtraHTTPHeaders({ "CF-Connecting-IP": `2001:db8::${id.slice(0, 4)}` })
+    await page.setExtraHTTPHeaders({ "CF-Connecting-IP": `2001:db8:${id.slice(0, 4)}::` })
     await completeSignUp(authPage, email)
     await expect(page).toHaveURL(/\/auth\/verify-email\?email=/u)
     await expectVerificationEmail(request, email)
@@ -181,9 +191,49 @@ test.describe("auth", () => {
     await authPage.gotoVerifyEmail("", "?token=test-token")
 
     await expect(page.getByText("This verification link is invalid or has expired.", { exact: true })).toBeVisible()
-    await expect(page.getByRole("button", { name: "Back to sign in", exact: true })).toBeVisible()
+    await expect(page.getByRole("link", { name: "Back to sign in", exact: true })).toBeVisible()
     await expect(authPage.emailField()).toBeVisible()
     await expect(authPage.verifyEmailResendButton()).toBeVisible()
+  })
+
+  test("verification redirects a new account to its localized app", async ({ authPage, page, request }) => {
+    const id = crypto.randomUUID()
+    const email = `localized.${id}@example.test`
+    await page.setExtraHTTPHeaders({ "CF-Connecting-IP": `2001:db8:${id.slice(0, 4)}::` })
+    await completeSignUp(authPage, email)
+    await expect(page).toHaveURL(/\/auth\/verify-email\?email=/u)
+    const verificationUrl = await expectVerificationEmail(request, email)
+    verificationUrl.pathname = "/pl-PL/auth/verify-email"
+
+    await page.goto(verificationUrl.toString())
+
+    await expect(page).toHaveURL(/\/pl-PL\/app\/?$/u)
+    const session = await page.request.get("/api/auth/get-session")
+    expect(await session.json()).toMatchObject({ user: { email, emailVerified: true } })
+  })
+
+  test("localized verification errors preserve the locale and ignore an untrusted callback URL", async ({ authPage, page }) => {
+    await authPage.gotoVerifyEmail("/pl-PL", "?token=invalid-token&verified=true&callbackURL=https%3A%2F%2Fexample.org")
+
+    await expect(page).toHaveURL(
+      (url) =>
+        url.pathname === "/pl-PL/auth/verify-email" &&
+        url.searchParams.get("error") === "INVALID_TOKEN" &&
+        !url.searchParams.has("callbackURL"),
+    )
+    await expect(page.getByText("Ten link weryfikacyjny jest nieprawidłowy lub wygasł.", { exact: true })).toBeVisible()
+    await expect(page.getByRole("link", { name: "Wróć do logowania", exact: true })).toHaveAttribute("href", "/pl-PL/auth/sign-in")
+    await expect(authPage.verifyEmailResendButton()).toBeVisible()
+    const session = await page.request.get("/api/auth/get-session")
+    expect(await session.json()).toBeNull()
+  })
+
+  test("a verification success marker cannot authenticate a signed-out visitor", async ({ page }) => {
+    await page.goto("/pl-PL/auth/verify-email?verified=true&callbackURL=https%3A%2F%2Fexample.org")
+
+    await expect(page).toHaveURL(/\/pl-PL\/auth\/sign-in$/u)
+    const session = await page.request.get("/api/auth/get-session")
+    expect(await session.json()).toBeNull()
   })
 
   test("two-factor page renders authentication form", async ({ authPage }) => {

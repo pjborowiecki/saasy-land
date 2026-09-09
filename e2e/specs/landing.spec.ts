@@ -10,6 +10,22 @@ test.describe("landing page", () => {
     await expect(landingPage.heroGetStartedLink()).toBeVisible()
   })
 
+  test("navbar progress follows scrolling down and back up", async ({ landingPage, page }) => {
+    await landingPage.goto()
+    const line = landingPage.navigation().locator(':scope > div[aria-hidden="true"]')
+    const viewportWidth = await page.evaluate(() => window.innerWidth)
+
+    for (const progress of [0.25, 0.75, 0.1, 0]) {
+      await page.evaluate((fraction) => {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+        window.scrollTo({ behavior: "instant", top: scrollHeight * fraction })
+      }, progress)
+
+      await expect.poll(async () => (await line.boundingBox())?.width).toBeCloseTo(viewportWidth * progress, -1)
+      await expect(line).toHaveCSS("height", "1px")
+    }
+  })
+
   test("prefixed locale route renders localized landing page", async ({ landingPage, page }) => {
     await landingPage.goto("/pl")
 

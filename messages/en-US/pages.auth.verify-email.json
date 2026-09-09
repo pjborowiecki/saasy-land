@@ -6,9 +6,6 @@
   "form": {
     "title": "Verify your email",
     "description": "Confirm your email address to finish setting up your account.",
-    "verifying": "Verifying your email…",
-    "success": "Your email has been verified.",
-    "continue": "Continue",
     "invalidToken": "This verification link is invalid or has expired.",
     "pendingDescription": "Check your inbox and follow the verification link. Then sign in to continue.",
     "email": "Email",

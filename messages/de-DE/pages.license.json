@@ -3,7 +3,8 @@
   "description": "Dein gekaufter CLI-Lizenzschlüssel und deine Geräteaktivierungen.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "Lizenzschlüssel",
   "pending": "Dein Schlüssel wird ausgestellt. Lade die Seite gleich noch einmal.",

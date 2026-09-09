@@ -7,7 +7,7 @@ type MessageTree = Record<string, AbstractIntlMessages>
 
 export type NamespaceEntry = readonly [namespace: string, messages: AbstractIntlMessages]
 
-const MESSAGES_QUERY_KEY = "i18n-messages"
+const MESSAGES_QUERY_KEYS = { ALL: ["i18n-messages"] } as const
 
 const JSON_EXTENSION_LENGTH = ".json".length
 const SLASH_LENGTH = 1
@@ -75,7 +75,7 @@ export const messagesQueryOptions = ({ locale, namespace }: { locale: LocaleCode
   queryOptions({
     gcTime: Infinity,
     queryFn: () => loadNamespace({ locale, namespace }),
-    queryKey: [MESSAGES_QUERY_KEY, locale, namespace],
+    queryKey: [...MESSAGES_QUERY_KEYS.ALL, locale, namespace],
     staleTime: Infinity,
   })
 

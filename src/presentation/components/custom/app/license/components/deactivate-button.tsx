@@ -1,13 +1,15 @@
-import { type JSX, useCallback, useTransition } from "react"
+import type { JSX } from "react"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useTranslations } from "use-intl/react"
 
+import { LICENSE_QUERY_KEYS } from "~/src/modules/license/license.constants"
 import { deactivateLicenseMutation } from "~/src/modules/license/use-cases/deactivate-license"
 
 import { useActionError } from "~/src/hooks/use-action-error"
 
+import { Button } from "~/src/presentation/components/shadcn/button"
 import { Spinner } from "~/src/presentation/components/shadcn/spinner"
 
 interface DeactivateButtonProps {
@@ -15,36 +17,29 @@ interface DeactivateButtonProps {
 }
 
 export const DeactivateButton = ({ activationId }: Readonly<DeactivateButtonProps>): JSX.Element => {
-  const queryClient = useQueryClient()
-  const deactivateLicenseRequest = useMutation({
-    ...deactivateLicenseMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["license"] }),
-  })
-  const [isPending, startTransition] = useTransition()
-
   const t = useTranslations("pages.license.activations")
+  const queryClient = useQueryClient()
   const actionError = useActionError()
-
-  const free = useCallback((): void => {
-    startTransition(async () => {
-      try {
-        await deactivateLicenseRequest.mutateAsync({ activationId })
-        toast.success(t("success"))
-      } catch (error) {
-        toast.error(actionError(error))
-      }
-    })
-  }, [actionError, activationId, t])
+  const { isPending, mutate } = useMutation({
+    ...deactivateLicenseMutation,
+    onError: (error) => toast.error(actionError(error)),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: LICENSE_QUERY_KEYS.ALL })
+      toast.success(t("success"))
+    },
+  })
 
   return (
-    <button
-      className="inline-flex h-8 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50"
-      disabled={isPending}
-      onClick={free}
-      type="button"
+    <Button
+      isDisabled={isPending}
+      onPress={() => {
+        mutate({ activationId })
+      }}
+      size="sm"
+      variant="outline"
     >
       {isPending && <Spinner />}
       {isPending ? t("deactivating") : t("deactivate")}
-    </button>
+    </Button>
   )
 }

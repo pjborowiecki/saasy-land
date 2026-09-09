@@ -1893,9 +1893,43 @@ declare const messages: {
       }
     },
     "app": {
-      "title": "App Page",
-      "description": "Welcome to the App page.",
-      "license": "Manage your license"
+      "title": "Overview",
+      "description": "Your SaaSy Land account, license, and next steps.",
+      "license": "Manage your license",
+      "navigation": {
+        "label": "App navigation",
+        "overview": "Overview",
+        "license": "License",
+        "resources": "Resources",
+        "documentation": "Documentation",
+        "support": "Contact support",
+        "website": "Back to website"
+      },
+      "account": {
+        "label": "Your account",
+        "signOut": "Sign out",
+        "signingOut": "Signing out...",
+        "signedOut": "You have been signed out."
+      },
+      "overview": {
+        "license": {
+          "title": "Your license",
+          "description": "View your license key and manage your activated machines.",
+          "active": "Active",
+          "revoked": "Inactive",
+          "pending": "Key being issued"
+        },
+        "docs": {
+          "title": "Start building",
+          "description": "Follow the documentation to install the CLI and create your first project.",
+          "action": "Read the documentation"
+        },
+        "support": {
+          "title": "Need a hand?",
+          "description": "Get help with your purchase, license, or getting started.",
+          "action": "Contact support"
+        }
+      }
     },
     "auth": {
       "forgot-password": {
@@ -2000,9 +2034,6 @@ declare const messages: {
         "form": {
           "title": "Verify your email",
           "description": "Confirm your email address to finish setting up your account.",
-          "verifying": "Verifying your email…",
-          "success": "Your email has been verified.",
-          "continue": "Continue",
           "invalidToken": "This verification link is invalid or has expired.",
           "pendingDescription": "Check your inbox and follow the verification link. Then sign in to continue.",
           "email": "Email",
@@ -2892,7 +2923,8 @@ declare const messages: {
       "description": "Your purchased CLI licence key and machine activations.",
       "tier": {
         "core": "Core",
-        "complete": "Complete"
+        "complete": "Complete",
+        "agency": "Agency"
       },
       "issued": "License key",
       "pending": "Your key is being issued. Refresh in a moment.",
@@ -2949,12 +2981,6 @@ declare const messages: {
           "note": "Sign up again from the footer and a fresh link lands in your inbox in about a minute.",
           "action": "Back to the site"
         },
-        "pending": {
-          "title": "Confirming your subscription…",
-          "body": "Please wait while we confirm your email address.",
-          "note": "This will only take a moment.",
-          "action": "Back to the site"
-        },
         "error": {
           "title": "We could not confirm your address.",
           "body": "Please reload this page to try again.",
@@ -2968,10 +2994,6 @@ declare const messages: {
         "body": "That address will not get another build log email. No confirmation needed and nothing else to click.",
         "note": "Transactional email about an account or a purchase is separate and still arrives, because that is mail you asked for by buying something.",
         "resubscribe": "Changed your mind? Sign up again from the footer",
-        "pending": {
-          "title": "Unsubscribing…",
-          "body": "Please wait while we update your subscription."
-        },
         "error": {
           "title": "We could not unsubscribe this address.",
           "body": "Open the unsubscribe link from your email and try again."

@@ -27,6 +27,18 @@ export default {
       }
       return Response.json(getSentEmails(recipient))
     }
+    if (url.pathname === "/__test/newsletter" && request.method === "GET") {
+      const email = url.searchParams.get("email")
+      if (email === null || !email.endsWith("@example.test")) {
+        return Response.json({ error: "A test email address is required" }, { status: 400 })
+      }
+      const subscriber = await env.DB.prepare(
+        "SELECT status, unsubscribe_token AS unsubscribeToken, unsubscribed_at AS unsubscribedAt FROM newsletter_subscriber WHERE email = ?",
+      )
+        .bind(email)
+        .first()
+      return Response.json(subscriber)
+    }
 
     applicationModule ??= loadTestApplication()
     const { default: application } = await applicationModule

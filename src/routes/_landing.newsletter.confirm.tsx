@@ -1,41 +1,19 @@
-import { type JSX, useEffect, useRef } from "react"
+import type { JSX } from "react"
 
-import { useMutation } from "@tanstack/react-query"
-import { Link, createFileRoute } from "@tanstack/react-router"
+import { Link, type SearchSchemaInput, createFileRoute, redirect } from "@tanstack/react-router"
 import { useLocale, useTranslations } from "use-intl/react"
 
 import { loadRouteMessages, routeHead } from "~/src/integrations/use-intl/i18n.metadata"
 import { localizePathname } from "~/src/integrations/use-intl/i18n.paths"
 
 import { NEWSLETTER_TOKEN_LENGTH } from "~/src/modules/newsletter-subscriber/newsletter-subscriber.schema"
-import { confirmNewsletterSubscriptionMutation } from "~/src/modules/newsletter-subscriber/use-cases/confirm-newsletter-subscription"
+import { confirmNewsletterSubscription } from "~/src/modules/newsletter-subscriber/use-cases/confirm-newsletter-subscription"
 
 import { ROUTES } from "~/src/routes"
 
-const ConfirmNewsletterPage = (): JSX.Element => {
-  const searchParams = Route.useSearch()
-  const { token } = searchParams
+const ConfirmNewsletterPage = ({ state }: { state: "confirmed" | "expired" | "error" }): JSX.Element => {
   const t = useTranslations("pages.newsletter.confirm")
   const locale = useLocale()
-
-  const confirm = useMutation(confirmNewsletterSubscriptionMutation)
-  const { mutate } = confirm
-  const submittedToken = useRef<string | undefined>(undefined)
-  const validToken = typeof token === "string" && token.length === NEWSLETTER_TOKEN_LENGTH
-  useEffect(() => {
-    if (validToken && submittedToken.current !== token) {
-      submittedToken.current = token
-      mutate({ token })
-    }
-  }, [mutate, token, validToken])
-  let state: "confirmed" | "expired" | "pending" | "error" = "expired"
-  if (confirm.isError) {
-    state = "error"
-  } else if (validToken && (confirm.isIdle || confirm.isPending)) {
-    state = "pending"
-  } else if (confirm.data?.confirmed === true) {
-    state = "confirmed"
-  }
 
   return (
     <section className="relative">
@@ -55,16 +33,31 @@ const ConfirmNewsletterPage = (): JSX.Element => {
 }
 
 export const Route = createFileRoute("/_landing/newsletter/confirm")({
-  component: ConfirmNewsletterPage,
+  validateSearch: (search: Record<string, unknown> & SearchSchemaInput) => ({
+    status: search["status"] === "confirmed" ? ("confirmed" as const) : ("expired" as const),
+    token: typeof search["token"] === "string" ? search["token"] : undefined,
+  }),
+  loaderDeps: ({ search: { token } }) => ({ token: token ?? "" }),
+  component: () => <ConfirmNewsletterPage state={Route.useSearch().status} />,
+  errorComponent: () => <ConfirmNewsletterPage state="error" />,
   head: routeHead,
-  loader: ({ context }) =>
-    loadRouteMessages({
+  loader: async ({ context, deps: { token } }) => {
+    const messages = await loadRouteMessages({
       metadataNamespace: "pages.newsletter.confirm",
       namespaces: ["pages.landing", "pages.newsletter"],
-      pathname: "/newsletter/confirm",
+      pathname: ROUTES.NEWSLETTER_CONFIRM,
       queryClient: context.queryClient,
-    }),
+    })
+    if (token) {
+      const result = token.length === NEWSLETTER_TOKEN_LENGTH ? await confirmNewsletterSubscription({ data: { token } }) : undefined
+      throw redirect({
+        replace: true,
+        search: { status: result?.confirmed === true ? "confirmed" : "expired" },
+        to: ROUTES.NEWSLETTER_CONFIRM,
+      })
+    }
+    return messages
+  },
+  preload: false,
   staticData: { namespaces: ["pages.landing", "pages.newsletter"] },
-  validateSearch: (search: Record<string, unknown>): Record<string, string | undefined> =>
-    Object.fromEntries(Object.entries(search).filter((entry): entry is [string, string] => typeof entry[1] === "string")),
 })

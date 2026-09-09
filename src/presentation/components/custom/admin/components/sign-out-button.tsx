@@ -1,4 +1,4 @@
-import { type JSX, useCallback, useTransition } from "react"
+import type { JSX } from "react"
 
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "@tanstack/react-router"
@@ -16,30 +16,28 @@ import { ROUTES } from "~/src/routes"
 
 export const SignOutButton = (): JSX.Element => {
   const queryClient = useQueryClient()
-  const settingsSignOutUserRequest = useMutation({
-    ...settingsSignOutUserMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
-  })
-  const [isPending, startTransition] = useTransition()
-
   const router = useRouter()
   const t = useTranslations("pages.admin.components.signOutButton")
   const actionError = useActionError()
-
-  const handleSignout = useCallback(() => {
-    startTransition(async () => {
-      try {
-        await settingsSignOutUserRequest.mutateAsync()
-        toast.success(t("success"))
-        void router.navigate({ to: ROUTES.HOME })
-      } catch (error) {
-        toast.error(actionError(error))
-      }
-    })
-  }, [actionError, router, t])
+  const { isPending, mutate } = useMutation({
+    ...settingsSignOutUserMutation,
+    onError: (error) => toast.error(actionError(error)),
+    onSuccess: async () => {
+      queryClient.clear()
+      await router.navigate({ replace: true, to: ROUTES.SIGN_IN })
+      router.clearCache()
+      toast.success(t("success"))
+    },
+  })
 
   return (
-    <DropdownMenuItem isDisabled={isPending} onAction={handleSignout} variant="destructive">
+    <DropdownMenuItem
+      isDisabled={isPending}
+      onAction={() => {
+        mutate()
+      }}
+      variant="destructive"
+    >
       {isPending ? <Loader2 className="size-4 animate-spin" /> : <LogOut className="size-4" />}
       {isPending ? t("signingOut") : t("signOut")}
     </DropdownMenuItem>

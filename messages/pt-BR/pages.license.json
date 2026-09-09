@@ -3,7 +3,8 @@
   "description": "A chave da licença CLI comprada e as ativações dos seus dispositivos.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "Chave de licença",
   "pending": "Sua chave está sendo emitida. Atualize a página em instantes.",

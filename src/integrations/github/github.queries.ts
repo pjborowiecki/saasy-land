@@ -11,6 +11,8 @@ const MILLISECONDS_PER_SECOND = 1000
 const CACHE_SECONDS = 3600
 const CACHE_KEY = `github:${APP_GITHUB_OWNER}/${APP_GITHUB_REPO}:stars`
 
+const GITHUB_QUERY_KEYS = { STARS: ["github", "stars"] } as const
+
 const starCountSchema = z.int().nonnegative()
 const cachedStarCountSchema = z.object({ count: starCountSchema, fetchedAt: z.int().nonnegative() })
 const githubRepositorySchema = z.object({ stargazers_count: starCountSchema })
@@ -71,6 +73,6 @@ export const getStarCount = createServerFn({ method: "GET" }).handler(async (): 
 export const starCountQuery = queryOptions({
   gcTime: CACHE_SECONDS * MILLISECONDS_PER_SECOND,
   queryFn: () => getStarCount(),
-  queryKey: ["github", "stars"],
+  queryKey: GITHUB_QUERY_KEYS.STARS,
   staleTime: CACHE_SECONDS * MILLISECONDS_PER_SECOND,
 })

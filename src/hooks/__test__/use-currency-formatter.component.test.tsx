@@ -124,4 +124,45 @@ describe("use currency formatter component", () => {
 
     expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe(expected)
   })
+
+  it("uses updated defaults after rerender while preserving per-call overrides", () => {
+    expect.hasAssertions()
+
+    const { result, rerender } = renderHook((defaults) => useCurrencyFormatter(defaults), {
+      initialProps: { currency: "USD", currencyDisplay: "symbol" as const, locale: "en-US" },
+      wrapper: createWrapper(),
+    })
+
+    expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe("$1,234.50")
+
+    rerender({ currency: "EUR", currencyDisplay: "symbol", locale: "de-DE" })
+
+    const expected = new Intl.NumberFormat("de-DE", { currency: "EUR", style: "currency" })
+    const override = new Intl.NumberFormat("pl-PL", { currency: "PLN", currencyDisplay: "code", style: "currency" })
+
+    expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe(expected.format(USD_SAMPLE_AMOUNT))
+    expect(result.current.formatCurrencyToParts({ value: USD_SAMPLE_AMOUNT })).toEqual(expected.formatToParts(USD_SAMPLE_AMOUNT))
+    expect(result.current.formatCurrency({ currency: "PLN", currencyDisplay: "code", locale: "pl-PL", value: USD_SAMPLE_AMOUNT })).toBe(
+      override.format(USD_SAMPLE_AMOUNT),
+    )
+  })
+
+  it("uses the new route locale after the provider changes", () => {
+    expect.hasAssertions()
+
+    let locale: "en-US" | "pl-PL" = "en-US"
+    const { result, rerender } = renderHook(() => useCurrencyFormatter({ currency: "USD" }), {
+      wrapper: ({ children }) => <IntlProvider locale={locale}>{children}</IntlProvider>,
+    })
+
+    expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe("$1,234.50")
+
+    locale = "pl-PL"
+    rerender()
+
+    const expected = new Intl.NumberFormat(locale, { currency: "USD", style: "currency" })
+
+    expect(result.current.formatCurrency({ value: USD_SAMPLE_AMOUNT })).toBe(expected.format(USD_SAMPLE_AMOUNT))
+    expect(result.current.formatCurrencyToParts({ value: USD_SAMPLE_AMOUNT })).toEqual(expected.formatToParts(USD_SAMPLE_AMOUNT))
+  })
 })

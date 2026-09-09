@@ -5,6 +5,7 @@ import type * as zod from "zod"
 import { RATE_LIMITS, withRateLimit } from "~/src/integrations/better-auth/auth.middleware"
 import { auth } from "~/src/integrations/better-auth/auth.server"
 
+import { VERIFICATION_MUTATION_KEYS } from "~/src/modules/verification/verification.constants"
 import { verificationZodSchemas } from "~/src/modules/verification/verification.zod"
 
 export const sendVerificationEmail = createServerFn({ method: "POST" })
@@ -16,5 +17,5 @@ export const sendVerificationEmail = createServerFn({ method: "POST" })
 
 export const sendVerificationEmailMutation = mutationOptions({
   mutationFn: (data: Parameters<typeof sendVerificationEmail>[0]["data"]) => sendVerificationEmail({ data }),
-  mutationKey: ["verification", "sendVerificationEmail"],
+  mutationKey: VERIFICATION_MUTATION_KEYS.SEND_EMAIL,
 })

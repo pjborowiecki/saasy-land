@@ -6,9 +6,6 @@
   "form": {
     "title": "Zweryfikuj e-mail",
     "description": "Potwierdź adres e-mail, aby dokończyć konfigurację konta.",
-    "verifying": "Weryfikowanie adresu e-mail…",
-    "success": "Twój adres e-mail został zweryfikowany.",
-    "continue": "Kontynuuj",
     "invalidToken": "Ten link weryfikacyjny jest nieprawidłowy lub wygasł.",
     "pendingDescription": "Sprawdź skrzynkę odbiorczą i otwórz link weryfikacyjny. Następnie zaloguj się, aby kontynuować.",
     "email": "E-mail",

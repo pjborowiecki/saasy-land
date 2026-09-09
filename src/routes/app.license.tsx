@@ -18,19 +18,24 @@ const LicensePage = (): JSX.Element => {
   const t = useTranslations("pages.license")
   const license = useSuspenseQuery(currentLicenseQuery).data
 
-  if (license === null) {
-    return (
-      <div className="flex flex-col gap-8 p-8">
-        <CheckoutOptions />
-      </div>
-    )
-  }
-
   return (
-    <div className="flex flex-col gap-10 p-8">
-      <LicensePanel license={license} />
-      {license.polarLicenseKeyId !== null && <ActivationList />}
-      <Link className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground" to={ROUTES.APP}>
+    <div className="flex w-full flex-col gap-8 pb-8">
+      <header className="flex flex-col gap-1">
+        <h1 className="text-statement font-semibold text-foreground">{t("title")}</h1>
+        <p className="text-sm text-muted-foreground">{t("description")}</p>
+      </header>
+      {license === null ? (
+        <CheckoutOptions />
+      ) : (
+        <>
+          <LicensePanel license={license} />
+          {license.polarLicenseKeyId !== null && <ActivationList />}
+        </>
+      )}
+      <Link
+        className="w-fit text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+        to={ROUTES.APP}
+      >
         {t("back")}
       </Link>
     </div>

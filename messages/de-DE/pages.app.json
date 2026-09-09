@@ -1,5 +1,39 @@
 {
-  "title": "App-Seite",
-  "description": "Willkommen auf der App-Seite.",
-  "license": "Verwalten Sie Ihre Lizenz"
+  "title": "Übersicht",
+  "description": "Dein Konto bei SaaSy Land, deine Lizenz und die nächsten Schritte.",
+  "license": "Lizenz verwalten",
+  "navigation": {
+    "label": "Navigation der Anwendung",
+    "overview": "Übersicht",
+    "license": "Lizenz",
+    "resources": "Ressourcen",
+    "documentation": "Dokumentation",
+    "support": "Support kontaktieren",
+    "website": "Zurück zur Website"
+  },
+  "account": {
+    "label": "Dein Konto",
+    "signOut": "Abmelden",
+    "signingOut": "Abmeldung läuft...",
+    "signedOut": "Du wurdest abgemeldet."
+  },
+  "overview": {
+    "license": {
+      "title": "Deine Lizenz",
+      "description": "Sieh dir deinen Lizenzschlüssel an und verwalte deine aktivierten Geräte.",
+      "active": "Aktiv",
+      "revoked": "Inaktiv",
+      "pending": "Schlüssel wird ausgestellt"
+    },
+    "docs": {
+      "title": "Leg los",
+      "description": "Folge der Dokumentation, um die CLI zu installieren und dein erstes Projekt zu erstellen.",
+      "action": "Dokumentation lesen"
+    },
+    "support": {
+      "title": "Brauchst du Hilfe?",
+      "description": "Erhalte Hilfe zu deinem Kauf, deiner Lizenz oder den ersten Schritten.",
+      "action": "Support kontaktieren"
+    }
+  }
 }

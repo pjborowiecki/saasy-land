@@ -1,64 +1,112 @@
-import type * as StartServerModule from "@tanstack/react-start/server"
-import { describe, expect, it, vi } from "vite-plus/test"
+import { getRequest } from "@tanstack/react-start/server"
+import { afterEach, describe, expect, it, vi } from "vite-plus/test"
 
 import { executeQuery } from "~/src/platform/testing/lib/query"
 
-import type { auth } from "~/src/integrations/better-auth/auth.server"
-import * as authServer from "~/src/integrations/better-auth/auth.server"
-import { getCurrentSessionQuery } from "~/src/integrations/better-auth/auth.session"
+import { createAuthSessionFixture } from "~/src/integrations/better-auth/__test__/fixtures/auth.session.fixture"
+import { auth } from "~/src/integrations/better-auth/auth.server"
+import { getCurrentSessionQuery, getRequestSession } from "~/src/integrations/better-auth/auth.session"
 
-const CALL_COUNT = 1
-const FIXTURE_DATE = new Date("2024-01-01T00:00:00.000Z")
-const FIXTURE_USER_ID = "00000000-0000-4000-8000-000000000001"
-const FIXTURE_SESSION_ID = "00000000-0000-4000-8000-000000000002"
-const FIXTURE_SESSION_TOKEN = "fixture-session-token"
+afterEach(() => vi.restoreAllMocks())
 
-type GetSessionFn = typeof auth.api.getSession
-type SessionResult = NonNullable<Awaited<ReturnType<GetSessionFn>>>
+describe("current session query", () => {
+  it("validates the incoming request's session through Better Auth", async () => {
+    const request = new Request("http://localhost/app", { headers: { Cookie: "session-token" } })
+    vi.mocked(getRequest).mockReturnValue(request)
+    const session = createAuthSessionFixture()
+    const getSession = vi.spyOn(auth.api, "getSession").mockResolvedValue(session)
 
-const getSessionMock = vi.hoisted(() => vi.fn<GetSessionFn>())
-
-vi.mock(import("@tanstack/react-start/server-only"), () => ({}))
-
-vi.mock(import("@tanstack/react-start/server"), (): Partial<typeof StartServerModule> => ({
-  getRequest: vi.fn(() => new Request("http://127.0.0.1:3000/", { headers: new Headers() })),
-}))
-
-const createSession = (): SessionResult => ({
-  session: {
-    createdAt: FIXTURE_DATE,
-    expiresAt: FIXTURE_DATE,
-    id: FIXTURE_SESSION_ID,
-    token: FIXTURE_SESSION_TOKEN,
-    updatedAt: FIXTURE_DATE,
-    userId: FIXTURE_USER_ID,
-  },
-  user: {
-    banned: false,
-    createdAt: FIXTURE_DATE,
-    email: "test@example.com",
-    emailVerified: true,
-    id: FIXTURE_USER_ID,
-    name: "Test User",
-    role: "user",
-    twoFactorEnabled: false,
-    updatedAt: FIXTURE_DATE,
-  },
+    await expect(executeQuery(getCurrentSessionQuery)).resolves.toEqual(session)
+    expect(getSession).toHaveBeenCalledExactlyOnceWith({ headers: request.headers, query: { disableCookieCache: true } })
+  })
 })
 
-const resetSessionMock = (): void => {
-  getSessionMock.mockReset()
-  vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
-}
+describe("request session lookup", () => {
+  it("shares concurrent and sequential reads in one request", async () => {
+    const request = new Request("http://localhost/app")
+    const session = createAuthSessionFixture()
+    const pending = Promise.withResolvers<typeof session>()
+    const getSession = vi.spyOn(auth.api, "getSession").mockReturnValue(pending.promise)
 
-describe("get current session component", () => {
-  it("delegates to auth.api.getSession", async () => {
-    expect.hasAssertions()
-    resetSessionMock()
-    const session = createSession()
-    getSessionMock.mockResolvedValue(session)
+    const first = getRequestSession(request)
+    const second = getRequestSession(request)
+    expect(second).toBe(first)
+    pending.resolve(session)
+    await expect(first).resolves.toEqual(session)
+    await expect(getRequestSession(request)).resolves.toEqual(session)
+    expect(getSession).toHaveBeenCalledExactlyOnceWith({ headers: request.headers, query: { disableCookieCache: true } })
+  })
 
-    await expect(executeQuery(getCurrentSessionQuery)).resolves.toStrictEqual(session)
-    expect(getSessionMock).toHaveBeenCalledTimes(CALL_COUNT)
+  it("also reuses a signed-out result within the request", async () => {
+    const request = new Request("http://localhost/app")
+    const getSession = vi.spyOn(auth.api, "getSession").mockResolvedValue(null)
+
+    await expect(getRequestSession(request)).resolves.toBeNull()
+    await expect(getRequestSession(request)).resolves.toBeNull()
+    expect(getSession).toHaveBeenCalledOnce()
+  })
+
+  it("does not query session storage for a visitor without a session cookie", async () => {
+    const context = await auth.$context
+    const findSession = vi.spyOn(context.internalAdapter, "findSession")
+    const request = new Request("http://localhost:3000/app", { headers: { host: "localhost:3000" } })
+
+    await expect(getRequestSession(request)).resolves.toBeNull()
+    expect(findSession).not.toHaveBeenCalled()
+  })
+
+  it("rechecks subsequent requests with identical cookies and observes revocation", async () => {
+    const headers = { Cookie: "same-session-token" }
+    const getSession = vi.spyOn(auth.api, "getSession").mockResolvedValueOnce(createAuthSessionFixture()).mockResolvedValueOnce(null)
+
+    await expect(getRequestSession(new Request("http://localhost/app", { headers }))).resolves.not.toBeNull()
+    await expect(getRequestSession(new Request("http://localhost/app", { headers }))).resolves.toBeNull()
+    expect(getSession).toHaveBeenCalledTimes(2)
+  })
+
+  it("keeps simultaneous users separate when their lookups finish out of order", async () => {
+    const firstSession = createAuthSessionFixture()
+    const secondSession = createAuthSessionFixture({ userId: "another-user" })
+    const firstPending = Promise.withResolvers<typeof firstSession>()
+    const secondPending = Promise.withResolvers<typeof secondSession>()
+    const getSession = vi.spyOn(auth.api, "getSession").mockReturnValueOnce(firstPending.promise).mockReturnValueOnce(secondPending.promise)
+    const firstRequest = new Request("http://localhost/app", { headers: { Cookie: "first-user" } })
+    const secondRequest = new Request("http://localhost/app", { headers: { Cookie: "second-user" } })
+
+    const first = getRequestSession(firstRequest)
+    const second = getRequestSession(secondRequest)
+    expect(getRequestSession(firstRequest)).toBe(first)
+    expect(getRequestSession(secondRequest)).toBe(second)
+    secondPending.resolve(secondSession)
+    await expect(second).resolves.toEqual(secondSession)
+    firstPending.resolve(firstSession)
+    await expect(first).resolves.toEqual(firstSession)
+    expect(getSession).toHaveBeenCalledTimes(2)
+  })
+
+  it("shares a failed lookup within the request and rejects every caller", async () => {
+    const request = new Request("http://localhost/app")
+    const failure = new Error("database unavailable")
+    const pending = Promise.withResolvers<never>()
+    const getSession = vi.spyOn(auth.api, "getSession").mockReturnValue(pending.promise)
+
+    const first = getRequestSession(request)
+    const second = getRequestSession(request)
+    expect(second).toBe(first)
+    pending.reject(failure)
+    await expect(first).rejects.toBe(failure)
+    await expect(second).rejects.toBe(failure)
+    await expect(getRequestSession(request)).rejects.toBe(failure)
+    expect(getSession).toHaveBeenCalledOnce()
+  })
+
+  it("does not retain a failed read for the next request", async () => {
+    const failure = new Error("database unavailable")
+    const session = createAuthSessionFixture()
+    const getSession = vi.spyOn(auth.api, "getSession").mockRejectedValueOnce(failure).mockResolvedValueOnce(session)
+
+    await expect(getRequestSession(new Request("http://localhost/app"))).rejects.toBe(failure)
+    await expect(getRequestSession(new Request("http://localhost/app"))).resolves.toEqual(session)
+    expect(getSession).toHaveBeenCalledTimes(2)
   })
 })

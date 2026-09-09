@@ -1,5 +1,39 @@
 {
-  "title": "アプリページ",
-  "description": "アプリのページへようこそ。",
-  "license": "ライセンスを管理する"
+  "title": "概要",
+  "description": "SaaSy Landのアカウント、ライセンス、次のステップを確認できます。",
+  "license": "ライセンスを管理",
+  "navigation": {
+    "label": "アプリのナビゲーション",
+    "overview": "概要",
+    "license": "ライセンス",
+    "resources": "リソース",
+    "documentation": "ドキュメント",
+    "support": "サポートに問い合わせる",
+    "website": "ウェブサイトに戻る"
+  },
+  "account": {
+    "label": "アカウント",
+    "signOut": "ログアウト",
+    "signingOut": "ログアウト中...",
+    "signedOut": "ログアウトしました。"
+  },
+  "overview": {
+    "license": {
+      "title": "ライセンス",
+      "description": "ライセンスキーの確認と、認証済みのマシンの管理ができます。",
+      "active": "有効",
+      "revoked": "無効",
+      "pending": "キーを発行中"
+    },
+    "docs": {
+      "title": "開発を始める",
+      "description": "ドキュメントに従ってCLIをインストールし、最初のプロジェクトを作成しましょう。",
+      "action": "ドキュメントを読む"
+    },
+    "support": {
+      "title": "お困りですか？",
+      "description": "購入、ライセンス、使い始めの手順についてサポートを受けられます。",
+      "action": "サポートに問い合わせる"
+    }
+  }
 }

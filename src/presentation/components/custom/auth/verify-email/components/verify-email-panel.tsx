@@ -1,103 +1,89 @@
-import { type JSX } from "react"
-
+import { useMutation } from "@tanstack/react-query"
+import { Link } from "@tanstack/react-router"
 import { Loader2 } from "lucide-react"
+import { toast } from "sonner"
+import { useLocale, useTranslations } from "use-intl/react"
 
-import { Button } from "~/src/presentation/components/shadcn/button"
+import { localizePathname } from "~/src/integrations/use-intl/i18n.paths"
+
+import { sendVerificationEmailMutation } from "~/src/modules/verification/use-cases/send-verification-email"
+
+import { useActionError } from "~/src/hooks/use-action-error"
+
+import { cn } from "~/src/lib/cn"
+
+import { Button, buttonVariants } from "~/src/presentation/components/shadcn/button"
 
 import {
   AUTH_INPUT_CLASS,
   AUTH_LABEL_CLASS,
   AUTH_PRIMARY_BUTTON_CLASS,
 } from "~/src/presentation/components/custom/auth/constants/auth-styles"
-import {
-  type VerifyEmailStatus,
-  useVerifyEmailPanel,
-} from "~/src/presentation/components/custom/auth/verify-email/hooks/use-verify-email-panel"
 
-const STATUS_COPY_CLASS = "text-body text-pretty text-muted-foreground"
+import { ROUTES } from "~/src/routes"
 
-interface VerifyEmailPanelProps {
-  readonly email?: string
-  readonly token?: string
-}
+export const VerifyEmailPanel = ({ email = "", invalid = false }: { readonly email?: string; readonly invalid?: boolean }) => {
+  const locale = useLocale()
+  const t = useTranslations("pages.auth.verify-email")
+  const actionError = useActionError()
+  const resend = useMutation({
+    ...sendVerificationEmailMutation,
+    onError: (error) => toast.error(actionError(error)),
+    onSuccess: () => toast.success(t("form.resendSuccess")),
+  })
 
-const VerifyEmailVerifyingView = ({ label }: Readonly<{ label: string }>): JSX.Element => (
-  <div className="flex items-center gap-3" data-testid="verify-email-verifying">
-    <Loader2 aria-hidden="true" className="size-4 shrink-0 animate-spin text-ring" strokeWidth={1.5} />
-    <p className={STATUS_COPY_CLASS}>{label}</p>
-  </div>
-)
+  return (
+    <div className="flex flex-col gap-6" data-testid="verify-email-pending">
+      <p className={cn("text-body text-pretty", invalid ? "text-destructive" : "text-muted-foreground")}>
+        {t(invalid ? "form.invalidToken" : "form.pendingDescription")}
+      </p>
 
-const VerifyEmailSuccessView = ({
-  continueLabel,
-  onContinue,
-  successLabel,
-}: Readonly<{ continueLabel: string; onContinue: () => void; successLabel: string }>): JSX.Element => (
-  <>
-    <p className={STATUS_COPY_CLASS}>{successLabel}</p>
-    <Button className={AUTH_PRIMARY_BUTTON_CLASS} onPress={onContinue} type="button">
-      {continueLabel}
-    </Button>
-  </>
-)
-
-const VerifyEmailPendingView = ({ panel }: Readonly<{ panel: ReturnType<typeof useVerifyEmailPanel> }>): JSX.Element => (
-  <div className="flex flex-col gap-6" data-testid="verify-email-pending">
-    <p className={panel.status === "error" ? "text-body text-pretty text-destructive" : STATUS_COPY_CLASS}>
-      {panel.t(panel.status === "error" ? "form.invalidToken" : "form.pendingDescription")}
-    </p>
-
-    <div className="flex flex-col gap-3">
-      <Button className={AUTH_PRIMARY_BUTTON_CLASS} onPress={panel.handleBackToSignIn} type="button">
-        {panel.t("form.backToSignIn")}
-      </Button>
-
-      {panel.showEmailInput ? (
-        <label className="flex flex-col gap-2">
-          <span className={AUTH_LABEL_CLASS}>{panel.t("form.email")}</span>
-          <input
-            autoComplete="email"
-            className={AUTH_INPUT_CLASS}
-            disabled={panel.isResending}
-            onChange={panel.handleEmailChange}
-            placeholder={panel.t("form.emailPlaceholder")}
-            type="email"
-            value={panel.resendEmail}
-          />
-        </label>
-      ) : undefined}
-
-      <Button
-        className="min-h-11 self-center px-0 text-body-sm text-muted-foreground"
-        data-testid="verify-email-resend-button"
-        isDisabled={panel.isResending}
-        onPress={panel.handleResendClick}
-        type="button"
-        variant="link"
+      <form
+        className="flex flex-col gap-3"
+        onSubmit={(event) => {
+          event.preventDefault()
+          if (resend.isPending) {
+            return
+          }
+          const address = new FormData(event.currentTarget).get("email")
+          if (typeof address !== "string" || address.trim().length === 0) {
+            toast.error(t("form.emailRequired"))
+            return
+          }
+          resend.mutate({ callbackURL: localizePathname({ locale, pathname: ROUTES.AUTH_CALLBACK }), email: address.trim() })
+        }}
       >
-        {panel.isResending ? <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} /> : undefined}
-        {panel.t(panel.isResending ? "form.resending" : "form.resend")}
-      </Button>
+        <Link className={cn(buttonVariants(), AUTH_PRIMARY_BUTTON_CLASS)} to={localizePathname({ locale, pathname: ROUTES.SIGN_IN })}>
+          {t("form.backToSignIn")}
+        </Link>
+
+        {email.trim().length > 0 ? (
+          <input name="email" type="hidden" value={email} />
+        ) : (
+          <label className="flex flex-col gap-2">
+            <span className={AUTH_LABEL_CLASS}>{t("form.email")}</span>
+            <input
+              autoComplete="email"
+              className={AUTH_INPUT_CLASS}
+              disabled={resend.isPending}
+              name="email"
+              placeholder={t("form.emailPlaceholder")}
+              type="email"
+            />
+          </label>
+        )}
+
+        <Button
+          className="min-h-11 self-center px-0 text-body-sm text-muted-foreground"
+          data-testid="verify-email-resend-button"
+          isDisabled={resend.isPending}
+          type="submit"
+          variant="link"
+        >
+          {resend.isPending ? <Loader2 aria-hidden="true" className="size-4 animate-spin" strokeWidth={1.5} /> : undefined}
+          {t(resend.isPending ? "form.resending" : "form.resend")}
+        </Button>
+      </form>
     </div>
-  </div>
-)
-
-const renderPendingView = (panel: ReturnType<typeof useVerifyEmailPanel>): JSX.Element => <VerifyEmailPendingView panel={panel} />
-
-const VERIFY_EMAIL_VIEWS: Record<VerifyEmailStatus, (panel: ReturnType<typeof useVerifyEmailPanel>) => JSX.Element> = {
-  error: renderPendingView,
-  pending: renderPendingView,
-  success: (panel) => (
-    <VerifyEmailSuccessView
-      continueLabel={panel.t("form.continue")}
-      onContinue={panel.handleContinue}
-      successLabel={panel.t("form.success")}
-    />
-  ),
-  verifying: (panel) => <VerifyEmailVerifyingView label={panel.t("form.verifying")} />,
-}
-
-export const VerifyEmailPanel = ({ email, token }: Readonly<VerifyEmailPanelProps>): JSX.Element => {
-  const panel = useVerifyEmailPanel({ ...(email === undefined ? {} : { email }), ...(token === undefined ? {} : { token }) })
-  return VERIFY_EMAIL_VIEWS[panel.status](panel)
+  )
 }

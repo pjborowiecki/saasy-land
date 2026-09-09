@@ -1,3 +1,4 @@
+import { QueryClient } from "@tanstack/react-query"
 import type * as StartServerModule from "@tanstack/react-start/server"
 import { describe, expect, it, vi } from "vite-plus/test"
 
@@ -12,6 +13,7 @@ import { listUserSessionsQuery } from "~/src/modules/session/use-cases/list-user
 
 const HEADERS = new Headers()
 const TARGET_USER_ID = "01900000-0000-7000-8000-000000000002"
+const OTHER_TARGET_USER_ID = "01900000-0000-7000-8000-000000000004"
 const ADMIN_USER_ID = "01900000-0000-7000-8000-000000000001"
 const FIXTURE_DATE = new Date("2024-01-01T00:00:00.000Z")
 
@@ -53,6 +55,39 @@ describe("list-user-sessions", () => {
       body: { userId: TARGET_USER_ID },
       headers: HEADERS,
     })
+  })
+
+  it("isolates target users in one cache and reuses a fresh result for the same user", async () => {
+    getSessionMock.mockReset()
+    listUserSessionsMock.mockReset()
+    vi.spyOn(authServer.auth.api, "getSession").mockImplementation(getSessionMock)
+    vi.spyOn(authServer.auth.api, "listUserSessions").mockImplementation(listUserSessionsMock)
+    getSessionMock.mockResolvedValue(createAuthSessionFixture({ role: ROLE_CODES.ADMIN, userId: ADMIN_USER_ID }))
+    const firstResult = { sessions: [] }
+    const secondResult = {
+      sessions: [
+        {
+          createdAt: FIXTURE_DATE,
+          expiresAt: FIXTURE_DATE,
+          id: "01900000-0000-7000-8000-000000000005",
+          token: "other-session-token",
+          updatedAt: FIXTURE_DATE,
+          userId: OTHER_TARGET_USER_ID,
+        },
+      ],
+    }
+    listUserSessionsMock.mockResolvedValueOnce(firstResult).mockResolvedValueOnce(secondResult)
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false, staleTime: Infinity } } })
+
+    await expect(queryClient.query(listUserSessionsQuery({ userId: TARGET_USER_ID }))).resolves.toEqual(firstResult)
+    await expect(queryClient.query(listUserSessionsQuery({ userId: OTHER_TARGET_USER_ID }))).resolves.toEqual(secondResult)
+    await expect(queryClient.query(listUserSessionsQuery({ userId: TARGET_USER_ID }))).resolves.toEqual(firstResult)
+
+    expect(listUserSessionsMock).toHaveBeenCalledTimes(2)
+    expect(listUserSessionsMock).toHaveBeenNthCalledWith(1, { body: { userId: TARGET_USER_ID }, headers: HEADERS })
+    expect(listUserSessionsMock).toHaveBeenNthCalledWith(2, { body: { userId: OTHER_TARGET_USER_ID }, headers: HEADERS })
+    expect(queryClient.getQueryData(listUserSessionsQuery({ userId: TARGET_USER_ID }).queryKey)).toEqual(firstResult)
+    expect(queryClient.getQueryData(listUserSessionsQuery({ userId: OTHER_TARGET_USER_ID }).queryKey)).toEqual(secondResult)
   })
 
   it("returns a domain error when the caller is not an admin", async () => {

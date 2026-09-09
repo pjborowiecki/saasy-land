@@ -10,6 +10,7 @@ import { useTranslations } from "use-intl/react"
 import { fieldErrorMessage } from "~/src/integrations/tanstack-form/form.fields"
 
 import { setUserPasswordMutation } from "~/src/modules/user/use-cases/set-user-password"
+import { USER_QUERY_KEYS } from "~/src/modules/user/user.constants"
 import { userZodSchemas } from "~/src/modules/user/user.zod"
 
 import { useActionError } from "~/src/hooks/use-action-error"
@@ -35,7 +36,7 @@ export const UserResetPasswordDialog = ({
   const queryClient = useQueryClient()
   const setUserPasswordRequest = useMutation({
     ...setUserPasswordMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: USER_QUERY_KEYS.ALL }),
   })
   const t = useTranslations("pages.admin.users")
   const actionError = useActionError()

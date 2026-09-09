@@ -112,4 +112,45 @@ describe("use date formatter component", () => {
 
     expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe(expected)
   })
+
+  it("uses updated defaults after rerender while preserving per-call overrides", () => {
+    expect.hasAssertions()
+
+    const { result, rerender } = renderHook((defaults) => useDateFormatter(defaults), {
+      initialProps: { dateStyle: "medium" as const, locale: "en-US", timeZone: "UTC" },
+      wrapper: createWrapper(),
+    })
+
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe("Jun 15, 2024")
+
+    rerender({ dateStyle: "medium", locale: "de-DE", timeZone: "Pacific/Kiritimati" })
+
+    const expected = new Intl.DateTimeFormat("de-DE", { dateStyle: "medium", timeZone: "Pacific/Kiritimati" })
+    const override = new Intl.DateTimeFormat("pl-PL", { dateStyle: "long", timeZone: "UTC" })
+
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe(expected.format(SAMPLE_UTC))
+    expect(result.current.formatDateToParts({ value: SAMPLE_UTC })).toEqual(expected.formatToParts(SAMPLE_UTC))
+    expect(result.current.formatDate({ dateStyle: "long", locale: "pl-PL", timeZone: "UTC", value: SAMPLE_UTC })).toBe(
+      override.format(SAMPLE_UTC),
+    )
+  })
+
+  it("uses the new route locale after the provider changes", () => {
+    expect.hasAssertions()
+
+    let locale: "en-US" | "pl-PL" = "en-US"
+    const { result, rerender } = renderHook(() => useDateFormatter({ dateStyle: "medium", timeZone: "UTC" }), {
+      wrapper: ({ children }) => <IntlProvider locale={locale}>{children}</IntlProvider>,
+    })
+
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe("Jun 15, 2024")
+
+    locale = "pl-PL"
+    rerender()
+
+    const expected = new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" })
+
+    expect(result.current.formatDate({ value: SAMPLE_UTC })).toBe(expected.format(SAMPLE_UTC))
+    expect(result.current.formatDateToParts({ value: SAMPLE_UTC })).toEqual(expected.formatToParts(SAMPLE_UTC))
+  })
 })

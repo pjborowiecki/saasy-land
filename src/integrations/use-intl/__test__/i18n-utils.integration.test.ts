@@ -34,10 +34,19 @@ describe("bundled locale namespaces", () => {
     ).toEqual({ pages: { admin: { title: "Admin", users: { title: "Users" } } } })
     expect(parent).toEqual({ title: "Admin" })
   })
-  it("includes locale and namespace in query cache identity", () => {
-    expect(messagesQueryOptions({ locale: "en-US", namespace: "auth.form" }).queryKey).not.toEqual(
-      messagesQueryOptions({ locale: "pl-PL", namespace: "auth.form" }).queryKey,
-    )
+  it("keeps each locale and namespace separate in one query cache", async () => {
+    const queryClient = new QueryClient()
+    const englishForm = { locale: "en-US", namespace: "auth.form" } as const
+    const polishForm = { locale: "pl-PL", namespace: "auth.form" } as const
+    const englishSignIn = { locale: "en-US", namespace: "pages.auth.sign-in" } as const
+
+    await queryClient.query(messagesQueryOptions(englishForm))
+    await queryClient.query(messagesQueryOptions(polishForm))
+    await queryClient.query(messagesQueryOptions(englishSignIn))
+
+    expect(queryClient.getQueryData(messagesQueryOptions(englishForm).queryKey)).toEqual(await loadNamespace(englishForm))
+    expect(queryClient.getQueryData(messagesQueryOptions(polishForm).queryKey)).toEqual(await loadNamespace(polishForm))
+    expect(queryClient.getQueryData(messagesQueryOptions(englishSignIn).queryKey)).toEqual(await loadNamespace(englishSignIn))
   })
   it("preloads messages into the same cache used by the provider", async () => {
     const queryClient = new QueryClient()

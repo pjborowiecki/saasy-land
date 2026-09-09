@@ -23,12 +23,6 @@
       "note": "Iscriviti nuovamente dalla sezione in basso e un nuovo link arriverà nella tua casella di posta in circa un minuto.",
       "action": "Ritorno al sito"
     },
-    "pending": {
-      "title": "Conferma dell'abbonamento...",
-      "body": "Attenda, stiamo verificando il Suo indirizzo email.",
-      "note": "Ci vorrà solo un momento.",
-      "action": "Ritorno al sito"
-    },
     "error": {
       "title": "Non siamo riusciti a confermare il suo indirizzo.",
       "body": "Si prega di ricaricare questa pagina per riprovare.",
@@ -42,10 +36,6 @@
     "body": "A quell'indirizzo non verranno inviati ulteriori messaggi relativi ai log di compilazione. Non è necessaria alcuna conferma e non ci sono altri link da cliccare.",
     "note": "Le email relative a transazioni o acquisti sono separate e vengono comunque recapitate, in quanto si tratta di messaggi che hai richiesto completando un'operazione di acquisto.",
     "resubscribe": "Hai cambiato idea? Registrati nuovamente dalla sezione in fondo alla pagina",
-    "pending": {
-      "title": "Annullamento in corso…",
-      "body": "Attenda, stiamo aggiornando il suo abbonamento."
-    },
     "error": {
       "title": "Non è stato possibile disiscriversi da questo indirizzo.",
       "body": "Apra il link di disiscrizione presente nella tua email e riprova."

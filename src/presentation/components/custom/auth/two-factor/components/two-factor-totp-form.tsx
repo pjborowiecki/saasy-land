@@ -6,6 +6,7 @@ import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { useTranslations } from "use-intl/react"
 
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { verifyTotpMutation } from "~/src/modules/two-factor/use-cases/verify-totp"
 
@@ -30,7 +31,7 @@ export const TwoFactorTotpForm = ({ onToggleMode }: Readonly<TwoFactorTotpFormPr
   const queryClient = useQueryClient()
   const verifyTotpRequest = useMutation({
     ...verifyTotpMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const t = useTranslations()
   const actionError = useActionError()

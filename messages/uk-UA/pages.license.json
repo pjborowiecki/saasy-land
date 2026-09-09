@@ -3,7 +3,8 @@
   "description": "Ключ придбаної ліцензії CLI та активації пристроїв.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "Ліцензійний ключ",
   "pending": "Ваш ключ видається. Оновіть сторінку за мить.",

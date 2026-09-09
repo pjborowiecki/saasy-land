@@ -8,6 +8,7 @@ import { useTranslations } from "use-intl/react"
 
 import { fieldErrorMessage } from "~/src/integrations/tanstack-form/form.fields"
 
+import { SESSION_QUERY_KEYS } from "~/src/modules/session/session.constants"
 import { twoFactorZodSchemas } from "~/src/modules/two-factor/two-factor.zod"
 import { verifyBackupCodeMutation } from "~/src/modules/two-factor/use-cases/verify-backup-code"
 
@@ -46,7 +47,7 @@ export const TwoFactorBackupForm = ({ onToggleMode }: Readonly<TwoFactorBackupFo
   const queryClient = useQueryClient()
   const verifyBackupCodeRequest = useMutation({
     ...verifyBackupCodeMutation,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["session"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: SESSION_QUERY_KEYS.ALL }),
   })
   const t = useTranslations()
   const actionError = useActionError()

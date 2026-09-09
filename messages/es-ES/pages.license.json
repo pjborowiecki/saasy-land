@@ -3,7 +3,8 @@
   "description": "Tu clave de licencia de la CLI y las activaciones de dispositivos.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "Clave de licencia",
   "pending": "Estamos emitiendo tu clave. Actualiza la página dentro de un momento.",

@@ -3,7 +3,8 @@
   "description": "Klucz zakupionej licencji CLI i aktywacje urządzeń.",
   "tier": {
     "core": "Core",
-    "complete": "Complete"
+    "complete": "Complete",
+    "agency": "Agency"
   },
   "issued": "Klucz licencyjny",
   "pending": "Klucz jest właśnie wydawany. Odśwież za chwilę.",

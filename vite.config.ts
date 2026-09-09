@@ -201,6 +201,11 @@ export default defineConfig({
         rules: { "require-await": "off", "typescript/require-await": "off" },
       },
       {
+        files: ["src/routes/**"],
+        // TanStack infers loader types from preceding search and loaderDeps options.
+        rules: { "sort-keys": "off" },
+      },
+      {
         files: ["vite.config.ts"],
         rules: {
           "max-lines": "off",

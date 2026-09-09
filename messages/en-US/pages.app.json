@@ -1,5 +1,39 @@
 {
-  "title": "App Page",
-  "description": "Welcome to the App page.",
-  "license": "Manage your license"
+  "title": "Overview",
+  "description": "Your SaaSy Land account, license, and next steps.",
+  "license": "Manage your license",
+  "navigation": {
+    "label": "App navigation",
+    "overview": "Overview",
+    "license": "License",
+    "resources": "Resources",
+    "documentation": "Documentation",
+    "support": "Contact support",
+    "website": "Back to website"
+  },
+  "account": {
+    "label": "Your account",
+    "signOut": "Sign out",
+    "signingOut": "Signing out...",
+    "signedOut": "You have been signed out."
+  },
+  "overview": {
+    "license": {
+      "title": "Your license",
+      "description": "View your license key and manage your activated machines.",
+      "active": "Active",
+      "revoked": "Inactive",
+      "pending": "Key being issued"
+    },
+    "docs": {
+      "title": "Start building",
+      "description": "Follow the documentation to install the CLI and create your first project.",
+      "action": "Read the documentation"
+    },
+    "support": {
+      "title": "Need a hand?",
+      "description": "Get help with your purchase, license, or getting started.",
+      "action": "Contact support"
+    }
+  }
 }

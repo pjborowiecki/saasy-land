@@ -46,6 +46,23 @@ src/
 
 Feature components, constants, types, and hooks stay beside their feature. Routes coordinate rendering and loading. Use cases export native `createServerFn` functions and query or mutation options. Protected functions check authorization themselves, in addition to route guards. Keep database and provider imports inside the server boundary.
 
+Query and mutation keys are readonly tuples declared in the owning feature's `*.constants.ts` as `*_QUERY_KEYS` and `*_MUTATION_KEYS`. Integration-owned queries keep their keys beside their query options. Query options pair the key with its fetch function; include every input that changes the result in both. Use the exported options' `.queryKey` for exact cache reads and writes, and `*_QUERY_KEYS.ALL` to invalidate a whole feature. Components and tests reuse those definitions instead of rebuilding keys. Mutations invalidate only the data they change.
+
+For authentication, start with these files in `src/integrations/better-auth`:
+
+| File                 | Responsibility                                                                                           |
+| -------------------- | -------------------------------------------------------------------------------------------------------- |
+| `auth.routes.ts`     | Page redirects: `redirectIfSignedIn`, `requireSignedIn`, `requireAdmin`, and the post-login destination. |
+| `auth.middleware.ts` | Server-function authorization through `authorized(permission)`, request errors, and rate limiting.       |
+| `auth.server.ts`     | Better Auth configuration.                                                                               |
+| `auth.session.ts`    | Request-scoped session lookup, the session server function, and TanStack Query options used by the UI.   |
+
+The server shares its session lookup only within the same HTTP request, including concurrent SSR loaders. A new request validates against session storage again, so revocations and role changes remain effective. Better Auth endpoints retain their own checks. Page preloads may reuse the session query for one minute; actual navigation always rechecks it. Session queries do not poll or refetch on window focus/reconnect. Sign-in, sign-out, and account changes clear private cached data.
+
+Email verification links enter `/auth/verify-email`, which redirects to Better Auth's native verification endpoint. Better Auth validates the token and sets the session cookie; successful callbacks use the normal role-based auth redirect, while invalid links return to the resend form. Verification never runs from a React effect or during a route preload.
+
+Newsletter confirmation and unsubscribe links run in their route loaders, with preloading disabled. After processing, the route replaces the token URL with a result notice so refreshes cannot repeat the operation. A failed request keeps the token available for retry.
+
 `bun run skills:sync` restores the skills lockfile into vendor groups under `.agents/skills` and links them into `.claude/skills`, following the reference project's layout. Cloudflare supplies the Workers, Wrangler, and performance skills; TanStack supplies Start and Table guidance. Start skills live under `tanstack/start`. The obsolete Next.js, Vercel, and removed integration skills are excluded from both the lockfile and sync mappings. The reference project's older community Start skill is replaced with current guidance from the official TanStack repository.
 
 The supported locales match React Projects: `en-US`, `de-DE`, `es-ES`, `fr-FR`, `it-IT`, `ja-JP`, `pl-PL`, `pt-BR`, and `uk-UA`. English uses unprefixed URLs; every other language uses its full locale prefix, such as `/de-DE` or `/pl-PL`. Short language aliases redirect to their canonical equivalents. Routes declare their message namespaces and preload them through TanStack Query. The locale cookie keeps server-function requests in the active language. Email namespaces are loaded only on the server.
